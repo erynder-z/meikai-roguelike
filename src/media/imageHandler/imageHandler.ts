@@ -113,13 +113,19 @@ export class ImageHandler {
   }
 
   /**
-   * Handles displaying an image based on the player's appearance and the current event.
-   * @param {GameState} game - The game state.
-   * @param {keyof typeof images} imageType - The type of image to display.
-   * @param {string | null} shouldDrawImageCheck - The current image's data-attribute to check against.
-   * @param {number} maybeDrawCheck - The integer to check against for randomly drawing an image.
-   * @returns {void} This function does not return anything.
+   * Handles the logic for displaying an image based on the current game event.
+   *
+   * This function selects an appropriate image from the specified image type,
+   * checks if the image should be displayed based on the current display state
+   * and a random chance, and then displays the image if conditions are met.
+   *
+   * @param {GameState} game - The game state containing information about the current game.
+   * @param {keyof typeof images} imageType - The type of images to select from (e.g., 'attackImages', 'hurtImages').
+   * @param {string | null} shouldDrawImageCheck - A string to check the current image display state, or null.
+   * @param {number} maybeDrawCheck - A number used to determine the likelihood of drawing the image.
+   * @return {void} This function does not return anything.
    */
+
   private handleImageDisplay(
     game: GameState,
     imageType: keyof typeof images,
@@ -131,10 +137,15 @@ export class ImageHandler {
       game.log.currentEvent
     ] as keyof typeof EventCategory;
 
-    const fullImageSet = this.getImageSet(
-      (images[imageType] as { boyish: string[]; girlish: string[] }).boyish,
-      (images[imageType] as { boyish: string[]; girlish: string[] }).girlish,
-    );
+    const fullImageSet =
+      imageType === 'deathImages'
+        ? this.getImageSet(images['deathImages'], images['deathImages'])
+        : this.getImageSet(
+            (images[imageType] as { boyish: string[]; girlish: string[] })
+              .boyish,
+            (images[imageType] as { boyish: string[]; girlish: string[] })
+              .girlish,
+          );
 
     const shouldDrawImage =
       this.getCurrentImageDataAttribute() !== shouldDrawImageCheck;
@@ -144,6 +155,10 @@ export class ImageHandler {
     if (shouldDrawImage || maybeDrawImage) {
       const nextImage = this.getNextImage(fullImageSet, imageType);
       const image = new Image();
+      image.onload = () => {
+        this.displayImage(image, evt);
+      };
+
       image.src = nextImage;
 
       this.displayImage(image, evt);
