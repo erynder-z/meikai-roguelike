@@ -87,14 +87,7 @@ export class BaseScreen implements StackScreen {
     for (m = queue.next(); !m.isPlayer && !this.over(s); m = queue.next()) {
       this.npcTurn(m, player, s);
     }
-    if (this.game.stats.currentTurnReceivedDmg >= 1) {
-      HealthAdjust.handlePlayerDamageEvent(
-        this.game.player,
-        this.game.stats.currentTurnReceivedDmg,
-        this.game,
-      );
-      this.game.stats.resetCurrentTurnReceivedDmg();
-    }
+    this.game.stats.resetCurrentTurnReceivedDmg();
   }
 
   /**
