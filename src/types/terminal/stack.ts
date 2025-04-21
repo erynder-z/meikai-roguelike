@@ -5,4 +5,5 @@ export type Stack = {
   push(screen: StackScreen): void;
   getCurrentScreen(): StackScreen;
   removeScreen(screen: StackScreen): void;
+  removeAllScreens(): void;
 };

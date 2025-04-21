@@ -125,7 +125,7 @@ export class BaseScreen implements StackScreen {
   private over(s: Stack): boolean {
     const over = !this.game.player.isAlive();
     if (over) {
-      s.pop();
+      s.removeAllScreens();
       s.push(this.make.gameOver(this.game));
     }
     return over;
