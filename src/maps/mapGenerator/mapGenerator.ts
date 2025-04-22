@@ -1,9 +1,8 @@
 import { DEFAULT_LEVEL_TILES } from './generationData/defaultLevelTiles';
-import { EnvironmentChecker } from '../../gameLogic/environment/environmentChecker';
 import { GameMap } from '../mapModel/gameMap';
 import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
-import { IrregularShapeAreaGenerator } from '../helpers/irregularShapeAreaGenerator';
+import { MapUtils } from '../helpers/mapUtils';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { RockGenerator } from './rockGenerator';
 import { WorldPoint } from '../mapModel/worldPoint';
@@ -13,20 +12,21 @@ import { WorldPoint } from '../mapModel/worldPoint';
  */
 export class MapGenerator1 {
   constructor(
-    public map: GameMapType,
+    public gameMap: GameMapType,
     public rand: RandomGenerator,
   ) {}
 
   /**
    * Generates a map.
-   * @param {GameMapType} map The map object to generate.
+   * @param {GameMapType} m The map object to generate.
    * @param {RandomGenerator} rand The random generator object.
    * @returns {GameMapType} The generated map.
    */
-  private loop(map: GameMapType, rand: RandomGenerator): GameMapType {
+  private loop(m: GameMapType, rand: RandomGenerator): GameMapType {
     // Number of iterations for map generation
     const numIterations = 40;
     const upperLeft = new WorldPoint();
+    const mapDimensions = m.dimensions;
     const roomDimensions = new WorldPoint();
 
     for (let n = 0; n < numIterations; ++n) {
@@ -35,25 +35,20 @@ export class MapGenerator1 {
       this.drawRoom(upperLeft, roomDimensions, filled, rand);
     }
 
-    const mossyFloorChance = rand.randomIntegerClosedRange(1, 100);
-    if (mossyFloorChance <= 100) {
-      for (let i = 0; i < mossyFloorChance; i++) {
-        const mossyFloorArea =
-          IrregularShapeAreaGenerator.generateIrregularShapeArea(
-            map.dimensions,
-            rand,
-            rand.randomIntegerClosedRange(3, 10),
-            5,
-          );
-        for (const p of mossyFloorArea) {
-          if (map.cell(p).env === Glyph.Regular_Floor)
-            map.cell(p).env = Glyph.Mossy_Floor;
-        }
-      }
-    }
+    MapUtils.applyTerrainModifier(
+      m,
+      rand,
+      mapDimensions,
+      rand.randomIntegerClosedRange(50, 150),
+      3,
+      10,
+      5,
+      Glyph.Regular_Floor,
+      Glyph.Mossy_Floor,
+    );
 
-    this.processCells(map);
-    return map;
+    MapUtils.applyStaticEffectsToCells(m);
+    return m;
   }
 
   /**
@@ -67,7 +62,7 @@ export class MapGenerator1 {
   ): void {
     const { rand } = this;
 
-    const mapDimensions = this.map.dimensions;
+    const mapDimensions = this.gameMap.dimensions;
 
     roomDimensions.y = rand.randomIntegerClosedRange(4, 16);
     roomDimensions.x = rand.randomIntegerClosedRange(8, 24);
@@ -116,7 +111,7 @@ export class MapGenerator1 {
           : isSecondLayer
             ? RockGenerator.getWallRockTypes(rand, DEFAULT_LEVEL_TILES)
             : centerGlyph;
-        this.map.cell(currentPoint).env = glyph;
+        this.gameMap.cell(currentPoint).env = glyph;
         if (isSecondLayer) {
           doorPositions.push(currentPoint.copy());
         }
@@ -134,21 +129,7 @@ export class MapGenerator1 {
     for (let i = rand.randomInteger(1, 3); i >= 0; --i) {
       const index = rand.randomInteger(0, doorPositions.length);
       const position = doorPositions[index];
-      this.map.cell(position).env = Glyph.Door_Closed;
-    }
-  }
-
-  /**
-   * Loops over every cell on the map and applies any necessary modifications.
-   * @param {GameMapType} map The map to process.
-   */
-  private processCells(map: GameMapType): void {
-    for (let y = 0; y < map.dimensions.y; y++) {
-      for (let x = 0; x < map.dimensions.x; x++) {
-        const position = new WorldPoint(x, y);
-
-        EnvironmentChecker.addStaticCellEffects(map.cell(position));
-      }
+      this.gameMap.cell(position).env = Glyph.Door_Closed;
     }
   }
 

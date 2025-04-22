@@ -44,6 +44,8 @@ export class GlyphLoader {
           false, // isGlowing
           false, // isCausingPoison
           false, // isCausingConfusion
+          false, // isCausingBlind
+          0, // defaultBuffDuration
         );
         GlyphMap.addGlyph(playerGlyph);
 
@@ -68,6 +70,8 @@ export class GlyphLoader {
             env.isGlowing,
             env.isCausingPoison,
             env.isCausingConfusion,
+            env.isCausingBlind,
+            env.defaultBuffDuration,
             env.help, // Optional
           );
           GlyphMap.addGlyph(envGlyph);
@@ -94,6 +98,8 @@ export class GlyphLoader {
             false, // isGlowing
             false, // isCausingPoison
             false, // isCausingConfusion
+            false, // isCausingBlind
+            0, // defaultBuffDuration
             mob.help, // Optional
           );
           GlyphMap.addGlyph(mobGlyph);
@@ -120,6 +126,8 @@ export class GlyphLoader {
             false, // isGlowing
             false, // isCausingPoison
             false, // isCausingConfusion
+            false, // isCausingBlind
+            0, // defaultBuffDuration
             item.help, // Optional
           );
           GlyphMap.addGlyph(itemGlyph);
@@ -146,6 +154,8 @@ export class GlyphLoader {
             false, // isGlowing
             false, // isCausingPoison
             false, // isCausingConfusion
+            false, // isCausingBlind
+            0, // defaultBuffDuration
             corpse.help, // Optional
           );
           GlyphMap.addGlyph(corpseGlyph);

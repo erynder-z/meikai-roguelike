@@ -19,6 +19,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": false,
         "about": "This is an unknown glyph."
@@ -43,6 +44,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "Regular floor."
@@ -67,6 +69,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "Typical rock. Solid, but can be dug through."
@@ -91,6 +94,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "A sturdy wall blocking the path, providing protection and boundaries."
@@ -115,6 +119,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "Stairs leading upwards to a higher level, offering a way to ascend."
@@ -139,6 +144,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "Stairs descending to a lower level, providing a path to explore deeper."
@@ -163,6 +169,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "An open door, allowing easy passage between rooms."
@@ -187,6 +194,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "A closed door, blocking the way until it is opened."
@@ -211,6 +219,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": false,
         "about": "A harmful area that can damage or hinder anyone who steps on it."
@@ -235,6 +244,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": { "show": false, "about": "A projectile in motion." }
     },
     {
@@ -256,6 +266,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": { "show": true, "about": "Impassable water surface." }
     },
     {
@@ -277,6 +288,8 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
+      "defaultBuffDuration": 2,
       "help": {
         "show": true,
         "about": "Shallow water that can be crossed, though it may slow movement."
@@ -301,6 +314,8 @@
       "isGlowing": true,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
+      "defaultBuffDuration": 10,
       "help": {
         "show": true,
         "about": "Molten lava that is extremely dangerous and will cause severe burns."
@@ -325,6 +340,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "An extremely hard, indestructible rock."
@@ -349,6 +365,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "A magnetic rock that attracts objects in its vicinity."
@@ -373,6 +390,8 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
+      "defaultBuffDuration": 5,
       "help": {
         "show": true,
         "about": "Spiky crystals emerging from the ground. Stepped on, they may cause damage."
@@ -397,6 +416,7 @@
       "isGlowing": true,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "A mushroom that is emitting a glowing light. Increases visibility range when nearby."
@@ -421,6 +441,8 @@
       "isGlowing": false,
       "isCausingPoison": true,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
+      "defaultBuffDuration": 10,
       "help": {
         "show": true,
         "about": "A mushroom that is emitting a poisonous cloud."
@@ -445,6 +467,8 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": true,
+      "isCausingBlind": false,
+      "defaultBuffDuration": 10,
       "help": {
         "show": true,
         "about": "A mushroom that is emitting a cloud that causes confusion when inhaled."
@@ -469,6 +493,8 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
+      "defaultBuffDuration": 5,
       "help": {
         "show": true,
         "about": "Regular ground. Nothing special here. Or is there?"
@@ -493,6 +519,8 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
+      "defaultBuffDuration": 5,
       "help": {
         "show": true,
         "about": "Sharp spikes sprung from the ground. No longer hidden, but still dangerous."
@@ -517,6 +545,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": { "show": true, "about": "Patches of green moss on the ground." }
     },
     {
@@ -538,6 +567,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": { "show": true, "about": "The edge of a chasm." }
     },
     {
@@ -559,6 +589,7 @@
       "isGlowing": false,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": { "show": true, "about": "Dark and deadly abyss." }
     },
     {
@@ -580,9 +611,36 @@
       "isGlowing": true,
       "isCausingPoison": false,
       "isCausingConfusion": false,
+      "isCausingBlind": false,
       "help": {
         "show": true,
         "about": "A glowing sigil with unknown magical properties. Could be beneficial... or dangerous."
+      }
+    },
+    {
+      "id": "Nebulous_Mist",
+      "char": "‷",
+      "bgCol": "#496181",
+      "fgCol": "#58749c",
+      "hasSolidBg": true,
+      "name": "Nebulous mist",
+      "description": "Thick hazy fog that obscures vision, making every step a venture into the unknown.",
+      "isOpaque": false,
+      "isBlockingMovement": false,
+      "isBlockingProjectiles": false,
+      "isDiggable": false,
+      "isCausingSlow": false,
+      "isCausingBurn": false,
+      "isMagnetic": false,
+      "isCausingBleed": false,
+      "isGlowing": false,
+      "isCausingPoison": false,
+      "isCausingConfusion": false,
+      "isCausingBlind": true,
+      "defaultBuffDuration": 1,
+      "help": {
+        "show": true,
+        "about": "Thick hazy fog that obscures vision, making every step a venture into the unknown."
       }
     }
   ]

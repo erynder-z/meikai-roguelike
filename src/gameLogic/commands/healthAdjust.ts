@@ -59,13 +59,20 @@ export class HealthAdjust {
     if (mob.isPlayer) {
       game.stats.adjustCurrentTurnReceivedDmg(amount);
       game.stats.incrementDamageReceivedCounter(amount);
+      if (game.stats.currentTurnReceivedDmg >= 1) {
+        this.handlePlayerDamageEvent(
+          game.player,
+          game.stats.currentTurnReceivedDmg,
+          game,
+        );
+      }
     }
 
     if (attacker?.isPlayer) game.stats.incrementDamageDealtCounter(amount);
 
     const shouldDisplayMessage = this.shouldDisplayMessage(game, mob, attacker);
 
-    if (mob.hp <= 0)
+    if (mob.hp <= 0 && !mob.isPlayer)
       this.mobDeathWithCorpseAndLoot(mob, game, shouldDisplayMessage);
   }
 
@@ -250,6 +257,7 @@ export class HealthAdjust {
     attacker: Mob | null,
   ): boolean {
     const map = <GameMap>game.currentMap();
+
     const isPlayer = mob.isPlayer;
     const isAttackerPlayer = attacker !== null && attacker.isPlayer;
     const iVisible = CanSee.checkMobLOS_Bresenham(mob, game.player, map, false);

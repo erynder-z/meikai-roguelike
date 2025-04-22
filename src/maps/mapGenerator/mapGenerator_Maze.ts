@@ -1,11 +1,10 @@
-import { EnvironmentChecker } from '../../gameLogic/environment/environmentChecker';
 import { GameMap } from '../mapModel/gameMap';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
+import { MapUtils } from '../helpers/mapUtils';
 import { MAZE_LEVEL_TILES } from './generationData/mazeLevelTiles';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { RockGenerator } from './rockGenerator';
 import { WorldPoint } from '../mapModel/worldPoint';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 
 /**
  * GameMapType generator for maze-like environments.
@@ -18,7 +17,7 @@ export class MapGenerator_Maze {
 
   public generate(): GameMap {
     this.carveMaze();
-    this.processCells(this.map);
+    MapUtils.applyStaticEffectsToCells(this.map);
     return this.map;
   }
 
@@ -97,20 +96,6 @@ export class MapGenerator_Maze {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-  }
-
-  /**
-   * Loops over every cell on the map and applies any necessary modifications.
-   * @param {GameMapType} map The map to process.
-   */
-  private processCells(map: GameMapType): void {
-    for (let y = 0; y < map.dimensions.y; y++) {
-      for (let x = 0; x < map.dimensions.x; x++) {
-        const position = new WorldPoint(x, y);
-
-        EnvironmentChecker.addStaticCellEffects(map.cell(position));
-      }
-    }
   }
 
   public static generate(rand: RandomGenerator, level: number): GameMap {

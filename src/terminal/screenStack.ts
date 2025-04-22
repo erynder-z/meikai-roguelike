@@ -47,6 +47,13 @@ export class ScreenStack implements Stack, InteractiveScreen {
   }
 
   /**
+   * Clears all screens from the stack.
+   */
+  public removeAllScreens(): void {
+    this.screens = [];
+  }
+
+  /**
    * Draws the current screen on the terminal, if there is one.
    *
    * @param {DrawableTerminal} term - the screen to be drawn

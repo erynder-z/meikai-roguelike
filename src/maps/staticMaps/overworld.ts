@@ -1,100 +1,110 @@
-import { EnvironmentChecker } from '../../gameLogic/environment/environmentChecker';
-import { FindFreeSpace } from '../helpers/findFreeSpace';
 import { GameMap } from '../mapModel/gameMap';
 import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
-import { IrregularShapeAreaGenerator } from '../helpers/irregularShapeAreaGenerator';
+import { MapUtils } from '../helpers/mapUtils';
 import { OVERWORLD_LEVEL_TILES } from '../mapGenerator/generationData/overworldLevelTiles';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { RockGenerator } from '../mapGenerator/rockGenerator';
 import { WorldPoint } from '../mapModel/worldPoint';
+import { WeightedFeatureConfig } from '../../types/gameLogic/maps/helpers/weightedFeatures';
+
+const overworldFeatures: WeightedFeatureConfig[] = [
+  {
+    glyph: Glyph.Deep_Water,
+    weight: 2,
+    minSize: 300,
+    maxSize: 600,
+    iterations: 10,
+  },
+  {
+    glyph: Glyph.Shallow_Water,
+    weight: 5,
+    minSize: 10,
+    maxSize: 40,
+    iterations: 8,
+  },
+  {
+    glyph: Glyph.Lava,
+    weight: 1,
+    minSize: 5,
+    maxSize: 25,
+    iterations: 10,
+  },
+  {
+    glyph: Glyph.Nebulous_Mist,
+    weight: 3,
+    minSize: 20,
+    maxSize: 60,
+    iterations: 12,
+  },
+];
 
 export class Overworld {
   public static generate(rand: RandomGenerator, level: number): GameMapType {
     const mapDimensionsX = 64;
     const mapDimensionsY = 32;
     const dim = new WorldPoint(mapDimensionsX, mapDimensionsY);
-    const m = new GameMap(dim, Glyph.Wall, level);
+    const gameMap = new GameMap(dim, Glyph.Wall, level);
 
-    for (let p = new WorldPoint(); p.y < mapDimensionsY; p.y++) {
-      for (p.x = 0; p.x < mapDimensionsX; p.x++) {
-        const edge = !(
-          p.x > 0 &&
-          p.x < mapDimensionsX - 1 &&
-          p.y > 0 &&
-          p.y < mapDimensionsY - 1
+    gameMap.forEachCell((_cell, p) => {
+      const edge = !(
+        p.x > 0 &&
+        p.x < mapDimensionsX - 1 &&
+        p.y > 0 &&
+        p.y < mapDimensionsY - 1
+      );
+      const chance = rand.isOneIn(4);
+
+      if (chance) {
+        gameMap.cell(p).env = RockGenerator.getWallRockTypes(
+          rand,
+          OVERWORLD_LEVEL_TILES,
         );
-        const chance = rand.isOneIn(4);
-
-        if (chance) {
-          m.cell(p).env = RockGenerator.getWallRockTypes(
-            rand,
-            OVERWORLD_LEVEL_TILES,
-          );
-        } else {
-          m.cell(p).env = RockGenerator.getFloorRockTypes(
-            rand,
-            OVERWORLD_LEVEL_TILES,
-          );
-        }
-        if (edge) {
-          m.cell(p).env = Glyph.Rock;
-        }
-        EnvironmentChecker.addStaticCellEffects(m.cell(p));
+      } else {
+        gameMap.cell(p).env = RockGenerator.getFloorRockTypes(
+          rand,
+          OVERWORLD_LEVEL_TILES,
+        );
       }
-    }
+      if (edge) {
+        gameMap.cell(p).env = Glyph.Rock;
+      }
+    });
 
-    const lake = IrregularShapeAreaGenerator.generateIrregularShapeArea(
-      dim,
+    const numberOfFeaturesToGenerate = 15;
+
+    MapUtils.generateRandomFeatures(
+      numberOfFeaturesToGenerate,
+      gameMap,
       rand,
-      500,
-      10,
+      overworldFeatures,
+      dim,
     );
 
-    for (const p of lake) {
-      m.cell(p).env = Glyph.Deep_Water;
-    }
+    /*   const singleFeature = {
+      glyph: Glyph.Lava,
+      weight: 1,
+      minSize: 5,
+      maxSize: 25,
+      iterations: 10,
+    };
 
-    const puddle = IrregularShapeAreaGenerator.generateIrregularShapeArea(
-      dim,
+    MapUtils.generateSingleFeature(singleFeature, m, rand, dim); */
+
+    MapUtils.applyTerrainModifier(
+      gameMap,
       rand,
-      20,
+      dim,
+      rand.randomIntegerClosedRange(50, 150),
+      3,
       10,
-    );
-    for (const p of puddle) {
-      m.cell(p).env = Glyph.Shallow_Water;
-    }
-
-    const lavaPool = IrregularShapeAreaGenerator.generateIrregularShapeArea(
-      dim,
-      rand,
       5,
-      10,
+      Glyph.Regular_Floor,
+      Glyph.Mossy_Floor,
     );
-    for (const p of lavaPool) {
-      m.cell(p).env = Glyph.Lava;
-    }
 
-    const freeSpace = FindFreeSpace.findFree(m, rand);
-    if (freeSpace) m.cell(freeSpace).env = Glyph.Magnetite;
+    MapUtils.applyStaticEffectsToCells(gameMap);
 
-    const mossyFloorChance = rand.randomIntegerClosedRange(1, 100);
-    if (mossyFloorChance <= 100) {
-      for (let i = 0; i < mossyFloorChance; i++) {
-        const mossyFloorArea =
-          IrregularShapeAreaGenerator.generateIrregularShapeArea(
-            dim,
-            rand,
-            rand.randomIntegerClosedRange(3, 10),
-            5,
-          );
-        for (const p of mossyFloorArea) {
-          if (m.cell(p).env === Glyph.Regular_Floor)
-            m.cell(p).env = Glyph.Mossy_Floor;
-        }
-      }
-    }
-
-    return m;
+    return gameMap;
   }
 }

@@ -128,26 +128,33 @@ export class GameMap implements GameMapType {
   }
 
   /**
-   * Turns the given mob into a corpse. If the cell at the mob's
-   * position is not a valid place for a corpse, the mob is moved
-   * to an adjacent cell that is valid. If all adjacent cells are
-   * invalid, the mob is deleted.
+   * Remove a mob from the queue and the map, and replace it with a corpse item object.
+   * If there is no free space in the same cell to drop the corpse, tries to find a free adjacent cell to drop it.
+   * If no free space is found, the corpse is not created and a warning is logged.
    *
-   * @param {Mob} mob - The mob to be turned into a corpse.
-   * @returns {void}
+   * @param {Mob} mob - The mob to be removed and replaced with a corpse.
+   * @return {void}
    */
   public mobToCorpse(mob: Mob): void {
     this.queue.removeMob(mob);
 
+    const cell = this.cell(mob.pos);
+
+    if (cell.mob === mob) {
+      cell.mob = undefined;
+    } else {
+      console.error(
+        `Mob ${mob.id} was not found in its expected cell ${mob.pos.toString()} during mobToCorpse.`,
+      );
+    }
+
     const corpseGlyph =
       Glyph[`${Glyph[mob.glyph]}_Corpse` as keyof typeof Glyph];
+    if (!corpseGlyph) return;
 
-    const cell = this.cell(mob.pos);
-    const canDrop = EnvironmentChecker.canCorpseBeDropped(cell);
-
-    if (canDrop) {
+    const canDropHere = EnvironmentChecker.canCorpseBeDropped(cell);
+    if (canDropHere) {
       const corpse = new Corpse(corpseGlyph, mob.pos.x, mob.pos.y).create();
-      cell.mob = undefined;
       cell.corpse = corpse;
       return;
     }
@@ -157,10 +164,19 @@ export class GameMap implements GameMapType {
     if (np) {
       const corpse = new Corpse(corpseGlyph, np.x, np.y).create();
       const newCell = this.cell(np);
-      newCell.mob = undefined;
-      newCell.corpse = corpse;
+
+      if (!newCell.mob && !newCell.corpse) {
+        newCell.corpse = corpse;
+      } else {
+        console.warn(
+          `Found adjacent free space ${np.toString()} for corpse, but it was occupied.`,
+        );
+      }
       return;
     }
+    console.log(
+      `Mob ${mob.id} died at ${mob.pos.toString()}, but no space found to drop corpse.`,
+    );
   }
 
   /**
@@ -219,7 +235,7 @@ export class GameMap implements GameMapType {
   }
 
   /**
-   * Sets the environment name and description for every cell.
+   * Sets the environment name, description and the default buff duration (if any) for every cell.
    */
   public setEnvironmentDescriptions(): void {
     this.forEachCell(cell => {
@@ -227,6 +243,8 @@ export class GameMap implements GameMapType {
       cell.environment.glyph = glyph;
       cell.environment.name = GlyphMap.getGlyphInfo(glyph).name;
       cell.environment.description = GlyphMap.getGlyphDescription(glyph);
+      cell.environment.defaultBuffDuration =
+        GlyphMap.getEnvDefaultBuffDuration(glyph);
     });
   }
 }

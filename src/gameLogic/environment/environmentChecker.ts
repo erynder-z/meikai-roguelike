@@ -70,6 +70,7 @@ export class EnvironmentChecker {
    */
   public static addStaticCellEffects(cell: MapCell): void {
     this.addArcaneSigilEffect(cell);
+    this.addNebulousMistEffect(cell);
   }
 
   /**
@@ -140,6 +141,18 @@ export class EnvironmentChecker {
       const effect = randomEnvEffect();
       cell.addEnvEffect(effect);
     }
+  }
+
+  /**
+   * Adds the blindness effect to a cell if it contains a Nebulous Mist glyph.
+   *
+   * @param {MapCell} cell - The cell to potentially add the blindness effect to.
+   * @return {void} This function does not return a value.
+   */
+
+  private static addNebulousMistEffect(cell: MapCell): void {
+    if (cell.glyph() === Glyph.Nebulous_Mist)
+      cell.addEnvEffect(EnvEffect.Blind);
   }
 
   /**

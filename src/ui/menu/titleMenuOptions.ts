@@ -312,7 +312,6 @@ export class TitleMenuOptions extends HTMLElement {
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.changeFont = this.changeFont.bind(this);
-    this.changeTerminalDimensions = this.changeTerminalDimensions.bind(this);
     this.changeSeed = this.changeSeed.bind(this);
     this.toggleControlScheme = this.toggleControlScheme.bind(this);
     this.toggleScanlines = this.toggleScanlines.bind(this);
@@ -343,19 +342,16 @@ export class TitleMenuOptions extends HTMLElement {
       root,
       'terminal-dimensions-width-input',
       'input',
-      () => this.changeTerminalDimensions('width'),
+      event => this.handleInputChange(event, 'terminal-width'),
     );
     this.eventTracker.addById(
       root,
       'terminal-dimensions-height-input',
       'input',
-      () => this.changeTerminalDimensions('height'),
+      event => this.handleInputChange(event, 'terminal-height'),
     );
-    this.eventTracker.addById(
-      root,
-      'scaling-factor-input',
-      'input',
-      this.focusAndSelectScalingFactorInput,
+    this.eventTracker.addById(root, 'scaling-factor-input', 'input', event =>
+      this.handleInputChange(event, 'scaling'),
     );
     this.eventTracker.addById(
       root,
@@ -397,7 +393,7 @@ export class TitleMenuOptions extends HTMLElement {
       root,
       'message-count-input-button',
       'click',
-      this.focusAndSelectMessageCountInput,
+      event => this.handleInputChange(event, 'message'),
     );
     this.eventTracker.addById(
       root,
@@ -684,38 +680,6 @@ export class TitleMenuOptions extends HTMLElement {
     this.buttonManager.displayCurrentFont();
 
     this.layoutManager.updateFont();
-  }
-
-  /**
-   * Adds an event listener to the input field for changing the terminal dimensions.
-   *
-   * The event listener is added to the input field for the specified side (width or height).
-   * When the input field is changed, the handleInputChange function is called with the event
-   * and the side as arguments.
-   *
-   * @param {string} side - The side to change the terminal dimensions for.
-   * @return {void}
-   */
-  private changeTerminalDimensions(side: 'width' | 'height'): void {
-    let input: HTMLInputElement | null = null;
-    switch (side) {
-      case 'width':
-        input = this.shadowRoot?.getElementById(
-          'terminal-dimensions-width-input',
-        ) as HTMLInputElement;
-        input.addEventListener('input', event =>
-          this.handleInputChange(event, 'terminal-width'),
-        );
-        break;
-      case 'height':
-        input = this.shadowRoot?.getElementById(
-          'terminal-dimensions-height-input',
-        ) as HTMLInputElement;
-        input.addEventListener('input', event =>
-          this.handleInputChange(event, 'terminal-height'),
-        );
-        break;
-    }
   }
 
   /**

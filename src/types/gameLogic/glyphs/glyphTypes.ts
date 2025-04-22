@@ -24,6 +24,8 @@ export type EnvironmentGlyph = {
   isGlowing: boolean;
   isCausingPoison: boolean;
   isCausingConfusion: boolean;
+  isCausingBlind: boolean;
+  defaultBuffDuration?: number;
 } & BaseGlyph;
 
 /**

@@ -21,6 +21,8 @@ export class GlyphInfo {
     public isGlowing: boolean = false,
     public isCausingPoison: boolean = false,
     public isCausingConfusion: boolean = false,
+    public isCausingBlind: boolean = false,
+    public defaultBuffDuration: number = 0,
     public help?: { show: boolean; about: string },
   ) {}
 }

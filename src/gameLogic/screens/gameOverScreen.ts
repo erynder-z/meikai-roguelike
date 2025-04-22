@@ -1,4 +1,5 @@
 import { BaseScreen } from './baseScreen';
+import { DrawUI } from '../../renderer/drawUI';
 import { GameOverScreenDisplay } from '../../ui/gameOverScreenDisplay/gameOverScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
@@ -48,10 +49,9 @@ export class GameOverScreen extends BaseScreen {
 
       container.appendChild(this.display);
     }
+
+    DrawUI.renderActionImage(this.game);
   }
-
-  /**
-
 
   /**
    * Determines if the screen should be updated based on time.

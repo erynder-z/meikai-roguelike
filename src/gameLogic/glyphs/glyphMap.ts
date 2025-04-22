@@ -34,6 +34,8 @@ export class GlyphMap {
     false, // isGlowing
     false, // isCausingPoison
     false, // isCausingConfusion
+    false, // isCausingBlind
+    0, // defaultBuffDuration
   );
 
   /**
@@ -72,9 +74,8 @@ export class GlyphMap {
    * @returns {void}
    */
   private static warn(glyph: Glyph): void {
-    if (GlyphMap.glyphsRegistry.size === Object.keys(Glyph).length) 
-      return;
-    
+    if (GlyphMap.glyphsRegistry.size === Object.keys(Glyph).length) return;
+
     console.error(
       `Glyph ${Glyph[glyph]} differs from registry size ${GlyphMap.glyphsRegistry.size}`,
     );
@@ -109,6 +110,18 @@ export class GlyphMap {
   public static getGlyphDescription(glyph: Glyph): string {
     const info = GlyphMap.glyphsRegistry.get(glyph);
     return info?.description || 'no description';
+  }
+
+  /**
+   * Retrieves the default buff duration for an environment glyph.
+   *
+   * If the glyph is not found or does not have a default buff duration, 1 is returned.
+   * @param {Glyph} glyph - The glyph to retrieve the default buff duration for.
+   * @return {number} The default buff duration for the glyph, or 1.
+   */
+  public static getEnvDefaultBuffDuration(glyph: Glyph): number {
+    const info = GlyphMap.glyphsRegistry.get(glyph);
+    return info?.defaultBuffDuration || 0;
   }
 
   /**

@@ -80,6 +80,7 @@ export enum Glyph {
   Deep_Water,
   Shallow_Water,
   Lava,
+  Nebulous_Mist,
 
   // Items
   Dagger,

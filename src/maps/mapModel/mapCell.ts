@@ -18,8 +18,15 @@ export class MapCell {
     glyph: Glyph;
     name: string;
     description: string;
+    defaultBuffDuration: number;
     effects: EnvEffect[];
-  } = { glyph: Glyph.Unknown, name: '', description: '', effects: [] };
+  } = {
+    glyph: Glyph.Unknown,
+    name: '',
+    description: '',
+    defaultBuffDuration: 0,
+    effects: [],
+  };
   public corpse: Corpse | undefined;
   public bloody: { isBloody: boolean; intensity: number } = {
     isBloody: false,
