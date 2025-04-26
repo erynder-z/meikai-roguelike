@@ -34,9 +34,11 @@ export class TitleMenu extends HTMLElement {
       }
 
       .title-screen-container h1 {
-        margin: 8rem 0 0 0;
+        font-size: 4rem;
+        margin: 8rem 1rem 0 1rem;
         text-align: center;
         z-index: 1;
+        text-shadow: 0 0 8px rgba(221, 0, 255, 0.82), 0 0 1px rgba(0, 153, 255, 0.9);
       }
 
       .title-screen-container button {
