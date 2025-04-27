@@ -48,6 +48,7 @@ body {
   margin: auto;
   line-height: 1.75;
   font-size: 1.25em;
+  animation: unBlur 0.25s;
 }
 
 .tab-container {
@@ -86,4 +87,13 @@ body {
 
 .underline {
   text-decoration: underline;
+}
+
+@keyframes unBlur {
+  from {
+    filter: blur(35px);
+  }
+  to {
+    filter: blur(0px);
+  }
 }

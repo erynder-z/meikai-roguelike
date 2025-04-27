@@ -22,6 +22,7 @@ export class HelpBuffs extends HTMLElement {
           justify-content: center;
           align-items: center;
           flex-direction: column;
+          animation: unBlur 0.25s;
         }
 
         table {
@@ -52,6 +53,15 @@ export class HelpBuffs extends HTMLElement {
         .effect-cell {
           font-style: italic;
         }
+
+        @keyframes unBlur {
+        from {
+          filter: blur(35px);
+        }
+        to {
+          filter: blur(0px);
+        }
+      }
       </style>
 
     <div class="container">

@@ -32,7 +32,9 @@ export class CloseButton extends HTMLElement {
         }
 
         .underline {
-          text-decoration: underline;}
+          text-decoration: underline;
+        }
+
       </style>
 
       <button class="close-button">
