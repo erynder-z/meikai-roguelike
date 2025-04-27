@@ -16,24 +16,17 @@ export class PoisonTick implements Tick {
   ) {}
 
   /**
-   * Checks if the current tick is the initial tick.
+   * Determines if damage should be applied based on the current turn.
+   * The initial tick always applies damage. After that, damage is applied on odd turns.
    *
-   * @param {number} duration - The total duration of the tick.
-   * @param {number} timeLeft - The remaining time for the tick.
-   * @return {boolean} True if it is the initial tick, false otherwise.
+   * @param {number} duration - The total duration of the bleed effect.
+   * @param {number} timeLeft - The remaining time for the bleed effect.
+   * @return {boolean} True if damage should be applied on odd turns, false otherwise.
    */
-  private isInitialTick(duration: number, timeLeft: number): boolean {
-    return timeLeft === duration;
-  }
+  private shouldApplyDamage(duration: number, timeLeft: number): boolean {
+    const turnNumber = duration - timeLeft;
 
-  /**
-   * Checks if damage should be applied based on the remaining time.
-   *
-   * @param {number} timeLeft - The remaining time for the tick.
-   * @return {boolean} True if damage should be applied, false otherwise.
-   */
-  private shouldApplyDamage(timeLeft: number): boolean {
-    return timeLeft % 2 === 0;
+    return turnNumber % 2 !== 0;
   }
 
   /**
@@ -43,12 +36,7 @@ export class PoisonTick implements Tick {
    * @param {number} timeLeft - The remaining time for the tick action.
    */
   public tick(duration: number, timeLeft: number): void {
-    if (
-      this.isInitialTick(duration, timeLeft) ||
-      !this.shouldApplyDamage(timeLeft)
-    ) {
-      return;
-    }
+    if (this.shouldApplyDamage(duration, timeLeft)) return;
 
     if (this.mob.isPlayer) {
       this.game.message(
