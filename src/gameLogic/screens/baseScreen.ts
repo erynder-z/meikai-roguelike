@@ -5,7 +5,6 @@ import { DrawUI } from '../../renderer/drawUI';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameMap } from '../../maps/mapModel/gameMap';
 import { GameState } from '../../types/gameBuilder/gameState';
-import { HealthAdjust } from '../commands/healthAdjust';
 import { MapCell } from '../../maps/mapModel/mapCell';
 import { Mob } from '../mobs/mob';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
