@@ -71,9 +71,13 @@ export class HealthAdjust {
     if (attacker?.isPlayer) game.stats.incrementDamageDealtCounter(amount);
 
     const shouldDisplayMessage = this.shouldDisplayMessage(game, mob, attacker);
+    const isMobDeath = mob.hp <= 0 && !mob.isPlayer;
+    const isPlayerDeath = mob.hp <= 0 && mob.isPlayer;
 
-    if (mob.hp <= 0 && !mob.isPlayer)
+    if (isMobDeath)
       this.mobDeathWithCorpseAndLoot(mob, game, shouldDisplayMessage);
+
+    if (isPlayerDeath) game.message(this.generatePlayerDeathMessage(mob));
   }
 
   /**
@@ -241,6 +245,17 @@ export class HealthAdjust {
     }
 
     return message;
+  }
+
+  /**
+   * Generates a message for the player's death.
+   *
+   * @param {Mob} player - The player who died.
+   * @return {LogMessage} The message describing the player's death.
+   */
+  private static generatePlayerDeathMessage(player: Mob): LogMessage {
+    const message = `${player.name} dies.`;
+    return new LogMessage(message, EventCategory.playerDeath);
   }
 
   /**
