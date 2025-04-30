@@ -45,7 +45,7 @@ export class BaseScreen implements StackScreen {
       this.game.player.pos,
       this.game,
     );
-    DrawUI.renderLevelInfo(this.game);
+    DrawUI.renderMiscInfo(this.game);
     DrawUI.renderBuffs(this.game);
     DrawUI.renderEquipment(this.game);
     DrawUI.renderMessage(this.game);

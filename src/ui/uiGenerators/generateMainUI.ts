@@ -15,12 +15,12 @@ export class GenerateMainUI {
     mainContainer.classList.add('main-container');
     ScanlinesHandler.handleScanlines(mainContainer);
 
-    // level info container
-    const levelInfoContainer = document.createElement('div');
-    levelInfoContainer.id = 'lvl-info-container';
-    levelInfoContainer.classList.add('lvl-info-container');
-    const levelInfo = document.createElement('level-info');
-    levelInfoContainer.appendChild(levelInfo);
+    // miscellaneous info container
+    const miscInfoContainer = document.createElement('div');
+    miscInfoContainer.id = 'misc-info-container';
+    miscInfoContainer.classList.add('misc-info-container');
+    const miscInfo = document.createElement('misc-info');
+    miscInfoContainer.appendChild(miscInfo);
 
     // Messages container
     const messagesContainer = document.createElement('div');
@@ -70,7 +70,7 @@ export class GenerateMainUI {
     bottomContainer.appendChild(imageContainer);
     bottomContainer.appendChild(buffsContainer);
     bottomContainer.appendChild(equipmentContainer);
-    mainContainer.appendChild(levelInfoContainer);
+    mainContainer.appendChild(miscInfoContainer);
     mainContainer.appendChild(messagesContainer);
     mainContainer.appendChild(canvasContainer);
     mainContainer.appendChild(bottomContainer);

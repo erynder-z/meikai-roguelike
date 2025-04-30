@@ -1,4 +1,4 @@
-export class LevelInfo extends HTMLElement {
+export class MiscInfo extends HTMLElement {
   constructor() {
     super();
   }
@@ -16,19 +16,35 @@ export class LevelInfo extends HTMLElement {
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
     <style>
-      .level-info{
-        font-size: large;
-        margin: auto;
+      .misc-info {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 1rem;
       }
+
+      .some-other-info {
+        font-size: large;
+      }
+
+      .level-info {
+        font-size: large;
+      }
+
       .yellow-hp {
         color: yellow;
       }
+
       .red-hp {
         color: red;
       }
     </style>
 
-    <div class="level-info"></div>
+    <div class="misc-info">
+      <div class="some-other-info"></div>
+      <div class="level-info"></div>
+    </div>
   `;
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
@@ -40,7 +56,7 @@ export class LevelInfo extends HTMLElement {
    * @param {number} lvl - The level to display.
    * @returns {void}
    */
-  public setInfo(lvl: number): void {
+  public setLevelInfo(lvl: number): void {
     const lvlDisplayText = `LVL: ${lvl}`;
 
     const levelInfo = this.shadowRoot?.querySelector('.level-info');

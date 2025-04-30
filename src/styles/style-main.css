@@ -92,7 +92,7 @@ li {
   grid-template-rows: 2% 83% 15%;
   grid-template-columns: 15% 85%;
   grid-template-areas:
-    'lvl-info lvl-info'
+    'misc-info misc-info'
     'messages canvas'
     'bottom bottom';
 }
@@ -105,13 +105,8 @@ li {
   grid-area: canvas;
 }
 
-.lvl-info-container {
-  grid-area: lvl-info;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-  padding: 0 1rem;
+.misc-info-container {
+  grid-area: misc-info;
 }
 
 .messages-container {
