@@ -99,7 +99,7 @@ export class DrawUI {
   }
 
   /**
-   * Renders miscellaneous information about the game state, such as the current dungeon level,
+   * Renders miscellaneous information about the game state, such as the current dungeon level and player status,
    * to the appropriate UI element on the page.
    *
    * @param {GameState} game - The current game state containing information about the dungeon.
@@ -110,7 +110,10 @@ export class DrawUI {
     const lvl = game.dungeon.level;
 
     const miscInfoDisplay = document.querySelector('misc-info') as MiscInfo;
-    if (miscInfoDisplay) miscInfoDisplay.setLevelInfo(lvl);
+    if (miscInfoDisplay) {
+      miscInfoDisplay.setLevelInfo(lvl);
+      miscInfoDisplay.setPlayerHPStatus(game.player);
+    }
   }
 
   /**

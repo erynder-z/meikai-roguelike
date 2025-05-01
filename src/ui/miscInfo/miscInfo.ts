@@ -1,3 +1,5 @@
+import { Mob } from '../../gameLogic/mobs/mob';
+
 export class MiscInfo extends HTMLElement {
   constructor() {
     super();
@@ -20,17 +22,15 @@ export class MiscInfo extends HTMLElement {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        gap: 1rem;
+        gap: 2rem;
         padding: 0 1rem;
       }
 
-      .some-other-info {
+      .large-font {
         font-size: large;
       }
 
-      .level-info {
-        font-size: large;
-      }
+  
 
       .yellow-hp {
         color: yellow;
@@ -42,7 +42,7 @@ export class MiscInfo extends HTMLElement {
     </style>
 
     <div class="misc-info">
-      <div class="some-other-info"></div>
+      <div class="player-hp-status">Health: </div>
       <div class="level-info"></div>
     </div>
   `;
@@ -57,10 +57,39 @@ export class MiscInfo extends HTMLElement {
    * @returns {void}
    */
   public setLevelInfo(lvl: number): void {
-    const lvlDisplayText = `LVL: ${lvl}`;
+    const lvlDisplayText = `LVL: <span class="large-font">${lvl}</span>`;
 
     const levelInfo = this.shadowRoot?.querySelector('.level-info');
 
     if (levelInfo) levelInfo.innerHTML = lvlDisplayText;
+  }
+
+  /**
+   * Sets the player's HP status text in the misc info display
+   * based on their current HP percentage.
+   *
+   * @param {Mob} player - The player mob.
+   * @returns {void}
+   */
+  public setPlayerHPStatus(player: Mob): void {
+    const hp = player.hp;
+    const maxhp = player.maxhp;
+
+    if (!hp || !maxhp) return;
+
+    const yellowHP = hp / maxhp >= 0.25 && hp / maxhp <= 0.5;
+    const redHP = hp / maxhp <= 0.25;
+    const isDead = hp <= 0;
+
+    const playerHpStatus = this.shadowRoot?.querySelector('.player-hp-status');
+
+    if (playerHpStatus)
+      playerHpStatus.innerHTML = isDead
+        ? `Health: <span class="large-font red-hp">Dead</span>`
+        : redHP
+          ? `Health: <span class="large-font red-hp">Danger</span>`
+          : yellowHP
+            ? `Health: <span class="large-font yellow-hp">Caution</span>`
+            : `Health: <span class="large-font">Good</span>`;
   }
 }
