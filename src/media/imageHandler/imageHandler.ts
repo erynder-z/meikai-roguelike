@@ -12,6 +12,15 @@ export class ImageHandler {
   private availableImages: Record<string, string[]> = {};
   private gameConfig = gameConfigManager.getConfig();
 
+  private imageQueue: {
+    img: HTMLImageElement;
+    type: keyof typeof EventCategory;
+  }[] = [];
+  private isDisplaying = false;
+  private readonly minDisplayTime = 250;
+
+  private displayTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
   private constructor() {}
 
   /**
@@ -42,7 +51,10 @@ export class ImageHandler {
    * @param img The image to display.
    * @param type The type of image to display.
    */
-  public displayImage(img: HTMLImageElement, type: keyof typeof EventCategory) {
+  public displayImageInternal(
+    img: HTMLImageElement,
+    type: keyof typeof EventCategory,
+  ) {
     const eventName = type;
 
     img.setAttribute('class', 'hud-image');
@@ -53,11 +65,54 @@ export class ImageHandler {
     if (imageContainer) {
       imageContainer.innerHTML = '';
       imageContainer.appendChild(img);
-
-      setTimeout(() => {
-        img.classList.add('animation');
-      }, 10);
     }
+  }
+
+  /**
+   * Process the image queue and display the next image.
+   * If there are no images in the queue, this function does nothing.
+   * If an image is already being displayed, this function does nothing.
+   * Otherwise, it will display the next image in the queue and set a timeout
+   * to process the rest of the queue after the minimum display time.
+   */
+  private processQueue(): void {
+    if (this.isDisplaying || this.imageQueue.length === 0) {
+      return;
+    }
+
+    const nextImageInfo = this.imageQueue.shift();
+
+    if (nextImageInfo) {
+      this.isDisplaying = true;
+      const { img, type } = nextImageInfo;
+
+      this.displayImageInternal(img, type);
+
+      if (this.displayTimeoutId) {
+        clearTimeout(this.displayTimeoutId);
+      }
+
+      this.displayTimeoutId = setTimeout(() => {
+        this.isDisplaying = false;
+        this.displayTimeoutId = null;
+
+        this.processQueue();
+      }, this.minDisplayTime);
+    }
+  }
+
+  /**
+   * Adds an image to the image queue and starts processing the queue.
+   * @param img The image to display.
+   * @param type The type of image to display.
+   * @returns Nothing.
+   */
+  public displayImage(
+    img: HTMLImageElement,
+    type: keyof typeof EventCategory,
+  ): void {
+    this.imageQueue.push({ img, type });
+    this.processQueue();
   }
 
   /**
