@@ -348,6 +348,7 @@ export class SaveStateHandler {
       glyph: cell.environment?.glyph ?? Glyph.Unknown,
       name: cell.environment?.name ?? '',
       description: cell.environment?.description ?? '',
+      defaultBuffDuration: cell.environment?.defaultBuffDuration ?? 0,
       effects: cell.environment?.effects ?? [],
     };
     newCell.corpse = cell.corpse ? this.restoreCorpse(cell.corpse) : undefined;

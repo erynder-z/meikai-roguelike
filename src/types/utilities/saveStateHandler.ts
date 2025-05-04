@@ -179,6 +179,7 @@ export type SerializedMapCell = {
     glyph: number;
     name: string;
     description: string;
+    defaultBuffDuration: number;
     effects: number[];
   };
 };
