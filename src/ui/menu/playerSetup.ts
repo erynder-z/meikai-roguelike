@@ -44,6 +44,7 @@ export class PlayerSetup extends HTMLElement {
           flex-direction: column;
           align-items: center;
           width: 45ch;
+          animation: unBlur 0.25s;
         }
 
         .container h1 {
@@ -196,6 +197,16 @@ export class PlayerSetup extends HTMLElement {
           font-size: 1.25rem;
           text-align: left;
           margin-top: 1rem;
+        }
+
+        @keyframes unBlur {
+          from {
+            filter: blur(35px);
+          }
+
+          to {
+            filter: blur(0px);
+          }
         }
       </style>
 

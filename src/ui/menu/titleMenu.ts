@@ -34,9 +34,11 @@ export class TitleMenu extends HTMLElement {
       }
 
       .title-screen-container h1 {
-        margin: 8rem 0 0 0;
+        font-size: 4rem;
+        margin: 8rem 1rem 0 1rem;
         text-align: center;
         z-index: 1;
+        animation: unBlur 0.25s;
       }
 
       .title-screen-container button {
@@ -65,6 +67,7 @@ export class TitleMenu extends HTMLElement {
         justify-content: center;
         gap: 0.5rem;
         height: 100%;
+        animation: unBlur 0.25s;
       }
 
       .bottom-container {
@@ -73,6 +76,7 @@ export class TitleMenu extends HTMLElement {
         align-items: center;
         width: 100%;
         margin-top: auto;
+        animation: unBlur 0.25s;
       }
 
       .version-display {
@@ -80,9 +84,18 @@ export class TitleMenu extends HTMLElement {
         font-size: 1.5rem;
       }
 
-       button[disabled] {
-          opacity: 0.5;
-          cursor: not-allowed;
+      button[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      @keyframes unBlur {
+        from {
+          filter: blur(35px);
+        }
+        to {
+          filter: blur(0px);
+        }
       }
     </style>
 

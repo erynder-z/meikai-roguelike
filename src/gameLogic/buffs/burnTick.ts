@@ -16,13 +16,17 @@ export class BurnTick implements Tick {
   ) {}
 
   /**
-   * Checks if damage should be applied based on the given time.
+   * Determines if damage should be applied based on the current turn.
+   * The initial tick always applies damage. After that, damage is applied on odd turns.
    *
-   * @param {number} timeLeft - The time parameter to check.
-   * @return {boolean} True if damage should be applied, false otherwise.
+   * @param {number} duration - The total duration of the bleed effect.
+   * @param {number} timeLeft - The remaining time for the bleed effect.
+   * @return {boolean} True if damage should be applied on odd turns, false otherwise.
    */
-  private shouldApplyDamage(timeLeft: number): boolean {
-    return timeLeft % 2 === 0;
+  private shouldApplyDamage(duration: number, timeLeft: number): boolean {
+    const turnNumber = duration - timeLeft;
+
+    return turnNumber % 2 !== 0;
   }
 
   /**
@@ -33,7 +37,7 @@ export class BurnTick implements Tick {
    * @return {void} This function does not return a value.
    */
   public tick(duration: number, timeLeft: number): void {
-    if (!this.shouldApplyDamage(timeLeft)) return;
+    if (!this.shouldApplyDamage(duration, timeLeft)) return;
     const dmg = this.game.rand.randomIntegerClosedRange(
       this.MIN_DAMAGE,
       this.MAX_DAMAGE,

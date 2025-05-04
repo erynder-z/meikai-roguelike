@@ -51,12 +51,13 @@ export class GameOverScreen extends BaseScreen {
     }
 
     DrawUI.renderActionImage(this.game);
+    DrawUI.renderMessage(this.game);
+    DrawUI.renderMiscInfo(this.game);
   }
 
   /**
    * Determines if the screen should be updated based on time.
    *
-   * @param {Stack} stack - The stack of screens.
    * @return {boolean} Returns `true` if the screen should be updated, `false` otherwise.
    */
   public onTime(): boolean {

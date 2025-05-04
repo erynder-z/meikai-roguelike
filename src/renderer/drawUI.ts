@@ -11,10 +11,10 @@ import { Glyph } from '../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
 import { ImageHandler } from '../media/imageHandler/imageHandler';
-import { LevelInfo } from '../ui/levelInfo/levelInfo';
 import { MapCell } from '../maps/mapModel/mapCell';
 import { MapRenderer } from './mapRenderer';
 import { MessagesDisplay } from '../ui/messages/messagesDisplay';
+import { MiscInfo } from '../ui/miscInfo/miscInfo';
 import { TerminalPoint } from '../terminal/terminalPoint';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
 
@@ -98,11 +98,22 @@ export class DrawUI {
     this.drawMap(term, map, viewport, playerPos, game);
   }
 
-  public static renderLevelInfo(game: GameState): void {
+  /**
+   * Renders miscellaneous information about the game state, such as the current dungeon level and player status,
+   * to the appropriate UI element on the page.
+   *
+   * @param {GameState} game - The current game state containing information about the dungeon.
+   * @return {void}
+   */
+
+  public static renderMiscInfo(game: GameState): void {
     const lvl = game.dungeon.level;
 
-    const levelInfoDisplay = document.querySelector('level-info') as LevelInfo;
-    if (levelInfoDisplay) levelInfoDisplay.setInfo(lvl);
+    const miscInfoDisplay = document.querySelector('misc-info') as MiscInfo;
+    if (miscInfoDisplay) {
+      miscInfoDisplay.setLevelInfo(lvl);
+      miscInfoDisplay.setPlayerHPStatus(game.player);
+    }
   }
 
   /**
@@ -186,8 +197,29 @@ export class DrawUI {
       case EventCategory.mobDeath:
         imageHandler.handleSmileImageDisplay(game);
         break;
-      case EventCategory.moving:
-        imageHandler.handleMovingImageDisplay(game);
+      case EventCategory.moving_UP:
+        imageHandler.handleMovingImageDisplay(game, 'UP');
+        break;
+      case EventCategory.moving_DOWN:
+        imageHandler.handleMovingImageDisplay(game, 'DOWN');
+        break;
+      case EventCategory.moving_LEFT:
+        imageHandler.handleMovingImageDisplay(game, 'LEFT');
+        break;
+      case EventCategory.moving_RIGHT:
+        imageHandler.handleMovingImageDisplay(game, 'RIGHT');
+        break;
+      case EventCategory.moving_UP_LEFT:
+        imageHandler.handleMovingImageDisplay(game, 'UP_LEFT');
+        break;
+      case EventCategory.moving_DOWN_LEFT:
+        imageHandler.handleMovingImageDisplay(game, 'DOWN_LEFT');
+        break;
+      case EventCategory.moving_UP_RIGHT:
+        imageHandler.handleMovingImageDisplay(game, 'UP_RIGHT');
+        break;
+      case EventCategory.moving_DOWN_RIGHT:
+        imageHandler.handleMovingImageDisplay(game, 'DOWN_RIGHT');
         break;
       case EventCategory.rangedAttack:
         imageHandler.handlePistolImageDisplay(game);

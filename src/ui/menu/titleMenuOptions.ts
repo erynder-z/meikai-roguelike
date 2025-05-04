@@ -68,6 +68,7 @@ export class TitleMenuOptions extends HTMLElement {
           color: var(--white);
           z-index: 1;
           overflow-x: hidden;
+          animation: unBlur 0.25s;
         }
         
         .options-menu button {
@@ -160,6 +161,16 @@ export class TitleMenuOptions extends HTMLElement {
           margin: 0 1rem;
           z-index: 1;
           font-size: 2.5rem;
+        }
+          
+        @keyframes unBlur {
+          from {
+            filter: blur(35px);
+          }
+
+          to {
+            filter: blur(0px);
+          }
         }
       </style>
 

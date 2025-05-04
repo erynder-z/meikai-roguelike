@@ -2,6 +2,7 @@ import { EventCategory } from '../../gameLogic/messages/logMessage';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { images } from './imageIndex';
+import { MovementDirection } from '../../types/gameLogic/commands/movementDirections';
 
 /**
  * Handles displaying action images on the screen.
@@ -11,6 +12,15 @@ export class ImageHandler {
 
   private availableImages: Record<string, string[]> = {};
   private gameConfig = gameConfigManager.getConfig();
+
+  private imageQueue: {
+    img: HTMLImageElement;
+    type: keyof typeof EventCategory;
+  }[] = [];
+  private isDisplaying = false;
+  private readonly minDisplayTime = 250;
+
+  private displayTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   private constructor() {}
 
@@ -42,7 +52,10 @@ export class ImageHandler {
    * @param img The image to display.
    * @param type The type of image to display.
    */
-  public displayImage(img: HTMLImageElement, type: keyof typeof EventCategory) {
+  public displayImageInternal(
+    img: HTMLImageElement,
+    type: keyof typeof EventCategory,
+  ) {
     const eventName = type;
 
     img.setAttribute('class', 'hud-image');
@@ -53,11 +66,54 @@ export class ImageHandler {
     if (imageContainer) {
       imageContainer.innerHTML = '';
       imageContainer.appendChild(img);
-
-      setTimeout(() => {
-        img.classList.add('animation');
-      }, 10);
     }
+  }
+
+  /**
+   * Process the image queue and display the next image.
+   * If there are no images in the queue, this function does nothing.
+   * If an image is already being displayed, this function does nothing.
+   * Otherwise, it will display the next image in the queue and set a timeout
+   * to process the rest of the queue after the minimum display time.
+   */
+  private processQueue(): void {
+    if (this.isDisplaying || this.imageQueue.length === 0) {
+      return;
+    }
+
+    const nextImageInfo = this.imageQueue.shift();
+
+    if (nextImageInfo) {
+      this.isDisplaying = true;
+      const { img, type } = nextImageInfo;
+
+      this.displayImageInternal(img, type);
+
+      if (this.displayTimeoutId) {
+        clearTimeout(this.displayTimeoutId);
+      }
+
+      this.displayTimeoutId = setTimeout(() => {
+        this.isDisplaying = false;
+        this.displayTimeoutId = null;
+
+        this.processQueue();
+      }, this.minDisplayTime);
+    }
+  }
+
+  /**
+   * Adds an image to the image queue and starts processing the queue.
+   * @param img The image to display.
+   * @param type The type of image to display.
+   * @returns Nothing.
+   */
+  public displayImage(
+    img: HTMLImageElement,
+    type: keyof typeof EventCategory,
+  ): void {
+    this.imageQueue.push({ img, type });
+    this.processQueue();
   }
 
   /**
@@ -122,17 +178,13 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    * @param {keyof typeof images} imageType - The type of images to select from (e.g., 'attackImages', 'hurtImages').
    * @param {string | null} shouldDrawImageCheck - A string to check the current image display state, or null.
-   * @param {number} maybeDrawCheck - A number used to determine the likelihood of drawing the image.
-   * @return {void} This function does not return anything.
    */
 
   private handleImageDisplay(
     game: GameState,
     imageType: keyof typeof images,
     shouldDrawImageCheck: string | null,
-    maybeDrawCheck: number,
   ): void {
-    const { rand } = game;
     const evt = EventCategory[
       game.log.currentEvent
     ] as keyof typeof EventCategory;
@@ -149,10 +201,8 @@ export class ImageHandler {
 
     const shouldDrawImage =
       this.getCurrentImageDataAttribute() !== shouldDrawImageCheck;
-    const maybeDrawImage =
-      rand.randomIntegerClosedRange(0, maybeDrawCheck) === 0;
 
-    if (shouldDrawImage || maybeDrawImage) {
+    if (shouldDrawImage) {
       const nextImage = this.getNextImage(fullImageSet, imageType);
       const image = new Image();
       image.onload = () => {
@@ -172,7 +222,7 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    */
   public handleAttackImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'attackImages', 'mobDamage', 2);
+    this.handleImageDisplay(game, 'attackImages', 'mobDamage');
   }
 
   /**
@@ -180,23 +230,26 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    */
   public handleHurtImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'hurtImages', 'playerDamage', 3);
+    this.handleImageDisplay(game, 'hurtImages', 'playerDamage');
   }
 
   /**
    * Handles displaying a smile image for the current event.
    * @param {GameState} game - The game state containing information about the current game.
    */
-  public handleSmileImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'smileImages', null, 0);
+  public handleSmileImageDisplay(game: GameState): void {
+    this.handleImageDisplay(game, 'smileImages', null);
   }
 
   /**
    * Handles displaying a moving image for the current event.
    * @param {GameState} game - The game state containing information about the current game.
    */
-  public handleMovingImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'movingImages', 'moving', 5);
+  public handleMovingImageDisplay(
+    game: GameState,
+    direction: MovementDirection,
+  ): void {
+    this.handleImageDisplay(game, 'movingImages', `moving_${direction}`);
   }
 
   /**
@@ -204,7 +257,7 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    */
   public handlePistolImageDisplay(game: GameState): void {
-    this.handleImageDisplay(game, 'pistolImages', null, 0);
+    this.handleImageDisplay(game, 'pistolImages', null);
   }
 
   /**
@@ -214,23 +267,21 @@ export class ImageHandler {
    * @return {void} This function does not return anything.
    */
   public handleNeutralImageDisplay(game: GameState): void {
-    this.handleImageDisplay(game, 'neutralImages', 'wait', 3);
+    this.handleImageDisplay(game, 'neutralImages', 'wait');
   }
 
   /**
    * Handles displaying a death image for the current event.
    * @param {GameState} game - The game state containing information about the current game.
-   * @return {void} This function does not return anything.
    */
   public handleDeathImageDisplay(game: GameState): void {
-    this.handleImageDisplay(game, 'deathImages', null, 0);
+    this.handleImageDisplay(game, 'deathImages', null);
   }
 
   /**
    * Handles displaying a random image for the current level.
    *
    * @param {GameState} game - The game state containing information about the current game.
-   * @return {void} This function does not return anything.
    */
   public handleLevelImageDisplay(game: GameState): void {
     const { rand } = game;

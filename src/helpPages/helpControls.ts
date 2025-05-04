@@ -41,6 +41,7 @@ export class HelpControls extends HTMLElement {
           justify-content: center;
           align-items: center;
           flex-direction: column;
+          animation: unBlur 0.25s;
         }
 
         .control-scheme-button-container {
@@ -88,6 +89,15 @@ export class HelpControls extends HTMLElement {
         .underline {
           text-decoration: underline;
         }
+
+        @keyframes unBlur {
+        from {
+          filter: blur(35px);
+        }
+        to {
+          filter: blur(0px);
+        }
+      }
       </style>
 
       <div class="container">

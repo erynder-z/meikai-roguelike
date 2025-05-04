@@ -7,6 +7,7 @@ import { Glyph } from '../glyphs/glyph';
 import { GlyphMap } from '../glyphs/glyphMap';
 import { ItemObject } from '../itemObjects/itemObject';
 import { Mob } from '../mobs/mob';
+import { MovementDirection } from '../../types/gameLogic/commands/movementDirections';
 import { StairCommand } from './stairCommand';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
@@ -28,11 +29,20 @@ export class MoveCommand extends CommandBase {
    * @returns {boolean} Whether the move was successful or not.
    */
   public execute(): boolean {
-    const newPosition = this.dir.plus(this.me.pos);
+    const currentPosition = this.me.pos;
+    const newPosition = this.dir.plus(currentPosition);
     const map = <GameMapType>this.game.currentMap();
 
     if (this.isMoveLegal(map, newPosition)) {
-      if (this.me.isPlayer) this.game.addCurrentEvent(EventCategory.moving);
+      if (this.me.isPlayer) {
+        const movementDir = this.getMovementDirectionFromPosition(
+          currentPosition,
+          newPosition,
+        );
+        const eventCat =
+          EventCategory[`moving_${movementDir}` as keyof typeof EventCategory];
+        this.game.addCurrentEvent(eventCat);
+      }
       this.moveAndHandleExtras(map, newPosition);
     }
 
@@ -139,6 +149,41 @@ export class MoveCommand extends CommandBase {
         EventCategory.layingObject,
       );
       this.game.message(message);
+    }
+  }
+
+  /**
+   * Gets the direction of movement from the current position to a new position.
+   * @param currentPosition - The current position of the mob.
+   * @param newPosition - The new position of the mob.
+   * @returns The direction of movement as a string, or an empty string if the positions are the same.
+   */
+  private getMovementDirectionFromPosition(
+    currentPosition: WorldPoint,
+    newPosition: WorldPoint,
+  ): MovementDirection {
+    const dx = newPosition.x - currentPosition.x;
+    const dy = newPosition.y - currentPosition.y;
+
+    switch (true) {
+      case dx === 0 && dy === -1:
+        return 'UP';
+      case dx === 0 && dy === 1:
+        return 'DOWN';
+      case dx === -1 && dy === 0:
+        return 'LEFT';
+      case dx === 1 && dy === 0:
+        return 'RIGHT';
+      case dx === -1 && dy === -1:
+        return 'UP_LEFT';
+      case dx === -1 && dy === 1:
+        return 'DOWN_LEFT';
+      case dx === 1 && dy === -1:
+        return 'UP_RIGHT';
+      case dx === 1 && dy === 1:
+        return 'DOWN_RIGHT';
+      default:
+        return '';
     }
   }
 }

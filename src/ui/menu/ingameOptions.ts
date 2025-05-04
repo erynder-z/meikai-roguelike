@@ -59,6 +59,7 @@ export class IngameOptions extends HTMLElement {
           color: var(--white);
           z-index: 1;
           overflow: hidden;
+          animation: unBlur 0.25s;
         }
 
         .options-menu button {
@@ -75,7 +76,7 @@ export class IngameOptions extends HTMLElement {
 
         .options-menu button:hover {
           transform: translateX(8px) scale(1.05);
-      }
+        }
 
         .underline {
           text-decoration: underline;
@@ -113,7 +114,7 @@ export class IngameOptions extends HTMLElement {
           color: var(--grayedOut);
           cursor: not-allowed;
         }
-            
+
         .explanation {
           font-size: 1rem;
         }
@@ -144,7 +145,7 @@ export class IngameOptions extends HTMLElement {
           margin: 0;
         }
 
-       .title {
+        .title {
           position: fixed;
           bottom: 0;
           left: 0;
@@ -160,6 +161,15 @@ export class IngameOptions extends HTMLElement {
           margin: 0 1rem;
           z-index: 1;
           font-size: 2.5rem;
+        }
+
+        @keyframes unBlur {
+          from {
+            filter: blur(35px);
+          }
+          to {
+            filter: blur(0px);
+          }
         }
       </style>
 

@@ -70,6 +70,7 @@ export class IngameMenu extends HTMLElement {
           color: var(--white);
           z-index: 1;
           overflow: hidden;
+          animation: unBlur 0.25s;
         }
 
         .ingame-menu h1 {
@@ -111,6 +112,15 @@ export class IngameMenu extends HTMLElement {
           justify-content: center;
           height: 100%;
           gap: 0.5rem;
+        }
+
+        @keyframes unBlur {
+          from {
+            filter: blur(35px);
+          }
+          to {
+            filter: blur(0px);
+          }
         }
       </style>
 
