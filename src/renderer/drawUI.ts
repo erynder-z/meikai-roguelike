@@ -197,8 +197,29 @@ export class DrawUI {
       case EventCategory.mobDeath:
         imageHandler.handleSmileImageDisplay(game);
         break;
-      case EventCategory.moving:
-        imageHandler.handleMovingImageDisplay(game);
+      case EventCategory.moving_UP:
+        imageHandler.handleMovingImageDisplay(game, 'UP');
+        break;
+      case EventCategory.moving_DOWN:
+        imageHandler.handleMovingImageDisplay(game, 'DOWN');
+        break;
+      case EventCategory.moving_LEFT:
+        imageHandler.handleMovingImageDisplay(game, 'LEFT');
+        break;
+      case EventCategory.moving_RIGHT:
+        imageHandler.handleMovingImageDisplay(game, 'RIGHT');
+        break;
+      case EventCategory.moving_UP_LEFT:
+        imageHandler.handleMovingImageDisplay(game, 'UP_LEFT');
+        break;
+      case EventCategory.moving_DOWN_LEFT:
+        imageHandler.handleMovingImageDisplay(game, 'DOWN_LEFT');
+        break;
+      case EventCategory.moving_UP_RIGHT:
+        imageHandler.handleMovingImageDisplay(game, 'UP_RIGHT');
+        break;
+      case EventCategory.moving_DOWN_RIGHT:
+        imageHandler.handleMovingImageDisplay(game, 'DOWN_RIGHT');
         break;
       case EventCategory.rangedAttack:
         imageHandler.handlePistolImageDisplay(game);

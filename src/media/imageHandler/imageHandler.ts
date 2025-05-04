@@ -2,6 +2,7 @@ import { EventCategory } from '../../gameLogic/messages/logMessage';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { images } from './imageIndex';
+import { MovementDirection } from '../../types/gameLogic/commands/movementDirections';
 
 /**
  * Handles displaying action images on the screen.
@@ -177,17 +178,13 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    * @param {keyof typeof images} imageType - The type of images to select from (e.g., 'attackImages', 'hurtImages').
    * @param {string | null} shouldDrawImageCheck - A string to check the current image display state, or null.
-   * @param {number} maybeDrawCheck - A number used to determine the likelihood of drawing the image.
-   * @return {void} This function does not return anything.
    */
 
   private handleImageDisplay(
     game: GameState,
     imageType: keyof typeof images,
     shouldDrawImageCheck: string | null,
-    maybeDrawCheck: number,
   ): void {
-    const { rand } = game;
     const evt = EventCategory[
       game.log.currentEvent
     ] as keyof typeof EventCategory;
@@ -204,10 +201,8 @@ export class ImageHandler {
 
     const shouldDrawImage =
       this.getCurrentImageDataAttribute() !== shouldDrawImageCheck;
-    const maybeDrawImage =
-      rand.randomIntegerClosedRange(0, maybeDrawCheck) === 0;
 
-    if (shouldDrawImage || maybeDrawImage) {
+    if (shouldDrawImage) {
       const nextImage = this.getNextImage(fullImageSet, imageType);
       const image = new Image();
       image.onload = () => {
@@ -227,7 +222,7 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    */
   public handleAttackImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'attackImages', 'mobDamage', 2);
+    this.handleImageDisplay(game, 'attackImages', 'mobDamage');
   }
 
   /**
@@ -235,23 +230,26 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    */
   public handleHurtImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'hurtImages', 'playerDamage', 3);
+    this.handleImageDisplay(game, 'hurtImages', 'playerDamage');
   }
 
   /**
    * Handles displaying a smile image for the current event.
    * @param {GameState} game - The game state containing information about the current game.
    */
-  public handleSmileImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'smileImages', null, 0);
+  public handleSmileImageDisplay(game: GameState): void {
+    this.handleImageDisplay(game, 'smileImages', null);
   }
 
   /**
    * Handles displaying a moving image for the current event.
    * @param {GameState} game - The game state containing information about the current game.
    */
-  public handleMovingImageDisplay(game: GameState) {
-    this.handleImageDisplay(game, 'movingImages', 'moving', 5);
+  public handleMovingImageDisplay(
+    game: GameState,
+    direction: MovementDirection,
+  ): void {
+    this.handleImageDisplay(game, 'movingImages', `moving_${direction}`);
   }
 
   /**
@@ -259,7 +257,7 @@ export class ImageHandler {
    * @param {GameState} game - The game state containing information about the current game.
    */
   public handlePistolImageDisplay(game: GameState): void {
-    this.handleImageDisplay(game, 'pistolImages', null, 0);
+    this.handleImageDisplay(game, 'pistolImages', null);
   }
 
   /**
@@ -269,23 +267,21 @@ export class ImageHandler {
    * @return {void} This function does not return anything.
    */
   public handleNeutralImageDisplay(game: GameState): void {
-    this.handleImageDisplay(game, 'neutralImages', 'wait', 3);
+    this.handleImageDisplay(game, 'neutralImages', 'wait');
   }
 
   /**
    * Handles displaying a death image for the current event.
    * @param {GameState} game - The game state containing information about the current game.
-   * @return {void} This function does not return anything.
    */
   public handleDeathImageDisplay(game: GameState): void {
-    this.handleImageDisplay(game, 'deathImages', null, 0);
+    this.handleImageDisplay(game, 'deathImages', null);
   }
 
   /**
    * Handles displaying a random image for the current level.
    *
    * @param {GameState} game - The game state containing information about the current game.
-   * @return {void} This function does not return anything.
    */
   public handleLevelImageDisplay(game: GameState): void {
     const { rand } = game;
