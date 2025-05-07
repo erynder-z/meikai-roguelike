@@ -79,10 +79,10 @@ export class StatsScreenDisplay extends HTMLElement {
           list-style-type: none;
         }
 
-        .yellow-hp {
+        .yellow-text {
           color: yellow;
         }
-        .red-hp {
+        .red-text {
           color: red;
         }
 
@@ -112,6 +112,9 @@ export class StatsScreenDisplay extends HTMLElement {
             <div class="attack-modifier">Attack modifier: ${this.stats?.damageDealModifier}</div>
             <div class="defense-modifier">Defense modifier: ${this.stats?.damageReceiveModifier}</div>
             <div class="visibility-range">Visibility: ${this.stats?.currentVisibilityRange}</div>
+            <div class="hunger">Hunger: ${this.stats?.hunger}</div>
+            <div class="thirst">Thirst: ${this.stats?.thirst}</div>
+            <div class="mood">Mood: ${this.stats?.mood}</div>
             <div class="mob-kills">Kills: ${this.stats?.mobKillCounter}</div>
           </div>
           <div class="buffs-list-heading">Buffs:</div>
@@ -163,31 +166,46 @@ export class StatsScreenDisplay extends HTMLElement {
   }
 
   /**
-   * Updates the HP display to show the current HP in relation to the player's max HP,
-   * with colors red for <= 25%, yellow for 25%-50%, and no color for > 50%.
+   * Sets the player's HP text in the stats display.
+   *
+   * This method checks if the player HP element exists in the Shadow DOM and
+   * if the player's HP and max HP are valid numbers. If valid, it sets the HP
+   * text to the current HP divided by the max HP, and applies a yellow or red
+   * text color if the percentage is below 50% or 25% respectively.
    */
-  public setHPColor(): void {
+  public displayHP(): void {
+    const hpElement = this.shadowRoot?.querySelector(
+      '.player-hp',
+    ) as HTMLElement;
+    if (!hpElement) {
+      console.warn('Player HP element not found in Shadow DOM');
+      return;
+    }
+
     const hp = this.player?.hp;
     const maxhp = this.player?.maxhp;
 
-    if (!hp || !maxhp) return;
-
-    const yellowHP = hp / maxhp >= 0.25 && hp / maxhp <= 0.5;
-    const redHP = hp / maxhp <= 0.25;
-
-    let hpDisplayText = `HP: `;
-    if (redHP) {
-      hpDisplayText = `<span class="red-hp">${hp} / ${maxhp}</span>`;
-    } else if (yellowHP) {
-      hpDisplayText += `<span class="yellow-hp">${hp} / ${maxhp}</span>`;
-    } else {
-      hpDisplayText += `${hp} / ${maxhp}`; // No color if hp is above 50%
+    if (typeof hp !== 'number' || typeof maxhp !== 'number' || maxhp <= 0) {
+      hpElement.innerHTML = 'HP: N/A';
+      return;
     }
 
-    const hpDisplay = this.shadowRoot?.querySelector('.player-hp');
-    if (hpDisplay) hpDisplay.innerHTML = hpDisplayText;
-  }
+    const percentage = hp / maxhp;
+    const hpText = `${hp} / ${maxhp}`;
+    let className = '';
 
+    if (percentage <= 0.25) {
+      className = 'red-text';
+    } else if (percentage <= 0.5) {
+      className = 'yellow-text';
+    }
+
+    if (className) {
+      hpElement.innerHTML = `HP: <span class="${className}">${hpText}</span>`;
+    } else {
+      hpElement.innerHTML = `HP: ${hpText}`;
+    }
+  }
   /**
    * Updates the display of active buffs by populating the "buffs-list" element
    * with a list of buffs. Each buff is displayed as a colored span, based on the
@@ -223,6 +241,105 @@ export class StatsScreenDisplay extends HTMLElement {
         buffsList.appendChild(buffSpan);
       });
     }
+  }
+  /**
+   * Returns the label and class name corresponding to the given value in the
+   * given list of levels. If the given value does not match any of the levels,
+   * the method returns the default label and class name.
+   *
+   * @param {number} value - The value to match against the levels.
+   * @param {{ threshold: number; label: string; className?: string }[]} levels - The list of levels to check against.
+   * @return {{ label: string; className?: string }} - The label and class name corresponding to the given value.
+   */
+  private getLevelLabel(
+    value: number,
+    levels: { threshold: number; label: string; className?: string }[],
+  ): { label: string; className?: string } {
+    const level = levels.find(({ threshold }) => value < threshold);
+    return level ?? { label: 'Unknown' };
+  }
+
+  /**
+   * Updates the text content of the element selected by the given selector.
+   * The element should contain a single child text node and a single child span element.
+   * The text content of the span element is set to the given label with the given class name.
+   * The text content of the text node is set to the given prefix.
+   *
+   * @param {string} selector - The CSS selector for the element to update.
+   * @param {number} value - The value to determine the label and class name for.
+   * @param {{ threshold: number; label: string; className?: string }[]} levels - The list of levels to check against.
+   * @param {string} prefix - The prefix to display before the label.
+   * @return {void}
+   */
+  private updateStatDisplay(
+    selector: string,
+    value: number,
+    levels: { threshold: number; label: string; className?: string }[],
+    prefix: string,
+  ): void {
+    const displayEl = this.shadowRoot?.querySelector(selector) as HTMLElement;
+    if (!displayEl) return;
+
+    const { label, className } = this.getLevelLabel(value, levels);
+
+    displayEl.innerHTML = `${prefix}: <span class="${className}"> ${label} </span>`;
+  }
+
+  /**
+   * Updates the hunger display text with the player's hunger level.
+   *
+   * The hunger level is represented as a fraction of the player's maximum hunger.
+   * The text will be colored yellow if the hunger level is between 0.6 and 0.8,
+   * and red if the hunger level is above 0.8.
+   *
+   * @return {void}
+   */
+  public displayHunger(): void {
+    if (typeof this.stats?.hunger !== 'number') return;
+
+    const hungerLevels = [
+      { threshold: 0.2, label: 'Satiated' },
+      { threshold: 0.4, label: 'Peckish' },
+      { threshold: 0.6, label: 'Hungry', className: 'yellow-text' },
+      { threshold: 0.8, label: 'Famished', className: 'yellow-text' },
+      { threshold: 1.0, label: 'Ravenous', className: 'red-text' },
+    ];
+
+    this.updateStatDisplay(
+      '.hunger',
+      this.stats.hunger,
+      hungerLevels,
+      'Hunger',
+    );
+  }
+
+/**
+ * Updates the thirst display text with the player's thirst level.
+ *
+ * The thirst level is represented as a fraction of the player's maximum thirst.
+ * The text will be colored yellow if the thirst level is between 0.6 and 0.8,
+ * and red if the thirst level is above 0.8.
+ *
+ * @return {void}
+ */
+
+  public displayThirst(): void {
+    if (typeof this.stats?.thirst !== 'number') return;
+
+    const thirstLevels = [
+      { threshold: 0.2, label: 'Hydrated' },
+      { threshold: 0.4, label: 'Dry-mouthed' },
+      { threshold: 0.6, label: 'Thirsty', className: 'yellow-text' },
+      { threshold: 0.8, label: 'Parched', className: 'red-text' },
+      { threshold: 1.0, label: 'Dehydrated', className: 'red-text' },
+    ];
+
+    this.updateStatDisplay(
+      '.thirst',
+      this.stats.thirst,
+      thirstLevels,
+      'Thirst',
+    );
   }
 
   /**
