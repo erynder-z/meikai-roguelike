@@ -86,6 +86,7 @@ export class BaseScreen implements StackScreen {
     for (m = queue.next(); !m.isPlayer && !this.over(s); m = queue.next()) {
       this.npcTurn(m, player, s);
     }
+
     this.game.stats.resetCurrentTurnReceivedDmg();
   }
 
@@ -179,6 +180,11 @@ export class BaseScreen implements StackScreen {
    */
   private handleAutoHeal(player: Mob): void {
     if (this.game.autoHeal) {
+      const tooHungry = this.game.stats.hunger >= 0.6;
+      const tooThirsty = this.game.stats.thirst >= 0.6;
+
+      if (tooHungry || tooThirsty) return;
+
       this.game.autoHeal.turn(player, this.game);
     }
   }

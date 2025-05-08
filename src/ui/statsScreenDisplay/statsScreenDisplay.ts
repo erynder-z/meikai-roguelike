@@ -82,6 +82,11 @@ export class StatsScreenDisplay extends HTMLElement {
         .yellow-text {
           color: yellow;
         }
+
+        .orange-text {
+          color: orange;
+        }
+
         .red-text {
           color: red;
         }
@@ -286,12 +291,13 @@ export class StatsScreenDisplay extends HTMLElement {
   }
 
   /**
-   * Updates the hunger display text with the player's hunger level.
-   *
-   * The hunger level is represented as a fraction of the player's maximum hunger.
-   * The text will be colored yellow if the hunger level is between 0.6 and 0.8,
-   * and red if the hunger level is above 0.8.
-   *
+   * Displays the player's hunger level in the stats screen display.
+   * The hunger level is represented as a label with a class name corresponding
+   * to the level of hunger (e.g. 'Satiated', 'Peckish', 'Hungry', 'Famished', 'Ravenous').
+   * The method first checks if the player's hunger level is a number and
+   * returns early if it is not. Otherwise, it updates the text content of the
+   * element with the selector '.hunger' using the getLevelLabel method and the
+   * given list of hunger levels.
    * @return {void}
    */
   public displayHunger(): void {
@@ -301,7 +307,7 @@ export class StatsScreenDisplay extends HTMLElement {
       { threshold: 0.2, label: 'Satiated' },
       { threshold: 0.4, label: 'Peckish' },
       { threshold: 0.6, label: 'Hungry', className: 'yellow-text' },
-      { threshold: 0.8, label: 'Famished', className: 'yellow-text' },
+      { threshold: 0.8, label: 'Famished', className: 'orange-text' },
       { threshold: 1.0, label: 'Ravenous', className: 'red-text' },
     ];
 
@@ -313,16 +319,16 @@ export class StatsScreenDisplay extends HTMLElement {
     );
   }
 
-/**
- * Updates the thirst display text with the player's thirst level.
- *
- * The thirst level is represented as a fraction of the player's maximum thirst.
- * The text will be colored yellow if the thirst level is between 0.6 and 0.8,
- * and red if the thirst level is above 0.8.
- *
- * @return {void}
- */
-
+  /**
+   * Displays the player's thirst level in the stats screen display.
+   * The thirst level is represented as a label with a class name corresponding
+   * to the level of thirst (e.g. 'Hydrated', 'Dry-mouthed', 'Thirsty', 'Parched', 'Dehydrated').
+   * The method first checks if the player's thirst level is a number and
+   * returns early if it is not. Otherwise, it updates the text content of the
+   * element with the selector '.thirst' using the getLevelLabel method and the
+   * given list of thirst levels.
+   * @return {void}
+   */
   public displayThirst(): void {
     if (typeof this.stats?.thirst !== 'number') return;
 
@@ -330,7 +336,7 @@ export class StatsScreenDisplay extends HTMLElement {
       { threshold: 0.2, label: 'Hydrated' },
       { threshold: 0.4, label: 'Dry-mouthed' },
       { threshold: 0.6, label: 'Thirsty', className: 'yellow-text' },
-      { threshold: 0.8, label: 'Parched', className: 'red-text' },
+      { threshold: 0.8, label: 'Parched', className: 'orange-text' },
       { threshold: 1.0, label: 'Dehydrated', className: 'red-text' },
     ];
 
