@@ -9,6 +9,7 @@ import { Mob } from '../../gameLogic/mobs/mob';
 import { MobAI } from '../gameLogic/mobs/mobAI';
 import { Slot } from '../../gameLogic/itemObjects/slot';
 import { Stats } from '../../gameLogic/stats/stats';
+import { Mood } from '../gameLogic/stats/stats';
 
 export type ReadyToSaveGameState = {
   serializedAI: {
@@ -135,6 +136,9 @@ export type SerializedStatsData = {
   visibilityRange: number;
   mobKillCounter: number;
   turnCounter: number;
+  mood: Mood;
+  hunger: number;
+  thirst: number;
 };
 
 export type SerializedPlayerData = {
