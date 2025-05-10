@@ -136,6 +136,7 @@ export type SerializedStatsData = {
   visibilityRange: number;
   mobKillCounter: number;
   turnCounter: number;
+  strength: number;
   mood: Mood;
   hunger: number;
   thirst: number;
@@ -218,6 +219,7 @@ export type SerializedMobData = {
   isPlayer: boolean;
   buffs: SerializedBuffData[];
   bloody: { isBloody: boolean; intensity: number };
+  strength: number;
 };
 
 export type SerializedCorpseData = {
