@@ -13,7 +13,7 @@ export class Stats {
   public currentTurnReceivedDmg = 0;
   public damageDealModifier = 1.0;
   public damageReceiveModifier = 1.0;
-  public strength = 1.0;
+  public strength = 4;
   public mood: Mood = 'Normal';
   public hunger = 0.0;
   public thirst = 0.0;
