@@ -348,6 +348,7 @@ export class SaveStateHandler {
       glyph: cell.environment?.glyph ?? Glyph.Unknown,
       name: cell.environment?.name ?? '',
       description: cell.environment?.description ?? '',
+      defaultBuffDuration: cell.environment?.defaultBuffDuration ?? 0,
       effects: cell.environment?.effects ?? [],
     };
     newCell.corpse = cell.corpse ? this.restoreCorpse(cell.corpse) : undefined;
@@ -379,6 +380,7 @@ export class SaveStateHandler {
     mob.isPlayer = serializedMob.isPlayer;
     mob.buffs = new ActiveBuffs();
     mob.bloody = serializedMob.bloody;
+    mob.strength = serializedMob.strength;
 
     return mob;
   }
@@ -629,5 +631,9 @@ export class SaveStateHandler {
       serializedStats.damageDealModifier || 1.0;
     restoredStats.damageReceiveModifier =
       serializedStats.damageReceiveModifier || 1.0;
+    restoredStats.strength = serializedStats.strength || 10;
+    restoredStats.mood = serializedStats.mood || 'Normal';
+    restoredStats.hunger = serializedStats.hunger || 0;
+    restoredStats.thirst = serializedStats.thirst || 0;
   }
 }

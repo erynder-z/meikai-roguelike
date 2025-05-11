@@ -37,7 +37,9 @@ export class StatsScreen extends BaseScreen {
 
       canvas?.insertAdjacentElement('afterend', this.display);
 
-      this.display.setHPColor();
+      this.display.displayHP();
+      this.display.displayHunger();
+      this.display.displayThirst();
       this.display.setBuffs(this.game.player.buffs.getBuffsMap());
     }
   }

@@ -24,6 +24,8 @@ export class Mob {
     isBloody: false,
     intensity: 0,
   };
+  public strength: number = 1.0;
+
   constructor(glyph: Glyph, x: number, y: number) {
     this.isPlayer = glyph == Glyph.Player;
     this.glyph = glyph;

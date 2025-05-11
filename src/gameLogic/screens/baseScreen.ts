@@ -2,9 +2,11 @@ import { CellEffects } from '../commands/cellEffects';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { DrawableTerminal } from '../../types/terminal/drawableTerminal';
 import { DrawUI } from '../../renderer/drawUI';
+import { EventCategory, LogMessage } from '../messages/logMessage';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameMap } from '../../maps/mapModel/gameMap';
 import { GameState } from '../../types/gameBuilder/gameState';
+import { HealthAdjust } from '../commands/healthAdjust';
 import { MapCell } from '../../maps/mapModel/mapCell';
 import { Mob } from '../mobs/mob';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
@@ -86,6 +88,7 @@ export class BaseScreen implements StackScreen {
     for (m = queue.next(); !m.isPlayer && !this.over(s); m = queue.next()) {
       this.npcTurn(m, player, s);
     }
+
     this.game.stats.resetCurrentTurnReceivedDmg();
   }
 
@@ -167,8 +170,48 @@ export class BaseScreen implements StackScreen {
       return;
     }
 
+    this.handleNeeds(player);
     this.handleAutoHeal(player);
     this.game.stats.incrementTurnCounter();
+  }
+
+  /**
+   * A method to handle hunger and thirst for a mob
+   *
+   * @param {Mob} player - the mob to handle needs for
+   * @return {void}
+   */
+  private handleNeeds(player: Mob): void {
+    const needs = [
+      {
+        type: 'hunger',
+        level: this.game.stats.hunger,
+        threshold: 0.8,
+        message: 'You are too hungry and take {damage} damage!',
+        category: EventCategory.hungerDamage,
+      },
+      {
+        type: 'thirst',
+        level: this.game.stats.thirst,
+        threshold: 0.8,
+        message: 'You are too thirsty and take {damage} damage!',
+        category: EventCategory.thirstDamage,
+      },
+    ];
+
+    const damage = 1;
+
+    for (const need of needs) {
+      if (need.level >= need.threshold) {
+        HealthAdjust.damage(player, damage, this.game, null);
+        this.game.message(
+          new LogMessage(
+            need.message.replace('{damage}', `${damage}`),
+            need.category,
+          ),
+        );
+      }
+    }
   }
 
   /**
@@ -179,6 +222,11 @@ export class BaseScreen implements StackScreen {
    */
   private handleAutoHeal(player: Mob): void {
     if (this.game.autoHeal) {
+      const tooHungry = this.game.stats.hunger >= 0.6;
+      const tooThirsty = this.game.stats.thirst >= 0.6;
+
+      if (tooHungry || tooThirsty) return;
+
       this.game.autoHeal.turn(player, this.game);
     }
   }

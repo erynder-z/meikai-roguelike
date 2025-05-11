@@ -143,7 +143,7 @@ export class HitCommand extends CommandBase {
    * @returns {number} The calculated damage.
    */
   private calcDamage(rand: RandomGenerator, me: Mob): number {
-    return rand.randomInteger(0, this.power(me));
+    return rand.randomIntegerClosedRange(0, this.power(me));
   }
 
   /**
@@ -161,15 +161,15 @@ export class HitCommand extends CommandBase {
    * @returns {number} The power of the NPC.
    */
   private npcPower(mob: Mob): number {
-    return mob.level + 1;
+    return (mob.level + 1) * mob.strength;
   }
 
   /**
    * Returns the base power for an unarmed hit.
    * @returns {number} The base power for an unarmed hit.
    */
-  private unarmed(): number {
-    return 3;
+  private unarmed(player: Mob): number {
+    return Math.ceil(player.strength);
   }
 
   /**
@@ -179,18 +179,27 @@ export class HitCommand extends CommandBase {
    */
   private playerPower(player: Mob): number {
     const game = this.game;
-    if (game.equipment) return this.equipmentPower(game, game.equipment);
-    return this.unarmed();
+    if (game.equipment)
+      return (
+        this.equipmentPower(game, game.equipment, player) * player.strength
+      );
+    return this.unarmed(player);
   }
 
   /**
    * Calculates the power of a player based on their equipment.
+   * If the player is under the Disarm buff, it will return the unarmed power.
    * @param {GameState} game - The game object.
-   * @param {Equipment} equipment - The equipment of the player.
+   * @param {Equipment} equipment - The player's equipment.
+   * @param {Mob} player - The player mob.
    * @returns {number} The power of the player based on their equipment.
    */
-  private equipmentPower(game: GameState, equipment: Equipment): number {
-    const disarm = game.player.is(Buff.Disarm);
+  private equipmentPower(
+    game: GameState,
+    equipment: Equipment,
+    player: Mob,
+  ): number {
+    const disarm = player.is(Buff.Disarm);
     if (equipment.weapon()) {
       if (disarm) {
         const msg = new LogMessage(
@@ -202,7 +211,7 @@ export class HitCommand extends CommandBase {
         return equipment.weaponDamage();
       }
     }
-    return this.unarmed();
+    return this.unarmed(player);
   }
 
   /**

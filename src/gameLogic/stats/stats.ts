@@ -1,3 +1,5 @@
+import { Mood } from '../../types/gameLogic/stats/stats';
+
 /**
  * Manage player related stats
  */
@@ -11,12 +13,15 @@ export class Stats {
   public currentTurnReceivedDmg = 0;
   public damageDealModifier = 1.0;
   public damageReceiveModifier = 1.0;
+  public strength = 4;
+  public mood: Mood = 'Normal';
+  public hunger = 0.0;
+  public thirst = 0.0;
 
   /**
    * Adjusts the default visibility range by the specified amount.
    *
    * @param {number} amount - The amount by which to adjust the default visibility range.
-   * @return {void} This function does not return a value.
    */
   public adjustVisibilityRange(amount: number): void {
     this.visibilityRange = amount;
@@ -26,7 +31,6 @@ export class Stats {
    * Adjusts the current visibility range by the given amount.
    *
    * @param {number} amount - The amount by which to adjust the current visibility range.
-   * @return {void} This function does not return anything.
    */
   public adjustCurrentVisibilityRange(amount: number): void {
     this.currentVisibilityRange = amount;
@@ -36,7 +40,6 @@ export class Stats {
    * Adjusts the current turn received damage by the given amount.
    *
    * @param {number} dmg - The amount to adjust the current turn received damage by.
-   * @return {void} This function does not return a value.
    */
   public adjustCurrentTurnReceivedDmg(dmg: number): void {
     this.currentTurnReceivedDmg += dmg;
@@ -44,8 +47,6 @@ export class Stats {
 
   /**
    * Resets the current turn received damage to zero.
-   *
-   * @return {void} This function does not return a value.
    */
   public resetCurrentTurnReceivedDmg(): void {
     this.currentTurnReceivedDmg = 0;
@@ -53,8 +54,6 @@ export class Stats {
 
   /**
    * Increments the turn counter by 1.
-   *
-   * @return {void} This function does not return a value.
    */
   public incrementTurnCounter(): void {
     this.turnCounter++;
@@ -62,8 +61,6 @@ export class Stats {
 
   /**
    * Increments the mob kill counter by 1.
-   *
-   * @return {void} This function does not return a value.
    */
   public incrementMobKillCounter(): void {
     this.mobKillCounter++;
@@ -73,7 +70,6 @@ export class Stats {
    * Increments the damage dealt counter by the specified amount.
    *
    * @param {number} dmg - The amount to increment the damage dealt counter by.
-   * @return {void} This function does not return a value.
    */
   public incrementDamageDealtCounter(dmg: number): void {
     this.damageDealtCounter += dmg;
@@ -83,7 +79,6 @@ export class Stats {
    * Increments the damage received counter by the given amount.
    *
    * @param {number} dmg - The amount to increment the damage received counter by.
-   * @return {void} This function does not return a value.
    */
   public incrementDamageReceivedCounter(dmg: number): void {
     this.damageReceivedCounter += dmg;
@@ -93,7 +88,6 @@ export class Stats {
    * Adjusts the damage deal modifier by the given amount.
    *
    * @param {number} amount - The amount to adjust the modifier by.
-   * @return {void} This function does not return a value.
    */
   public adjustDamageDealModifier(amount: number): void {
     this.damageDealModifier += amount;
@@ -102,8 +96,6 @@ export class Stats {
   /**
    * Resets the damage deal modifier to 1.0, removing any temporary
    * damage increase or decrease.
-   *
-   * @return {void} This function does not return a value.
    */
   public resetDamageDealModifier(): void {
     this.damageDealModifier = 1.0;
@@ -113,7 +105,6 @@ export class Stats {
    * Adjusts the damage received modifier by the given amount.
    *
    * @param {number} amount - The amount to adjust the modifier by.
-   * @return {void} This function does not return a value.
    */
   public adjustDamageReceiveModifier(amount: number): void {
     this.damageReceiveModifier += amount;
@@ -122,10 +113,33 @@ export class Stats {
   /**
    * Resets the damage received modifier to 1.0, removing any temporary
    * damage increase or decrease.
-   *
-   * @return {void} This function does not return a value.
    */
   public resetDamageReceiveModifier(): void {
     this.damageReceiveModifier = 1.0;
+  }
+
+  /**
+   * Sets the mood of the entity to the specified value.
+   *
+   * @param {Mood} mood - The new mood to set for the entity.
+   */
+  public setMood(mood: Mood): void {
+    this.mood = mood;
+  }
+
+  /**
+   * Adjusts the hunger amount by the given value.
+   * @param {number} amount - The amount to adjust hunger by.
+   */
+  public adjustHunger(amount: number): void {
+    this.hunger += amount;
+  }
+
+  /**
+   * Adjusts the thirst amount by the given value.
+   * @param {number} amount - The amount to adjust thirst by.
+   */
+  public adjustThirst(amount: number): void {
+    this.thirst += amount;
   }
 }
