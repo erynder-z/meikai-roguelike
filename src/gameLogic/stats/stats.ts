@@ -13,7 +13,8 @@ export class Stats {
   public currentTurnReceivedDmg = 0;
   public damageDealModifier = 1.0;
   public damageReceiveModifier = 1.0;
-  public strength = 4;
+  public baseStrength = 4;
+  public currentStrength = 4;
   public mood: Mood = 'Normal';
   public hunger = 0.0;
   public thirst = 0.0;
@@ -141,5 +142,14 @@ export class Stats {
    */
   public adjustThirst(amount: number): void {
     this.thirst += amount;
+  }
+
+  /**
+   * Sets the strength of the entity to the specified value.
+   *
+   * @param {number} strength - The new strength to set for the entity.
+   */
+  public setStrength(strength: number): void {
+    this.baseStrength = strength;
   }
 }

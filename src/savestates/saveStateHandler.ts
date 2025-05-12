@@ -380,7 +380,8 @@ export class SaveStateHandler {
     mob.isPlayer = serializedMob.isPlayer;
     mob.buffs = new ActiveBuffs();
     mob.bloody = serializedMob.bloody;
-    mob.strength = serializedMob.strength;
+    mob.baseStrength = serializedMob.baseStrength;
+    mob.currentStrength = serializedMob.currentStrength;
 
     return mob;
   }
@@ -617,9 +618,9 @@ export class SaveStateHandler {
     const restoredStats = game.stats;
     const serializedStats = saveState.serializedStats.data;
 
-    restoredStats.visibilityRange = serializedStats.visibilityRange || 50;
+    restoredStats.visibilityRange = serializedStats.visibilityRange || 15;
     restoredStats.currentVisibilityRange =
-      serializedStats.currentVisibilityRange || 50;
+      serializedStats.currentVisibilityRange || 15;
     restoredStats.turnCounter = serializedStats.turnCounter || 1;
     restoredStats.mobKillCounter = serializedStats.mobKillCounter || 0;
     restoredStats.damageDealtCounter = serializedStats.damageDealtCounter || 0;
@@ -631,7 +632,8 @@ export class SaveStateHandler {
       serializedStats.damageDealModifier || 1.0;
     restoredStats.damageReceiveModifier =
       serializedStats.damageReceiveModifier || 1.0;
-    restoredStats.strength = serializedStats.strength || 10;
+    restoredStats.baseStrength = serializedStats.baseStrength || 4;
+    restoredStats.currentStrength = serializedStats.currentStrength || 4;
     restoredStats.mood = serializedStats.mood || 'Normal';
     restoredStats.hunger = serializedStats.hunger || 0;
     restoredStats.thirst = serializedStats.thirst || 0;
