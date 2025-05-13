@@ -145,11 +145,11 @@ export class Stats {
   }
 
   /**
-   * Sets the strength of the entity to the specified value.
+   * Sets the currentStrength of the entity to the specified value.
    *
    * @param {number} strength - The new strength to set for the entity.
    */
-  public setStrength(strength: number): void {
-    this.baseStrength = strength;
+  public setCurrentStrength(strength: number): void {
+    this.currentStrength = strength;
   }
 }

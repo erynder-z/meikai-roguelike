@@ -176,42 +176,71 @@ export class BaseScreen implements StackScreen {
   }
 
   /**
-   * A method to handle hunger and thirst for a mob
+   * A method to handle hunger and thirst for a mob, applying cumulative
+   * strength penalties and damage at high levels.
    *
-   * @param {Mob} player - the mob to handle needs for
+   * @param {Mob} player - the mob (player) to handle needs for
    * @return {void}
    */
   private handleNeeds(player: Mob): void {
-    const needs = [
+    const needsConfig = [
       {
         type: 'hunger',
         level: this.game.stats.hunger,
-        threshold: 0.8,
-        message: 'You are too hungry and take {damage} damage!',
-        category: EventCategory.hungerDamage,
+        thresholds: [0.4, 0.6, 0.8], // low, medium, high thresholds
+        damageMessage: 'You are too hungry and take {damage} damage!',
+        damageCategory: EventCategory.hungerDamage,
       },
       {
         type: 'thirst',
         level: this.game.stats.thirst,
-        threshold: 0.8,
-        message: 'You are too thirsty and take {damage} damage!',
-        category: EventCategory.thirstDamage,
+        thresholds: [0.4, 0.6, 0.8], // low, medium, high thresholds
+        damageMessage: 'You are too thirsty and take {damage} damage!',
+        damageCategory: EventCategory.thirstDamage,
       },
     ];
 
-    const damage = 1;
+    const reductionPerThreshold = 0.2;
+    let totalStrengthReductionFactor = 0.0;
+    const damageAtHighThreshold = 1;
 
-    for (const need of needs) {
-      if (need.level >= need.threshold) {
-        HealthAdjust.damage(player, damage, this.game, null);
+    // Calculate reduction factor from needs
+    for (const need of needsConfig) {
+      let reductionForThisNeed = 0.0;
+      // Check low threshold
+      if (need.level >= need.thresholds[0]) {
+        reductionForThisNeed += reductionPerThreshold;
+      }
+      // Check medium threshold (cumulative)
+      if (need.level >= need.thresholds[1]) {
+        reductionForThisNeed += reductionPerThreshold;
+      }
+      // Check high threshold (cumulative)
+      if (need.level >= need.thresholds[2]) {
+        reductionForThisNeed += reductionPerThreshold;
+
+        HealthAdjust.damage(player, damageAtHighThreshold, this.game, null);
         this.game.message(
           new LogMessage(
-            need.message.replace('{damage}', `${damage}`),
-            need.category,
+            need.damageMessage.replace('{damage}', `${damageAtHighThreshold}`),
+            need.damageCategory,
           ),
         );
       }
+
+      totalStrengthReductionFactor += reductionForThisNeed;
     }
+
+    const minimumStrengthMultiplier = 0.4;
+    const strengthMultiplier = Math.max(
+      minimumStrengthMultiplier,
+      1.0 - totalStrengthReductionFactor,
+    );
+
+    const newStrength = Math.ceil(
+      this.game.stats.baseStrength * strengthMultiplier,
+    );
+    this.game.stats.currentStrength = newStrength;
   }
 
   /**
