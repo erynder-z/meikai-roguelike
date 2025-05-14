@@ -13,6 +13,8 @@ import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
 import { StackScreen } from '../../types/terminal/stackScreen';
 import { TurnQueue } from '../turnQueue/turnQueue';
+import { BuffCommand } from '../commands/buffCommand';
+import { Buff } from '../buffs/buffEnum';
 
 /**
  * Represents a base screen implementation that implements the StackScreen interface.
@@ -187,14 +189,14 @@ export class BaseScreen implements StackScreen {
       {
         type: 'hunger',
         level: this.game.stats.hunger,
-        thresholds: [0.4, 0.6, 0.8], // low, medium, high thresholds
+        thresholds: [0.4, 0.6, 0.8, 1.0], // low, medium, high, max thresholds
         damageMessage: 'You are too hungry and take {damage} damage!',
         damageCategory: EventCategory.hungerDamage,
       },
       {
         type: 'thirst',
         level: this.game.stats.thirst,
-        thresholds: [0.4, 0.6, 0.8], // low, medium, high thresholds
+        thresholds: [0.4, 0.6, 0.8, 1.0], // low, medium, high, max thresholds
         damageMessage: 'You are too thirsty and take {damage} damage!',
         damageCategory: EventCategory.thirstDamage,
       },
@@ -203,6 +205,7 @@ export class BaseScreen implements StackScreen {
     const reductionPerThreshold = 0.2;
     let totalStrengthReductionFactor = 0.0;
     const damageAtHighThreshold = 1;
+    let confuseApplied = false;
 
     // Calculate reduction factor from needs
     for (const need of needsConfig) {
@@ -227,7 +230,28 @@ export class BaseScreen implements StackScreen {
           ),
         );
       }
+      // Check max threshold (cumulative)
+      if (need.level >= need.thresholds[3] && !confuseApplied) {
+        const duration = 1;
+        const player = this.game.player;
 
+        new BuffCommand(
+          Buff.Confuse,
+          player,
+          this.game,
+          player,
+          duration,
+        ).execute();
+
+        this.game.message(
+          new LogMessage(
+            "You feel like you're going crazy!",
+            need.damageCategory,
+          ),
+        );
+
+        confuseApplied = true;
+      }
       totalStrengthReductionFactor += reductionForThisNeed;
     }
 
