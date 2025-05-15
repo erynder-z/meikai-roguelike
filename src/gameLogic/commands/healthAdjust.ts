@@ -59,13 +59,6 @@ export class HealthAdjust {
     if (mob.isPlayer) {
       game.stats.adjustCurrentTurnReceivedDmg(amount);
       game.stats.incrementDamageReceivedCounter(amount);
-      if (game.stats.currentTurnReceivedDmg >= 1) {
-        this.handlePlayerDamageEvent(
-          game.player,
-          game.stats.currentTurnReceivedDmg,
-          game,
-        );
-      }
     }
 
     if (attacker?.isPlayer) game.stats.incrementDamageDealtCounter(amount);
@@ -218,6 +211,21 @@ export class HealthAdjust {
    */
   private static isFatalDamage(mob: Mob, amount: number): boolean {
     return amount > 0 && mob.hp <= 0;
+  }
+
+  /**
+   * Processes and displays the single cumulative damage message for the player for the current turn.
+   * This should be called once by the game loop after all player damage for the turn is thought to be resolved.
+   * @param {GameState} game - The current game state.
+   */
+  public static displayCumulativePlayerDamageMessage(game: GameState): void {
+    if (game.player && game.stats.currentTurnReceivedDmg > 0) {
+      this.handlePlayerDamageEvent(
+        game.player,
+        game.stats.currentTurnReceivedDmg,
+        game,
+      );
+    }
   }
 
   /**

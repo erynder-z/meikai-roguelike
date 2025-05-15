@@ -1,3 +1,5 @@
+import { Buff } from '../buffs/buffEnum';
+import { BuffCommand } from '../commands/buffCommand';
 import { CellEffects } from '../commands/cellEffects';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { DrawableTerminal } from '../../types/terminal/drawableTerminal';
@@ -13,8 +15,6 @@ import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
 import { StackScreen } from '../../types/terminal/stackScreen';
 import { TurnQueue } from '../turnQueue/turnQueue';
-import { BuffCommand } from '../commands/buffCommand';
-import { Buff } from '../buffs/buffEnum';
 
 /**
  * Represents a base screen implementation that implements the StackScreen interface.
@@ -90,7 +90,7 @@ export class BaseScreen implements StackScreen {
     for (m = queue.next(); !m.isPlayer && !this.over(s); m = queue.next()) {
       this.npcTurn(m, player, s);
     }
-
+    HealthAdjust.displayCumulativePlayerDamageMessage(this.game);
     this.game.stats.resetCurrentTurnReceivedDmg();
   }
 
