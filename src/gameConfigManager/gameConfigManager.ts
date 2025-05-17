@@ -32,6 +32,7 @@ class GameConfigManager {
       avatar: '@',
     },
     blood_intensity: 1,
+    min_keypress_delay: 50,
     terminal: {
       dimensions: {
         width: 64,

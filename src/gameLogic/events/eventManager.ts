@@ -1,3 +1,4 @@
+import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { InteractiveScreen } from '../../types/terminal/interactiveScreen';
 import { KeypressThrottler } from '../../utilities/keypressThrottler';
 import { ResizingTerminal } from '../../terminal/resizingTerminal';
@@ -13,9 +14,12 @@ export class EventManager {
     public term: ResizingTerminal,
     public screen: InteractiveScreen,
   ) {
+    const gameConfig = gameConfigManager.getConfig();
+    const { min_keypress_delay } = gameConfig;
+
     this.keyThrottler = new KeypressThrottler(
-      this.handleKeyDownThrottled.bind(this),
-      50,
+      this.handleKeyDown.bind(this),
+      min_keypress_delay,
     );
 
     const bodyElement = document.getElementById('body-main');
@@ -26,19 +30,6 @@ export class EventManager {
     window.addEventListener('resize', this.handleResize.bind(this));
     this.handleResize();
     this.initTimer();
-  }
-
-  /**
-   * Handles the key down event by passing the event to the screen and then
-   * redrawing the screen. This is called after a short delay to prevent too
-   * many key presses from being handled at once.
-   *
-   * @param {KeyboardEvent} event - The keyboard event to handle.
-   * @return {void}
-   */
-  private handleKeyDownThrottled(event: KeyboardEvent): void {
-    this.screen.handleKeyDownEvent(event);
-    this.screen.drawScreen(this.term);
   }
 
   /**

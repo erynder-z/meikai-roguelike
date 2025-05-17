@@ -22,4 +22,5 @@ export type GameConfigType = {
     avatar: string;
   };
   blood_intensity: number;
+  min_keypress_delay: number;
 };
