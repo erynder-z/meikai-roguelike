@@ -127,6 +127,6 @@ export class DynamicScreenMaker implements ScreenMaker {
     const imageHandler = ImageHandler.getInstance();
     const image = new Image();
     image.src = randomImage;
-    imageHandler.displayImage(image, 'lvlChange');
+    imageHandler.renderImage(image, 'lvlChange');
   }
 }

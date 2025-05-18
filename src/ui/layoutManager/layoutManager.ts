@@ -76,7 +76,7 @@ export class LayoutManager {
     const imageHandler = ImageHandler.getInstance();
     const image = new Image();
     image.src = randomImage;
-    imageHandler.displayImage(image, 'none');
+    imageHandler.renderImage(image, 'none');
   }
 
   /**
