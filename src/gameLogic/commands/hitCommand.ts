@@ -161,15 +161,16 @@ export class HitCommand extends CommandBase {
    * @returns {number} The power of the NPC.
    */
   private npcPower(mob: Mob): number {
-    return (mob.level + 1) * mob.strength;
+    return (mob.level + 1) * mob.currentStrength;
   }
 
   /**
-   * Returns the base power for an unarmed hit.
-   * @returns {number} The base power for an unarmed hit.
+   * Calculates the power of the player when unarmed.
+   * @returns {number} The calculated power.
    */
-  private unarmed(player: Mob): number {
-    return Math.ceil(player.strength);
+  private unarmed(): number {
+    const baseDmg = 1;
+    return baseDmg;
   }
 
   /**
@@ -181,9 +182,10 @@ export class HitCommand extends CommandBase {
     const game = this.game;
     if (game.equipment)
       return (
-        this.equipmentPower(game, game.equipment, player) * player.strength
+        this.equipmentPower(game, game.equipment, player) *
+        player.currentStrength
       );
-    return this.unarmed(player);
+    return this.unarmed();
   }
 
   /**
@@ -211,7 +213,7 @@ export class HitCommand extends CommandBase {
         return equipment.weaponDamage();
       }
     }
-    return this.unarmed(player);
+    return this.unarmed();
   }
 
   /**

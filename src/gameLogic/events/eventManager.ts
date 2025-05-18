@@ -1,4 +1,6 @@
+import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { InteractiveScreen } from '../../types/terminal/interactiveScreen';
+import { KeypressThrottler } from '../../utilities/keypressThrottler';
 import { ResizingTerminal } from '../../terminal/resizingTerminal';
 
 /**
@@ -6,13 +8,24 @@ import { ResizingTerminal } from '../../terminal/resizingTerminal';
  *
  */
 export class EventManager {
+  private keyThrottler: KeypressThrottler;
+
   constructor(
     public term: ResizingTerminal,
     public screen: InteractiveScreen,
   ) {
-    // Attach event listeners to relevant elements
+    const gameConfig = gameConfigManager.getConfig();
+    const { min_keypress_delay } = gameConfig;
+
+    this.keyThrottler = new KeypressThrottler(
+      this.handleKeyDown.bind(this),
+      min_keypress_delay,
+    );
+
     const bodyElement = document.getElementById('body-main');
-    bodyElement?.addEventListener('keydown', this.handleKeyDown.bind(this));
+    bodyElement?.addEventListener('keydown', event =>
+      this.keyThrottler.run(event),
+    );
 
     window.addEventListener('resize', this.handleResize.bind(this));
     this.handleResize();

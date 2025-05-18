@@ -54,7 +54,7 @@ export class TitleMenuOptions extends HTMLElement {
 
         ::-webkit-scrollbar-track {
           background-color: var(--scrollbar-background);
-        }   
+        }
 
         .options-menu {
           font-family: 'UA Squared';
@@ -70,7 +70,7 @@ export class TitleMenuOptions extends HTMLElement {
           overflow-x: hidden;
           animation: unBlur 0.25s;
         }
-        
+
         .options-menu button {
           font-family: 'UA Squared';
           padding: 1rem;
@@ -123,7 +123,8 @@ export class TitleMenuOptions extends HTMLElement {
 
         .message-count-input,
         .terminal-dimensions-input,
-        .scaling-factor-input {
+        .scaling-factor-input,
+        .keypress-throttle-input {
           font-family: 'UA Squared';
           background: none;
           border: none;
@@ -135,7 +136,8 @@ export class TitleMenuOptions extends HTMLElement {
 
         .message-count-input:focus,
         .terminal-dimensions-input:focus,
-        .scaling-factor-input:focus {
+        .scaling-factor-input:focus,
+        .keypress-throttle-input:focus {
           outline: none;
         }
 
@@ -162,7 +164,7 @@ export class TitleMenuOptions extends HTMLElement {
           z-index: 1;
           font-size: 2.5rem;
         }
-          
+
         @keyframes unBlur {
           from {
             filter: blur(35px);
@@ -230,6 +232,19 @@ export class TitleMenuOptions extends HTMLElement {
           <button id="switch-controls-button">
             <span class="underline">C</span>ontrol scheme
           </button>
+          <button id="keypress-throttle-input-button">
+            <label for="keypress-throttle-input">
+              Mi<span class="underline">n</span>imum keypress delay in milliseconds (0-250 ms):
+            </label>
+            <input
+              type="number"
+              min="0"
+              max="250"
+              id="keypress-throttle-input"
+              class="keypress-throttle-input"
+              value="${this.gameConfig.min_keypress_delay}"
+            />
+          </button>
         </div>
         <span class="info-span">Graphics</span>
         <div class="info-container">
@@ -268,7 +283,7 @@ export class TitleMenuOptions extends HTMLElement {
         <span class="info-span">Misc</span>
         <div class="info-container">
           <button id="blood-intensity-button">
-            <span class="underline">B</span>lood intensity
+            <span class="underline">B</span>lood intensity   
           </button>
         </div>
         <div class="title">Options</div>
@@ -281,6 +296,7 @@ export class TitleMenuOptions extends HTMLElement {
     this.shadowRoot?.appendChild(templateElement.content.cloneNode(true));
 
     this.buttonManager.updateControlSchemeButton(this.currentScheme);
+    this.setupKeypressThrottleInput();
     this.buttonManager.updateScanlinesToggleButton(
       this.gameConfig.show_scanlines,
     );
@@ -315,6 +331,7 @@ export class TitleMenuOptions extends HTMLElement {
    * - Toggle image alignment button click event
    * - Focus and select message count input button click event
    * - Toggle blood intensity button click event
+   * - Focus and select keypress throttle input button click event
    * - Return to previous screen button click event
    * - Keydown event on the document
    *
@@ -325,6 +342,8 @@ export class TitleMenuOptions extends HTMLElement {
     this.changeFont = this.changeFont.bind(this);
     this.changeSeed = this.changeSeed.bind(this);
     this.toggleControlScheme = this.toggleControlScheme.bind(this);
+    this.focusAndSelectKeypressThrottleInput =
+      this.focusAndSelectKeypressThrottleInput.bind(this);
     this.toggleScanlines = this.toggleScanlines.bind(this);
     this.switchScanlineStyle = this.switchScanlineStyle.bind(this);
     this.toggleMessageAlignment = this.toggleMessageAlignment.bind(this);
@@ -369,6 +388,12 @@ export class TitleMenuOptions extends HTMLElement {
       'switch-controls-button',
       'click',
       this.toggleControlScheme,
+    );
+    this.eventTracker.addById(
+      root,
+      'keypress-throttle-input-button',
+      'click',
+      event => this.handleInputChange(event, 'keypress-throttle'),
     );
     this.eventTracker.addById(
       root,
@@ -469,6 +494,27 @@ export class TitleMenuOptions extends HTMLElement {
   }
 
   /**
+   * Sets up the event listener for the keypress throttle input element.
+   *
+   * Attaches an 'input' event listener to the keypress throttle input element
+   * within the shadow DOM. The listener triggers the {@link handleInputChange}
+   * method whenever the input value changes.
+   *
+   * @return {void}
+   */
+  private setupKeypressThrottleInput(): void {
+    const keypressThrottleInput = this.shadowRoot?.getElementById(
+      'keypress-throttle-input',
+    ) as HTMLInputElement;
+
+    if (keypressThrottleInput) {
+      keypressThrottleInput.addEventListener('input', event =>
+        this.handleInputChange(event, 'keypress-throttle'),
+      );
+    }
+  }
+
+  /**
    * Sets focus to the terminal height input element and selects its content.
    *
    * This function is called when the user presses the "h" key on the options menu.
@@ -561,6 +607,29 @@ export class TitleMenuOptions extends HTMLElement {
   }
 
   /**
+   * Sets focus to the keypress throttle input element and selects its content.
+   *
+   * This function is called when the user presses the "t" key on the options menu.
+   * It finds the input element in the shadow DOM and sets focus to it. To select
+   * the content of the input element, it uses setTimeout to delay the selection
+   * by 10 milliseconds, so that the focus event is processed before the selection
+   * is triggered.
+   *
+   * @return {void}
+   */
+  private focusAndSelectKeypressThrottleInput(): void {
+    const keypressThrottleInput = this.shadowRoot?.getElementById(
+      'keypress-throttle-input',
+    ) as HTMLInputElement;
+    if (keypressThrottleInput) {
+      keypressThrottleInput.focus();
+      setTimeout(() => {
+        keypressThrottleInput.select();
+      }, 10);
+    }
+  }
+
+  /**
    * Handles input change events for different configuration settings.
    *
    * Depending on the type of setting being changed, this method updates the
@@ -573,7 +642,12 @@ export class TitleMenuOptions extends HTMLElement {
    */
   private handleInputChange = (
     event: Event,
-    type: 'message' | 'terminal-width' | 'terminal-height' | 'scaling',
+    type:
+      | 'message'
+      | 'terminal-width'
+      | 'terminal-height'
+      | 'scaling'
+      | 'keypress-throttle',
   ): void => {
     switch (type) {
       case 'message':
@@ -587,6 +661,9 @@ export class TitleMenuOptions extends HTMLElement {
         break;
       case 'scaling':
         this.updateScalingFactorValue(event);
+        break;
+      case 'keypress-throttle':
+        this.updateKeypressThrottleValue(event);
         break;
       default:
         break;
@@ -652,6 +729,28 @@ export class TitleMenuOptions extends HTMLElement {
       this.gameConfig.message_count = newCount;
     } else {
       input.value = this.gameConfig.message_count.toString();
+    }
+  }
+
+  /**
+   * Updates the minimum delay between key presses in milliseconds.
+   *
+   * Parses the input value from the event's target and updates the game configuration's
+   * minimum key press delay if the value is a valid number within the range of 1 to 250.
+   * If the value is not valid, resets the input to the current minimum key press delay
+   * in the game configuration.
+   *
+   * @param {Event} event - The input event containing the new value for the minimum key press delay.
+   * @return {void}
+   */
+  private updateKeypressThrottleValue(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const newCount = parseInt(input.value, 10);
+
+    if (!isNaN(newCount) && newCount >= 0 && newCount <= 250) {
+      this.gameConfig.min_keypress_delay = newCount;
+    } else {
+      input.value = this.gameConfig.min_keypress_delay.toString();
     }
   }
 
@@ -935,6 +1034,9 @@ export class TitleMenuOptions extends HTMLElement {
         break;
       case 'B':
         this.toggleBloodIntensity();
+        break;
+      case 'n':
+        this.focusAndSelectKeypressThrottleInput();
         break;
       case this.activeControlScheme.menu.toString():
       case 'R':

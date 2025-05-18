@@ -189,7 +189,7 @@ export class IngameOptions extends HTMLElement {
             Current terminal scaling factor: ${this.gameConfig.terminal.scaling_factor} *
           </div>
           <div class="explanation">
-            * These values can only be changed from main menu.
+            * Can only be changed from main menu.
           </div>
         </div>
         <span class="info-span">Controls</span>
@@ -197,6 +197,12 @@ export class IngameOptions extends HTMLElement {
           <button id="switch-controls-button">
             <span class="underline">C</span>ontrol scheme
           </button>
+          <div class="info-text">
+            Current minimum keypress delay (in milliseconds): ${this.gameConfig.min_keypress_delay} *
+          </div>
+          <div class="explanation">
+            * Can only be changed from main menu.
+          </div>
         </div>
         <span class="info-span">Graphics</span>
         <div class="info-container">
