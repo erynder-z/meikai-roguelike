@@ -125,24 +125,30 @@ export class IngameOptions extends HTMLElement {
           cursor: not-allowed;
         }
 
-        .message-count-input {
-          font-family: 'UA Squared';
-          background: none;
-          border: none;
-          border-bottom: 2px solid var(--white);
-          color: var(--white);
-          font-weight: bold;
-          font-size: 2rem;
-        }
-
-        .message-count-input:focus {
-          outline: none;
-        }
-
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
           -webkit-appearance: none;
           margin: 0;
+        }
+
+        .message-count-input {
+          -webkit-appearance: none;
+          appearance: none;
+          height: 1rem;
+          background: var(--accent);
+          outline: none;
+          opacity: 0.7;
+          display: flex;
+          margin: 1rem auto;
+          width: 33%;
+        }
+
+        .message-count-input::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 2rem;
+          height: 2rem;
+          background: var(--white);
         }
 
         .title {
@@ -229,13 +235,18 @@ export class IngameOptions extends HTMLElement {
               M<span class="underline">e</span>ssages to Display (1-50):
             </label>
             <input
-              type="number"
+              type="range"
               id="message-count-input"
               class="message-count-input"
               min="1"
               max="50"
               value="${this.gameConfig.message_count}"
-            />
+            >
+            <div id="message-count-value" class="message-count-value">
+              ${this.gameConfig.message_count}
+            </div>
+            </input>
+            <div class="explanation">(Default: 35)</div>
           </button>
         </div>
         <span class="info-span">Misc</span>
@@ -343,7 +354,7 @@ export class IngameOptions extends HTMLElement {
       root,
       'message-count-input-button',
       'click',
-      this.focusAndSelectMessageCountInput,
+      event => this.handleMessageCountChange(event),
     );
 
     this.eventTracker.addById(
@@ -532,10 +543,14 @@ export class IngameOptions extends HTMLElement {
    */
   private handleMessageCountChange = (event: Event): void => {
     const input = event.target as HTMLInputElement;
+    const valueDisplay = this.shadowRoot?.getElementById(
+      'message-count-value',
+    ) as HTMLDivElement;
     const newCount = parseInt(input.value, 10);
 
     if (!isNaN(newCount) && newCount >= 1 && newCount <= 50) {
       this.gameConfig.message_count = newCount;
+      valueDisplay.textContent = newCount.toString();
     } else {
       input.value = this.gameConfig.message_count.toString();
     }
