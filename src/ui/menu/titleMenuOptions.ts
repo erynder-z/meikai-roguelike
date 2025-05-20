@@ -60,7 +60,6 @@ export class TitleMenuOptions extends HTMLElement {
           font-family: 'UA Squared';
           font-size: 2rem;
           display: flex;
-          justify-content: center;
           flex-direction: column;
           align-items: center;
           height: 100%;
@@ -96,6 +95,7 @@ export class TitleMenuOptions extends HTMLElement {
           flex-direction: column;
           justify-content: center;
           gap: 0.5rem;
+          min-width: 70ch;
         }
 
         .info-span {
@@ -146,7 +146,7 @@ export class TitleMenuOptions extends HTMLElement {
         .message-count-input {
           -webkit-appearance: none;
           appearance: none;
-          width: 100%;
+          width: 66%;
           height: 1rem;
           background: var(--accent);
           outline: none;

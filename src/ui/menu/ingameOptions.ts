@@ -88,6 +88,7 @@ export class IngameOptions extends HTMLElement {
           justify-content: center;
           width: 100%;
           gap: 0.5rem;
+          min-width: 70ch;
         }
 
         .info-span {
