@@ -99,6 +99,8 @@ export abstract class CommandBase implements Command {
     if (this.asleep(mob, game)) return negate;
     if (this.slow(mob, game)) return negate;
     if (this.freeze(mob, game, move)) return negate;
+    if (this.dehydrated(game)) return negate;
+    if (this.ravenous(game)) return negate;
 
     return able;
   }
@@ -264,6 +266,41 @@ export abstract class CommandBase implements Command {
     dir.x = cd.x;
     dir.y = cd.y;
     return true;
+  }
+
+  /**
+   * Checks if the player is dehydrated and flashes a message if it is.
+   *
+   * @param {GameState} game - The game object for flashing messages.
+   * @returns {boolean} - Whether the player is dehydrated or not.
+   */
+  private dehydrated(game: GameState): boolean {
+    const dehydrated = game.stats.thirst >= 0.8;
+    const chance = this.game.rand.isOneIn(5);
+    const msg = new LogMessage(
+      'You can not concentrate! You need to drink something!',
+      EventCategory.unable,
+    );
+    if (this.me.isPlayer && dehydrated && chance) game.flash(msg);
+    return dehydrated && chance;
+  }
+
+  /**
+   * Checks if the mob is ravenous and, if it is a player, flashes a message to the game interface.
+   * If ravenous, the player may have difficulty concentrating.
+   *
+   * @param {GameState} game - The game object for flashing messages.
+   * @return {boolean} True if the mob is ravenous and the chance condition is met, false otherwise.
+   */
+  private ravenous(game: GameState): boolean {
+    const ravenous = game.stats.hunger >= 0.8;
+    const chance = this.game.rand.isOneIn(5);
+    const msg = new LogMessage(
+      'You can not concentrate! You need to eat something!',
+      EventCategory.unable,
+    );
+    if (this.me.isPlayer && ravenous && chance) game.flash(msg);
+    return ravenous && chance;
   }
 
   /**
