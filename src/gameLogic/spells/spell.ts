@@ -1,5 +1,6 @@
 // Spells should be arranged in order of their power. Sorting should be done from weak to strong.
 export enum Spell {
+  // Combat Spells
   Heal, // Tier 1
   Charm, // Tier 2
   Slow, // Tier 3
@@ -26,3 +27,30 @@ export enum Spell {
   Disarm, // Tier 24
   None, // Tier 25
 }
+
+export const PICKABLE_SPELLS: readonly Spell[] = [
+  Spell.Heal,
+  Spell.Charm,
+  Spell.Slow,
+  Spell.Afraid,
+  Spell.Bullet,
+  Spell.Poison,
+  Spell.Confuse,
+  Spell.Silence,
+  Spell.Cleanse,
+  Spell.Stun,
+  Spell.Burn,
+  Spell.Blind,
+  Spell.Multiply,
+  Spell.Freeze,
+  Spell.Root,
+  Spell.Shock,
+  Spell.Teleport,
+  Spell.Paralyze,
+  Spell.Sleep,
+  Spell.Petrify,
+  Spell.Summon,
+  Spell.Bleed,
+  Spell.Levitate,
+  Spell.Disarm,
+];
