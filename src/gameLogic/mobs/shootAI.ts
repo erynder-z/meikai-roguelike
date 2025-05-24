@@ -12,7 +12,7 @@ import { NPCSpellFinder } from '../spells/npcSpellFinder';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { SimpleSleepAI } from './simpleSleepAI';
-import { Spell } from '../spells/spell';
+import { PICKABLE_SPELLS, Spell } from '../spells/spell';
 import { Stack } from '../../types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
@@ -96,16 +96,16 @@ export class ShootAI implements MobAI {
   }
 
   /**
-   * Picks a spell based on the mob's level.
+   * Picks a spell for the given mob based on its level.
    *
-   * @param {Mob} me - The mob.
-   * @param {RandomGenerator} rand - The random generator.
-   * @return {Spell} The picked spell.
+   * @param {Mob} me - The mob for which to pick the spell.
+   * @param {RandomGenerator} rand - The random generator used for picking the spell.
+   * @return {Spell} The spell chosen for the mob.
    */
+
   private pickSpell(me: Mob, rand: RandomGenerator): Spell {
-    const range: number = Spell.None + 1;
-    const spellIndex: number = me.level % range;
-    const spell: Spell = <Spell>spellIndex;
+    const index = me.level % PICKABLE_SPELLS.length;
+    const spell = PICKABLE_SPELLS[index];
 
     console.log(`${me.name}: spell ${Spell[spell]}`);
     return spell;
