@@ -7,9 +7,10 @@ import { MapHandler } from '../../gameBuilder/mapHandler';
 import { MessageLog } from '../../gameLogic/messages/messageLog';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { MobAI } from '../gameLogic/mobs/mobAI';
+import { Mood } from '../gameLogic/stats/stats';
+import { NeedsHandler } from '../../gameLogic/needs/needsHandler';
 import { Slot } from '../../gameLogic/itemObjects/slot';
 import { Stats } from '../../gameLogic/stats/stats';
-import { Mood } from '../gameLogic/stats/stats';
 
 export type ReadyToSaveGameState = {
   serializedAI: {
@@ -35,6 +36,10 @@ export type ReadyToSaveGameState = {
   serializedEquipment: {
     id: string;
     data: [Slot, ItemObject][];
+  };
+  serializedNeeds: {
+    id: string;
+    data: NeedsHandler | undefined;
   };
   serializedStats: {
     id: string;
@@ -70,6 +75,7 @@ export type SerializedGameState = {
   serializedAutoHeal: { id: string; data: SerializedAutoHealData };
   serializedInventory: { id: string; data: SerializedInventoryData };
   serializedEquipment: { id: string; data: SerializedEquipmentData };
+  serializedNeeds: { id: string; data: SerializedNeedsData };
   serializedStats: { id: string; data: SerializedStatsData };
   serializedPlayer: { id: string; data: SerializedPlayerData };
   serializedPlayerBuffs: {
@@ -124,7 +130,11 @@ export type SerializedItemData = {
   spell: number;
   category: number[];
 };
+
 export type SerializedEquipmentData = [number, SerializedItemData][];
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type SerializedNeedsData = any;
 
 export type SerializedStatsData = {
   currentTurnReceivedDmg: number;

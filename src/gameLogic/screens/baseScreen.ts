@@ -172,19 +172,37 @@ export class BaseScreen implements StackScreen {
       return;
     }
 
-    this.handleNeeds(player);
+    this.processNeeds(player);
     this.handleAutoHeal(player);
     this.game.stats.incrementTurnCounter();
   }
 
   /**
-   * A method to handle hunger and thirst for a mob, applying cumulative
-   * strength penalties and damage at high levels.
+   * Increases hunger and thirst by one turn each, and applies damage and status effects
+   * if the levels are above certain thresholds.
    *
-   * @param {Mob} player - the mob (player) to handle needs for
-   * @return {void}
+   * The thresholds are as follows:
+   * - Low: 40%
+   * - Medium: 60%
+   * - High: 80%
+   * - Maximum: 100%
+   *
+   * At the high threshold, the player takes 1 damage and at the maximum threshold,
+   * the player is confused for 1 turn.
+   *
+   * The player's strength is also reduced by a factor that is calculated as follows:
+   * - For each need, if the level is above the low threshold, the factor is increased by 0.2.
+   * - For each need, if the level is above the medium threshold, the factor is increased by 0.2.
+   * - For each need, if the level is above the high threshold, the factor is increased by 0.2.
+   * - The total factor is then multiplied by the player's base strength to get the new strength.
+   * - The new strength is capped at a minimum of 40% of the player's base strength.
+   *
+   * @param {Mob} player - the player to update needs for
    */
-  private handleNeeds(player: Mob): void {
+  private processNeeds(player: Mob): void {
+    this.game.needs?.increaseHunger(this.game);
+    this.game.needs?.increaseThirst(this.game);
+
     const needsConfig = [
       {
         type: 'hunger',
