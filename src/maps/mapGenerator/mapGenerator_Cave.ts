@@ -99,7 +99,7 @@ export class MapGenerator_Cave {
       this.map,
       this.rand,
       mapDimensions,
-      this.rand.randomIntegerClosedRange(40, 100),
+      this.rand.randomIntegerInclusive(40, 100),
       5,
       15,
       5,
@@ -129,7 +129,7 @@ export class MapGenerator_Cave {
   private addChasm(): void {
     const centerGlyph = Glyph.Chasm_Center;
     const edgeGlyph = Glyph.Chasm_Edge;
-    const chasmCount = this.rand.randomIntegerClosedRange(3, 7);
+    const chasmCount = this.rand.randomIntegerInclusive(3, 7);
     const chasmMinSize = 15;
     const chasmMaxSize = 40;
     this.addChasmAreas(
@@ -164,7 +164,7 @@ export class MapGenerator_Cave {
     edgeGlyph: Glyph,
   ): void {
     for (let i = 0; i < areaCount; i++) {
-      const size = rand.randomIntegerClosedRange(areaMinSize, areaMaxSize);
+      const size = rand.randomIntegerInclusive(areaMinSize, areaMaxSize);
       this.createChasmAreas(rand, size, centerGlyph, edgeGlyph);
     }
   }

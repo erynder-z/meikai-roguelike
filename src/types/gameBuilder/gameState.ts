@@ -8,6 +8,7 @@ import { MapHandler } from '../../gameBuilder/mapHandler';
 import { MessageLog } from '../../gameLogic/messages/messageLog';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { MobAI } from '../gameLogic/mobs/mobAI';
+import { NeedsHandler } from '../../gameLogic/needs/needsHandler';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { Stats } from '../../gameLogic/stats/stats';
 
@@ -21,6 +22,7 @@ export type GameState = {
   autoHeal: AutoHeal | undefined;
   inventory: Inventory | undefined;
   equipment: Equipment | undefined;
+  needs: NeedsHandler | undefined;
   stats: Stats;
   currentMap(): GameMapType | null;
   message(msg: LogMessage): void;

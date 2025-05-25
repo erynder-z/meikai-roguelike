@@ -99,7 +99,7 @@ export class CellEffects {
 
     if (this.cell.isCausingAttackUp()) {
       const duration = 50;
-      const amount = this.game.rand.randomFloat(0, 1);
+      const amount = this.game.rand.randomFloatInclusive(0, 1);
 
       new StatChangeBuffCommand(
         Buff.AttackUp,
@@ -114,7 +114,7 @@ export class CellEffects {
 
     if (this.cell.isCausingAttackDown()) {
       const duration = 50;
-      const amount = this.game.rand.randomFloat(0, 1);
+      const amount = this.game.rand.randomFloatInclusive(0, 1);
 
       new StatChangeBuffCommand(
         Buff.AttackDown,
@@ -129,7 +129,7 @@ export class CellEffects {
 
     if (this.cell.isCausingDefenseUp()) {
       const duration = 50;
-      const amount = this.game.rand.randomFloat(0, 1);
+      const amount = this.game.rand.randomFloatInclusive(0, 1);
 
       new StatChangeBuffCommand(
         Buff.DefenseUp,
@@ -144,7 +144,7 @@ export class CellEffects {
 
     if (this.cell.isCausingDefenseDown()) {
       const duration = 50;
-      const amount = this.game.rand.randomFloat(0, 1);
+      const amount = this.game.rand.randomFloatInclusive(0, 1);
 
       new StatChangeBuffCommand(
         Buff.DefenseDown,
@@ -158,7 +158,10 @@ export class CellEffects {
     }
 
     if (this.cell.isHealing()) {
-      const randomAmount = this.game.rand.randomInteger(1, this.me.maxhp);
+      const randomAmount = this.game.rand.randomIntegerExclusive(
+        1,
+        this.me.maxhp,
+      );
       new HealCommand(randomAmount, this.me, this.game).execute();
     }
 

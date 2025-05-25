@@ -104,7 +104,7 @@ export class MapUtils {
       return null;
     }
 
-    let randomWeight = rand.randomIntegerClosedRange(1, totalWeight);
+    let randomWeight = rand.randomIntegerInclusive(1, totalWeight);
 
     for (const feature of features) {
       randomWeight -= feature.weight;
@@ -146,10 +146,7 @@ export class MapUtils {
     if (targets.length === 0) return gameMap;
 
     for (let i = 0; i < attempts; i++) {
-      const patchSize = rand.randomIntegerClosedRange(
-        minPatchSize,
-        maxPatchSize,
-      );
+      const patchSize = rand.randomIntegerInclusive(minPatchSize, maxPatchSize);
       const patchArea = IrregularShapeAreaGenerator.generateIrregularShapeArea(
         dim,
         rand,
@@ -198,7 +195,7 @@ export class MapUtils {
       );
 
       if (featureConfig) {
-        const featureSize = rand.randomIntegerClosedRange(
+        const featureSize = rand.randomIntegerInclusive(
           featureConfig.minSize,
           featureConfig.maxSize,
         );
@@ -239,7 +236,7 @@ export class MapUtils {
     rand: RandomGenerator,
     dimensions: WorldPoint,
   ): GameMapType {
-    const featureSize = rand.randomIntegerClosedRange(
+    const featureSize = rand.randomIntegerInclusive(
       featureConfig.minSize,
       featureConfig.maxSize,
     );
@@ -345,7 +342,7 @@ export class MapUtils {
           [1, 0],
           [-1, 0],
         ];
-        const index = rand.randomInteger(0, directions.length);
+        const index = rand.randomIntegerExclusive(0, directions.length);
         return directions[index];
       };
 

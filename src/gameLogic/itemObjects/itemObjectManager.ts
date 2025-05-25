@@ -120,7 +120,9 @@ export class ItemObjectManager {
    * @return {ObjectTypes} The randomly selected object template.
    */
   private static getRandomTemplate(rand: RandomGenerator): ObjectTypes {
-    const index = rand.randomInteger(ItemObjectManager.objTypes.length);
+    const index = rand.randomIntegerExclusive(
+      ItemObjectManager.objTypes.length,
+    );
     const template: ObjectTypes = ItemObjectManager.getTemplate(index);
     return template;
   }
@@ -185,7 +187,15 @@ export class ItemObjectManager {
         break;
       case Glyph.Pistol:
         this.setSpecificSpell(object, Spell.Bullet);
-        object.charges = rand.randomInteger(10, level);
+        object.charges = rand.randomIntegerExclusive(10, level);
+        break;
+      case Glyph.Ration:
+        this.setItemSpell(object, rand);
+        this.setCharges(object, 1, rand, level);
+        break;
+      case Glyph.Water_Bottle:
+        this.setItemSpell(object, rand);
+        this.setCharges(object, 1, rand, level);
         break;
     }
 
@@ -241,7 +251,7 @@ export class ItemObjectManager {
     rand: RandomGenerator,
     level: number,
   ): void {
-    object.charges = rand.randomInteger(charges, level);
+    object.charges = rand.randomIntegerExclusive(charges, level);
   }
   /**
    * Retrieves a template object type based on its index.

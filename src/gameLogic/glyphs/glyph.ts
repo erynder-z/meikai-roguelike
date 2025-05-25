@@ -95,6 +95,8 @@ export enum Glyph {
   Pistol,
   Rune,
   Scroll,
+  Ration,
+  Water_Bottle,
 
   // Misc
   Bad,

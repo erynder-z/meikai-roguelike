@@ -24,5 +24,8 @@ export class SpellColors {
     ['#DDA0DD', 'Arcane Plum'],
     ['#9370DB', 'Mystic Violet'],
     ['#40E0D0', 'Celestial Turquoise'],
+    ['#00FFFF', 'Astral Aqua'],
+    ['#FF00FF', 'Spectral Magenta'],
+    ['#FFC0CB', 'Chromatic Pink'],
   ];
 }

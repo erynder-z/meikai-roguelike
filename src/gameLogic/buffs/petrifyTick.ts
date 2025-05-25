@@ -38,7 +38,7 @@ export class PetrifyTick implements Tick {
     if (!this.shouldApplyDamage(duration, timeLeft)) return;
     const sinceLastMove = this.mob.sinceMove;
     if (sinceLastMove < 2) return;
-    const dmg = this.game.rand.randomIntegerClosedRange(
+    const dmg = this.game.rand.randomIntegerInclusive(
       sinceLastMove,
       sinceLastMove * 2,
     );

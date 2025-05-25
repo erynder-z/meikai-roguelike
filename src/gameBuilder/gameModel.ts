@@ -9,6 +9,7 @@ import { MapHandler } from './mapHandler';
 import { MessageLog } from '../gameLogic/messages/messageLog';
 import { Mob } from '../gameLogic/mobs/mob';
 import { MobAI } from '../types/gameLogic/mobs/mobAI';
+import { NeedsHandler } from '../gameLogic/needs/needsHandler';
 import { RandomGenerator } from '../randomGenerator/randomGenerator';
 import { Stats } from '../gameLogic/stats/stats';
 
@@ -22,6 +23,7 @@ export class Game implements GameState {
   public autoHeal: AutoHeal | undefined = new AutoHeal();
   public inventory = new Inventory();
   public equipment = new Equipment();
+  public needs = new NeedsHandler();
   public stats = new Stats();
   constructor(
     public rand: RandomGenerator,

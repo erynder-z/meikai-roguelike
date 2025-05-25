@@ -95,7 +95,7 @@ export class Overworld {
       gameMap,
       rand,
       dim,
-      rand.randomIntegerClosedRange(50, 150),
+      rand.randomIntegerInclusive(50, 150),
       3,
       10,
       5,

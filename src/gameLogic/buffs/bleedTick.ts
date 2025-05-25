@@ -43,7 +43,7 @@ export class BleedTick implements Tick {
     const isResting = this.mob.sinceMove > BleedTick.RESTING_TURNS_THRESHOLD;
     return isResting
       ? BleedTick.RESTING_DAMAGE
-      : this.game.rand.randomIntegerClosedRange(
+      : this.game.rand.randomIntegerInclusive(
           BleedTick.MIN_DAMAGE,
           BleedTick.MAX_DAMAGE,
         );

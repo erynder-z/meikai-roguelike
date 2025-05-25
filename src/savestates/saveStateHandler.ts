@@ -50,6 +50,7 @@ export class SaveStateHandler {
       autoHeal,
       inventory,
       equipment,
+      needs,
       stats,
       player,
       build,
@@ -61,6 +62,7 @@ export class SaveStateHandler {
     const serializedAutoHeal = this.getAutoHealData(autoHeal);
     const serializedInventory = this.getInventoryData(inventory);
     const serializedEquipment = this.getEquipmentData(equipment);
+    const serializedNeeds = this.getNeedsData(needs);
     const serializedStats = this.getStatsData(stats);
     const serializedPlayer = this.getPlayerData(player);
     const serializedPlayerBuffs = this.getPlayerBuffsData(player);
@@ -75,6 +77,7 @@ export class SaveStateHandler {
       serializedAutoHeal,
       serializedInventory,
       serializedEquipment,
+      serializedNeeds,
       serializedStats,
       serializedPlayer,
       serializedPlayerBuffs,
@@ -165,6 +168,20 @@ export class SaveStateHandler {
     return {
       id: 'EQUIPMENT',
       data: objectifiedEquipment,
+    };
+  }
+
+  /**
+   * Serializes the player's needs.
+   * @param {GameState['needs']} needs - The player's needs.
+   * @returns {ReadyToSaveGameState['serializedNeeds']} - Serialized needs data.
+   */
+  private getNeedsData(
+    needs: GameState['needs'],
+  ): ReadyToSaveGameState['serializedNeeds'] {
+    return {
+      id: 'NEEDS',
+      data: needs,
     };
   }
 

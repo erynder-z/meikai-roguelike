@@ -20,8 +20,8 @@ export class IrregularShapeAreaGenerator {
     const shape = new Set<WorldPoint>();
     // Initialize the shape with a random starting point
     const start = new WorldPoint(
-      rand.randomInteger(dim.x),
-      rand.randomInteger(dim.y),
+      rand.randomIntegerExclusive(dim.x),
+      rand.randomIntegerExclusive(dim.y),
     );
     shape.add(start);
 

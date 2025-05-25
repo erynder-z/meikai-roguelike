@@ -60,7 +60,6 @@ export class TitleMenuOptions extends HTMLElement {
           font-family: 'UA Squared';
           font-size: 2rem;
           display: flex;
-          justify-content: center;
           flex-direction: column;
           align-items: center;
           height: 100%;
@@ -96,6 +95,7 @@ export class TitleMenuOptions extends HTMLElement {
           flex-direction: column;
           justify-content: center;
           gap: 0.5rem;
+          min-width: 70ch;
         }
 
         .info-span {
@@ -121,10 +121,7 @@ export class TitleMenuOptions extends HTMLElement {
           font-weight: normal;
         }
 
-        .message-count-input,
-        .terminal-dimensions-input,
-        .scaling-factor-input,
-        .keypress-throttle-input {
+        .terminal-dimensions-input{
           font-family: 'UA Squared';
           background: none;
           border: none;
@@ -134,10 +131,7 @@ export class TitleMenuOptions extends HTMLElement {
           font-size: 2rem;
         }
 
-        .message-count-input:focus,
-        .terminal-dimensions-input:focus,
-        .scaling-factor-input:focus,
-        .keypress-throttle-input:focus {
+        .terminal-dimensions-input:focus {
           outline: none;
         }
 
@@ -145,6 +139,28 @@ export class TitleMenuOptions extends HTMLElement {
         input[type='number']::-webkit-outer-spin-button {
           -webkit-appearance: none;
           margin: 0;
+        }
+
+        .scaling-factor-input,
+        .keypress-throttle-input,
+        .message-count-input {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 66%;
+          height: 1rem;
+          background: var(--accent);
+          outline: none;
+          opacity: 0.7;
+        }
+
+        .scaling-factor-input::-webkit-slider-thumb,
+        .keypress-throttle-input::-webkit-slider-thumb,
+        .message-count-input::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 2rem;
+          height: 2rem;
+          background: var(--white);
         }
 
         .title {
@@ -216,14 +232,18 @@ export class TitleMenuOptions extends HTMLElement {
               Current terminal sca<span class="underline">l</span>ing factor:
             </label>
             <input
-              type="number"
+              type="range"
               step="0.1"
               min="0"
               max="2"
               id="scaling-factor-input"
               class="scaling-factor-input"
               value="${this.gameConfig.terminal.scaling_factor}"
-            />
+            >
+            <div id="scaling-factor-value" class="scaling-factor-value">
+              ${this.gameConfig.terminal.scaling_factor}
+            </div>
+            </input>
             <div class="explanation">(Default: 0.8)</div>
           </button>
         </div>
@@ -237,13 +257,18 @@ export class TitleMenuOptions extends HTMLElement {
               Mi<span class="underline">n</span>imum keypress delay in milliseconds (0-250 ms):
             </label>
             <input
-              type="number"
+              type="range"
               min="0"
               max="250"
               id="keypress-throttle-input"
               class="keypress-throttle-input"
               value="${this.gameConfig.min_keypress_delay}"
-            />
+            >
+            <div id="keypress-throttle-value" class="keypress-throttle-value">
+              ${this.gameConfig.min_keypress_delay}
+            </div>
+            </input>
+            <div class="explanation">(Default: 50ms)</div>
           </button>
         </div>
         <span class="info-span">Graphics</span>
@@ -271,13 +296,18 @@ export class TitleMenuOptions extends HTMLElement {
               M<span class="underline">e</span>ssages to Display (1-50):
             </label>
             <input
-              type="number"
+              type="range"
               min="1"
               max="50"
               id="message-count-input"
               class="message-count-input"
               value="${this.gameConfig.message_count}"
-            />
+            >
+            <div id="message-count-value" class="message-count-value">
+              ${this.gameConfig.message_count}
+            </div>
+            </input>
+            <div class="explanation">(Default: 35)</div>
           </button>
         </div>
         <span class="info-span">Misc</span>
@@ -701,10 +731,14 @@ export class TitleMenuOptions extends HTMLElement {
 
   private updateScalingFactorValue(event: Event): void {
     const input = event.target as HTMLInputElement;
+    const valueDisplay = this.shadowRoot?.getElementById(
+      'scaling-factor-value',
+    ) as HTMLDivElement;
     const newCount = parseFloat(input.value);
 
     if (!isNaN(newCount) && newCount >= 0 && newCount <= 2) {
       this.gameConfig.terminal.scaling_factor = newCount;
+      valueDisplay.textContent = newCount.toString();
     } else {
       input.value = this.gameConfig.terminal.scaling_factor.toString();
     }
@@ -723,10 +757,14 @@ export class TitleMenuOptions extends HTMLElement {
 
   private updateMessageCountValue(event: Event): void {
     const input = event.target as HTMLInputElement;
+    const valueDisplay = this.shadowRoot?.getElementById(
+      'message-count-value',
+    ) as HTMLDivElement;
     const newCount = parseInt(input.value, 10);
 
     if (!isNaN(newCount) && newCount >= 1 && newCount <= 50) {
       this.gameConfig.message_count = newCount;
+      valueDisplay.textContent = newCount.toString();
     } else {
       input.value = this.gameConfig.message_count.toString();
     }
@@ -745,10 +783,14 @@ export class TitleMenuOptions extends HTMLElement {
    */
   private updateKeypressThrottleValue(event: Event): void {
     const input = event.target as HTMLInputElement;
+    const valueDisplay = this.shadowRoot?.getElementById(
+      'keypress-throttle-value',
+    ) as HTMLDivElement;
     const newCount = parseInt(input.value, 10);
 
     if (!isNaN(newCount) && newCount >= 0 && newCount <= 250) {
       this.gameConfig.min_keypress_delay = newCount;
+      valueDisplay.textContent = newCount.toString();
     } else {
       input.value = this.gameConfig.min_keypress_delay.toString();
     }

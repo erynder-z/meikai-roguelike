@@ -32,8 +32,8 @@ export class FindFreeSpace {
   ): WorldPoint {
     const e = new WorldPoint(map.dimensions.x - 2, map.dimensions.y - 2);
     const s = new WorldPoint(
-      rand.randomIntegerClosedRange(1, e.x),
-      rand.randomIntegerClosedRange(1, e.y),
+      rand.randomIntegerInclusive(1, e.x),
+      rand.randomIntegerInclusive(1, e.y),
     );
     for (let p = s.copy(); ; ) {
       const cell = map.cell(p);

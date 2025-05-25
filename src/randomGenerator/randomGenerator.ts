@@ -38,12 +38,18 @@ export class RandomNumberGenerator {
  */
 export class RandomNumberGeneratorBase extends RandomNumberGenerator {
   /**
-   * Generates a random integer within the specified range.
+   * Generates a random integer within the specified range, exclusive of the higher bound.
+   *
+   * If the higher bound is not specified, the lower bound is used and the range is 0 to lower.
+   * If the lower bound is greater than the higher bound, the two are swapped.
+   * The range is the difference between the higher and lower bounds, and a random
+   * number between 0 and the range is generated. The result is the sum of the
+   * random number and the lower bound, rounded down to the nearest whole number.
    * @param {number} lower - The lower bound of the range.
-   * @param {number} [higher=0] - The upper bound of the range.
-   * @returns {number} A random integer within the specified range.
+   * @param {number} [higher=0] - The higher bound of the range.
+   * @returns {number} A random integer within the specified range, exclusive of the higher bound.
    */
-  public randomInteger(lower: number, higher: number = 0): number {
+  public randomIntegerExclusive(lower: number, higher: number = 0): number {
     if (!higher) {
       higher = lower;
       lower = 0;
@@ -60,22 +66,32 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
   }
 
   /**
-   * Generates a random integer within the closed range [lower, higher].
+   * Generates a random integer within the specified range, inclusive of both bounds.
+   *
    * @param {number} lower - The lower bound of the range.
-   * @param {number} higher - The upper bound of the range.
-   * @returns {number} A random integer within the closed range [lower, higher].
+   * @param {number} higher - The higher bound of the range.
+   * @returns {number} A random integer within the specified range, inclusive of both the lower and higher bounds.
    */
-  public randomIntegerClosedRange(lower: number, higher: number): number {
-    return this.randomInteger(lower, higher + 1);
+
+  public randomIntegerInclusive(lower: number, higher: number): number {
+    return this.randomIntegerExclusive(lower, higher + 1);
   }
 
   /**
-   * Generates a random float within the specified range, limited to two decimal places.
+   * Generates a random floating-point number within the specified range, exclusive of the higher bound.
+   *
+   * If the higher bound is not specified, the lower bound is used and the range is 0 to lower.
+   * If the lower bound is greater than the higher bound, the two are swapped.
+   * The range is the difference between the higher and lower bounds, and a random
+   * floating-point number between 0 and the range is generated. The result is the sum of the
+   * random number and the lower bound, formatted to two decimal places.
+   *
    * @param {number} lower - The lower bound of the range.
-   * @param {number} [higher=0] - The upper bound of the range.
-   * @returns {number} A random float within the specified range, rounded to two decimal places.
+   * @param {number} [higher=0] - The higher bound of the range.
+   * @returns {number} A random floating-point number within the specified range, exclusive of the higher bound.
    */
-  public randomFloat(lower: number, higher: number = 0): number {
+
+  public randomFloatExclusive(lower: number, higher: number = 0): number {
     if (!higher) {
       higher = lower;
       lower = 0;
@@ -91,13 +107,29 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
     return parseFloat(result.toFixed(2));
   }
 
+/**
+ * Generates a random floating-point number within the specified range, inclusive of both bounds.
+ *
+ * If the lower bound is greater than the higher bound, the two are swapped before generating the number.
+ * The result is formatted to two decimal places.
+ *
+ * @param {number} lower - The lower bound of the range.
+ * @param {number} higher - The higher bound of the range.
+ * @returns {number} A random floating-point number within the specified range, inclusive of both the lower and higher bounds.
+ */
+
+  public randomFloatInclusive(lower: number, higher: number): number {
+    const draw = this.randomFloatExclusive(lower, higher + Number.EPSILON);
+    return parseFloat(Math.min(draw, higher).toFixed(2));
+  }
+
   /**
    * Checks if a random integer from 0 to N-1 equals 0.
    * @param {number} N - The number to check against.
    * @returns {boolean} true if a random integer from 0 to N-1 equals 0, otherwise false.
    */
   public isOneIn(N: number): boolean {
-    return this.randomInteger(N) == 0;
+    return this.randomIntegerExclusive(N) == 0;
   }
 }
 
@@ -110,7 +142,7 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
    * @returns {WorldPoint} A random direction represented as a WorldPoint object.
    */
   public randomDirectionForcedMovement(): WorldPoint {
-    const a = this.randomIntegerClosedRange(-1, 1);
+    const a = this.randomIntegerInclusive(-1, 1);
     const b = this.isOneIn(2) ? 1 : -1;
     const h = this.isOneIn(2);
     return new WorldPoint(h ? a : b, h ? b : a);
@@ -123,8 +155,8 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
    */
   public randomDirection0(): WorldPoint {
     return new WorldPoint(
-      this.randomIntegerClosedRange(-1, 1),
-      this.randomIntegerClosedRange(-1, 1),
+      this.randomIntegerInclusive(-1, 1),
+      this.randomIntegerInclusive(-1, 1),
     );
   }
 
@@ -136,8 +168,8 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
    */
   public randomDirection(p: WorldPoint = new WorldPoint()): WorldPoint {
     return new WorldPoint(
-      p.x + this.randomIntegerClosedRange(-1, 1),
-      p.y + this.randomIntegerClosedRange(-1, 1),
+      p.x + this.randomIntegerInclusive(-1, 1),
+      p.y + this.randomIntegerInclusive(-1, 1),
     );
   }
 
@@ -175,7 +207,7 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
    * @return {boolean} Returns true if a success event occurred, false otherwise.
    */
   public determineSuccess(rate: number): boolean {
-    return this.randomInteger(100) < rate;
+    return this.randomIntegerExclusive(100) < rate;
   }
 
   /**
@@ -185,6 +217,6 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
    * @return {string} The randomly selected image from the array.
    */
   public getRandomImageFromArray(array: string[]): string {
-    return array[this.randomIntegerClosedRange(0, array.length - 1)];
+    return array[this.randomIntegerInclusive(0, array.length - 1)];
   }
 }

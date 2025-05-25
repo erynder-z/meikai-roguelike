@@ -39,7 +39,7 @@ export class MapGenerator1 {
       m,
       rand,
       mapDimensions,
-      rand.randomIntegerClosedRange(50, 150),
+      rand.randomIntegerInclusive(50, 150),
       3,
       10,
       5,
@@ -64,8 +64,8 @@ export class MapGenerator1 {
 
     const mapDimensions = this.gameMap.dimensions;
 
-    roomDimensions.y = rand.randomIntegerClosedRange(4, 16);
-    roomDimensions.x = rand.randomIntegerClosedRange(8, 24);
+    roomDimensions.y = rand.randomIntegerInclusive(4, 16);
+    roomDimensions.x = rand.randomIntegerInclusive(8, 24);
 
     if (rand.isOneIn(2)) {
       const swap = roomDimensions.x;
@@ -73,8 +73,14 @@ export class MapGenerator1 {
       roomDimensions.y = swap;
     }
 
-    upperLeft.x = rand.randomInteger(1, mapDimensions.x - roomDimensions.x - 1);
-    upperLeft.y = rand.randomInteger(1, mapDimensions.y - roomDimensions.y - 1);
+    upperLeft.x = rand.randomIntegerExclusive(
+      1,
+      mapDimensions.x - roomDimensions.x - 1,
+    );
+    upperLeft.y = rand.randomIntegerExclusive(
+      1,
+      mapDimensions.y - roomDimensions.y - 1,
+    );
   }
 
   /**
@@ -126,8 +132,8 @@ export class MapGenerator1 {
    */
   private placeDoors(doorPositions: WorldPoint[]): void {
     const rand = this.rand;
-    for (let i = rand.randomInteger(1, 3); i >= 0; --i) {
-      const index = rand.randomInteger(0, doorPositions.length);
+    for (let i = rand.randomIntegerExclusive(1, 3); i >= 0; --i) {
+      const index = rand.randomIntegerExclusive(0, doorPositions.length);
       const position = doorPositions[index];
       this.gameMap.cell(position).env = Glyph.Door_Closed;
     }

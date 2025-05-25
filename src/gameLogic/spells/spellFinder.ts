@@ -6,6 +6,8 @@ import { Command } from '../../types/gameLogic/commands/command';
 import { CommandDirectionScreen } from '../screens/commandDirectionScreen';
 import { CommandOrScreen } from '../../types/gameLogic/screens/CommandOrScreen';
 import { Cost } from '../../types/gameLogic/commands/cost';
+import { DrinkCommand } from '../commands/drinkCommand';
+import { EatCommand } from '../commands/eatCommand';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { HealCommand } from '../commands/healCommand';
 import { Mob } from '../mobs/mob';
@@ -31,10 +33,15 @@ export class SpellFinder {
    * Finds and returns a Command or StackScreen based on the provided spell and optional cost.
    *
    * @param {Spell} spell - The spell to be executed.
+   * @param {number} amount - The amount of the spell.
    * @param {Cost} [cost] - The optional cost of the spell.
    * @return {Command | StackScreen | null} The found Command or StackScreen, or null if the spell is not recognized.
    */
-  public find(spell: Spell, cost?: Cost): Command | StackScreen | null {
+  public find(
+    spell: Spell,
+    amount: number,
+    cost?: Cost,
+  ): Command | StackScreen | null {
     const { game } = this;
 
     const me = game.player;
@@ -59,7 +66,7 @@ export class SpellFinder {
         break;
       case Spell.Bullet:
         screen = this.dir(
-          (cmd = new BulletCommand(game.player, game, this.stack, this.make)),
+          (cmd = new BulletCommand(game.player, game, this.stack, this.make)), // TODO: add damage amount based on item properties
         );
         break;
       case Spell.Poison:
@@ -119,6 +126,13 @@ export class SpellFinder {
       case Spell.Disarm:
         ({ screen, cmd } = b(Buff.Disarm, me));
         break;
+      case Spell.DecreaseHunger:
+        cmd = new EatCommand(me, game, amount);
+        break;
+      case Spell.DecreaseThirst:
+        cmd = new DrinkCommand(me, game, amount);
+        break;
+
       default:
         return null;
     }

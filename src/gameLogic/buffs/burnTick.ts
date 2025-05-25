@@ -38,7 +38,7 @@ export class BurnTick implements Tick {
    */
   public tick(duration: number, timeLeft: number): void {
     if (!this.shouldApplyDamage(duration, timeLeft)) return;
-    const dmg = this.game.rand.randomIntegerClosedRange(
+    const dmg = this.game.rand.randomIntegerInclusive(
       this.MIN_DAMAGE,
       this.MAX_DAMAGE,
     );
