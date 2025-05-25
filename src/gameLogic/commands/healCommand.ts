@@ -24,7 +24,7 @@ export class HealCommand extends CommandBase {
   public execute(): boolean {
     const randomGenerator = this.gameInstance.rand;
     const minHeal = Math.ceil(this.healAmount * 0.5);
-    const maxHeal = Math.floor(this.healAmount * 0.5);
+    const maxHeal = Math.floor(this.healAmount * 1.5);
     const healPoints = randomGenerator.randomIntegerExclusive(minHeal, maxHeal);
     const isPlayer = this.mob.isPlayer;
 

@@ -107,16 +107,16 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
     return parseFloat(result.toFixed(2));
   }
 
-/**
- * Generates a random floating-point number within the specified range, inclusive of both bounds.
- *
- * If the lower bound is greater than the higher bound, the two are swapped before generating the number.
- * The result is formatted to two decimal places.
- *
- * @param {number} lower - The lower bound of the range.
- * @param {number} higher - The higher bound of the range.
- * @returns {number} A random floating-point number within the specified range, inclusive of both the lower and higher bounds.
- */
+  /**
+   * Generates a random floating-point number within the specified range, inclusive of both bounds.
+   *
+   * If the lower bound is greater than the higher bound, the two are swapped before generating the number.
+   * The result is formatted to two decimal places.
+   *
+   * @param {number} lower - The lower bound of the range.
+   * @param {number} higher - The higher bound of the range.
+   * @returns {number} A random floating-point number within the specified range, inclusive of both the lower and higher bounds.
+   */
 
   public randomFloatInclusive(lower: number, higher: number): number {
     const draw = this.randomFloatExclusive(lower, higher + Number.EPSILON);
