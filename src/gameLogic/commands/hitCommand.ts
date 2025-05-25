@@ -41,7 +41,7 @@ export class HitCommand extends CommandBase {
 
     if (me.is(Buff.Shock) && rand.isOneIn(2)) {
       dmg = this.shockDmg(dmg);
-      back = rand.randomIntegerClosedRange(2, 3);
+      back = rand.randomIntegerInclusive(2, 3);
     }
 
     const damageDealer = me.name;
@@ -143,7 +143,7 @@ export class HitCommand extends CommandBase {
    * @returns {number} The calculated damage.
    */
   private calcDamage(rand: RandomGenerator, me: Mob): number {
-    return rand.randomIntegerClosedRange(0, this.power(me));
+    return rand.randomIntegerInclusive(0, this.power(me));
   }
 
   /**

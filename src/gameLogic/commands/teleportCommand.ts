@@ -57,8 +57,8 @@ export class TeleportCommand extends CommandBase {
     const newPoint = new WorldPoint();
 
     for (let attempts = 15; attempts > 0; attempts--) {
-      const deltaX = random.randomInteger(-radius, radius);
-      const deltaY = random.randomInteger(-radius, radius);
+      const deltaX = random.randomIntegerExclusive(-radius, radius);
+      const deltaY = random.randomIntegerExclusive(-radius, radius);
       newPoint.x = center.x + deltaX;
       newPoint.y = center.y + deltaY;
 

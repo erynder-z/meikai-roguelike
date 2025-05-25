@@ -92,7 +92,7 @@ export class MultiplyCommand extends CommandBase {
    */
   private pick(c: WorldPoint[], rand: RandomGenerator): WorldPoint | null {
     if (c.length == 0) return null;
-    const index = rand.randomInteger(c.length);
+    const index = rand.randomIntegerExclusive(c.length);
     return c[index];
   }
 }

@@ -35,8 +35,8 @@ export class MapGenerator_Maze {
     }
 
     // Start carving the maze from a random cell
-    const startX = rand.randomInteger(1, map.dimensions.x - 2);
-    const startY = rand.randomInteger(1, map.dimensions.y - 2);
+    const startX = rand.randomIntegerExclusive(1, map.dimensions.x - 2);
+    const startY = rand.randomIntegerExclusive(1, map.dimensions.y - 2);
     const startCell = new WorldPoint(startX, startY);
     this.carvePassage(startCell);
   }
@@ -92,7 +92,7 @@ export class MapGenerator_Maze {
   private shuffle(array: WorldPoint[]): WorldPoint[] {
     const { rand } = this;
     for (let i = array.length - 1; i > 0; i--) {
-      const j = rand.randomInteger(0, i);
+      const j = rand.randomIntegerExclusive(0, i);
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;

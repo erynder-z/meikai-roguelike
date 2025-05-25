@@ -195,7 +195,7 @@ export abstract class CommandBase implements Command {
       if (me.isPlayer) game.flash(msg);
     } else {
       const buff = me.buffs.get(Buff.Paralyze);
-      buff!.timeLeft -= game.rand.randomIntegerClosedRange(1, 2);
+      buff!.timeLeft -= game.rand.randomIntegerInclusive(1, 2);
     }
     return paralyzed;
   }
