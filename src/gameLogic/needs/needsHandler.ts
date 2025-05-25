@@ -37,4 +37,9 @@ export class NeedsHandler {
       parseFloat((game.stats.thirst + increaseAmount).toFixed(4)),
     );
   }
+
+  public log(game: GameState): void {
+    console.log(`Hunger: ${game.stats.hunger}`);
+    console.log(`Thirst: ${game.stats.thirst}`);
+  }
 }

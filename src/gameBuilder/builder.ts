@@ -573,6 +573,25 @@ export class Builder implements Build {
     strongPistol.charges = 10;
     inv.add(strongPistol);
 
+    const ration = new ItemObject(
+      Glyph.Ration,
+      Slot.NotWorn,
+      [ObjCategory.Consumable],
+      Spell.DecreaseHunger,
+    );
+
+    ration.level = 2;
+    inv.add(ration);
+
+    const waterBottle = new ItemObject(
+      Glyph.Water_Bottle,
+      Slot.NotWorn,
+      [ObjCategory.Consumable],
+      Spell.DecreaseThirst,
+    );
+    waterBottle.level = 1;
+    inv.add(waterBottle);
+
     for (let index = 0; index < 10; index++) {
       const potion = new ItemObject(
         Glyph.Potion,

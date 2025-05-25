@@ -141,6 +141,34 @@
       "description": "A scroll that can cast magic.",
       "category": "SpellItem",
       "help": { "show": true, "about": "A scroll that can cast magic." }
+    },
+    {
+      "id": "Ration",
+      "char": "ø",
+      "bgCol": "#4B5A52",
+      "fgCol": "#32d728",
+      "hasSolidBg": false,
+      "name": "Ration",
+      "description": "Prepared food in a can.",
+      "category": "Consumable",
+      "help": {
+        "show": true,
+        "about": "Prepared food in a can. Not exactly tasty, but better than going hungry."
+      }
+    },
+    {
+      "id": "Water_Bottle",
+      "char": "Ւ",
+      "bgCol": "#4B5A52",
+      "fgCol": "#0ab1f5",
+      "hasSolidBg": false,
+      "name": "Water bottle",
+      "description": "Bottled water.",
+      "category": "Consumable",
+      "help": {
+        "show": true,
+        "about": "Water in a bottle. Tasteless, but refreshing."
+      }
     }
   ]
 }
