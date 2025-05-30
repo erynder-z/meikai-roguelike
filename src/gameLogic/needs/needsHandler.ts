@@ -14,11 +14,11 @@ export class NeedsHandler {
    */
 
   public increaseHunger(game: GameState): void {
-    const increaseAmount = 0.0005;
-    const MAX_HUNGER = 1.0;
+    const increaseAmount = 0.02;
+    const MAX_HUNGER = 10.0;
     game.stats.hunger = Math.min(
       MAX_HUNGER,
-      parseFloat((game.stats.hunger + increaseAmount).toFixed(4)),
+      parseFloat((game.stats.hunger + increaseAmount).toFixed(2)),
     );
   }
 
@@ -30,11 +30,11 @@ export class NeedsHandler {
    * @return {void} This function does not return a value.
    */
   public increaseThirst(game: GameState): void {
-    const increaseAmount = 0.0005;
-    const MAX_THIRST = 1.0;
+    const increaseAmount = 0.02;
+    const MAX_THIRST = 10.0;
     game.stats.thirst = Math.min(
       MAX_THIRST,
-      parseFloat((game.stats.thirst + increaseAmount).toFixed(4)),
+      parseFloat((game.stats.thirst + increaseAmount).toFixed(2)),
     );
   }
 
