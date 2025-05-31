@@ -129,6 +129,7 @@ export type SerializedItemData = {
   slot: number;
   spell: number;
   category: number[];
+  effectMagnitude: number | null;
 };
 
 export type SerializedEquipmentData = [number, SerializedItemData][];

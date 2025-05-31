@@ -417,6 +417,7 @@ export class SaveStateHandler {
       serializedItem.level,
       serializedItem.desc,
       serializedItem.charges,
+      serializedItem.effectMagnitude,
     );
 
     item.id = serializedItem.id;
