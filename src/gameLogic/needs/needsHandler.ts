@@ -67,7 +67,7 @@ export class NeedsHandler {
    * @return {void} This function does not return a value.
    */
   public increaseThirst(game: GameState): void {
-    const increaseAmount = 0.02; // Corresponds to 1 point per 50 turns
+    const increaseAmount = 0.04; // Corresponds to 1 point per 25 turns
     const MAX_THIRST = 10.0;
     game.stats.thirst = Math.min(
       MAX_THIRST,
