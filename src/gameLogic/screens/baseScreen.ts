@@ -207,14 +207,14 @@ export class BaseScreen implements StackScreen {
       {
         type: 'hunger',
         level: this.game.stats.hunger,
-        thresholds: [0.4, 0.6, 0.8, 1.0], // low, medium, high, max thresholds
+        thresholds: [4, 6, 8, 10], // low, medium, high, max thresholds
         damageMessage: 'You are too hungry and take {damage} damage!',
         damageCategory: EventCategory.hungerDamage,
       },
       {
         type: 'thirst',
         level: this.game.stats.thirst,
-        thresholds: [0.4, 0.6, 0.8, 1.0], // low, medium, high, max thresholds
+        thresholds: [4, 6, 8, 10], // low, medium, high, max thresholds
         damageMessage: 'You are too thirsty and take {damage} damage!',
         damageCategory: EventCategory.thirstDamage,
       },

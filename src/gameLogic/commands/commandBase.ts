@@ -275,7 +275,7 @@ export abstract class CommandBase implements Command {
    * @returns {boolean} - Whether the player is dehydrated or not.
    */
   private dehydrated(game: GameState): boolean {
-    const dehydrated = game.stats.thirst >= 0.8;
+    const dehydrated = game.stats.thirst >= 8;
     const chance = this.game.rand.isOneIn(5);
     const msg = new LogMessage(
       'You can not concentrate! You need to drink something!',
@@ -293,7 +293,7 @@ export abstract class CommandBase implements Command {
    * @return {boolean} True if the mob is ravenous and the chance condition is met, false otherwise.
    */
   private ravenous(game: GameState): boolean {
-    const ravenous = game.stats.hunger >= 0.8;
+    const ravenous = game.stats.hunger >= 8;
     const chance = this.game.rand.isOneIn(5);
     const msg = new LogMessage(
       'You can not concentrate! You need to eat something!',

@@ -18,6 +18,7 @@ export class ItemObject {
     public level: number = 1,
     public desc: string = 'some item without description',
     public charges: number = 1,
+    public effectMagnitude: number | null = null, // float number between 0 and 1. 2 decimals. i,e 0.05.
   ) {
     this.id = crypto.randomUUID();
   }
