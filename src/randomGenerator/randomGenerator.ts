@@ -78,49 +78,21 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
   }
 
   /**
-   * Generates a random floating-point number within the specified range, exclusive of the higher bound.
-   *
-   * If the higher bound is not specified, the lower bound is used and the range is 0 to lower.
-   * If the lower bound is greater than the higher bound, the two are swapped.
-   * The range is the difference between the higher and lower bounds, and a random
-   * floating-point number between 0 and the range is generated. The result is the sum of the
-   * random number and the lower bound, formatted to two decimal places.
-   *
-   * @param {number} lower - The lower bound of the range.
-   * @param {number} [higher=0] - The higher bound of the range.
-   * @returns {number} A random floating-point number within the specified range, exclusive of the higher bound.
-   */
-
-  public randomFloatExclusive(lower: number, higher: number = 0): number {
-    if (!higher) {
-      higher = lower;
-      lower = 0;
-    }
-    if (lower > higher) {
-      const swap = lower;
-      lower = higher;
-      higher = swap;
-    }
-    const range = higher - lower;
-    const draw = this.generateRandomNumber() * range;
-    const result = draw + lower;
-    return parseFloat(result.toFixed(2));
-  }
-
-  /**
    * Generates a random floating-point number within the specified range, inclusive of both bounds.
    *
-   * If the lower bound is greater than the higher bound, the two are swapped before generating the number.
-   * The result is formatted to two decimal places.
-   *
+   * The result is a number between the lower and higher bounds, inclusive of both.
+   * The result is rounded to 2 decimal places.
+   * If the lower bound is greater than the higher bound, the two are swapped.
    * @param {number} lower - The lower bound of the range.
    * @param {number} higher - The higher bound of the range.
    * @returns {number} A random floating-point number within the specified range, inclusive of both the lower and higher bounds.
    */
-
   public randomFloatInclusive(lower: number, higher: number): number {
-    const draw = this.randomFloatExclusive(lower, higher + Number.EPSILON);
-    return parseFloat(Math.min(draw, higher).toFixed(2));
+    if (lower > higher) {
+      [lower, higher] = [higher, lower];
+    }
+    const draw = Math.random() * (higher - lower) + lower;
+    return Math.round(draw * 100) / 100; // limit to 2 decimal places
   }
 
   /**

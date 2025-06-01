@@ -23,8 +23,8 @@ export class EatCommand extends CommandBase {
     const { game } = this;
     const { me } = this;
 
-    const min = Math.max(0, parseFloat((this.amount * 0.1).toFixed(2)));
-    const max = Math.min(1, parseFloat((this.amount * 1.0).toFixed(2)));
+    const min = Math.max(0, parseFloat((this.amount * 2).toFixed(2)));
+    const max = Math.min(10, parseFloat((this.amount * 10).toFixed(2)));
     const satietyAmount = game.rand.randomFloatInclusive(min, max);
 
     if (me.isPlayer) {
