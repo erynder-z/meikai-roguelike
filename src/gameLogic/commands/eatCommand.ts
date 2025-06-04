@@ -23,10 +23,9 @@ export class EatCommand extends CommandBase {
     const { game } = this;
     const { me } = this;
 
-    const satietyAmount = game.rand.randomFloatInclusive(
-      parseFloat(Math.round(this.amount * 0.5).toFixed(2)),
-      this.amount,
-    );
+    const min = Math.max(0, parseFloat((this.amount * 2).toFixed(2)));
+    const max = Math.min(10, parseFloat((this.amount * 10).toFixed(2)));
+    const satietyAmount = game.rand.randomFloatInclusive(min, max);
 
     if (me.isPlayer) {
       game.stats.adjustHunger(-satietyAmount);

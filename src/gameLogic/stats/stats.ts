@@ -129,21 +129,23 @@ export class Stats {
   }
 
   /**
-   * Adjusts the hunger of the entity by the given amount, ensuring it remains within the 0-1 range.
+   * Adjusts the hunger of the entity by the given amount. Ensures
+   * that the hunger value stays within the range [0, 10].
    *
    * @param {number} amount - The amount to adjust the hunger by.
    */
   public adjustHunger(amount: number): void {
-    this.hunger = Math.min(1, Math.max(0, this.hunger + amount));
+    this.hunger = Math.min(10, Math.max(0, this.hunger + amount));
   }
 
   /**
-   * Adjusts the thirst of the entity by the given amount, ensuring it remains within the 0-1 range.
+   * Adjusts the thirst of the entity by the given amount. Ensures
+   * that the thirst value stays within the range [0, 10].
    *
    * @param {number} amount - The amount to adjust the thirst by.
    */
   public adjustThirst(amount: number): void {
-    this.thirst = Math.min(1, Math.max(0, this.thirst + amount));
+    this.thirst = Math.min(10, Math.max(0, this.thirst + amount));
   }
 
   /**

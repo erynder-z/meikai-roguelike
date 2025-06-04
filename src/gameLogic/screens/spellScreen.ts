@@ -163,8 +163,9 @@ export class SpellScreen extends BaseScreen {
    */
   private doSpell(s: Spell, stack: Stack): void {
     const finder = new SpellFinder(this.game, stack, this.make);
+    const amount = 1;
     const cost: Cost | undefined = undefined;
-    const spell: Command | StackScreen | null = finder.find(s, cost);
+    const spell: Command | StackScreen | null = finder.find(s, amount, cost);
 
     if (spell == null) return;
     if (spell instanceof CommandBase) {

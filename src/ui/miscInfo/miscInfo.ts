@@ -27,10 +27,8 @@ export class MiscInfo extends HTMLElement {
       }
 
       .large-font {
-        font-size: large;
+        font-size: 1.25rem;
       }
-
-  
 
       .yellow-hp {
         color: yellow;

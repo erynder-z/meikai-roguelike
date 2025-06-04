@@ -304,10 +304,10 @@ export class StatsScreenDisplay extends HTMLElement {
     if (typeof this.stats?.hunger !== 'number') return;
 
     const hungerLevels = [
-      { threshold: 0.2, label: 'Satiated' },
-      { threshold: 0.4, label: 'Peckish' },
-      { threshold: 0.6, label: 'Hungry', className: 'yellow-text' },
-      { threshold: 0.8, label: 'Famished', className: 'orange-text' },
+      { threshold: 2, label: 'Satiated' },
+      { threshold: 4, label: 'Peckish' },
+      { threshold: 6, label: 'Hungry', className: 'yellow-text' },
+      { threshold: 8, label: 'Famished', className: 'orange-text' },
       { threshold: Infinity, label: 'Ravenous', className: 'red-text' },
     ];
 
@@ -333,10 +333,10 @@ export class StatsScreenDisplay extends HTMLElement {
     if (typeof this.stats?.thirst !== 'number') return;
 
     const thirstLevels = [
-      { threshold: 0.2, label: 'Hydrated' },
-      { threshold: 0.4, label: 'Dry-mouthed' },
-      { threshold: 0.6, label: 'Thirsty', className: 'yellow-text' },
-      { threshold: 0.8, label: 'Parched', className: 'orange-text' },
+      { threshold: 2, label: 'Hydrated' },
+      { threshold: 4, label: 'Dry-mouthed' },
+      { threshold: 6, label: 'Thirsty', className: 'yellow-text' },
+      { threshold: 8, label: 'Parched', className: 'orange-text' },
       { threshold: Infinity, label: 'Dehydrated', className: 'red-text' },
     ];
 

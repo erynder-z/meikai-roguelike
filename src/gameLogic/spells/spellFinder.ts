@@ -45,7 +45,7 @@ export class SpellFinder {
     const { game } = this;
 
     const me = game.player;
-    const level = 1;
+    const level = this.game.dungeon.level;
 
     let screen: StackScreen | null = null;
     let cmd: Command;

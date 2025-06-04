@@ -54,7 +54,7 @@ export class FindObjectSpell {
     if (!this.isUsable(obj, game)) return null;
 
     const finder = new SpellFinder(game, this.stack, this.make);
-    const amount = obj.level || 1;
+    const amount = obj.effectMagnitude || 1;
     const cost = new MultipleUseItemCost(game, obj, this.index);
 
     return finder.find(obj.spell, amount, cost);

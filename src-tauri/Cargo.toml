@@ -12,15 +12,15 @@ rust-version = "1.60"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "2.1.0", features = [] }
+tauri-build = { version = "2.2.0", features = [] }
 
 [dependencies]
 serde_json = "1.0.140"
-serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "2.4.0", features = [] }
-tauri-plugin-dialog = "2.2.0"
-tauri-plugin-process = "2.2.0"
-tauri-plugin-fs = "2.2.0"
+serde = { version = "1.0.219", features = ["derive"] }
+tauri = { version = "2.5.1", features = [] }
+tauri-plugin-dialog = "2.2.2"
+tauri-plugin-process = "2.2.1"
+tauri-plugin-fs = "2.3.0"
 walkdir = "2.5.0"
 ttf-parser = "0.25.1"
 

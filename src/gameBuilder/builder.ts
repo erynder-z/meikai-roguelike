@@ -580,7 +580,7 @@ export class Builder implements Build {
       Spell.DecreaseHunger,
     );
 
-    ration.level = 2;
+    ration.effectMagnitude = 0.25;
     inv.add(ration);
 
     const waterBottle = new ItemObject(
@@ -589,7 +589,7 @@ export class Builder implements Build {
       [ObjCategory.Consumable],
       Spell.DecreaseThirst,
     );
-    waterBottle.level = 1;
+    waterBottle.effectMagnitude = 0.25;
     inv.add(waterBottle);
 
     for (let index = 0; index < 10; index++) {
