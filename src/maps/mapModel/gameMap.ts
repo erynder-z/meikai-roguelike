@@ -250,23 +250,26 @@ export class GameMap implements GameMapType {
   }
 
   /**
-   * Sets the temperature of the level based on depth.
+   * Sets the level temperature. The temperature is a combination of the surface
+   * temperature and an increasing gradient with depth. The gradient is
+   * logarithmic in nature, to slow down the increase in temperature as the
+   * depth increases. Additionally, a random element is added to make the
+   * temperature more variable.
    *
-   * Assumes a geothermal gradient: deeper levels are hotter.
-   * Uses a base temperature (e.g., 15°C) and increases temperature
-   * more steeply as you descend. A small random variance is added.
-   *
+   * @param {number} surfaceTemp - The surface temperature.
    * @return {void}
    */
-  public setLevelTemperature(): void {
-    const baseTemp = 15;
+  public setLevelTemperature(surfaceTemp: number): void {
     const geothermalGradient = 2.5;
     const variability = Math.random() * 1.0;
 
     const depthBoostFactor = Math.log(this.level + 1);
-    this.temperature =
-      baseTemp +
-      this.level * geothermalGradient +
-      variability * depthBoostFactor;
+    this.temperature = Number(
+      (
+        surfaceTemp +
+        this.level * geothermalGradient +
+        variability * depthBoostFactor
+      ).toFixed(2),
+    );
   }
 }

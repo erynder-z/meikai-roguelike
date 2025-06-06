@@ -28,7 +28,7 @@ export class MapHandler {
    */
   public getLevel(level: number, game: GameState): GameMapType {
     if (!this.hasLevel(level)) {
-      const map = game.build.makeLevel(game.rand, level);
+      const map = game.build.makeLevel(game.rand, level, game.surfaceTemp);
       this.add(map, level);
     }
     return this.maps[level];

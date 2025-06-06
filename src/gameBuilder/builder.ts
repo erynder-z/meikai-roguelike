@@ -43,6 +43,7 @@ export class Builder implements Build {
     const rand = new RandomGenerator(this.seed);
     const player = this.makePlayer();
     const game = new Game(rand, player, this);
+    game.surfaceTemp = rand.randomFloatInclusive(2, 15);
     game.dungeon.level = 0;
     this.enterFirstLevel(game, rand);
     game.ai = this.makeAI();
@@ -90,8 +91,12 @@ export class Builder implements Build {
    * @param {number} level - the level number
    * @return {GameMapType} the generated map
    */
-  public makeLevel(rand: RandomGenerator, level: number): GameMapType {
-    const map = this.makeMap(rand, level);
+  public makeLevel(
+    rand: RandomGenerator,
+    level: number,
+    surfaceTemp: number,
+  ): GameMapType {
+    const map = this.makeMap(rand, level, surfaceTemp);
     this.addLevelStairs(map, level, rand);
     this.addMobsToLevel(map, rand);
     this.addItems(map, rand);
@@ -105,7 +110,11 @@ export class Builder implements Build {
    * @param {number} level - the level-number for the map
    * @return {GameMapType} the generated map
    */
-  public makeMap(rand: RandomGenerator, level: number): GameMapType {
+  public makeMap(
+    rand: RandomGenerator,
+    level: number,
+    surfaceTemp: number,
+  ): GameMapType {
     const dim = TerminalPoint.MapDimensions;
     const wdim = new WorldPoint(dim.x, dim.y);
 
@@ -130,7 +139,7 @@ export class Builder implements Build {
     }
 
     map.setEnvironmentDescriptions();
-    map.setLevelTemperature();
+    map.setLevelTemperature(surfaceTemp);
 
     // add a 10% chance of the map being dark if it's not level 0
     if (level !== 0 && rand.isOneIn(10)) {

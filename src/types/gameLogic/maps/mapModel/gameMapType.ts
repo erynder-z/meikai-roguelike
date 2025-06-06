@@ -29,5 +29,5 @@ export type GameMapType = {
   addObject(o: ItemObject, p: WorldPoint): void;
   forEachCell(action: (cell: MapCell, p: WorldPoint) => void): void;
   setEnvironmentDescriptions(): void;
-  setLevelTemperature(): void;
+  setLevelTemperature(surfaceTemp: number): void;
 };

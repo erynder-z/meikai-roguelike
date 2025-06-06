@@ -10,8 +10,16 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
 export type Build = {
   makeGame(): GameState;
   restoreGame(saveState: SerializedGameState): GameState;
-  makeLevel(rand: RandomGenerator, level: number): GameMapType;
-  makeMap(rand: RandomGenerator, level: number): GameMapType;
+  makeLevel(
+    rand: RandomGenerator,
+    level: number,
+    surfaceTemp: number,
+  ): GameMapType;
+  makeMap(
+    rand: RandomGenerator,
+    level: number,
+    surfaceTemp: number,
+  ): GameMapType;
   makePlayer(): Mob;
   makeAI(): MobAI | null;
   addNPC(
