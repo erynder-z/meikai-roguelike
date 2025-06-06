@@ -22,6 +22,7 @@ export class GameMap implements GameMapType {
     public level: number,
     public isDark: boolean = false,
     public cells: MapCell[][] = [],
+    public temperature: number = 15,
     public upStairPos?: WorldPoint,
     public downStairPos?: WorldPoint,
     public queue: TurnQueue = new TurnQueue(),
@@ -246,5 +247,26 @@ export class GameMap implements GameMapType {
       cell.environment.defaultBuffDuration =
         GlyphMap.getEnvDefaultBuffDuration(glyph);
     });
+  }
+
+  /**
+   * Sets the temperature of the level based on depth.
+   *
+   * Assumes a geothermal gradient: deeper levels are hotter.
+   * Uses a base temperature (e.g., 15°C) and increases temperature
+   * more steeply as you descend. A small random variance is added.
+   *
+   * @return {void}
+   */
+  public setLevelTemperature(): void {
+    const baseTemp = 15;
+    const geothermalGradient = 2.5;
+    const variability = Math.random() * 1.0;
+
+    const depthBoostFactor = Math.log(this.level + 1);
+    this.temperature =
+      baseTemp +
+      this.level * geothermalGradient +
+      variability * depthBoostFactor;
   }
 }

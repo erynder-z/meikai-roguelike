@@ -177,6 +177,7 @@ export type SerializedGameMap = {
   level: number;
   cells: SerializedMapCellArray[];
   isDark: boolean;
+  temperature: number;
   upStairPos?: SerializedWorldPoint;
   downStairPos?: SerializedWorldPoint;
   queue: SerializedMapQueue;

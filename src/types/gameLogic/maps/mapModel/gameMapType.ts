@@ -10,6 +10,7 @@ export type GameMapType = {
   level: number;
   cells: MapCell[][];
   isDark: boolean;
+  temperature: number;
   upStairPos?: WorldPoint;
   downStairPos?: WorldPoint;
   queue: TurnQueue;
@@ -28,4 +29,5 @@ export type GameMapType = {
   addObject(o: ItemObject, p: WorldPoint): void;
   forEachCell(action: (cell: MapCell, p: WorldPoint) => void): void;
   setEnvironmentDescriptions(): void;
+  setLevelTemperature(): void;
 };

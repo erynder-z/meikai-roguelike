@@ -130,6 +130,7 @@ export class Builder implements Build {
     }
 
     map.setEnvironmentDescriptions();
+    map.setLevelTemperature();
 
     // add a 10% chance of the map being dark if it's not level 0
     if (level !== 0 && rand.isOneIn(10)) {
