@@ -42,6 +42,7 @@ export class MiscInfo extends HTMLElement {
     <div class="misc-info">
       <div class="player-hp-status">Health: </div>
       <div class="level-info"></div>
+      <div class="level-temp"></div>
     </div>
   `;
 
@@ -60,6 +61,19 @@ export class MiscInfo extends HTMLElement {
     const levelInfo = this.shadowRoot?.querySelector('.level-info');
 
     if (levelInfo) levelInfo.innerHTML = lvlDisplayText;
+  }
+
+  /**
+   * Sets the level temperature text to the given temperature in degrees Celsius.
+   * @param {number} temp - The temperature to display.
+   * @returns {void}
+   */
+  public setLevelTemp(temp: number): void {
+    const tempDisplayText = `TEMP: <span class="large-font">${temp}°C</span>`;
+
+    const tempInfo = this.shadowRoot?.querySelector('.level-temp');
+
+    if (tempInfo) tempInfo.innerHTML = tempDisplayText;
   }
 
   /**
