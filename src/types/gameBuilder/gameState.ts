@@ -24,6 +24,7 @@ export type GameState = {
   equipment: Equipment | undefined;
   needs: NeedsHandler | undefined;
   stats: Stats;
+  surfaceTemp: number;
   currentMap(): GameMapType | null;
   message(msg: LogMessage): void;
   flash(msg: LogMessage): void;

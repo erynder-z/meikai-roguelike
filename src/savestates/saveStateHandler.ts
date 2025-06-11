@@ -54,6 +54,7 @@ export class SaveStateHandler {
       stats,
       player,
       build,
+      surfaceTemp,
     } = gameState;
 
     const serializedAI = this.getAIData(ai);
@@ -64,6 +65,7 @@ export class SaveStateHandler {
     const serializedEquipment = this.getEquipmentData(equipment);
     const serializedNeeds = this.getNeedsData(needs);
     const serializedStats = this.getStatsData(stats);
+    const serializedSurfaceTemp = this.getSurfaceTempData(surfaceTemp);
     const serializedPlayer = this.getPlayerData(player);
     const serializedPlayerBuffs = this.getPlayerBuffsData(player);
     const serializedBuild = this.getBuildData(build);
@@ -79,6 +81,7 @@ export class SaveStateHandler {
       serializedEquipment,
       serializedNeeds,
       serializedStats,
+      serializedSurfaceTemp,
       serializedPlayer,
       serializedPlayerBuffs,
       serializedBuild,
@@ -196,6 +199,20 @@ export class SaveStateHandler {
     return {
       id: 'STATS',
       data: stats,
+    };
+  }
+
+  /**
+   * Serializes the surface temperature.
+   * @param {GameState['surfaceTemp']} surfaceTemp - The surface temperature.
+   * @returns {ReadyToSaveGameState['serializedSurfaceTemp']} - Serialized surface temperature data.
+   */
+  private getSurfaceTempData(
+    surfaceTemp: GameState['surfaceTemp'],
+  ): ReadyToSaveGameState['serializedSurfaceTemp'] {
+    return {
+      id: 'SURFACETEMP',
+      data: surfaceTemp,
     };
   }
 
@@ -318,6 +335,7 @@ export class SaveStateHandler {
       map.level,
       map.isDark,
       [],
+      map.temperature,
       new WorldPoint(map.upStairPos?.x ?? 0, map.upStairPos?.y ?? 0),
       new WorldPoint(map.downStairPos?.x ?? 0, map.downStairPos?.y ?? 0),
       new TurnQueue(),

@@ -108,10 +108,12 @@ export class DrawUI {
 
   public static renderMiscInfo(game: GameState): void {
     const lvl = game.dungeon.level;
+    const currentMap = game.currentMap();
 
     const miscInfoDisplay = document.querySelector('misc-info') as MiscInfo;
     if (miscInfoDisplay) {
       miscInfoDisplay.setLevelInfo(lvl);
+      miscInfoDisplay.setLevelTemp(currentMap?.temperature || 0);
       miscInfoDisplay.setPlayerHPStatus(game.player);
     }
   }

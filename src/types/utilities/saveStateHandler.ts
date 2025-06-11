@@ -45,6 +45,10 @@ export type ReadyToSaveGameState = {
     id: string;
     data: Stats;
   };
+  serializedSurfaceTemp: {
+    id: string;
+    data: number;
+  };
   serializedPlayer: {
     id: string;
     data: Mob;
@@ -77,6 +81,7 @@ export type SerializedGameState = {
   serializedEquipment: { id: string; data: SerializedEquipmentData };
   serializedNeeds: { id: string; data: SerializedNeedsData };
   serializedStats: { id: string; data: SerializedStatsData };
+  serializedSurfaceTemp: { id: string; data: number };
   serializedPlayer: { id: string; data: SerializedPlayerData };
   serializedPlayerBuffs: {
     id: string;
@@ -177,6 +182,7 @@ export type SerializedGameMap = {
   level: number;
   cells: SerializedMapCellArray[];
   isDark: boolean;
+  temperature: number;
   upStairPos?: SerializedWorldPoint;
   downStairPos?: SerializedWorldPoint;
   queue: SerializedMapQueue;

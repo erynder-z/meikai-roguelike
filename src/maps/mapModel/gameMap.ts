@@ -22,6 +22,7 @@ export class GameMap implements GameMapType {
     public level: number,
     public isDark: boolean = false,
     public cells: MapCell[][] = [],
+    public temperature: number = 15,
     public upStairPos?: WorldPoint,
     public downStairPos?: WorldPoint,
     public queue: TurnQueue = new TurnQueue(),
@@ -246,5 +247,29 @@ export class GameMap implements GameMapType {
       cell.environment.defaultBuffDuration =
         GlyphMap.getEnvDefaultBuffDuration(glyph);
     });
+  }
+
+  /**
+   * Sets the level temperature. The temperature is a combination of the surface
+   * temperature and an increasing gradient with depth. The gradient is
+   * logarithmic in nature, to slow down the increase in temperature as the
+   * depth increases. Additionally, a random element is added to make the
+   * temperature more variable.
+   *
+   * @param {number} surfaceTemp - The surface temperature.
+   * @return {void}
+   */
+  public setLevelTemperature(surfaceTemp: number): void {
+    const geothermalGradient = 2.5;
+    const variability = Math.random() * 1.0;
+
+    const depthBoostFactor = Math.log(this.level + 1);
+    this.temperature = Number(
+      (
+        surfaceTemp +
+        this.level * geothermalGradient +
+        variability * depthBoostFactor
+      ).toFixed(2),
+    );
   }
 }

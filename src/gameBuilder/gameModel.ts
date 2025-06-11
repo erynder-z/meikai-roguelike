@@ -25,6 +25,7 @@ export class Game implements GameState {
   public equipment = new Equipment();
   public needs = new NeedsHandler();
   public stats = new Stats();
+  public surfaceTemp = 15;
   constructor(
     public rand: RandomGenerator,
     public player: Mob,
