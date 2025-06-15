@@ -99,21 +99,20 @@ export class DrawUI {
   }
 
   /**
-   * Renders miscellaneous information about the game state, such as the current dungeon level and player status,
-   * to the appropriate UI element on the page.
+   * Renders the misc info elements on the page based on the game state.
    *
-   * @param {GameState} game - The current game state containing information about the dungeon.
+   * @param {GameState} game - the game instance containing the current map and player
    * @return {void}
    */
-
   public static renderMiscInfo(game: GameState): void {
-    const lvl = game.dungeon.level;
     const currentMap = game.currentMap();
+    const currentDepth = currentMap?.depth || 0;
+    const currentTemp = currentMap?.temperature || 0;
 
     const miscInfoDisplay = document.querySelector('misc-info') as MiscInfo;
     if (miscInfoDisplay) {
-      miscInfoDisplay.setLevelInfo(lvl);
-      miscInfoDisplay.setLevelTemp(currentMap?.temperature || 0);
+      miscInfoDisplay.setLevelDepthInfo(currentDepth);
+      miscInfoDisplay.setLevelTempInfo(currentTemp);
       miscInfoDisplay.setPlayerHPStatus(game.player);
     }
   }

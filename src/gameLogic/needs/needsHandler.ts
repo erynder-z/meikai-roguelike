@@ -1,6 +1,7 @@
 import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from '../commands/buffCommand';
 import { EventCategory, LogMessage } from '../messages/logMessage';
+import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { HealthAdjust } from '../commands/healthAdjust';
 import { Mob } from '../mobs/mob';
@@ -12,11 +13,8 @@ type NeedConfig = {
   damageMessage: string;
   damageCategory: EventCategory;
   confuseMessage: string;
-  // Add a category for confusion if different, otherwise can reuse damageCategory
-  // confuseCategory: EventCategory;
 };
 
-// Default configurations for player needs. This could be made more dynamic if needed.
 const needsConfigDefaults: NeedConfig[] = [
   {
     type: 'hunger',
@@ -44,47 +42,68 @@ export class NeedsHandler {
   constructor() {}
 
   /**
-   * Increases the hunger level of the player by a small fixed amount.
-   * Ensures that the hunger level does not exceed the maximum threshold.
+   * Increases the player's hunger level by a small amount.
+   * The rate of increase is set to 0.005, which corresponds to 1 point per 200 turns.
+   * The hunger level is capped at a maximum value of 10.0 to prevent overflow.
    *
-   * @param {GameState} game - The current state of the game.
-   * @return {void} This function does not return a value.
+   * @param game - The game object that contains the player's stats.
    */
   public increaseHunger(game: GameState): void {
-    const increaseAmount = 0.005; // Corresponds to 1 point per 200 turns
+    const baseIncreaseAmount = 0.005; // Corresponds to 1 point per 200 turns
     const MAX_HUNGER = 10.0;
     game.stats.hunger = Math.min(
       MAX_HUNGER,
-      parseFloat((game.stats.hunger + increaseAmount).toFixed(2)),
+      parseFloat((game.stats.hunger + baseIncreaseAmount).toFixed(2)),
     );
   }
 
   /**
-   * Increases the thirst level of the player by a small fixed amount.
-   * Ensures that the thirst level does not exceed the maximum threshold.
+   * Increases the player's thirst level based on the current map's temperature.
+   * The thirst level increases at a base rate, with the rate accelerating if
+   * the temperature exceeds a specified threshold. Higher temperatures result
+   * in a faster increase of thirst. The thirst level is capped at a maximum
+   * value to prevent overflow.
    *
-   * @param {GameState} game - The current state of the game.
-   * @return {void} This function does not return a value.
+   * @param currentMap - The current map providing context, including temperature.
+   * @param game - The current game state, which includes player stats.
    */
-  public increaseThirst(game: GameState): void {
-    const increaseAmount = 0.01; // Corresponds to 1 point per 100 turns
+
+  public increaseThirst(currentMap: GameMapType, game: GameState): void {
+    const currentTemperature = currentMap.temperature;
+    const baseIncreaseAmount = 0.01; // Corresponds to 1 point per 100 turns
     const MAX_THIRST = 10.0;
+    const temperatureThreshold = 20; // A temperature above this threshold accelerates thirst
+    // Thirst is more sensitive to heat. 0.01 means a 1% increase per degree.
+    const thirstTemperatureMultiplier = 0.01;
+
+    let actualIncreaseAmount = baseIncreaseAmount;
+
+    if (currentTemperature > temperatureThreshold) {
+      const temperatureDifference = currentTemperature - temperatureThreshold;
+      const temperatureFactor =
+        1 + temperatureDifference * thirstTemperatureMultiplier;
+      actualIncreaseAmount *= temperatureFactor;
+    }
+
     game.stats.thirst = Math.min(
       MAX_THIRST,
-      parseFloat((game.stats.thirst + increaseAmount).toFixed(2)),
+      parseFloat((game.stats.thirst + actualIncreaseAmount).toFixed(2)),
     );
   }
 
   /**
-   * Processes the player's needs, increasing them and applying any resultant effects
-   * such as damage, status ailments, and strength reduction.
-   *
-   * @param {GameState} game - The current game state.
-   * @param {Mob} player - The player mob.
+   * Handles all effects of the player's needs, including:
+   * - Increasing the levels of the needs over time
+   * - Reducing the player's strength based on the levels of the needs
+   * - Damaging the player if the needs are high enough
+   * - Confusing the player if the needs are extremely high
+   * @param game - The current game state
+   * @param player - The player mob
    */
   public processPlayerNeeds(game: GameState, player: Mob): void {
+    const currentMap = game.dungeon.currentMap(game);
     this.increaseHunger(game);
-    this.increaseThirst(game);
+    this.increaseThirst(currentMap, game);
 
     const reductionPerThreshold = 0.2;
     let totalStrengthReductionFactor = 0.0;

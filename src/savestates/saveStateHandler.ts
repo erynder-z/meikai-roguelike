@@ -336,6 +336,7 @@ export class SaveStateHandler {
       map.isDark,
       [],
       map.temperature,
+      map.depth,
       new WorldPoint(map.upStairPos?.x ?? 0, map.upStairPos?.y ?? 0),
       new WorldPoint(map.downStairPos?.x ?? 0, map.downStairPos?.y ?? 0),
       new TurnQueue(),

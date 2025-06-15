@@ -23,6 +23,7 @@ export class GameMap implements GameMapType {
     public isDark: boolean = false,
     public cells: MapCell[][] = [],
     public temperature: number = 15,
+    public depth: number = 0,
     public upStairPos?: WorldPoint,
     public downStairPos?: WorldPoint,
     public queue: TurnQueue = new TurnQueue(),
@@ -271,5 +272,29 @@ export class GameMap implements GameMapType {
         variability * depthBoostFactor
       ).toFixed(2),
     );
+  }
+
+  /**
+   * Calculates the depth of the current level in meters.
+   *
+   * For level 0, the depth is 0.
+   * For other levels, the depth is calculated as the sum of a base value
+   * (50 + level * 10) and a random variance (between 0 and 30 meters).
+   * The result is then floored to the nearest whole number.
+   */
+  public setLevelDepth(): void {
+    if (this.level === 0) {
+      this.depth = 0;
+      return;
+    }
+
+    let depth = 0;
+    for (let i = 1; i <= this.level; i++) {
+      const base = 50 + i * 10; // Minimum depth added per level
+      const variance = Math.random() * 30;
+      depth += base + variance;
+    }
+
+    this.depth = Math.floor(depth);
   }
 }
