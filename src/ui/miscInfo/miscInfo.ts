@@ -41,7 +41,7 @@ export class MiscInfo extends HTMLElement {
 
     <div class="misc-info">
       <div class="player-hp-status">Health: </div>
-      <div class="level-info"></div>
+      <div class="level-depth"></div>
       <div class="level-temp"></div>
     </div>
   `;
@@ -50,17 +50,18 @@ export class MiscInfo extends HTMLElement {
   }
 
   /**
-   * Sets the level text to the given level.
-   *
-   * @param {number} lvl - The level to display.
+   * Sets the level depth information element to the given depth value.
+   * If the given depth is 0, displays 'Surface' as the depth text.
+   * Otherwise, displays the depth with a negative sign and the unit 'm'.
+   * @param {number} depth - The level depth to display.
    * @returns {void}
    */
-  public setLevelInfo(lvl: number): void {
-    const lvlDisplayText = `LVL: <span class="large-font">${lvl}</span>`;
+  public setLevelDepthInfo(depth: number): void {
+    const depthText = depth === 0 ? 'Surface' : `-${depth}m`;
+    const depthDisplayText = `DEPTH: <span class="large-font">${depthText}</span>`;
+    const depthInfo = this.shadowRoot?.querySelector('.level-depth');
 
-    const levelInfo = this.shadowRoot?.querySelector('.level-info');
-
-    if (levelInfo) levelInfo.innerHTML = lvlDisplayText;
+    if (depthInfo) depthInfo.innerHTML = depthDisplayText;
   }
 
   /**
@@ -68,7 +69,7 @@ export class MiscInfo extends HTMLElement {
    * @param {number} temp - The temperature to display.
    * @returns {void}
    */
-  public setLevelTemp(temp: number): void {
+  public setLevelTempInfo(temp: number): void {
     const tempDisplayText = `TEMP: <span class="large-font">${temp}°C</span>`;
 
     const tempInfo = this.shadowRoot?.querySelector('.level-temp');
