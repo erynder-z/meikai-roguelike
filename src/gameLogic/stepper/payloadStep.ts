@@ -21,7 +21,9 @@ export class PayloadStep extends TimedStep {
   }
 
   /**
-   * Represents a timed step that draws a step screen for a given amount of time. Most methods are placeholders to be implemented in subclasses.
+   * Sets the target of the function to the specified Mob.
+   *
+   * @param {Mob} tgt - The Mob object to set as the target.
    */
   public setTarget(tgt: Mob): void {
     this.target = tgt;
@@ -31,7 +33,6 @@ export class PayloadStep extends TimedStep {
    * Sets the position of the object to the specified world point.
    *
    * @param {WorldPoint} pos - The world point to set the position to.
-   * @return {void} This function does not return anything.
    */
   public setPos(pos: WorldPoint): void {
     this.pos = pos.copy();

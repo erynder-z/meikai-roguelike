@@ -74,7 +74,6 @@ export class GameMap implements GameMapType {
    *
    * @param {Glyph.Stairs_Up | Glyph.Stairs_Down} glyph - The type of stair glyph (up or down).
    * @param {WorldPoint} pos - The position of the stair on the map.
-   * @returns {void}
    */
   public addStairInfo(
     glyph: Glyph.Stairs_Up | Glyph.Stairs_Down,
@@ -89,7 +88,6 @@ export class GameMap implements GameMapType {
    *
    * @param {Mob} m - the mob to be moved
    * @param {WorldPoint} p - the destination world point
-   * @return {void}
    */
   public moveMob(m: Mob, p: WorldPoint): void {
     this.cell(m.pos).mob = undefined;
@@ -122,7 +120,6 @@ export class GameMap implements GameMapType {
    * Remove a mob from the queue and set its position to undefined.
    *
    * @param {Mob} m - The mob to be removed.
-   * @return {void}
    */
   public removeMob(m: Mob): void {
     this.queue.removeMob(m);
@@ -135,7 +132,6 @@ export class GameMap implements GameMapType {
    * If no free space is found, the corpse is not created and a warning is logged.
    *
    * @param {Mob} mob - The mob to be removed and replaced with a corpse.
-   * @return {void}
    */
   public mobToCorpse(mob: Mob): void {
     this.queue.removeMob(mob);
@@ -186,7 +182,6 @@ export class GameMap implements GameMapType {
    *
    * @param {Mob} player - the player to enter into the map
    * @param {WorldPoint} np - the world point where the player will enter
-   * @return {void}
    */
   public enterMap(player: Mob, np: WorldPoint): void {
     player.pos.set(np);
@@ -212,8 +207,7 @@ export class GameMap implements GameMapType {
    * Adds a new object to the game at the specified world point.
    *
    * @param {ItemObject} o - the object to be added
-   * @param {WorldPoint} np - the world point where the player will enter
-   * @return {void}
+   * @param {WorldPoint} p - the world point where the player will enter
    */
   public addObject(o: ItemObject, p: WorldPoint): void {
     o.desc = GlyphMap.getGlyphDescription(o.glyph);
@@ -258,7 +252,6 @@ export class GameMap implements GameMapType {
    * temperature more variable.
    *
    * @param {number} surfaceTemp - The surface temperature.
-   * @return {void}
    */
   public setLevelTemperature(surfaceTemp: number): void {
     const geothermalGradient = 2.5;

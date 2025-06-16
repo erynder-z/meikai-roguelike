@@ -62,8 +62,6 @@ export class EventManager {
 
   /**
    * Initializes a timer that calls the onTimer method at a specified interval.
-   *
-   * @return {void} No return value.
    */
   private initTimer(): void {
     const interval_ms = 50;

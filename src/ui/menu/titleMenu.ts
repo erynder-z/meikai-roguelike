@@ -148,8 +148,6 @@ export class TitleMenu extends HTMLElement {
    * - Click event on the about button
    * - Click event on the quit button
    * - Keydown event on the document
-   *
-   * @return {void}
    */
 
   private bindEvents(): void {
@@ -221,7 +219,6 @@ export class TitleMenu extends HTMLElement {
    * - Q: quitGame
    *
    * @param {KeyboardEvent} event - The keyboard event to be handled.
-   * @return {void}
    */
   private handleKeyPress(event: KeyboardEvent): void {
     switch (event.key) {
@@ -303,8 +300,6 @@ export class TitleMenu extends HTMLElement {
    * Dispatches a 'start-new-game' event.
    *
    * This event can be listened for by other components to start a new game.
-   *
-   * @return {void}
    */
   public startNewGame(): void {
     this.dispatchEvent(
@@ -316,8 +311,6 @@ export class TitleMenu extends HTMLElement {
    * Dispatches a 'load-game' event.
    *
    * This event can be listened to by other components to load a saved game.
-   *
-   * @return {void}
    */
   public loadGame(): void {
     this.dispatchEvent(
@@ -331,8 +324,6 @@ export class TitleMenu extends HTMLElement {
    * This function will query the first 'title-screen' element in the document
    * and replace its content with a 'player-setup' element. This element will
    * allow the user to modify their player's name and appearance.
-   *
-   * @return {void}
    */
   public playerSetup(): void {
     const titleScreenContent = document
@@ -350,8 +341,6 @@ export class TitleMenu extends HTMLElement {
    *
    * This function queries the first 'title-screen' element in the document,
    * clears its content, and appends a 'title-menu-options' element.
-   *
-   * @return {void}
    */
 
   public showOptions(): void {
@@ -369,7 +358,6 @@ export class TitleMenu extends HTMLElement {
 
   /**
    * Opens a new window with the game's help documentation.
-   * @return {void}
    */
   private showHelp(): void {
     invoke('create_hidden_help_window');
@@ -403,7 +391,6 @@ export class TitleMenu extends HTMLElement {
    * This function is called when the custom element is removed from the DOM.
    * It removes event listeners for keydown and click events that were added in the
    * connectedCallback function.
-   * @return {void}
    */
   disconnectedCallback(): void {
     this.eventTracker.removeAll();

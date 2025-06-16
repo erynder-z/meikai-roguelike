@@ -77,8 +77,6 @@ export class Terminal implements DrawableTerminal {
    * Updates the font size and family of the canvas rendering context.
    * The font size is calculated based on the terminal cell side length and a scaling factor,
    * and the font family is retrieved from the game configuration.
-   *
-   * @return {void}
    */
 
   public updateFont(): void {

@@ -35,7 +35,6 @@ export class AttackAnimationScreen extends BaseScreen {
    * Draws the attack animation on the terminal.
    *
    * @param {DrawableTerminal} term - The terminal to draw on.
-   * @return {void} No return value.
    */
   public drawScreen(term: DrawableTerminal): void {
     if (this.isDig) {
@@ -68,7 +67,6 @@ export class AttackAnimationScreen extends BaseScreen {
    * @param {DrawableTerminal} term - The terminal to draw on.
    * @param {string} type - The type of attack animation to draw. Must be one of
    *   'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
-   * @return {void} No return value.
    */
   private drawAttackAnimation(
     term: DrawableTerminal,

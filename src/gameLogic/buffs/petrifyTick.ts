@@ -32,7 +32,6 @@ export class PetrifyTick implements Tick {
    *
    * @param {number} duration - The duration of the petrify effect.
    * @param {number} timeLeft - The time left in the petrify effect.
-   * @return {void} This function does not return a value.
    */
   public tick(duration: number, timeLeft: number): void {
     if (!this.shouldApplyDamage(duration, timeLeft)) return;

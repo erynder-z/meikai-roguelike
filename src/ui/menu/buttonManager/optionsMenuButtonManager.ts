@@ -19,7 +19,6 @@ export class OptionsMenuButtonManager {
    * Updates the displayed text of the control scheme button to reflect the current active control scheme.
    *
    * @param { 'default' | 'alternate' } text - The current active control scheme.
-   * @returns {void}
    */
   public updateControlSchemeButton(
     text: GameConfigType['control_scheme'],
@@ -42,7 +41,6 @@ export class OptionsMenuButtonManager {
    * button.
    *
    * @param {boolean} areScanlinesEnabled - Indicates if scanlines are currently enabled.
-   * @return {void}
    */
   public updateScanlinesToggleButton(areScanlinesEnabled: boolean): void {
     const scanlinesButton = this.shadowRoot?.getElementById(
@@ -62,7 +60,6 @@ export class OptionsMenuButtonManager {
    * updates the disabled state based on whether scanlines are enabled.
    *
    * @param {string} scanlineStyle - The current scanline style, one of the values in the ScanlineStyles enum.
-   * @return {void}
    */
   public updateScanlineStyleButton(scanlineStyle: ScanlineStyles): void {
     const scanLineStyleBtn = this.shadowRoot?.getElementById(
@@ -87,7 +84,6 @@ export class OptionsMenuButtonManager {
    * RIGHT', depending on the current message alignment.
    *
    * @param {('left' | 'right')} messageAlignment - The current message alignment.
-   * @return {void}
    */
   public updateMessageAlignButton(messageAlignment: 'left' | 'right'): void {
     const messageAlignBtn = this.shadowRoot?.getElementById(
@@ -105,7 +101,6 @@ export class OptionsMenuButtonManager {
    * and 'Show images: NO' otherwise.
    *
    * @param {boolean} areImagesDisplayed - Indicates if images are currently displayed.
-   * @return {void}
    */
   public updateShowImagesButton(areImagesDisplayed: boolean): void {
     const displayImage = this.shadowRoot?.getElementById(
@@ -125,7 +120,6 @@ export class OptionsMenuButtonManager {
    * RIGHT', depending on the current image alignment.
    *
    * @param {('left' | 'right')} imageAlignment - The current image alignment.
-   * @return {void}
    */
   public updateImageAlignButton(imageAlignment: 'left' | 'right'): void {
     const imageAlignBtn = this.shadowRoot?.getElementById(
@@ -150,7 +144,6 @@ export class OptionsMenuButtonManager {
    * blood intensity.
    *
    * @param {number} bloodIntensity - The current blood intensity, one of the values in the BloodIntensity enum.
-   * @return {void}
    */
   public updateBloodIntensityButton(bloodIntensity: number): void {
     const bloodIntensityBtn = this.shadowRoot?.getElementById(
@@ -169,7 +162,6 @@ export class OptionsMenuButtonManager {
    * Displays the current seed in the title menu.
    *
    * @param {GameConfigType['seed']} seed - The current seed.
-   * @return {void}
    */
   public displayCurrentSeed(seed: GameConfigType['seed']): void {
     const seedButton = this.shadowRoot?.getElementById(
@@ -183,8 +175,6 @@ export class OptionsMenuButtonManager {
    *
    * This function is called when the font is changed, and will update the displayed
    * font in the title menu.
-   *
-   * @return {void}
    */
   public displayCurrentFont(): void {
     const fontButton = this.shadowRoot?.getElementById(

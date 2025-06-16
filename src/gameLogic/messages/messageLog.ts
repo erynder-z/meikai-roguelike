@@ -18,7 +18,6 @@ export class MessageLog {
    * Adds a message to the log.
    * @param {LogMessage} msg - The message to add.
    * @param {boolean} isFlashMsg - True if the message is a flash message, otherwise false.
-   * @returns {void}
    */
   public message(msg: LogMessage, isFlashMsg: boolean): void {
     if (!isFlashMsg) this.archive.push(msg);
@@ -26,7 +25,6 @@ export class MessageLog {
   }
   /**
    * Removes the oldest message from the queue.
-   * @returns {void}
    */
   public dequeue(): void {
     this.queue.shift();
@@ -42,7 +40,6 @@ export class MessageLog {
 
   /**
    * Clears all messages from the queue.
-   * @returns {void}
    */
   public clearQueue(): void {
     this.queue = [];
@@ -71,10 +68,11 @@ export class MessageLog {
   public empty(): boolean {
     return !this.queue.length;
   }
+
   /**
-   * Sets the current event.
-   * @param {LogMessage} msg - The message be set as the current event.
-   * @returns {void}
+   * Sets the current event in the message log to the specified event category.
+   *
+   * @param {EventCategory} evt - The event category to set as the current event.
    */
   public addCurrentEvent(evt: EventCategory): void {
     this.currentEvent = evt;
@@ -82,8 +80,6 @@ export class MessageLog {
 
   /**
    * Removes the current event by setting it to a new LogMessage with an empty message and unknown category.
-   *
-   * @return {void} This function does not return a value.
    */
   public removeCurrentEvent(): void {
     this.currentEvent = EventCategory.none;

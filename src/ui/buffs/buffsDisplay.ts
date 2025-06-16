@@ -66,7 +66,6 @@ export class BuffsDisplay extends HTMLElement {
   /**
    * Updates the element's shadow root to display the given map of buffs.
    * @param {Map<Buff, BuffType>} buffMap - A map of buffs to their types.
-   * @return {void}
    */
   public setBuffs(buffMap: Map<Buff, BuffType>): void {
     const buffsDisplay = this.shadowRoot?.querySelector('.buffs-display');
@@ -91,7 +90,6 @@ export class BuffsDisplay extends HTMLElement {
    * Displays a message in the given fragment indicating that there are no buffs.
    *
    * @param {DocumentFragment} fragment - The fragment to modify.
-   * @return {void}
    */
   private displayNoBuffs(fragment: DocumentFragment): void {
     const listItem = document.createElement('li');
@@ -105,7 +103,6 @@ export class BuffsDisplay extends HTMLElement {
    * The colorizer is used to color the list item according to the buff type.
    * @param {Map<Buff, BuffType>} buffMap - The map of buffs to their types.
    * @param {DocumentFragment} fragment - The fragment to which the list items should be appended.
-   * @return {void}
    */
   private displayBuffList(
     buffMap: Map<Buff, BuffType>,

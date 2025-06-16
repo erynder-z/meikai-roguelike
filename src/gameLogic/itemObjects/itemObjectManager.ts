@@ -207,7 +207,6 @@ export class ItemObjectManager {
    *
    * @param {ItemObject} object - The ItemObject to set the spell property for.
    * @param {RandomGenerator} rand - The random number generator used to determine the spell.
-   * @return {void} This function does not return a value.
    */
   private static setItemSpell(object: ItemObject, rand: RandomGenerator): void {
     const l = rand.adjustLevel(object.level);
@@ -230,7 +229,6 @@ export class ItemObjectManager {
    *
    * @param {ItemObject} object - The ItemObject to set the spell for.
    * @param {Spell} spell - The specific spell to set.
-   * @return {void} This function does not return a value.
    */
   private static setSpecificSpell(object: ItemObject, spell: Spell): void {
     object.spell = spell;
@@ -243,7 +241,6 @@ export class ItemObjectManager {
    * @param {number} charges - The maximum number of charges.
    * @param {RandomGenerator} rand - The random number generator used to generate a random integer.
    * @param {number} level - The level used to adjust the maximum number of charges.
-   * @return {void} This function does not return a value.
    */
   static setCharges(
     object: ItemObject,

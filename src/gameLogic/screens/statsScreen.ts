@@ -69,6 +69,8 @@ export class StatsScreen extends BaseScreen {
 
   /**
    * Checks if the menu key is pressed.
+   * @param {KeyboardEvent} event - The keyboard event.
+   * @return {boolean} True if the menu key is pressed, otherwise false.
    */
   private isMenuKeyPressed(event: KeyboardEvent): boolean {
     return event.key === this.activeControlScheme.menu.toString();
@@ -76,6 +78,8 @@ export class StatsScreen extends BaseScreen {
 
   /**
    * Checks if the Alt or Meta key is pressed.
+   * @param {KeyboardEvent} event - The keyboard event.
+   * @return {boolean} True if the Alt or Meta key is pressed, otherwise false.
    */
   private isAltKeyPressed(event: KeyboardEvent): boolean {
     return event.altKey || event.metaKey;

@@ -107,7 +107,6 @@ export class ScreenStack implements Stack, InteractiveScreen {
    * Runs the StackScreen by pushing it onto the ScreenStack and running it with the EventManager.
    *
    * @param {StackScreen} sScreen - the StackScreen to be run
-   * @return {void}
    */
   public static run_StackScreen(sScreen: StackScreen): void {
     const stack = new ScreenStack();

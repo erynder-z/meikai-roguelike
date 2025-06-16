@@ -16,7 +16,6 @@ export class WaterHandler {
    *
    * @param {Mob} mob The mob to handle the water cell effect for.
    * @param {GameState} game The game state.
-   * @return {void} This function does not return a value.
    */
   public static handleWaterCellEffect(mob: Mob, game: GameState): void {
     // remove .5 intensity of blood if mob is bloody

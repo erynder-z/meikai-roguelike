@@ -54,7 +54,6 @@ export class GlyphMap {
    * Adds a glyph to the GlyphMap.
    *
    * @param {GlyphInfo} info - The information of the glyph to add.
-   * @returns {void}
    */
   public static addGlyph(info: GlyphInfo): void {
     const glyph = Glyph[info.id as keyof typeof Glyph];
@@ -71,7 +70,6 @@ export class GlyphMap {
    *
    * This can happen when a glyph is added in the code but the enum is not updated.
    * @param {Glyph} glyph - The glyph to warn about.
-   * @returns {void}
    */
   private static warn(glyph: Glyph): void {
     if (GlyphMap.glyphsRegistry.size === Object.keys(Glyph).length) return;

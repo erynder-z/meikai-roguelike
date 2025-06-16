@@ -65,7 +65,6 @@ export class FlashDisplay extends HTMLElement {
    * Sets the flash message display.
    * @param {LogMessage[]} msgs - The messages to set.
    * @param {MessageLog} log - The message log to check for queued messages.
-   * @returns {void}
    */
   public setFlash(msgs: LogMessage[], log: MessageLog): void {
     const flashDisplay = this.shadowRoot?.querySelector(
@@ -102,7 +101,6 @@ export class FlashDisplay extends HTMLElement {
    *
    * @param {DocumentFragment} fragment - The fragment to modify.
    * @param {MessageLog} log - The message log to check for queued messages.
-   * @return {void}
    */
   private decorateFlashDisplay(
     fragment: DocumentFragment,
@@ -128,7 +126,6 @@ export class FlashDisplay extends HTMLElement {
   /**
    * Clears the flash message display.
    * @param {GameState} game - The game state.
-   * @returns {void}
    */
   public clearFlash(game: GameState): void {
     game.log.clearQueue();

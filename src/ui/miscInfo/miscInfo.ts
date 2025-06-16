@@ -54,7 +54,6 @@ export class MiscInfo extends HTMLElement {
    * If the given depth is 0, displays 'Surface' as the depth text.
    * Otherwise, displays the depth with a negative sign and the unit 'm'.
    * @param {number} depth - The level depth to display.
-   * @returns {void}
    */
   public setLevelDepthInfo(depth: number): void {
     const depthText = depth === 0 ? 'Surface' : `-${depth}m`;
@@ -67,7 +66,6 @@ export class MiscInfo extends HTMLElement {
   /**
    * Sets the level temperature text to the given temperature in degrees Celsius.
    * @param {number} temp - The temperature to display.
-   * @returns {void}
    */
   public setLevelTempInfo(temp: number): void {
     const tempDisplayText = `TEMP: <span class="large-font">${temp}°C</span>`;
@@ -82,7 +80,6 @@ export class MiscInfo extends HTMLElement {
    * based on their current HP percentage.
    *
    * @param {Mob} player - The player mob.
-   * @returns {void}
    */
   public setPlayerHPStatus(player: Mob): void {
     const hp = player.hp;

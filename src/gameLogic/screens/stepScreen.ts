@@ -35,7 +35,6 @@ export class StepScreen extends BaseScreen {
    * Draws the screen on the provided drawable terminal.
    *
    * @param {DrawableTerminal} term - The terminal on which to draw the screen.
-   * @return {void} No return value.
    */
   public drawScreen(term: DrawableTerminal): void {
     super.drawScreen(term);

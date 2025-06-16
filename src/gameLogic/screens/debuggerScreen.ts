@@ -17,7 +17,6 @@ export class DebuggerScreen extends BaseScreen {
    * Draws the game screen for the debugger.
    *
    * @param {DrawableTerminal} term - the terminal to draw on
-   * @return {void}
    */
   public drawScreen(term: DrawableTerminal): void {
     DrawUI.debugDrawMap(

@@ -50,7 +50,6 @@ export class EnvironmentChecker {
    * @param {MapCell} cell - The cell to add effects to.
    * @param {WorldPoint} wp - The position of the cell.
    * @param {GameMapType} map - The map containing the cells.
-   * @return {void} This function does not return a value.
    */
   public static addDynamicCellEffects(
     cell: MapCell,
@@ -66,7 +65,6 @@ export class EnvironmentChecker {
    * These shall only be used on map generation!
    *
    * @param {MapCell} cell - The cell to add effects to.
-   * @return {void} This function does not return a value.
    */
   public static addStaticCellEffects(cell: MapCell): void {
     this.addArcaneSigilEffect(cell);
@@ -79,7 +77,6 @@ export class EnvironmentChecker {
    * @param {MapCell} cell - The cell to add the poison effect to.
    * @param {WorldPoint} wp - The position of the cell.
    * @param {GameMapType} map - The map containing the cells.
-   * @return {void} This function does not return a value.
    */
   private static addPoisonEffectToCellNeighbors(
     cell: MapCell,
@@ -107,7 +104,6 @@ export class EnvironmentChecker {
    * @param {MapCell} cell - The cell to add the confusion effect to.
    * @param {WorldPoint} wp - The position of the cell.
    * @param {GameMapType} map - The map containing the cells.
-   * @return {void} This function does not return a value.
    */
   private static addConfusionEffectToCellNeighbors(
     cell: MapCell,
@@ -133,7 +129,6 @@ export class EnvironmentChecker {
    * Adds a random arcane sigil effect to the given cell if it contains an Arcane Sigil glyph.
    *
    * @param {MapCell} cell - The cell to potentially add an arcane sigil effect to.
-   * @return {void} This function does not return a value.
    */
 
   private static addArcaneSigilEffect(cell: MapCell): void {
@@ -147,7 +142,6 @@ export class EnvironmentChecker {
    * Adds the blindness effect to a cell if it contains a Nebulous Mist glyph.
    *
    * @param {MapCell} cell - The cell to potentially add the blindness effect to.
-   * @return {void} This function does not return a value.
    */
 
   private static addNebulousMistEffect(cell: MapCell): void {

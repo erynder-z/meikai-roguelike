@@ -98,7 +98,6 @@ export class MessagesDisplay extends HTMLElement {
    * The component uses requestAnimationFrame to schedule the update for the next frame.
    *
    * @param {LogMessage[]} messageLog - An array of messages to display.
-   * @return {void}
    */
   public setMessages(messageLog: LogMessage[]): void {
     const messagesDisplay = this.shadowRoot?.querySelector('.messages-display');

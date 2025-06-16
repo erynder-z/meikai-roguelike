@@ -27,7 +27,6 @@ export class DirectionStep extends TimedStep {
    * Sets the direction of the object to the specified world point.
    *
    * @param {WorldPoint} dir - The world point to set the direction to.
-   * @return {void} This function does not return anything.
    */
   public setDirection(dir: WorldPoint): void {
     this.direction = dir;

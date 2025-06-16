@@ -154,7 +154,6 @@ export class Builder implements Build {
    * enter the first level of the game.
    *
    * @param {GameState} game - the game object
-   * @return {void}
    */
   private enterFirstLevel(game: GameState, rand: RandomGenerator): void {
     const dungeon = game.dungeon;
@@ -211,7 +210,6 @@ export class Builder implements Build {
    * @param {Glyph} glyph - the glyph representing the mob
    * @param {GameMapType} map - the map on which the mobs will be generated
    * @param {RandomGenerator} rand - the random generator for determining mob positions
-   * @return {void}
    */
   public makeRingOfMobs(
     glyph: Glyph,
@@ -303,7 +301,6 @@ export class Builder implements Build {
    * @param {GameMapType} map - The map to which stairs are being added.
    * @param {number} level - The level for which stairs are being added.
    * @param {RandomGenerator} rand - The random generator used for adding stairs.
-   * @returns {void}
    */
   private addLevelStairs(
     map: GameMapType,
@@ -320,7 +317,6 @@ export class Builder implements Build {
   /**
    * Adds stairs for level to the map at a specified position.
    * @param {GameMapType} map - The map to which stairs are being added.
-   * @returns {void}
    */
   private addStairs0(map: GameMapType, rand: RandomGenerator): void {
     const pos = this.centerPos(map.dimensions);
@@ -339,7 +335,6 @@ export class Builder implements Build {
   /**
    * Adds stairs for a level to the map.
    * @param {GameMapType} map - The map to which stairs are being added.
-   * @returns {void}
    */
   private addStairs(map: GameMapType, rand: RandomGenerator): void {
     this.addStair(map, rand, Glyph.Stairs_Down);
@@ -369,7 +364,6 @@ export class Builder implements Build {
    * Adds mobs to the level based on the map and random generator provided.
    * @param {GameMapType} map - The map to which mobs are being added.
    * @param {RandomGenerator} rand - The random generator used for adding mobs.
-   * @returns {void}
    */
   private addMobsToLevel(map: GameMapType, rand: RandomGenerator): void {
     switch (map.level) {
@@ -388,7 +382,6 @@ export class Builder implements Build {
    * @param {RandomGenerator} rand - The random generator used to determine the placement of the mobs.
    * @param {Glyph} glyph - The glyph representing the mobs.
    * @param {number} rate - The rate of mob creation.
-   * @returns {void}
    */
   private makeMobs(
     map: GameMapType,
@@ -483,7 +476,6 @@ export class Builder implements Build {
    * Initializes level 0 of the game.
    *
    * @param {Game} game - The game object.
-   * @return {void} No return value.
    */
   private initLevel0(game: Game): void {
     const L0 = game.dungeon.getLevel(0, game);
@@ -497,7 +489,6 @@ export class Builder implements Build {
    *
    * @param {Mob} player - The player object.
    * @param {GameMapType} map - The map where items are added.
-   * @return {void} No return value.
    */
   private addItemNextToPlayer(player: Mob, map: GameMapType): void {
     const a = player.pos;
@@ -525,7 +516,6 @@ export class Builder implements Build {
    * Adds items to the player's inventory.
    *
    * @param {Inventory} inv - The inventory to add the item to.
-   * @return {void} This function does not return anything.
    */
   private addItemToPlayerInventory(inv: Inventory): void {
     inv.add(

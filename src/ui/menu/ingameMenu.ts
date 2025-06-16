@@ -168,8 +168,6 @@ export class IngameMenu extends HTMLElement {
    * - Help button click event
    * - Quit button click event
    * - Keydown event on the document
-   *
-   * @return {void}
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -220,7 +218,6 @@ export class IngameMenu extends HTMLElement {
    * Handles key presses on the options menu.
    *
    * @param {KeyboardEvent} event - The keyboard event to be handled.
-   * @return {void}
    */
   private handleKeyPress(event: KeyboardEvent): void {
     // Prevent keyboard events before the element is fully rendered. In particular, this prevents the initial {menu} keypress to close the menu the moment it's being rendered.
@@ -253,8 +250,6 @@ export class IngameMenu extends HTMLElement {
 
   /**
    * Removes the menu screen from the DOM.
-   *
-   * @return {void}
    */
   private returnToGame(): void {
     const event = new CustomEvent('return-to-game', { bubbles: true });
@@ -270,8 +265,6 @@ export class IngameMenu extends HTMLElement {
 
   /**
    * Opens a new window with the game's help documentation.
-   *
-   * @return {void}
    */
   private showHelp(): void {
     // Help window will start hidden and will be shown when the help-window DOM content is rendered.
@@ -384,8 +377,6 @@ export class IngameMenu extends HTMLElement {
    * This function is called when the custom element is removed from the DOM.
    * It removes event listeners for keydown and click events that were added in the
    * connectedCallback function.
-   *
-   * @return {void}
    */
   disconnectedCallback(): void {
     this.eventTracker.removeAll();

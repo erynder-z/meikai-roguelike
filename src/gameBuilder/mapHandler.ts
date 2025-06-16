@@ -47,7 +47,6 @@ export class MapHandler {
    * Adds a map to a specified level of the dungeon.
    * @param {GameMapType} map - The map to add.
    * @param {number} level - The level number where the map should be added.
-   * @returns {void}
    */
   private add(map: GameMapType, level: number): void {
     if (level >= this.maps.length) {
@@ -59,7 +58,6 @@ export class MapHandler {
   /**
    * Extends the maps array to a specified length.
    * @param {number} len - The new length of the maps array.
-   * @returns {void}
    */
   private extendMaps(len: number): void {
     this.maps.length = len;
@@ -69,7 +67,6 @@ export class MapHandler {
    * Adjusts the current visibility range of the player based on the current level
    * being dark or not.
    * @param {GameState} game - The game object.
-   * @returns {void}
    */
   private adjustLevelVisibilityRange(game: GameState): void {
     if (this.currentMap(game).isDark) {
@@ -86,7 +83,6 @@ export class MapHandler {
    * @param {number} newLevel - The new level to which the player switches.
    * @param {WorldPoint} newPosition - The new position of the player on the new level.
    * @param {GameState} game - The game object.
-   * @returns {void}
    */
   public playerSwitchLevel(
     newLevel: number,

@@ -44,7 +44,6 @@ export class LookScreen extends BaseScreen {
    * and draws an overlay cursor at the position of the cursor.
    *
    * @param {DrawableTerminal} term - The terminal to draw on.
-   * @return {void} No return value.
    */
   public drawScreen(term: DrawableTerminal): void {
     const cursorBgCol = '#F0F8FF';
@@ -140,6 +139,13 @@ export class LookScreen extends BaseScreen {
 
     const usedLetters = new Set<string>();
 
+    /**
+     * Adds key letters from the given control scheme to the usedLetters set.
+     *
+     * @param {Record<string, string[]>} controlScheme - The control scheme object
+     * where each key is a control name and its value is an array of string key letters.
+     */
+
     const addControlSchemeKeyLetters = (
       controlScheme: Record<string, string[]>,
     ) => {
@@ -151,6 +157,12 @@ export class LookScreen extends BaseScreen {
       });
     };
 
+    /**
+     * Returns a unique letter (a lowercase character) not present in the given control scheme or usedLetters set.
+     *
+     * @param {string} name - The name from which to generate a unique letter.
+     * @return {string} The generated unique letter. If no unique letter can be generated, returns '*'.
+     */
     const getUniqueLetter = (name: string): string => {
       addControlSchemeKeyLetters(this.activeControlScheme);
       for (const char of name.toLowerCase()) {
@@ -162,6 +174,14 @@ export class LookScreen extends BaseScreen {
       return '*';
     };
 
+    /**
+     * Adds a DetailViewEntity to the list of entities to be displayed. It also
+     * adds a binding to the keyBindings map for the entity, where the key is
+     * a unique letter generated from the name of the entity.
+     *
+     * @param {string} name - The name of the entity to be added.
+     * @param {DetailViewEntity} entity - The DetailViewEntity to be added.
+     */
     const addEntity = (name: string, entity: DetailViewEntity) => {
       const letter = getUniqueLetter(name).toLowerCase();
       entities.push({ uniqueKey: letter, entity });
@@ -232,7 +252,6 @@ export class LookScreen extends BaseScreen {
    * Displays the provided information on the screen.
    *
    * @param {string} s - The information to display.
-   * @return {void} No return value.
    */
   private displayInfo(s: string): void {
     DrawUI.clearFlash(this.game);
@@ -259,12 +278,6 @@ export class LookScreen extends BaseScreen {
    *
    * @param {KeyboardEvent} event - The keyboard event triggered by user input.
    * @param {Stack} stack - The stack of screens, used to manage screen transitions.
-   * @return {void} No return value.
-   * @description
-   * This function processes keyboard events to navigate the cursor on the look screen,
-   * display entity details, or exit the look screen. It also checks for open entity
-   * cards and removes them if necessary. The function utilizes key bindings to identify
-   * entities and control schemes for cursor movement.
    */
 
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {

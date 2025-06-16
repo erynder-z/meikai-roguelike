@@ -50,7 +50,6 @@ export class LayoutManager {
    * Sets the display property of the image container.
    *
    * @param {boolean} shouldShow - Determines whether the image container should be visible ('block') or hidden ('none').
-   * @return {void}
    */
   public setImageDisplay(shouldShow: boolean): void {
     if (!this.imageContainer) return;
@@ -59,8 +58,6 @@ export class LayoutManager {
 
   /**
    * Forces the display of a smile image.
-   *
-   * @returns {void}
    */
   public forceSmileImageDisplay(): void {
     const appearance = this.gameConfig.player.appearance;

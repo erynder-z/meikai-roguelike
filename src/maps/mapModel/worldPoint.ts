@@ -53,7 +53,6 @@ export class WorldPoint {
    * Set the x and y coordinates to the values of the given WorldPoint.
    *
    * @param {WorldPoint} n - the WorldPoint object with the new x and y coordinates
-   * @return {void}
    */
   public set(n: WorldPoint): void {
     this.x = n.x;

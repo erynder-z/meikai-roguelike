@@ -46,7 +46,7 @@ export class NeedsHandler {
    * The rate of increase is set to 0.005, which corresponds to 1 point per 200 turns.
    * The hunger level is capped at a maximum value of 10.0 to prevent overflow.
    *
-   * @param game - The game object that contains the player's stats.
+   * @param {GameState} game - The game object that contains the player's stats.
    */
   public increaseHunger(game: GameState): void {
     const baseIncreaseAmount = 0.005; // Corresponds to 1 point per 200 turns
@@ -65,7 +65,7 @@ export class NeedsHandler {
    * value to prevent overflow.
    *
    * @param currentMap - The current map providing context, including temperature.
-   * @param game - The current game state, which includes player stats.
+   * @param {GameState} game - The current game state, which includes player stats.
    */
 
   public increaseThirst(currentMap: GameMapType, game: GameState): void {
@@ -97,8 +97,8 @@ export class NeedsHandler {
    * - Reducing the player's strength based on the levels of the needs
    * - Damaging the player if the needs are high enough
    * - Confusing the player if the needs are extremely high
-   * @param game - The current game state
-   * @param player - The player mob
+   * @param {GameState} game - The current game state
+   * @param {Mob} player - The player mob
    */
   public processPlayerNeeds(game: GameState, player: Mob): void {
     const currentMap = game.dungeon.currentMap(game);

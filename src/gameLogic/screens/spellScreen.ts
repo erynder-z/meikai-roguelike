@@ -74,10 +74,6 @@ export class SpellScreen extends BaseScreen {
    * @param {KeyboardEvent} event - The keyboard event.
    * @param {Stack} stack - The stack of screens.
    * @return {boolean} True if the event was handled successfully, otherwise false.
-   * @description
-   * Handles key down events, converting the key to a spell position and calling `handleSpellSelection`
-   * if it is a valid spell key.
-   * If the key is the cancel key, calls `handleCancel` instead.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     const key = event.key;
@@ -143,7 +139,6 @@ export class SpellScreen extends BaseScreen {
    *
    * @param {number} pos - The position of the selected item.
    * @param {Stack} stack - The stack object.
-   * @return {void} This function does not return anything.
    */
   private itemMenu(pos: number, stack: Stack): void {
     const s: Spell = pos;
@@ -159,7 +154,6 @@ export class SpellScreen extends BaseScreen {
    *
    * @param {Spell} s - The spell to be executed.
    * @param {Stack} stack - The stack object.
-   * @return {void} This function does not return anything.
    */
   private doSpell(s: Spell, stack: Stack): void {
     const finder = new SpellFinder(this.game, stack, this.make);

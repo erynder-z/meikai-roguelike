@@ -191,7 +191,6 @@ export class ItemScreen extends BaseScreen {
    * Drops an item from the player's inventory and removes the item screen.
    *
    * @param {Stack} stack - The stack of screens to pop if the item is successfully dropped.
-   * @returns {void}
    */
   private dropItem(stack: Stack): void {
     if (new DropCommand(this.obj, this.index, this.game).execute()) {
@@ -222,7 +221,6 @@ export class ItemScreen extends BaseScreen {
    * Uses an item by finding the matching item/spell and executing it.
    *
    * @param {Stack} stack - The stack to push the spell screen onto if necessary.
-   * @return {void} This function does not return anything.
    */
   private useItem(stack: Stack): void {
     const { game } = this;

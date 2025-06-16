@@ -102,7 +102,6 @@ export class EquipmentDisplay extends HTMLElement {
    * Sets the text content of the elements in the shadow DOM to the descriptions of the items in the given equipment.
    *
    * @param {Equipment | undefined} equipment - The equipment to display. If undefined, the elements will be set to 'empty'.
-   * @returns {void}
    */
   public setEquipment(equipment: Equipment | undefined): void {
     const slots = [

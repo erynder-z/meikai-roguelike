@@ -185,7 +185,6 @@ export class MapRenderer {
    * @param {GameMapType} map - The map containing the cells.
    * @param {WorldPoint} vp - The view point on the map.
    * @param {Function} callback - The callback function to be executed for each cell.
-   * @return {void}
    */
   private static forEachCellInView(
     term: DrawableTerminal,
@@ -222,7 +221,6 @@ export class MapRenderer {
    * @param {WorldPoint} vp - The viewpoint on the map.
    * @param {WorldPoint} playerPos - The position of the player on the map.
    * @param {GameState} game - The current game state.
-   * @return {void}
    */
   public static drawMap_Standard(
     term: DrawableTerminal,
@@ -248,7 +246,6 @@ export class MapRenderer {
    * @param {WorldPoint} vp - The view point on the map.
    * @param {WorldPoint} playerPos - The position of the player on the map.
    * @param {GameState} game - The game state object.
-   * @return {void}
    */
   public static drawMap_RayCast(
     term: DrawableTerminal,

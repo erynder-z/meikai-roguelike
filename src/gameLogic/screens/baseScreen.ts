@@ -34,7 +34,6 @@ export class BaseScreen implements StackScreen {
    * Draw the terminal.
    *
    * @param {DrawableTerminal} term - the terminal to draw
-   * @return {void}
    */
   public drawScreen(term: DrawableTerminal): void {
     DrawUI.addDynamicEnvironmentAreaEffectsToCells(
@@ -70,7 +69,6 @@ export class BaseScreen implements StackScreen {
    * Process the non-player character's turns.
    *
    * @param {Stack} s - the stack to be processed
-   * @return {void}
    */
   public npcTurns(s: Stack): void {
     const player = <Mob>this.game.player;
@@ -129,7 +127,6 @@ export class BaseScreen implements StackScreen {
    * tickBuffs - A function to handle ticking buffs for a mob.
    *
    * @param {Mob} m - The mob to tick buffs for
-   * @return {void}
    */
   private tickBuffs(m: Mob): void {
     if (!m.buffs) return;
@@ -140,7 +137,6 @@ export class BaseScreen implements StackScreen {
    * A method to finish the turn for a given mob.
    *
    * @param {Mob} m - the mob to finish the turn for
-   * @return {void}
    */
   private finishTurn(m: Mob): void {
     ++m.sinceMove;
@@ -180,7 +176,6 @@ export class BaseScreen implements StackScreen {
    * Handle auto-healing for the player.
    *
    * @param {Mob} player - the player
-   * @return {void}
    */
   private handleAutoHeal(player: Mob): void {
     if (this.game.autoHeal) {
@@ -198,7 +193,6 @@ export class BaseScreen implements StackScreen {
    *
    * @param {MapCell} cell - The cell to handle effects for.
    * @param {Mob} player - The player to apply effects to.
-   * @return {void} This function does not return a value.
    */
   private handleCellEffects(cell: MapCell, player: Mob): void {
     const map = <GameMap>this.game.currentMap();
@@ -210,13 +204,11 @@ export class BaseScreen implements StackScreen {
    *
    * @param {MapCell} cell - the current cell of the player
    * @param {Mob} player - the player
-   * @return {void}
    */
 
   /**
    * Removes the current screen and runs the NPC loop.
    * @param {Stack} s - The stack of Screens.
-   * @returns {void}
    */
   public pop_and_runNPCLoop(s: Stack): void {
     s.pop();

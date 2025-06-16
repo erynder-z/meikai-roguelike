@@ -17,7 +17,6 @@ export class Inventory {
   /**
    * Add an item to the inventory.
    * @param {ItemObject} item - The item to add to the inventory.
-   * @returns {void}
    */
   public add(item: ItemObject): void {
     this.items.push(item);
@@ -26,7 +25,6 @@ export class Inventory {
   /**
    * Remove an item from the inventory by its index.
    * @param {number} index - The index of the item to remove.
-   * @returns {void}
    */
   public removeIndex(index: number): void {
     this.items.splice(index, 1);

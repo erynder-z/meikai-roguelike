@@ -18,7 +18,6 @@ export class EventListenerTracker {
    * @param {string} type - The type of event to listen for.
    * @param {EventListenerOrEventListenerObject} listener - The event listener function or object.
    * @param {boolean | AddEventListenerOptions} [options] - Optional object specifying characteristics about the event listener.
-   * @return {void}
    */
 
   add(
@@ -39,7 +38,6 @@ export class EventListenerTracker {
    * @param {string} type - The type of event to listen for.
    * @param {EventListenerOrEventListenerObject} listener - The event listener function or object.
    * @param {boolean | AddEventListenerOptions} [options] - Optional object specifying characteristics about the event listener.
-   * @return {void}
    */
   addById(
     root: Document | ShadowRoot | null,
@@ -62,8 +60,6 @@ export class EventListenerTracker {
    * Iterates over the stored event listeners and removes each one from its
    * respective target. After all event listeners have been removed, the internal
    * list of listeners is cleared.
-   *
-   * @return {void}
    */
 
   removeAll(): void {

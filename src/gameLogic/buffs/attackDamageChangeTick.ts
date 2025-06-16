@@ -27,7 +27,6 @@ export class AttackDamageChangeTick implements Tick {
    *
    * @param {number} duration - The duration of the attack damage modifier.
    * @param {number} timeLeft - The time left in the modifier.
-   * @return {void} This function does not return a value.
    */
   public tick(duration: number, timeLeft: number): void {
     if (!this.isFinalTick(timeLeft)) return;

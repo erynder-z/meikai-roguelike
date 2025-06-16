@@ -34,7 +34,6 @@ export class BurnTick implements Tick {
    *
    * @param {number} duration - The duration of the burn effect.
    * @param {number} timeLeft - The time left in the burn effect.
-   * @return {void} This function does not return a value.
    */
   public tick(duration: number, timeLeft: number): void {
     if (!this.shouldApplyDamage(duration, timeLeft)) return;

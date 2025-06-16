@@ -69,7 +69,6 @@ export class GameOverScreen extends BaseScreen {
    *
    * @param {KeyboardEvent} event - The keyboard event to handle.
    * @param {Stack} stack - The current stack of screens.
-   * @return {void}
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
     if (event.key === this.activeControlScheme.menu.toString()) {

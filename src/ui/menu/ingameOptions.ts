@@ -291,8 +291,6 @@ export class IngameOptions extends HTMLElement {
    * - Toggle scanlines button click event
    * - Back button click event
    * - Keydown event on the document
-   *
-   * @return {void}
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -384,8 +382,6 @@ export class IngameOptions extends HTMLElement {
    *
    * Updates the {@link gameConfig.control_scheme} property, and toggles the
    * displayed text of the control scheme button.
-   *
-   * @return {void}
    */
   private toggleControlScheme(): void {
     const currentSchemeIndex = this.availableControlSchemes.indexOf(
@@ -407,8 +403,6 @@ export class IngameOptions extends HTMLElement {
    * Updates the {@link gameConfig.show_scanlines} property, and toggles the
    * 'scanlines' class on the main container element. The button text is also
    * updated based on the current state.
-   *
-   * @return {void}
    */
   private toggleScanlines(): void {
     this.gameConfig.show_scanlines = !this.gameConfig.show_scanlines;
@@ -434,8 +428,6 @@ export class IngameOptions extends HTMLElement {
    * Applies the new style to the main container element.
    *
    * Tries to save the updated config to local storage.
-   *
-   * @return {void}
    */
   private switchScanlineStyle(): void {
     const availableStyles = ScanlinesHandler.SCANLINES_STYLES;
@@ -463,8 +455,6 @@ export class IngameOptions extends HTMLElement {
    * Updates the {@link gameConfig.message_display} property, updates the
    * message alignment button, and sets the layout of the main container based on
    * the current message alignment.
-   *
-   * @return {void}
    */
   private toggleMessageAlignment(): void {
     this.gameConfig.message_display =
@@ -482,8 +472,6 @@ export class IngameOptions extends HTMLElement {
    * Updates the {@link gameConfig.show_images} property, updates the show images
    * button, and sets the display of the image container based on the current
    * state. Also updates the disabled status of the image alignment button.
-   *
-   * @return {void}
    */
   private toggleShowImages(): void {
     this.gameConfig.show_images = !this.gameConfig.show_images;
@@ -503,8 +491,6 @@ export class IngameOptions extends HTMLElement {
    * Updates the {@link gameConfig.image_display} property, updates the image
    * alignment button, and sets the layout of the main container based on the
    * current image alignment.
-   *
-   * @return {void}
    */
   private toggleImageAlignment(): void {
     this.gameConfig.image_display =
@@ -520,8 +506,6 @@ export class IngameOptions extends HTMLElement {
    * Attaches an 'input' event listener to the message count input element
    * within the shadow DOM. The listener triggers the handleMessageCountChange
    * method whenever the input value changes.
-   *
-   * @return {void}
    */
   private setupMessageCountInput(): void {
     const messageCountInput = this.shadowRoot?.getElementById(
@@ -540,7 +524,6 @@ export class IngameOptions extends HTMLElement {
    * Handles the input event on the message count input element.
    *
    * @param {Event} event The input event from the message count input element.
-   * @return {void}
    */
   private handleMessageCountChange = (event: Event): void => {
     const input = event.target as HTMLInputElement;
@@ -567,8 +550,6 @@ export class IngameOptions extends HTMLElement {
    *
    * Updates the {@link gameConfig.blood_intensity} property, updates the blood intensity button,
    * and sets the blood intensity of the game.
-   *
-   * @return {void}
    */
   private toggleBloodIntensity(): void {
     this.gameConfig.blood_intensity = (this.gameConfig.blood_intensity + 1) % 4;
@@ -608,8 +589,6 @@ export class IngameOptions extends HTMLElement {
    * the content of the input element, it uses setTimeout to delay the selection
    * by 10 milliseconds, so that the focus event is processed before the selection
    * is triggered.
-   *
-   * @return {void}
    */
   private focusAndSelectMessageCountInput(): void {
     const messageCountInput = this.shadowRoot?.getElementById(
@@ -639,7 +618,6 @@ export class IngameOptions extends HTMLElement {
    * - Menu key or 'R': Returns to the ingame menu.
    *
    * @param {KeyboardEvent} event - The keyboard event to be handled.
-   * @return {void}
    */
 
   private handleKeyPress(event: KeyboardEvent): void {
@@ -683,8 +661,6 @@ export class IngameOptions extends HTMLElement {
    * This function is called when the custom element is removed from the DOM.
    * It removes event listeners for keydown and click events that were added in the
    * connectedCallback function, and dispatches a custom event to open the ingame menu.
-   *
-   * @return {void}
    */
   disconnectedCallback(): void {
     const event = new CustomEvent('open-ingame-menu', {

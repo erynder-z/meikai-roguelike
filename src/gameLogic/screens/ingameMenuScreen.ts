@@ -23,8 +23,6 @@ export class IngameMenuScreen extends BaseScreen {
    * which creates and inserts the 'ingame-menu' element into the main body
    * of the document. This function does not perform any additional actions
    * beyond drawing the in-game menu.
-   *
-   * @return {void}
    */
   public drawScreen(): void {
     this.drawIngameMenu();
@@ -37,8 +35,6 @@ export class IngameMenuScreen extends BaseScreen {
    * attempting insertion. It also adds event listeners to the menu to handle
    * opening the options menu and returning to the game.
    *
-   * @private
-   * @return {void}
    */
   private drawIngameMenu(): void {
     if (
@@ -76,9 +72,6 @@ export class IngameMenuScreen extends BaseScreen {
    * already exist. This function ensures the body element exists before
    * attempting insertion. It also adds event listeners to the menu to handle
    * opening the ingame menu.
-   *
-   * @private
-   * @return {void}
    */
   private drawOptionsMenu(): void {
     if (!document.querySelector('ingame-options')) {

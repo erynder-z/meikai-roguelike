@@ -132,8 +132,6 @@ export class HelpControls extends HTMLElement {
    * - Click event on the previous control scheme button
    * - Click event on the next control scheme button
    * - Keydown event on the document
-   *
-   * @return {void}
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -165,7 +163,6 @@ export class HelpControls extends HTMLElement {
    *
    * @param {'prev' | 'next'} buttonDirection - The direction of the control
    * scheme button that was clicked.
-   * @return {void}
    */
   private handleControlSchemeButtonClick(
     buttonDirection: 'prev' | 'next',
@@ -207,7 +204,6 @@ export class HelpControls extends HTMLElement {
    *
    * @param {ControlSchemeName} controlSchemeName - The name of the control scheme
    * to populate the table with.
-   * @return {void}
    */
   private populateControlsTable(controlSchemeName: ControlSchemeName): void {
     const controlsListElement = this.shadowRoot?.querySelector(
@@ -275,7 +271,6 @@ export class HelpControls extends HTMLElement {
    *
    * @param {KeyboardEvent} event - The keyboard event object containing
    * details about the key press.
-   * @return {void}
    */
 
   private handleKeyPress(event: KeyboardEvent): void {
@@ -297,8 +292,6 @@ export class HelpControls extends HTMLElement {
    * This function is called when the custom element is removed from the DOM.
    * It removes event listeners for keydown and click events that were added in the
    * connectedCallback function.
-   *
-   * @return {void}
    */
   disconnectedCallback(): void {
     this.eventTracker.removeAll();

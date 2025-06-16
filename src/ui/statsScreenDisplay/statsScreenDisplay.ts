@@ -218,7 +218,6 @@ export class StatsScreenDisplay extends HTMLElement {
    *
    * @param {Map<Buff, BuffType>} buffMap - A map containing the buffs and their
    * corresponding types that should be displayed in the buffs list.
-   * @return {void}
    */
 
   public setBuffs(buffMap: Map<Buff, BuffType>): void {
@@ -274,7 +273,6 @@ export class StatsScreenDisplay extends HTMLElement {
    * @param {number} value - The value to determine the label and class name for.
    * @param {{ threshold: number; label: string; className?: string }[]} levels - The list of levels to check against.
    * @param {string} prefix - The prefix to display before the label.
-   * @return {void}
    */
   private updateStatDisplay(
     selector: string,
@@ -298,7 +296,6 @@ export class StatsScreenDisplay extends HTMLElement {
    * returns early if it is not. Otherwise, it updates the text content of the
    * element with the selector '.hunger' using the getLevelLabel method and the
    * given list of hunger levels.
-   * @return {void}
    */
   public displayHunger(): void {
     if (typeof this.stats?.hunger !== 'number') return;
@@ -327,7 +324,6 @@ export class StatsScreenDisplay extends HTMLElement {
    * returns early if it is not. Otherwise, it updates the text content of the
    * element with the selector '.thirst' using the getLevelLabel method and the
    * given list of thirst levels.
-   * @return {void}
    */
   public displayThirst(): void {
     if (typeof this.stats?.thirst !== 'number') return;

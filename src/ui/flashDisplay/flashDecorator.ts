@@ -43,8 +43,6 @@ export class FlashDecorator {
    * @param {DocumentFragment} fragment - The fragment to modify.
    * @param {FlashDecoratorDataEntry[] | string} namesOrName - The array of objects containing the names to replace or a single player name.
    * @param {string} type - The type of name (e.g. 'mob', 'item', 'env'). Ignored if a single player name is passed.
-   *
-   * @return {void}
    */
   public colorize(
     fragment: DocumentFragment,
@@ -114,7 +112,6 @@ export class FlashDecorator {
    *
    * @param {FlashDecoratorDataEntry[] | string} dataOrColor - The data or color to create styles for.
    * @param {string} [type] - The type of style. Ignored if dataOrColor is a string.
-   * @return {void}
    */
   public createStyles(
     dataOrColor: FlashDecoratorDataEntry[] | string,
@@ -139,7 +136,6 @@ export class FlashDecorator {
    * Appends a CSS rule to the existing style element.
    *
    * @param {string} rule - The CSS rule to append.
-   * @return {void}
    */
   private appendStyleRule(rule: string): void {
     if (this.styleElement.sheet) {

@@ -288,7 +288,6 @@ export class PlayerSetup extends HTMLElement {
    * - Clicking return button to go back to previous screen.
    *
    * Also sets up key press event listener.
-   * @return {void}
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -371,7 +370,6 @@ export class PlayerSetup extends HTMLElement {
    *
    * @param {KeyboardEvent} event - The event object that contains information
    * about the key press.
-   * @return {void}
    */
   private handleKeyPress(event: KeyboardEvent): void {
     const nameInputElement = this.shadowRoot?.getElementById(
@@ -432,7 +430,6 @@ export class PlayerSetup extends HTMLElement {
    *
    * @param {GameConfigType['player']} player - The player object containing the
    * appearance, name, and avatar information.
-   * @return {void}
    */
   private displayPlayer(player: GameConfigType['player']): void {
     const isGirlish = player.appearance === 'girlish';
@@ -458,7 +455,6 @@ export class PlayerSetup extends HTMLElement {
    * @param {string} elementId - The ID of the element to render.
    * @param {string} imageHTML - The HTML string of the portrait image.
    * @param {boolean} isHighlighted - Whether the portrait should be highlighted.
-   * @return {void}
    */
   private renderPortraitElement(
     elementId: string,
@@ -480,7 +476,6 @@ export class PlayerSetup extends HTMLElement {
    *
    * @param {string} elementId - The ID of the element to render.
    * @param {string} content - The text content of the element.
-   * @return {void}
    */
   private renderNameElement(elementId: string, content: string): void {
     const element = this.shadowRoot?.getElementById(
@@ -492,8 +487,6 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Toggles the player's appearance between 'girlish' and 'boyish'. Updates the
    * UI to reflect the new appearance.
-   *
-   * @return {void}
    */
   private toggleAppearance(): void {
     const player = this.gameConfig.player;
@@ -510,8 +503,6 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Enables the player name input element for editing, hiding the player name
    * element and the randomize name button.
-   *
-   * @return {void}
    */
   private enableNameEditing(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -539,8 +530,6 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Handles the blur event on the player name input element by saving the new
    * name to gameConfig and hiding the input element.
-   *
-   * @return {void}
    */
   private handleNameInputChange(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -565,8 +554,6 @@ export class PlayerSetup extends HTMLElement {
 
   /**
    * Sets the player's name to a random name based on their appearance.
-   *
-   * @return {void}
    */
   private randomizeName(): void {
     this.gameConfig.player.name = getRandomName(
@@ -576,8 +563,6 @@ export class PlayerSetup extends HTMLElement {
 
   /**
    * Sets the player's avatar to a random unicode character.
-   *
-   * @return {void}
    */
   private randomizeAvatar(): void {
     this.gameConfig.player.avatar = getRandomUnicodeCharacter();
@@ -590,7 +575,6 @@ export class PlayerSetup extends HTMLElement {
    * player setup screen.
    *
    * @param {string} color - The new color for the player.
-   * @return {void}
    */
   private setColorInputValue(color: string): void {
     const colorInput = this.shadowRoot?.getElementById(
@@ -602,8 +586,6 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Handles the change event on the player color input element by saving the
    * new color to gameConfig.
-   *
-   * @return {void}
    */
   private handleColorInputChange(): void {
     const colorInput = this.shadowRoot?.getElementById(
@@ -615,8 +597,6 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Simulates a click event on the player color input element, allowing the user
    * to select a color from the color picker.
-   *
-   * @return {void}
    */
   private changeColor(): void {
     const colorInput = this.shadowRoot?.getElementById(
@@ -627,8 +607,6 @@ export class PlayerSetup extends HTMLElement {
 
   /**
    * Sets the player's color to a random color.
-   *
-   * @return {void}
    */
   private randomizeColor(): void {
     const randomColor = getRandomColor();
@@ -645,8 +623,6 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Enables the avatar input element for editing, hiding the avatar element
    * and randomize button.
-   *
-   * @return {void}
    */
   private enableAvatarEditing(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -674,8 +650,6 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Handles the blur event on the player avatar input element by saving the new
    * avatar to gameConfig and hiding the input element.
-   *
-   * @return {void}
    */
   private handleAvatarInputChange(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -700,8 +674,6 @@ export class PlayerSetup extends HTMLElement {
 
   /**
    * Randomizes the player's appearance.
-   *
-   * @return {void}
    */
   private randomizeAppearance(): void {
     this.gameConfig.player.appearance =
@@ -716,8 +688,6 @@ export class PlayerSetup extends HTMLElement {
    *
    * @param {string} element The element to randomize. Can be 'appearance',
    * 'name', 'color', 'avatar', or 'all'.
-   *
-   * @return {void}
    */
   private randomize(
     element: 'appearance' | 'name' | 'color' | 'avatar' | 'all',
@@ -775,8 +745,6 @@ export class PlayerSetup extends HTMLElement {
    *
    * This method is called when the element is removed from the DOM.
    * It removes all event listeners that were added in the connectedCallback method.
-   *
-   * @return {void}
    */
   disconnectedCallback(): void {
     this.eventTracker.removeAll();

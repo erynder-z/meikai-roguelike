@@ -102,7 +102,6 @@ export class DrawUI {
    * Renders the misc info elements on the page based on the game state.
    *
    * @param {GameState} game - the game instance containing the current map and player
-   * @return {void}
    */
   public static renderMiscInfo(game: GameState): void {
     const currentMap = game.currentMap();
@@ -121,7 +120,6 @@ export class DrawUI {
    * Renders the active buffs of the player on the terminal.
    *
    * @param {GameState} game - the game instance containing the player's buffs
-   * @return {void}
    */
   public static renderBuffs(game: GameState): void {
     const playerBuffs = game.player.buffs;
@@ -137,7 +135,6 @@ export class DrawUI {
    * Renders the equipment on the terminal based on the provided game state.
    *
    * @param {GameState} game - the game instance containing the equipment state
-   * @return {void}
    */
   public static renderEquipment(game: GameState): void {
     const equipment = game.equipment;
@@ -151,7 +148,6 @@ export class DrawUI {
    * Renders the log messages on the terminal.
    *
    * @param {GameState} game - the game instance to retrieve player stats from
-   * @return {void}
    */
   public static renderMessage(game: GameState): void {
     const gameConfig = gameConfigManager.getConfig();
@@ -170,7 +166,6 @@ export class DrawUI {
   /**
    * Handles displaying an image based on the current event in the game log.
    * @param {GameState} game - The game state containing the current event.
-   * @return {void} This function does not return anything.
    */
   public static renderActionImage(game: GameState): void {
     const gameConfig = gameConfigManager.getConfig();
@@ -241,7 +236,6 @@ export class DrawUI {
    * This function is called at the start of each turn and is responsible for
    * displaying any messages that were queued up during the previous turn.
    * @param {GameState} game - The game state containing the log.
-   * @returns {void} This function does not return anything.
    */
   public static renderFlash(game: GameState): void {
     const { log } = game;
@@ -268,7 +262,6 @@ export class DrawUI {
    * Clears the flash message on the screen.
    *
    * @param {GameState} game - The game instance to clear the flash message from.
-   * @return {void} This function does not return anything.
    */
   public static clearFlash(game: GameState): void {
     const flashDisplay = document.querySelector(
@@ -301,7 +294,6 @@ export class DrawUI {
    * Apply environment area effects to each cell in the map based on the given game state.
    *
    * @param {GameMapType} map - The game map to apply effects to
-   * @return {void} This function does not return anything.
    */
   public static addDynamicEnvironmentAreaEffectsToCells(
     map: GameMapType,

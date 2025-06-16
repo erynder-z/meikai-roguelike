@@ -49,7 +49,13 @@ export class InventoryScreen extends BaseScreen {
   }
 
   /**
-   * Handles key down events.
+   * Handles key down events in the inventory screen.
+   * If the menu key is pressed, the inventory screen fades out and is removed from the stack.
+   * If a valid item position is entered, the item menu is opened.
+   * If the alt or meta key is pressed, the inventory list is scrolled.
+   * @param {KeyboardEvent} event - The keyboard event.
+   * @param {Stack} stack - The stack of screens.
+   * @returns {boolean} True if the event was handled, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     const pos = this.characterToPosition(event.key);
@@ -74,7 +80,12 @@ export class InventoryScreen extends BaseScreen {
   }
 
   /**
-   * Converts character to position.
+   * Converts a character to a corresponding position in the inventory.
+   * The character is converted to a number by subtracting the char code of 'a' from the char code of the given character.
+   * If the resulting position is valid (i.e. within the range of the inventory), it is returned.
+   * Otherwise -1 is returned.
+   * @param {string} c - The character to convert.
+   * @return {number} The position of the character in the inventory, or -1 if not valid.
    */
   private characterToPosition(c: string): number {
     const pos = c.charCodeAt(0) - 'a'.charCodeAt(0);
@@ -82,7 +93,9 @@ export class InventoryScreen extends BaseScreen {
   }
 
   /**
-   * Opens the item menu.
+   * Opens the item menu screen.
+   * @param {number} pos - The position of the item in the inventory.
+   * @param {Stack} stack - The stack of screens.
    */
   private itemMenu(pos: number, stack: Stack): void {
     const item = this.inventory.items[pos];
@@ -92,6 +105,8 @@ export class InventoryScreen extends BaseScreen {
 
   /**
    * Checks if the Alt or Meta key is pressed.
+   * @param {KeyboardEvent} event - The keyboard event.
+   * @return {boolean} True if the Alt or Meta key is pressed, otherwise false.
    */
   private isAltKeyPressed(event: KeyboardEvent): boolean {
     return event.altKey || event.metaKey;

@@ -41,7 +41,6 @@ export class ResizingTerminal extends Terminal {
    *
    * @param {number} containerWidth - The width of the container in pixels.
    * @param {number} containerHeight - The height of the container in pixels.
-   * @return {void}
    */
   private resizeCanvasAndTerminal(
     containerWidth: number,
@@ -63,8 +62,6 @@ export class ResizingTerminal extends Terminal {
    * Handles the resize event by calculating the new canvas dimensions based
    * on the container's current width and height, and adjusts the canvas
    * and terminal size accordingly.
-   *
-   * @return {void}
    */
 
   public handleResize(): void {

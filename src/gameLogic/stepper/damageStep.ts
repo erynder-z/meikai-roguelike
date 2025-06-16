@@ -27,7 +27,6 @@ export class DamageStep extends TimedStep {
    * Sets the target of the function to the specified Mob.
    *
    * @param {Mob} tgt - The Mob object to set as the target.
-   * @return {void} This function does not return anything.
    */
   public setTarget(tgt: Mob): void {
     this.target = tgt;
@@ -37,7 +36,6 @@ export class DamageStep extends TimedStep {
    * Sets the position of the object to the specified world point.
    *
    * @param {WorldPoint} pos - The world point to set the position to.
-   * @return {void} This function does not return anything.
    */
   public setPos(pos: WorldPoint): void {
     this.pos = pos.copy();

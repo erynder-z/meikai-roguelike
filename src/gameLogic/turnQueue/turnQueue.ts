@@ -18,7 +18,6 @@ export class TurnQueue {
    * Pushes a mob into the mobs array.
    *
    * @param {Mob} m - the mob to be pushed
-   * @return {void}
    */
   public pushMob(m: Mob): void {
     this.mobs.push(m);
@@ -36,7 +35,6 @@ export class TurnQueue {
    * Removes the specified Mob from the list of mobs.
    *
    * @param {Mob} m - the Mob to be removed
-   * @return {void}
    */
   public removeMob(m: Mob): boolean {
     const index = this.mobs.indexOf(m);
@@ -49,7 +47,6 @@ export class TurnQueue {
    * Pushes the given mob to the front of the mobs array.
    *
    * @param {Mob} m - the mob to be pushed to the front
-   * @return {void}
    */
   public pushMobToFront(m: Mob): void {
     this.mobs.unshift(m);

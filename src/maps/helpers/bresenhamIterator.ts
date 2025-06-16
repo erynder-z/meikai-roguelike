@@ -93,7 +93,7 @@ export class BresenhamIterator {
    * Creates a BresenhamIterator instance with specified start and end points.
    * @param start The starting point.
    * @param end The ending point.
-   * @returns A BresenhamIterator instance.
+   * @returns {BresenhamIterator} A BresenhamIterator instance.
    */
   public static createFromWorldPoint(
     start: WorldPoint,

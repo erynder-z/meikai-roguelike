@@ -44,7 +44,6 @@ export class Game implements GameState {
   /**
    * Adds a message to the message log.
    * @param {string} msg - The message to add.
-   * @returns {void}
    */
   public message(msg: LogMessage): void {
     const isFlashMsg = false;
@@ -54,7 +53,6 @@ export class Game implements GameState {
   /**
    * Displays a flash message.
    * @param {string} msg - The message to add.
-   * @returns {void}
    */
   public flash(msg: LogMessage): void {
     const isFlashMsg = true;
@@ -65,7 +63,6 @@ export class Game implements GameState {
    * Adds the given event category to the current event in the message log.
    *
    * @param {EventCategory} evt - The event category to add.
-   * @return {void} This function does not return anything.
    */
   public addCurrentEvent(evt: EventCategory): void {
     this.log.addCurrentEvent(evt);
