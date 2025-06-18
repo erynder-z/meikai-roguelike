@@ -52,7 +52,9 @@ export class GameOverScreen extends BaseScreen {
 
     DrawUI.renderActionImage(this.game);
     DrawUI.renderMessage(this.game);
-    DrawUI.renderMiscInfo(this.game);
+    DrawUI.renderPlayerHealthInfo(this.game);
+    DrawUI.renderLevelDepthInfo(this.game);
+    DrawUI.renderLevelTemperatureInfo(this.game);
   }
 
   /**

@@ -11,10 +11,12 @@ import { Glyph } from '../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
 import { ImageHandler } from '../media/imageHandler/imageHandler';
+import { LevelDepthInfo } from '../ui/miscInfo/levelDepthInfo';
+import { LevelTemperatureInfo } from '../ui/miscInfo/levelTemperatureInfo';
 import { MapCell } from '../maps/mapModel/mapCell';
 import { MapRenderer } from './mapRenderer';
 import { MessagesDisplay } from '../ui/messages/messagesDisplay';
-import { MiscInfo } from '../ui/miscInfo/miscInfo';
+import { PlayerHealthInfo } from '../ui/miscInfo/playerHealthInfo';
 import { TerminalPoint } from '../terminal/terminalPoint';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
 
@@ -99,21 +101,40 @@ export class DrawUI {
   }
 
   /**
-   * Renders the misc info elements on the page based on the game state.
-   *
-   * @param {GameState} game - the game instance containing the current map and player
+   * Updates the player's HP status in the UI.
+   * @param {GameState} game - the game interface containing the player mob
    */
-  public static renderMiscInfo(game: GameState): void {
+  public static renderPlayerHealthInfo(game: GameState): void {
+    const playerHealthInfo = document.querySelector(
+      'player-health-info',
+    ) as PlayerHealthInfo;
+    if (playerHealthInfo) playerHealthInfo.setPlayerHPStatus(game.player);
+  }
+
+  /**
+   * Updates the level depth information element in the UI.
+   * @param {GameState} game - the game interface containing the current map
+   */
+  public static renderLevelDepthInfo(game: GameState): void {
     const currentMap = game.currentMap();
     const currentDepth = currentMap?.depth || 0;
-    const currentTemp = currentMap?.temperature || 0;
+    const levelDepthInfo = document.querySelector(
+      'level-depth-info',
+    ) as LevelDepthInfo;
+    if (levelDepthInfo) levelDepthInfo.setLevelDepthInfo(currentDepth);
+  }
 
-    const miscInfoDisplay = document.querySelector('misc-info') as MiscInfo;
-    if (miscInfoDisplay) {
-      miscInfoDisplay.setLevelDepthInfo(currentDepth);
-      miscInfoDisplay.setLevelTempInfo(currentTemp);
-      miscInfoDisplay.setPlayerHPStatus(game.player);
-    }
+  /**
+   * Updates the level temperature information element in the UI.
+   * @param {GameState} game - the game interface containing the current map
+   */
+  public static renderLevelTemperatureInfo(game: GameState): void {
+    const currentMap = game.currentMap();
+    const currentTemp = currentMap?.temperature || 0;
+    const levelTempInfo = document.querySelector(
+      'level-temperature-info',
+    ) as LevelTemperatureInfo;
+    if (levelTempInfo) levelTempInfo.setLevelTempInfo(currentTemp);
   }
 
   /**

@@ -19,8 +19,15 @@ export class GenerateMainUI {
     const miscInfoContainer = document.createElement('div');
     miscInfoContainer.id = 'misc-info-container';
     miscInfoContainer.classList.add('misc-info-container');
-    const miscInfo = document.createElement('misc-info');
-    miscInfoContainer.appendChild(miscInfo);
+
+    const playerHealthInfo = document.createElement('player-health-info');
+    miscInfoContainer.appendChild(playerHealthInfo);
+
+    const levelDepthInfo = document.createElement('level-depth-info');
+    miscInfoContainer.appendChild(levelDepthInfo);
+
+    const levelTempInfo = document.createElement('level-temperature-info');
+    miscInfoContainer.appendChild(levelTempInfo);
 
     // Messages container
     const messagesContainer = document.createElement('div');
