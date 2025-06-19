@@ -1,11 +1,8 @@
 import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class LevelTemperatureInfo extends HTMLElement {
-  private unitSettingsManager: UnitSettingsManager;
   constructor() {
     super();
-
-    this.unitSettingsManager = new UnitSettingsManager();
   }
 
   connectedCallback(): void {
@@ -26,11 +23,14 @@ export class LevelTemperatureInfo extends HTMLElement {
   }
 
   /**
-   * Sets the level temperature text to the given temperature in degrees Celsius.
-   * @param {number} temp - The temperature to display.
+   * Sets the temperature information element to the given temperature value.
+   * Converts the temperature to the currently set unit before displaying it.
+   * @param {number} temp - The temperature in Celsius to display.
    */
+
   public setLevelTempInfo(temp: number): void {
-    const tempDisplayText = `TEMP: <span class="large-font">${this.unitSettingsManager.displayTemperature(temp)}</span>`;
+    const unitSettingsManager = new UnitSettingsManager();
+    const tempDisplayText = `TEMP: <span class="large-font">${unitSettingsManager.displayTemperature(temp)}</span>`;
 
     const tempInfo = this.shadowRoot?.querySelector('.level-temp');
 

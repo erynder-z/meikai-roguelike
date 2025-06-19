@@ -33,6 +33,8 @@ class GameConfigManager {
     },
     blood_intensity: 1,
     min_keypress_delay: 50,
+    temperature_unit: 'celsius',
+    depth_unit: 'meters',
     terminal: {
       dimensions: {
         width: 64,

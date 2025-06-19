@@ -1,11 +1,11 @@
 import controls from '../../controls/control_schemes.json';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { ControlSchemeName } from '../../types/controls/controlSchemeType';
+import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { LayoutManager } from '../layoutManager/layoutManager';
 import { OptionsMenuButtonManager } from './buttonManager/optionsMenuButtonManager';
 import { ScanlinesHandler } from '../../renderer/scanlinesHandler';
-import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 
 export class IngameOptions extends HTMLElement {
   private gameConfig = gameConfigManager.getConfig();
@@ -249,6 +249,12 @@ export class IngameOptions extends HTMLElement {
             </input>
             <div class="explanation">(Default: 35)</div>
           </button>
+          <button id="temperature-units-button">
+            Tem<span class="underline">p</span>erature units
+          </button>
+          <button id="depth-units-button">
+            <span class="underline">D</span>epth units
+          </button>
         </div>
         <span class="info-span">Misc</span>
         <div class="info-container">
@@ -275,6 +281,10 @@ export class IngameOptions extends HTMLElement {
     this.buttonManager.updateMessageAlignButton(
       this.gameConfig.message_display,
     );
+    this.buttonManager.updateTemperatureUnitsButton(
+      this.gameConfig.temperature_unit,
+    );
+    this.buttonManager.updateDepthUnitsButton(this.gameConfig.depth_unit);
     this.buttonManager.updateShowImagesButton(this.gameConfig.show_images);
     this.buttonManager.updateImageAlignButton(this.gameConfig.image_display);
     this.setupMessageCountInput();
@@ -286,11 +296,6 @@ export class IngameOptions extends HTMLElement {
 
   /**
    * Binds events to the elements inside the options menu.
-   *
-   * The function binds the following events:
-   * - Toggle scanlines button click event
-   * - Back button click event
-   * - Keydown event on the document
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -298,6 +303,9 @@ export class IngameOptions extends HTMLElement {
     this.toggleScanlines = this.toggleScanlines.bind(this);
     this.switchScanlineStyle = this.switchScanlineStyle.bind(this);
     this.toggleMessageAlignment = this.toggleMessageAlignment.bind(this);
+    this.toggleTemperatureUnitChange =
+      this.toggleTemperatureUnitChange.bind(this);
+    this.toggleDepthUnitChange = this.toggleDepthUnitChange.bind(this);
     this.toggleShowImages = this.toggleShowImages.bind(this);
     this.toggleImageAlignment = this.toggleImageAlignment.bind(this);
     this.focusAndSelectMessageCountInput =
@@ -333,6 +341,20 @@ export class IngameOptions extends HTMLElement {
       'message-display-align-button',
       'click',
       this.toggleMessageAlignment,
+    );
+
+    this.eventTracker.addById(
+      root,
+      'temperature-units-button',
+      'click',
+      this.toggleTemperatureUnitChange,
+    );
+
+    this.eventTracker.addById(
+      root,
+      'depth-units-button',
+      'click',
+      this.toggleDepthUnitChange,
     );
 
     this.eventTracker.addById(
@@ -489,15 +511,57 @@ export class IngameOptions extends HTMLElement {
    * Toggles the image alignment between left and right.
    *
    * Updates the {@link gameConfig.image_display} property, updates the image
-   * alignment button, and sets the layout of the main container based on the
+   * alignment button, and sets the layout of the image container based on the
    * current image alignment.
    */
+
   private toggleImageAlignment(): void {
     this.gameConfig.image_display =
       this.gameConfig.image_display === 'left' ? 'right' : 'left';
 
     this.buttonManager.updateImageAlignButton(this.gameConfig.image_display);
     this.layoutManager.setImageDisplayLayout(this.gameConfig.image_display);
+  }
+
+  /**
+   * Toggles the temperature units between Celsius and Fahrenheit.
+   *
+   * Updates the {@link gameConfig.temperature_unit} property, and updates the
+   * temperature units button.
+   */
+  private toggleTemperatureUnitChange(): void {
+    this.gameConfig.temperature_unit =
+      this.gameConfig.temperature_unit === 'celsius' ? 'fahrenheit' : 'celsius';
+
+    this.buttonManager.updateTemperatureUnitsButton(
+      this.gameConfig.temperature_unit,
+    );
+
+    const customEvent = new CustomEvent('redraw-temperature-info', {
+      bubbles: true,
+    });
+    this.dispatchEvent(customEvent);
+  }
+
+  /**
+   * Toggles the depth units between meters and feet.
+   *
+   * Updates the {@link gameConfig.depth_unit} property, and updates the
+   * depth units button.
+   *
+   * Dispatches a custom 'redraw-temperature-info' event to request the redraw
+   * of the level depth information element.
+   */
+  private toggleDepthUnitChange(): void {
+    this.gameConfig.depth_unit =
+      this.gameConfig.depth_unit === 'meters' ? 'feet' : 'meters';
+
+    this.buttonManager.updateDepthUnitsButton(this.gameConfig.depth_unit);
+
+    const customEvent = new CustomEvent('redraw-depth-info', {
+      bubbles: true,
+    });
+    this.dispatchEvent(customEvent);
   }
 
   /**
@@ -603,23 +667,23 @@ export class IngameOptions extends HTMLElement {
   }
 
   /**
-   * Handles key presses in the options menu.
+   * Handles key presses on the options menu.
    *
-   * This function listens for specific key presses and triggers corresponding
-   * actions within the options menu. The key actions include:
-   * - 'C': Toggles the control scheme.
-   * - 'S': Toggles the scanlines.
-   * - 't': Switches the scanline style.
-   * - 'M': Toggles message alignment.
-   * - 'e': Focuses and selects the message count input.
-   * - 'h': Toggles the display of images.
-   * - 'I': Toggles image alignment.
-   * - 'B': Toggles the blood intensity.
-   * - Menu key or 'R': Returns to the ingame menu.
+   * Listens for the following keys and calls the corresponding method to update the game configuration:
+   * - C: toggleControlScheme
+   * - S: toggleScanlines
+   * - t: switchScanlineStyle
+   * - M: toggleMessageAlignment
+   * - e: focusAndSelectMessageCountInput
+   * - p: toggleTemperatureUnitChange
+   * - D: toggleDepthUnitChange
+   * - o: toggleShowImages
+   * - I: toggleImageAlignment
+   * - B: toggleBloodIntensity
+   * - {menu} or R: returnToIngameMenu
    *
    * @param {KeyboardEvent} event - The keyboard event to be handled.
    */
-
   private handleKeyPress(event: KeyboardEvent): void {
     switch (event.key) {
       case 'C':
@@ -636,6 +700,12 @@ export class IngameOptions extends HTMLElement {
         break;
       case 'e':
         this.focusAndSelectMessageCountInput();
+        break;
+      case 'p':
+        this.toggleTemperatureUnitChange();
+        break;
+      case 'D':
+        this.toggleDepthUnitChange();
         break;
       case 'o':
         this.toggleShowImages();

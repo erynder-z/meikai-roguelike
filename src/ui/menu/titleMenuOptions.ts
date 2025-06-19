@@ -309,6 +309,12 @@ export class TitleMenuOptions extends HTMLElement {
             </input>
             <div class="explanation">(Default: 35)</div>
           </button>
+          <button id="temperature-units-button">
+            Tem<span class="underline">p</span>erature units
+          </button>
+          <button id="depth-units-button">
+            <span class="underline">D</span>epth units
+          </button>
         </div>
         <span class="info-span">Misc</span>
         <div class="info-container">
@@ -336,6 +342,10 @@ export class TitleMenuOptions extends HTMLElement {
     this.buttonManager.updateMessageAlignButton(
       this.gameConfig.message_display,
     );
+    this.buttonManager.updateTemperatureUnitsButton(
+      this.gameConfig.temperature_unit,
+    );
+    this.buttonManager.updateDepthUnitsButton(this.gameConfig.depth_unit);
     this.buttonManager.updateShowImagesButton(this.gameConfig.show_images);
     this.buttonManager.updateImageAlignButton(this.gameConfig.image_display);
     this.setupScalingFactorInput();
@@ -379,6 +389,9 @@ export class TitleMenuOptions extends HTMLElement {
     this.toggleImageAlignment = this.toggleImageAlignment.bind(this);
     this.focusAndSelectMessageCountInput =
       this.focusAndSelectMessageCountInput.bind(this);
+    this.toggleTemperatureUnitChange =
+      this.toggleTemperatureUnitChange.bind(this);
+    this.toggleDepthUnitChange = this.toggleDepthUnitChange.bind(this);
     this.toggleBloodIntensity = this.toggleBloodIntensity.bind(this);
     this.returnToPreviousScreen = this.returnToPreviousScreen.bind(this);
 
@@ -458,6 +471,19 @@ export class TitleMenuOptions extends HTMLElement {
       'message-count-input-button',
       'click',
       event => this.handleInputChange(event, 'message'),
+    );
+    this.eventTracker.addById(
+      root,
+      'temperature-units-button',
+      'click',
+      this.toggleTemperatureUnitChange,
+    );
+
+    this.eventTracker.addById(
+      root,
+      'depth-units-button',
+      'click',
+      this.toggleDepthUnitChange,
     );
     this.eventTracker.addById(
       root,
@@ -926,11 +952,52 @@ export class TitleMenuOptions extends HTMLElement {
   }
 
   /**
-   * Toggles the blood intensity of the game by cycling through the available blood intensities.
+   * Toggles the temperature units between Celsius and Fahrenheit.
    *
-   * The blood intensity is cycled through the following values:
-   * 0 (no blood), 1 (light blood), 2 (medium blood), 3 (heavy blood).
+   * Updates the {@link gameConfig.temperature_unit} property, and updates the
+   * temperature units button.
    */
+  private toggleTemperatureUnitChange(): void {
+    this.gameConfig.temperature_unit =
+      this.gameConfig.temperature_unit === 'celsius' ? 'fahrenheit' : 'celsius';
+
+    this.buttonManager.updateTemperatureUnitsButton(
+      this.gameConfig.temperature_unit,
+    );
+
+    const customEvent = new CustomEvent('redraw-temperature-info', {
+      bubbles: true,
+    });
+    this.dispatchEvent(customEvent);
+  }
+
+  /**
+   * Toggles the depth units between meters and feet.
+   *
+   * Updates the {@link gameConfig.depth_unit} property, and updates the
+   * depth units button.
+   *
+   * Dispatches a custom 'redraw-temperature-info' event to request the redraw
+   * of the level depth information element.
+   */
+  private toggleDepthUnitChange(): void {
+    this.gameConfig.depth_unit =
+      this.gameConfig.depth_unit === 'meters' ? 'feet' : 'meters';
+
+    this.buttonManager.updateDepthUnitsButton(this.gameConfig.depth_unit);
+
+    const customEvent = new CustomEvent('redraw-depth-info', {
+      bubbles: true,
+    });
+    this.dispatchEvent(customEvent);
+  }
+
+  /**
+   * Cycles through the blood intensity options (0 = no blood, 1 = light blood, 2 = medium blood, 3 = heavy blood).
+   *
+   * Updates the {@link gameConfig.blood_intensity} property and the blood intensity button.
+   */
+
   private toggleBloodIntensity(): void {
     this.gameConfig.blood_intensity = (this.gameConfig.blood_intensity + 1) % 4;
     this.buttonManager.updateBloodIntensityButton(
@@ -1033,6 +1100,12 @@ export class TitleMenuOptions extends HTMLElement {
         break;
       case 'I':
         this.toggleImageAlignment();
+        break;
+      case 'p':
+        this.toggleTemperatureUnitChange();
+        break;
+      case 'D':
+        this.toggleDepthUnitChange();
         break;
       case 'B':
         this.toggleBloodIntensity();

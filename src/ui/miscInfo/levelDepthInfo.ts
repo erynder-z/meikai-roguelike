@@ -1,11 +1,8 @@
 import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class LevelDepthInfo extends HTMLElement {
-  private unitSettingsManager: UnitSettingsManager;
   constructor() {
     super();
-
-    this.unitSettingsManager = new UnitSettingsManager();
   }
 
   connectedCallback(): void {
@@ -32,10 +29,9 @@ export class LevelDepthInfo extends HTMLElement {
    * @param {number} depth - The level depth to display.
    */
   public setLevelDepthInfo(depth: number): void {
+    const unitSettingsManager = new UnitSettingsManager();
     const depthText =
-      depth === 0
-        ? 'Surface'
-        : `-${this.unitSettingsManager.displayDepth(depth)}`;
+      depth === 0 ? 'Surface' : `-${unitSettingsManager.displayDepth(depth)}`;
     const depthDisplayText = `DEPTH: <span class="large-font">${depthText}</span>`;
     const depthInfo = this.shadowRoot?.querySelector('.level-depth');
 

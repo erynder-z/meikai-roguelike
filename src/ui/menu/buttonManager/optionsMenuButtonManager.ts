@@ -1,7 +1,6 @@
 import { gameConfigManager } from '../../../gameConfigManager/gameConfigManager';
 import { GameConfigType } from '../../../types/gameConfig/gameConfigType';
 import { ScanlineStyles } from '../../../renderer/scanlinesHandler';
-
 /**
  * Handles changing the displayed content of buttons on the options menu.
  */
@@ -133,6 +132,46 @@ export class OptionsMenuButtonManager {
         'disabled',
         this.shouldDisableImageAlignButton,
       );
+    }
+  }
+
+  /**
+   * Updates the text of the temperature units button based on the current
+   * temperature units. Also forces a redraw of the misc info display
+   * (which includes the current temperature).
+   *
+   * Sets the button's text to 'Temperature units: CELSIUS' or 'Temperature
+   * units: FAHRENHEIT', depending on the current unit.
+   *
+   * @param {('celsius' | 'fahrenheit')} unit - The current temperature unit.
+   */
+  public updateTemperatureUnitsButton(unit: 'celsius' | 'fahrenheit'): void {
+    const temperatureUnitsBtn = this.shadowRoot?.getElementById(
+      'temperature-units-button',
+    ) as HTMLButtonElement;
+
+    if (temperatureUnitsBtn) {
+      temperatureUnitsBtn.innerHTML = `Tem<span class="underline">p</span>erature units: ${unit.toUpperCase()}`;
+    }
+  }
+
+  /**
+   * Updates the text of the depth units button based on the current
+   * depth units.
+   *
+   * Sets the button's text to 'Depth units: METERS' or 'Depth units: FEET',
+   * depending on the current unit.
+   *
+   * @param {('meters' | 'feet')} unit - The current depth unit.
+   */
+
+  public updateDepthUnitsButton(unit: 'meters' | 'feet'): void {
+    const depthUnitsBtn = this.shadowRoot?.getElementById(
+      'depth-units-button',
+    ) as HTMLButtonElement;
+
+    if (depthUnitsBtn) {
+      depthUnitsBtn.innerHTML = `<span class="underline">D</span>epth units: ${unit.toUpperCase()}`;
     }
   }
 

@@ -2,6 +2,8 @@ import { BaseScreen } from './baseScreen';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { IngameMenu } from '../../ui/menu/ingameMenu';
 import { IngameOptions } from '../../ui/menu/ingameOptions';
+import { LevelDepthInfo } from '../../ui/miscInfo/levelDepthInfo';
+import { LevelTemperatureInfo } from '../../ui/miscInfo/levelTemperatureInfo';
 import { LayoutManager } from '../../ui/layoutManager/layoutManager';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
@@ -100,6 +102,26 @@ export class IngameMenuScreen extends BaseScreen {
       optionsMenu.addEventListener('redraw-message-display', () => {
         const layoutManager = new LayoutManager();
         layoutManager.redrawMessages(this.game.log);
+      });
+
+      optionsMenu.addEventListener('redraw-temperature-info', () => {
+        const tempDisplay = document.querySelector(
+          'level-temperature-info',
+        ) as LevelTemperatureInfo;
+
+        tempDisplay.setLevelTempInfo(
+          this.game.dungeon.currentMap(this.game).temperature,
+        );
+      });
+
+      optionsMenu.addEventListener('redraw-depth-info', () => {
+        const depthDisplay = document.querySelector(
+          'level-depth-info',
+        ) as LevelDepthInfo;
+
+        depthDisplay.setLevelDepthInfo(
+          this.game.dungeon.currentMap(this.game).depth,
+        );
       });
     }
   }

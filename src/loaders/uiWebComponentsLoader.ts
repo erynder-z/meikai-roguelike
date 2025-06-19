@@ -6,7 +6,6 @@ import { EquipmentScreenDisplay } from '../ui/equipmentScreenDIsplay/equipmentSc
 import { FlashDisplay } from '../ui/flashDisplay/flashDisplay';
 import { GameOverScreenDisplay } from '../ui/gameOverScreenDisplay/gameOverScreenDisplay';
 import { MessagesDisplay } from '../ui/messages/messagesDisplay';
-import { MiscInfo } from '../ui/miscInfo/miscInfo';
 import { IngameMenu } from '../ui/menu/ingameMenu';
 import { IngameOptions } from '../ui/menu/ingameOptions';
 import { InventoryScreenDisplay } from '../ui/inventoryScreenDisplay/inventoryScreenDisplay';
@@ -29,7 +28,6 @@ customElements.define('title-screen', TitleScreen);
 customElements.define('title-menu', TitleMenu);
 customElements.define('title-menu-options', TitleMenuOptions);
 customElements.define('player-setup', PlayerSetup);
-customElements.define('misc-info', MiscInfo);
 customElements.define('messages-display', MessagesDisplay);
 customElements.define('buffs-display', BuffsDisplay);
 customElements.define('equipment-display', EquipmentDisplay);
