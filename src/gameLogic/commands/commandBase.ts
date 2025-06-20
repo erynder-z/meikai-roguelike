@@ -26,7 +26,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Executes the command.
-   * @returns {boolean} Always throws an error, should be implemented in subclasses.
+   * @returns Always throws an error, should be implemented in subclasses.
    */
   public execute(): boolean {
     throw 'no exc';
@@ -34,8 +34,8 @@ export abstract class CommandBase implements Command {
 
   /**
    * Sets the direction of the command.
-   * @param {WorldPoint} direction - The direction to set.
-   * @returns {Command} The command object.
+   * @param direction - The direction to set.
+   * @returns The command object.
    */
   public setDirection(direction: WorldPoint): Command {
     throw 'no setDirection';
@@ -44,8 +44,7 @@ export abstract class CommandBase implements Command {
   /**
    * Sets the target of the function to the specified Mob.
    *
-   * @param {Mob | undefined} target - The Mob object to set as the target.
-   * @return {void} This function does not return anything.
+   * @param target - The Mob object to set as the target.
    */
   public setTarget(target: Mob): void {
     this.target = target;
@@ -54,7 +53,7 @@ export abstract class CommandBase implements Command {
   /**
    * Returns true, if an items has no associated cost. If it has a cost, calls pay on that item.
    *
-   * @return {boolean} True if the cost can be paid, false otherwise.
+   * @return True if the cost can be paid, false otherwise.
    */
   private pay(): boolean {
     if (!this.cost) return true;
@@ -63,7 +62,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Executes a turn for the mob if it is able to do so.
-   * @returns {boolean} The result of executing the command.
+   * @returns The result of executing the command.
    */
   public turn(): boolean {
     const r = this.able(<Mob>this.me, <GameState>this.game, this.act);
@@ -76,10 +75,10 @@ export abstract class CommandBase implements Command {
   /**
    * Determines if a mob is able to perform a certain action.
    *
-   * @param {Mob} mob - The mob performing the action.
-   * @param {GameState} game - The game object.
-   * @param {Act} act - The action being performed.
-   * @returns {Able} An object indicating if the mob is able to perform the action and if it uses a turn.
+   * @param mob - The mob performing the action.
+   * @param game - The game object.
+   * @param act - The action being performed.
+   * @returns An object indicating if the mob is able to perform the action and if it uses a turn.
    */
   public able(mob: Mob, game: GameState, act: Act): Able {
     const cant = { isAble: false, usesTurn: false };
@@ -109,9 +108,9 @@ export abstract class CommandBase implements Command {
    * Checks if the given mob is afraid and flashes a message if it is the player.
    *  If afraid, the player can not attack.
    *
-   * @param {Mob} me - The mob to check for fear.
-   * @param {GameState} game - The game object for flashing messages.
-   * @return {boolean} - Whether the mob is afraid or not.
+   * @param me - The mob to check for fear.
+   * @param game - The game object for flashing messages.
+   * @return Whether the mob is afraid or not.
    */
   private afraid(me: Mob, game: GameState): boolean {
     const afraid = me.is(Buff.Afraid);
@@ -124,9 +123,9 @@ export abstract class CommandBase implements Command {
    * Checks if the given mob is charmed and if it is a player. If it is, flashes a message to the game interface.
    * If charmed, the player can not attack. Charmed status is cleared if the charming spellcaster attacks the player.
    *
-   * @param {Mob} me - The mob to check for charm.
-   * @param {GameState} game - The game object to flash the message to.
-   * @return {boolean} True if the mob is charmed, false otherwise.
+   * @param me - The mob to check for charm.
+   * @param game - The game object to flash the message to.
+   * @return True if the mob is charmed, false otherwise.
    */
   private charmed(me: Mob, game: GameState): boolean {
     const charmed = me.is(Buff.Charm);
@@ -139,9 +138,9 @@ export abstract class CommandBase implements Command {
    * Checks if the given mob is rooted and if it is a player, flashes a message to the game interface.
    * If rooted, the player can not move.
    *
-   * @param {Mob} me - The mob to check for root.
-   * @param {GameState} game - The game object to flash the message to.
-   * @return {boolean} True if the mob is rooted, false otherwise.
+   * @param me - The mob to check for root.
+   * @param game - The game object to flash the message to.
+   * @return True if the mob is rooted, false otherwise.
    */
   private rooted(me: Mob, game: GameState): boolean {
     const rooted = me.is(Buff.Root);
@@ -154,9 +153,9 @@ export abstract class CommandBase implements Command {
    * Checks if the given mob is levitating and flashes a message if it is the player.
    * If levitating, the player can not move or attack with melee weapons.
    *
-   * @param {Mob} me - The mob to check for levitation.
-   * @param {GameState} game - The game object for flashing messages.
-   * @return {boolean} - Whether the mob is levitating or not.
+   * @param me - The mob to check for levitation.
+   * @param game - The game object for flashing messages.
+   * @return True if the mob is levitating, false otherwise.
    */
   private levitate(me: Mob, game: GameState): boolean {
     const levitate = me.is(Buff.Levitate);
@@ -169,9 +168,9 @@ export abstract class CommandBase implements Command {
    * Checks if the given mob is paralyzed and flashes a message if it is the player.
    * If paralyzed, the player's actions have to pass a dice roll check in order to perform them.
    *
-   * @param {Mob} me - The mob to check for paralysis.
-   * @param {GameState} game - The game object for flashing messages.
-   * @returns {boolean} - Whether the mob is paralyzed or not.
+   * @param me - The mob to check for paralysis.
+   * @param game - The game object for flashing messages.
+   * @returns True if the mob is paralyzed, false otherwise.
    */
   private paralyzed(me: Mob, game: GameState): boolean {
     if (!me.is(Buff.Paralyze)) return false;
@@ -204,9 +203,9 @@ export abstract class CommandBase implements Command {
    * Checks if the given mob is asleep and flashes a message if it is the player.
    * If asleep, the player can not move or attack. Sleep status is cleared when receiving damage.
    *
-   * @param {Mob} me - The mob to check for sleep.
-   * @param {GameState} game - The game object to flash the message to.
-   * @return {boolean} - Whether the mob is asleep or not.
+   * @param me - The mob to check for sleep.
+   * @param game - The game object to flash the message to.
+   * @return True if the mob is asleep, false otherwise.
    */
   private asleep(me: Mob, game: GameState): boolean {
     if (!me.is(Buff.Sleep)) return false;
@@ -219,9 +218,9 @@ export abstract class CommandBase implements Command {
    * Checks if the given mob is slowed and flashes a message if it is the player.
    * If slowed, half of the player's actions have a 50% chance to fail.
    *
-   * @param {Mob} me - The mob to check for being slowed.
-   * @param {GameState} game - The game object for checking conditions and displaying messages.
-   * @returns {boolean} - True if the mob is slowed, false otherwise.
+   * @param me - The mob to check for being slowed.
+   * @param game - The game object for checking conditions and displaying messages.
+   * @returns True if the mob is slowed, false otherwise.
    */
   private slow(me: Mob, game: GameState): boolean {
     if (!me.is(Buff.Slow)) return false;
@@ -234,10 +233,10 @@ export abstract class CommandBase implements Command {
   /**
    * Checks if the given mob is frozen and flashes a message if it is the player.
    *
-   * @param {Mob} me - The mob to check for freezing.
-   * @param {GameState} game - The game object for flashing messages.
-   * @param {boolean} move - Indicates if the mob is trying to move.
-   * @returns {boolean} - Whether the mob is frozen or not.
+   * @param me - The mob to check for freezing.
+   * @param game - The game object for flashing messages.
+   * @param move - Indicates if the mob is trying to move.
+   * @returns True if the mob is frozen, false otherwise.
    */
   private freeze(me: Mob, game: GameState, move: boolean): boolean {
     if (!me.is(Buff.Freeze)) return false;
@@ -250,9 +249,9 @@ export abstract class CommandBase implements Command {
   /**
    * Checks if the mob is confused and updates the direction accordingly.
    *
-   * @param {GameState} game - The game object for handling randomness.
-   * @param {WorldPoint} dir - The direction to update.
-   * @returns {boolean} Whether the mob is confused or not.
+   * @param game - The game object for handling randomness.
+   * @param dir - The direction to update.
+   * @returns True if the mob is confused, false otherwise.
    */
   public confused(game: GameState, dir: WorldPoint): boolean {
     if (!this.me.is(Buff.Confuse)) return false;
@@ -271,8 +270,8 @@ export abstract class CommandBase implements Command {
   /**
    * Checks if the player is dehydrated and flashes a message if it is.
    *
-   * @param {GameState} game - The game object for flashing messages.
-   * @returns {boolean} - Whether the player is dehydrated or not.
+   * @param game - The game object for flashing messages.
+   * @returns True if the player is dehydrated, false otherwise.
    */
   private dehydrated(game: GameState): boolean {
     const dehydrated = game.stats.thirst >= 8;
@@ -289,8 +288,8 @@ export abstract class CommandBase implements Command {
    * Checks if the mob is ravenous and, if it is a player, flashes a message to the game interface.
    * If ravenous, the player may have difficulty concentrating.
    *
-   * @param {GameState} game - The game object for flashing messages.
-   * @return {boolean} True if the mob is ravenous and the chance condition is met, false otherwise.
+   * @param game - The game object for flashing messages.
+   * @return True if the mob is ravenous and the chance condition is met, false otherwise.
    */
   private ravenous(game: GameState): boolean {
     const ravenous = game.stats.hunger >= 8;
@@ -305,7 +304,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Executes the command directly.
-   * @returns {boolean} The result of executing the command.
+   * @returns The result of executing the command.
    */
   public raw(): boolean {
     return this.execute();
@@ -313,7 +312,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Executes a non-player character (NPC) turn.
-   * @returns {boolean} The result of executing the command.
+   * @returns The result of executing the command.
    */
   public npcTurn(): boolean {
     return this.turn();

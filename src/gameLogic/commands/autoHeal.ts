@@ -34,8 +34,8 @@ export class AutoHeal {
    * Clears the sleep buff from a mob if it exists and the mob is a player,
    * and displays a message indicating that the player has woken up.
    *
-   * @param {Mob} mob - The mob to clear the sleep buff from.
-   * @param {Game} game - The game object to display the message on.
+   * @param mob - The mob to clear the sleep buff from.
+   * @param game - The game object to display the message on.
    */
   static clearSleep(mob: Mob, game: GameState) {
     if (!mob.is(Buff.Sleep)) return;

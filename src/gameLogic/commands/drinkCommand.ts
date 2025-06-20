@@ -17,7 +17,7 @@ export class DrinkCommand extends CommandBase {
 
   /**
    * Executes the drink command. For players, this decreases the thirst level and flashes a message.
-   * @returns {boolean} Always returns true.
+   * @returns Always returns true.
    */
   public execute(): boolean {
     const { game } = this;

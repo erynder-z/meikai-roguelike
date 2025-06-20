@@ -18,7 +18,8 @@ export class StairCommand extends CommandBase {
 
   /**
    * Executes the stair command.
-   * @returns {boolean} True if the command execution is successful, otherwise false.
+   *
+   * @returns True if the command execution is successful, otherwise false.
    */
   public execute(): boolean {
     const { game, levelDir } = this;
@@ -41,10 +42,10 @@ export class StairCommand extends CommandBase {
   /**
    * Returns the new position on the map based on the direction and the new map.
    *
-   * @param {string} direction - The direction of movement ('ascends' or 'descends').
-   * @param {GameMapType} newMap - The new map to move to.
-   * @param {GameState} game - The game object.
-   * @return {WorldPoint} The new position on the map.
+   * @param direction - The direction of movement ('ascends' or 'descends').
+   * @param newMap - The new map to move to.
+   * @param game - The game object.
+   * @return The new position on the map.
    */
   private getNewPos(
     direction: string,

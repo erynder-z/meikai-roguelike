@@ -35,7 +35,7 @@ export class Game implements GameState {
   /**
    * Retrieve the current map.
    *
-   * @return {GameMapType | null} The current map, or null if not available.
+   * @return The current map, or null if not available.
    */
   public currentMap(): GameMapType | null {
     return this.dungeon.currentMap(this);
@@ -43,7 +43,7 @@ export class Game implements GameState {
 
   /**
    * Adds a message to the message log.
-   * @param {string} msg - The message to add.
+   * @param msg - The message to add.
    */
   public message(msg: LogMessage): void {
     const isFlashMsg = false;
@@ -52,7 +52,7 @@ export class Game implements GameState {
 
   /**
    * Displays a flash message.
-   * @param {string} msg - The message to add.
+   * @param msg - The message to add.
    */
   public flash(msg: LogMessage): void {
     const isFlashMsg = true;
@@ -62,7 +62,7 @@ export class Game implements GameState {
   /**
    * Adds the given event category to the current event in the message log.
    *
-   * @param {EventCategory} evt - The event category to add.
+   * @param evt - The event category to add.
    */
   public addCurrentEvent(evt: EventCategory): void {
     this.log.addCurrentEvent(evt);

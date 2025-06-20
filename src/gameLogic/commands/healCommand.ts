@@ -19,7 +19,7 @@ export class HealCommand extends CommandBase {
   /**
    * Executes the heal command, healing the mob by a random amount between 50% and 75% of the specified heal amount.
    *
-   * @return {boolean} Returns true if the heal command was executed successfully.
+   * @return Returns true if the heal command was executed successfully.
    */
   public execute(): boolean {
     const randomGenerator = this.gameInstance.rand;

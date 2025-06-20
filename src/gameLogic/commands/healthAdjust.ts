@@ -13,10 +13,10 @@ import { Mob } from '../mobs/mob';
 export class HealthAdjust {
   /**
    * Adjusts the health of a mob based on the specified amount.
-   * @param {Mob} mob - The mob whose health is to be adjusted.
-   * @param {number} amount - The amount by which the health will be adjusted.
-   * @param {GameState} game - The game object.
-   * @param {Mob} entity - The entity involved in the adjustment.
+   * @param mob - The mob whose health is to be adjusted.
+   * @param amount - The amount by which the health will be adjusted.
+   * @param game - The game object.
+   * @param entity - The entity involved in the adjustment.
    */
   public static adjust(
     mob: Mob,
@@ -31,8 +31,8 @@ export class HealthAdjust {
 
   /**
    * Heals the specified amount of health to the given mob.
-   * @param {Mob} mob - The mob to be healed.
-   * @param {number} amount - The amount of health to be healed.
+   * @param mob - The mob to be healed.
+   * @param amount - The amount of health to be healed.
    */
   public static heal(mob: Mob, amount: number): void {
     const limit = mob.maxhp - mob.hp;
@@ -42,10 +42,10 @@ export class HealthAdjust {
 
   /**
    * Deals damage to the specified mob.
-   * @param {Mob} mob - The mob to receive the damage.
-   * @param {number} amount - The amount of damage to deal.
-   * @param {Game} game - The game object.
-   * @param {Mob | null} attacker - The mob causing the damage.
+   * @param mob - The mob to receive the damage.
+   * @param amount - The amount of damage to deal.
+   * @param game - The game object.
+   * @param attacker - The mob causing the damage.
    */
   public static damage(
     mob: Mob,
@@ -75,8 +75,8 @@ export class HealthAdjust {
 
   /**
    * Handles the death of the specified mob by an damage action.
-   * @param {Mob} mob - The mob that dies.
-   * @param {GameState} game - The game object.
+   * @param mob - The mob that dies.
+   * @param game - The game object.
    */
   private static mobDeathWithCorpseAndLoot(
     mob: Mob,
@@ -102,9 +102,9 @@ export class HealthAdjust {
 
   /**
    * Handles the death of the specified mob by removing it from the map.
-   * @param {Mob} mob - The mob that dies.
-   * @param {GameState} game - The game object.
-   * @param {boolean} shouldDisplayMessage - Whether to message the death.
+   * @param mob - The mob that dies.
+   * @param game - The game object.
+   * @param shouldDisplayMessage - Whether to message the death.
    */
   public static mobDeathWithoutCorpseAndLoot(
     mob: Mob,
@@ -130,8 +130,8 @@ export class HealthAdjust {
   /**
    * Determines if loot should be dropped for the specified mob.
    *
-   * @param {Mob} mob - The mob for which loot may be dropped.
-   * @param {GameState} game - The game object used to determine success.
+   * @param mob - The mob for which loot may be dropped.
+   * @param game - The game object used to determine success.
    */
   private static maybeDropLoot(mob: Mob, game: GameState): void {
     if (game.rand.isOneIn(10)) {
@@ -142,10 +142,9 @@ export class HealthAdjust {
   /**
    * Handles the event when a player takes damage.
    *
-   * @param {Mob} player - The player who took damage.
-   * @param {number} amount - The amount of damage taken.
-   * @param {GameState} game - The current game state.
-   * @return {void} This function does not return anything.
+   * @param player - The player who took damage.
+   * @param amount - The amount of damage taken.
+   * @param game - The current game state.
    */
   public static handlePlayerDamageEvent(
     player: Mob,
@@ -160,9 +159,9 @@ export class HealthAdjust {
   /**
    * Generates a damage message for a player and returns it as a LogMessage object.
    *
-   * @param {Mob} player - The player who took damage.
-   * @param {number} amount - The amount of damage taken.
-   * @return {LogMessage} A LogMessage object containing the damage message and the playerDamage category.
+   * @param player - The player who took damage.
+   * @param amount - The amount of damage taken.
+   * @return A LogMessage object containing the damage message and the playerDamage category.
    */
   private static getDamageMessage(player: Mob, amount: number): LogMessage {
     const message = this.generateDamageMessage(player, amount);
@@ -172,9 +171,8 @@ export class HealthAdjust {
   /**
    * Flashes a damage message on the game state.
    *
-   * @param {GameState} game - The game state.
-   * @param {LogMessage} message - The damage message.
-   * @return {void} This function does not return a value.
+   * @param game - The game state.
+   * @param message - The damage message.
    */
   private static flashDamageMessage(
     game: GameState,
@@ -186,10 +184,9 @@ export class HealthAdjust {
   /**
    * Adds a damage or death event to the game state based on the player's health.
    *
-   * @param {Mob} player - The player who took damage.
-   * @param {number} amount - The amount of damage taken.
-   * @param {GameState} game - The current game state.
-   * @return {void} This function does not return anything.
+   * @param player - The player who took damage.
+   * @param amount - The amount of damage taken.
+   * @param game - The current game state.
    */
   private static addDamageOrDeathEvent(
     player: Mob,
@@ -205,9 +202,9 @@ export class HealthAdjust {
   /**
    * Determines if the given amount of damage is fatal for the mob.
    *
-   * @param {Mob} mob - The mob object to check for fatal damage.
-   * @param {number} amount - The amount of damage to check.
-   * @return {boolean} True if the amount of damage is fatal, false otherwise.
+   * @param mob - The mob object to check for fatal damage.
+   * @param amount - The amount of damage to check.
+   * @return True if the amount of damage is fatal, false otherwise.
    */
   private static isFatalDamage(mob: Mob, amount: number): boolean {
     return amount > 0 && mob.hp <= 0;
@@ -216,7 +213,7 @@ export class HealthAdjust {
   /**
    * Processes and displays the single cumulative damage message for the player for the current turn.
    * This should be called once by the game loop after all player damage for the turn is thought to be resolved.
-   * @param {GameState} game - The current game state.
+   * @param game - The current game state.
    */
   public static displayCumulativePlayerDamageMessage(game: GameState): void {
     if (game.player && game.stats.currentTurnReceivedDmg > 0) {
@@ -231,9 +228,9 @@ export class HealthAdjust {
   /**
    * Generates a message based on the damage percentage inflicted on the mob.
    *
-   * @param {Mob} mob - The mob object taking the damage.
-   * @param {number} amount - The amount of damage inflicted.
-   * @return {string} The message describing the level of damage.
+   * @param mob - The mob object taking the damage.
+   * @param amount - The amount of damage inflicted.
+   * @return‚ The message describing the level of damage.
    */
   private static generateDamageMessage(mob: Mob, amount: number): string {
     const damagePercentage = Math.round((amount / mob.hp) * 100);
@@ -258,8 +255,8 @@ export class HealthAdjust {
   /**
    * Generates a message for the player's death.
    *
-   * @param {Mob} player - The player who died.
-   * @return {LogMessage} The message describing the player's death.
+   * @param player - The player who died.
+   * @return The message describing the player's death.
    */
   private static generatePlayerDeathMessage(player: Mob): LogMessage {
     const message = `${player.name} dies.`;
@@ -269,10 +266,10 @@ export class HealthAdjust {
   /**
    * Determines whether a message should be displayed based on game state, mob, and attacker.
    *
-   * @param {GameState} game - The current game state.
-   * @param {Mob} mob - The mob for which the message is being considered.
-   * @param {Mob | null} attacker - The attacker mob, can be null.
-   * @return {boolean} True if a message should be displayed, false otherwise.
+   * @param game - The current game state.
+   * @param mob - The mob for which the message is being considered.
+   * @param attacker - The attacker mob, can be null.
+   * @return True if a message should be displayed, false otherwise.
    */
   private static shouldDisplayMessage(
     game: GameState,

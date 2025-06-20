@@ -2,9 +2,9 @@ export class ManipulateColors {
   /**
    * Darkens a hex color by a given factor.
    *
-   * @param {string} hexColor - The hex color to darken.
-   * @param {number} factor - The factor by which to darken the color.
-   * @return {string} The darkened hex color.
+   * @param hexColor - The hex color to darken.
+   * @param factor - The factor by which to darken the color.
+   * @return The darkened hex color.
    */
   public static darkenColor(hexColor: string, factor: number): string {
     if (hexColor.startsWith('#')) {
@@ -27,9 +27,9 @@ export class ManipulateColors {
   /**
    * Tints the given hex color with pink based on the provided factor.
    *
-   * @param {string} hexColor - The hex color to tint.
-   * @param {number} factor - The factor by which to tint the color.
-   * @return {string} The tinted hex color.
+   * @param hexColor - The hex color to tint.
+   * @param factor - The factor by which to tint the color.
+   * @return The tinted hex color.
    */
   public static tintWithPink(hexColor: string, factor: number): string {
     if (hexColor.startsWith('#')) {
@@ -52,9 +52,9 @@ export class ManipulateColors {
   /**
    * Tints the given hex color with red based on the provided factor.
    *
-   * @param {string} hexColor - The hex color to tint.
-   * @param {number} factor - The factor by which to tint the color.
-   * @return {string} The tinted hex color.
+   * @param hexColor - The hex color to tint.
+   * @param factor - The factor by which to tint the color.
+   * @return The tinted hex color.
    */
   public static tintWithRed(hexColor: string, factor: number): string {
     if (hexColor.startsWith('#')) {
@@ -77,9 +77,9 @@ export class ManipulateColors {
   /**
    * Tints the given hex color with green based on the provided factor.
    *
-   * @param {string} hexColor - The hex color to tint.
-   * @param {number} factor - The factor by which to tint the color.
-   * @return {string} The tinted hex color.
+   * @param hexColor - The hex color to tint.
+   * @param factor - The factor by which to tint the color.
+   * @return The tinted hex color.
    */
   public static tintWithGreen(hexColor: string, factor: number): string {
     if (hexColor.startsWith('#')) {
@@ -102,9 +102,9 @@ export class ManipulateColors {
   /**
    * Tints the given hex color with yellow based on the provided factor.
    *
-   * @param {string} hexColor - The hex color to tint. It should start with a '#' character.
-   * @param {number} factor - The factor by which to tint the color. A value of 0 will return the original color, a value of 1 will return the most yellow color possible.
-   * @return {string} The tinted hex color.
+   * @param hexColor - The hex color to tint. It should start with a '#' character.
+   * @param factor - The factor by which to tint the color. A value of 0 will return the original color, a value of 1 will return the most yellow color possible.
+   * @return The tinted hex color.
    */
   public static tintWithYellow(hexColor: string, factor: number): string {
     if (hexColor.startsWith('#')) {
@@ -127,9 +127,9 @@ export class ManipulateColors {
   /**
    * Tints the given hex color with blue based on the provided factor.
    *
-   * @param {string} hexColor - The hex color to tint. It should start with a '#' character.
-   * @param {number} factor - The factor by which to tint the color. A value of 0 will return the original color, a value of 1 will return the most blue color possible.
-   * @return {string} The tinted hex color.
+   * @param hexColor - The hex color to tint. It should start with a '#' character.
+   * @param factor - The factor by which to tint the color. A value of 0 will return the original color, a value of 1 will return the most blue color possible.
+   * @return The tinted hex color.
    */
   public static tintWithBlue(hexColor: string, factor: number): string {
     if (hexColor.startsWith('#')) {
@@ -150,9 +150,9 @@ export class ManipulateColors {
   /**
    * Tints the given hex color with blood-like intensity based on the provided factor.
    *
-   * @param {string} hexColor - The hex color to tint. It should start with a '#' character.
-   * @param {number} factor - The factor by which to tint the color. A value of 0 will return the original color, while a value close to 1 will result in a more blood-like tint.
-   * @return {string} The tinted hex color.
+   * @param hexColor - The hex color to tint. It should start with a '#' character.
+   * @param factor - The factor by which to tint the color. A value of 0 will return the original color, while a value close to 1 will result in a more blood-like tint.
+   * @return The tinted hex color.
    */
 
   public static tintWithBlood(hexColor: string, factor: number): string {
@@ -177,9 +177,9 @@ export class ManipulateColors {
   /**
    * Converts a hex color to an rgba color string.
    *
-   * @param {string} hex - The hex color to convert.
-   * @param {number} transparency - The transparency of the color. A value of 0 will return a completely transparent color, a value of 1 will return a completely opaque color.
-   * @return {string} The rgba color string.
+   * @param hex - The hex color to convert.
+   * @param transparency - The transparency of the color. A value of 0 will return a completely transparent color, a value of 1 will return a completely opaque color.
+   * @return The rgba color string.
    */
   public static hexToRgba(hex: string, transparency: number): string {
     transparency = Math.max(0, Math.min(1, transparency));

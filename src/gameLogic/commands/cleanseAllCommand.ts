@@ -17,7 +17,7 @@ export class CleanseAllCommand extends CommandBase {
   /**
    * Executes the cleanse all command, removing all buffs from the mob.
    *
-   * @return {boolean} Returns true if the command was executed successfully.
+   * @return Returns true if the command was executed successfully.
    */
   public execute(): boolean {
     const { me, game } = this;

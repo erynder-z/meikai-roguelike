@@ -32,7 +32,7 @@ export class BuffCommand extends CommandBase {
   }
   /**
    * Executes the buff command.
-   * @returns {boolean} Always returns true.
+   * @returns Always returns true.
    */
   public execute(): boolean {
     const { game, target } = this;
@@ -73,9 +73,9 @@ export class BuffCommand extends CommandBase {
   /**
    * Add a buff to a mob in the game.
    *
-   * @param {BuffType} active - the buff to add
-   * @param {GameState} game - the game where the mob exists
-   * @param {Mob} mob - the mob to add the buff to
+   * @param active - the buff to add
+   * @param game - the game where the mob exists
+   * @param mob - the mob to add the buff to
    */
   public addBuffToMob(active: BuffType, game: GameState, mob: Mob) {
     mob.buffs.add(active, game, mob);

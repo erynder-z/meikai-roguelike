@@ -20,7 +20,7 @@ export class EquipCommand extends CommandBase {
 
   /**
    * Executes the equip command.
-   * @returns {boolean} True if the command executed successfully, false otherwise.
+   * @returns True if the command executed successfully, false otherwise.
    */
   public execute(): boolean {
     const { game, item, index, equipment } = this;
@@ -42,8 +42,9 @@ export class EquipCommand extends CommandBase {
 
   /**
    * Checks if an item is equippable.
-   * @param {ItemObject} item The item to check.
-   * @returns {boolean} True if the item is equippable, false otherwise.
+   *
+   * @param item - The item to check.
+   * @returns True if the item is equippable, false otherwise.
    */
   private isEquippable(item: ItemObject): boolean {
     const canEquip = item.slot != Slot.NotWorn;
@@ -57,8 +58,9 @@ export class EquipCommand extends CommandBase {
 
   /**
    * Checks if an item is already equipped.
-   * @param {ItemObject} item The item to check.
-   * @returns {boolean} True if the item is already equipped, false otherwise.
+   *
+   * @param item - The item to check.
+   * @returns True if the item is already equipped, false otherwise.
    */
   private isAlreadyEquipped(item: ItemObject): boolean {
     const { game } = this;
@@ -78,8 +80,9 @@ export class EquipCommand extends CommandBase {
 
   /**
    * Checks if the hands are already full with weapons.
-   * @param {ItemObject} item The item to check if it's a weapon.
-   * @returns {boolean} True if the hands are already full, false otherwise.
+   *
+   * @param item - The item to check if it's a weapon.
+   * @returns True if the hands are already full, false otherwise.
    */
   private areHandsFull(item: ItemObject): boolean {
     if (!Equipment.isWeapon(item)) return false;
@@ -101,9 +104,10 @@ export class EquipCommand extends CommandBase {
 
   /**
    * Checks if two slots overlap.
-   * @param {Slot} slot The first slot to check.
-   * @param {Slot} hand The second slot to check.
-   * @returns {boolean} True if the slots overlap, false otherwise.
+   *
+   * @param slot - The first slot to check.
+   * @param hand - The second slot to check.
+   * @returns True if the slots overlap, false otherwise.
    */
   private doesOverlap(slot: Slot, hand: Slot): boolean {
     return slot == Slot.BothHands || hand == Slot.BothHands || hand == slot;

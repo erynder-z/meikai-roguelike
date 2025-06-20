@@ -20,7 +20,7 @@ export class CleanseBuffCommand extends CommandBase {
   /**
    * Executes the command to cleanse a specific buff from the mob.
    *
-   * @return {boolean} Returns true if the command was executed successfully.
+   * @return Returns true if the command was executed successfully.
    */
   public execute(): boolean {
     const { me, game } = this;

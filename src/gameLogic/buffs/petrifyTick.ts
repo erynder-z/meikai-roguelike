@@ -17,9 +17,9 @@ export class PetrifyTick implements Tick {
    * Determines if damage should be applied based on the current turn.
    * The initial tick always applies damage. After that, damage is applied on odd turns.
    *
-   * @param {number} duration - The total duration of the bleed effect.
-   * @param {number} timeLeft - The remaining time for the bleed effect.
-   * @return {boolean} True if damage should be applied on odd turns, false otherwise.
+   * @param duration - The total duration of the bleed effect.
+   * @param timeLeft - The remaining time for the bleed effect.
+   * @return True if damage should be applied on odd turns, false otherwise.
    */
   private shouldApplyDamage(duration: number, timeLeft: number): boolean {
     const turnNumber = duration - timeLeft;
@@ -30,8 +30,8 @@ export class PetrifyTick implements Tick {
   /**
    * Ticks the petrify effect on the mob.
    *
-   * @param {number} duration - The duration of the petrify effect.
-   * @param {number} timeLeft - The time left in the petrify effect.
+   * @param duration - The duration of the petrify effect.
+   * @param timeLeft - The time left in the petrify effect.
    */
   public tick(duration: number, timeLeft: number): void {
     if (!this.shouldApplyDamage(duration, timeLeft)) return;

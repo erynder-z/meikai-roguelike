@@ -15,8 +15,8 @@ export class AttackDamageChangeTick implements Tick {
   /**
    * Checks if the current tick is the final tick.
    *
-   * @param {number} timeLeft - The time left in the modifier.
-   * @return {boolean} True if it is the final tick, false otherwise.
+   * @param timeLeft - The time left in the modifier.
+   * @return True if it is the final tick, false otherwise.
    */
   private isFinalTick(timeLeft: number): boolean {
     return timeLeft === 0;
@@ -25,8 +25,8 @@ export class AttackDamageChangeTick implements Tick {
   /**
    * Applies the attack damage modifier to the game state.
    *
-   * @param {number} duration - The duration of the attack damage modifier.
-   * @param {number} timeLeft - The time left in the modifier.
+   * @param duration - The duration of the attack damage modifier.
+   * @param timeLeft - The time left in the modifier.
    */
   public tick(duration: number, timeLeft: number): void {
     if (!this.isFinalTick(timeLeft)) return;

@@ -18,10 +18,9 @@ export class SummonCommand extends MultiplyCommand {
   /**
    * Spawns a mob at the given world point on the specified game map.
    *
-   * @param {WorldPoint} wp - The coordinates of the world point where the mob should be spawned.
-   * @param {GameMap} map - The game map on which the mob should be spawned.
-   * @param {GameState} game - The game object.
-   * @return {void} This function does not return a value.
+   * @param wp - The coordinates of the world point where the mob should be spawned.
+   * @param map - The game map on which the mob should be spawned.
+   * @param game - The game object.
    */
   public spawnMob(wp: WorldPoint, map: GameMap, game: GameState): void {
     const { me } = this;

@@ -17,6 +17,8 @@ export class ControlSchemeManager {
 
   /**
    * Gets the current active control scheme.
+   *
+   * @return The active control scheme.
    */
   public getActiveScheme(): Record<string, string[]> {
     return this.activeScheme;
@@ -25,8 +27,8 @@ export class ControlSchemeManager {
   /**
    * Takes a KeyboardEvent and extracts the associated key code.
    *
-   * @param {KeyboardEvent} event - the keyboard event to extract the key code from
-   * @return {string} the extracted key code
+   * @param event - the keyboard event to extract the key code from
+   * @return the extracted key code
    */
   public keyPressToCode(event: KeyboardEvent): string {
     let keyCode: string = event.key;

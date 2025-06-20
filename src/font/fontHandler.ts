@@ -17,7 +17,8 @@ export class FontHandler {
   /**
    * Loads all fonts from the fonts directory in the app data directory.
    * Also applies the selected font.
-   * @returns {Promise<void>} A promise that resolves when all fonts are loaded.
+   *
+   * @returns A promise that resolves when all fonts are loaded.
    */
   static async loadFonts(): Promise<void> {
     const appDataPath = await appDataDir();
@@ -34,7 +35,7 @@ export class FontHandler {
   /**
    * Loads a font from the given path.
    * @param  {FontInfo} font - - The font information that includes the name and path of the font.
-   * @returns {Promise<void>} A promise that resolves when the font is loaded or an error occurs.
+   * @returns A promise that resolves when the font is loaded or an error occurs.
    * If the font is already loaded, the promise resolves immediately.
    * If the font is invalid or cannot be loaded, it logs an error to the console.
    */
@@ -73,7 +74,7 @@ export class FontHandler {
    * Returns an array of font names that have been loaded. These font names
    * correspond to the fonts currently available for use in the application.
    *
-   * @returns {string[]} An array of strings representing the names of the available fonts.
+   * @returns An array of strings representing the names of the available fonts.
    */
 
   static getAvailableFonts(): string[] {
@@ -86,7 +87,6 @@ export class FontHandler {
    * Updates the CSS variable `--game-font` to reflect the current terminal font specified
    * in the game configuration. This ensures that any elements styled with this variable
    * will use the selected font.
-   * @returns {void}
    */
 
   static applySelectedFont(): void {

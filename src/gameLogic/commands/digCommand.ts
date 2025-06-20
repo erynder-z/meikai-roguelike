@@ -29,7 +29,7 @@ export class DigCommand extends CommandBase {
   /**
    * Executes the dig command. Digging has a 10% chance of success.
    *
-   * @return {boolean} Returns true if the dig command was executed successfully, otherwise false.
+   * @return Returns true if the dig command was executed successfully, otherwise false.
    */
   public execute(): boolean {
     const { game } = this;

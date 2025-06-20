@@ -13,15 +13,18 @@ import { MobMessagesHandler } from '../../ui/messages/mobMessagesHandler';
 export class ActiveBuffs {
   private map: Map<Buff, BuffType> = new Map();
 
+  /**
+   * @returns A map with the buffs of a mob.
+   */
   public getBuffsMap(): Map<Buff, BuffType> {
     return this.map;
   }
 
   /**
    * Adds a buff to the collection of active buffs for a given mob.
-   * @param {BuffType} buffType - The buff to add.
-   * @param {GameState} game - The game object.
-   * @param {Mob} mob - The mob to apply the buff to.
+   * @param buffType - The buff to add.
+   * @param game - The game object.
+   * @param mob - The mob to apply the buff to.
    */
   public add(buffType: BuffType, game: GameState, mob: Mob): void {
     const buff = buffType.buff;
@@ -35,9 +38,9 @@ export class ActiveBuffs {
 
   /**
    * Remove a buff from the collection of active buffs for a given mob.
-   * @param {BuffType} b - The buff to remove.
-   * @param {Game} game - The game object.
-   * @param {Mob} mob - The mob to remove the buff from.
+   * @param b - The buff to remove.
+   * @param game - The game object.
+   * @param mob - The mob to remove the buff from.
    */
   public remove(b: BuffType, game: GameState, mob: Mob): void {
     this.map.delete(b.buff);
@@ -51,8 +54,8 @@ export class ActiveBuffs {
 
   /**
    * Checks if a specific type of buff is currently active on the mob.
-   * @param {Buff} buff - The buff to check.
-   * @returns {boolean} - True if the buff is active, false otherwise.
+   * @param buff - The buff to check.
+   * @returns True if the buff is active, false otherwise.
    */
   public is(buff: Buff): boolean {
     return this.map.has(buff);
@@ -60,8 +63,8 @@ export class ActiveBuffs {
 
   /**
    * Gets the information of the buff of a specific type currently active on the mob.
-   * @param {Buff} buff - The buff to get information for.
-   * @returns {BuffType | undefined} - The information of the buff if active, otherwise undefined.
+   * @param buff - The buff to get information for.
+   * @returns The information of the buff if active, otherwise undefined.
    */
   public get(buff: Buff): BuffType | undefined {
     return this.map.get(buff);
@@ -69,9 +72,9 @@ export class ActiveBuffs {
 
   /**
    * Cleanses a specific type of buff from the mob, removing it from the active buffs collection.
-   * @param {Buff} buff - The buff to cleanse.
-   * @param {Game} game - The game object.
-   * @param {Mob} mob - The mob to cleanse the buff from.
+   * @param buff - The buff to cleanse.
+   * @param game - The game object.
+   * @param mob - The mob to cleanse the buff from.
    */
   public cleanse(buff: Buff, game: GameState, mob: Mob): void {
     const b = mob.buffs.get(buff);
@@ -80,8 +83,8 @@ export class ActiveBuffs {
 
   /**
    * Progresses the active buffs by decrementing their timers and removing expired buffs.
-   * @param {Mob} mob - The mob to process active buffs for.
-   * @param {Game} game - The game object.
+   * @param mob - The mob to process active buffs for.
+   * @param game - The game object.
    */
   public ticks(mob: Mob, game: GameState): void {
     for (const b of this.map.values()) {
@@ -94,10 +97,10 @@ export class ActiveBuffs {
   /**
    * Determines whether a buff message should be displayed to the player.
    *
-   * @param {boolean} alreadyHasBuff - Whether the mob already has the buff.
-   * @param {GameState} game - The game object.
-   * @param {Mob} mob - The mob to check visibility and type.
-   * @return {boolean} True if the buff message should be displayed, false otherwise.
+   * @param alreadyHasBuff - Whether the mob already has the buff.
+   * @param game - The game object.
+   * @param mob - The mob to check visibility and type.
+   * @return True if the buff message should be displayed, false otherwise.
    */
   private shouldDisplayBuffMessage(
     alreadyHasBuff: boolean,
@@ -123,9 +126,9 @@ export class ActiveBuffs {
 
   /**
    * Displays the buff message for the mob.
-   * @param {Buff} buff - The buff to describe.
-   * @param {GameState} game - The game object.
-   * @param {Mob} mob - The mob to apply the buff to.
+   * @param buff - The buff to describe.
+   * @param game - The game object.
+   * @param mob - The mob to apply the buff to.
    */
   private displayBuffMessage(buff: Buff, game: GameState, mob: Mob): void {
     const buffAdjective = GrammarHandler.BuffToAdjective(buff) || buff;

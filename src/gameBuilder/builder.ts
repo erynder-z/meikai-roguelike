@@ -37,7 +37,7 @@ export class Builder implements Build {
   /**
    * Create and return a new Game instance.
    *
-   * @return {GameState} The newly created Game instance
+   * @return The newly created Game instance
    */
   public makeGame(): GameState {
     const rand = new RandomGenerator(this.seed);
@@ -52,6 +52,12 @@ export class Builder implements Build {
     return game;
   }
 
+  /**
+   * Restores a game state from a serialized save state.
+   *
+   * @param saveState - The serialized game state to restore from.
+   * @returns The restored game state.
+   */
   public restoreGame(saveState: SerializedGameState): GameState {
     const saveStateHandler = new SaveStateHandler();
     const rand = new RandomGenerator(saveState.serializedBuild.data.seed);
@@ -87,9 +93,9 @@ export class Builder implements Build {
   /**
    * A function to make a level using the given random generator and level number.
    *
-   * @param {RandomGenerator} rand - the random generator to use
-   * @param {number} level - the level number
-   * @return {GameMapType} the generated map
+   * @param rand - the random generator to use
+   * @param level - the level number
+   * @return the generated map
    */
   public makeLevel(
     rand: RandomGenerator,
@@ -106,9 +112,9 @@ export class Builder implements Build {
   /**
    * Generates a map using the given random generator and level number.
    *
-   * @param {RandomGenerator} rand - the random generator to use
-   * @param {number} level - the level-number for the map
-   * @return {GameMapType} the generated map
+   * @param rand - the random generator to use
+   * @param level - the level-number for the map
+   * @return the generated map
    */
   public makeMap(
     rand: RandomGenerator,
@@ -153,7 +159,7 @@ export class Builder implements Build {
   /**
    * enter the first level of the game.
    *
-   * @param {GameState} game - the game object
+   * @param game - the game object
    */
   private enterFirstLevel(game: GameState, rand: RandomGenerator): void {
     const dungeon = game.dungeon;
@@ -165,6 +171,12 @@ export class Builder implements Build {
     game.dungeon.playerSwitchLevel(dungeon.level, np, game);
   }
 
+  /**
+   * Enters the player into the specified level at the given position.
+   * @param game - the game object
+   * @param level - the level number
+   * @param pos - the position on the level to enter
+   */
   private enterSpecificLevelAtPos(
     game: GameState,
     level: number,
@@ -175,8 +187,8 @@ export class Builder implements Build {
   /**
    * Calculates the center position of the given WorldPoint dimensions.
    *
-   * @param {WorldPoint} dim - the dimensions for which to calculate the center position
-   * @return {WorldPoint} the center position of the given dimensions
+   * @param dim - the dimensions for which to calculate the center position
+   * @return the center position of the given dimensions
    */
   private centerPos(dim: WorldPoint): WorldPoint {
     return new WorldPoint(Math.floor(dim.x / 2), Math.floor(dim.y / 2));
@@ -185,7 +197,7 @@ export class Builder implements Build {
   /**
    * Creates a new player Mob.
    *
-   * @return {Mob} a new player Mob
+   * @return a new player Mob
    */
   public makePlayer(): Mob {
     const player = new Mob(Glyph.Player, 20, 12);
@@ -198,7 +210,7 @@ export class Builder implements Build {
   /**
    * Create and return a new MobAI instance, or null if unable to create one.
    *
-   * @return {MobAI | null} The created MobAI instance, or null if unable to create one.
+   * @return The created MobAI instance, or null if unable to create one.
    */
   public makeAI(): MobAI | null {
     return new AISwitcher(MoodAI.stockMoodShootAI(1, 8));
@@ -207,9 +219,9 @@ export class Builder implements Build {
   /**
    * Generates a ring of mobs around a central point on the map.
    *
-   * @param {Glyph} glyph - the glyph representing the mob
-   * @param {GameMapType} map - the map on which the mobs will be generated
-   * @param {RandomGenerator} rand - the random generator for determining mob positions
+   * @param glyph - the glyph representing the mob
+   * @param map - the map on which the mobs will be generated
+   * @param rand - the random generator for determining mob positions
    */
   public makeRingOfMobs(
     glyph: Glyph,
@@ -263,12 +275,12 @@ export class Builder implements Build {
   /**
    * Adds a new non-playable character to the map at the specified position and level.
    *
-   * @param {Glyph} glyph - the visual representation of the NPC
-   * @param {number} x - the x-coordinate of the NPC on the map
-   * @param {number} y - the y-coordinate of the NPC on the map
-   * @param {GameMapType} map - the map to which the NPC is being added
-   * @param {number} level - the level of the NPC
-   * @return {Mob} the newly added NPC
+   * @param glyph - the visual representation of the NPC
+   * @param x - the x-coordinate of the NPC on the map
+   * @param y - the y-coordinate of the NPC on the map
+   * @param map - the map to which the NPC is being added
+   * @param level - the level of the NPC
+   * @return the newly added NPC
    */
   public addNPC(
     glyph: Glyph,
@@ -286,9 +298,8 @@ export class Builder implements Build {
   /**
    * Sets the level-related statistics of a Mob.
    *
-   * @param {Mob} mob - The Mob whose statistics are being set.
-   * @param {number} mobLevel - The level of the Mob.
-   * @return {void}
+   * @param mob - The Mob whose statistics are being set.
+   * @param mobLevel - The level of the Mob.
    */
   private setLevelStats(mob: Mob, mobLevel: number): void {
     mob.level = mobLevel;
@@ -298,9 +309,9 @@ export class Builder implements Build {
 
   /**
    * Adds level stairs to the map based on the level and random generator provided.
-   * @param {GameMapType} map - The map to which stairs are being added.
-   * @param {number} level - The level for which stairs are being added.
-   * @param {RandomGenerator} rand - The random generator used for adding stairs.
+   * @param map - The map to which stairs are being added.
+   * @param level - The level for which stairs are being added.
+   * @param rand - The random generator used for adding stairs.
    */
   private addLevelStairs(
     map: GameMapType,
@@ -316,7 +327,7 @@ export class Builder implements Build {
 
   /**
    * Adds stairs for level to the map at a specified position.
-   * @param {GameMapType} map - The map to which stairs are being added.
+   * @param map - The map to which stairs are being added.
    */
   private addStairs0(map: GameMapType, rand: RandomGenerator): void {
     const pos = this.centerPos(map.dimensions);
@@ -334,7 +345,7 @@ export class Builder implements Build {
 
   /**
    * Adds stairs for a level to the map.
-   * @param {GameMapType} map - The map to which stairs are being added.
+   * @param map - The map to which stairs are being added.
    */
   private addStairs(map: GameMapType, rand: RandomGenerator): void {
     this.addStair(map, rand, Glyph.Stairs_Down);
@@ -343,10 +354,9 @@ export class Builder implements Build {
 
   /**
    * Adds stairs to the map based on the provided glyph and random generator.
-   * @param {GameMapType} map - The map to which stairs are being added.
-   * @param {RandomGenerator} rand - The random generator used for adding stairs.
-   * @param {Glyph} stair - The glyph representing the stairs.
-   * @returns {boolean} True if stairs are successfully added, otherwise false.
+   * @param map - The map to which stairs are being added.
+   * @param rand - The random generator used for adding stairs.
+   * @param stair - The glyph representing the stairs.
    */
   private addStair(
     map: GameMapType,
@@ -362,8 +372,8 @@ export class Builder implements Build {
 
   /**
    * Adds mobs to the level based on the map and random generator provided.
-   * @param {GameMapType} map - The map to which mobs are being added.
-   * @param {RandomGenerator} rand - The random generator used for adding mobs.
+   * @param map - The map to which mobs are being added.
+   * @param rand - The random generator used for adding mobs.
    */
   private addMobsToLevel(map: GameMapType, rand: RandomGenerator): void {
     switch (map.level) {
@@ -377,11 +387,10 @@ export class Builder implements Build {
   }
 
   /**
-   * Makes mobs on the map using the provided random generator and glyph.
-   * @param {GameMapType} map - The map on which the mobs will be created.
-   * @param {RandomGenerator} rand - The random generator used to determine the placement of the mobs.
-   * @param {Glyph} glyph - The glyph representing the mobs.
-   * @param {number} rate - The rate of mob creation.
+   * Makes mobs on the map based on the provided map, random generator, and rate.
+   * @param map - The map on which the mobs will be created.
+   * @param rand - The random generator used to determine the placement of the mobs.
+   * @param rate - The rate of mob creation.
    */
   private makeMobs(
     map: GameMapType,
@@ -405,10 +414,9 @@ export class Builder implements Build {
 
   /**
    * Adds a mob to the map at the specified position based on the map level and random generator provided.
-   * @param {WorldPoint} pos - The position where the mob is added.
-   * @param {GameMapType} map - The map to which the mob is being added.
-   * @param {RandomGenerator} rand - The random generator used for adjusting the level.
-   * @return {Mob} The added mob.
+   * @param pos - The position where the mob is added.
+   * @param map - The map to which the mob is being added.
+   * @param rand - The random generator used for adjusting the level.
    */
   public addMapLevel_Mob(
     pos: WorldPoint,
@@ -435,8 +443,7 @@ export class Builder implements Build {
   /**
    * Maps the level to the corresponding Glyph name.
    *
-   * @param {number} level - The level number.
-   * @return {string | null} The Glyph name or null if not found.
+   * @param level - The level number.
    */
   private getGlyphNameByLevel(level: number): string | null {
     const glyphNames = Object.keys(Glyph).filter(key => isNaN(Number(key)));
@@ -455,8 +462,8 @@ export class Builder implements Build {
   /**
    * Adds items to the map.
    *
-   * @param {GameMapType} map - The map to which the mob is being added.
-   * @param {RandomGenerator} rand - The random generator used for adjusting the level.
+   * @param map - The map to which the mob is being added.
+   * @param rand - The random generator used for adjusting the level.
    */
   private addItems(map: GameMapType, rand: RandomGenerator): void {
     for (let p = new WorldPoint(); p.y < map.dimensions.y; ++p.y) {
@@ -475,7 +482,7 @@ export class Builder implements Build {
   /**
    * Initializes level 0 of the game.
    *
-   * @param {Game} game - The game object.
+   * @param game - The game object.
    */
   private initLevel0(game: Game): void {
     const L0 = game.dungeon.getLevel(0, game);
@@ -487,8 +494,8 @@ export class Builder implements Build {
   /**
    * Adds items next to the player on the map.
    *
-   * @param {Mob} player - The player object.
-   * @param {GameMapType} map - The map where items are added.
+   * @param player - The player object.
+   * @param map - The map where items are added.
    */
   private addItemNextToPlayer(player: Mob, map: GameMapType): void {
     const a = player.pos;
@@ -515,7 +522,7 @@ export class Builder implements Build {
   /**
    * Adds items to the player's inventory.
    *
-   * @param {Inventory} inv - The inventory to add the item to.
+   * @param inv - The inventory to add the item to.
    */
   private addItemToPlayerInventory(inv: Inventory): void {
     inv.add(

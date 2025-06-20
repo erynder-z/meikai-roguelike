@@ -23,8 +23,6 @@ export class CellEffects {
 
   /**
    * Applies cell effects based on the given map and position.
-   *
-   * @return {void} This function does not return anything.
    */
   public applyCellEffects(): void {
     if (this.cell.isCausingSlow()) {
