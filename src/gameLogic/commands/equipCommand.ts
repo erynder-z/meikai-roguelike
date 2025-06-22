@@ -20,6 +20,7 @@ export class EquipCommand extends CommandBase {
 
   /**
    * Executes the equip command.
+   *
    * @returns True if the command executed successfully, false otherwise.
    */
   public execute(): boolean {

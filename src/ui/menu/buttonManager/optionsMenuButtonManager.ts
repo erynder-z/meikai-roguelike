@@ -17,7 +17,7 @@ export class OptionsMenuButtonManager {
   /**
    * Updates the displayed text of the control scheme button to reflect the current active control scheme.
    *
-   * @param { 'default' | 'alternate' } text - The current active control scheme.
+   * @param text - The current active control scheme.
    */
   public updateControlSchemeButton(
     text: GameConfigType['control_scheme'],
@@ -39,7 +39,7 @@ export class OptionsMenuButtonManager {
    * the current state. Also updates the disabled state of the scanline style
    * button.
    *
-   * @param {boolean} areScanlinesEnabled - Indicates if scanlines are currently enabled.
+   * @param areScanlinesEnabled - Indicates if scanlines are currently enabled.
    */
   public updateScanlinesToggleButton(areScanlinesEnabled: boolean): void {
     const scanlinesButton = this.shadowRoot?.getElementById(
@@ -58,7 +58,7 @@ export class OptionsMenuButtonManager {
    * Sets the button's text to 'Scanlines style: <current style>' and also
    * updates the disabled state based on whether scanlines are enabled.
    *
-   * @param {string} scanlineStyle - The current scanline style, one of the values in the ScanlineStyles enum.
+   * @param scanlineStyle - The current scanline style, one of the values in the ScanlineStyles enum.
    */
   public updateScanlineStyleButton(scanlineStyle: ScanlineStyles): void {
     const scanLineStyleBtn = this.shadowRoot?.getElementById(
@@ -82,7 +82,7 @@ export class OptionsMenuButtonManager {
    * Sets the button's text to 'Message display: LEFT' or 'Message display:
    * RIGHT', depending on the current message alignment.
    *
-   * @param {('left' | 'right')} messageAlignment - The current message alignment.
+   * @param messageAlignment - The current message alignment.
    */
   public updateMessageAlignButton(messageAlignment: 'left' | 'right'): void {
     const messageAlignBtn = this.shadowRoot?.getElementById(
@@ -99,7 +99,7 @@ export class OptionsMenuButtonManager {
    * Sets the button's text to 'Show images: YES' if images are displayed,
    * and 'Show images: NO' otherwise.
    *
-   * @param {boolean} areImagesDisplayed - Indicates if images are currently displayed.
+   * @param areImagesDisplayed - Indicates if images are currently displayed.
    */
   public updateShowImagesButton(areImagesDisplayed: boolean): void {
     const displayImage = this.shadowRoot?.getElementById(
@@ -118,7 +118,7 @@ export class OptionsMenuButtonManager {
    * Sets the button's text to 'Image display: LEFT' or 'Image display:
    * RIGHT', depending on the current image alignment.
    *
-   * @param {('left' | 'right')} imageAlignment - The current image alignment.
+   * @param imageAlignment - The current image alignment.
    */
   public updateImageAlignButton(imageAlignment: 'left' | 'right'): void {
     const imageAlignBtn = this.shadowRoot?.getElementById(
@@ -143,7 +143,7 @@ export class OptionsMenuButtonManager {
    * Sets the button's text to 'Temperature units: CELSIUS' or 'Temperature
    * units: FAHRENHEIT', depending on the current unit.
    *
-   * @param {('celsius' | 'fahrenheit')} unit - The current temperature unit.
+   * @param unit - The current temperature unit.
    */
   public updateTemperatureUnitsButton(unit: 'celsius' | 'fahrenheit'): void {
     const temperatureUnitsBtn = this.shadowRoot?.getElementById(
@@ -162,7 +162,7 @@ export class OptionsMenuButtonManager {
    * Sets the button's text to 'Depth units: METERS' or 'Depth units: FEET',
    * depending on the current unit.
    *
-   * @param {('meters' | 'feet')} unit - The current depth unit.
+   * @param unit - The current depth unit.
    */
 
   public updateDepthUnitsButton(unit: 'meters' | 'feet'): void {
@@ -178,11 +178,9 @@ export class OptionsMenuButtonManager {
   /**
    * Updates the text of the blood intensity button based on the current blood intensity.
    *
-   * Sets the button's text to 'Blood intensity: OFF', 'Blood intensity: NORMAL',
-   * 'Blood intensity: HIGH', or 'Blood intensity: ULTRA', depending on the current
-   * blood intensity.
+   * Sets the button's text to 'Blood intensity: OFF', 'Blood intensity: NORMAL', 'Blood intensity: HIGH', or 'Blood intensity: ULTRA', depending on the current blood intensity.
    *
-   * @param {number} bloodIntensity - The current blood intensity, one of the values in the BloodIntensity enum.
+   * @param bloodIntensity - The current blood intensity, one of the values in the BloodIntensity enum.
    */
   public updateBloodIntensityButton(bloodIntensity: number): void {
     const bloodIntensityBtn = this.shadowRoot?.getElementById(
@@ -200,7 +198,7 @@ export class OptionsMenuButtonManager {
   /**
    * Displays the current seed in the title menu.
    *
-   * @param {GameConfigType['seed']} seed - The current seed.
+   * @param seed - The current seed.
    */
   public displayCurrentSeed(seed: GameConfigType['seed']): void {
     const seedButton = this.shadowRoot?.getElementById(

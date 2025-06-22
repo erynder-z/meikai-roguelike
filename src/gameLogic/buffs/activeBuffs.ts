@@ -22,6 +22,7 @@ export class ActiveBuffs {
 
   /**
    * Adds a buff to the collection of active buffs for a given mob.
+   *
    * @param buffType - The buff to add.
    * @param game - The game object.
    * @param mob - The mob to apply the buff to.
@@ -38,6 +39,7 @@ export class ActiveBuffs {
 
   /**
    * Remove a buff from the collection of active buffs for a given mob.
+   *
    * @param b - The buff to remove.
    * @param game - The game object.
    * @param mob - The mob to remove the buff from.
@@ -54,6 +56,7 @@ export class ActiveBuffs {
 
   /**
    * Checks if a specific type of buff is currently active on the mob.
+   *
    * @param buff - The buff to check.
    * @returns True if the buff is active, false otherwise.
    */
@@ -63,6 +66,7 @@ export class ActiveBuffs {
 
   /**
    * Gets the information of the buff of a specific type currently active on the mob.
+   *
    * @param buff - The buff to get information for.
    * @returns The information of the buff if active, otherwise undefined.
    */
@@ -72,6 +76,7 @@ export class ActiveBuffs {
 
   /**
    * Cleanses a specific type of buff from the mob, removing it from the active buffs collection.
+   *
    * @param buff - The buff to cleanse.
    * @param game - The game object.
    * @param mob - The mob to cleanse the buff from.
@@ -83,6 +88,7 @@ export class ActiveBuffs {
 
   /**
    * Progresses the active buffs by decrementing their timers and removing expired buffs.
+   *
    * @param mob - The mob to process active buffs for.
    * @param game - The game object.
    */
@@ -126,6 +132,7 @@ export class ActiveBuffs {
 
   /**
    * Displays the buff message for the mob.
+   *
    * @param buff - The buff to describe.
    * @param game - The game object.
    * @param mob - The mob to apply the buff to.

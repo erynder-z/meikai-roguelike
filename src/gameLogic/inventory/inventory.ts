@@ -8,7 +8,8 @@ export class Inventory {
 
   /**
    * Get the length of the inventory.
-   * @returns {number} The number of items in the inventory.
+   *
+   * @returns The number of items in the inventory.
    */
   public length(): number {
     return this.items.length;
@@ -16,7 +17,8 @@ export class Inventory {
 
   /**
    * Add an item to the inventory.
-   * @param {ItemObject} item - The item to add to the inventory.
+   *
+   * @param item - The item to add to the inventory.
    */
   public add(item: ItemObject): void {
     this.items.push(item);
@@ -24,7 +26,8 @@ export class Inventory {
 
   /**
    * Remove an item from the inventory by its index.
-   * @param {number} index - The index of the item to remove.
+   *
+   * @param index - The index of the item to remove.
    */
   public removeIndex(index: number): void {
     this.items.splice(index, 1);

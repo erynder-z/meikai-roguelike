@@ -60,7 +60,7 @@ export class ItemScreen extends BaseScreen {
    * objects, each containing a key and a description for possible actions that can be
    * performed on the item.
    *
-   * @returns {Array<{key: string, description: string}>} A list of menu options with keys and descriptions.
+   * @return A list of menu options with keys and descriptions.
    */
   private getMenuOptions(): { key: string; description: string }[] {
     const options = [{ key: 'v', description: 'View' }];
@@ -111,7 +111,8 @@ export class ItemScreen extends BaseScreen {
   /**
    * Creates and appends an 'entity-info-card' element to the 'canvas-container' element, containing
    * detailed information about the given item object.
-   * @param {ItemObject} obj - The item object to display.
+   *
+   * @param obj - The item object to display.
    */
   private displayItemDetails(obj: ItemObject): void {
     const canvasContainer = document.getElementById('canvas-container');
@@ -130,15 +131,10 @@ export class ItemScreen extends BaseScreen {
   /**
    * Handles key down events on the item screen.
    *
-   * @param {KeyboardEvent} event - The keyboard event triggered by the user.
-   * @param {Stack} stack - The stack of screens in the application.
-   * @returns {boolean} - True if the event is handled and causes a screen transition, otherwise false.
-   * This function maps specific key presses to actions that can be performed on the item screen,
-   * such as dropping, wearing, equipping, using, firing, casting, or viewing details of an item.
-   * If the menu key is pressed, the current screen is removed from the stack. When a valid item
-   * action key is pressed, the corresponding action is executed, and the item screen fades out.
+   * @param event - The keyboard event triggered by the user.
+   * @param stack - The stack of screens in the application.
+   * @return True if the event is handled and causes a screen transition, otherwise false.
    */
-
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     const { display, activeControlScheme } = this;
 
@@ -190,7 +186,7 @@ export class ItemScreen extends BaseScreen {
   /**
    * Drops an item from the player's inventory and removes the item screen.
    *
-   * @param {Stack} stack - The stack of screens to pop if the item is successfully dropped.
+   * @param stack - The stack of screens to pop if the item is successfully dropped.
    */
   private dropItem(stack: Stack): void {
     if (new DropCommand(this.obj, this.index, this.game).execute()) {
@@ -202,8 +198,9 @@ export class ItemScreen extends BaseScreen {
 
   /**
    * Wears an item from the inventory.
-   * @param {Stack} stack - The stack to pop if the item can't be equipped.
-   * @returns {boolean} True if the item was successfully equipped, otherwise false.
+   *
+   * @param stack - The stack to pop if the item can't be equipped.
+   * @return True if the item was successfully equipped, otherwise false.
    */
   private canWear(stack: Stack): boolean {
     if (this.isSlotOccupied) return false;
@@ -220,7 +217,7 @@ export class ItemScreen extends BaseScreen {
   /**
    * Uses an item by finding the matching item/spell and executing it.
    *
-   * @param {Stack} stack - The stack to push the spell screen onto if necessary.
+   * @param stack - The stack to push the spell screen onto if necessary.
    */
   private useItem(stack: Stack): void {
     const { game } = this;
@@ -249,9 +246,9 @@ export class ItemScreen extends BaseScreen {
   /**
    * Unequips an item from the specified slot and updates the game state.
    *
-   * @param {Slot} slot - The slot from which the item will be unequipped.
-   * @param {Stack} stack - The stack to pop if the unequip action fails.
-   * @returns {boolean} True if the item was successfully unequipped, otherwise false.
+   * @param slot - The slot from which the item will be unequipped.
+   * @param stack - The stack to pop if the unequip action fails.
+   * @return True if the item was successfully unequipped, otherwise false.
    */
 
   private unequip(slot: Slot, stack: Stack): boolean {
@@ -267,7 +264,7 @@ export class ItemScreen extends BaseScreen {
   /**
    * Fades out the item screen display and removes it from the DOM.
    *
-   * @returns {Promise<void>} A promise that resolves when the fade out animation ends.
+   * @return A promise that resolves when the fade out animation ends.
    */
   private async fadeOutItemScreen(): Promise<void> {
     if (this.display) {

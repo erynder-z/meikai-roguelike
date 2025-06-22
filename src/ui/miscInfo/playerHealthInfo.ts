@@ -33,7 +33,7 @@ export class PlayerHealthInfo extends HTMLElement {
    * Sets the player's HP status text in the misc info display
    * based on their current HP percentage.
    *
-   * @param {Mob} player - The player mob.
+   * @param player - The player mob.
    */
   public setPlayerHPStatus(player: Mob): void {
     const hp = player.hp;

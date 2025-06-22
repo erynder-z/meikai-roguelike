@@ -41,7 +41,7 @@ export class MoveBumpCommand extends CommandBase {
   /**
    * Executes the function and returns a boolean value.
    *
-   * @return the result of the function execution
+   * @return the result of the function execution.
    */
   public execute(): boolean {
     const { game, me, dir } = this;

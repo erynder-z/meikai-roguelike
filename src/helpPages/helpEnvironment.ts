@@ -135,8 +135,8 @@ export class HelpEnvironment extends HTMLElement {
   /**
    * Creates a table cell element with the specified class name.
    *
-   * @param {string} className - The class name to add to the cell element.
-   * @return {HTMLTableCellElement} The newly created table cell element.
+   * @param className - The class name to add to the cell element.
+   * @return The newly created table cell element.
    */
   private createTableCell(className: string): HTMLTableCellElement {
     const cellElement = document.createElement('td');

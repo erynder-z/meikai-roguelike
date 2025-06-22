@@ -140,14 +140,14 @@ export class TitleMenu extends HTMLElement {
    * Binds events to the elements in the title menu.
    *
    * The function binds the following events:
-   * - Click event on the new game button
-   * - Click event on the load game button
-   * - Click event on the player setup button
-   * - Click event on the options button
-   * - Click event on the help button
-   * - Click event on the about button
-   * - Click event on the quit button
-   * - Keydown event on the document
+   * - Click event on the new game button.
+   * - Click event on the load game button.
+   * - Click event on the player setup button.
+   * - Click event on the options button.
+   * - Click event on the help button.
+   * - Click event on the about button.
+   * - Click event on the quit button.
+   * - Keydown event on the document.
    */
 
   private bindEvents(): void {
@@ -218,7 +218,7 @@ export class TitleMenu extends HTMLElement {
    * - A: showAbout
    * - Q: quitGame
    *
-   * @param {KeyboardEvent} event - The keyboard event to be handled.
+   * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
     switch (event.key) {
@@ -255,9 +255,8 @@ export class TitleMenu extends HTMLElement {
    * data directory. If the file is found and contains data, it enables the load game button.
    * Logs an error message to the console if there is an issue accessing the file.
    *
-   * @return {Promise<void>} A promise that resolves when the check is completed.
+   * @return A promise that resolves when the check is completed.
    */
-
   private async checkForSaveState(): Promise<void> {
     try {
       const binaryData = await readFile('savestate.bin', {
@@ -279,7 +278,6 @@ export class TitleMenu extends HTMLElement {
    * allowing the user to load a saved game. It is typically called after
    * confirming the presence of a saved game state.
    */
-
   private enableLoadGameButton(): void {
     const loadGameButton = this.shadowRoot?.getElementById('load-game-button');
     if (loadGameButton) loadGameButton.removeAttribute('disabled');
@@ -342,7 +340,6 @@ export class TitleMenu extends HTMLElement {
    * This function queries the first 'title-screen' element in the document,
    * clears its content, and appends a 'title-menu-options' element.
    */
-
   public showOptions(): void {
     const titleScreenContent = document
       .querySelector('title-screen')
@@ -370,7 +367,7 @@ export class TitleMenu extends HTMLElement {
   /**
    * Calls the Tauri backend to quit the game. Asks for confirmation before quitting.
    *
-   * @return {Promise<void>} A promise that resolves when the game is exited.
+   * @return A promise that resolves when the game is exited.
    */
   private async quitGame(): Promise<void> {
     try {

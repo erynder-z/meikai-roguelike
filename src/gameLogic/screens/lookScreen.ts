@@ -43,7 +43,7 @@ export class LookScreen extends BaseScreen {
    * The look screen displays the cell information at the position of the player
    * and draws an overlay cursor at the position of the cursor.
    *
-   * @param {DrawableTerminal} term - The terminal to draw on.
+   * @param term - The terminal to draw on.
    */
   public drawScreen(term: DrawableTerminal): void {
     const cursorBgCol = '#F0F8FF';
@@ -70,11 +70,11 @@ export class LookScreen extends BaseScreen {
   /**
    * Determines if a point is visible on the map based on player position, game stats, and visibility buffs.
    *
-   * @param {WorldPoint} pos - The position of the point to check for visibility.
-   * @param {GameMapType} map - The map object containing the point.
-   * @param {WorldPoint} playerPos - The position of the player.
-   * @param {GameState} game - The game object containing the player and game stats.
-   * @return {boolean} Returns true if the point is visible, false otherwise.
+   * @param pos - The position of the point to check for visibility.
+   * @param map - The map object containing the point.
+   * @param playerPos - The position of the player.
+   * @param game - The game object containing the player and game stats.
+   * @return Returns true if the point is visible, false otherwise.
    */
   private isPointVisible(
     pos: WorldPoint,
@@ -96,9 +96,9 @@ export class LookScreen extends BaseScreen {
   /**
    * Retrieves information about a cell at the specified coordinates.
    *
-   * @param {number} x - The x-coordinate of the cell.
-   * @param {number} y - The y-coordinate of the cell.
-   * @return {string | null} The information about the cell. Returns 'Not visible!' if the cell is not visible.
+   * @param x - The x-coordinate of the cell.
+   * @param y - The y-coordinate of the cell.
+   * @return The information about the cell. Returns 'Not visible!' if the cell is not visible.
    */
   private getCellInfo(x: number, y: number): string | null {
     const point = new WorldPoint(x, y);
@@ -122,8 +122,8 @@ export class LookScreen extends BaseScreen {
   /**
    * Generates a message describing the contents of a cell if it is visible.
    *
-   * @param {MapCell} cell - The cell to generate the message for.
-   * @return {string} The generated message.
+   * @param cell - The cell to generate the message for.
+   * @return The generated message.
    */
   private generateMessageVisibleCell(cell: MapCell): string {
     const entities: { uniqueKey: string; entity: DetailViewEntity }[] = [];
@@ -142,10 +142,8 @@ export class LookScreen extends BaseScreen {
     /**
      * Adds key letters from the given control scheme to the usedLetters set.
      *
-     * @param {Record<string, string[]>} controlScheme - The control scheme object
-     * where each key is a control name and its value is an array of string key letters.
+     * @para controlScheme - The control scheme object where each key is a control name and its value is an array of string key letters.
      */
-
     const addControlSchemeKeyLetters = (
       controlScheme: Record<string, string[]>,
     ) => {
@@ -160,8 +158,8 @@ export class LookScreen extends BaseScreen {
     /**
      * Returns a unique letter (a lowercase character) not present in the given control scheme or usedLetters set.
      *
-     * @param {string} name - The name from which to generate a unique letter.
-     * @return {string} The generated unique letter. If no unique letter can be generated, returns '*'.
+     * @param name - The name from which to generate a unique letter.
+     * @return The generated unique letter. If no unique letter can be generated, returns '*'.
      */
     const getUniqueLetter = (name: string): string => {
       addControlSchemeKeyLetters(this.activeControlScheme);
@@ -179,8 +177,8 @@ export class LookScreen extends BaseScreen {
      * adds a binding to the keyBindings map for the entity, where the key is
      * a unique letter generated from the name of the entity.
      *
-     * @param {string} name - The name of the entity to be added.
-     * @param {DetailViewEntity} entity - The DetailViewEntity to be added.
+     * @param name - The name of the entity to be added.
+     * @param entity - The DetailViewEntity to be added.
      */
     const addEntity = (name: string, entity: DetailViewEntity) => {
       const letter = getUniqueLetter(name).toLowerCase();
@@ -232,7 +230,7 @@ export class LookScreen extends BaseScreen {
   /**
    * Retrieves information about a cell that is not visible.
    *
-   * @return {string} The information about the cell.
+   * @return The information about the cell.
    */
   private generateMessageNotVisibleCell(): string {
     return 'Not visible from where you are!';
@@ -241,8 +239,8 @@ export class LookScreen extends BaseScreen {
   /**
    * Capitalizes the first letter of a string.
    *
-   * @param {string} str - The string to capitalize.
-   * @return {string} The capitalized string.
+   * @param str - The string to capitalize.
+   * @return The capitalized string.
    */
   private capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -251,7 +249,7 @@ export class LookScreen extends BaseScreen {
   /**
    * Displays the provided information on the screen.
    *
-   * @param {string} s - The information to display.
+   * @param s - The information to display.
    */
   private displayInfo(s: string): void {
     DrawUI.clearFlash(this.game);
@@ -262,6 +260,12 @@ export class LookScreen extends BaseScreen {
     DrawUI.renderFlash(this.game);
   }
 
+  /**
+   * Displays detailed information about a given entity by creating and appending
+   * an 'entity-info-card' element to the 'canvas-container'.
+   *
+   * @param entity - The DetailViewEntity containing the information to be displayed.
+   */
   private showEntityDetail(entity: DetailViewEntity): void {
     const canvasContainer = document.getElementById('canvas-container');
     const entityCard = document.createElement(
@@ -276,10 +280,9 @@ export class LookScreen extends BaseScreen {
   /**
    * Handles key down events for navigating the look screen and interacting with entities.
    *
-   * @param {KeyboardEvent} event - The keyboard event triggered by user input.
-   * @param {Stack} stack - The stack of screens, used to manage screen transitions.
+   * @param event - The keyboard event triggered by user input.
+   * @param stack - The stack of screens, used to manage screen transitions.
    */
-
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
     const detailViewHandler = new DetailViewHandler();
     const isEntityCardOpen = detailViewHandler.isEntityCardOpen();

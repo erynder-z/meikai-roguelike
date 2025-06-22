@@ -72,7 +72,8 @@ export class CommandDirectionScreenDisplay extends HTMLElement {
 
   /**
    * Sets the cancel key text displayed in the footer.
-   * @param {string} key - The cancel key.
+   *
+   * @param key - The cancel key.
    */
   set menuKeyText(key: string) {
     this.menuKey = key;
@@ -109,9 +110,9 @@ export class CommandDirectionScreenDisplay extends HTMLElement {
   }
 
   /**
-   * Adds a 'fade-out' class to the element, triggering a fade-out animation,
-   * and returns a promise that resolves when the animation ends.
-   * @returns {Promise<void>} A promise that resolves when the fade-out animation completes.
+   * Adds a 'fade-out' class to the element, triggering a fade-out animation, and returns a promise that resolves when the animation ends.
+   *
+   * @return A promise that resolves when the fade-out animation completes.
    */
   public fadeOut(): Promise<void> {
     return new Promise(resolve => {

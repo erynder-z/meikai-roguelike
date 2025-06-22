@@ -37,7 +37,7 @@ export class Builder implements Build {
   /**
    * Create and return a new Game instance.
    *
-   * @return The newly created Game instance
+   * @return The newly created Game instance.
    */
   public makeGame(): GameState {
     const rand = new RandomGenerator(this.seed);
@@ -93,9 +93,9 @@ export class Builder implements Build {
   /**
    * A function to make a level using the given random generator and level number.
    *
-   * @param rand - the random generator to use
-   * @param level - the level number
-   * @return the generated map
+   * @param rand - The random generator to use.
+   * @param level - The level number.
+   * @return The generated map.
    */
   public makeLevel(
     rand: RandomGenerator,
@@ -112,9 +112,9 @@ export class Builder implements Build {
   /**
    * Generates a map using the given random generator and level number.
    *
-   * @param rand - the random generator to use
-   * @param level - the level-number for the map
-   * @return the generated map
+   * @param rand - The random generator to use.
+   * @param level - The level-number for the map.
+   * @return The generated map.
    */
   public makeMap(
     rand: RandomGenerator,
@@ -159,7 +159,7 @@ export class Builder implements Build {
   /**
    * enter the first level of the game.
    *
-   * @param game - the game object
+   * @param game - The game object.
    */
   private enterFirstLevel(game: GameState, rand: RandomGenerator): void {
     const dungeon = game.dungeon;
@@ -173,9 +173,10 @@ export class Builder implements Build {
 
   /**
    * Enters the player into the specified level at the given position.
-   * @param game - the game object
-   * @param level - the level number
-   * @param pos - the position on the level to enter
+   *
+   * @param game - The game object.
+   * @param level - The level number.
+   * @param pos - The position on the level to enter.
    */
   private enterSpecificLevelAtPos(
     game: GameState,
@@ -187,8 +188,8 @@ export class Builder implements Build {
   /**
    * Calculates the center position of the given WorldPoint dimensions.
    *
-   * @param dim - the dimensions for which to calculate the center position
-   * @return the center position of the given dimensions
+   * @param dim - the dimensions for which to calculate the center position.
+   * @return the center position of the given dimensions.
    */
   private centerPos(dim: WorldPoint): WorldPoint {
     return new WorldPoint(Math.floor(dim.x / 2), Math.floor(dim.y / 2));
@@ -197,7 +198,7 @@ export class Builder implements Build {
   /**
    * Creates a new player Mob.
    *
-   * @return a new player Mob
+   * @return A new player Mob.
    */
   public makePlayer(): Mob {
     const player = new Mob(Glyph.Player, 20, 12);
@@ -219,9 +220,9 @@ export class Builder implements Build {
   /**
    * Generates a ring of mobs around a central point on the map.
    *
-   * @param glyph - the glyph representing the mob
-   * @param map - the map on which the mobs will be generated
-   * @param rand - the random generator for determining mob positions
+   * @param glyph - The glyph representing the mob
+   * @param map - The map on which the mobs will be generated
+   * @param rand - The random generator for determining mob positions
    */
   public makeRingOfMobs(
     glyph: Glyph,
@@ -275,12 +276,12 @@ export class Builder implements Build {
   /**
    * Adds a new non-playable character to the map at the specified position and level.
    *
-   * @param glyph - the visual representation of the NPC
-   * @param x - the x-coordinate of the NPC on the map
-   * @param y - the y-coordinate of the NPC on the map
-   * @param map - the map to which the NPC is being added
-   * @param level - the level of the NPC
-   * @return the newly added NPC
+   * @param glyph - The visual representation of the NPC.
+   * @param x - The x-coordinate of the NPC on the map.
+   * @param y - The y-coordinate of the NPC on the map.
+   * @param map - The map to which the NPC is being added.
+   * @param level - The level of the NPC.
+   * @return The newly added NPC.
    */
   public addNPC(
     glyph: Glyph,
@@ -309,6 +310,7 @@ export class Builder implements Build {
 
   /**
    * Adds level stairs to the map based on the level and random generator provided.
+   *
    * @param map - The map to which stairs are being added.
    * @param level - The level for which stairs are being added.
    * @param rand - The random generator used for adding stairs.
@@ -327,6 +329,7 @@ export class Builder implements Build {
 
   /**
    * Adds stairs for level to the map at a specified position.
+   *
    * @param map - The map to which stairs are being added.
    */
   private addStairs0(map: GameMapType, rand: RandomGenerator): void {
@@ -345,6 +348,7 @@ export class Builder implements Build {
 
   /**
    * Adds stairs for a level to the map.
+   *
    * @param map - The map to which stairs are being added.
    */
   private addStairs(map: GameMapType, rand: RandomGenerator): void {
@@ -354,6 +358,7 @@ export class Builder implements Build {
 
   /**
    * Adds stairs to the map based on the provided glyph and random generator.
+   *
    * @param map - The map to which stairs are being added.
    * @param rand - The random generator used for adding stairs.
    * @param stair - The glyph representing the stairs.
@@ -372,6 +377,7 @@ export class Builder implements Build {
 
   /**
    * Adds mobs to the level based on the map and random generator provided.
+   *
    * @param map - The map to which mobs are being added.
    * @param rand - The random generator used for adding mobs.
    */
@@ -388,6 +394,7 @@ export class Builder implements Build {
 
   /**
    * Makes mobs on the map based on the provided map, random generator, and rate.
+   *
    * @param map - The map on which the mobs will be created.
    * @param rand - The random generator used to determine the placement of the mobs.
    * @param rate - The rate of mob creation.
@@ -414,6 +421,7 @@ export class Builder implements Build {
 
   /**
    * Adds a mob to the map at the specified position based on the map level and random generator provided.
+   *
    * @param pos - The position where the mob is added.
    * @param map - The map to which the mob is being added.
    * @param rand - The random generator used for adjusting the level.

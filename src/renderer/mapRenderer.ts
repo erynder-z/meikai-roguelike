@@ -26,14 +26,14 @@ export class MapRenderer {
   /**
    * Draws a cell on the terminal.
    *
-   * @param {DrawableTerminal} term - The terminal used for drawing.
-   * @param {TerminalPoint} tp - The position on the terminal to draw at.
-   * @param {WorldPoint} wp - The position of the cell on the map.
-   * @param {GameMapType} map - The map containing the cells.
-   * @param {WorldPoint} playerPos - The position of the player on the map.
-   * @param {number} farDist - The maximum distance that a cell can be from the player to be visible.
-   * @param {boolean} blind - Whether the player is blind.
-   * @param {boolean} isRayCast - Whether ray casting is being used to render the map.
+   * @param term - The terminal used for drawing.
+   * @param tp - The position on the terminal to draw at.
+   * @param wp - The position of the cell on the map.
+   * @param map - The map containing the cells.
+   * @param playerPos - The position of the player on the map.
+   * @param farDist - The maximum distance that a cell can be from the player to be visible.
+   * @param blind - Whether the player is blind.
+   * @param isRayCast - Whether ray casting is being used to render the map.
    */
   private static drawCell(
     term: DrawableTerminal,
@@ -89,12 +89,12 @@ export class MapRenderer {
   /**
    * Checks the visibility of an entity based on various conditions.
    *
-   * @param {MapCell} cell - The cell to check visibility for.
-   * @param {WorldPoint} playerPos - The position of the player on the map.
-   * @param {GameMapType} map - The current map.
-   * @param {boolean} far - Indicates if the entity is far from the player.
-   * @param {boolean} blind - Indicates if the player is blind.
-   * @return {boolean} Whether the entity is visible under the given conditions.
+   * @param cell - The cell to check visibility for.
+   * @param playerPos - The position of the player on the map.
+   * @param map - The current map.
+   * @param far - Indicates if the entity is far from the player.
+   * @param blind - Indicates if the player is blind.
+   * @return Whether the entity is visible under the given conditions.
    */
   private static checkEntityVisibility(
     cell: MapCell,
@@ -117,17 +117,17 @@ export class MapRenderer {
    * player is blind, whether the cell is part of a raycast, and whether the
    * cell is in a foggy area.
    *
-   * @param {MapCell} cell - the cell to compute the colors for
-   * @param {GlyphInfo} glyphInfo - the GlyphInfo for the glyph on the cell
-   * @param {GlyphInfo} envOnlyGlyphInfo - the GlyphInfo for the environment glyph
-   * @param {boolean} far - whether the cell is far from the player
-   * @param {boolean} blind - whether the player is blind
-   * @param {boolean} isRayCast - whether the cell is part of a raycast
-   * @param {WorldPoint} playerPos - the position of the player
-   * @param {WorldPoint} wp - the position of the cell
-   * @param {GameMapType} map - the current map
-   * @param {boolean} isDim - whether the cell is dimmed
-   * @return {{fg: string, bg: string}} the foreground and background colors
+   * @param cell - the cell to compute the colors for.
+   * @param glyphInfo - the GlyphInfo for the glyph on the cell.
+   * @param envOnlyGlyphInfo - the GlyphInfo for the environment glyph.
+   * @param far - whether the cell is far from the player.
+   * @param blind - whether the player is blind.
+   * @param isRayCast - whether the cell is part of a raycast.
+   * @param playerPos - the position of the player.
+   * @param wp - the position of the cell.
+   * @param map - the current map.
+   * @param isDim - whether the cell is dimmed.
+   * @return The foreground and background colors.
    */
   private static getCellColors(
     cell: MapCell,
@@ -181,10 +181,10 @@ export class MapRenderer {
   /**
    * Helper function that Iterates over each cell in the view and invokes a callback function for each cell.
    *
-   * @param {DrawableTerminal} term - The terminal used for drawing.
-   * @param {GameMapType} map - The map containing the cells.
-   * @param {WorldPoint} vp - The view point on the map.
-   * @param {Function} callback - The callback function to be executed for each cell.
+   * @param term - The terminal used for drawing.
+   * @param map - The map containing the cells.
+   * @param vp - The view point on the map.
+   * @param callback The callback function to be executed for each cell.
    */
   private static forEachCellInView(
     term: DrawableTerminal,
@@ -216,11 +216,11 @@ export class MapRenderer {
   /**
    * Draws the map normally based on the player's position and game state.
    *
-   * @param {DrawableTerminal} term - The terminal used for drawing.
-   * @param {GameMapType} map - The map to be drawn.
-   * @param {WorldPoint} vp - The viewpoint on the map.
-   * @param {WorldPoint} playerPos - The position of the player on the map.
-   * @param {GameState} game - The current game state.
+   * @param term - The terminal used for drawing.
+   * @param map - The map to be drawn.
+   * @param vp - The viewpoint on the map.
+   * @param playerPos - The position of the player on the map.
+   * @param game - The current game state.
    */
   public static drawMap_Standard(
     term: DrawableTerminal,
@@ -241,11 +241,11 @@ export class MapRenderer {
   /**
    * Renders the map using ray casting technique.
    *
-   * @param {DrawableTerminal} term - The terminal used for drawing.
-   * @param {GameMapType} map - The map containing the cells.
-   * @param {WorldPoint} vp - The view point on the map.
-   * @param {WorldPoint} playerPos - The position of the player on the map.
-   * @param {GameState} game - The game state object.
+   * @param term - The terminal used for drawing.
+   * @param map - The map containing the cells.
+   * @param vp - The view point on the map.
+   * @param playerPos - The position of the player on the map.
+   * @param game - The game state object.
    */
   public static drawMap_RayCast(
     term: DrawableTerminal,
@@ -266,9 +266,9 @@ export class MapRenderer {
   /**
    * Calculates the background color based on the solid background flag and cell lighting.
    *
-   * @param {MapCell} cell - The map cell to determine background color for.
-   * @param {GlyphInfo} glyphInfo - Information about the glyph.
-   * @return {string} The background color for the cell.
+   * @param cell - The map cell to determine background color for.
+   * @param glyphInfo - Information about the glyph.
+   * @return The background color for the cell.
    */
   private static getGeneralBgCol(cell: MapCell, glyphInfo: GlyphInfo): string {
     // If the glyph has a solid background and the cell is lit, return the solid background unlit color.
@@ -283,9 +283,9 @@ export class MapRenderer {
   /**
    * Calculates the foreground color of a cell based on its properties.
    *
-   * @param {MapCell} cell - The cell to determine the color for.
-   * @param {GlyphInfo} glyphInfo - The information about the glyph.
-   * @return {string} The calculated foreground color.
+   * @param cell - The cell to determine the color for.
+   * @param glyphInfo - The information about the glyph.
+   * @return The calculated foreground color.
    */
   private static getGeneralFgCol(cell: MapCell, glyphInfo: GlyphInfo): string {
     // If the cell is lit or if the player is on the cell and If the cell's environment is unknown, return the background color of the glyph
@@ -307,9 +307,9 @@ export class MapRenderer {
    * appropriate darkness modifier. If the cell is bloody, it also tints the
    * background color with a red tone based on the blood intensity.
    *
-   * @param {boolean} isVisible - Flag indicating if the cell is visible.
-   * @param {MapCell} cell - The cell to determine the color for.
-   * @return {string} The calculated background color.
+   * @param isVisible - Flag indicating if the cell is visible.
+   * @param cell - The cell to determine the color for.
+   * @return The calculated background color.
    */
   private static getRayCastBgCol(isVisible: boolean, cell: MapCell): string {
     const envOnlyGlyphInfo = GlyphMap.getGlyphInfo(cell.env);
@@ -340,10 +340,10 @@ export class MapRenderer {
   /**
    * Calculates the foreground color of a cell for ray casting.
    *
-   * @param {boolean} isVisible - Flag indicating if the cell is visible.
-   * @param {MapCell} cell - The cell to determine the color for.
-   * @param {GlyphInfo} glyphInfo - The information about the glyph.
-   * @return {string} The calculated foreground color.
+   * @param isVisible - Flag indicating if the cell is visible.
+   * @param cell - The cell to determine the color for.
+   * @param glyphInfo - The information about the glyph.
+   * @return The calculated foreground color.
    */
   private static getRayCastFgCol(
     isVisible: boolean,
@@ -394,9 +394,9 @@ export class MapRenderer {
   /**
    * Adds a tint to the given background color based on the specified environment effects.
    *
-   * @param {string} bgColor - The background color to tint.
-   * @param {EnvEffect[]} envEffects - The environment effects to consider.
-   * @return {string} The tinted background color.
+   * @param bgColor - The background color to tint.
+   * @param envEffects - The environment effects to consider.
+   * @return The tinted background color.
    */
   private static addEnvEffectsTint(
     bgColor: string,
@@ -414,9 +414,9 @@ export class MapRenderer {
   /**
    * Tints the given color with red to represent bloodiness based on the specified modifier.
    *
-   * @param {string} color - The original color to be tinted.
-   * @param {number} modifier - The intensity factor by which to tint the color with blood-red.
-   * @return {string} The color tinted with red to represent bloodiness.
+   * @param color - The original color to be tinted.
+   * @param modifier - The intensity factor by which to tint the color with blood-red.
+   * @return The color tinted with red to represent bloodiness.
    */
 
   private static addBloodiness(color: string, modifier: number): string {

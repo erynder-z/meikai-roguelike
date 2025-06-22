@@ -37,7 +37,7 @@ export class MapCell {
   /**
    * Adds an environment effect to the current map cell if it does not already exist.
    *
-   * @param {EnvEffect} effect - The environment effect to add.
+   * @param effect - The environment effect to add.
    */
   public addEnvEffect(effect: EnvEffect) {
     if (this.environment.effects.includes(effect)) return;
@@ -48,7 +48,7 @@ export class MapCell {
   /**
    * Removes an environment effect from the current map cell.
    *
-   * @param {EnvEffect} effect - The environment effect to remove.
+   * @param effect - The environment effect to remove.
    */
   public removeEnvEffect(effect: EnvEffect) {
     this.environment.effects = this.environment.effects.filter(
@@ -66,7 +66,7 @@ export class MapCell {
   /**
    * Dynamically retrieves the glyph information based on the current environment.
    *
-   * @return {GlyphInfo} the glyph information
+   * @return the glyph information.
    */
   private get glyphInfo(): GlyphInfo {
     return GlyphMap.getGlyphInfo(this.env);
@@ -75,7 +75,7 @@ export class MapCell {
   /**
    * Return the glyph of the mob if it exists, otherwise return the environment glyph.
    *
-   * @return {Glyph} the glyph of the mob if it exists, otherwise the environment glyph
+   * @return the glyph of the mob if it exists, otherwise the environment glyph.
    */
   public glyph(): Glyph {
     return this.mob ? this.mob.glyph : this.env;
@@ -84,7 +84,7 @@ export class MapCell {
   /**
    * Returns only the environment Glyph.
    *
-   * @return {Glyph} the Glyph environment
+   * @return the Glyph environment.
    */
   public glyphEnvOnly(): Glyph {
     return this.env;
@@ -93,7 +93,7 @@ export class MapCell {
   /**
    * Returns object Glyph, if it exists and the environment Glyph otherwise.
    *
-   * @return {Glyph} the Glyph object
+   * @return the Glyph object.
    */
   public glyphObjOrEnv(): Glyph {
     return this.obj ? this.obj.glyph : this.env;
@@ -103,7 +103,7 @@ export class MapCell {
    * Returns the sprite glyph if it exists, otherwise returns the glyph of the object if it exists,
    * otherwise returns the environment glyph.
    *
-   * @return {Glyph} The sprite glyph, object glyph, or environment glyph.
+   * @return The sprite glyph, object glyph, or environment glyph.
    */
   public glyphSpriteOrObjOrEnv(): Glyph {
     if (this.sprite) return this.sprite;
@@ -115,7 +115,7 @@ export class MapCell {
    * Returns the sprite glyph if it exists, otherwise returns the glyph of the object if it exists,
    * otherwise returns the corpse glyph if it exists, otherwise returns the environment glyph.
    *
-   * @return {Glyph} The sprite glyph, object glyph, corpse glyph, or environment glyph.
+   * @return The sprite glyph, object glyph, corpse glyph, or environment glyph.
    */
   public glyphSpriteOrObjOrCorpseOrEnv(): Glyph {
     if (this.sprite) return this.sprite;
@@ -128,7 +128,7 @@ export class MapCell {
   /**
    * Checks if the current cell has an object on it
    *
-   * @return {boolean} Returns true if the object property is truthy, false otherwise.
+   * @return Returns true if the object property is truthy, false otherwise.
    */
   public hasObject(): boolean {
     return !!this.obj;
@@ -137,7 +137,7 @@ export class MapCell {
   /**
    * Check if the cell is blocked.
    *
-   * @return {boolean} true if the cell is blocked, false otherwise
+   * @return True if the cell is blocked, false otherwise
    */
   public isBlocked(): boolean {
     const isBlockingEnv = this.glyphInfo.isBlockingMovement || false;
@@ -147,7 +147,7 @@ export class MapCell {
   /**
    * Checks if the current cell is blocking projectiles.
    *
-   * @return {boolean} Returns true if the cell is blocking projectiles, false otherwise.
+   * @return Returns true if the cell is blocking projectiles, false otherwise.
    */
   public isBlockingProjectiles(): boolean {
     const isBlockingEnv = this.glyphInfo.isBlockingProjectiles || false;
@@ -157,7 +157,7 @@ export class MapCell {
   /**
    * Check if the environment of a cell is opaque.
    *
-   * @return {boolean} true if the environment is opaque, false otherwise
+   * @return True if the environment is opaque, false otherwise.
    */
   public isOpaque(): boolean {
     return this.glyphInfo.isOpaque || false;
@@ -166,7 +166,7 @@ export class MapCell {
   /**
    * Check if the cell is slowing due to the environment.
    *
-   * @return {boolean} true if the cell is slowing, false otherwise
+   * @return True if the cell is slowing, false otherwise.
    */
   public isCausingSlow(): boolean {
     return this.glyphInfo.isCausingSlow || false;
@@ -175,7 +175,7 @@ export class MapCell {
   /**
    * Check if the cell causes burn due to the environment.
    *
-   * @return {boolean} true if the cell is causing burn, false otherwise
+   * @return True if the cell is causing burn, false otherwise.
    */
   public isCausingBurn(): boolean {
     return this.glyphInfo.isCausingBurn || false;
@@ -184,7 +184,7 @@ export class MapCell {
   /**
    * Check if the cell is magnetic.
    *
-   * @return {boolean} true if the cell is magnetic, false otherwise
+   * @return True if the cell is magnetic, false otherwise.
    */
   public isMagnetic(): boolean {
     return this.glyphInfo.isMagnetic || false;
@@ -193,7 +193,7 @@ export class MapCell {
   /**
    * Check if the cell is causing bleed due to the environment.
    *
-   * @return {boolean} true if the cell is causing bleed, false otherwise
+   * @return True if the cell is causing bleed, false otherwise.
    */
   public isCausingBleed(): boolean {
     return this.glyphInfo.isCausingBleed || false;
@@ -202,7 +202,7 @@ export class MapCell {
   /**
    * Check if the cell is glowing.
    *
-   * @return {boolean} true if the cell is glowing, false otherwise
+   * @return True if the cell is glowing, false otherwise.
    */
   public isGlowing(): boolean {
     return this.glyphInfo.isGlowing || false;
@@ -211,7 +211,7 @@ export class MapCell {
   /**
    * Check if the cell is causing poison due to the environment.
    *
-   * @return {boolean} true if the cell is causing poison, false otherwise
+   * @return True if the cell is causing poison, false otherwise.
    */
   public isCausingPoison(): boolean {
     return (
@@ -224,7 +224,7 @@ export class MapCell {
   /**
    * Determines if the current cell is causing confusion.
    *
-   * @return {boolean} True if the cell is causing confusion, false otherwise.
+   * @return True if the cell is causing confusion, false otherwise.
    */
   public isCausingConfusion(): boolean {
     return (
@@ -237,7 +237,7 @@ export class MapCell {
   /**
    * Checks if the current cell is healing.
    *
-   * @return {boolean} True if the cell is healing, false otherwise.
+   * @return True if the cell is healing, false otherwise.
    */
   public isHealing(): boolean {
     return this.environment.effects.includes(EnvEffect.Heal) || false;
@@ -246,7 +246,7 @@ export class MapCell {
   /**
    * Determines if the current cell is blinding.
    *
-   * @return {boolean} True if the cell is blinding, false otherwise.
+   * @return True if the cell is blinding, false otherwise.
    */
   public isCausingBlind(): boolean {
     return this.environment.effects.includes(EnvEffect.Blind) || false;
@@ -255,7 +255,7 @@ export class MapCell {
   /**
    * Checks if the current cell is causing an attack up effect.
    *
-   * @return {boolean} True if the cell is causing an attack up effect, false otherwise.
+   * @return True if the cell is causing an attack up effect, false otherwise.
    */
   public isCausingAttackUp(): boolean {
     return this.environment.effects.includes(EnvEffect.AttackUp) || false;
@@ -264,7 +264,7 @@ export class MapCell {
   /**
    * Checks if the current cell is causing an attack down effect.
    *
-   * @return {boolean} True if the cell is causing an attack down effect, false otherwise.
+   * @return True if the cell is causing an attack down effect, false otherwise.
    */
   public isCausingAttackDown(): boolean {
     return this.environment.effects.includes(EnvEffect.AttackDown) || false;
@@ -273,7 +273,7 @@ export class MapCell {
   /**
    * Checks if the current cell is causing a defense up effect.
    *
-   * @return {boolean} True if the cell is causing a defense up effect, false otherwise.
+   * @return True if the cell is causing a defense up effect, false otherwise.
    */
   public isCausingDefenseUp(): boolean {
     return this.environment.effects.includes(EnvEffect.DefenseUp) || false;
@@ -282,7 +282,7 @@ export class MapCell {
   /**
    * Checks if the current cell is causing a defense down effect.
    *
-   * @return {boolean} True if the cell is causing a defense down effect, false otherwise.
+   * @return True if the cell is causing a defense down effect, false otherwise.
    */
   public isCausingDefenseDown(): boolean {
     return this.environment.effects.includes(EnvEffect.DefenseDown) || false;
@@ -291,7 +291,7 @@ export class MapCell {
   /**
    * Checks if the current cell is a hidden trap.
    *
-   * @return {boolean} True if the cell is a hidden trap, false otherwise.
+   * @return True if the cell is a hidden trap, false otherwise.
    */
   public isHiddenTrap(): boolean {
     return this.env === Glyph.Hidden_Trap;
@@ -300,7 +300,7 @@ export class MapCell {
   /**
    * Checks if the current cell is at the edge of a chasm.
    *
-   * @return {boolean} True if the cell is at the chasm edge, false otherwise.
+   * @return True if the cell is at the chasm edge, false otherwise.
    */
 
   public isChasmEdge(): boolean {
@@ -310,7 +310,7 @@ export class MapCell {
   /**
    * Checks if the current cell is the center of a chasm.
    *
-   * @return {boolean} True if the cell is the center of a chasm, false otherwise.
+   * @return True if the cell is the center of a chasm, false otherwise.
    */
   public isChasmCenter(): boolean {
     return this.env === Glyph.Chasm_Center;
@@ -319,7 +319,7 @@ export class MapCell {
   /**
    * Determines if the current cell is water.
    *
-   * @return {boolean} True if the cell is water, false otherwise.
+   * @return True if the cell is water, false otherwise.
    */
   public isWater(): boolean {
     return this.env === Glyph.Shallow_Water || this.env === Glyph.Deep_Water;

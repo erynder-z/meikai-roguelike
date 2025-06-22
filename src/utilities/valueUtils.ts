@@ -1,8 +1,9 @@
 export class ValueUtils {
   /**
    * Clamps a number between 0 and 1 and rounds it to two decimal places.
-   * @param {number} value The input number.
-   * @returns {number}   A number between 0 and 1, rounded to two decimals.
+   *
+   * @param value The input number.
+   * @return A number between 0 and 1, rounded to two decimals.
    */
   static clampToTwoDecimals(value: number): number {
     if (isNaN(value)) return 0;

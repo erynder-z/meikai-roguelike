@@ -16,10 +16,8 @@ export class FlashDecorator {
    * Adds a span element to the given fragment with a message indicating
    * how many messages are in the message log's queue.
    *
-   * @param {DocumentFragment} fragment - The fragment to add the span to.
-   * @param {MessageLog} log - The message log to check for queued messages.
-   *
-   * @return {void}
+   * @param fragment - The fragment to add the span to.
+   * @param log - The message log to check for queued messages.
    */
   public addMoreSpanToFragment(
     fragment: DocumentFragment,
@@ -40,9 +38,9 @@ export class FlashDecorator {
    * Replaces occurrences of names (or a single name) in the given fragment with colored spans.
    * The spans are given a class name based on the type of name and the name itself.
    *
-   * @param {DocumentFragment} fragment - The fragment to modify.
-   * @param {FlashDecoratorDataEntry[] | string} namesOrName - The array of objects containing the names to replace or a single player name.
-   * @param {string} type - The type of name (e.g. 'mob', 'item', 'env'). Ignored if a single player name is passed.
+   * @param fragment - The fragment to modify.
+   * @param namesOrName - The array of objects containing the names to replace or a single player name.
+   * @param type - The type of name (e.g. 'mob', 'item', 'env'). Ignored if a single player name is passed.
    */
   public colorize(
     fragment: DocumentFragment,
@@ -110,8 +108,8 @@ export class FlashDecorator {
    * `${this.sanitizeClassName(entry.name)}-${type}-span` and the color and font weight properties are set
    * to the entry's fgCol property.
    *
-   * @param {FlashDecoratorDataEntry[] | string} dataOrColor - The data or color to create styles for.
-   * @param {string} [type] - The type of style. Ignored if dataOrColor is a string.
+   * @param dataOrColor - The data or color to create styles for.
+   * @param type - The optional type of style. Ignored if dataOrColor is a string.
    */
   public createStyles(
     dataOrColor: FlashDecoratorDataEntry[] | string,
@@ -135,7 +133,7 @@ export class FlashDecorator {
   /**
    * Appends a CSS rule to the existing style element.
    *
-   * @param {string} rule - The CSS rule to append.
+   * @param rule - The CSS rule to append.
    */
   private appendStyleRule(rule: string): void {
     if (this.styleElement.sheet) {
@@ -151,8 +149,9 @@ export class FlashDecorator {
    * - Converts to lower case
    * - Replaces one or more spaces with a single underscore
    * - Replaces any non-alphanumeric characters with an underscore
-   * @param {string} name - The string to sanitize.
-   * @returns {string} The sanitized string.
+   *
+   * @param name - The string to sanitize.
+   * @return The sanitized string.
    */
   private sanitizeClassName = (name: string): string => {
     return name

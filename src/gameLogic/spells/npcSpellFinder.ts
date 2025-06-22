@@ -29,10 +29,10 @@ export class NPCSpellFinder {
   /**
    * Finds and returns a Command or StackScreen based on the provided spell and optional cost.
    *
-   * @param {Mob} me - The Mob object representing the player.
-   * @param {Spell} spell - The spell to be executed.
-   * @param {Cost} [cost] - The optional cost of the spell.
-   * @return {Command | StackScreen | null} The found Command or StackScreen, or null if the spell is not recognized.
+   * @param me - The Mob object representing the player.
+   * @param spell - The spell to be executed.
+   * @param cost - The optional cost of the spell.
+   * @return The found Command or StackScreen, or null if the spell is not recognized.
    */
   public find(
     me: Mob,
@@ -129,8 +129,8 @@ export class NPCSpellFinder {
   /**
    * Sets the direction of the command based on the player's position and returns the updated command.
    *
-   * @param {BulletCommand} cmd - The command to be updated.
-   * @return {Command} The updated command with the direction set.
+   * @param cmd - The command to be updated.
+   * @return The updated command with the direction set.
    */
   private aim(cmd: BulletCommand): Command {
     const dir = cmd.me.pos.directionTo(this.player.pos);
@@ -140,9 +140,9 @@ export class NPCSpellFinder {
   /**
    * Creates a new BuffCommand with the given buff and mob, and returns it as a Command.
    *
-   * @param {Buff} buff - The buff to be added to the mob.
-   * @param {Mob} me - The mob to receive the buff.
-   * @return {Command} A new BuffCommand with the given buff and mob.
+   * @param buff - The buff to be added to the mob.
+   * @param me - The mob to receive the buff.
+   * @return A new BuffCommand with the given buff and mob.
    */
   private buff(buff: Buff, me: Mob): Command {
     return new BuffCommand(buff, this.player, this.game, me);

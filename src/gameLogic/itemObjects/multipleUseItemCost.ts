@@ -16,7 +16,7 @@ export class MultipleUseItemCost implements Cost {
   /**
    * Pay the cost of using a multiple-use item.
    *
-   * @return {boolean} True if the cost was successfully paid, false otherwise.
+   * @return True if the cost was successfully paid, false otherwise.
    */
   public pay(): boolean {
     const { obj } = this;

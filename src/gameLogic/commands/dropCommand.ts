@@ -19,6 +19,7 @@ export class DropCommand extends CommandBase {
 
   /**
    * Executes the drop command.
+   *
    * @returns True if the item was dropped successfully, otherwise false.
    */
   public execute(): boolean {

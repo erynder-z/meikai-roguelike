@@ -13,6 +13,7 @@ import { Mob } from '../mobs/mob';
 export class HealthAdjust {
   /**
    * Adjusts the health of a mob based on the specified amount.
+   *
    * @param mob - The mob whose health is to be adjusted.
    * @param amount - The amount by which the health will be adjusted.
    * @param game - The game object.
@@ -31,6 +32,7 @@ export class HealthAdjust {
 
   /**
    * Heals the specified amount of health to the given mob.
+   *
    * @param mob - The mob to be healed.
    * @param amount - The amount of health to be healed.
    */
@@ -42,6 +44,7 @@ export class HealthAdjust {
 
   /**
    * Deals damage to the specified mob.
+   *
    * @param mob - The mob to receive the damage.
    * @param amount - The amount of damage to deal.
    * @param game - The game object.
@@ -75,6 +78,7 @@ export class HealthAdjust {
 
   /**
    * Handles the death of the specified mob by an damage action.
+   *
    * @param mob - The mob that dies.
    * @param game - The game object.
    */
@@ -102,6 +106,7 @@ export class HealthAdjust {
 
   /**
    * Handles the death of the specified mob by removing it from the map.
+   *
    * @param mob - The mob that dies.
    * @param game - The game object.
    * @param shouldDisplayMessage - Whether to message the death.
@@ -212,7 +217,8 @@ export class HealthAdjust {
 
   /**
    * Processes and displays the single cumulative damage message for the player for the current turn.
-   * This should be called once by the game loop after all player damage for the turn is thought to be resolved.
+   * This should be called once by the game loop after all player damage for the turn is resolved.
+   *
    * @param game - The current game state.
    */
   public static displayCumulativePlayerDamageMessage(game: GameState): void {

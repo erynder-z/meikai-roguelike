@@ -14,9 +14,9 @@ export class RockGenerator {
   /**
    * Retrieves the floor rock types randomly based on the given random generator and tile.
    *
-   * @param {RandomGenerator} rand - The random generator used to generate the random selection.
-   * @param {Tile} tile - The tile object containing the floor information.
-   * @return {Glyph} The randomly selected glyph.
+   * @param rand - The random generator used to generate the random selection.
+   * @param tile - The tile object containing the floor information.
+   * @return The randomly selected glyph.
    */
   public static getFloorRockTypes(rand: RandomGenerator, tile: Tile): Glyph {
     return this.getRandomGlyph(rand, tile.floor);
@@ -27,9 +27,9 @@ export class RockGenerator {
    * based on the weights. The function will throw an error if the total weight of the
    * rock types is less than or equal to zero.
    *
-   * @param {RandomGenerator} rand - The random generator used to generate a random number.
-   * @param {Rock[]} rockTypes - The array of rock types with their relative weights.
-   * @return {Glyph} The glyph of the selected rock type.
+   * @param rand - The random generator used to generate a random number.
+   * @param rockTypes - The array of rock types with their relative weights.
+   * @return The glyph of the selected rock type.
    */
   private static getRandomGlyph(
     rand: RandomGenerator,

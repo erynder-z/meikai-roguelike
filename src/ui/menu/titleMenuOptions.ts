@@ -37,7 +37,6 @@ export class TitleMenuOptions extends HTMLElement {
    * This method is called when the element is inserted into the DOM.
    * It is called after the element is created and before the element is connected
    * to the DOM.
-   *
    */
   connectedCallback(): void {
     const templateElement = document.createElement('template');
@@ -360,20 +359,20 @@ export class TitleMenuOptions extends HTMLElement {
    * Bind events to the elements inside the options menu.
    *
    * The function binds the following events:
-   * - Change current seed button click event
-   * - Change current font button click event
-   * - Change terminal dimensions button click event
-   * - Switch control scheme button click event
-   * - Toggle scanlines button click event
-   * - Switch scanline style button click event
-   * - Toggle message alignment button click event
-   * - Toggle show images button click event
-   * - Toggle image alignment button click event
-   * - Focus and select message count input button click event
-   * - Toggle blood intensity button click event
-   * - Focus and select keypress throttle input button click event
-   * - Return to previous screen button click event
-   * - Keydown event on the document
+   * - Change current seed button click event.
+   * - Change current font button click event.
+   * - Change terminal dimensions button click event.
+   * - Switch control scheme button click event.
+   * - Toggle scanlines button click event.
+   * - Switch scanline style button click event.
+   * - Toggle message alignment button click event.
+   * - Toggle show images button click event.
+   * - Toggle image alignment button click event.
+   * - Focus and select message count input button click event.
+   * - Toggle blood intensity button click event.
+   * - Focus and select keypress throttle input button click event.
+   * - Return to previous screen button click event.
+   * - Keydown event on the document.
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -674,8 +673,8 @@ export class TitleMenuOptions extends HTMLElement {
    * corresponding value in the game configuration by calling the appropriate
    * update method.
    *
-   * @param {Event} event - The input event containing the new value.
-   * @param {string} type - The type of configuration setting being updated.
+   * @param event - The input event containing the new value.
+   * @param type - The type of configuration setting being updated.
    */
   private handleInputChange = (
     event: Event,
@@ -710,8 +709,8 @@ export class TitleMenuOptions extends HTMLElement {
   /**
    * Updates the terminal dimensions when the user changes the input values.
    *
-   * @param {Event} event - The input event.
-   * @param {string} side - The side of the terminal that is being updated.
+   * @param event - The input event.
+   * @param side - The side of the terminal that is being updated.
    */
   private updateTerminalDimensionsValue(
     event: Event,
@@ -731,7 +730,7 @@ export class TitleMenuOptions extends HTMLElement {
    * the range of 0 to 2. If the value is not valid, resets the input to the current scaling
    * factor in the game configuration.
    *
-   * @param {Event} event - The input event containing the new value for the scaling factor.
+   * @param event - The input event containing the new value for the scaling factor.
    */
 
   private updateScalingFactorValue(event: Event): void {
@@ -756,7 +755,7 @@ export class TitleMenuOptions extends HTMLElement {
    * message count if the value is a valid number within the range of 1 to 50. If the value
    * is not valid, resets the input to the current message count in the game configuration.
    *
-   * @param {Event} event - The input event containing the new value for the message count.
+   * @param event - The input event containing the new value for the message count.
    */
 
   private updateMessageCountValue(event: Event): void {
@@ -782,7 +781,7 @@ export class TitleMenuOptions extends HTMLElement {
    * If the value is not valid, resets the input to the current minimum key press delay
    * in the game configuration.
    *
-   * @param {Event} event - The input event containing the new value for the minimum key press delay.
+   * @param event - The input event containing the new value for the minimum key press delay.
    */
   private updateKeypressThrottleValue(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -803,6 +802,7 @@ export class TitleMenuOptions extends HTMLElement {
    * Changes the current seed to a random value.
    *
    * This function will also update the displayed seed in the title menu.
+   * @return A promise that resolves when the seed has been changed.
    */
   public async changeSeed(): Promise<void> {
     this.gameConfig.seed = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
@@ -816,7 +816,7 @@ export class TitleMenuOptions extends HTMLElement {
    * It then selects the next font in the list, updates the game configuration with this new font, and updates the displayed font in the UI.
    * The updated configuration is saved, and the layout manager is notified to update the font accordingly.
    *
-   * @return {Promise<void>} A promise that resolves when the font has been changed and the configuration is saved.
+   * @return A promise that resolves when the font has been changed and the configuration is saved.
    */
 
   public async changeFont(): Promise<void> {
@@ -838,8 +838,7 @@ export class TitleMenuOptions extends HTMLElement {
   /**
    * Toggles the control scheme setting on or off.
    *
-   * Updates the {@link gameConfig.control_scheme} property, and toggles the
-   * displayed text of the control scheme button.
+   * Updates the {@link gameConfig.control_scheme} property, and toggles the displayed text of the control scheme button.
    */
   private toggleControlScheme(): void {
     const currentSchemeIndex = this.availableControlSchemes.indexOf(
@@ -1011,7 +1010,8 @@ export class TitleMenuOptions extends HTMLElement {
    * This function is called when the user clicks the "start game" button on the player setup
    * screen. It saves the current build parameters to a file and then returns to the previous
    * screen by replacing the content of the title screen with the title menu element.
-   * @return {Promise<void>} A promise for when the file is saved and the screen is updated.
+   *
+   * @return A promise for when the file is saved and the screen is updated.
    */
   private async returnToPreviousScreen(): Promise<void> {
     try {
@@ -1045,7 +1045,7 @@ export class TitleMenuOptions extends HTMLElement {
    * the options menu, and if so, calls the appropriate function to handle the key press.
    * If the pressed key does not match any of the handled keys, the function does nothing.
    *
-   * @param {KeyboardEvent} event - The keyboard event to be handled.
+   * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
     // scroll via keypress when alt or meta key is pressed

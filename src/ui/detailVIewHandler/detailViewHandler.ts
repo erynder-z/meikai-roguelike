@@ -8,15 +8,14 @@ import { Mob } from '../../gameLogic/mobs/mob';
 
 export class DetailViewHandler {
   /**
-   * Transforms a given entity into a DetailViewEntity representation.
+   * Converts a given entity (Mob, Corpse, ItemObject, or MapCell's environment)
+   * into a DetailViewEntity object that can be used to display information about the entity.
    *
-   * @param {Mob | Corpse | ItemObject | MapCell['environment']} entity - The entity to be transformed.
-   * @return {Omit<DetailViewEntity, 'uniqueKey'>} The transformed DetailViewEntity object without the unique key.
+   * If the given entity is not recognized, it will return an object with type 'unknown',
+   * glyph Glyph.Unknown, and name and description of 'Unknown entity'.
    *
-   * The function identifies the type of entity provided and extracts its relevant properties
-   * to create a DetailViewEntity. It handles Mobs, Corpses, ItemObjects, and MapCell environments,
-   * assigning appropriate type, glyph, name, description, and other properties specific to the entity type.
-   * If the entity type is unrecognized, it defaults to an unknown entity representation.
+   * @param entity - The entity to convert into a DetailViewEntity.
+   * @return The converted DetailViewEntity.
    */
   public transformIntoDetailViewEntity(
     entity: Mob | Corpse | ItemObject | MapCell['environment'],
@@ -79,7 +78,7 @@ export class DetailViewHandler {
   /**
    * Checks if the entity info card is currently open in the DOM.
    *
-   * @return {boolean} True if the entity info card is present, false otherwise.
+   * @return True if the entity info card is present, false otherwise.
    */
   public isEntityCardOpen(): boolean {
     const entityCardElement = document.getElementById(

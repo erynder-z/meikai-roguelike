@@ -8,7 +8,8 @@ export class StartingMessageGenerator {
 
   /**
    * Gets a random starting message from the list.
-   * @returns {string} A random starting message.
+   *
+   * @return A random starting message.
    */
   public static getRandomMessage(): string {
     const randomIndex = Math.floor(Math.random() * this.messages.length);

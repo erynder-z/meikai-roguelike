@@ -23,10 +23,14 @@ export class LevelDepthInfo extends HTMLElement {
   }
 
   /**
-   * Sets the level depth information element to the given depth value.
-   * If the given depth is 0, displays 'Surface' as the depth text.
-   * Otherwise, displays the depth with a negative sign and the unit 'm'.
-   * @param {number} depth - The level depth to display.
+   * Updates the level depth information element with the given depth value.
+   *
+   * If the given depth is 0, the element is updated with the text 'Surface'.
+   * Otherwise, the depth is formatted as a negative number with the currently
+   * set depth unit (meters or feet) and the result is prepended with a '-'.
+   * The formatted text is then displayed in the level depth information element.
+   *
+   * @param depth - The depth value to display.
    */
   public setLevelDepthInfo(depth: number): void {
     const unitSettingsManager = new UnitSettingsManager();

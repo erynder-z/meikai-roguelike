@@ -26,6 +26,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Executes the command.
+   *
    * @returns Always throws an error, should be implemented in subclasses.
    */
   public execute(): boolean {
@@ -34,6 +35,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Sets the direction of the command.
+   *
    * @param direction - The direction to set.
    * @returns The command object.
    */
@@ -62,6 +64,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Executes a turn for the mob if it is able to do so.
+   *
    * @returns The result of executing the command.
    */
   public turn(): boolean {

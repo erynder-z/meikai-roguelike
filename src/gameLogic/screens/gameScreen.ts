@@ -17,8 +17,8 @@ export class GameScreen extends BaseScreen {
   /**
    * Handle key down event.
    *
-   * @param {KeyboardEvent} event - the keyboard event
-   * @param {Stack} stack - the stack
+   * @param event - the keyboard event.
+   * @param stack - the stack.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
     const detailViewHandler = new DetailViewHandler();
@@ -35,9 +35,9 @@ export class GameScreen extends BaseScreen {
   /**
    * A function that handles the player's turn in the game.
    *
-   * @param {Stack} stack - the game stack
-   * @param {string} char - the character input by the player
-   * @param {KeyboardEvent | null} event - the keyboard event or null
+   * @param stack - the game stack.
+   * @param char - the character input by the player.
+   * @param event - the keyboard event or null.
    */
   private playerKeyTurn(
     stack: Stack,
@@ -51,10 +51,10 @@ export class GameScreen extends BaseScreen {
   /**
    * A function that handles the player's turn.
    *
-   * @param {Stack} stack - the stack object
-   * @param {string} char - the character input
-   * @param {KeyboardEvent | null} event - the keyboard event or null
-   * @return {boolean} the result of parsing the key code as a turn
+   * @param stack - the stack object.
+   * @param char - the character input.
+   * @param event - the keyboard event or null.
+   * @return The result of parsing the key code as a turn.
    */
   private playerTurn(
     stack: Stack,

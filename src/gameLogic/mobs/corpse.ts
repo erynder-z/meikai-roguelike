@@ -24,7 +24,7 @@ export class Corpse {
    * Creates a new Corpse object with the same glyph and position as the current object.
    * Sets the description of the corpse to the corpse glyph's description for the 'corpse' state.
    *
-   * @return {Corpse} A new Corpse object with the same glyph and position as the current object.
+   * @return A new Corpse object with the same glyph and position as the current object.
    */
   public create(): Corpse {
     const corpse = new Corpse(this.glyph, this.pos.x, this.pos.y);

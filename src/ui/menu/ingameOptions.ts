@@ -402,8 +402,7 @@ export class IngameOptions extends HTMLElement {
   /**
    * Toggles the control scheme setting on or off.
    *
-   * Updates the {@link gameConfig.control_scheme} property, and toggles the
-   * displayed text of the control scheme button.
+   * Updates the {@link gameConfig.control_scheme} property, and toggles the displayed text of the control scheme button.
    */
   private toggleControlScheme(): void {
     const currentSchemeIndex = this.availableControlSchemes.indexOf(
@@ -682,7 +681,7 @@ export class IngameOptions extends HTMLElement {
    * - B: toggleBloodIntensity
    * - {menu} or R: returnToIngameMenu
    *
-   * @param {KeyboardEvent} event - The keyboard event to be handled.
+   * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
     switch (event.key) {

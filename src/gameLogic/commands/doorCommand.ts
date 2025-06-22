@@ -21,6 +21,7 @@ export class DoorCommand extends CommandBase {
 
   /**
    * Sets the direction for the command.
+   *
    * @param direction - The direction to set.
    * @returns The command object.
    */
@@ -31,6 +32,7 @@ export class DoorCommand extends CommandBase {
 
   /**
    * Executes the door command.
+   *
    * @returns True if the command is executed successfully, false otherwise.
    */
   public execute(): boolean {
@@ -62,6 +64,7 @@ export class DoorCommand extends CommandBase {
 
   /**
    * Displays a message about the door action.
+   *
    * @param env - The environment of the door.
    */
   private message(env: Glyph): void {

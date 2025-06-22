@@ -278,16 +278,21 @@ export class PlayerSetup extends HTMLElement {
   }
 
   /**
-   * Sets up event listeners for player setup screen.
+   * Bind events to the elements inside the player setup menu.
    *
-   * Handles events such as:
-   * - Clicking on the player portrait to toggle appearance.
-   * - Clicking on the player name to enable name editing.
-   * - Key presses to randomize name, color, or avatar.
-   * - Clicking randomize button to randomize selected attribute.
-   * - Clicking return button to go back to previous screen.
-   *
-   * Also sets up key press event listener.
+   * The function binds the following events:
+   * - Click event on the girlish portrait button.
+   * - Click event on the boyish portrait button.
+   * - Click event on the player name span.
+   * - Change event on the player name input.
+   * - Click event on the randomize name button.
+   * - Change event on the player color input.
+   * - Click event on the randomize color button.
+   * - Click event on the player avatar span.
+   * - Change event on the player avatar input.
+   * - Click event on the randomize avatar button.
+   * - Click event on the return button.
+   * - Keydown event on the document.
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -368,8 +373,7 @@ export class PlayerSetup extends HTMLElement {
    * calls the appropriate function to handle the key press. If the pressed key
    * does not match any of the handled keys, the function does nothing.
    *
-   * @param {KeyboardEvent} event - The event object that contains information
-   * about the key press.
+   * @param event - The event object that contains information about the key press.
    */
   private handleKeyPress(event: KeyboardEvent): void {
     const nameInputElement = this.shadowRoot?.getElementById(
@@ -428,8 +432,7 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Renders the player's current portrait, name, and avatar in the UI.
    *
-   * @param {GameConfigType['player']} player - The player object containing the
-   * appearance, name, and avatar information.
+   * @param player - The player object containing the appearance, name, and avatar information.
    */
   private displayPlayer(player: GameConfigType['player']): void {
     const isGirlish = player.appearance === 'girlish';
@@ -452,9 +455,9 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Renders a portrait element with the specified image HTML and highlight status.
    *
-   * @param {string} elementId - The ID of the element to render.
-   * @param {string} imageHTML - The HTML string of the portrait image.
-   * @param {boolean} isHighlighted - Whether the portrait should be highlighted.
+   * @param elementId - The ID of the element to render.
+   * @param imageHTML - The HTML string of the portrait image.
+   * @param isHighlighted - Whether the portrait should be highlighted.
    */
   private renderPortraitElement(
     elementId: string,
@@ -474,8 +477,8 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Renders a name element with the specified content.
    *
-   * @param {string} elementId - The ID of the element to render.
-   * @param {string} content - The text content of the element.
+   * @param elementId - The ID of the element to render.
+   * @param content - The text content of the element.
    */
   private renderNameElement(elementId: string, content: string): void {
     const element = this.shadowRoot?.getElementById(
@@ -494,6 +497,12 @@ export class PlayerSetup extends HTMLElement {
     this.displayPlayer(player);
   }
 
+  /**
+   * Updates the player's appearance to the specified value, and updates the UI
+   * to reflect the new appearance.
+   *
+   * @param appearance - The new appearance of the player, either 'boyish' or 'girlish'.
+   */
   private changeAppearanceTo(appearance: 'boyish' | 'girlish'): void {
     const player = this.gameConfig.player;
     player.appearance = appearance;
@@ -501,8 +510,7 @@ export class PlayerSetup extends HTMLElement {
   }
 
   /**
-   * Enables the player name input element for editing, hiding the player name
-   * element and the randomize name button.
+   * Enables the player name input element for editing, hiding the player name element and the randomize name button.
    */
   private enableNameEditing(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -528,8 +536,7 @@ export class PlayerSetup extends HTMLElement {
   }
 
   /**
-   * Handles the blur event on the player name input element by saving the new
-   * name to gameConfig and hiding the input element.
+   * Handles the blur event on the player name input element by saving the new name to gameConfig and hiding the input element.
    */
   private handleNameInputChange(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -571,10 +578,9 @@ export class PlayerSetup extends HTMLElement {
   /**
    * Sets the value of the player color input element to the given color.
    *
-   * This function is called when the player's color is changed from the
-   * player setup screen.
+   * This function is called when the player's color is changed from the player setup screen.
    *
-   * @param {string} color - The new color for the player.
+   * @param color - The new color for the player.
    */
   private setColorInputValue(color: string): void {
     const colorInput = this.shadowRoot?.getElementById(
@@ -584,8 +590,7 @@ export class PlayerSetup extends HTMLElement {
   }
 
   /**
-   * Handles the change event on the player color input element by saving the
-   * new color to gameConfig.
+   * Handles the change event on the player color input element by saving the new color to gameConfig.
    */
   private handleColorInputChange(): void {
     const colorInput = this.shadowRoot?.getElementById(
@@ -595,8 +600,7 @@ export class PlayerSetup extends HTMLElement {
   }
 
   /**
-   * Simulates a click event on the player color input element, allowing the user
-   * to select a color from the color picker.
+   * Simulates a click event on the player color input element, allowing the user to select a color from the color picker.
    */
   private changeColor(): void {
     const colorInput = this.shadowRoot?.getElementById(
@@ -621,8 +625,7 @@ export class PlayerSetup extends HTMLElement {
   }
 
   /**
-   * Enables the avatar input element for editing, hiding the avatar element
-   * and randomize button.
+   * Enables the avatar input element for editing, hiding the avatar element and randomize button.
    */
   private enableAvatarEditing(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -648,8 +651,7 @@ export class PlayerSetup extends HTMLElement {
   }
 
   /**
-   * Handles the blur event on the player avatar input element by saving the new
-   * avatar to gameConfig and hiding the input element.
+   * Handles the blur event on the player avatar input element by saving the new avatar to gameConfig and hiding the input element.
    */
   private handleAvatarInputChange(): void {
     const inputElement = this.shadowRoot?.getElementById(
@@ -686,8 +688,7 @@ export class PlayerSetup extends HTMLElement {
    * Randomizes either the player's appearance, name, color, avatar, or all of
    * the above.
    *
-   * @param {string} element The element to randomize. Can be 'appearance',
-   * 'name', 'color', 'avatar', or 'all'.
+   * @param element The element to randomize. Can be 'appearance', 'name', 'color', 'avatar', or 'all'.
    */
   private randomize(
     element: 'appearance' | 'name' | 'color' | 'avatar' | 'all',
@@ -721,7 +722,8 @@ export class PlayerSetup extends HTMLElement {
    * This function is called when the user clicks the "start game" button on the player setup
    * screen. It saves the current build parameters to a file and then returns to the previous
    * screen by replacing the content of the title screen with the title menu element.
-   * @return {Promise<void>} A promise for when the file is saved and the screen is updated.
+   *
+   * @return A promise for when the file is saved and the screen is updated.
    */
   private async returnToPreviousScreen(): Promise<void> {
     try {

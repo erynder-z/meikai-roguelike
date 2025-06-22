@@ -41,9 +41,9 @@ export class MapGenerator_Cave {
    * This function creates a new instance of the MapGenerator_Cave class and
    * calls its createCave method to generate the map.
    *
-   * @param {RandomGenerator} rand - The random number generator.
-   * @param {number} level - The level number of the map.
-   * @return {GameMapType} The generated map.
+   * @param rand - The random number generator.
+   * @param level - The level number of the map.
+   * @return The generated map.
    */
   public static generate(rand: RandomGenerator, level: number): GameMapType {
     const mapDimensionsX = 128;
@@ -68,7 +68,7 @@ export class MapGenerator_Cave {
    * and chasms are added to the map. Finally, cell-specific modifications
    * are processed before returning the completed map.
    *
-   * @return {GameMapType} The generated cave-like map.
+   * @return The generated cave-like map.
    */
   public createCave(): GameMapType {
     MapUtils.clearMap(this.map);
@@ -148,12 +148,12 @@ export class MapGenerator_Cave {
    * Each chasm area is a random size between areaMinSize and areaMaxSize.
    * The chasm areas are added using the createChasmAreas method.
    *
-   * @param {RandomGenerator} rand - The random number generator.
-   * @param {number} areaCount - The number of chasm areas to add.
-   * @param {number} areaMinSize - The minimum size of a chasm area.
-   * @param {number} areaMaxSize - The maximum size of a chasm area.
-   * @param {Glyph} centerGlyph - The glyph representing the center of a chasm area.
-   * @param {Glyph} edgeGlyph - The glyph representing the edge of a chasm area.
+   * @param rand - The random number generator.
+   * @param areaCount - The number of chasm areas to add.
+   * @param areaMinSize - The minimum size of a chasm area.
+   * @param areaMaxSize - The maximum size of a chasm area.
+   * @param centerGlyph - The glyph representing the center of a chasm area.
+   * @param edgeGlyph - The glyph representing the edge of a chasm area.
    */
   private addChasmAreas(
     rand: RandomGenerator,
@@ -177,10 +177,10 @@ export class MapGenerator_Cave {
    * The cells in the generated area are set to the provided centerGlyph.
    * The cells around the edge of the area are set to the provided edgeGlyph.
    *
-   * @param {RandomGenerator} rand - The random number generator.
-   * @param {number} size - The size of the chasm area.
-   * @param {Glyph} centerGlyph - The glyph representing the center of the chasm area.
-   * @param {Glyph} edgeGlyph - The glyph representing the edge of the chasm area.
+   * @param rand - The random number generator.
+   * @param size - The size of the chasm area.
+   * @param centerGlyph - The glyph representing the center of the chasm area.
+   * @param edgeGlyph - The glyph representing the edge of the chasm area.
    */
   private createChasmAreas(
     rand: RandomGenerator,

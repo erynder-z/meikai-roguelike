@@ -26,6 +26,7 @@ export class UnitSettingsManager {
 
   /**
    * Sets the current temperature unit.
+   *
    * @param unit The new temperature unit ('celsius' or 'fahrenheit').
    */
   public setCurrentTempUnit(unit: 'celsius' | 'fahrenheit'): void {
@@ -34,6 +35,7 @@ export class UnitSettingsManager {
 
   /**
    * Sets the current depth unit.
+   *
    * @param unit The new depth unit ('meters' or 'feet').
    */
   public setCurrentDepthUnit(unit: 'meters' | 'feet'): void {
@@ -42,8 +44,9 @@ export class UnitSettingsManager {
 
   /**
    * Converts a temperature from Celsius to Fahrenheit.
+   *
    * @param celsius The temperature in Celsius.
-   * @returns {number} The temperature in Fahrenheit.
+   * @returns The temperature in Fahrenheit.
    */
   private convertCelsiusToFahrenheit(celsius: number): number {
     return celsius * (9 / 5) + 32;
@@ -51,8 +54,9 @@ export class UnitSettingsManager {
 
   /**
    * Converts a depth from meters to feet.
+   *
    * @param meters The depth in meters.
-   * @returns {number} The depth in feet.
+   * @returns The depth in feet.
    */
   private convertMetersToFeet(meters: number): number {
     return meters * 3.28084;
@@ -60,8 +64,9 @@ export class UnitSettingsManager {
 
   /**
    * Converts a temperature from Celsius to the currently set unit.
+   *
    * @param temperature The temperature in Celsius.
-   * @returns {number} The temperature in the current unit.
+   * @returns The temperature in the current unit.
    */
   private convertTemperature(temperature: number): number {
     return this.currentTempUnit === 'fahrenheit'
@@ -71,8 +76,9 @@ export class UnitSettingsManager {
 
   /**
    * Converts a depth from meters to the currently set unit.
+   *
    * @param depth The depth in meters.
-   * @returns {number} The depth in the current unit.
+   * @returns The depth in the current unit.
    */
   private convertDepth(depth: number): number {
     return this.currentDepthUnit === 'feet'
@@ -82,8 +88,9 @@ export class UnitSettingsManager {
 
   /**
    * Displays a temperature with the currently set unit.
-   * @param {number} temperature - The temperature in Celsius.
-   * @returns {string} The temperature in the current unit.
+   *
+   * @param temperature - The temperature in Celsius.
+   * @return The temperature in the current unit.
    */
   public displayTemperature(temperature: number): string {
     const convertedTemperature = Math.round(
@@ -96,10 +103,10 @@ export class UnitSettingsManager {
 
   /**
    * Displays a depth with the currently set unit.
-   * @param {number} depth - The depth in meters.
-   * @returns {string} The depth in the current unit with the appropriate unit symbol.
+   *
+   * @param depth - The depth in meters.
+   * @return The depth in the current unit with the appropriate unit symbol.
    */
-
   public displayDepth(depth: number): string {
     const convertedDepth = Math.round(this.convertDepth(depth));
     const displayUnit =

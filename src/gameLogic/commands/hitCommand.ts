@@ -30,6 +30,7 @@ export class HitCommand extends CommandBase {
 
   /**
    * Executes the hit command, dealing damage to the target mob.
+   *
    * @returns Returns true if the hit was successful, false otherwise.
    */
   public execute(): boolean {

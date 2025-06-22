@@ -26,7 +26,7 @@ export class DirectionStep extends TimedStep {
   /**
    * Sets the direction of the object to the specified world point.
    *
-   * @param {WorldPoint} dir - The world point to set the direction to.
+   * @param dir - The world point to set the direction to.
    */
   public setDirection(dir: WorldPoint): void {
     this.direction = dir;
@@ -35,7 +35,7 @@ export class DirectionStep extends TimedStep {
   /**
    * Executes the step for moving an object in a specified direction.
    *
-   * @return {Step | null} The next step to execute or null if the current step is done.
+   * @return The next step to execute or null if the current step is done.
    */
   public executeStep(): Step | null {
     const currentPosition = this.pos;

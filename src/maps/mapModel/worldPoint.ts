@@ -12,7 +12,7 @@ export class WorldPoint {
   /**
    * Check if the x and y values are both zero.
    *
-   * @return {boolean} true if both x and y are zero, false otherwise
+   * @return true if both x and y are zero, false otherwise.
    */
   public isEmpty(): boolean {
     return this.x == 0 && this.y == 0;
@@ -21,8 +21,8 @@ export class WorldPoint {
   /**
    * A method to add a WorldPoint to the current instance.
    *
-   * @param {WorldPoint} p - the WorldPoint to add
-   * @return {WorldPoint} the resulting WorldPoint after addition
+   * @param p - the WorldPoint to add.
+   * @return the resulting WorldPoint after addition.
    */
   public plus(p: WorldPoint): WorldPoint {
     return this.copy().addTo(p);
@@ -31,7 +31,7 @@ export class WorldPoint {
   /**
    * Copies the current WorldPoint.
    *
-   * @return {WorldPoint} a new WorldPoint with the same coordinates as the current one
+   * @return A new WorldPoint with the same coordinates as the current one.
    */
   public copy(): WorldPoint {
     return new WorldPoint(this.x, this.y);
@@ -40,8 +40,8 @@ export class WorldPoint {
   /**
    * Adds the coordinates of the given WorldPoint to the current WorldPoint.
    *
-   * @param {WorldPoint} b - The WorldPoint to add to the current point
-   * @return {WorldPoint} The updated WorldPoint after adding the given point
+   * @param b - The WorldPoint to add to the current point.
+   * @return The updated WorldPoint after adding the given point.
    */
   public addTo(b: WorldPoint): WorldPoint {
     this.x += b.x;
@@ -52,7 +52,7 @@ export class WorldPoint {
   /**
    * Set the x and y coordinates to the values of the given WorldPoint.
    *
-   * @param {WorldPoint} n - the WorldPoint object with the new x and y coordinates
+   * @param n - the WorldPoint object with the new x and y coordinates.
    */
   public set(n: WorldPoint): void {
     this.x = n.x;
@@ -62,8 +62,8 @@ export class WorldPoint {
   /**
    * Determines the direction from the current point to another WorldPoint.
    *
-   * @param {WorldPoint} p - The world point to calculate the direction to
-   * @return {WorldPoint} The calculated direction as a new WorldPoint
+   * @param p - The world point to calculate the direction to.
+   * @return The calculated direction as a new WorldPoint.
    */
   public directionTo(p: WorldPoint): WorldPoint {
     return new WorldPoint(Math.sign(p.x - this.x), Math.sign(p.y - this.y));
@@ -72,8 +72,8 @@ export class WorldPoint {
   /**
    * Calculates the distance between the current point and another WorldPoint.
    *
-   * @param {WorldPoint} b - the WorldPoint to calculate the distance to
-   * @return {number} the distance to the given WorldPoint
+   * @param b - the WorldPoint to calculate the distance to.
+   * @return The distance to the given WorldPoint.
    */
   public distanceTo(b: WorldPoint): number {
     return Math.sqrt(this.squaredDistanceTo(b));
@@ -83,8 +83,8 @@ export class WorldPoint {
    * Calculates the squared distance between the current point and another WorldPoint.
    * This is more efficient than calculating the actual distance.
    *
-   * @param {WorldPoint} b - The WorldPoint to calculate the squared distance to
-   * @return {number} The squared distance between the points
+   * @param b - The WorldPoint to calculate the squared distance to.
+   * @return The squared distance between the points.
    */
   public squaredDistanceTo(b: WorldPoint): number {
     const d = this.minus(b);
@@ -94,8 +94,8 @@ export class WorldPoint {
   /**
    * Subtracts another WorldPoint from the current instance.
    *
-   * @param {WorldPoint} b - The WorldPoint to subtract
-   * @return {WorldPoint} The resulting WorldPoint after subtraction
+   * @param b - The WorldPoint to subtract.
+   * @return The resulting WorldPoint after subtraction.
    */
   public minus(b: WorldPoint): WorldPoint {
     return new WorldPoint(this.x - b.x, this.y - b.y);
@@ -103,8 +103,9 @@ export class WorldPoint {
 
   /**
    * Checks if this WorldPoint is equal to another WorldPoint.
-   * @param {WorldPoint} b - The WorldPoint to compare with
-   * @returns {boolean} true if the two WorldPoints are equal, false otherwise
+   *
+   * @param b - The WorldPoint to compare with.
+   * @return true if the two WorldPoints are equal, false otherwise.
    */
   public isEqual(b: WorldPoint): boolean {
     return b.x === this.x && b.y === this.y;
@@ -113,8 +114,8 @@ export class WorldPoint {
   /**
    * Generates a generator that yields all neighboring points within the given radius.
    *
-   * @param {number} radius - The radius within which to find neighboring points. Defaults to 1.
-   * @returns {Generator<WorldPoint>} A generator that yields WorldPoint instances.
+   * @param radius - The radius within which to find neighboring points. Defaults to 1.
+   * @return A generator that yields WorldPoint instances.
    */
   public *getNeighbors(radius: number = 1): Generator<WorldPoint> {
     for (let dy = -radius; dy <= radius; dy++) {
@@ -128,9 +129,9 @@ export class WorldPoint {
   /**
    * Checks if the given position is out of bounds on the map.
    *
-   * @param {WorldPoint} position - The position to check.
-   * @param {GameMapType} map - The game map containing dimensions for comparison.
-   * @return {boolean} True if the position is out of bounds, false otherwise.
+   * @param position - The position to check.
+   * @param map - The game map containing dimensions for comparison.
+   * @return True if the position is out of bounds, false otherwise.
    */
   public isPositionOutOfBounds(
     position: WorldPoint,

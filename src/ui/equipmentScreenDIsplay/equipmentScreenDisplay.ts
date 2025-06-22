@@ -97,7 +97,8 @@ export class EquipmentScreenDisplay extends HTMLElement {
 
   /**
    * Sets the equipment items to display.
-   * @param {{ slot: string; description: string }[]} items - The equipment items.
+   *
+   * @param items - An array of equipment items to display.
    */
   set items(items: { char: string; slot: string; description: string }[]) {
     this.equipmentItems = items;
@@ -106,7 +107,8 @@ export class EquipmentScreenDisplay extends HTMLElement {
 
   /**
    * Sets the menu key text displayed in the heading.
-   * @param {string} key - The menu key.
+   *
+   * @param key - The menu key.
    */
   set menuKeyText(key: string) {
     this.menuKey = key;
@@ -148,7 +150,8 @@ export class EquipmentScreenDisplay extends HTMLElement {
 
   /**
    * Triggers a fade-out animation and resolves when it completes.
-   * @returns {Promise<void>}
+   *
+   * @returns A promise that resolves when the fade-out animation completes.
    */
   public fadeOut(): Promise<void> {
     return new Promise(resolve => {

@@ -67,7 +67,8 @@ export class ItemScreenDisplay extends HTMLElement {
   }
   /**
    * Sets the menu key text displayed in the heading.
-   * @param {string} key - The menu key.
+   *
+   * @param key - The menu key.
    */
   set menuKeyText(key: string) {
     this.menuKey = key;
@@ -79,7 +80,6 @@ export class ItemScreenDisplay extends HTMLElement {
 
   /**
    * Generates and populates the options list in the item screen display.
-   *
    */
   private generateOptionsList(): void {
     if (!this.shadowRoot) return;
@@ -106,7 +106,8 @@ export class ItemScreenDisplay extends HTMLElement {
 
   /**
    * Triggers a fade-out animation and resolves when it completes.
-   * @returns {Promise<void>}
+   *
+   * @returns A promise that resolves when the fade-out animation completes.
    */
   public fadeOut(): Promise<void> {
     return new Promise(resolve => {

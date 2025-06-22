@@ -133,7 +133,8 @@ export class StatsScreenDisplay extends HTMLElement {
 
   /**
    * Sets the current stats data.
-   * @param {Stats} stats - The new stats data.
+   *
+   * @param stats - The new stats data.
    */
   set currentStats(stats: Stats) {
     this.stats = stats;
@@ -141,7 +142,8 @@ export class StatsScreenDisplay extends HTMLElement {
 
   /**
    * Sets the current player data.
-   * @param {Mob} player - The new player data.
+   *
+   * @param player - The new player data.
    */
 
   set currentPlayer(player: Mob) {
@@ -150,7 +152,8 @@ export class StatsScreenDisplay extends HTMLElement {
 
   /**
    * Sets the current equipment data.
-   * @param {Equipment} equipment - The new equipment data.
+   *
+   * @param equipment - The new equipment data.
    */
   set currentEquipment(equipment: Equipment) {
     this.equipment = equipment;
@@ -158,7 +161,8 @@ export class StatsScreenDisplay extends HTMLElement {
 
   /**
    * Sets the menu key text displayed in the heading.
-   * @param {string} key - The menu key.
+   *
+   * @param key - The menu key.
    */
   set menuKeyText(key: string) {
     this.menuKey = key;
@@ -216,8 +220,7 @@ export class StatsScreenDisplay extends HTMLElement {
    * with a list of buffs. Each buff is displayed as a colored span, based on the
    * buff's type. Buffs are separated by commas.
    *
-   * @param {Map<Buff, BuffType>} buffMap - A map containing the buffs and their
-   * corresponding types that should be displayed in the buffs list.
+   * @param buffMap - A map containing the buffs and their corresponding types that should be displayed in the buffs list.
    */
 
   public setBuffs(buffMap: Map<Buff, BuffType>): void {
@@ -251,9 +254,9 @@ export class StatsScreenDisplay extends HTMLElement {
    * given list of levels. If the given value does not match any of the levels,
    * the method returns the default label and class name.
    *
-   * @param {number} value - The value to match against the levels.
-   * @param {{ threshold: number; label: string; className?: string }[]} levels - The list of levels to check against.
-   * @return {{ label: string; className?: string }} - The label and class name corresponding to the given value.
+   * @param value - The value to match against the levels.
+   * @param levels - The list of levels to check against.
+   * @return The label and class name corresponding to the given value.
    */
   private getLevelLabel(
     value: number,
@@ -269,10 +272,10 @@ export class StatsScreenDisplay extends HTMLElement {
    * The text content of the span element is set to the given label with the given class name.
    * The text content of the text node is set to the given prefix.
    *
-   * @param {string} selector - The CSS selector for the element to update.
-   * @param {number} value - The value to determine the label and class name for.
-   * @param {{ threshold: number; label: string; className?: string }[]} levels - The list of levels to check against.
-   * @param {string} prefix - The prefix to display before the label.
+   * @param selector - The CSS selector for the element to update.
+   * @param value - The value to determine the label and class name for.
+   * @param levels - The list of levels to check against.
+   * @param prefix - The prefix to display before the label.
    */
   private updateStatDisplay(
     selector: string,
@@ -347,7 +350,8 @@ export class StatsScreenDisplay extends HTMLElement {
   /**
    * Adds the 'fade-out' class to the element and returns a promise that resolves
    * when the fade out animation ends.
-   * @returns {Promise<void>}
+   *
+   * @returns A promise that resolves when the fade out animation ends.
    */
   public fadeOut(): Promise<void> {
     return new Promise(resolve => {

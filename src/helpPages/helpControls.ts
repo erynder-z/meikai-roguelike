@@ -129,9 +129,9 @@ export class HelpControls extends HTMLElement {
    * Binds events to the elements inside the controls help page.
    *
    * The function binds the following events:
-   * - Click event on the previous control scheme button
-   * - Click event on the next control scheme button
-   * - Keydown event on the document
+   * - Click event on the previous control scheme button.
+   * - Click event on the next control scheme button.
+   * - Keydown event on the document.
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -161,8 +161,7 @@ export class HelpControls extends HTMLElement {
    * The function takes care of switching the current control scheme to the
    * previous or next one in the list of available control schemes.
    *
-   * @param {'prev' | 'next'} buttonDirection - The direction of the control
-   * scheme button that was clicked.
+   * buttonDirection - The direction of the control scheme button that was clicked.
    */
   private handleControlSchemeButtonClick(
     buttonDirection: 'prev' | 'next',
@@ -202,8 +201,7 @@ export class HelpControls extends HTMLElement {
    * associated control scheme in the controlSchemes object. It then uses the
    * controls data to populate the controls table in the UI.
    *
-   * @param {ControlSchemeName} controlSchemeName - The name of the control scheme
-   * to populate the table with.
+   * @param controlSchemeName - The name of the control scheme to populate the table with.
    */
   private populateControlsTable(controlSchemeName: ControlSchemeName): void {
     const controlsListElement = this.shadowRoot?.querySelector(
@@ -247,9 +245,8 @@ export class HelpControls extends HTMLElement {
    * will be formatted as "key1 / key2 / ...". If the control action contains no keys
    * at all, it will be formatted as "N/A".
    *
-   * @param {string[]} keys - The list of keys associated with the scroll list control
-   * action.
-   * @return {string} The formatted string representing the scroll list control action.
+   * @param keys - The list of keys associated with the scroll list control action.
+   * @return The formatted string representing the scroll list control action.
    */
   private formatScrollListKeys(keys: string[]): string {
     const modifiers = keys.filter(k => k === 'Alt' || k === 'Meta').join(' / ');
@@ -269,10 +266,8 @@ export class HelpControls extends HTMLElement {
    * or next control scheme, respectively. If either key is pressed, it triggers
    * the corresponding control scheme button click handler.
    *
-   * @param {KeyboardEvent} event - The keyboard event object containing
-   * details about the key press.
+   * @param event - The keyboard event object containing details about the key press.
    */
-
   private handleKeyPress(event: KeyboardEvent): void {
     switch (event.key) {
       case '<':

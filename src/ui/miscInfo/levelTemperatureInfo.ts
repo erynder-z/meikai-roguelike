@@ -25,9 +25,9 @@ export class LevelTemperatureInfo extends HTMLElement {
   /**
    * Sets the temperature information element to the given temperature value.
    * Converts the temperature to the currently set unit before displaying it.
-   * @param {number} temp - The temperature in Celsius to display.
+   *
+   * @param temp - The temperature in Celsius to display.
    */
-
   public setLevelTempInfo(temp: number): void {
     const unitSettingsManager = new UnitSettingsManager();
     const tempDisplayText = `TEMP: <span class="large-font">${unitSettingsManager.displayTemperature(temp)}</span>`;

@@ -12,6 +12,7 @@ export class MapHandler {
 
   /**
    * Retrieves the current map of the dungeon based on the current level.
+   *
    * @param game - The game object.
    * @returns The current map.
    */
@@ -22,6 +23,7 @@ export class MapHandler {
   /**
    * Retrieves a specific level of the dungeon.
    * If the level does not exist, it is generated.
+   *
    * @param level - The level number.
    * @param game - The game object.
    * @returns The map of the specified level.
@@ -36,6 +38,7 @@ export class MapHandler {
 
   /**
    * Checks if the dungeon has a specific level.
+   *
    * @param level - The level number to check.
    * @returns True if the dungeon has the level, otherwise false.
    */
@@ -45,6 +48,7 @@ export class MapHandler {
 
   /**
    * Adds a map to a specified level of the dungeon.
+   *
    * @param map - The map to add.
    * @param level - The level number where the map should be added.
    */
@@ -57,6 +61,7 @@ export class MapHandler {
 
   /**
    * Extends the maps array to a specified length.
+   *
    * @param len - The new length of the maps array.
    */
   private extendMaps(len: number): void {
@@ -66,6 +71,7 @@ export class MapHandler {
   /**
    * Adjusts the current visibility range of the player based on the current level
    * being dark or not.
+   *
    * @param game - The game object.
    */
   private adjustLevelVisibilityRange(game: GameState): void {
@@ -80,6 +86,7 @@ export class MapHandler {
 
   /**
    * Handles player switching levels within the dungeon.
+   *
    * @param newLevel - The new level to which the player switches.
    * @param newPosition - The new position of the player on the new level.
    * @param game - The game object.

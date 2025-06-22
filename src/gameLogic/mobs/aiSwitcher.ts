@@ -24,12 +24,13 @@ export class AISwitcher implements MobAI {
 
   /**
    * Executes a turn for the mob using the appropriate AI based on the mob's type.
-   * @param {Mob} me - The current mob controlled by this AI.
-   * @param {Mob} enemy - The enemy mob.
-   * @param {GameState} game - The game object.
-   * @param {Stack} game - The screen stack.
-   * @param {ScreenMaker} make - The screen maker.
-   * @returns {boolean} - True if the turn was successfully executed, false otherwise.
+   *
+   * @param me - The current mob controlled by this AI.
+   * @param enemy - The enemy mob.
+   * @param game - The game object.
+   * @param game - The screen stack.
+   * @param make - The screen maker.
+   * @return True if the turn was successfully executed, false otherwise.
    */
   public turn(
     me: Mob,

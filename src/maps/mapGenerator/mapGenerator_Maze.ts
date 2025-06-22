@@ -15,12 +15,33 @@ export class MapGenerator_Maze {
     public rand: RandomGenerator,
   ) {}
 
-  public generate(): GameMap {
+  /**
+   * Creates a maze map using the given random generator and level number.
+   *
+   * This function first clears the current map, carves out a maze using the
+   * recursive backtracking algorithm, and then applies static effects to all
+   * map cells.
+   *
+   * @return The generated maze map.
+   */
+  public createMaze(): GameMap {
     this.carveMaze();
     MapUtils.applyStaticEffectsToCells(this.map);
     return this.map;
   }
 
+  /**
+   * Recursively carves out a maze in the given map.
+   *
+   * The algorithm starts by initializing the entire map as walls.
+   * Then, a random cell is chosen, and the algorithm carves out a passage
+   * from there, randomly choosing a direction to move in.
+   * It will only move to a cell if it is a wall, and will not move to a cell
+   * that has already been visited.
+   *
+   * The algorithm will also randomly decide whether to add a door to each
+   * cell it visits.
+   */
   private carveMaze(): void {
     const { map, rand } = this;
 
@@ -41,6 +62,19 @@ export class MapGenerator_Maze {
     this.carvePassage(startCell);
   }
 
+  /**
+   * Recursively carves a passage from the given cell.
+   *
+   * It does this by randomly choosing a direction to move in, and
+   * carving out a passage to the neighbor in that direction.
+   * It will only move to a cell if it is a wall, and will not move
+   * to a cell that has already been visited.
+   *
+   * The algorithm will also randomly decide whether to add a door
+   * to each cell it visits.
+   *
+   * @param currentCell - The current cell to carve a passage from.
+   */
   private carvePassage(currentCell: WorldPoint): void {
     const { map, rand } = this;
 
@@ -85,8 +119,8 @@ export class MapGenerator_Maze {
   /**
    * Randomly shuffles the elements of the given array using the Fisher-Yates algorithm.
    *
-   * @param {WorldPoint[]} array - The array of WorldPoints to shuffle.
-   * @returns {WorldPoint[]} The shuffled array of WorldPoints.
+   * @param array - The array of WorldPoints to shuffle.
+   * @returns The shuffled array of WorldPoints.
    */
 
   private shuffle(array: WorldPoint[]): WorldPoint[] {
@@ -98,6 +132,16 @@ export class MapGenerator_Maze {
     return array;
   }
 
+  /**
+   * Generates a maze map using the given random generator and level number.
+   *
+   * This function creates a new instance of the MapGenerator_Maze class and
+   * calls its generate method to generate the map.
+   *
+   * @param rand - The random number generator.
+   * @param level - The level number of the map.
+   * @return The generated map.
+   */
   public static generate(rand: RandomGenerator, level: number): GameMap {
     const mapDimensionsX = 64;
     const mapDimensionsY = 32;
@@ -106,6 +150,6 @@ export class MapGenerator_Maze {
 
     const generator = new MapGenerator_Maze(map, rand);
 
-    return generator.generate();
+    return generator.createMaze();
   }
 }

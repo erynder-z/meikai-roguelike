@@ -10,9 +10,8 @@ export class KeypressScrollHandler {
   /**
    * Handles key press events for virtual scrolling.
    *
-   * Listens for the ArrowUp and ArrowDown keys, and when either is pressed,
-   * scrolls the container by the given scroll amount.
-   * @param {KeyboardEvent} event - The keyboard event.
+   * Listens for the ArrowUp and ArrowDown keys, and when either is pressed, scrolls the container by the given scroll amount.
+   * @param event - The keyboard event.
    */
   public handleVirtualScroll(event: KeyboardEvent): void {
     event.preventDefault();

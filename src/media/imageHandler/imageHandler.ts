@@ -19,6 +19,16 @@ class ThrottledImageHandler {
 
   private constructor() {}
 
+  /**
+   * Retrieves the single instance of the ThrottledImageHandler.
+   *
+   * Implements the singleton pattern to ensure that only one instance
+   * of the ThrottledImageHandler exists. If the instance does not exist,
+   * it is created.
+   *
+   * @returns The single instance of the ThrottledImageHandler.
+   */
+
   public static getInstance(): ThrottledImageHandler {
     if (!ThrottledImageHandler.instance) {
       ThrottledImageHandler.instance = new ThrottledImageHandler();
@@ -35,7 +45,7 @@ class ThrottledImageHandler {
    * @param type - The type of event category associated with the image.
    */
 
-  public queue(img: HTMLImageElement, type: keyof typeof EventCategory) {
+  public queue(img: HTMLImageElement, type: keyof typeof EventCategory): void {
     if (!this.currentImg) {
       this.show(img, type);
       this.startTimer();
@@ -53,7 +63,7 @@ class ThrottledImageHandler {
    * @param type - The type of event category associated with the image.
    */
 
-  private show(img: HTMLImageElement, type: keyof typeof EventCategory) {
+  private show(img: HTMLImageElement, type: keyof typeof EventCategory): void {
     img.className = 'hud-image';
     img.setAttribute('data-image', type);
     const container = document.getElementById('image-container');
@@ -69,7 +79,7 @@ class ThrottledImageHandler {
    * this function does nothing. Otherwise, it sets the timer to call onTimer after
    * the configured minimum display time.
    */
-  private startTimer() {
+  private startTimer(): void {
     if (this.timerId !== null) return;
     this.timerId = setTimeout(() => this.onTimer(), this.minDisplayTime);
   }
@@ -80,7 +90,7 @@ class ThrottledImageHandler {
    * If there is a next image to display, it will be shown and the timer will be restarted.
    * Otherwise, the timer will be cleared and the currentImg property will be set to null.
    */
-  private onTimer() {
+  private onTimer(): void {
     if (this.nextImgInfo) {
       const { img, type } = this.nextImgInfo;
       this.nextImgInfo = null;
@@ -105,6 +115,15 @@ export class ImageHandler {
 
   private constructor() {}
 
+  /**
+   * Retrieves the single instance of the ImageHandler.
+   *
+   * Implements the singleton pattern to ensure that only one instance
+   * of the ImageHandler exists. If the instance does not exist,
+   * it is created.
+   *
+   * @returns The single instance of the ImageHandler.
+   */
   public static getInstance(): ImageHandler {
     if (!ImageHandler.instance) {
       ImageHandler.instance = new ImageHandler();
@@ -113,8 +132,11 @@ export class ImageHandler {
   }
 
   /**
-   * Gets the current image data attribute, which is a string indicating the type of the currently displayed image.
-   * Returns null if there is no image displayed.
+   * Retrieves the data-image attribute of the currently displayed image in the image container,
+   * if one exists. Otherwise, returns null.
+   *
+   * @returns The data-image attribute of the currently displayed image in the image container,
+   * if one exists. Otherwise, returns null.
    */
   private getCurrentImageDataAttribute(): string | null {
     const image = document.getElementById('image-container')
@@ -129,8 +151,8 @@ export class ImageHandler {
    * If there is an element with the id 'image-container', it will be cleared and the img element
    * will be appended to it.
    *
-   * @param {HTMLImageElement} img - The image to be rendered.
-   * @param {keyof typeof EventCategory} type - The type of the image to be rendered.
+   * @param img - The image to be rendered.
+   * @param type - The type of the image to be rendered.
    */
   public renderImage(img: HTMLImageElement, type: keyof typeof EventCategory) {
     img.setAttribute('class', 'hud-image');
@@ -147,9 +169,9 @@ export class ImageHandler {
    * If the player is 'boyish', the boyish set will be returned.
    * Otherwise, the girlish set will be returned.
    *
-   * @param {T} boyishSet - The set of images to use if the player is 'boyish'.
-   * @param {T} girlishSet - The set of images to use if the player is 'girlish'.
-   * @returns {T} The set of images to use.
+   * @param boyishSet - The set of images to use if the player is 'boyish'.
+   * @param girlishSet - The set of images to use if the player is 'girlish'.
+   * @return The set of images to use.
    */
   private getImageSet<T>(boyishSet: T, girlishSet: T): T {
     return this.gameConfig.player.appearance === 'boyish'
@@ -163,9 +185,9 @@ export class ImageHandler {
    *
    * If there are no images left in the set, it will be reset to the full set of images.
    *
-   * @param {string[]} fullImageSet - The full set of images to draw from.
-   * @param {string} imageType - The type of image to get.
-   * @returns {string} A random image from the set of available images.
+   * @param fullImageSet - The full set of images to draw from.
+   * @param imageType - The type of image to get.
+   * @return A random image from the set of available images.
    */
   private getNextImage(fullImageSet: string[], imageType: string): string {
     if (!this.availableImages[imageType]) {
@@ -202,9 +224,9 @@ export class ImageHandler {
    *
    * The function will remove the current event from the game log after it has been called.
    *
-   * @param {GameState} game - The current game state.
-   * @param {keyof typeof images} imageType - The type of image to display.
-   * @param {string | null} shouldDrawImageCheck - The string indicating whether the image should be displayed or not.
+   * @param game - The current game state.
+   * @param imageType - The type of image to display.
+   * @param shouldDrawImageCheck - The string indicating whether the image should be displayed or not.
    */
   private queueEventImage(
     game: GameState,

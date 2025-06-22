@@ -37,8 +37,9 @@ import { StatChangeBuffCommand } from '../gameLogic/commands/statChangeBuffComma
 export class SaveStateHandler {
   /**
    * Prepares the game state for saving by serializing various components.
-   * @param {GameState} gameState - The current game state to serialize.
-   * @returns {ReadyToSaveGameState} - The serialized game state ready for saving.
+   *
+   * @param gameState - The current game state to serialize.
+   * @return The serialized game state ready for saving.
    */
   public prepareForSave(gameState: GameState): ReadyToSaveGameState {
     const gameConfig = gameConfigManager.getConfig();
@@ -91,8 +92,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the AI data.
-   * @param {GameState['ai']} ai - The AI state of the game.
-   * @returns {ReadyToSaveGameState['serializedAI']} - Serialized AI data.
+   *
+   * @param ai - The AI state of the game.
+   * @return Serialized AI data.
    */
   private getAIData(ai: GameState['ai']): ReadyToSaveGameState['serializedAI'] {
     return {
@@ -103,8 +105,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the game log.
-   * @param {GameState['log']} log - The game log.
-   * @returns {ReadyToSaveGameState['serializedLog']} - Serialized log data.
+   *
+   * @param log - The game log.
+   * @return Serialized log data.
    */
   private getLogData(
     log: GameState['log'],
@@ -117,8 +120,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the dungeon data.
-   * @param {GameState['dungeon']} dungeon - The game's dungeon data.
-   * @returns {ReadyToSaveGameState['serializedDungeon']} - Serialized dungeon data.
+   *
+   * @param dungeon - The game's dungeon data.
+   * @return Serialized dungeon data.
    */
   private getDungeonData(
     dungeon: GameState['dungeon'],
@@ -131,8 +135,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the auto-heal state.
-   * @param {GameState['autoHeal']} autoHeal - The game's auto-heal data.
-   * @returns {ReadyToSaveGameState['serializedAutoHeal']} - Serialized auto-heal data.
+   *
+   * @param autoHeal - The game's auto-heal data.
+   * @return Serialized auto-heal data.
    */
   private getAutoHealData(
     autoHeal: GameState['autoHeal'],
@@ -145,8 +150,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the inventory data.
-   * @param {GameState['inventory']} inventory - The player's inventory.
-   * @returns {ReadyToSaveGameState['serializedInventory']} - Serialized inventory data.
+   *
+   * @param inventory - The player's inventory.
+   * @return Serialized inventory data.
    */
   private getInventoryData(
     inventory: GameState['inventory'],
@@ -159,8 +165,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the player's equipment.
-   * @param {GameState['equipment']} equipment - The player's equipment.
-   * @returns {ReadyToSaveGameState['serializedEquipment']} - Serialized equipment data.
+   *
+   * @param equipment - The player's equipment.
+   * @return Serialized equipment data.
    */
   private getEquipmentData(
     equipment: GameState['equipment'],
@@ -176,8 +183,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the player's needs.
-   * @param {GameState['needs']} needs - The player's needs.
-   * @returns {ReadyToSaveGameState['serializedNeeds']} - Serialized needs data.
+   *
+   * @param needs - The player's needs.
+   * @return Serialized needs data.
    */
   private getNeedsData(
     needs: GameState['needs'],
@@ -190,8 +198,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the player's stats.
-   * @param {GameState['stats']} stats - The player's stats.
-   * @returns {ReadyToSaveGameState['serializedStats']} - Serialized stats data.
+   *
+   * @param stats - The player's stats.
+   * @return Serialized stats data.
    */
   private getStatsData(
     stats: GameState['stats'],
@@ -204,8 +213,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the surface temperature.
-   * @param {GameState['surfaceTemp']} surfaceTemp - The surface temperature.
-   * @returns {ReadyToSaveGameState['serializedSurfaceTemp']} - Serialized surface temperature data.
+   *
+   * @param surfaceTemp - The surface temperature.
+   * @return Serialized surface temperature data.
    */
   private getSurfaceTempData(
     surfaceTemp: GameState['surfaceTemp'],
@@ -218,8 +228,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the player object.
-   * @param {GameState['player']} player - The player mob.
-   * @returns {ReadyToSaveGameState['serializedPlayer']} - Serialized player data.
+   *
+   * @param player - The player mob.
+   * @return Serialized player data.
    */
   private getPlayerData(
     player: GameState['player'],
@@ -234,8 +245,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the player's active buffs.
-   * @param {GameState['player']} player - The player mob.
-   * @returns {ReadyToSaveGameState['serializedPlayerBuffs']} - Serialized buffs data.
+   *
+   * @param player - The player mob.
+   * @return Serialized buffs data.
    */
   private getPlayerBuffsData(
     player: GameState['player'],
@@ -265,8 +277,9 @@ export class SaveStateHandler {
 
   /**
    * Serializes the build data.
-   * @param {GameState['build']} build - The current game build information.
-   * @returns {ReadyToSaveGameState['serializedBuild']} - Serialized build data.
+   *
+   * @param build - The current game build information.
+   * @return Serialized build data.
    */
   private getBuildData(
     build: GameState['build'],
@@ -279,10 +292,11 @@ export class SaveStateHandler {
 
   /**
    * Restores the dungeon state from the serialized data.
-   * @param {Game} game - The current game instance to which the dungeon state will be restored.
-   * @param {SerializedDungeonData} serializedDungeon - The serialized data containing the dungeon level and maps.
-   * @param {Mob} player - The player mob.
-   * @returns {GameState} - The game state after restoring the dungeon.
+   *
+   * @param game - The current game instance to which the dungeon state will be restored.
+   * @param serializedDungeon - The serialized data containing the dungeon level and maps.
+   * @param player - The player mob.
+   * @return The game state after restoring the dungeon.
    */
   public restoreDungeon(
     game: Game,
@@ -296,8 +310,9 @@ export class SaveStateHandler {
 
   /**
    * Sets the current dungeon level.
-   * @param {Game} game - The current game instance.
-   * @param {number} level - The level to set.
+   *
+   * @param game - The current game instance.
+   * @param level - The level to set.
    */
   private setDungeonLevel(game: Game, level: number): void {
     game.dungeon.level = level;
@@ -305,10 +320,10 @@ export class SaveStateHandler {
 
   /**
    * Restores the dungeon maps from serialized data.
-   * @param {Game} game - The current game instance where maps will be restored.
-   * @param {SerializedGameMap[]} dungeonMaps - The serialized map data to restore.
-   * @param {Mob} player - The player mob.
-   * @returns {void}
+   *
+   * @param game - The current game instance where maps will be restored.
+   * @param dungeonMaps - The serialized map data to restore.
+   * @param player - The player mob.
    */
   private restoreDungeonMaps(
     game: Game,
@@ -322,9 +337,10 @@ export class SaveStateHandler {
 
   /**
    * Restores a single map from the serialized data.
-   * @param {SerializedGameMap} map - The serialized map data to restore.
-   * @param {Mob} player - The player mob.
-   * @returns {GameMap} - The restored map.
+   *
+   * @param map - The serialized map data to restore.
+   * @param player - The player mob.
+   * @return The restored map.
    */
   private restoreSingleMap(map: SerializedGameMap, player: Mob): GameMap {
     const restoredCells = this.restoreMapCells(map.cells);
@@ -352,8 +368,9 @@ export class SaveStateHandler {
 
   /**
    * Restores a 2D array of map cells from the serialized data.
-   * @param {SerializedMapCellArray[]} cells - The serialized map cell data to restore.
-   * @returns {MapCell[][]} - The restored 2D array of map cells.
+   *
+   * @param cells - The serialized map cell data to restore.
+   * @return The restored 2D array of map cells.
    */
   private restoreMapCells(cells: SerializedMapCellArray[]): MapCell[][] {
     return cells.map(cellArray => this.restoreCellArray(cellArray));
@@ -361,8 +378,9 @@ export class SaveStateHandler {
 
   /**
    * Restores a single 1D array of map cells from the serialized data.
-   * @param {SerializedMapCellArray} cellArray - The serialized map cell data to restore.
-   * @returns {MapCell[]} - The restored 1D array of map cells.
+   *
+   * @param cellArray - The serialized map cell data to restore.
+   * @return The restored 1D array of map cells.
    */
   private restoreCellArray(cellArray: SerializedMapCellArray): MapCell[] {
     return cellArray.map(cell => this.restoreSingleCell(cell));
@@ -370,8 +388,9 @@ export class SaveStateHandler {
 
   /**
    * Restores a single map cell from the serialized data.
-   * @param {SerializedMapCell} cell - The serialized map cell data to restore.
-   * @returns {MapCell} - The restored map cell.
+   *
+   * @param cell - The serialized map cell data to restore.
+   * @return The restored map cell.
    */
   private restoreSingleCell(cell: SerializedMapCell): MapCell {
     const newCell = new MapCell(cell.env);
@@ -395,8 +414,9 @@ export class SaveStateHandler {
 
   /**
    * Restores a single mob from the serialized data.
-   * @param {SerializedMobData} serializedMob - The serialized mob data to restore.
-   * @returns {Mob} - The restored mob.
+   *
+   * @param serializedMob - The serialized mob data to restore.
+   * @return The restored mob.
    */
   private restoreMob(serializedMob: SerializedMobData): Mob {
     const mob = new Mob(
@@ -424,8 +444,9 @@ export class SaveStateHandler {
 
   /**
    * Restores a single item object from the serialized data.
-   * @param {SerializedItemData} serializedItem - The serialized item object data to restore.
-   * @returns {ItemObject} - The restored item object.
+   *
+   * @param serializedItem - The serialized item object data to restore.
+   * @return The restored item object.
    */
   private restoreItemObject(serializedItem: SerializedItemData): ItemObject {
     const item = new ItemObject(
@@ -446,8 +467,9 @@ export class SaveStateHandler {
 
   /**
    * Restores a single corpse from the serialized data.
-   * @param {SerializedCorpseData} serializedCorpse - The serialized corpse data to restore.
-   * @returns {Corpse} - The restored corpse.
+   *
+   * @param serializedCorpse - The serialized corpse data to restore.
+   * @return The restored corpse.
    */
   private restoreCorpse(serializedCorpse: SerializedCorpseData): Corpse {
     const corpse = new Corpse(
@@ -463,9 +485,10 @@ export class SaveStateHandler {
 
   /**
    * Restores the turn queue of a map from the given serialized data.
-   * @param {SerializedMapQueue} serializedQueue - The serialized queue data to restore.
-   * @param {Mob} player - The player mob.
-   * @returns {TurnQueue} - The restored turn queue.
+   *
+   * @param serializedQueue - The serialized queue data to restore.
+   * @param player - The player mob.
+   * @return The restored turn queue.
    */
   private restoreMapQueue(
     serializedQueue: SerializedMapQueue,
@@ -483,8 +506,8 @@ export class SaveStateHandler {
   /**
    * Restores the player's state from the given save state.
    *
-   * @param {SerializedGameState} saveState - The save state to restore from.
-   * @return {Mob} The restored player mob.
+   * @param saveState - The save state to restore from.
+   * @return The restored player mob.
    */
   public restorePlayer(saveState: SerializedGameState): Mob {
     const playerPos = new WorldPoint(
@@ -504,10 +527,10 @@ export class SaveStateHandler {
   /**
    * Restores the player's buffs from the given save state.
    *
-   * @param {GameState} game - The game to restore the buffs to.
-   * @param {Mob} player - The player mob.
-   * @param {SerializedGameState} saveState - The save state to restore from.
-   * @returns {GameState} - The game state after restoring the buffs.
+   * @param game - The game to restore the buffs to.
+   * @param player - The player mob.
+   * @param saveState - The save state to restore from.
+   * @return The game state after restoring the buffs.
    */
   public restorePlayerBuffs(
     game: GameState,
@@ -544,8 +567,9 @@ export class SaveStateHandler {
   /**
    * Determines whether the given buff enum value is a stat changing buff.
    * This is used to determine whether a buff should be executed as a stat changing buff or not.
-   * @param {number} buffEnumValue - The value of the enum to check.
-   * @returns {boolean} True if the buff is a stat changing buff, false otherwise.
+   *
+   * @param buffEnumValue - The value of the enum to check.
+   * @return True if the buff is a stat changing buff, false otherwise.
    */
   private isStatChangingBuff(buffEnumValue: number): boolean {
     return (
@@ -559,9 +583,9 @@ export class SaveStateHandler {
   /**
    * Restores the player's inventory from the given save state.
    *
-   * @param {Inventory} inv - The inventory to restore items into.
-   * @param {SerializedGameState} saveState - The save state to restore from.
-   * @return {GameState} The updated game state.
+   * @param game - The game state.
+   * @param saveState - The save state to restore from.
+   * @return The updated game state.
    */
 
   public restorePlayerInventory(
@@ -591,9 +615,9 @@ export class SaveStateHandler {
   /**
    * Restores the player's equipment from the given save state.
    *
-   * @param {GameState} game - The game state.
-   * @param {SerializedGameState} saveState - The save state to restore from.
-   * @return {GameState} The updated game state.
+   * @param  game - The game state.
+   * @param saveState - The save state to restore from.
+   * @return The updated game state.
    */
   public restorePlayerEquipment(
     game: GameState,
@@ -621,11 +645,9 @@ export class SaveStateHandler {
   /**
    * Restores the game log from the given save state.
    *
-   * @param {Game} game - The game instance whose log is to be restored.
-   * @param {SerializedGameState} saveState - The save state containing the serialized log data.
-   * @returns {void} This function does not return anything.
+   * @param game - The game instance whose log is to be restored.
+   * @param saveState - The save state containing the serialized log data.
    */
-
   public restoreLog(game: Game, saveState: SerializedGameState): void {
     const serializedLog = saveState.serializedLog.data;
     const log = game.log;
@@ -641,16 +663,11 @@ export class SaveStateHandler {
   /**
    * Restores the player's stats from the given save state.
    *
-   * This function updates the game's stats object with values from the serialized
-   * stats in the save state. Default values are applied if the serialized data
-   * lacks specific stats.
+   * This function updates the game's stats object with values from the serialized stats in the save state. Default values are applied if the serialized data lacks specific stats.
    *
-   * @param {Game} game - The game instance whose stats are to be restored.
-   * @param {SerializedGameState} saveState - The save state containing the
-   * serialized stats data.
-   * @returns {void} This function does not return anything.
+   * @param game - The game instance whose stats are to be restored.
+   * @param saveState - The save state containing the serialized stats data.
    */
-
   public restoreStats(game: Game, saveState: SerializedGameState): void {
     const restoredStats = game.stats;
     const serializedStats = saveState.serializedStats.data;

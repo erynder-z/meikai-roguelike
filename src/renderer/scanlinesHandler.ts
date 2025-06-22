@@ -70,8 +70,8 @@ export class ScanlinesHandler {
    *
    * Does nothing if the style is not a valid key in the styleClassMap.
    *
-   * @param {HTMLElement} container - The container to apply the scanline style to.
-   * @param {ScanlineStyles} style - The scanline style to apply.
+   * @param container - The container to apply the scanline style to.
+   * @param style - The scanline style to apply.
    */
   public static applyScanlineStyle(
     container: HTMLElement,
@@ -89,7 +89,7 @@ export class ScanlinesHandler {
    * Iterates over the values of the styleClassMap and removes each class name
    * from the container's class list.
    *
-   * @param {HTMLElement} container - The container from which to remove the
+   * @param container - The container from which to remove the
    * scanline styles.
    */
   private static clearScanlineStyles(container: HTMLElement): void {
@@ -105,8 +105,7 @@ export class ScanlinesHandler {
    * Calls clearScanlineStyles to remove all scanline-related class names from
    * the container's class list.
    *
-   * @param {HTMLElement} container - The container from which to remove the
-   * scanline styles.
+   * @param container - The container from which to remove the scanline styles.
    */
   public static removeScanlinesFromContainer(container: HTMLElement): void {
     this.clearScanlineStyles(container);

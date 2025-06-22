@@ -18,7 +18,8 @@ import {
 export class GlyphLoader {
   /**
    * Initializes all glyphs by loading data from various sources.
-   * @returns {Promise<number>} The number of glyphs initialized.
+   *
+   * @return The number of glyphs initialized.
    */
   public static async initializeGlyphs(): Promise<number> {
     const gameConfig = gameConfigManager.getConfig();

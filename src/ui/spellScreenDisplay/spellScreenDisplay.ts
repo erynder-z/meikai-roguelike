@@ -79,7 +79,8 @@ export class SpellScreenDisplay extends HTMLElement {
 
   /**
    * Sets the cancel key text displayed in the footer.
-   * @param {string} key - The cancel key.
+   *
+   * @param key - The cancel key.
    */
   set menuKeyText(key: string) {
     this.menuKey = key;
@@ -114,7 +115,8 @@ export class SpellScreenDisplay extends HTMLElement {
 
   /**
    * Triggers a fade-out animation and resolves when it completes.
-   * @returns {Promise<void>}
+   *
+   * @returns A promise that resolves when the fade-out animation completes.
    */
   public fadeOut(): Promise<void> {
     return new Promise(resolve => {

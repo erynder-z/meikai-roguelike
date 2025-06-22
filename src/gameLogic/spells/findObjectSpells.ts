@@ -24,9 +24,9 @@ export class FindObjectSpell {
   /**
    * Checks if an ItemObject is usable. Objects that have no spell associated are not usable.
    *
-   * @param {ItemObject} obj - The ItemObject to check.
-   * @param {GameState} game - The Game instance.
-   * @return {boolean} True if the ItemObject is usable, false otherwise.
+   * @param obj - The ItemObject to check.
+   * @param game - The Game instance.
+   * @return True if the ItemObject is usable, false otherwise.
    */
   private isUsable(obj: ItemObject, game: GameState): boolean {
     const canUse = obj.spell != Spell.None;
@@ -44,7 +44,7 @@ export class FindObjectSpell {
   /**
    * Finds a Command, StackScreen, or null based on the given ItemObject and Game.
    *
-   * @return {Command | StackScreen | null} The found Command, StackScreen, or null if the ItemObject is not usable.
+   * @return The found Command, StackScreen, or null if the ItemObject is not usable.
    */
   public find(): Command | StackScreen | null {
     const { game } = this;

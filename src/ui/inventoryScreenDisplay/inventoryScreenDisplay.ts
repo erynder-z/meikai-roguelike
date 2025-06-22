@@ -99,7 +99,8 @@ export class InventoryScreenDisplay extends HTMLElement {
 
   /**
    * Sets the inventory items to display.
-   * @param {ItemObject[]} items - The inventory items.
+   *
+   * @param items - The inventory items.
    */
   set items(items: ItemObject[]) {
     this.inventoryItems = items;
@@ -108,7 +109,8 @@ export class InventoryScreenDisplay extends HTMLElement {
 
   /**
    * Sets the menu key text displayed in the heading.
-   * @param {string} key - The menu key.
+   *
+   * @param key - The menu key.
    */
   set menuKeyText(key: string) {
     this.menuKey = key;
@@ -153,7 +155,8 @@ export class InventoryScreenDisplay extends HTMLElement {
 
   /**
    * Triggers a fade-out animation and resolves when it completes.
-   * @returns {Promise<void>}
+   *
+   * @returns A promise that resolves when the fade-out animation completes.
    */
   public fadeOut(): Promise<void> {
     return new Promise(resolve => {

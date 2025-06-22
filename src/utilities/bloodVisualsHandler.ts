@@ -12,9 +12,19 @@ export class BloodVisualsHandler {
   }
 
   /**
-   * Adds blood to a cell when a mob takes damage.
-   * Blood appears based on damage ratio or chance.
+   * Handles the visual blood effects when a mob is attacked and takes damage.
+   *
+   * This function applies blood effects based on the damage dealt to a target mob.
+   * If the blood intensity setting is enabled and the target is not dead, it
+   * calculates the damage ratio and chance of blood splatter. If the damage
+   * is significant or a random chance condition is met, blood is added to
+   * the target's cell on the map.
+   *
+   * @param target - The mob that is attacked and may bleed.
+   * @param dmg - The amount of damage dealt to the target.
+   * @param game - The current game state.
    */
+
   public static handleAttackBlood(
     target: Mob,
     dmg: number,
@@ -35,7 +45,15 @@ export class BloodVisualsHandler {
   }
 
   /**
-   * Adds blood to a cell when a mob bleeds over time.
+   * Handles the visual blood effects when a mob takes damage from a tick.
+   *
+   * This function applies blood effects based on the intensity of the tick.
+   * If the blood intensity setting is enabled, it adds blood to the target's
+   * cell on the map.
+   *
+   * @param target - The mob that is bleeding due to a tick.
+   * @param intensity - The intensity of the tick.
+   * @param game - The current game state.
    */
   public static handleTickBlood(
     target: Mob,
@@ -49,8 +67,14 @@ export class BloodVisualsHandler {
   }
 
   /**
-   * Applies blood effects to a specific cell based on damage intensity.
-   * Blood can also splash onto nearby cells if damage is high.
+   * Adds blood to the cell at the given world position based on the given damage ratio.
+   *
+   * The blood intensity is determined by the blood intensity setting and the damage ratio.
+   * If the damage ratio is high enough, it also causes a blood splash in the surrounding cells.
+   *
+   * @param wp - The world position of the cell to add blood to.
+   * @param map - The map containing the cell.
+   * @param damageRatio - The ratio of damage dealt to the target's max HP.
    */
   private static addBloodToCell(
     wp: WorldPoint,
@@ -94,7 +118,15 @@ export class BloodVisualsHandler {
   }
 
   /**
-   * Spreads blood to neighboring cells, fading intensity based on distance.
+   * Adds blood to the cells surrounding the given world position, up to a given distance.
+   *
+   * The blood intensity is determined by the blood intensity setting and the distance to the source.
+   * If the blood intensity is high enough, it also causes the mob that is in the cell to be covered in blood.
+   *
+   * @param wp - The world position of the cell to add blood to.
+   * @param map - The map containing the cell.
+   * @param area - The distance from the source to spread blood.
+   * @param baseIntensity - The base intensity of the blood.
    */
   private static addBloodSplash(
     wp: WorldPoint,

@@ -33,8 +33,9 @@ export class GameMap implements GameMapType {
 
   /**
    * Retrieves the map cell at the specified world point.
-   * @param {WorldPoint} p - The world point to retrieve the cell for.
-   * @returns {MapCell} The map cell at the specified world point.
+   *
+   * @param p - The world point to retrieve the cell for.
+   * @return The map cell at the specified world point.
    */
   public cell(p: WorldPoint): MapCell {
     if (!this.isLegalPoint(p)) return new MapCell(this.g_empty);
@@ -43,8 +44,9 @@ export class GameMap implements GameMapType {
 
   /**
    * Checks if the specified world point is legal on the game map.
-   * @param {WorldPoint} p - The world point to check.
-   * @returns {boolean} True if the point is legal, false otherwise.
+   *
+   * @param p - The world point to check.
+   * @return True if the point is legal, false otherwise.
    */
   public isLegalPoint(p: WorldPoint): boolean {
     return (
@@ -54,8 +56,9 @@ export class GameMap implements GameMapType {
 
   /**
    * Allocates and initializes the game map with empty cells.
-   * @param {Glyph} g_empty - The default glyph for empty cells.
-   * @returns {MapCell[][]} The 2D array of initialized map cells.
+   *
+   * @param g_empty - The default glyph for empty cells.
+   * @return The 2D array of initialized map cells.
    */
   private allocateMap(g_empty: Glyph): MapCell[][] {
     const cells = new Array(this.dimensions.y);
@@ -72,8 +75,8 @@ export class GameMap implements GameMapType {
   /**
    * Adds information about the location of up and down stairs.
    *
-   * @param {Glyph.Stairs_Up | Glyph.Stairs_Down} glyph - The type of stair glyph (up or down).
-   * @param {WorldPoint} pos - The position of the stair on the map.
+   * @param glyph - The type of stair glyph (up or down).
+   * @param pos - The position of the stair on the map.
    */
   public addStairInfo(
     glyph: Glyph.Stairs_Up | Glyph.Stairs_Down,
@@ -86,8 +89,8 @@ export class GameMap implements GameMapType {
   /**
    * Moves the given mob to the specified world point.
    *
-   * @param {Mob} m - the mob to be moved
-   * @param {WorldPoint} p - the destination world point
+   * @param m - the mob to be moved
+   * @param p - the destination world point
    */
   public moveMob(m: Mob, p: WorldPoint): void {
     this.cell(m.pos).mob = undefined;
@@ -99,8 +102,8 @@ export class GameMap implements GameMapType {
   /**
    * Adds a new non-playable character to the map at the specified position and level.
    *
-   * @param {Mob} m - the mob to be added
-   * @returns {Mob} the newly added mob
+   * @param m - the mob to be added
+   * @return the newly added mob
    */
   public addNPC(m: Mob): Mob {
     const glyphInfo = GlyphMap.getGlyphInfo(m.glyph);
@@ -119,7 +122,7 @@ export class GameMap implements GameMapType {
   /**
    * Remove a mob from the queue and set its position to undefined.
    *
-   * @param {Mob} m - The mob to be removed.
+   * @param m - The mob to be removed.
    */
   public removeMob(m: Mob): void {
     this.queue.removeMob(m);
@@ -131,7 +134,7 @@ export class GameMap implements GameMapType {
    * If there is no free space in the same cell to drop the corpse, tries to find a free adjacent cell to drop it.
    * If no free space is found, the corpse is not created and a warning is logged.
    *
-   * @param {Mob} mob - The mob to be removed and replaced with a corpse.
+   * @param mob - The mob to be removed and replaced with a corpse.
    */
   public mobToCorpse(mob: Mob): void {
     this.queue.removeMob(mob);
@@ -180,8 +183,8 @@ export class GameMap implements GameMapType {
   /**
    * Enters the player into the map at the specified world point.
    *
-   * @param {Mob} player - the player to enter into the map
-   * @param {WorldPoint} np - the world point where the player will enter
+   * @param player - the player to enter into the map
+   * @param np - the world point where the player will enter
    */
   public enterMap(player: Mob, np: WorldPoint): void {
     player.pos.set(np);
@@ -192,8 +195,8 @@ export class GameMap implements GameMapType {
   /**
    * A function that checks if a given WorldPoint is blocked.
    *
-   * @param {WorldPoint} p - the WorldPoint to check
-   * @return {boolean} true if the WorldPoint is blocked, false otherwise
+   * @param p - the WorldPoint to check
+   * @return true if the WorldPoint is blocked, false otherwise
    */
   public isBlocked(p: WorldPoint): boolean {
     if (!this.isLegalPoint(p)) {
@@ -206,8 +209,8 @@ export class GameMap implements GameMapType {
   /**
    * Adds a new object to the game at the specified world point.
    *
-   * @param {ItemObject} o - the object to be added
-   * @param {WorldPoint} p - the world point where the player will enter
+   * @param o - the object to be added
+   * @param p - the world point where the player will enter
    */
   public addObject(o: ItemObject, p: WorldPoint): void {
     o.desc = GlyphMap.getGlyphDescription(o.glyph);
@@ -219,7 +222,8 @@ export class GameMap implements GameMapType {
 
   /**
    * Loops over every cell in the game map and performs the given action.
-   * @param {Function} action - The action to perform on each cell.
+   *
+   * @param action - The action to perform on each cell.
    */
   public forEachCell(action: (cell: MapCell, p: WorldPoint) => void): void {
     const p: WorldPoint = new WorldPoint();
@@ -251,7 +255,7 @@ export class GameMap implements GameMapType {
    * depth increases. Additionally, a random element is added to make the
    * temperature more variable.
    *
-   * @param {number} surfaceTemp - The surface temperature.
+   * @param surfaceTemp - The surface temperature.
    */
   public setLevelTemperature(surfaceTemp: number): void {
     const geothermalGradient = 2.5;

@@ -7,15 +7,12 @@ export class GenerateHelpUI {
       return;
     }
 
-    // Main help container
     const helpContainer = document.createElement('div');
     helpContainer.classList.add('help-container');
 
-    // Tab container
     const tabContainer = document.createElement('div');
     tabContainer.classList.add('tab-container');
 
-    // Tabs (controls, buffs, environment, items, mobs, concepts)
     const tabs = [
       {
         target: 'controls',
@@ -78,10 +75,8 @@ export class GenerateHelpUI {
       tabContainer.appendChild(tab);
     });
 
-    // Append tab container to the main help container
     helpContainer.appendChild(tabContainer);
 
-    // Tab contents (controls, buffs, environment, items, mobs, concepts)
     const contents = [
       { id: 'controls', component: 'help-controls', active: true },
       { id: 'buffs', component: 'help-buffs', active: false },
@@ -104,16 +99,29 @@ export class GenerateHelpUI {
       helpContainer.appendChild(contentDiv);
     });
 
-    // Close button
     const closeButton = document.createElement('close-button');
     helpContainer.appendChild(closeButton);
 
-    // Append the main help container to the body
     body.appendChild(helpContainer);
 
     this.initializeTabs();
   }
 
+  /**
+   * Initialize the help tabs.
+   *
+   * This function sets up click event listeners for each tab, which
+   * toggle the active class on the tab and the corresponding content
+   * element. It also sets up hotkeys for each tab, which can be accessed
+   * via the following keys:
+   *
+   * - 'o': Controls tab
+   * - 't': Concepts tab
+   * - 'B': Buffs tab
+   * - 'E': Environment tab
+   * - 'I': Items tab
+   * - 'M': Mobs tab
+   */
   private static initializeTabs() {
     const tabElements = document.querySelectorAll(
       '.tab',

@@ -22,8 +22,9 @@ export class CommandDirectionScreen extends BaseScreen {
 
   /**
    * Converts a numpad key string to its corresponding numeric character.
-   * @param {string} key - The key string to convert.
-   * @return {string} The numeric character if the key is a numpad key, otherwise the original key.
+   *
+   * @param key - The key string to convert.
+   * @return The numeric character if the key is a numpad key, otherwise the original key.
    */
   private convertNumpadKey(key: string): string {
     if (key.startsWith('Numpad')) {
@@ -53,7 +54,14 @@ export class CommandDirectionScreen extends BaseScreen {
   }
 
   /**
-   * Creates the direction control table.
+   * Generates a table representing directional inputs for the command direction screen.
+   *
+   * Each row in the table corresponds to a direction, with symbols indicating
+   * the direction visually and key mappings shown for each direction. The key
+   * mappings are converted using the active control scheme's numpad settings.
+   *
+   * @return A 2D array representing the direction table with arrows
+   * and corresponding control scheme keys.
    */
   private getDirectionTable(): string[][] {
     const convert = (key: string) => this.convertNumpadKey(key.toString());
@@ -87,9 +95,10 @@ export class CommandDirectionScreen extends BaseScreen {
 
   /**
    * Handles key down event for selecting direction.
-   * @param {KeyboardEvent} event - The keyboard event.
-   * @param {Stack} stack - The stack of screens.
-   * @returns {boolean} True if the event is handled, otherwise false.
+   *
+   * @param event - The keyboard event.
+   * @param stack - The stack of screens.
+   * @return True if the event is handled, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     this.closeScreen(stack);
@@ -142,7 +151,8 @@ export class CommandDirectionScreen extends BaseScreen {
 
   /**
    * Executes the command in the selected direction.
-   * @param {WorldPoint} direction - The selected direction.
+   *
+   * @param direction - The selected direction.
    */
   private actInDirection(direction: WorldPoint) {
     return this.command.setDirection(direction).turn();
@@ -151,7 +161,7 @@ export class CommandDirectionScreen extends BaseScreen {
   /**
    * Closes the command direction screen with a fade-out animation and removes it from the stack.
    *
-   * @param {Stack} stack - The stack of screens.
+   * @param stack - The stack of screens.
    */
   private closeScreen(stack: Stack): void {
     this.fadeOutDirectionScreen();
@@ -160,7 +170,8 @@ export class CommandDirectionScreen extends BaseScreen {
 
   /**
    * Fades out the direction screen display and removes it from the DOM.
-   * @returns {Promise<void>} A promise that resolves when the fade out animation ends.
+   *
+   * @returns A promise that resolves when the fade out animation ends.
    */
   private async fadeOutDirectionScreen(): Promise<void> {
     if (this.display) {

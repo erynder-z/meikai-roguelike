@@ -8,7 +8,8 @@ export class PopupHandler {
   /**
    * Displays a popup box with a green background color and the given message.
    * The popup will be automatically closed after a few seconds.
-   * @param {string} msg - The message to be displayed in the popup.
+   *
+   * @param msg - The message to be displayed in the popup.
    */
   public static showGoodPopup(msg: string): void {
     const body = document.getElementById('body-main');
@@ -26,7 +27,8 @@ export class PopupHandler {
   /**
    * Displays a popup box with a red background color and the given message.
    * The popup will be automatically closed after a few seconds.
-   * @param {string} msg - The message to be displayed in the popup.
+   *
+   * @param msg - The message to be displayed in the popup.
    */
   public static showBadPopup(msg: string): void {
     const body = document.getElementById('body-main');

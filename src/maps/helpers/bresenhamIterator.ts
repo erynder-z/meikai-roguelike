@@ -61,7 +61,7 @@ export class BresenhamIterator {
 
   /**
    * Checks if the iteration is complete.
-   * @returns {boolean} - True if the iteration is complete, otherwise false.
+   * @returns True if the iteration is complete, otherwise false.
    */
   public done(): boolean {
     return !(this.i <= this.longest);
@@ -91,9 +91,10 @@ export class BresenhamIterator {
 
   /**
    * Creates a BresenhamIterator instance with specified start and end points.
+   *
    * @param start The starting point.
    * @param end The ending point.
-   * @returns {BresenhamIterator} A BresenhamIterator instance.
+   * @return A BresenhamIterator instance.
    */
   public static createFromWorldPoint(
     start: WorldPoint,
@@ -106,11 +107,12 @@ export class BresenhamIterator {
 
   /**
    * Initializes a BresenhamIterator instance with coordinates.
-   * @param {number} x1 - The x-coordinate of the starting point.
-   * @param {number} y1 - The y-coordinate of the starting point.
-   * @param {number} x2 - The x-coordinate of the ending point.
-   * @param {number} y2 - The y-coordinate of the ending point.
-   * @returns {BresenhamIterator} - A BresenhamIterator instance.
+   *
+   * @param x1 - The x-coordinate of the starting point.
+   * @param y1 - The y-coordinate of the starting point.
+   * @param x2 - The x-coordinate of the ending point.
+   * @param y2 - The y-coordinate of the ending point.
+   * @return A BresenhamIterator instance.
    */
   public static createFromCoordinates(
     x1: number,
@@ -123,11 +125,12 @@ export class BresenhamIterator {
 
   /**
    * Initializes the iterator with coordinates.
-   * @param {number} x1 - The x-coordinate of the starting point.
-   * @param {number} y1 - The y-coordinate of the starting point.
-   * @param {number} x2 - The x-coordinate of the ending point.
-   * @param {number} y2 - The y-coordinate of the ending point.
-   * @returns {BresenhamIterator} - The updated BresenhamIterator instance.
+   *
+   * @param x1 - The x-coordinate of the starting point.
+   * @param y1 - The y-coordinate of the starting point.
+   * @param x2 - The x-coordinate of the ending point.
+   * @param y2 - The y-coordinate of the ending point.
+   * @return The updated BresenhamIterator instance.
    */
   private init(
     x1: number,
@@ -177,7 +180,8 @@ export class BresenhamIterator {
 
   /**
    * Generates the next point in the iteration.
-   * @returns {WorldPoint} - The next point in the iteration.
+   *
+   * @return The next point in the iteration.
    */
   public next(): WorldPoint {
     const curPoint: WorldPoint = new WorldPoint(this.x, this.y);

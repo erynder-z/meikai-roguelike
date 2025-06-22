@@ -31,12 +31,12 @@ export class ShootAI implements MobAI {
   /**
    * Takes a turn for the Mob in a shootAI state.
    *
-   * @param {Mob} me - The Mob making the turn.
-   * @param {Mob} enemy - The enemy Mob.
-   * @param {GameState} game - The game instance.
-   * @param {Stack} stack - The screen stack.
-   * @param {ScreenMaker} make - The screen maker.
-   * @return {boolean} Always `true`.
+   * @param me - The Mob making the turn.
+   * @param enemy - The enemy Mob.
+   * @param game - The game instance.
+   * @param stack - The screen stack.
+   * @param make - The screen maker.
+   * @return Always returns true.
    */
   public turn(
     me: Mob,
@@ -68,12 +68,12 @@ export class ShootAI implements MobAI {
   /**
    * Tries to cast a spell between two mobs in the game.
    *
-   * @param {Mob} me - the casting mob
-   * @param {Mob} enemy - the target mob
-   * @param {GameState} game - the game instance
-   * @param {Stack} stack - the game stack
-   * @param {ScreenMaker} make - the screen maker
-   * @return {boolean} true if the spell was cast, false otherwise
+   * @param me - the casting mob.
+   * @param enemy - the target mob.
+   * @param game - the game instance.
+   * @param stack - the game stack.
+   * @param make - the screen maker.
+   * @return True if the spell was cast, false otherwise.
    */
   private maybeCastSpell(
     me: Mob,
@@ -98,11 +98,10 @@ export class ShootAI implements MobAI {
   /**
    * Picks a spell for the given mob based on its level.
    *
-   * @param {Mob} me - The mob for which to pick the spell.
-   * @param {RandomGenerator} rand - The random generator used for picking the spell.
-   * @return {Spell} The spell chosen for the mob.
+   * @param me - The mob for which to pick the spell.
+   * @param rand - The random generator used for picking the spell.
+   * @return The spell chosen for the mob.
    */
-
   private pickSpell(me: Mob, rand: RandomGenerator): Spell {
     const index = me.level % PICKABLE_SPELLS.length;
     const spell = PICKABLE_SPELLS[index];
@@ -114,13 +113,13 @@ export class ShootAI implements MobAI {
   /**
    * Casts a spell using the NPCSpellFinder and executes the command if it is an instance of CommandBase.
    *
-   * @param {Spell} spell - The spell to be cast.
-   * @param {Mob} me - The mob casting the spell.
-   * @param {Mob} enemy - The mob being targeted by the spell.
-   * @param {GameState} game - The game object.
-   * @param {Stack} stack - The game stack.
-   * @param {ScreenMaker} make - The screen maker.
-   * @return {boolean} Returns true if the spell was successfully cast and executed, otherwise false.
+   * @param spell - The spell to be cast.
+   * @param me - The mob casting the spell.
+   * @param enemy - The mob being targeted by the spell.
+   * @param game - The game object.
+   * @param stack - The game stack.
+   * @param make - The screen maker.
+   * @return Returns true if the spell was successfully cast and executed, otherwise false.
    */
   private castSpell(
     spell: Spell,
@@ -143,13 +142,13 @@ export class ShootAI implements MobAI {
    * Checks if the mob can shoot at another mob, picks a spell, checks if the spell is a bullet spell,
    * checks if the spell rate is met, checks if the mob is in line of sight of the target, and shoots.
    *
-   * @param {Mob} me - The mob that is shooting.
-   * @param {RandomGenerator} rand - The random generator used for picking a spell.
-   * @param {GameState} game - The game object used for getting the current map and checking line of sight.
-   * @param {Mob} him - The mob that is being shot at.
-   * @param {Stack} stack - The game stack used for shooting.
-   * @param {ScreenMaker} make - The screen maker used for shooting.
-   * @return {boolean} Returns true if the mob successfully shoots, false otherwise.
+   * @param me - The mob that is shooting.
+   * @param rand - The random generator used for picking a spell.
+   * @param game - The game object used for getting the current map and checking line of sight.
+   * @param him - The mob that is being shot at.
+   * @param stack - The game stack used for shooting.
+   * @param make - The screen maker used for shooting.
+   * @return Returns true if the mob successfully shoots, false otherwise.
    */
   private didShoot(
     me: Mob,
@@ -174,9 +173,9 @@ export class ShootAI implements MobAI {
   /**
    * Checks if the given direction is a diagonal line between two points.
    *
-   * @param {WorldPoint} from - The starting point.
-   * @param {WorldPoint} to - The ending point.
-   * @return {boolean} Returns true if the direction is diagonal, false otherwise.
+   * @param from - The starting point.
+   * @param to - The ending point.
+   * @return Returns true if the direction is diagonal, false otherwise.
    */
   private aim(from: WorldPoint, to: WorldPoint): boolean {
     const delta = from.minus(to);
@@ -191,8 +190,8 @@ export class ShootAI implements MobAI {
   /**
    * Checks if the given spell is a bullet spell.
    *
-   * @param {Spell} spell - The spell to check.
-   * @return {boolean} True if the spell is a bullet spell, false otherwise.
+   * @param spell - The spell to check.
+   * @return True if the spell is a bullet spell, false otherwise.
    */
   private isBulletSpell(spell: Spell): boolean {
     return spell == Spell.Bullet;
@@ -201,13 +200,13 @@ export class ShootAI implements MobAI {
   /**
    * Shoots a spell from the given mob to another mob.
    *
-   * @param {Spell} spell - The spell to be shot.
-   * @param {Mob} me - The mob shooting the spell.
-   * @param {Mob} him - The mob being shot.
-   * @param {GameState} game - The game object.
-   * @param {Stack} stack - The game stack.
-   * @param {ScreenMaker} make - The screen maker.
-   * @return {boolean} Returns true if the spell was successfully shot.
+   * @param spell - The spell to be shot.
+   * @param me - The mob shooting the spell.
+   * @param him - The mob being shot.
+   * @param game - The game object.
+   * @param stack - The game stack.
+   * @param make - The screen maker.
+   * @return Returns true if the spell was successfully shot.
    */
   private shoot(
     spell: Spell,

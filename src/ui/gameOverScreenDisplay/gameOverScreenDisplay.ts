@@ -112,14 +112,16 @@ export class GameOverScreenDisplay extends HTMLElement {
   }
 
   /**
-   * Renders the game over screen content, including the player's name,
-   * a death message, and post-mortem statistics. This function creates
-   * a new post-mortem element, attaches the current game state to it,
-   * and appends it to the post-mortem container in the shadow DOM.
-   * It also updates the player's name and death message in their respective
-   * elements, and sets the footer content.
+   * Renders the content of the game over screen by populating
+   * various UI elements with player-related data. This includes:
+   * - Setting the player's name and death message.
+   * - Appending a post-mortem custom element with the game state.
+   * - Displaying the player's last moments using messages from the log.
+   * - Updating the footer with additional information.
+   *
+   * Assumes that the shadow DOM is already attached and elements
+   * are queried using their respective class names.
    */
-
   private renderContent(): void {
     if (!this.shadowRoot) return;
 

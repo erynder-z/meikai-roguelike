@@ -11,7 +11,7 @@ export class TimedStep implements Step {
   /**
    * Executes the step.
    *
-   * @return {StepIF | null} The function always throws an error.
+   * @return The function always throws an error.
    */
   public executeStep(): Step | null {
     throw 'no executeStep';
@@ -20,7 +20,7 @@ export class TimedStep implements Step {
   /**
    * Sets the position of the object to the specified world point.
    *
-   * @param {WorldPoint} pos - The world point to set the position to.
+   * @param pos - The world point to set the position to.
    */
   public setPos(pos: WorldPoint): void {
     throw 'no setPos';
@@ -29,7 +29,7 @@ export class TimedStep implements Step {
   /**
    * Sets the direction of the object to the specified world point.
    *
-   * @param {WorldPoint} dir - The world point to set the direction to.
+   * @param dir - The world point to set the direction to.
    */
   public setDirection(dir: WorldPoint): void {
     throw 'no setDir';
@@ -38,7 +38,7 @@ export class TimedStep implements Step {
   /**
    * Sets the target of the function to the specified Mob.
    *
-   * @param {Mob} tgt - The Mob object to set as the target.
+   * @param tgt - The Mob object to set as the target.
    */
   public setTarget(tgt: Mob): void {
     throw 'no setTarget';
@@ -47,7 +47,7 @@ export class TimedStep implements Step {
   /**
    * Sets the time value of the object.
    *
-   * @param {number} time - The time value to be set.
+   * @param time - The time value to be set.
    */
   public setTime(time: number): void {
     this.time = time;

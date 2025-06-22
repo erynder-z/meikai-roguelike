@@ -21,7 +21,7 @@ export class KeypressThrottler {
    * ignored. The throttler is set to true when the handler is called, and is
    * set back to false after `delay` milliseconds.
    *
-   * @param {KeyboardEvent} event - The KeyboardEvent to pass to the handler.
+   * @param event - The KeyboardEvent to pass to the handler.
    */
   public run(event: KeyboardEvent): void {
     if (this.isThrottled) return;

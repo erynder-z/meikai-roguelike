@@ -117,8 +117,8 @@ export class HelpBuffs extends HTMLElement {
   /**
    * Creates a table cell element with the given class name.
    *
-   * @param {string} className - The class name to add to the created element.
-   * @return {HTMLTableCellElement} - The created table cell element.
+   * @param className - The class name to add to the created element.
+   * @return The created table cell element.
    */
   private createTableCell(className: string): HTMLTableCellElement {
     const cellElement = document.createElement('td');

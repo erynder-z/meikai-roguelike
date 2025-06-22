@@ -148,6 +148,7 @@ export class MoveCommand extends CommandBase {
 
   /**
    * Gets the direction of movement from the current position to a new position.
+   *
    * @param currentPosition - The current position of the mob.
    * @param newPosition - The new position of the mob.
    * @returns The direction of movement as a string, or an empty string if the positions are the same.

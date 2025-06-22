@@ -36,7 +36,6 @@ export class IngameMenuScreen extends BaseScreen {
    * elements are present. This function ensures the body element exists before
    * attempting insertion. It also adds event listeners to the menu to handle
    * opening the options menu and returning to the game.
-   *
    */
   private drawIngameMenu(): void {
     if (

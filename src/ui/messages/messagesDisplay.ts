@@ -16,7 +16,6 @@ export class MessagesDisplay extends HTMLElement {
    * This method is called when the element is inserted into the DOM.
    * It is called after the element is created and before the element is connected
    * to the DOM.
-   *
    */
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -97,7 +96,7 @@ export class MessagesDisplay extends HTMLElement {
    * If a message is new (i.e. not already in the component's previousRenderedMessages Set), it is given the class "new-message".
    * The component uses requestAnimationFrame to schedule the update for the next frame.
    *
-   * @param {LogMessage[]} messageLog - An array of messages to display.
+   * @param messageLog - An array of messages to display.
    */
   public setMessages(messageLog: LogMessage[]): void {
     const messagesDisplay = this.shadowRoot?.querySelector('.messages-display');

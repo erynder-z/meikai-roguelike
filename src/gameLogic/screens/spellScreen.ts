@@ -25,8 +25,8 @@ export class SpellScreen extends BaseScreen {
   /**
    * Converts a position to a corresponding character.
    *
-   * @param {number} pos - The position to convert.
-   * @return {string} The corresponding character.
+   * @param pos - The position to convert.
+   * @return The corresponding character.
    */
   private positionToCharacter(pos: number): string {
     return String.fromCharCode(97 + pos);
@@ -35,8 +35,8 @@ export class SpellScreen extends BaseScreen {
   /**
    * Converts a character to its corresponding position in the alphabet.
    *
-   * @param {string} c - The character to convert.
-   * @return {number} The position of the character in the alphabet.
+   * @param c - The character to convert.
+   * @return The position of the character in the alphabet.
    */
   private characterToPosition(c: string): number {
     const pos = c.charCodeAt(0) - 'a'.charCodeAt(0);
@@ -71,9 +71,9 @@ export class SpellScreen extends BaseScreen {
   /**
    * Handles key down events.
    *
-   * @param {KeyboardEvent} event - The keyboard event.
-   * @param {Stack} stack - The stack of screens.
-   * @return {boolean} True if the event was handled successfully, otherwise false.
+   * @param event - The keyboard event.
+   * @param stack - The stack of screens.
+   * @return True if the event was handled successfully, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     const key = event.key;
@@ -95,8 +95,8 @@ export class SpellScreen extends BaseScreen {
   /**
    * Checks if the key corresponds to a valid spell.
    *
-   * @param {string} key - The pressed key.
-   * @return {boolean} True if the key is a valid spell key.
+   * @param key - The pressed key.
+   * @return True if the key is a valid spell key.
    */
   private isSpellKey(key: string): boolean {
     const pos = this.characterToPosition(key);
@@ -106,8 +106,8 @@ export class SpellScreen extends BaseScreen {
   /**
    * Handles the selection of a spell.
    *
-   * @param {number} pos - The position of the selected spell.
-   * @param {Stack} stack - The stack object.
+   * @param pos - The position of the selected spell.
+   * @param stack - The stack object.
    */
   private handleSpellSelection(pos: number, stack: Stack): void {
     /*  this.game.log.clearQueue(); */
@@ -118,7 +118,7 @@ export class SpellScreen extends BaseScreen {
   /**
    * Handles the cancellation of the spell screen.
    *
-   * @param {Stack} stack - The stack object.
+   * @param stack - The stack object.
    */
   private handleCancel(stack: Stack): void {
     this.closeScreen(stack);
@@ -127,7 +127,7 @@ export class SpellScreen extends BaseScreen {
   /**
    * Closes the spell screen with fade-out animation and removes it from the stack.
    *
-   * @param {Stack} stack - The stack object.
+   * @param stack - The stack object.
    */
   private closeScreen(stack: Stack): void {
     this.fadeOutSpellScreen();
@@ -137,8 +137,8 @@ export class SpellScreen extends BaseScreen {
   /**
    * Handles the item menu selection.
    *
-   * @param {number} pos - The position of the selected item.
-   * @param {Stack} stack - The stack object.
+   * @param pos - The position of the selected item.
+   * @param stack - The stack object.
    */
   private itemMenu(pos: number, stack: Stack): void {
     const s: Spell = pos;
@@ -152,8 +152,8 @@ export class SpellScreen extends BaseScreen {
   /**
    * Executes a spell by finding the corresponding command or screen and pushing it onto the stack.
    *
-   * @param {Spell} s - The spell to be executed.
-   * @param {Stack} stack - The stack object.
+   * @param s - The spell to be executed.
+   * @param stack - The stack object.
    */
   private doSpell(s: Spell, stack: Stack): void {
     const finder = new SpellFinder(this.game, stack, this.make);
@@ -171,7 +171,8 @@ export class SpellScreen extends BaseScreen {
 
   /**
    * Fades out the spell screen display and removes it from the DOM.
-   * @returns {Promise<void>} A promise that resolves when the fade out animation ends.
+   *
+   * @return A promise that resolves when the fade out animation ends.
    */
   private async fadeOutSpellScreen(): Promise<void> {
     if (this.display) {

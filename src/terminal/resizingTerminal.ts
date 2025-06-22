@@ -26,10 +26,7 @@ export class ResizingTerminal extends Terminal {
   }
 
   /**
-   * Reinitializes the canvas context by calling initializeContext() and
-   * setting the context to the return value.
-   *
-   * @return {void}
+   * Reinitializes the canvas context by calling initializeContext() and setting the context to the return value.
    */
   public reinitializeContext(): void {
     this.ctx = this.initializeContext();
@@ -39,8 +36,8 @@ export class ResizingTerminal extends Terminal {
    * Calculates the largest possible square cell size that fits within the given container dimensions
    * and updates the canvas size to match. The context is then reinitialized with the new canvas size.
    *
-   * @param {number} containerWidth - The width of the container in pixels.
-   * @param {number} containerHeight - The height of the container in pixels.
+   * @param containerWidth - The width of the container in pixels.
+   * @param containerHeight - The height of the container in pixels.
    */
   private resizeCanvasAndTerminal(
     containerWidth: number,
@@ -59,9 +56,7 @@ export class ResizingTerminal extends Terminal {
   }
 
   /**
-   * Handles the resize event by calculating the new canvas dimensions based
-   * on the container's current width and height, and adjusts the canvas
-   * and terminal size accordingly.
+   * Handles the resize event by calculating the new canvas dimensions based on the container's current width and height, and adjusts the canvas and terminal size accordingly.
    */
 
   public handleResize(): void {

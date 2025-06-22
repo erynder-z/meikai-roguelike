@@ -43,6 +43,7 @@ export class Game implements GameState {
 
   /**
    * Adds a message to the message log.
+   *
    * @param msg - The message to add.
    */
   public message(msg: LogMessage): void {
@@ -52,6 +53,7 @@ export class Game implements GameState {
 
   /**
    * Displays a flash message.
+   *
    * @param msg - The message to add.
    */
   public flash(msg: LogMessage): void {

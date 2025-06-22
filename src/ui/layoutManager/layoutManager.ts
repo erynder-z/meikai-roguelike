@@ -22,7 +22,7 @@ export class LayoutManager {
   /**
    * Sets the message display layout within the container.
    *
-   * @param {('left' | 'right')} position - The desired position of the message display.
+   * @param position - The desired position of the message display.
    */
   public setMessageDisplayLayout(position: 'left' | 'right'): void {
     if (!this.mainContainer) return;
@@ -35,7 +35,7 @@ export class LayoutManager {
   /**
    * Sets the image display layout within the bottom container.
    *
-   * @param {('left' | 'right')} position - The desired position of the image display.
+   * @param position - The desired position of the image display.
    */
   public setImageDisplayLayout(position: 'left' | 'right'): void {
     if (!this.bottomContainer || !this.imageContainer) return;
@@ -49,7 +49,7 @@ export class LayoutManager {
   /**
    * Sets the display property of the image container.
    *
-   * @param {boolean} shouldShow - Determines whether the image container should be visible ('block') or hidden ('none').
+   * @param shouldShow - Determines whether the image container should be visible ('block') or hidden ('none').
    */
   public setImageDisplay(shouldShow: boolean): void {
     if (!this.imageContainer) return;
@@ -87,8 +87,8 @@ export class LayoutManager {
   /**
    * Returns the grid layout configuration for the message panel.
    *
-   * @param {('left' | 'right')} position - The message panel position.
-   * @return {{ columns: string, areas: string }}
+   * @param position - The message panel position.
+   * @return An object with columns and areas properties.
    */
   private getMessageDisplayLayout(position: 'left' | 'right'): {
     columns: string;
@@ -118,8 +118,8 @@ export class LayoutManager {
   /**
    * Returns the grid layout configuration for the image panel.
    *
-   * @param {('left' | 'right')} position - The image panel position.
-   * @return {{ columns: string, areas: string, justifyContent: string }}
+   * @param position - The image panel position.
+   * @return An object with columns, areas, and justifyContent properties.
    */
   private getImageDisplayLayout(position: 'left' | 'right'): {
     columns: string;
@@ -143,7 +143,8 @@ export class LayoutManager {
 
   /**
    * Updates the messages display with the current current message count.
-   * @param {MessageLog} log - The message log to read from.
+   *
+   * @param log - The message log to read from.
    */
   public redrawMessages(log: MessageLog): void {
     const messageCount = this.gameConfig.message_count;

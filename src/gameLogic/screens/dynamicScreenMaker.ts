@@ -29,13 +29,19 @@ export class DynamicScreenMaker implements ScreenMaker {
   /**
    * Creates a new game screen.
    *
-   * @returns {StackScreen} A StackScreen representing the initial state of a new game.
+   * @return A StackScreen representing the initial state of a new game.
    */
   public newGame(): StackScreen {
     this.game = this.builder.makeGame();
     return this.gameScreen(<GameState>this.game, this);
   }
 
+  /**
+   * Loads a saved game state and returns the corresponding game screen.
+   *
+   * @param saveState - The serialized game state to load.
+   * @return A StackScreen representing the loaded game state.
+   */
   public loadGame(saveState: SerializedGameState): StackScreen {
     const loadedGame = this.builder.restoreGame(saveState);
     return this.gameScreen(<GameState>loadedGame, this);
@@ -54,8 +60,8 @@ export class DynamicScreenMaker implements ScreenMaker {
   /**
    * Generates a game over screen and inserts it at the start of the document.
    *
-   * @param {GameState} game - The game state to display on the game over screen.
-   * @returns {StackScreen} A StackScreen representing the game over screen.
+   * @param game - The game state to display on the game over screen.
+   * @return A StackScreen representing the game over screen.
    */
   public gameOver(game: GameState): StackScreen {
     return this.overScreen(game, this);
@@ -68,7 +74,7 @@ export class DynamicScreenMaker implements ScreenMaker {
   /**
    * Runs a dynamic screen sequence.
    *
-   * @param {ScreenMaker_Dynamic} dynamicScreenMaker - The dynamic screen maker instance to run.
+   * @param - The dynamic screen maker instance to run.
    */
   static runDynamic(dynamicScreenMaker: DynamicScreenMaker) {
     ScreenStack.run_StackScreen(dynamicScreenMaker.init(dynamicScreenMaker));
@@ -77,7 +83,7 @@ export class DynamicScreenMaker implements ScreenMaker {
   /**
    * Runs a predefined sequence where the game over screen is shown first.
    *
-   * @param {Build} builder - The builder for creating games.
+   * @param builder - The builder for creating games.
    */
   public static async runBuilt_InitialGameSetup(builder: Build, seed: number) {
     const dynamicScreenMaker = new DynamicScreenMaker(
@@ -92,6 +98,13 @@ export class DynamicScreenMaker implements ScreenMaker {
     this.runDynamic(dynamicScreenMaker);
   }
 
+  /**
+   * Runs a predefined sequence where the game over screen is shown first.
+   *
+   * @param builder - The builder for creating games.
+   * @param seed - The seed for the random number generator.
+   * @param saveState - The serialized game state to load.
+   */
   public static async runBuilt_RestoreGameSetup(
     builder: Build,
     seed: number,

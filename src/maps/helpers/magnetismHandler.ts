@@ -10,9 +10,9 @@ export class MagnetismHandler {
   /**
    * Checks for magnetism in the map at a given position and returns the first magnetic neighbor if found.
    *
-   * @param {GameMapType} map - The game map representing the game world.
-   * @param {WorldPoint} position - The position to check for magnetism.
-   * @return {WorldPoint | null} The WorldPoint of the magnetic neighbor if found, otherwise null.
+   * @param map - The game map representing the game world.
+   * @param position - The position to check for magnetism.
+   * @return The WorldPoint of the magnetic neighbor if found, otherwise null.
    */
   private static checkForMagnetismInArea(
     map: GameMapType,
@@ -36,12 +36,12 @@ export class MagnetismHandler {
   /**
    * Determines if the object should move towards the magnetic position.
    *
-   * @param {GameMap} map - The game map representing the game world.
-   * @param {WorldPoint} currentPosition - The current position of the object.
-   * @param {WorldPoint} proposedNewPosition - The proposed new position.
-   * @param {RandomGenerator} rand - The random generator.
-   * @param {boolean} canGetStuckInWall - Whether the object can get stuck in a wall.
-   * @return {WorldPoint | null} The direction to move towards if magnetism is found, otherwise null.
+   * @param map - The game map representing the game world.
+   * @param currentPosition - The current position of the object.
+   * @param proposedNewPosition - The proposed new position.
+   * @param rand - The random generator.
+   * @param canGetStuckInWall - Whether the object can get stuck in a wall.
+   * @return The direction to move towards if magnetism is found, otherwise null.
    */
   public static getMagnetizedPosition(
     map: GameMap,

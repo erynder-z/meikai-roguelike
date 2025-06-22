@@ -50,10 +50,11 @@ export class EventManager {
     this.term.updateFont();
     this.screen.drawScreen(this.term);
   }
+
   /**
    * Handles the keyboard input event by updating the raw screen based on the input.
    *
-   * @param {KeyboardEvent} event - The keyboard event to be handled.
+   * @param event - The keyboard event to be handled.
    */
   private handleKeyDown(event: KeyboardEvent): void {
     this.screen.handleKeyDownEvent(event);
@@ -82,7 +83,7 @@ export class EventManager {
   /**
    * Creates and runs an EventManager instance with a provided raw screen interface.
    *
-   * @param {RawScreenInterface} rawScreen - The raw screen interface to be associated with the manager.
+   * @param rawScreen - The raw screen interface to be associated with the manager.
    * @returns The created EventManager instance.
    */
   public static runWithInteractiveScreen(

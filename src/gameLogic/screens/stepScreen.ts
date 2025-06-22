@@ -23,9 +23,9 @@ export class StepScreen extends BaseScreen {
   /**
    * Handles the key down event.
    *
-   * @param {KeyboardEvent} event - The keyboard event.
-   * @param {Stack} stack - The stack.
-   * @return {boolean} True if the event was handled successfully, false otherwise.
+   * @param event - The keyboard event.
+   * @param  stack - The stack.
+   * @return True if the event was handled successfully, false otherwise.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     return false;
@@ -34,7 +34,7 @@ export class StepScreen extends BaseScreen {
   /**
    * Draws the screen on the provided drawable terminal.
    *
-   * @param {DrawableTerminal} term - The terminal on which to draw the screen.
+   * @param term - The terminal on which to draw the screen.
    */
   public drawScreen(term: DrawableTerminal): void {
     super.drawScreen(term);
@@ -42,8 +42,9 @@ export class StepScreen extends BaseScreen {
 
   /**
    * Handles the timed step screen.
-   * @param {Stack} stack - The stack of screens.
-   * @return {boolean} True if the screen should be updated, false otherwise.
+   *
+   * @param stack - The stack of screens.
+   * @return True if the screen should be updated, false otherwise.
    */
   public onTime(stack: Stack): boolean {
     if (this.step == null) throw 'step is null';
