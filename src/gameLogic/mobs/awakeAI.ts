@@ -21,12 +21,12 @@ export class AwakeAI implements MobAI {
    * Takes a turn for the Mob in an awake state.
    *
    *
-   * @param {Mob} me - The Mob making the turn.
-   * @param {Mob} enemy - The enemy Mob.
-   * @param {Game} game - The game instance.
-   * @param {Stack} game - The screen stack.
-   * @param {ScreenMaker} make - The screen maker.
-   * @returns {boolean} - Always `true`.
+   * @param me - The Mob making the turn.
+   * @param enemy - The enemy Mob.
+   * @param game - The game instance.
+   * @param game - The screen stack.
+   * @param make - The screen maker.
+   * @return Always returns true.
    */
   public turn(
     me: Mob,

@@ -51,8 +51,9 @@ export class ItemObjectManager {
 
   /**
    * Retrieves the index of an object type based on its glyph.
-   * @param {Glyph} glyph - The glyph of the object type.
-   * @returns {number} The index of the object type.
+   *
+   * @param glyph - The glyph of the object type.
+   * @return The index of the object type.
    */
   private static indexForGlyph(glyph: Glyph): number {
     return this.objTypes.findIndex(obj => obj.glyph == glyph);
@@ -60,12 +61,13 @@ export class ItemObjectManager {
 
   /**
    * Adds an object of a specified type to the map at a given position.
-   * @param {WorldPoint} wp - The position to add the object.
-   * @param {GameMapType} map - The map to add the object to.
-   * @param {RandomGenerator} rand - The random generator to use for randomness.
-   * @param {Glyph} objType - The glyph representing the object type.
-   * @param {number} level - The level of the object.
-   * @returns {ItemObject} The added object.
+   *
+   * @param wp - The position to add the object.
+   * @param map - The map to add the object to.
+   * @param rand - The random generator to use for randomness.
+   * @param objType - The glyph representing the object type.
+   * @param level - The level of the object.
+   * @return The added object.
    */
   private static addObjTypeToMap(
     wp: WorldPoint,
@@ -83,11 +85,12 @@ export class ItemObjectManager {
 
   /**
    * Adds a random object of a specified level to the map at a given position.
-   * @param {WorldPoint} wp - The position to add the object.
-   * @param {GameMapType} map - The map to add the object to.
-   * @param {RandomGenerator} rand - The random generator to use for randomness.
-   * @param {number} level - The level of the object.
-   * @returns {ItemObject} The added object.
+   *
+   * @param wp - The position to add the object.
+   * @param map - The map to add the object to.
+   * @param rand - The random generator to use for randomness.
+   * @param level - The level of the object.
+   * @return The added object.
    */
   static addRandomObjectForLevel(
     wp: WorldPoint,
@@ -102,9 +105,10 @@ export class ItemObjectManager {
 
   /**
    * Generates a random object of a specified level.
-   * @param {number} level - The level of the object.
-   * @param {RandomGenerator} rand - The random generator to use for randomness.
-   * @returns {ItemObject} The generated object.
+   *
+   * @param level - The level of the object.
+   * @param rand - The random generator to use for randomness.
+   * @return The generated object.
    */
   public static randomLevelObject(
     level: number,
@@ -116,8 +120,8 @@ export class ItemObjectManager {
   /**
    * Returns a random object template from the objTypes array.
    *
-   * @param {RandomGenerator} rand - The random number generator used to generate a random index.
-   * @return {ObjectTypes} The randomly selected object template.
+   * @param rand - The random number generator used to generate a random index.
+   * @return The randomly selected object template.
    */
   private static getRandomTemplate(rand: RandomGenerator): ObjectTypes {
     const index = rand.randomIntegerExclusive(
@@ -130,9 +134,9 @@ export class ItemObjectManager {
   /**
    * Generates a rare rune item object with a specified level.
    *
-   * @param {RandomGenerator} rand - The random number generator used for randomness.
-   * @param {number} level - The level of the item object.
-   * @return {ItemObject} The generated rare rune item object.
+   * @param rand - The random number generator used for randomness.
+   * @param level - The level of the item object.
+   * @return The generated rare rune item object.
    */
   private static rareRunes(rand: RandomGenerator, level: number): ItemObject {
     const maxAttempts = 1000;
@@ -156,10 +160,11 @@ export class ItemObjectManager {
 
   /**
    * Creates an object based on a template.
-   * @param {number} level - The level of the object.
-   * @param {RandomGenerator} rand - The random generator to use for randomness.
-   * @param {ObjectTypes} template - The template for the object.
-   * @returns {ItemObject} The created object.
+   *
+   * @param level - The level of the object.
+   * @param rand - The random generator to use for randomness.
+   * @param template - The template for the object.
+   * @return The created object.
    */
   private static makeTemplateObject(
     level: number,
@@ -205,9 +210,8 @@ export class ItemObjectManager {
   /**
    * Sets the spell property of the given ItemObject based on its level using the random generator.
    *
-   * @param {ItemObject} object - The ItemObject to set the spell property for.
-   * @param {RandomGenerator} rand - The random number generator used to determine the spell.
-   * @return {void} This function does not return a value.
+   * @param object - The ItemObject to set the spell property for.
+   * @param rand - The random number generator used to determine the spell.
    */
   private static setItemSpell(object: ItemObject, rand: RandomGenerator): void {
     const l = rand.adjustLevel(object.level);
@@ -217,8 +221,8 @@ export class ItemObjectManager {
   /**
    * Returns a Spell based on the given level. Only spells matching the dungeon level or lower will be returned.
    *
-   * @param {number} level - The level to determine the Spell.
-   * @return {Spell} The Spell corresponding to the given level.
+   * @param level - The level to determine the Spell.
+   * @return The Spell corresponding to the given level.
    */
   private static spellForLevel(level: number): Spell {
     const slot: Spell = level % this.highestSpellTier;
@@ -228,9 +232,8 @@ export class ItemObjectManager {
   /**
    * Sets the specific spell for the given ItemObject.
    *
-   * @param {ItemObject} object - The ItemObject to set the spell for.
-   * @param {Spell} spell - The specific spell to set.
-   * @return {void} This function does not return a value.
+   * @param object - The ItemObject to set the spell for.
+   * @param spell - The specific spell to set.
    */
   private static setSpecificSpell(object: ItemObject, spell: Spell): void {
     object.spell = spell;
@@ -239,11 +242,10 @@ export class ItemObjectManager {
   /**
    * Sets the charges of an ItemObject using a random integer within a specified range.
    *
-   * @param {ItemObject} object - The ItemObject to set the charges for.
-   * @param {number} charges - The maximum number of charges.
-   * @param {RandomGenerator} rand - The random number generator used to generate a random integer.
-   * @param {number} level - The level used to adjust the maximum number of charges.
-   * @return {void} This function does not return a value.
+   * @param object - The ItemObject to set the charges for.
+   * @param charges - The maximum number of charges.
+   * @param rand - The random number generator used to generate a random integer.
+   * @param level - The level used to adjust the maximum number of charges.
    */
   static setCharges(
     object: ItemObject,
@@ -255,9 +257,10 @@ export class ItemObjectManager {
   }
   /**
    * Retrieves a template object type based on its index.
-   * @param {number} index - The index of the template.
-   * @returns {ObjectTypes} The template object type.
-   * @throws {string} Throws an error if the index is out of bounds.
+   *
+   * @param index - The index of the template.
+   * @return The template object type.
+   * @throws Throws an error if the index is out of bounds.
    */
   private static getTemplate(index: number): ObjectTypes {
     const length = ItemObjectManager.objTypes.length;
@@ -271,8 +274,8 @@ export class ItemObjectManager {
   /**
    * Retrieves the description of a spell based on its category.
    *
-   * @param {Spell} spell - The spell to retrieve the description for.
-   * @return {string} The description of the spell, or 'no description' if not found.
+   * @param spell - The spell to retrieve the description for.
+   * @return The description of the spell, or 'no description' if not found.
    */
   public static getSpellDescription(spell: Spell): string {
     let description: string = 'no description';

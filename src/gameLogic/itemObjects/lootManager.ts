@@ -13,9 +13,9 @@ export class LootManager {
   /**
    * Attempts to drop loot at the given position on the map.
    *
-   * @param {WorldPoint} pos - The position where the loot will be dropped.
-   * @param {GameState} game - The current game state.
-   * @param {number} level - The level of the loot.
+   * @param pos - The position where the loot will be dropped.
+   * @param game - The current game state.
+   * @param level - The level of the loot.
    */
   public static dropLoot(
     pos: WorldPoint,
@@ -38,10 +38,10 @@ export class LootManager {
   /**
    * Adds a random loot object at the specified position and logs the event.
    *
-   * @param {WorldPoint} pos - The position where the loot will be added.
-   * @param {GameMapType} map - The game map.
-   * @param {GameState} game - The game object.
-   * @param {number} level - The level of the loot.
+   * @param pos - The position where the loot will be added.
+   * @param map - The game map.
+   * @param game - The game object.
+   * @param level - The level of the loot.
    */
   private static addLootAndLog(
     pos: WorldPoint,

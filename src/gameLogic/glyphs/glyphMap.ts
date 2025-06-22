@@ -7,8 +7,8 @@ import { Glyph } from './glyph';
 export class GlyphMap {
   /**
    * A map containing information about each glyph.
-   * Key: Glyph enum value
-   * Value: GlyphInfo instance
+   * Key: Glyph enum value.
+   * Value: GlyphInfo instance.
    */
   private static glyphsRegistry: Map<Glyph, GlyphInfo> = new Map();
 
@@ -43,8 +43,8 @@ export class GlyphMap {
    *
    * If the glyph is unknown, it returns the default or "bad" glyph information.
    *
-   * @param {Glyph} glyph - The glyph to retrieve the information for.
-   * @return {GlyphInfo} The information of the glyph, or the default glyph if not found.
+   * @param glyph - The glyph to retrieve the information for.
+   * @return The information of the glyph, or the default glyph if not found.
    */
   public static getGlyphInfo(glyph: Glyph): GlyphInfo {
     return GlyphMap.glyphsRegistry.get(glyph) || GlyphMap.bad;
@@ -53,8 +53,7 @@ export class GlyphMap {
   /**
    * Adds a glyph to the GlyphMap.
    *
-   * @param {GlyphInfo} info - The information of the glyph to add.
-   * @returns {void}
+   * @param info - The information of the glyph to add.
    */
   public static addGlyph(info: GlyphInfo): void {
     const glyph = Glyph[info.id as keyof typeof Glyph];
@@ -70,8 +69,7 @@ export class GlyphMap {
    * Warns if a glyph is added but the registry size does not match the length of the Glyph enum.
    *
    * This can happen when a glyph is added in the code but the enum is not updated.
-   * @param {Glyph} glyph - The glyph to warn about.
-   * @returns {void}
+   * @param glyph - The glyph to warn about.
    */
   private static warn(glyph: Glyph): void {
     if (GlyphMap.glyphsRegistry.size === Object.keys(Glyph).length) return;
@@ -88,9 +86,9 @@ export class GlyphMap {
    * defined by the order in which glyphs are added to the registry. If the index
    * is out of bounds, an error is thrown.
    *
-   * @param {number} index - The index to convert to a glyph.
-   * @return {Glyph} The glyph at the given index.
-   * @throws {Error} If the index is out of bounds.
+   * @param index - The index to convert to a glyph.
+   * @return The glyph at the given index.
+   * @throws If the index is out of bounds.
    */
   public static indexToGlyph(index: number): Glyph {
     const keys = Array.from(GlyphMap.glyphsRegistry.keys());
@@ -104,8 +102,8 @@ export class GlyphMap {
    * Retrieves the description of a glyph.
    *
    * If the glyph is not found or does not have a description, "no description" is returned.
-   * @param {Glyph} glyph - The glyph to retrieve the description for.
-   * @return {string} The description of the glyph, or "no description".
+   * @param glyph - The glyph to retrieve the description for.
+   * @return The description of the glyph, or "no description".
    */
   public static getGlyphDescription(glyph: Glyph): string {
     const info = GlyphMap.glyphsRegistry.get(glyph);
@@ -116,8 +114,8 @@ export class GlyphMap {
    * Retrieves the default buff duration for an environment glyph.
    *
    * If the glyph is not found or does not have a default buff duration, 1 is returned.
-   * @param {Glyph} glyph - The glyph to retrieve the default buff duration for.
-   * @return {number} The default buff duration for the glyph, or 1.
+   * @param glyph - The glyph to retrieve the default buff duration for.
+   * @return The default buff duration for the glyph, or 1.
    */
   public static getEnvDefaultBuffDuration(glyph: Glyph): number {
     const info = GlyphMap.glyphsRegistry.get(glyph);
@@ -127,7 +125,7 @@ export class GlyphMap {
   /**
    * Returns the number of glyphs in the registry.
    *
-   * @return {number} The number of glyphs in the registry.
+   * @return The number of glyphs in the registry.
    */
   public static getRegistrySize(): number {
     return GlyphMap.glyphsRegistry.size;
@@ -136,7 +134,7 @@ export class GlyphMap {
   /**
    * Returns an array of all glyphs in the registry.
    *
-   * @return {Array<GlyphInfo>} An array of all glyphs in the registry.
+   * @return An array of all glyphs in the registry.
    */
   public static getAllGlyphs(): Array<GlyphInfo> {
     return Array.from(GlyphMap.glyphsRegistry.values());

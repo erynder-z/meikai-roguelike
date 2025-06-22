@@ -14,11 +14,10 @@ export class EventListenerTracker {
   /**
    * Adds an event listener to the specified target and tracks it.
    *
-   * @param {EventTarget} target - The target to which the event listener should be added.
-   * @param {string} type - The type of event to listen for.
-   * @param {EventListenerOrEventListenerObject} listener - The event listener function or object.
-   * @param {boolean | AddEventListenerOptions} [options] - Optional object specifying characteristics about the event listener.
-   * @return {void}
+   * @param target - The target to which the event listener should be added.
+   * @param type - The type of event to listen for.
+   * @param listener - The event listener function or object.
+   * @param options - Optional object specifying characteristics about the event listener.
    */
 
   add(
@@ -34,12 +33,11 @@ export class EventListenerTracker {
   /**
    * Adds an event listener to the specified element, by id, within the provided root and tracks it.
    *
-   * @param {Document | ShadowRoot | null} root - The root element to search for the element with the specified id.
-   * @param {string} id - The id of the element to which the event listener should be added.
-   * @param {string} type - The type of event to listen for.
-   * @param {EventListenerOrEventListenerObject} listener - The event listener function or object.
-   * @param {boolean | AddEventListenerOptions} [options] - Optional object specifying characteristics about the event listener.
-   * @return {void}
+   * @param root - The root element to search for the element with the specified id.
+   * @param id - The id of the element to which the event listener should be added.
+   * @param type - The type of event to listen for.
+   * @param listener - The event listener function or object.
+   * @param options - Optional object specifying characteristics about the event listener.
    */
   addById(
     root: Document | ShadowRoot | null,
@@ -62,10 +60,7 @@ export class EventListenerTracker {
    * Iterates over the stored event listeners and removes each one from its
    * respective target. After all event listeners have been removed, the internal
    * list of listeners is cleared.
-   *
-   * @return {void}
    */
-
   removeAll(): void {
     for (const { target, type, listener, options } of this.listeners) {
       target.removeEventListener(type, listener, options);

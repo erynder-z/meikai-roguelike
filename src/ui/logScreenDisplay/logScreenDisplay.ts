@@ -95,7 +95,8 @@ export class LogScreenDisplay extends HTMLElement {
 
   /**
    * Sets the log messages and triggers a render.
-   * @param {LogMessage[]} messages - The log messages to display.
+   *
+   * @param messages - The log messages to display.
    */
   set log(messages: LogMessage[]) {
     this.messageLog = messages;
@@ -142,9 +143,9 @@ export class LogScreenDisplay extends HTMLElement {
   }
 
   /**
-   * Adds the 'fade-out' class to the element and returns a promise that resolves
-   * when the fade out animation ends.
-   * @returns {Promise<void>}
+   * Adds the 'fade-out' class to the element and returns a promise that resolves when the fade out animation ends.
+   *
+   * @returns A promise that resolves when the fade out animation ends.
    */
   public fadeOut(): Promise<void> {
     return new Promise(resolve => {

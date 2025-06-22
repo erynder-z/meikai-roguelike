@@ -13,8 +13,8 @@ export class EnvironmentChecker {
   /**
    * Checks if items can be dropped on the given cell.
    *
-   * @param {MapCell} cell - The cell to check.
-   * @return {boolean} Returns true if items can be dropped, false otherwise.
+   * @param cell - The cell to check.
+   * @return Returns true if items can be dropped, false otherwise.
    */
   public static canItemsBeDropped(cell: MapCell): boolean {
     return !cell.hasObject() && cell.env === Glyph.Regular_Floor;
@@ -23,8 +23,8 @@ export class EnvironmentChecker {
   /**
    * Checks if a corpse can be dropped on the given cell.
    *
-   * @param {MapCell} cell - The cell to check.
-   * @return {boolean} Returns true if a corpse can be dropped, false otherwise.
+   * @param cell - The cell to check.
+   * @return Returns true if a corpse can be dropped, false otherwise.
    */
   public static canCorpseBeDropped(cell: MapCell): boolean {
     return !cell.corpse;
@@ -33,9 +33,9 @@ export class EnvironmentChecker {
   /**
    * Checks if a neighbor is within bounds of the map.
    *
-   * @param {WorldPoint} neighbor - The neighboring point to check.
-   * @param {GameMapType} map - The map containing the cells.
-   * @return {boolean} Returns true if the neighbor is within bounds, false otherwise.
+   * @param neighbor - The neighboring point to check.
+   * @param map - The map containing the cells.
+   * @return Returns true if the neighbor is within bounds, false otherwise.
    */
   public static isValidNeighbor(
     neighbor: WorldPoint,
@@ -47,10 +47,9 @@ export class EnvironmentChecker {
   /**
    * Add all environmental effects to the given cell. These will be updated every time the screen is redrawn
    *
-   * @param {MapCell} cell - The cell to add effects to.
-   * @param {WorldPoint} wp - The position of the cell.
-   * @param {GameMapType} map - The map containing the cells.
-   * @return {void} This function does not return a value.
+   * @param cell - The cell to add effects to.
+   * @param wp - The position of the cell.
+   * @param map - The map containing the cells.
    */
   public static addDynamicCellEffects(
     cell: MapCell,
@@ -65,8 +64,7 @@ export class EnvironmentChecker {
    * Adds all static environmental effects to the given cell.
    * These shall only be used on map generation!
    *
-   * @param {MapCell} cell - The cell to add effects to.
-   * @return {void} This function does not return a value.
+   * @param cell - The cell to add effects to.
    */
   public static addStaticCellEffects(cell: MapCell): void {
     this.addArcaneSigilEffect(cell);
@@ -76,10 +74,9 @@ export class EnvironmentChecker {
   /**
    * Adds the poison effect to the cells surrounding the given cell, if it contains a Poison Mushroom glyph.
    *
-   * @param {MapCell} cell - The cell to add the poison effect to.
-   * @param {WorldPoint} wp - The position of the cell.
-   * @param {GameMapType} map - The map containing the cells.
-   * @return {void} This function does not return a value.
+   * @param cell - The cell to add the poison effect to.
+   * @param wp - The position of the cell.
+   * @param map - The map containing the cells.
    */
   private static addPoisonEffectToCellNeighbors(
     cell: MapCell,
@@ -104,10 +101,9 @@ export class EnvironmentChecker {
   /**
    * Adds the confusion effect to the neighboring cells of the given cell if it contains a Confusion Mushroom glyph.
    *
-   * @param {MapCell} cell - The cell to add the confusion effect to.
-   * @param {WorldPoint} wp - The position of the cell.
-   * @param {GameMapType} map - The map containing the cells.
-   * @return {void} This function does not return a value.
+   * @param cell - The cell to add the confusion effect to.
+   * @param wp - The position of the cell.
+   * @param map - The map containing the cells.
    */
   private static addConfusionEffectToCellNeighbors(
     cell: MapCell,
@@ -132,8 +128,7 @@ export class EnvironmentChecker {
   /**
    * Adds a random arcane sigil effect to the given cell if it contains an Arcane Sigil glyph.
    *
-   * @param {MapCell} cell - The cell to potentially add an arcane sigil effect to.
-   * @return {void} This function does not return a value.
+   * @param cell - The cell to potentially add an arcane sigil effect to.
    */
 
   private static addArcaneSigilEffect(cell: MapCell): void {
@@ -146,8 +141,7 @@ export class EnvironmentChecker {
   /**
    * Adds the blindness effect to a cell if it contains a Nebulous Mist glyph.
    *
-   * @param {MapCell} cell - The cell to potentially add the blindness effect to.
-   * @return {void} This function does not return a value.
+   * @param cell - The cell to potentially add the blindness effect to.
    */
 
   private static addNebulousMistEffect(cell: MapCell): void {
@@ -158,8 +152,8 @@ export class EnvironmentChecker {
   /**
    * Gets the environmental effect corresponding to the given glyph.
    *
-   * @param {Glyph} glyph - The glyph to get the effect from.
-   * @return {EnvEffect | null} The environmental effect corresponding to the glyph, or null if not found.
+   * @param glyph - The glyph to get the effect from.
+   * @return The environmental effect corresponding to the glyph, or null if not found.
    */
   private static getEffectFromGlyph(glyph: Glyph): EnvEffect | null {
     switch (glyph) {
@@ -175,9 +169,9 @@ export class EnvironmentChecker {
   /**
    * Clears the environmental effect in the area surrounding a specified cell.
    *
-   * @param {WorldPoint} wp - The position of the cell.
-   * @param {GameMapType} map - The map containing the cells.
-   * @param {Glyph} glyph - The glyph representing the environmental effect.
+   * @param wp - The position of the cell.
+   * @param map - The map containing the cells.
+   * @param glyph - The glyph representing the environmental effect.
    */
   public static clearCellEffectInArea(
     wp: WorldPoint,

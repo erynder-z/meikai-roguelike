@@ -65,6 +65,10 @@ export class PopupBoxBad extends HTMLElement {
     }, 2000);
   }
 
+  /**
+   * Displays the given message in the popup box.
+   * @param message - The message to display in the popup box.
+   */
   public showMessage(message: string): void {
     const popupMessage = this.shadowRoot?.querySelector('.popup-message');
     if (!popupMessage) return;

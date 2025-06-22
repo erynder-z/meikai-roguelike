@@ -19,9 +19,9 @@ export class PoisonTick implements Tick {
    * Determines if damage should be applied based on the current turn.
    * The initial tick always applies damage. After that, damage is applied on odd turns.
    *
-   * @param {number} duration - The total duration of the bleed effect.
-   * @param {number} timeLeft - The remaining time for the bleed effect.
-   * @return {boolean} True if damage should be applied on odd turns, false otherwise.
+   * @param duration - The total duration of the bleed effect.
+   * @param timeLeft - The remaining time for the bleed effect.
+   * @return True if damage should be applied on odd turns, false otherwise.
    */
   private shouldApplyDamage(duration: number, timeLeft: number): boolean {
     const turnNumber = duration - timeLeft;
@@ -32,8 +32,8 @@ export class PoisonTick implements Tick {
   /**
    * Performs a tick action based on the duration and time left.
    *
-   * @param {number} duration - The duration of the tick action.
-   * @param {number} timeLeft - The remaining time for the tick action.
+   * @param duration - The duration of the tick action.
+   * @param timeLeft - The remaining time for the tick action.
    */
   public tick(duration: number, timeLeft: number): void {
     if (this.shouldApplyDamage(duration, timeLeft)) return;

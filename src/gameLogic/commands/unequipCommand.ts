@@ -18,7 +18,8 @@ export class UnequipCommand extends CommandBase {
 
   /**
    * Executes the unequip command.
-   * @returns {boolean} True if the command executed successfully, false otherwise.
+   *
+   * @returns True if the command executed successfully, false otherwise.
    */
   public execute(): boolean {
     const { slot, game } = this;

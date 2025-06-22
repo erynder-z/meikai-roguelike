@@ -37,10 +37,9 @@ export class MultiplyCommand extends CommandBase {
   /**
    * Spawns a mob at the given world point on the specified game map.
    *
-   * @param {WorldPoint} wp - The coordinates of the world point where the mob should be spawned.
-   * @param {GameMap} map - The game map on which the mob should be spawned.
-   * @param {GameState} game - The game object.
-   * @return {void} This function does not return a value.
+   * @param wp - The coordinates of the world point where the mob should be spawned.
+   * @param map - The game map on which the mob should be spawned.
+   * @param game - The game object.
    */
   public spawnMob(wp: WorldPoint, map: GameMap, game: GameState): void {
     const { me } = this;
@@ -58,9 +57,9 @@ export class MultiplyCommand extends CommandBase {
   /**
    * Finds a valid world point on the game map to spawn a mob.
    *
-   * @param {GameMap} gameMap - The game map to search for a valid spawn point.
-   * @param {RandomGenerator} randomGenerator - The random number generator to use for picking a spawn point.
-   * @return {WorldPoint | null} The valid world point to spawn a mob, or null if no valid spawn point is found.
+   * @param gameMap - The game map to search for a valid spawn point.
+   * @param randomGenerator - The random number generator to use for picking a spawn point.
+   * @return The valid world point to spawn a mob, or null if no valid spawn point is found.
    */
   private find(
     gameMap: GameMap,
@@ -86,9 +85,9 @@ export class MultiplyCommand extends CommandBase {
   /**
    * Picks a random element from the given array of WorldPoints using the provided RandomGenerator.
    *
-   * @param {WorldPoint[]} c - The array of WorldPoints to pick from.
-   * @param {RandomGenerator} rand - The RandomGenerator used to generate a random index.
-   * @return {WorldPoint | null} The randomly picked WorldPoint, or null if the array is empty.
+   * @param c - The array of WorldPoints to pick from.
+   * @param rand - The RandomGenerator used to generate a random index.
+   * @return The randomly picked WorldPoint, or null if the array is empty.
    */
   private pick(c: WorldPoint[], rand: RandomGenerator): WorldPoint | null {
     if (c.length == 0) return null;

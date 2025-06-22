@@ -11,10 +11,12 @@ import { Glyph } from '../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
 import { ImageHandler } from '../media/imageHandler/imageHandler';
+import { LevelDepthInfo } from '../ui/miscInfo/levelDepthInfo';
+import { LevelTemperatureInfo } from '../ui/miscInfo/levelTemperatureInfo';
 import { MapCell } from '../maps/mapModel/mapCell';
 import { MapRenderer } from './mapRenderer';
 import { MessagesDisplay } from '../ui/messages/messagesDisplay';
-import { MiscInfo } from '../ui/miscInfo/miscInfo';
+import { PlayerHealthInfo } from '../ui/miscInfo/playerHealthInfo';
 import { TerminalPoint } from '../terminal/terminalPoint';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
 
@@ -25,15 +27,16 @@ export class DrawUI {
   static outside: MapCell = new MapCell(Glyph.Unknown);
   /**
    * Draws a map on a drawable terminal. The whole map is visible.
-   * @param {DrawableTerminal} term - The drawable terminal to draw on.
-   * @param {GameMapType} map - The map to draw.
-   * @param {WorldPoint} vp - The viewport representing the point in the world where drawing starts.
+   *
+   * @param term - The drawable terminal to draw on.
+   * @param map - The map to draw.
+   * @param vp - The viewport representing the point in the world where drawing starts.
    */
   private static drawMapFullyVisible(
     term: DrawableTerminal,
     map: GameMapType,
     vp: WorldPoint,
-  ) {
+  ): void {
     const terminalDimensions = term.dimensions;
     const t = new TerminalPoint();
     const w = new WorldPoint();
@@ -59,11 +62,12 @@ export class DrawUI {
 
   /**
    * Draws a map with considerations for player position and lighting conditions.
-   * @param {DrawableTerminal} term - The drawable terminal to draw on.
-   * @param {GameMapType} map - The map to draw.
-   * @param {WorldPoint} vp - The viewport representing the point in the world where drawing starts.
-   * @param {WorldPoint} playerPos - The position of the player.
-   * @param {GameState} game - The game object.
+   *
+   * @param term - The drawable terminal to draw on.
+   * @param map - The map to draw.
+   * @param vp - The viewport representing the point in the world where drawing starts.
+   * @param playerPos - The position of the player.
+   * @param game - The game object.
    */
   private static drawMap(
     term: DrawableTerminal,
@@ -71,24 +75,24 @@ export class DrawUI {
     vp: WorldPoint,
     playerPos: WorldPoint,
     game: GameState,
-  ) {
+  ): void {
     MapRenderer.drawMap_RayCast(term, map, vp, playerPos, game);
   }
 
   /**
    * Draw the map with the player centered.
    *
-   * @param {DrawableTerminal} term - the terminal to draw on
-   * @param {GameMapType} map - the map to draw
-   * @param {WorldPoint} player_pos - the position of the player
-   * @param {GameState} game - the game interface
+   * @param term - the terminal to draw on.
+   * @param map - the map to draw.
+   * @param player_pos - the position of the player.
+   * @param game - the game interface.
    */
   public static drawMapWithPlayerCentered(
     term: DrawableTerminal,
     map: GameMapType,
     playerPos: WorldPoint,
     game: GameState,
-  ) {
+  ): void {
     if (!playerPos) playerPos = new WorldPoint();
 
     const viewport: WorldPoint = new WorldPoint(
@@ -99,29 +103,49 @@ export class DrawUI {
   }
 
   /**
-   * Renders the misc info elements on the page based on the game state.
+   * Updates the player's HP status in the UI.
    *
-   * @param {GameState} game - the game instance containing the current map and player
-   * @return {void}
+   * @param game - the game interface containing the player mob.
    */
-  public static renderMiscInfo(game: GameState): void {
+  public static renderPlayerHealthInfo(game: GameState): void {
+    const playerHealthInfo = document.querySelector(
+      'player-health-info',
+    ) as PlayerHealthInfo;
+    if (playerHealthInfo) playerHealthInfo.setPlayerHPStatus(game.player);
+  }
+
+  /**
+   * Updates the level depth information element in the UI.
+   *
+   * @param game - the game interface containing the current map.
+   */
+  public static renderLevelDepthInfo(game: GameState): void {
     const currentMap = game.currentMap();
     const currentDepth = currentMap?.depth || 0;
-    const currentTemp = currentMap?.temperature || 0;
+    const levelDepthInfo = document.querySelector(
+      'level-depth-info',
+    ) as LevelDepthInfo;
+    if (levelDepthInfo) levelDepthInfo.setLevelDepthInfo(currentDepth);
+  }
 
-    const miscInfoDisplay = document.querySelector('misc-info') as MiscInfo;
-    if (miscInfoDisplay) {
-      miscInfoDisplay.setLevelDepthInfo(currentDepth);
-      miscInfoDisplay.setLevelTempInfo(currentTemp);
-      miscInfoDisplay.setPlayerHPStatus(game.player);
-    }
+  /**
+   * Updates the level temperature information element in the UI.
+   *
+   * @param game - the game interface containing the current map.
+   */
+  public static renderLevelTemperatureInfo(game: GameState): void {
+    const currentMap = game.currentMap();
+    const currentTemp = currentMap?.temperature || 0;
+    const levelTempInfo = document.querySelector(
+      'level-temperature-info',
+    ) as LevelTemperatureInfo;
+    if (levelTempInfo) levelTempInfo.setLevelTempInfo(currentTemp);
   }
 
   /**
    * Renders the active buffs of the player on the terminal.
    *
-   * @param {GameState} game - the game instance containing the player's buffs
-   * @return {void}
+   * @param game - the game instance containing the player's buffs.
    */
   public static renderBuffs(game: GameState): void {
     const playerBuffs = game.player.buffs;
@@ -136,8 +160,7 @@ export class DrawUI {
   /**
    * Renders the equipment on the terminal based on the provided game state.
    *
-   * @param {GameState} game - the game instance containing the equipment state
-   * @return {void}
+   * @param game - the game instance containing the equipment state.
    */
   public static renderEquipment(game: GameState): void {
     const equipment = game.equipment;
@@ -150,8 +173,7 @@ export class DrawUI {
   /**
    * Renders the log messages on the terminal.
    *
-   * @param {GameState} game - the game instance to retrieve player stats from
-   * @return {void}
+   * @param game - the game instance to retrieve player stats from.
    */
   public static renderMessage(game: GameState): void {
     const gameConfig = gameConfigManager.getConfig();
@@ -169,8 +191,8 @@ export class DrawUI {
 
   /**
    * Handles displaying an image based on the current event in the game log.
-   * @param {GameState} game - The game state containing the current event.
-   * @return {void} This function does not return anything.
+   *
+   * @param game - The game state containing the current event.
    */
   public static renderActionImage(game: GameState): void {
     const gameConfig = gameConfigManager.getConfig();
@@ -240,8 +262,8 @@ export class DrawUI {
    * Handles displaying a flash message for queued messages in the log.
    * This function is called at the start of each turn and is responsible for
    * displaying any messages that were queued up during the previous turn.
-   * @param {GameState} game - The game state containing the log.
-   * @returns {void} This function does not return anything.
+   *
+   * @param game - The game state containing the log.
    */
   public static renderFlash(game: GameState): void {
     const { log } = game;
@@ -267,8 +289,7 @@ export class DrawUI {
   /**
    * Clears the flash message on the screen.
    *
-   * @param {GameState} game - The game instance to clear the flash message from.
-   * @return {void} This function does not return anything.
+   * @param game - The game instance to clear the flash message from.
    */
   public static clearFlash(game: GameState): void {
     const flashDisplay = document.querySelector(
@@ -280,8 +301,8 @@ export class DrawUI {
   /**
    * Loops over each cell in the entire map and applies a given function.
    *
-   * @param {GameMapType} map - The game map
-   * @param {Function} callback - The function to apply to each cell
+   * @param map - The game map.
+   * @param callback - The function to apply to each cell.
    */
   private static forEachCellInMap(
     map: GameMapType,
@@ -300,8 +321,7 @@ export class DrawUI {
   /**
    * Apply environment area effects to each cell in the map based on the given game state.
    *
-   * @param {GameMapType} map - The game map to apply effects to
-   * @return {void} This function does not return anything.
+   * @param map - The game map to apply effects to.
    */
   public static addDynamicEnvironmentAreaEffectsToCells(
     map: GameMapType,
@@ -315,9 +335,9 @@ export class DrawUI {
   /**
    * Debug draw the map on the terminal with the player's position centered. GameMapType is completely visible.
    *
-   * @param {DrawableTerminal} term - the terminal to draw on
-   * @param {GameMapType} map - the map to draw
-   * @param {WorldPoint} playerPos - the position of the player
+   * @param term - the terminal to draw on.
+   * @param map - the map to draw.
+   * @param playerPos - the position of the player.
    */
   public static debugDrawMap(
     term: DrawableTerminal,

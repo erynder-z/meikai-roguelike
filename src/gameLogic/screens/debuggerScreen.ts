@@ -16,8 +16,7 @@ export class DebuggerScreen extends BaseScreen {
   /**
    * Draws the game screen for the debugger.
    *
-   * @param {DrawableTerminal} term - the terminal to draw on
-   * @return {void}
+   * @param term - the terminal to draw on
    */
   public drawScreen(term: DrawableTerminal): void {
     DrawUI.debugDrawMap(
@@ -27,6 +26,13 @@ export class DebuggerScreen extends BaseScreen {
     );
   }
 
+  /**
+   * Handles key down events, specifically checking for the debug key.
+   * If the debug key is pressed, the screen is popped from the stack.
+   *
+   * @param event - The keyboard event to handle.
+   * @param stack - The stack of screens.
+   */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
     switch (event.key) {
       case this.activeControlScheme.debug1.toString():

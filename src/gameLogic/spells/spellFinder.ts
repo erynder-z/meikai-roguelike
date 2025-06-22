@@ -32,10 +32,10 @@ export class SpellFinder {
   /**
    * Finds and returns a Command or StackScreen based on the provided spell and optional cost.
    *
-   * @param {Spell} spell - The spell to be executed.
-   * @param {number} amount - The amount of the spell.
-   * @param {Cost} [cost] - The optional cost of the spell.
-   * @return {Command | StackScreen | null} The found Command or StackScreen, or null if the spell is not recognized.
+   * @param spell - The spell to be executed.
+   * @param amount - The amount of the spell.
+   * @param cost - The optional cost of the spell.
+   * @return The found Command or StackScreen, or null if the spell is not recognized.
    */
   public find(
     spell: Spell,
@@ -143,9 +143,9 @@ export class SpellFinder {
   /**
    * Creates a new buff command and returns a CommandOrScreen object containing the command and screen.
    *
-   * @param {Buff} buff - The type of buff to add.
-   * @param {Mob} me - The mob to add the buff to.
-   * @return {CommandOrScreen} An object containing the command and screen.
+   * @param buff - The type of buff to add.
+   * @param me - The mob to add the buff to.
+   * @return An object containing the command and screen.
    */
   private buff(buff: Buff, me: Mob): CommandOrScreen {
     const buffCmd = new BuffCommand(buff, me, this.game, me);
@@ -156,9 +156,9 @@ export class SpellFinder {
   /**
    * Creates a new payload command and returns a CommandOrScreen object containing the command and screen.
    *
-   * @param {Command} inner - The inner command to be wrapped by the payload command.
-   * @param {Mob} me - The mob that will execute the command.
-   * @return {CommandOrScreen} An object containing the command and screen.
+   * @param inner - The inner command to be wrapped by the payload command.
+   * @param me - The mob that will execute the command.
+   * @return An object containing the command and screen.
    */
   private payload(inner: Command, me: Mob): CommandOrScreen {
     const cmd: Command = new PayloadCommand(
@@ -175,8 +175,8 @@ export class SpellFinder {
   /**
    * Creates a new CommandDirectionScreen with the given command and returns it as a StackScreen.
    *
-   * @param {Command} cmd - The command to be executed.
-   * @return {StackScreen} The newly created CommandDirectionScreen.
+   * @param cmd - The command to be executed.
+   * @return The newly created CommandDirectionScreen.
    */
   private dir(cmd: Command): StackScreen {
     return new CommandDirectionScreen(cmd, this.game, this.make);

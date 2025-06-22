@@ -140,16 +140,14 @@ export class TitleMenu extends HTMLElement {
    * Binds events to the elements in the title menu.
    *
    * The function binds the following events:
-   * - Click event on the new game button
-   * - Click event on the load game button
-   * - Click event on the player setup button
-   * - Click event on the options button
-   * - Click event on the help button
-   * - Click event on the about button
-   * - Click event on the quit button
-   * - Keydown event on the document
-   *
-   * @return {void}
+   * - Click event on the new game button.
+   * - Click event on the load game button.
+   * - Click event on the player setup button.
+   * - Click event on the options button.
+   * - Click event on the help button.
+   * - Click event on the about button.
+   * - Click event on the quit button.
+   * - Keydown event on the document.
    */
 
   private bindEvents(): void {
@@ -220,8 +218,7 @@ export class TitleMenu extends HTMLElement {
    * - A: showAbout
    * - Q: quitGame
    *
-   * @param {KeyboardEvent} event - The keyboard event to be handled.
-   * @return {void}
+   * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
     switch (event.key) {
@@ -258,9 +255,8 @@ export class TitleMenu extends HTMLElement {
    * data directory. If the file is found and contains data, it enables the load game button.
    * Logs an error message to the console if there is an issue accessing the file.
    *
-   * @return {Promise<void>} A promise that resolves when the check is completed.
+   * @return A promise that resolves when the check is completed.
    */
-
   private async checkForSaveState(): Promise<void> {
     try {
       const binaryData = await readFile('savestate.bin', {
@@ -282,7 +278,6 @@ export class TitleMenu extends HTMLElement {
    * allowing the user to load a saved game. It is typically called after
    * confirming the presence of a saved game state.
    */
-
   private enableLoadGameButton(): void {
     const loadGameButton = this.shadowRoot?.getElementById('load-game-button');
     if (loadGameButton) loadGameButton.removeAttribute('disabled');
@@ -303,8 +298,6 @@ export class TitleMenu extends HTMLElement {
    * Dispatches a 'start-new-game' event.
    *
    * This event can be listened for by other components to start a new game.
-   *
-   * @return {void}
    */
   public startNewGame(): void {
     this.dispatchEvent(
@@ -316,8 +309,6 @@ export class TitleMenu extends HTMLElement {
    * Dispatches a 'load-game' event.
    *
    * This event can be listened to by other components to load a saved game.
-   *
-   * @return {void}
    */
   public loadGame(): void {
     this.dispatchEvent(
@@ -331,8 +322,6 @@ export class TitleMenu extends HTMLElement {
    * This function will query the first 'title-screen' element in the document
    * and replace its content with a 'player-setup' element. This element will
    * allow the user to modify their player's name and appearance.
-   *
-   * @return {void}
    */
   public playerSetup(): void {
     const titleScreenContent = document
@@ -350,10 +339,7 @@ export class TitleMenu extends HTMLElement {
    *
    * This function queries the first 'title-screen' element in the document,
    * clears its content, and appends a 'title-menu-options' element.
-   *
-   * @return {void}
    */
-
   public showOptions(): void {
     const titleScreenContent = document
       .querySelector('title-screen')
@@ -369,7 +355,6 @@ export class TitleMenu extends HTMLElement {
 
   /**
    * Opens a new window with the game's help documentation.
-   * @return {void}
    */
   private showHelp(): void {
     invoke('create_hidden_help_window');
@@ -382,7 +367,7 @@ export class TitleMenu extends HTMLElement {
   /**
    * Calls the Tauri backend to quit the game. Asks for confirmation before quitting.
    *
-   * @return {Promise<void>} A promise that resolves when the game is exited.
+   * @return A promise that resolves when the game is exited.
    */
   private async quitGame(): Promise<void> {
     try {
@@ -403,7 +388,6 @@ export class TitleMenu extends HTMLElement {
    * This function is called when the custom element is removed from the DOM.
    * It removes event listeners for keydown and click events that were added in the
    * connectedCallback function.
-   * @return {void}
    */
   disconnectedCallback(): void {
     this.eventTracker.removeAll();

@@ -9,9 +9,10 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
 export class FindFreeSpace {
   /**
    * Finds a free space on the map.
-   * @param {GameMapType} map - The map on which to find free space.
-   * @param {RandomGenerator} rand - The random generator to use for finding free space.
-   * @returns {WorldPoint | null} A WorldPoint representing the free space found, or null if no free space is available.
+   *
+   * @param map - The map on which to find free space.
+   * @param rand - The random generator to use for finding free space.
+   * @return A WorldPoint representing the free space found, or null if no free space is available.
    */
   public static findFree(map: GameMapType, rand: RandomGenerator): WorldPoint {
     return this.find(Glyph.Regular_Floor, map, rand);
@@ -19,11 +20,12 @@ export class FindFreeSpace {
 
   /**
    * Finds a specified character in the map and returns its position.
-   * @param {Glyph} char - The character to find.
-   * @param {GameMapType} map - The map in which to search for the character.
-   * @param {RandomGenerator} rand - The random generator to use for finding the character.
-   * @returns {WorldPoint } A WorldPoint representing the position of the character found.
-   * @throws {string} Throws an error if no free space is found.
+   *
+   * @param char - The character to find.
+   * @param map - The map in which to search for the character.
+   * @param rand - The random generator to use for finding the character.
+   * @return A WorldPoint representing the position of the character found.
+   * @throw Throws an error if no free space is found.
    */
   public static find(
     char: Glyph,
@@ -58,10 +60,10 @@ export class FindFreeSpace {
    * Finds a free space adjacent to a provided world point.
    * If no space is found, it increases the search radius and retries.
    *
-   * @param {WorldPoint} point - The point around which to search for free space.
-   * @param {GameMapType} map - The map on which to find free space.
-   * @param {number} maxRadius - The maximum radius within which to search for free space.
-   * @returns {WorldPoint | null} A WorldPoint representing the free adjacent space found, or null if no free space is available.
+   * @param point - The point around which to search for free space.
+   * @param map - The map on which to find free space.
+   * @param maxRadius - The maximum radius within which to search for free space.
+   * @return A WorldPoint representing the free adjacent space found, or null if no free space is available.
    */
   public static findFreeAdjacent(
     point: WorldPoint,

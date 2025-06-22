@@ -7,10 +7,10 @@ export class MobMessagesHandler {
   /**
    * Determines whether a message should be displayed based on the visibility of the mob to the player.
    *
-   * @param {GameState} game - The current game state.
-   * @param {Mob} mob - The mob for which the message is being considered.
-   * @param {Mob} player - The player mob.
-   * @return {boolean} True if the message should be displayed, false otherwise.
+   * @param game - The current game state.
+   * @param mob - The mob for which the message is being considered.
+   * @param player - The player mob.
+   * @return True if the message should be displayed, false otherwise.
    */
   public static shouldDisplayMessageBasedOnVisibility(
     game: GameState,

@@ -15,7 +15,6 @@ export class TitleScreen extends HTMLElement {
    * This method is called when the element is inserted into the DOM.
    * It is called after the element is created and before the element is connected
    * to the DOM.
-   *
    */
   connectedCallback(): void {
     const images = [img01, img02, img03, img04, img05, img06];
@@ -87,8 +86,6 @@ export class TitleScreen extends HTMLElement {
    * Handles the 'player-setup' event by replacing the content of the title screen
    * with a player setup element. This function is called when the user clicks
    * the "start a new game" button on the title screen.
-   *
-   * @return {void}
    */
   private handlePlayerSetup(): void {
     const titleScreenContent = this.shadowRoot?.getElementById(

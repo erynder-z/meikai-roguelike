@@ -37,6 +37,12 @@ export class Mob {
     this.id = crypto.randomUUID();
   }
 
+  /**
+   * Determines if a specific type of buff is currently active on this mob.
+   *
+   * @param buff - The buff to check for.
+   * @returns True if the buff is active, false otherwise.
+   */
   public is(buff: Buff): boolean {
     return this.buffs.is(buff);
   }
@@ -44,7 +50,7 @@ export class Mob {
   /**
    * A function that checks if the entity is alive.
    *
-   * @return {boolean} the status of the entity
+   * @return The status of the entity
    */
   public isAlive(): boolean {
     return this.hp > 0;

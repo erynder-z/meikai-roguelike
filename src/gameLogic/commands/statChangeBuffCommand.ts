@@ -30,7 +30,7 @@ export class StatChangeBuffCommand extends BuffCommand {
    * logic handling. Depending on the buff type, it applies the appropriate
    * stat adjustment and creates the corresponding tick effect.
    *
-   * @returns {boolean} Always returns true, indicating successful execution.
+   * @returns Always returns true, indicating successful execution.
    */
 
   public execute(): boolean {

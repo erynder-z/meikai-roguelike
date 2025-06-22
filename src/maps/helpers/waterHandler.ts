@@ -14,9 +14,8 @@ export class WaterHandler {
    * This effect reduces the mob's bloodiness by 0.5, removes any active Burn or Lava buffs,
    * and adds a Slow buff for 2 turns.
    *
-   * @param {Mob} mob The mob to handle the water cell effect for.
-   * @param {GameState} game The game state.
-   * @return {void} This function does not return a value.
+   * @param mob The mob to handle the water cell effect for.
+   * @param game The game state.
    */
   public static handleWaterCellEffect(mob: Mob, game: GameState): void {
     // remove .5 intensity of blood if mob is bloody

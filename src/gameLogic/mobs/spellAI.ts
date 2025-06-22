@@ -28,13 +28,12 @@ export class SpellAI implements MobAI {
   /**
    * Takes a turn for the Mob in an awake state.
    *
-   *
-   * @param {Mob} me - The Mob making the turn.
-   * @param {Mob} enemy - The enemy Mob.
-   * @param {GameState} game - The game instance.
-   * @param {Stack} stack - The screen stack.
-   * @param {ScreenMaker} make - The screen maker.
-   * @returns {boolean} - Always `true`.
+   * @param me - The Mob making the turn.
+   * @param enemy - The enemy Mob.
+   * @param game - The game instance.
+   * @param stack - The screen stack.
+   * @param make - The screen maker.
+   * @return Always returns true.
    */
   public turn(
     me: Mob,
@@ -59,10 +58,10 @@ export class SpellAI implements MobAI {
   /**
    * A function to potentially cast a spell between two mobs in the game.
    *
-   * @param {Mob} me - the casting mob
-   * @param {Mob} enemy - the target mob
-   * @param {GameState} game - the game instance
-   * @return {boolean} true if the spell was cast, false otherwise
+   * @param me - the casting mob.
+   * @param enemy - the target mob.
+   * @param game - the game instance.
+   * @return True if the spell was cast, false otherwise.
    */
   private maybeCastSpell(me: Mob, enemy: Mob, game: GameState): boolean {
     const map = <GameMap>game.currentMap();
@@ -77,9 +76,9 @@ export class SpellAI implements MobAI {
   /**
    * A function that picks a buff for a given mob.
    *
-   * @param {Mob} me - the mob for which to pick the buff
-   * @param {any} rand- the game random generator
-   * @return {Buff} the chosen buff for the mob
+   * @param me - the mob for which to pick the buff.
+   * @param rand- the game random generator.
+   * @return The chosen buff for the mob.
    */
   private pickBuff(me: Mob, rand: RandomGenerator): Buff {
     // TODO: Implement buff choosing
@@ -89,11 +88,11 @@ export class SpellAI implements MobAI {
   /**
    * Casts a spell on the enemy mob using the given buff, current mob, enemy mob, and game interface.
    *
-   * @param {number} buff - the buff to cast
-   * @param {Mob} me - the current mob
-   * @param {Mob} enemy - the enemy mob
-   * @param {GameState} game - the game instance
-   * @return {boolean} the result of the spell cast
+   * @param buff - the buff to cast.
+   * @param me - the current mob.
+   * @param enemy - the enemy mob.
+   * @param game - the game instance.
+   * @return The result of the spell cast.
    */
   private cast(buff: number, me: Mob, enemy: Mob, game: GameState): boolean {
     const spell = new BuffCommand(buff, enemy, game, me);

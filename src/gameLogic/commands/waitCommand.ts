@@ -21,7 +21,8 @@ export class WaitCommand extends CommandBase {
   }
   /**
    * Executes the wait command.
-   * @returns {boolean} Always returns true.
+   *
+   * @returns Always returns true.
    */
   public execute(): boolean {
     const { me, game } = this;

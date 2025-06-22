@@ -18,8 +18,7 @@ export class BuffColors {
    * Replaces occurrences of buffs in the innerHTML of the given element with
    * colored spans.
    *
-   * @param {HTMLElement} element - The element to modify.
-   * @return {void}
+   * @param element - The element to modify.
    */
   public colorBuffs(element: HTMLElement): void {
     element.innerHTML = element.innerHTML.replace(this.buffRegex, match => {
@@ -33,8 +32,8 @@ export class BuffColors {
   /**
    * Generates a regular expression that matches any occurrence of the buff words in the given array of BuffText objects.
    *
-   * @param {BuffText[]} buffs - The array of BuffText objects containing buff words.
-   * @return {RegExp} - The regular expression that matches any occurrence of the buff words.
+   * @param buffs - The array of BuffText objects containing buff words.
+   * @return The regular expression that matches any occurrence of the buff words.
    */
   private createBuffRegex(buffs: BuffText[]): RegExp {
     const buffWords: string[] = [];
@@ -51,8 +50,8 @@ export class BuffColors {
   /**
    * Creates a lookup object for buff texts based on the given buff texts array.
    *
-   * @param {BuffText[]} buffs - An array of buff texts.
-   * @return {{ [key: string]: BuffText }} - A lookup object where the keys are the buff words and the values are the corresponding buff texts.
+   * @param buffs - An array of buff texts.
+   * @return A lookup object where the keys are the buff words and the values are the corresponding buff texts.
    */
   private createBuffLookup(buffs: BuffText[]): { [key: string]: BuffText } {
     const lookup: { [key: string]: BuffText } = {};

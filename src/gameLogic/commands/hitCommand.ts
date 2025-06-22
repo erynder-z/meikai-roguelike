@@ -30,7 +30,8 @@ export class HitCommand extends CommandBase {
 
   /**
    * Executes the hit command, dealing damage to the target mob.
-   * @returns {boolean} Returns true if the hit was successful, false otherwise.
+   *
+   * @returns Returns true if the hit was successful, false otherwise.
    */
   public execute(): boolean {
     const { game, me } = this;
@@ -58,8 +59,8 @@ export class HitCommand extends CommandBase {
   /**
    * Calculates the shock damage based on the given damage.
    *
-   * @param {number} dmg - The damage value.
-   * @return {number} The calculated shock damage.
+   * @param dmg - The damage value.
+   * @return The calculated shock damage.
    */
   private shockDmg(dmg: number): number {
     return Math.floor(dmg * 1.5);
@@ -68,13 +69,12 @@ export class HitCommand extends CommandBase {
   /**
    * Applies damage to a target mob, adjusting based on player status and equipment.
    *
-   * @param {number} dmg - The initial damage amount to be dealt.
-   * @param {Mob} target - The mob receiving the damage.
-   * @param {Mob} attacker - The mob inflicting the damage.
-   * @param {GameState} game - The current game state.
-   * @param {string} me - The name of the attacker.
-   * @param {string} him - The name of the target.
-   * @return {void} This function does not return anything.
+   * @param dmg - The initial damage amount to be dealt.
+   * @param target - The mob receiving the damage.
+   * @param attacker - The mob inflicting the damage.
+   * @param game - The current game state.
+   * @param me - The name of the attacker.
+   * @param him - The name of the target.
    */
   private doDmg(
     dmg: number,
@@ -127,7 +127,7 @@ export class HitCommand extends CommandBase {
   /**
    * Clears the Charm buff from the target mob.
    *
-   * @param {GameState} game - The game object.
+   * @param game - The game object.
    */
   private clearCharm(game: GameState) {
     const { him } = this;
@@ -138,9 +138,10 @@ export class HitCommand extends CommandBase {
 
   /**
    * Calculates the damage dealt by the hit command.
-   * @param {RandomGenerator} rand - The random generator used to calculate damage.
-   * @param {Mob} me - The mob initiating the hit.
-   * @returns {number} The calculated damage.
+   *
+   * @param rand - The random generator used to calculate damage.
+   * @param me - The mob initiating the hit.
+   * @returns The calculated damage.
    */
   private calcDamage(rand: RandomGenerator, me: Mob): number {
     return rand.randomIntegerInclusive(0, this.power(me));
@@ -148,8 +149,9 @@ export class HitCommand extends CommandBase {
 
   /**
    * Calculates the power of the mob initiating the hit.
-   * @param {Mob} me - The mob initiating the hit.
-   * @returns {number} The power of the mob.
+   *
+   * @param me - The mob initiating the hit.
+   * @returns The power of the mob.
    */
   private power(me: Mob): number {
     return me.isPlayer ? this.playerPower(me) : this.npcPower(me);
@@ -157,8 +159,9 @@ export class HitCommand extends CommandBase {
 
   /**
    * Calculates the power of an NPC.
-   * @param {Mob} mob - The NPC mob.
-   * @returns {number} The power of the NPC.
+   *
+   * @param mob - The NPC mob.
+   * @returns The power of the NPC.
    */
   private npcPower(mob: Mob): number {
     return (mob.level + 1) * mob.currentStrength;
@@ -166,7 +169,8 @@ export class HitCommand extends CommandBase {
 
   /**
    * Calculates the power of the player when unarmed.
-   * @returns {number} The calculated power.
+   *
+   * @returns The calculated power.
    */
   private unarmed(): number {
     const baseDmg = 1;
@@ -175,8 +179,9 @@ export class HitCommand extends CommandBase {
 
   /**
    * Calculates the power of a player.
-   * @param {Mob} player - The player mob.
-   * @returns {number} The power of the player.
+   *
+   * @param player - The player mob.
+   * @returns The power of the player.
    */
   private playerPower(player: Mob): number {
     const game = this.game;
@@ -191,10 +196,11 @@ export class HitCommand extends CommandBase {
   /**
    * Calculates the power of a player based on their equipment.
    * If the player is under the Disarm buff, it will return the unarmed power.
-   * @param {GameState} game - The game object.
-   * @param {Equipment} equipment - The player's equipment.
-   * @param {Mob} player - The player mob.
-   * @returns {number} The power of the player based on their equipment.
+   *
+   * @param game - The game object.
+   * @param equipment - The player's equipment.
+   * @param player - The player mob.
+   * @returns The power of the player based on their equipment.
    */
   private equipmentPower(
     game: GameState,
@@ -219,13 +225,13 @@ export class HitCommand extends CommandBase {
   /**
    * Generates a combat message based on the attacker, target, and damage dealt.
    *
-   * @param {number} dmg - The amount of damage dealt.
-   * @param {Mob} attacker - The mob causing the damage.
-   * @param {Mob} target - The mob receiving the damage.
-   * @param {string} attackerName - The name of the attacking mob.
-   * @param {string} targetName - The name of the target mob.
-   * @param {number} remainingHp - The remaining HP of the target after the damage.
-   * @returns {string} The generated combat message.
+   * @param dmg - The amount of damage dealt.
+   * @param attacker - The mob causing the damage.
+   * @param target - The mob receiving the damage.
+   * @param attackerName - The name of the attacking mob.
+   * @param targetName - The name of the target mob.
+   * @param remainingHp - The remaining HP of the target after the damage.
+   * @returns The generated combat message.
    */
   private generateCombatMessage(
     dmg: number,
@@ -254,8 +260,8 @@ export class HitCommand extends CommandBase {
   /**
    * Pushes an AttackAnimationScreen onto the stack if the target mob is in a cell.
    *
-   * @param {Mob} him - The mob that is being attacked.
-   * @param {boolean} isAttackByPlayer - True if the attack is by the player, false otherwise.
+   * @param him - The mob that is being attacked.
+   * @param isAttackByPlayer - True if the attack is by the player, false otherwise.
    */
   private displayAttackAnimation(him: Mob, isAttackByPlayer: boolean): void {
     const map = this.game.currentMap();

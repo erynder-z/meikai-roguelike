@@ -29,10 +29,10 @@ export class MoveBumpCommand extends CommandBase {
   /**
    * Determines if a mob is able to perform a certain action.
    *
-   * @param {Mob} mob - The mob performing the action.
-   * @param {GameState} game - The game object.
-   * @param {Act} act - The action being performed.
-   * @returns {Able} An object indicating if the mob is able to perform the action and if it uses a turn.
+   * @param mob - The mob performing the action.
+   * @param game - The game object.
+   * @param act - The action being performed.
+   * @returns An object indicating if the mob is able to perform the action and if it uses a turn.
    */
   public able(mob: Mob, game: GameState, act: Act): Able {
     return { isAble: true, usesTurn: false };
@@ -41,7 +41,7 @@ export class MoveBumpCommand extends CommandBase {
   /**
    * Executes the function and returns a boolean value.
    *
-   * @return {boolean} the result of the function execution
+   * @return the result of the function execution.
    */
   public execute(): boolean {
     const { game, me, dir } = this;
@@ -76,9 +76,8 @@ export class MoveBumpCommand extends CommandBase {
   /**
    * Checks if the mob is confused.
    *
-   * @param {GameState} game - The game object for handling randomness.
-   * @param {WorldPoint} direction - The direction to update.
-   * @return {void} This function does not return anything.
+   * @param game - The game object for handling randomness.
+   * @param direction - The direction to update.
    */
   private checkForConfusion(game: GameState, direction: WorldPoint): void {
     this.confused(game, direction);
@@ -87,9 +86,9 @@ export class MoveBumpCommand extends CommandBase {
   /**
    * Checks if the given position is legal on the map.
    *
-   * @param {GameMap} map - The game map to check against.
-   * @param {WorldPoint} position - The position to check for legality.
-   * @return {boolean} True if the position is legal, false otherwise.
+   * @param map - The game map to check against.
+   * @param position - The position to check for legality.
+   * @return True if the position is legal, false otherwise.
    */
   private isPositionLegal(map: GameMap, position: WorldPoint): boolean {
     return map.isLegalPoint(position);
@@ -98,10 +97,10 @@ export class MoveBumpCommand extends CommandBase {
   /**
    * Executes a move or hit action based on the cell being occupied by a mob or not.
    *
-   * @param {MapCell} cell - The cell to check for mob presence.
-   * @param {Mob} mob - The mob performing the action.
-   * @param {GameState} game - The game object.
-   * @return {boolean} Returns the result of the move or hit action.
+   * @param cell - The cell to check for mob presence.
+   * @param mob - The mob performing the action.
+   * @param game - The game object.
+   * @return Returns the result of the move or hit action.
    */
   private executeMoveOrHit(cell: MapCell, mob: Mob, game: GameState): boolean {
     return cell.mob

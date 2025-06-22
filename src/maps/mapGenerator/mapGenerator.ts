@@ -18,9 +18,10 @@ export class MapGenerator1 {
 
   /**
    * Generates a map.
-   * @param {GameMapType} m The map object to generate.
-   * @param {RandomGenerator} rand The random generator object.
-   * @returns {GameMapType} The generated map.
+   *
+   * @param m The map object to generate.
+   * @param rand The random generator object.
+   * @return The generated map.
    */
   private loop(m: GameMapType, rand: RandomGenerator): GameMapType {
     // Number of iterations for map generation
@@ -53,8 +54,9 @@ export class MapGenerator1 {
 
   /**
    * Picks a random position for a room.
-   * @param {WorldPoint} upperLeft The upper left corner of the room.
-   * @param {WorldPoint} roomDimensions The dimensions of the room.
+   *
+   * @param upperLeft The upper left corner of the room.
+   * @param roomDimensions The dimensions of the room.
    */
   private pickRandomPosition(
     upperLeft: WorldPoint,
@@ -85,10 +87,11 @@ export class MapGenerator1 {
 
   /**
    * Draws a room on the map.
-   * @param {WorldPoint} upperLeft The upper left corner of the room.
-   * @param {WorldPoint} dimensions The dimensions of the room.
-   * @param {boolean} filled Whether the room is filled.
-   * @param {RandomGenerator} rand The random generator object.
+   *
+   * @param upperLeft The upper left corner of the room.
+   * @param dimensions The dimensions of the room.
+   * @param filled Whether the room is filled.
+   * @param rand The random generator object.
    */
   private drawRoom(
     upperLeft: WorldPoint,
@@ -128,7 +131,8 @@ export class MapGenerator1 {
 
   /**
    * Places doors on the map.
-   * @param {WorldPoint[]} doorPositions The positions for the doors.
+   *
+   * @param doorPositions The positions for the doors.
    */
   private placeDoors(doorPositions: WorldPoint[]): void {
     const rand = this.rand;
@@ -142,10 +146,10 @@ export class MapGenerator1 {
   /**
    * Generates a map and returns it.
    *
-   * @param {WorldPoint} dim - The dimensions of the map.
-   * @param {RandomGenerator} rand - The random generator object.
-   * @param {number} level - The level of the map.
-   * @return {GameMapType} The generated map.
+   * @param dim - The dimensions of the map.
+   * @param rand - The random generator object.
+   * @param level - The level of the map.
+   * @return The generated map.
    */
   public static generate(
     dim: WorldPoint,

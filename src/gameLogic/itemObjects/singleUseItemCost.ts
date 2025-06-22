@@ -16,7 +16,7 @@ export class SingleUseItemCost implements Cost {
   /**
    * Executes the payment process for the single use item.
    *
-   * @return {boolean} Returns true if the payment is successful, false otherwise.
+   * @return Returns true if the payment is successful, false otherwise.
    */
   public pay(): boolean {
     const { game } = this;

@@ -38,7 +38,7 @@ export class Terminal implements DrawableTerminal {
    * Sets canvas dimensions, styles, and translation to ensure proper
    * text alignment and rendering. Adjusts font size based on the scaling factor.
    *
-   * @return {CanvasRenderingContext2D} The initialized and configured rendering context.
+   * @return The initialized and configured rendering context.
    */
   public initializeContext(): CanvasRenderingContext2D {
     const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
@@ -77,8 +77,6 @@ export class Terminal implements DrawableTerminal {
    * Updates the font size and family of the canvas rendering context.
    * The font size is calculated based on the terminal cell side length and a scaling factor,
    * and the font family is retrieved from the game configuration.
-   *
-   * @return {void}
    */
 
   public updateFont(): void {
@@ -88,7 +86,7 @@ export class Terminal implements DrawableTerminal {
   /**
    * Creates a stock terminal object with the default canvas and context.
    *
-   * @return {Terminal} The created terminal object.
+   * @return The created terminal object.
    */
   public static createStockTerminal(): Terminal {
     const defaultCanvas = document.getElementById(
@@ -104,11 +102,12 @@ export class Terminal implements DrawableTerminal {
 
   /**
    * Draws a string of text on the terminal at the given coordinates.
-   * @param {number} x - The x-coordinate of the starting position.
-   * @param {number} y - The y-coordinate of the starting position.
-   * @param {string} text - The string of text to draw.
-   * @param {string} foreground - The foreground color.
-   * @param {string} background - The background color.
+   *
+   * @param x - The x-coordinate of the starting position.
+   * @param y - The y-coordinate of the starting position.
+   * @param text - The string of text to draw.
+   * @param foreground - The foreground color.
+   * @param background - The background color.
    */
   public drawText(
     x: number,
@@ -137,11 +136,11 @@ export class Terminal implements DrawableTerminal {
    * The background is drawn first, then a clipping rectangle is applied to keep the character
    * inside its cell.
    *
-   * @param {number} x - The x-coordinate of the cell position.
-   * @param {number} y - The y-coordinate of the cell position.
-   * @param {string} char - The character to draw.
-   * @param {string} foreground - The color of the character.
-   * @param {string} background - The background color of the cell.
+   * @param x - The x-coordinate of the cell position.
+   * @param y - The y-coordinate of the cell position.
+   * @param char - The character to draw.
+   * @param foreground - The color of the character.
+   * @param background - The background color of the cell.
    */
   public drawAt(
     x: number,
@@ -178,13 +177,13 @@ export class Terminal implements DrawableTerminal {
    *
    * The cursor consists of a colored overlay and border drawn at the corners.
    *
-   * @param {number} x - The x-coordinate of the cell.
-   * @param {number} y - The y-coordinate of the cell.
-   * @param {string} color - The overlay color.
-   * @param {number} opacityFactor - The opacity factor for the overlay.
-   * @param {string} borderColor - The border color.
-   * @param {number} borderThickness - The thickness of the border.
-   * @param {number} cornerSize - The size of each border corner.
+   * @param x - The x-coordinate of the cell.
+   * @param y - The y-coordinate of the cell.
+   * @param color - The overlay color.
+   * @param opacityFactor - The opacity factor for the overlay.
+   * @param borderColor - The border color.
+   * @param borderThickness - The thickness of the border.
+   * @param cornerSize - The size of each border corner.
    */
   public drawOverlayCursor(
     x: number,
@@ -255,11 +254,11 @@ export class Terminal implements DrawableTerminal {
    *
    * Radiates lines from the center of the cell at 45° intervals.
    *
-   * @param {number} x - The x-coordinate of the cell.
-   * @param {number} y - The y-coordinate of the cell.
-   * @param {string} color - The color of the burst lines.
-   * @param {number} opacityFactor - The opacity factor for the lines.
-   * @param {number} thickness - The thickness of the lines.
+   * @param x - The x-coordinate of the cell.
+   * @param y - The y-coordinate of the cell.
+   * @param color - The color of the burst lines.
+   * @param opacityFactor - The opacity factor for the lines.
+   * @param thickness - The thickness of the lines.
    */
   public drawBurstAttackOverlay(
     x: number,
@@ -288,11 +287,11 @@ export class Terminal implements DrawableTerminal {
   /**
    * Draws a longer slash attack effect on the terminal at the specified coordinates.
    *
-   * @param {number} x - The x-coordinate of the cell.
-   * @param {number} y - The y-coordinate of the cell.
-   * @param {string} color - The color of the slash.
-   * @param {number} opacityFactor - The opacity factor for the slash.
-   * @param {number} thickness - The thickness of the slash.
+   * @param x - The x-coordinate of the cell.
+   * @param y - The y-coordinate of the cell.
+   * @param color - The color of the slash.
+   * @param opacityFactor - The opacity factor for the slash.
+   * @param thickness - The thickness of the slash.
    */
   public drawLongerSlashAttackOverlay(
     x: number,
@@ -315,11 +314,11 @@ export class Terminal implements DrawableTerminal {
   /**
    * Draws a shorter slash attack effect on the terminal at the specified coordinates.
    *
-   * @param {number} x - The x-coordinate of the cell.
-   * @param {number} y - The y-coordinate of the cell.
-   * @param {string} color - The color of the slash.
-   * @param {number} opacityFactor - The opacity factor for the slash.
-   * @param {number} thickness - The thickness of the slash.
+   * @param x - The x-coordinate of the cell.
+   * @param y - The y-coordinate of the cell.
+   * @param color - The color of the slash.
+   * @param opacityFactor - The opacity factor for the slash.
+   * @param thickness - The thickness of the slash.
    */
   public drawShorterSlashAttackOverlay(
     x: number,
@@ -342,13 +341,13 @@ export class Terminal implements DrawableTerminal {
   /**
    * A helper function to draw a slash overlay given factor parameters.
    *
-   * @param {number} x - The x-coordinate of the cell.
-   * @param {number} y - The y-coordinate of the cell.
-   * @param {string} color - The color of the slash.
-   * @param {number} opacityFactor - The opacity factor.
-   * @param {number} thickness - The line thickness.
-   * @param {number} minFactor - The minimum factor for positioning.
-   * @param {number} factorRange - The range for the random factor.
+   * @param x - The x-coordinate of the cell.
+   * @param y - The y-coordinate of the cell.
+   * @param color - The color of the slash.
+   * @param opacityFactor - The opacity factor.
+   * @param thickness - The line thickness.
+   * @param minFactor - The minimum factor for positioning.
+   * @param factorRange - The range for the random factor.
    */
   public drawSlashOverlay(
     x: number,
@@ -439,11 +438,11 @@ export class Terminal implements DrawableTerminal {
    * Radiates randomly positioned and angled lines from the center of the cell at the
    * specified coordinates.
    *
-   * @param {number} x - The x-coordinate of the cell.
-   * @param {number} y - The y-coordinate of the cell.
-   * @param {string} explosionColor - The color of the explosion.
-   * @param {number} opacityFactor - The opacity factor for the explosion.
-   * @param {number} thickness - The thickness of the explosion lines.
+   * @param x - The x-coordinate of the cell.
+   * @param y - The y-coordinate of the cell.
+   * @param explosionColor - The color of the explosion.
+   * @param opacityFactor - The opacity factor for the explosion.
+   * @param thickness - The thickness of the explosion lines.
    */
   public drawProjectileExplosion(
     x: number,

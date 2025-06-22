@@ -26,8 +26,7 @@ export class DamageStep extends TimedStep {
   /**
    * Sets the target of the function to the specified Mob.
    *
-   * @param {Mob} tgt - The Mob object to set as the target.
-   * @return {void} This function does not return anything.
+   * @param tgt - The Mob object to set as the target.
    */
   public setTarget(tgt: Mob): void {
     this.target = tgt;
@@ -36,8 +35,7 @@ export class DamageStep extends TimedStep {
   /**
    * Sets the position of the object to the specified world point.
    *
-   * @param {WorldPoint} pos - The world point to set the position to.
-   * @return {void} This function does not return anything.
+   * @param pos - The world point to set the position to.
    */
   public setPos(pos: WorldPoint): void {
     this.pos = pos.copy();
@@ -46,7 +44,7 @@ export class DamageStep extends TimedStep {
   /**
    * Executes the step and damages the target.
    *
-   * @return {StepIF | null} The executed step or null if no target is found.
+   * @return The executed step or null if no target is found.
    */
   public executeStep(): Step | null {
     let tgt = this.target;
@@ -72,7 +70,7 @@ export class DamageStep extends TimedStep {
   /**
    * Retrieves the target Mob based on the current position.
    *
-   * @return {Mob | null} The target Mob if found, otherwise null.
+   * @return The target Mob if found, otherwise null.
    */
   private targetFromPosition(): Mob | null {
     if (this.pos) {
@@ -86,7 +84,7 @@ export class DamageStep extends TimedStep {
   /**
    * Returns the type of ranged weapon used in this step.
    *
-   * @return {RangedWeaponType} The type of ranged weapon.
+   * @return The type of ranged weapon.
    */
   public rangedWeaponType(): RangedWeaponType {
     return this.weaponType;

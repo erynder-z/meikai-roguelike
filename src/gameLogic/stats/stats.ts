@@ -22,7 +22,7 @@ export class Stats {
   /**
    * Adjusts the default visibility range by the specified amount.
    *
-   * @param {number} amount - The amount by which to adjust the default visibility range.
+   * @param amount - The amount by which to adjust the default visibility range.
    */
   public adjustVisibilityRange(amount: number): void {
     this.visibilityRange = amount;
@@ -31,7 +31,7 @@ export class Stats {
   /**
    * Adjusts the current visibility range by the given amount.
    *
-   * @param {number} amount - The amount by which to adjust the current visibility range.
+   * @param amount - The amount by which to adjust the current visibility range.
    */
   public adjustCurrentVisibilityRange(amount: number): void {
     this.currentVisibilityRange = amount;
@@ -40,7 +40,7 @@ export class Stats {
   /**
    * Adjusts the current turn received damage by the given amount.
    *
-   * @param {number} dmg - The amount to adjust the current turn received damage by.
+   * @param dmg - The amount to adjust the current turn received damage by.
    */
   public adjustCurrentTurnReceivedDmg(dmg: number): void {
     this.currentTurnReceivedDmg += dmg;
@@ -70,7 +70,7 @@ export class Stats {
   /**
    * Increments the damage dealt counter by the specified amount.
    *
-   * @param {number} dmg - The amount to increment the damage dealt counter by.
+   * @param dmg - The amount to increment the damage dealt counter by.
    */
   public incrementDamageDealtCounter(dmg: number): void {
     this.damageDealtCounter += dmg;
@@ -79,7 +79,7 @@ export class Stats {
   /**
    * Increments the damage received counter by the given amount.
    *
-   * @param {number} dmg - The amount to increment the damage received counter by.
+   * @param dmg - The amount to increment the damage received counter by.
    */
   public incrementDamageReceivedCounter(dmg: number): void {
     this.damageReceivedCounter += dmg;
@@ -88,7 +88,7 @@ export class Stats {
   /**
    * Adjusts the damage deal modifier by the given amount.
    *
-   * @param {number} amount - The amount to adjust the modifier by.
+   * @param amount - The amount to adjust the modifier by.
    */
   public adjustDamageDealModifier(amount: number): void {
     this.damageDealModifier += amount;
@@ -105,7 +105,7 @@ export class Stats {
   /**
    * Adjusts the damage received modifier by the given amount.
    *
-   * @param {number} amount - The amount to adjust the modifier by.
+   * @param amount - The amount to adjust the modifier by.
    */
   public adjustDamageReceiveModifier(amount: number): void {
     this.damageReceiveModifier += amount;
@@ -122,7 +122,7 @@ export class Stats {
   /**
    * Sets the mood of the entity to the specified value.
    *
-   * @param {Mood} mood - The new mood to set for the entity.
+   * @param mood - The new mood to set for the entity.
    */
   public setMood(mood: Mood): void {
     this.mood = mood;
@@ -132,7 +132,7 @@ export class Stats {
    * Adjusts the hunger of the entity by the given amount. Ensures
    * that the hunger value stays within the range [0, 10].
    *
-   * @param {number} amount - The amount to adjust the hunger by.
+   * @param amount - The amount to adjust the hunger by.
    */
   public adjustHunger(amount: number): void {
     this.hunger = Math.min(10, Math.max(0, this.hunger + amount));
@@ -142,7 +142,7 @@ export class Stats {
    * Adjusts the thirst of the entity by the given amount. Ensures
    * that the thirst value stays within the range [0, 10].
    *
-   * @param {number} amount - The amount to adjust the thirst by.
+   * @param amount - The amount to adjust the thirst by.
    */
   public adjustThirst(amount: number): void {
     this.thirst = Math.min(10, Math.max(0, this.thirst + amount));
@@ -151,7 +151,7 @@ export class Stats {
   /**
    * Sets the currentStrength of the entity to the specified value.
    *
-   * @param {number} strength - The new strength to set for the entity.
+   * @param strength - The new strength to set for the entity.
    */
   public setCurrentStrength(strength: number): void {
     this.currentStrength = strength;

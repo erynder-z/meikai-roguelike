@@ -197,9 +197,9 @@ export class EntityInfoCard extends HTMLElement {
    * Gets a string describing the health state of a mob, as a proportion of its
    * current HP to its max HP.
    *
-   * @param {number} currentHP - The current HP of the mob.
-   * @param {number} maxHP - The maximum HP of the mob.
-   * @return {string} An HTML string describing the health state of the mob.
+   * @param currentHP - The current HP of the mob.
+   * @param maxHP - The maximum HP of the mob.
+   * @return An HTML string describing the health state of the mob.
    */
   private getMobHealthMessage(currentHP: number, maxHP: number): string {
     const hpPercentage = (currentHP / maxHP) * 100;
@@ -222,7 +222,6 @@ export class EntityInfoCard extends HTMLElement {
    * a CSS animation. It listens for the 'animationend' event to remove the
    * element from the DOM, ensuring the animation completes before removal.
    */
-
   public fadeOutAndRemove(): void {
     const entityCard = this.shadowRoot?.querySelector('.entity-card');
     if (!entityCard) return;

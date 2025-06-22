@@ -4,7 +4,7 @@ export class ColorLoader {
   /**
    * Initializes the colors used in the game by setting them as CSS root variables.
    *
-   * @returns {Promise<void>} A promise that resolves when the colors have been set.
+   * @return A promise that resolves when the colors have been set.
    */
   public static initializeColors(): Promise<void> {
     return new Promise(resolve => {

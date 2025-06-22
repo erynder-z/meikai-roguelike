@@ -107,6 +107,11 @@ li {
 
 .misc-info-container {
   grid-area: misc-info;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
 }
 
 .messages-container {

@@ -85,6 +85,15 @@ export class HelpItems extends HTMLElement {
     this.populateItemsList();
   }
 
+  /**
+   * Populates the items list table with data from items.json.
+   *
+   * Iterates over the itemData.items array and creates a table row for each item.
+   * Each row contains three cells: one for the item's character representation,
+   * another for the item's name, and the last for its description.
+   * The character cell is styled with the item's foreground color and a transparent background.
+   * The table rows are appended to the item list element in the shadow DOM.
+   */
   private populateItemsList(): void {
     const itemListElement = this.shadowRoot?.querySelector(
       '#item-list',
@@ -125,8 +134,8 @@ export class HelpItems extends HTMLElement {
   /**
    * Creates a table cell element with the given class name.
    *
-   * @param {string} className - The class name to add to the created element.
-   * @return {HTMLTableCellElement} - The created table cell element.
+   * @param className - The class name to add to the created element.
+   * @return The created table cell element.
    */
   private createTableCell(className: string): HTMLTableCellElement {
     const cellElement = document.createElement('td');

@@ -33,6 +33,8 @@ class GameConfigManager {
     },
     blood_intensity: 1,
     min_keypress_delay: 50,
+    temperature_unit: 'celsius',
+    depth_unit: 'meters',
     terminal: {
       dimensions: {
         width: 64,
@@ -50,6 +52,7 @@ class GameConfigManager {
 
   /**
    * Gets the single instance of the GameConfigManager.
+   *
    * @returns The single instance of the GameConfigManager.
    */
   public static getInstance(): GameConfigManager {
@@ -63,8 +66,7 @@ class GameConfigManager {
    * Initializes the game configuration manager.
    *
    * If the configuration file (gameConfig.json) does not exist, it is created with default parameters.
-   * If the configuration file does exist, it is loaded and the parameters are used to update the game
-   * configuration.
+   * If the configuration file does exist, it is loaded and the parameters are used to update the game configuration.
    *
    * @returns A promise that resolves when the game config is successfully initialized.
    */
@@ -99,6 +101,8 @@ class GameConfigManager {
 
   /**
    * Returns the current game configuration.
+   *
+   * @returns The current game configuration.
    */
   public getConfig(): GameConfigType {
     return this.config;
@@ -106,10 +110,7 @@ class GameConfigManager {
 
   /**
    * Updates the list of fonts available in the document.
-   *
    * This is called during initialization and after saving the config.
-   *
-   * The list of fonts is used to populate the font select dropdown.
    */
   private updateFonts(): void {
     this.fonts = Array.from(document.fonts).map(fontFace => fontFace.family);
@@ -119,6 +120,7 @@ class GameConfigManager {
    * Returns the list of font families available in the document.
    *
    * This list is updated whenever the game configuration is initialized or updated.
+   *
    * @returns The list of font families available in the document.
    */
   public getFonts(): string[] {
@@ -128,6 +130,9 @@ class GameConfigManager {
   /**
    * Saves the current in-memory configuration to gameConfig.json.
    * If the file does not exist, it is created with write permissions.
+   * If the file already exists, it is overwritten.
+   *
+   * @returns A promise that resolves when the configuration is successfully saved.
    */
   public async saveConfig(): Promise<void> {
     try {

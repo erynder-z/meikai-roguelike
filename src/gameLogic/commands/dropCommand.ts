@@ -19,7 +19,8 @@ export class DropCommand extends CommandBase {
 
   /**
    * Executes the drop command.
-   * @returns {boolean} True if the item was dropped successfully, otherwise false.
+   *
+   * @returns True if the item was dropped successfully, otherwise false.
    */
   public execute(): boolean {
     const { game } = this;

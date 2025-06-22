@@ -9,8 +9,9 @@ export class Equipment {
 
   /**
    * Adds an item to the equipment.
-   * @param {ItemObject} o The item to add.
-   * @throws {string} Throws an error if the item cannot be legally added.
+   *
+   * @param o The item to add.
+   * @throws Throws an error if the item cannot be legally added.
    */
   public add(o: ItemObject): void {
     this.legalObj(o);
@@ -19,8 +20,9 @@ export class Equipment {
 
   /**
    * Removes an item from the equipment by its slot.
-   * @param {Slot} s The slot of the item to remove.
-   * @throws {string} Throws an error if the slot does not exist.
+   *
+   * @param s The slot of the item to remove.
+   * @throws Throws an error if the slot does not exist.
    */
   public remove(s: Slot): void {
     this.legalSlot(s);
@@ -29,8 +31,9 @@ export class Equipment {
 
   /**
    * Checks if the equipment has an item in the given slot.
-   * @param {Slot} s The slot to check.
-   * @returns {boolean} True if the equipment has an item in the slot, false otherwise.
+   *
+   * @param s The slot to check.
+   * @returns True if the equipment has an item in the slot, false otherwise.
    */
   public hasItemInSlot(s: Slot): boolean {
     return this._objs.has(s);
@@ -38,8 +41,9 @@ export class Equipment {
 
   /**
    * Checks if a specific item is currently equipped.
-   * @param {ItemObject} o The item to check.
-   * @returns {boolean} True if the item is equipped, false otherwise.
+   *
+   * @param o The item to check.
+   * @returns True if the item is equipped, false otherwise.
    */
 
   public isItemEquipped(o: ItemObject): boolean {
@@ -48,7 +52,8 @@ export class Equipment {
 
   /**
    * Returns the number of items in the equipment.
-   * @returns {number} The number of items.
+   *
+   * @returns The number of items.
    */
   public length(): number {
     return this._objs.size;
@@ -56,8 +61,9 @@ export class Equipment {
 
   /**
    * Retrieves the item in the specified slot.
-   * @param {Slot} s The slot to retrieve the item from.
-   * @returns {ItemObject | undefined} The item in the slot, or undefined if not found.
+   *
+   * @param s The slot to retrieve the item from.
+   * @returns The item in the slot, or undefined if not found.
    */
   public getItemInSlot(s: Slot): ItemObject | undefined {
     return this._objs.get(s);
@@ -65,8 +71,9 @@ export class Equipment {
 
   /**
    * Checks if the slot exists in the equipment.
-   * @param {Slot} s The slot to check.
-   * @throws {string} Throws an error if the slot does not exist.
+   *
+   * @param s The slot to check.
+   * @throws Throws an error if the slot does not exist.
    */
   private legalSlot(s: Slot): void {
     if (!this.hasItemInSlot(s)) {
@@ -77,8 +84,9 @@ export class Equipment {
 
   /**
    * Checks if the item can be legally added to the equipment.
-   * @param {ItemObject} o The item to check.
-   * @throws {string} Throws an error if the item cannot be legally added.
+   *
+   * @param o The item to check.
+   * @throws Throws an error if the item cannot be legally added.
    */
   private legalObj(o: ItemObject): void {
     const slot: Slot = o.slot;
@@ -94,7 +102,8 @@ export class Equipment {
 
   /**
    * Calculates the total armor class provided by all equipped items.
-   * @returns {number} The total armor class.
+   *
+   * @returns The total armor class.
    */
   public armorClass(): number {
     let ac: number = 0;
@@ -106,7 +115,8 @@ export class Equipment {
 
   /**
    * Calculates the reduction factor for armor class.
-   * @returns {number} The reduction factor.
+   *
+   * @returns The reduction factor.
    */
   public armorClass_reduce(): number {
     const ac: number = this.armorClass();
@@ -121,8 +131,9 @@ export class Equipment {
 
   /**
    * Checks if an item is a weapon.
-   * @param {ItemObject} o The item to check.
-   * @returns {boolean} True if the item is a weapon, false otherwise.
+   *
+   * @param o The item to check.
+   * @returns True if the item is a weapon, false otherwise.
    */
   public static isWeapon(o: ItemObject): boolean {
     return o.slot in Equipment.weapons;
@@ -130,7 +141,8 @@ export class Equipment {
 
   /**
    * Retrieves the first weapon found in the equipment.
-   * @returns {ItemObject | undefined} The first weapon found, or undefined if no weapon is found.
+   *
+   * @returns The first weapon found, or undefined if no weapon is found.
    */
   public weapon(): ItemObject | undefined {
     for (const slot of Equipment.weapons) {
@@ -141,7 +153,8 @@ export class Equipment {
 
   /**
    * Calculates the damage provided by the equipped weapon.
-   * @returns {number} The weapon damage.
+   *
+   * @returns The weapon damage.
    */
   public weaponDamage(): number {
     const weapon: ItemObject | undefined = this.weapon();

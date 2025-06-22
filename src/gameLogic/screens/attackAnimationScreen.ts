@@ -23,9 +23,9 @@ export class AttackAnimationScreen extends BaseScreen {
   /**
    * Handles key down events.
    *
-   * @param {KeyboardEvent} event - The keyboard event.
-   * @param {Stack} stack - The stack of screens.
-   * @returns {boolean} True if the event was handled successfully, otherwise false.
+   * @param event - The keyboard event.
+   * @param stack - The stack of screens.
+   * @return True if the event was handled successfully, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     return false;
@@ -34,8 +34,7 @@ export class AttackAnimationScreen extends BaseScreen {
   /**
    * Draws the attack animation on the terminal.
    *
-   * @param {DrawableTerminal} term - The terminal to draw on.
-   * @return {void} No return value.
+   * @param term - The terminal to draw on.
    */
   public drawScreen(term: DrawableTerminal): void {
     if (this.isDig) {
@@ -55,8 +54,8 @@ export class AttackAnimationScreen extends BaseScreen {
   /**
    * Removes the attack animation screen from the stack.
    *
-   * @param {Stack} stack - The stack of screens.
-   * @return {boolean} True if the screen was popped successfully, otherwise false.
+   * @param stack - The stack of screens.
+   * @return True if the screen was popped successfully, otherwise false.
    */
   public onTime(stack: Stack): boolean {
     stack.removeScreen(this);
@@ -65,10 +64,8 @@ export class AttackAnimationScreen extends BaseScreen {
   /**
    * Draws the attack animation of a given type on the given terminal.
    *
-   * @param {DrawableTerminal} term - The terminal to draw on.
-   * @param {string} type - The type of attack animation to draw. Must be one of
-   *   'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
-   * @return {void} No return value.
+   * @param term - The terminal to draw on.
+   * @param type - The type of attack animation to draw. Must be one of 'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
    */
   private drawAttackAnimation(
     term: DrawableTerminal,
@@ -83,11 +80,8 @@ export class AttackAnimationScreen extends BaseScreen {
   /**
    * Gets the parameters for the attack animation given the type of attack.
    *
-   * @param {string} type - The type of attack animation to draw. Must be one of
-   *   'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
-   * @returns {{ color: string, opacityFactor: number, thickness: number }}
-   *   An object with the color, opacity factor, and line thickness for the attack
-   *   animation.
+   * @param type - The type of attack animation to draw. Must be one of 'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
+   * @return An object with the color, opacity factor, and line thickness for the attack animation.
    */
   private getAnimationParams(
     type: 'longerSlash' | 'shorterSlash' | 'burst' | 'ranged',
@@ -103,11 +97,9 @@ export class AttackAnimationScreen extends BaseScreen {
    * Returns the drawing method on the given terminal that corresponds to the
    * given type of attack animation.
    *
-   * @param {DrawableTerminal} term - The terminal to draw on.
-   * @param {string} type - The type of attack animation to draw. Must be one of
-   *   'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
-   * @returns {(x: number, y: number, color: string, opacityFactor: number,
-   *     thickness: number) => void} The drawing method on the given terminal.
+   * @param term - The terminal to draw on.
+   * @param type - The type of attack animation to draw. Must be one of 'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
+   * @return The drawing method on the given terminal.
    */
   private getDrawingMethod(
     term: DrawableTerminal,
@@ -133,10 +125,9 @@ export class AttackAnimationScreen extends BaseScreen {
   }
 
   /**
-   * Calculates the position of the target mob on the terminal based on its world position,
-   * taking into account the player's position.
+   * Calculates the position of the target mob on the terminal based on its world position, taking into account the player's position.
    *
-   * @return {WorldPoint} The position of the target mob on the terminal.
+   * @return The position of the target mob on the terminal.
    */
   private getTargetPosition(): WorldPoint {
     const terminalCenter = new WorldPoint(

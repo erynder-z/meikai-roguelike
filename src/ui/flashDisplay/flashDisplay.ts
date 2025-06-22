@@ -23,7 +23,6 @@ export class FlashDisplay extends HTMLElement {
    * This method is called when the element is inserted into the DOM.
    * It is called after the element is created and before the element is connected
    * to the DOM.
-   *
    */
   connectedCallback(): void {
     const templateElement = document.createElement('template');
@@ -63,9 +62,9 @@ export class FlashDisplay extends HTMLElement {
 
   /**
    * Sets the flash message display.
-   * @param {LogMessage[]} msgs - The messages to set.
-   * @param {MessageLog} log - The message log to check for queued messages.
-   * @returns {void}
+   *
+   * @param msgs - The messages to set.
+   * @param log - The message log to check for queued messages.
    */
   public setFlash(msgs: LogMessage[], log: MessageLog): void {
     const flashDisplay = this.shadowRoot?.querySelector(
@@ -100,9 +99,8 @@ export class FlashDisplay extends HTMLElement {
    * Decorates the given DocumentFragment with colored names and a message
    * indicating if there are more messages queued.
    *
-   * @param {DocumentFragment} fragment - The fragment to modify.
-   * @param {MessageLog} log - The message log to check for queued messages.
-   * @return {void}
+   * @param fragment - The fragment to modify.
+   * @param log - The message log to check for queued messages.
    */
   private decorateFlashDisplay(
     fragment: DocumentFragment,
@@ -127,8 +125,8 @@ export class FlashDisplay extends HTMLElement {
 
   /**
    * Clears the flash message display.
-   * @param {GameState} game - The game state.
-   * @returns {void}
+   *
+   * @param game - The game state.
    */
   public clearFlash(game: GameState): void {
     game.log.clearQueue();

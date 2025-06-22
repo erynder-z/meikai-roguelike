@@ -26,8 +26,7 @@ export class GameOverScreen extends BaseScreen {
    * 'canvas-container' if the component does not already exist.
    *
    * The component is populated with the player's name, color, and a post-mortem analysis
-   * of the game. The component also displays instructions for returning to the title
-   * screen.
+   * of the game. The component also displays instructions for returning to the title screen.
    */
   public drawScreen(): void {
     const container = document.getElementById('canvas-container');
@@ -52,13 +51,15 @@ export class GameOverScreen extends BaseScreen {
 
     DrawUI.renderActionImage(this.game);
     DrawUI.renderMessage(this.game);
-    DrawUI.renderMiscInfo(this.game);
+    DrawUI.renderPlayerHealthInfo(this.game);
+    DrawUI.renderLevelDepthInfo(this.game);
+    DrawUI.renderLevelTemperatureInfo(this.game);
   }
 
   /**
    * Determines if the screen should be updated based on time.
    *
-   * @return {boolean} Returns `true` if the screen should be updated, `false` otherwise.
+   * @return Returns `true` if the screen should be updated, `false` otherwise.
    */
   public onTime(): boolean {
     return false;
@@ -67,9 +68,8 @@ export class GameOverScreen extends BaseScreen {
   /**
    * Handles a key down event, checking if the escape key is pressed and performing actions accordingly.
    *
-   * @param {KeyboardEvent} event - The keyboard event to handle.
-   * @param {Stack} stack - The current stack of screens.
-   * @return {void}
+   * @param event - The keyboard event to handle.
+   * @param stack - The current stack of screens.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
     if (event.key === this.activeControlScheme.menu.toString()) {

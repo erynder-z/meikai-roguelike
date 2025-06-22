@@ -15,7 +15,8 @@ import { WorldPoint } from '../mapModel/worldPoint';
 export class MapUtils {
   /**
    * Resets a map to its default state of all rock tiles.
-   * @param {GameMap} gameMap - The game map object containing cells and dimensions.
+   *
+   * @param gameMap - The game map object containing cells and dimensions.
    */
   public static clearMap(gameMap: GameMap): void {
     for (let y = 0; y < gameMap.dimensions.y; y++) {
@@ -34,8 +35,7 @@ export class MapUtils {
    * @param startPoint - The WorldPoint from where the search begins.
    * @param gameMap - The game map object containing cells and dimensions.
    * @param targetGlyph - The Glyph enum value to search for in the cell's environment property.
-   * @returns The WorldPoint coordinates of the nearest cell with the matching environment glyph,
-   * or null if no such cell is found within the map boundaries.
+   * @returns The WorldPoint coordinates of the nearest cell with the matching environment glyph, or null if no such cell is found within the map boundaries.
    */
   public static findNearestCellWithGlyph(
     startPoint: WorldPoint,
@@ -91,9 +91,9 @@ export class MapUtils {
   /**
    * Selects a weighted feature from a list of features based on their weights.
    *
-   * @param {WeightedFeatureConfig[]} features - An array of features with associated weights.
-   * @param {RandomGenerator} rand - The random generator used to pick a feature based on weight.
-   * @return {WeightedFeatureConfig | null} The selected feature or null if the total weight is zero or less.
+   * @param features - An array of features with associated weights.
+   * @param rand - The random generator used to pick a feature based on weight.
+   * @return The selected feature or null if the total weight is zero or less.
    */
   public static selectWeightedFeature(
     features: WeightedFeatureConfig[],
@@ -120,16 +120,16 @@ export class MapUtils {
   /**
    * Modifies terrain in a game map by randomly applying a result glyph to target glyphs in irregularly shaped patches.
    *
-   * @param {GameMapType} gameMap - The game map object to modify.
-   * @param {RandomGenerator} rand - The random generator used to generate random numbers.
-   * @param {WorldPoint} dim - The dimensions of the game map.
-   * @param {number} attempts - The number of times to attempt to apply the result glyph.
-   * @param {number} minPatchSize - The minimum size of an irregularly shaped patch of cells.
-   * @param {number} maxPatchSize - The maximum size of an irregularly shaped patch of cells.
-   * @param {number} iterations - The number of iterations to run the irregular shape generation algorithm.
-   * @param {Glyph | Glyph[]} targetGlyphs - A single glyph or an array of glyphs that are targets for modification.
-   * @param {Glyph} resultGlyph - The glyph to apply to the target glyphs.
-   * @return {GameMapType} The modified game map.
+   * @param gameMap - The game map object to modify.
+   * @param rand - The random generator used to generate random numbers.
+   * @param dim - The dimensions of the game map.
+   * @param attempts - The number of times to attempt to apply the result glyph.
+   * @param minPatchSize - The minimum size of an irregularly shaped patch of cells.
+   * @param maxPatchSize - The maximum size of an irregularly shaped patch of cells.
+   * @param iterations - The number of iterations to run the irregular shape generation algorithm.
+   * @param targetGlyphs - A single glyph or an array of glyphs that are targets for modification.
+   * @param resultGlyph - The glyph to apply to the target glyphs.
+   * @return The modified game map.
    */
   public static applyTerrainModifier(
     gameMap: GameMapType,
@@ -174,12 +174,12 @@ export class MapUtils {
    * within the range specified in its configuration. The feature is then placed on the
    * map using the irregular shape area generator.
    *
-   * @param {number} numFeatures - The number of features to generate.
-   * @param {GameMapType} gameMap - The map where the features will be generated.
-   * @param {RandomGenerator} rand - The random generator used to select features and determine sizes.
-   * @param {WeightedFeatureConfig[]} featureConfigs - The configurations for the features.
-   * @param {WorldPoint} dimensions - The dimensions of the map.
-   * @return {GameMapType} The game map with the newly generated features.
+   * @param numFeatures - The number of features to generate.
+   * @param gameMap - The map where the features will be generated.
+   * @param rand - The random generator used to select features and determine sizes.
+   * @param featureConfigs - The configurations for the features.
+   * @param dimensions - The dimensions of the map.
+   * @return The game map with the newly generated features.
    */
   public static generateRandomFeatures(
     numFeatures: number,
@@ -224,11 +224,11 @@ export class MapUtils {
    * and generating an irregular shape. It then places the feature on the map if the
    * position is legal.
    *
-   * @param {WeightedFeatureConfig} featureConfig - The configuration dictating feature weights and sizes.
-   * @param {GameMapType} gameMap - The map where the feature will be generated.
-   * @param {RandomGenerator} rand - The random number generator for randomness.
-   * @param {WorldPoint} dimensions - The dimensions of the map.
-   * @return {GameMapType} The game map with the newly generated feature.
+   * @param featureConfig - The configuration dictating feature weights and sizes.
+   * @param gameMap - The map where the feature will be generated.
+   * @param rand - The random number generator for randomness.
+   * @param dimensions - The dimensions of the map.
+   * @return The game map with the newly generated feature.
    */
   public static generateSingleFeature(
     featureConfig: WeightedFeatureConfig,
@@ -267,14 +267,12 @@ export class MapUtils {
    * The algorithm also keeps track of the current position and resets it to the center
    * of the map if it goes out of bounds.
    *
-   * @param {GameMap} gameMap - The game map to generate the caverns on.
-   * @param {RandomGenerator} rand - The random number generator.
-   * @param {Tile} mapTiles - The possible tiles to use for walls and floors.
-   * @param {number} wallProbability - The probability that a rock will be replaced with a wall
-   *   tile. Defaults to 0.5.
-   * @param {number} maxIterations - The maximum number of steps to take in the walk.
-   *   Defaults to 5000.
-   * @return {GameMapType} The game map with the generated caverns.
+   * @param gameMap - The game map to generate the caverns on.
+   * @param rand - The random number generator.
+   * @param mapTiles - The possible tiles to use for walls and floors.
+   * @param wallProbability - The probability that a rock will be replaced with a wall tile. Defaults to 0.5.
+   * @param maxIterations - The maximum number of steps to take in the walk. Defaults to 5000.
+   * @return The game map with the generated caverns.
    */
   public static drunkardsWalk(
     gameMap: GameMap,
@@ -328,7 +326,7 @@ export class MapUtils {
       /**
        * Generates a random direction.
        *
-       * @return {number[]} a length 2 array containing the x and y delta
+       * @return A length 2 array containing the x and y delta
        *   values of the random direction. The possible values are:
        *   - [0, 1] (up)
        *   - [0, -1] (down)
@@ -371,8 +369,8 @@ export class MapUtils {
    * whether the cell's position is legal within the map boundaries. If the
    * position is legal, it applies static environment effects to the cell.
    *
-   * @param {GameMap} gameMap - The game map object containing cells and dimensions.
-   * @return {GameMapType} The game map with applied static environment effects to its cells.
+   * @param gameMap - The game map object containing cells and dimensions.
+   * @return The game map with applied static environment effects to its cells.
    */
   public static applyStaticEffectsToCells(gameMap: GameMapType): GameMapType {
     for (let y = 0; y < gameMap.dimensions.y; y++) {

@@ -23,13 +23,12 @@ export class MoodAI implements MobAI {
   /**
    * Delegates the turn action to the appropriate AI based on the Mob's mood.
    *
-   *
-   * @param {Mob} me - The Mob making the turn.
-   * @param {Mob} enemy - The enemy Mob.
-   * @param {GameState} game - The game instance.
-   * @param {Stack} stack - The screen stack.
-   * @param {ScreenMaker} make - The screen maker.
-   * @returns {boolean} - The result of the delegated turn action.
+   * @param me - The Mob making the turn.
+   * @param enemy - The enemy Mob.
+   * @param game - The game instance.
+   * @param stack - The screen stack.
+   * @param make - The screen maker.
+   * @returns The result of the delegated turn action.
    */
   public turn(
     me: Mob,
@@ -56,16 +55,30 @@ export class MoodAI implements MobAI {
   /**
    * Creates a default MoodAI instance with a SimpleSleepAI for asleep and AwakeAI for awake.
    *
-   *
-   * @returns {MoodAI} - A new MoodAI instance with default AIs.
+   * @return A new MoodAI instance with default AIs.
    */
   public static stockMood(speed: number): MobAI {
     return new MoodAI(new VisibilityAwareSleepAI(), new AwakeAI(speed));
   }
 
+  /**
+   * Creates a default MoodAI instance with a SimpleSleepAI for asleep and SpellAI for awake.
+   *
+   * @param speed - The speed of the mob.
+   * @param spellRate - The rate at which the mob casts spells.
+   * @return A new MoodAI instance with default AIs.
+   */
   public static stockMoodSpellCaster(speed: number, spellRate: number): MobAI {
     return new MoodAI(new SimpleSleepAI(), new SpellAI(speed, spellRate));
   }
+
+  /**
+   * Creates a MoodAI instance with a SimpleSleepAI for asleep and ShootAI for awake.
+   *
+   * @param speed - The speed of the mob.
+   * @param spellRate - The rate at which the mob shoots spells.
+   * @return A new MoodAI instance with default AIs.
+   */
 
   public static stockMoodShootAI(speed: number, spellRate: number): MobAI {
     return new MoodAI(new SimpleSleepAI(), new ShootAI(speed, spellRate));

@@ -2,6 +2,8 @@ import { BaseScreen } from './baseScreen';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { IngameMenu } from '../../ui/menu/ingameMenu';
 import { IngameOptions } from '../../ui/menu/ingameOptions';
+import { LevelDepthInfo } from '../../ui/miscInfo/levelDepthInfo';
+import { LevelTemperatureInfo } from '../../ui/miscInfo/levelTemperatureInfo';
 import { LayoutManager } from '../../ui/layoutManager/layoutManager';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
@@ -23,8 +25,6 @@ export class IngameMenuScreen extends BaseScreen {
    * which creates and inserts the 'ingame-menu' element into the main body
    * of the document. This function does not perform any additional actions
    * beyond drawing the in-game menu.
-   *
-   * @return {void}
    */
   public drawScreen(): void {
     this.drawIngameMenu();
@@ -36,9 +36,6 @@ export class IngameMenuScreen extends BaseScreen {
    * elements are present. This function ensures the body element exists before
    * attempting insertion. It also adds event listeners to the menu to handle
    * opening the options menu and returning to the game.
-   *
-   * @private
-   * @return {void}
    */
   private drawIngameMenu(): void {
     if (
@@ -76,9 +73,6 @@ export class IngameMenuScreen extends BaseScreen {
    * already exist. This function ensures the body element exists before
    * attempting insertion. It also adds event listeners to the menu to handle
    * opening the ingame menu.
-   *
-   * @private
-   * @return {void}
    */
   private drawOptionsMenu(): void {
     if (!document.querySelector('ingame-options')) {
@@ -107,6 +101,26 @@ export class IngameMenuScreen extends BaseScreen {
       optionsMenu.addEventListener('redraw-message-display', () => {
         const layoutManager = new LayoutManager();
         layoutManager.redrawMessages(this.game.log);
+      });
+
+      optionsMenu.addEventListener('redraw-temperature-info', () => {
+        const tempDisplay = document.querySelector(
+          'level-temperature-info',
+        ) as LevelTemperatureInfo;
+
+        tempDisplay.setLevelTempInfo(
+          this.game.dungeon.currentMap(this.game).temperature,
+        );
+      });
+
+      optionsMenu.addEventListener('redraw-depth-info', () => {
+        const depthDisplay = document.querySelector(
+          'level-depth-info',
+        ) as LevelDepthInfo;
+
+        depthDisplay.setLevelDepthInfo(
+          this.game.dungeon.currentMap(this.game).depth,
+        );
       });
     }
   }

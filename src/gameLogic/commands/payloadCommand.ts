@@ -29,8 +29,8 @@ export class PayloadCommand extends CommandBase {
   /**
    * Sets the direction of the command.
    *
-   * @param {WorldPoint} direction - The direction to set.
-   * @return {Command} The command object.
+   * @param direction - The direction to set.
+   * @return The command object.
    */
   public setDirection(direction: WorldPoint): Command {
     this.dir = direction;
@@ -40,7 +40,7 @@ export class PayloadCommand extends CommandBase {
   /**
    * Executes the command by creating a new PayloadStep, setting its direction, and pushing a new StepScreen onto the stack.
    *
-   * @return {boolean} Always returns false.
+   * @return Always returns false.
    */
   public execute(): boolean {
     const { game, me } = this;

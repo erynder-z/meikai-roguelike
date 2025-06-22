@@ -8,7 +8,8 @@ export class RandomNumberGenerator {
 
   /**
    * Gets the current seed of the generator.
-   * @returns {number} The current seed.
+   *
+   * @return The current seed.
    */
   public getCurrentSeed(): number {
     return this.seed;
@@ -16,7 +17,8 @@ export class RandomNumberGenerator {
 
   /**
    * Sets a new seed for the generator.
-   * @param {number} newSeed - The new seed value.
+   *
+   * @param newSeed - The new seed value.
    */
   public setSeed(newSeed: number): void {
     this.seed = newSeed;
@@ -24,7 +26,8 @@ export class RandomNumberGenerator {
 
   /**
    * Generates a random number.
-   * @returns {number} A random number between 0 and 1.
+   *
+   * @return A random number between 0 and 1.
    */
   public generateRandomNumber(): number {
     this.seed = (this.seed * 9301 + 49297) % 233280;
@@ -45,9 +48,10 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
    * The range is the difference between the higher and lower bounds, and a random
    * number between 0 and the range is generated. The result is the sum of the
    * random number and the lower bound, rounded down to the nearest whole number.
-   * @param {number} lower - The lower bound of the range.
-   * @param {number} [higher=0] - The higher bound of the range.
-   * @returns {number} A random integer within the specified range, exclusive of the higher bound.
+   *
+   * @param lower - The lower bound of the range.
+   * @param higher=0 - The higher bound of the range.
+   * @return A random integer within the specified range, exclusive of the higher bound.
    */
   public randomIntegerExclusive(lower: number, higher: number = 0): number {
     if (!higher) {
@@ -68,11 +72,10 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
   /**
    * Generates a random integer within the specified range, inclusive of both bounds.
    *
-   * @param {number} lower - The lower bound of the range.
-   * @param {number} higher - The higher bound of the range.
-   * @returns {number} A random integer within the specified range, inclusive of both the lower and higher bounds.
+   * @param lower - The lower bound of the range.
+   * @param higher - The higher bound of the range.
+   * @return A random integer within the specified range, inclusive of both the lower and higher bounds.
    */
-
   public randomIntegerInclusive(lower: number, higher: number): number {
     return this.randomIntegerExclusive(lower, higher + 1);
   }
@@ -83,9 +86,10 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
    * The result is a number between the lower and higher bounds, inclusive of both.
    * The result is rounded to 2 decimal places.
    * If the lower bound is greater than the higher bound, the two are swapped.
-   * @param {number} lower - The lower bound of the range.
-   * @param {number} higher - The higher bound of the range.
-   * @returns {number} A random floating-point number within the specified range, inclusive of both the lower and higher bounds.
+   *
+   * @param lower - The lower bound of the range.
+   * @param higher - The higher bound of the range.
+   * @return A random floating-point number within the specified range, inclusive of both the lower and higher bounds.
    */
   public randomFloatInclusive(lower: number, higher: number): number {
     if (lower > higher) {
@@ -97,8 +101,9 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
 
   /**
    * Checks if a random integer from 0 to N-1 equals 0.
-   * @param {number} N - The number to check against.
-   * @returns {boolean} true if a random integer from 0 to N-1 equals 0, otherwise false.
+   *
+   * @param N - The number to check against.
+   * @return True if a random integer from 0 to N-1 equals 0, otherwise false.
    */
   public isOneIn(N: number): boolean {
     return this.randomIntegerExclusive(N) == 0;
@@ -111,7 +116,8 @@ export class RandomNumberGeneratorBase extends RandomNumberGenerator {
 export class RandomGenerator extends RandomNumberGeneratorBase {
   /**
    * Generates a random direction for forced movement. Never returns 0,0, to prevent returning the same world point the mob is currently at.
-   * @returns {WorldPoint} A random direction represented as a WorldPoint object.
+   *
+   * @return A random direction represented as a WorldPoint object.
    */
   public randomDirectionForcedMovement(): WorldPoint {
     const a = this.randomIntegerInclusive(-1, 1);
@@ -123,7 +129,7 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
   /**
    * Generates a random WorldPoint representing a random direction.
    *
-   * @return {WorldPoint} the randomly generated WorldPoint
+   * @return The randomly generated WorldPoint
    */
   public randomDirection0(): WorldPoint {
     return new WorldPoint(
@@ -135,8 +141,8 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
   /**
    * Generates a new WorldPoint object representing a random direction from the given WorldPoint.
    *
-   * @param {WorldPoint} p - (Optional) The starting WorldPoint. Defaults to a new WorldPoint.
-   * @return {WorldPoint} A new WorldPoint object representing the random direction.
+   * @param p - (Optional) The starting WorldPoint. Defaults to a new WorldPoint.
+   * @return A new WorldPoint object representing the random direction.
    */
   public randomDirection(p: WorldPoint = new WorldPoint()): WorldPoint {
     return new WorldPoint(
@@ -147,8 +153,9 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
 
   /**
    * Increases the difficulty level by applying random adjustments.
-   * @param {number} level - The current difficulty level.
-   * @returns {number} The adjusted difficulty level.
+   *
+   * @param level - The current difficulty level.
+   * @return The adjusted difficulty level.
    */
   public adjustLevel(level: number): number {
     if (this.isOneIn(3)) {
@@ -162,9 +169,10 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
 
   /**
    * Adjusts the level based on a random delta value.
-   * @param {number} level - The current level.
-   * @param {number} delta - The adjustment delta.
-   * @returns {number} The adjusted level.
+   *
+   * @param level - The current level.
+   * @param delta - The adjustment delta.
+   * @return The adjusted level.
    */
   public adjustLevelByDelta(level: number, delta: number): number {
     return this.isOneIn(4)
@@ -175,8 +183,8 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
   /**
    * Determines if a success event occurred based on the given rate.
    *
-   * @param {number} rate - The rate at which a success event occurs.
-   * @return {boolean} Returns true if a success event occurred, false otherwise.
+   * @param rate - The rate at which a success event occurs.
+   * @return Returns true if a success event occurred, false otherwise.
    */
   public determineSuccess(rate: number): boolean {
     return this.randomIntegerExclusive(100) < rate;
@@ -185,8 +193,8 @@ export class RandomGenerator extends RandomNumberGeneratorBase {
   /**
    * Retrieves a random image from the given array of strings.
    *
-   * @param {string[]} array - The array of strings from which to select a random image.
-   * @return {string} The randomly selected image from the array.
+   * @param array - The array of strings from which to select a random image.
+   * @return The randomly selected image from the array.
    */
   public getRandomImageFromArray(array: string[]): string {
     return array[this.randomIntegerInclusive(0, array.length - 1)];

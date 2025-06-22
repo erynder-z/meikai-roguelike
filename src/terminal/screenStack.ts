@@ -21,7 +21,7 @@ export class ScreenStack implements Stack, InteractiveScreen {
   /**
    * Push a new screen onto the stack.
    *
-   * @param {StackScreen} screen - the screen to push onto the stack
+   * @param screen - the screen to push onto the stack.
    */
   public push(screen: StackScreen) {
     this.screens.push(screen);
@@ -29,7 +29,7 @@ export class ScreenStack implements Stack, InteractiveScreen {
   /**
    * Get the current screen.
    *
-   * @return {StackScreen} the current screen
+   * @return The current screen.
    */
   public getCurrentScreen(): StackScreen {
     return this.screens[this.screens.length - 1];
@@ -37,7 +37,8 @@ export class ScreenStack implements Stack, InteractiveScreen {
 
   /**
    * Removes a screen from the stack.
-   * @param {StackScreen} screen - the screen to be removed
+   *
+   * @param screen - the screen to be removed.
    */
   public removeScreen(screen: StackScreen): void {
     const index = this.screens.indexOf(screen);
@@ -56,7 +57,7 @@ export class ScreenStack implements Stack, InteractiveScreen {
   /**
    * Draws the current screen on the terminal, if there is one.
    *
-   * @param {DrawableTerminal} term - the screen to be drawn
+   * @param term - the screen to be drawn.
    */
   public drawScreen(term: DrawableTerminal) {
     const currentScreen = this.getCurrentScreen();
@@ -65,7 +66,11 @@ export class ScreenStack implements Stack, InteractiveScreen {
     }
   }
 
-  private fadeOutAndRemoveScreen() {
+  /**
+   * Removes the current screen by fading it out and then removing it from the DOM.
+   * This function is called when popping the current screen from the stack.
+   */
+  private fadeOutAndRemoveScreen(): void {
     const currentScreenElement = document.getElementById(
       this.getCurrentScreen().name,
     );
@@ -82,7 +87,7 @@ export class ScreenStack implements Stack, InteractiveScreen {
   /**
    * Handle key down event.
    *
-   * @param {KeyboardEvent} event - The keyboard event to handle
+   * @param event - The keyboard event to handle.
    */
   public handleKeyDownEvent(event: KeyboardEvent) {
     const currentScreen = this.getCurrentScreen();
@@ -94,7 +99,7 @@ export class ScreenStack implements Stack, InteractiveScreen {
   /**
    * A method that determines if the screen should be updated based on time.
    *
-   * @return {boolean} Returns `true` if the screen should be updated, `false` otherwise.
+   * @return Returns `true` if the screen should be updated, `false` otherwise.
    */
   public onTime(): boolean {
     let change = false;
@@ -106,8 +111,7 @@ export class ScreenStack implements Stack, InteractiveScreen {
   /**
    * Runs the StackScreen by pushing it onto the ScreenStack and running it with the EventManager.
    *
-   * @param {StackScreen} sScreen - the StackScreen to be run
-   * @return {void}
+   * @param sScreen - the StackScreen to be run.
    */
   public static run_StackScreen(sScreen: StackScreen): void {
     const stack = new ScreenStack();

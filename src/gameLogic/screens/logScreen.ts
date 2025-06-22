@@ -38,9 +38,10 @@ export class LogScreen extends BaseScreen {
 
   /**
    * Handles key down events and fades out the screen if the menu key is pressed.
-   * @param {KeyboardEvent} event - The keyboard event.
-   * @param {Stack} stack - The stack.
-   * @returns {boolean} True if the event is handled, otherwise false.
+   *
+   * @param event - The keyboard event.
+   * @param stack - The stack.
+   * @return True if the event is handled, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     // fade out when menu key is pressed
@@ -60,7 +61,10 @@ export class LogScreen extends BaseScreen {
   }
 
   /**
-   * Checks if the menu key is pressed.
+   * Checks if the menu key is pressed.#
+   *
+   * @param event - The keyboard event.
+   * @return True if the menu key is pressed, otherwise false.
    */
   private isMenuKeyPressed(event: KeyboardEvent): boolean {
     return event.key === this.activeControlScheme.menu.toString();
@@ -68,14 +72,18 @@ export class LogScreen extends BaseScreen {
 
   /**
    * Checks if the Alt or Meta key is pressed.
+   *
+   * @param  event - The keyboard event.
+   * @return True if the Alt or Meta key is pressed, otherwise false.
    */
   private isAltKeyPressed(event: KeyboardEvent): boolean {
     return event.altKey || event.metaKey;
   }
   /**
    * Fades out the log screen display and removes it from the DOM. Then it pops the current screen from the stack.
-   * @param {Stack} stack - The stack of screens.
-   * @returns {Promise<void>} A promise that resolves when the fade out animation ends.
+   *
+   * @param stack - The stack of screens.
+   * @return A promise that resolves when the fade out animation ends.
    */
   private async fadeOutAndRemove(stack: Stack): Promise<void> {
     if (this.display) {

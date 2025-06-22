@@ -163,13 +163,11 @@ export class IngameMenu extends HTMLElement {
    * Bind events to the elements inside the options menu.
    *
    * The function binds the following events:
-   * - Return to game button click event
-   * - Toggle scanlines button click event
-   * - Help button click event
-   * - Quit button click event
-   * - Keydown event on the document
-   *
-   * @return {void}
+   * - Return to game button click event.
+   * - Toggle scanlines button click event.
+   * - Help button click event.
+   * - Quit button click event.
+   * - Keydown event on the document.
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -219,8 +217,7 @@ export class IngameMenu extends HTMLElement {
   /**
    * Handles key presses on the options menu.
    *
-   * @param {KeyboardEvent} event - The keyboard event to be handled.
-   * @return {void}
+   * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
     // Prevent keyboard events before the element is fully rendered. In particular, this prevents the initial {menu} keypress to close the menu the moment it's being rendered.
@@ -253,8 +250,6 @@ export class IngameMenu extends HTMLElement {
 
   /**
    * Removes the menu screen from the DOM.
-   *
-   * @return {void}
    */
   private returnToGame(): void {
     const event = new CustomEvent('return-to-game', { bubbles: true });
@@ -262,6 +257,11 @@ export class IngameMenu extends HTMLElement {
     this.remove();
   }
 
+  /**
+   * Opens the options menu.
+   *
+   * Dispatches a custom event to open the options menu, and then removes the current element from the DOM.
+   */
   private showOptions(): void {
     const event = new CustomEvent('open-options-menu', { bubbles: true });
     this.dispatchEvent(event);
@@ -270,8 +270,6 @@ export class IngameMenu extends HTMLElement {
 
   /**
    * Opens a new window with the game's help documentation.
-   *
-   * @return {void}
    */
   private showHelp(): void {
     // Help window will start hidden and will be shown when the help-window DOM content is rendered.
@@ -286,8 +284,7 @@ export class IngameMenu extends HTMLElement {
    * and then writes the data to a file named "savestate.bin" in the application's data directory.
    * If the file does not exist, it is created with write permissions.
    *
-   * @return {Promise<void>} A promise that resolves when the game is saved successfully,
-   * or rejects if there is an error saving the game.
+   * @return  A promise that resolves when the game is saved successfully, or rejects if there is an error saving the game.
    */
   private async saveGame(): Promise<void> {
     if (!this.game) return;
@@ -318,8 +315,7 @@ export class IngameMenu extends HTMLElement {
   /**
    * Disables the save game button.
    *
-   * This function is called after a successful save to prevent the user from saving
-   * multiple times in a row.
+   * This function is called after a successful save to prevent the user from saving multiple times in a row.
    */
   private disableSaveButton(): void {
     const saveButton = this.shadowRoot?.getElementById('save-game-button');
@@ -329,8 +325,7 @@ export class IngameMenu extends HTMLElement {
   /**
    * Disables the save game keyboard shortcut.
    *
-   * This function is called after a successful save to prevent the user from saving
-   * multiple times in a row.
+   * This function is called after a successful save to prevent the user from saving multiple times in a row.
    */
   private disableSaveKeyboardShortcut(): void {
     this.shouldDisableSaveKeyboardShortcut = true;
@@ -341,7 +336,7 @@ export class IngameMenu extends HTMLElement {
    *
    * If the user confirms, the page is reloaded, which causes the game to restart.
    *
-   * @return {Promise<void>} A promise that resolves when the screen is updated.
+   * @return A promise that resolves when the screen is updated.
    */
   private async returnToTitle(): Promise<void> {
     try {
@@ -361,7 +356,7 @@ export class IngameMenu extends HTMLElement {
   /**
    * Calls the Tauri backend to quit the game. Asks for confirmation before quitting.
    *
-   * @return {Promise<void>} A promise that resolves when the game is exited.
+   * @return A promise that resolves when the game is exited.
    */
   private async quitApp(): Promise<void> {
     try {
@@ -384,8 +379,6 @@ export class IngameMenu extends HTMLElement {
    * This function is called when the custom element is removed from the DOM.
    * It removes event listeners for keydown and click events that were added in the
    * connectedCallback function.
-   *
-   * @return {void}
    */
   disconnectedCallback(): void {
     this.eventTracker.removeAll();

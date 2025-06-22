@@ -5,11 +5,11 @@ export class IrregularShapeAreaGenerator {
   /**
    * Generates an irregular shape area using cellular automata.
    *
-   * @param {WorldPoint} dim - The dimensions of the area.
-   * @param {RandomGenerator} rand - The random number generator.
-   * @param {number} maxSize - The maximum size of the shape.
-   * @param {number} iter - The number of iterations.
-   * @return {Set<WorldPoint>} - The set of points representing the irregular shape area.
+   * @param dim - The dimensions of the area.
+   * @param rand - The random number generator.
+   * @param maxSize - The maximum size of the shape.
+   * @param iter - The number of iterations.
+   * @return The set of points representing the irregular shape area.
    */
   public static generateIrregularShapeArea(
     dim: WorldPoint,

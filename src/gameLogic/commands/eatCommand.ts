@@ -17,7 +17,8 @@ export class EatCommand extends CommandBase {
 
   /**
    * Executes the eat command. For players, this decreases the hunger level and flashes a message.
-   * @returns {boolean} Always returns true.
+   *
+   * @returns Always returns true.
    */
   public execute(): boolean {
     const { game } = this;

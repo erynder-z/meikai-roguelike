@@ -33,8 +33,7 @@ export class BaseScreen implements StackScreen {
   /**
    * Draw the terminal.
    *
-   * @param {DrawableTerminal} term - the terminal to draw
-   * @return {void}
+   * @param term - The terminal to draw.
    */
   public drawScreen(term: DrawableTerminal): void {
     DrawUI.addDynamicEnvironmentAreaEffectsToCells(
@@ -46,7 +45,10 @@ export class BaseScreen implements StackScreen {
       this.game.player.pos,
       this.game,
     );
-    DrawUI.renderMiscInfo(this.game);
+
+    DrawUI.renderPlayerHealthInfo(this.game);
+    DrawUI.renderLevelDepthInfo(this.game);
+    DrawUI.renderLevelTemperatureInfo(this.game);
     DrawUI.renderBuffs(this.game);
     DrawUI.renderEquipment(this.game);
     DrawUI.renderMessage(this.game);
@@ -59,8 +61,8 @@ export class BaseScreen implements StackScreen {
   /**
    * Determines if the screen should be updated based on time.
    *
-   * @param {Stack} stack - The stack of screens.
-   * @return {boolean} Returns `true` if the screen should be updated, `false` otherwise.
+   * @param stack - The stack of screens.
+   * @return Returns `true` if the screen should be updated, `false` otherwise.
    */
   public onTime(stack: Stack): boolean {
     return false;
@@ -69,8 +71,7 @@ export class BaseScreen implements StackScreen {
   /**
    * Process the non-player character's turns.
    *
-   * @param {Stack} s - the stack to be processed
-   * @return {void}
+   * @param s - the stack to be processed.
    */
   public npcTurns(s: Stack): void {
     const player = <Mob>this.game.player;
@@ -94,8 +95,8 @@ export class BaseScreen implements StackScreen {
   /**
    * Perform the NPC's turn in the game.
    *
-   * @param {Mob} m - the NPC performing the turn
-   * @param {Mob} ply - the player involved in the turn
+   * @param m - the NPC performing the turn.
+   * @param ply - the player involved in the turn.
    */
   private npcTurn(m: Mob, ply: Mob, stack: Stack): void {
     const { ai } = this.game;
@@ -111,10 +112,10 @@ export class BaseScreen implements StackScreen {
   }
 
   /**
-   * Determine if the stack is over
+   * Determine if the stack is over.
    *
-   * @param {Stack} s - the stack to check
-   * @return {boolean} true if the stack is over, false otherwise
+   * @param s - the stack to check.
+   * @return true if the stack is over, false otherwise.
    */
   private over(s: Stack): boolean {
     const over = !this.game.player.isAlive();
@@ -126,10 +127,10 @@ export class BaseScreen implements StackScreen {
   }
 
   /**
-   * tickBuffs - A function to handle ticking buffs for a mob.
+   * Tick the buffs on the mob.
+   * Progresses the active buffs by decrementing their timers and removing expired buffs.
    *
-   * @param {Mob} m - The mob to tick buffs for
-   * @return {void}
+   * @param m - the mob to tick buffs for.
    */
   private tickBuffs(m: Mob): void {
     if (!m.buffs) return;
@@ -139,8 +140,7 @@ export class BaseScreen implements StackScreen {
   /**
    * A method to finish the turn for a given mob.
    *
-   * @param {Mob} m - the mob to finish the turn for
-   * @return {void}
+   * @param m - the mob to finish the turn for.
    */
   private finishTurn(m: Mob): void {
     ++m.sinceMove;
@@ -150,9 +150,8 @@ export class BaseScreen implements StackScreen {
   /**
    * Finish the player's turn.
    *
-   * @param {TurnQueue} q - the turn queue
-   * @param {Stack} s - the stack of screens
-   * @return {void}
+   * @param q - the turn queue.
+   * @param s - the stack of screens.
    */
   private finishPlayerTurn(q: TurnQueue, s: Stack): void {
     const player = q.currentMob();
@@ -179,8 +178,7 @@ export class BaseScreen implements StackScreen {
   /**
    * Handle auto-healing for the player.
    *
-   * @param {Mob} player - the player
-   * @return {void}
+   * @param player - the player.
    */
   private handleAutoHeal(player: Mob): void {
     if (this.game.autoHeal) {
@@ -196,9 +194,8 @@ export class BaseScreen implements StackScreen {
   /**
    * Handles the effects of a cell on the player.
    *
-   * @param {MapCell} cell - The cell to handle effects for.
-   * @param {Mob} player - The player to apply effects to.
-   * @return {void} This function does not return a value.
+   * @param cell - The cell to handle effects for.
+   * @param player - The player to apply effects to.
    */
   private handleCellEffects(cell: MapCell, player: Mob): void {
     const map = <GameMap>this.game.currentMap();
@@ -210,13 +207,12 @@ export class BaseScreen implements StackScreen {
    *
    * @param {MapCell} cell - the current cell of the player
    * @param {Mob} player - the player
-   * @return {void}
    */
 
   /**
    * Removes the current screen and runs the NPC loop.
-   * @param {Stack} s - The stack of Screens.
-   * @returns {void}
+   *
+   * @param s - The stack of Screens.
    */
   public pop_and_runNPCLoop(s: Stack): void {
     s.pop();

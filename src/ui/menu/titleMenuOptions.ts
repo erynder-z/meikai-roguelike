@@ -37,7 +37,6 @@ export class TitleMenuOptions extends HTMLElement {
    * This method is called when the element is inserted into the DOM.
    * It is called after the element is created and before the element is connected
    * to the DOM.
-   *
    */
   connectedCallback(): void {
     const templateElement = document.createElement('template');
@@ -309,6 +308,12 @@ export class TitleMenuOptions extends HTMLElement {
             </input>
             <div class="explanation">(Default: 35)</div>
           </button>
+          <button id="temperature-units-button">
+            Tem<span class="underline">p</span>erature units
+          </button>
+          <button id="depth-units-button">
+            <span class="underline">D</span>epth units
+          </button>
         </div>
         <span class="info-span">Misc</span>
         <div class="info-container">
@@ -336,6 +341,10 @@ export class TitleMenuOptions extends HTMLElement {
     this.buttonManager.updateMessageAlignButton(
       this.gameConfig.message_display,
     );
+    this.buttonManager.updateTemperatureUnitsButton(
+      this.gameConfig.temperature_unit,
+    );
+    this.buttonManager.updateDepthUnitsButton(this.gameConfig.depth_unit);
     this.buttonManager.updateShowImagesButton(this.gameConfig.show_images);
     this.buttonManager.updateImageAlignButton(this.gameConfig.image_display);
     this.setupScalingFactorInput();
@@ -350,22 +359,20 @@ export class TitleMenuOptions extends HTMLElement {
    * Bind events to the elements inside the options menu.
    *
    * The function binds the following events:
-   * - Change current seed button click event
-   * - Change current font button click event
-   * - Change terminal dimensions button click event
-   * - Switch control scheme button click event
-   * - Toggle scanlines button click event
-   * - Switch scanline style button click event
-   * - Toggle message alignment button click event
-   * - Toggle show images button click event
-   * - Toggle image alignment button click event
-   * - Focus and select message count input button click event
-   * - Toggle blood intensity button click event
-   * - Focus and select keypress throttle input button click event
-   * - Return to previous screen button click event
-   * - Keydown event on the document
-   *
-   * @return {void}
+   * - Change current seed button click event.
+   * - Change current font button click event.
+   * - Change terminal dimensions button click event.
+   * - Switch control scheme button click event.
+   * - Toggle scanlines button click event.
+   * - Switch scanline style button click event.
+   * - Toggle message alignment button click event.
+   * - Toggle show images button click event.
+   * - Toggle image alignment button click event.
+   * - Focus and select message count input button click event.
+   * - Toggle blood intensity button click event.
+   * - Focus and select keypress throttle input button click event.
+   * - Return to previous screen button click event.
+   * - Keydown event on the document.
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -381,6 +388,9 @@ export class TitleMenuOptions extends HTMLElement {
     this.toggleImageAlignment = this.toggleImageAlignment.bind(this);
     this.focusAndSelectMessageCountInput =
       this.focusAndSelectMessageCountInput.bind(this);
+    this.toggleTemperatureUnitChange =
+      this.toggleTemperatureUnitChange.bind(this);
+    this.toggleDepthUnitChange = this.toggleDepthUnitChange.bind(this);
     this.toggleBloodIntensity = this.toggleBloodIntensity.bind(this);
     this.returnToPreviousScreen = this.returnToPreviousScreen.bind(this);
 
@@ -463,6 +473,19 @@ export class TitleMenuOptions extends HTMLElement {
     );
     this.eventTracker.addById(
       root,
+      'temperature-units-button',
+      'click',
+      this.toggleTemperatureUnitChange,
+    );
+
+    this.eventTracker.addById(
+      root,
+      'depth-units-button',
+      'click',
+      this.toggleDepthUnitChange,
+    );
+    this.eventTracker.addById(
+      root,
       'blood-intensity-button',
       'click',
       this.toggleBloodIntensity,
@@ -487,8 +510,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Attaches an 'input' event listener to the scaling factor input element
    * within the shadow DOM. The listener triggers the {@link handleInputChange}
    * method whenever the input value changes.
-   *
-   * @return {void}
    */
   private setupScalingFactorInput(): void {
     const scalingFactorInput = this.shadowRoot?.getElementById(
@@ -508,8 +529,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Attaches an 'input' event listener to the message count input element
    * within the shadow DOM. The listener triggers the {@link handleInputChange}
    * method whenever the input value changes.
-   *
-   * @return {void}
    */
   private setupMessageCountInput(): void {
     const messageCountInput = this.shadowRoot?.getElementById(
@@ -529,8 +548,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Attaches an 'input' event listener to the keypress throttle input element
    * within the shadow DOM. The listener triggers the {@link handleInputChange}
    * method whenever the input value changes.
-   *
-   * @return {void}
    */
   private setupKeypressThrottleInput(): void {
     const keypressThrottleInput = this.shadowRoot?.getElementById(
@@ -552,8 +569,6 @@ export class TitleMenuOptions extends HTMLElement {
    * the content of the input element, it uses setTimeout to delay the selection
    * by 10 milliseconds, so that the focus event is processed before the selection
    * is triggered.
-   *
-   * @return {void}
    */
   private focusAndSelectTerminalHeightInput(): void {
     const heightInput = this.shadowRoot?.getElementById(
@@ -575,8 +590,6 @@ export class TitleMenuOptions extends HTMLElement {
    * the content of the input element, it uses setTimeout to delay the selection
    * by 10 milliseconds, so that the focus event is processed before the selection
    * is triggered.
-   *
-   * @return {void}
    */
   private focusAndSelectTerminalWidthInput(): void {
     const widthInput = this.shadowRoot?.getElementById(
@@ -598,8 +611,6 @@ export class TitleMenuOptions extends HTMLElement {
    * the content of the input element, it uses setTimeout to delay the selection
    * by 10 milliseconds, so that the focus event is processed before the selection
    * is triggered.
-   *
-   * @return {void}
    */
   private focusAndSelectScalingFactorInput(): void {
     const scalingFactorInput = this.shadowRoot?.getElementById(
@@ -621,8 +632,6 @@ export class TitleMenuOptions extends HTMLElement {
    * the content of the input element, it uses setTimeout to delay the selection
    * by 10 milliseconds, so that the focus event is processed before the selection
    * is triggered.
-   *
-   * @return {void}
    */
   private focusAndSelectMessageCountInput(): void {
     const messageCountInput = this.shadowRoot?.getElementById(
@@ -644,8 +653,6 @@ export class TitleMenuOptions extends HTMLElement {
    * the content of the input element, it uses setTimeout to delay the selection
    * by 10 milliseconds, so that the focus event is processed before the selection
    * is triggered.
-   *
-   * @return {void}
    */
   private focusAndSelectKeypressThrottleInput(): void {
     const keypressThrottleInput = this.shadowRoot?.getElementById(
@@ -666,9 +673,8 @@ export class TitleMenuOptions extends HTMLElement {
    * corresponding value in the game configuration by calling the appropriate
    * update method.
    *
-   * @param {Event} event - The input event containing the new value.
-   * @param {string} type - The type of configuration setting being updated.
-   * @return {void}
+   * @param event - The input event containing the new value.
+   * @param type - The type of configuration setting being updated.
    */
   private handleInputChange = (
     event: Event,
@@ -703,9 +709,8 @@ export class TitleMenuOptions extends HTMLElement {
   /**
    * Updates the terminal dimensions when the user changes the input values.
    *
-   * @param {Event} event - The input event.
-   * @param {string} side - The side of the terminal that is being updated.
-   * @return {void}
+   * @param event - The input event.
+   * @param side - The side of the terminal that is being updated.
    */
   private updateTerminalDimensionsValue(
     event: Event,
@@ -725,8 +730,7 @@ export class TitleMenuOptions extends HTMLElement {
    * the range of 0 to 2. If the value is not valid, resets the input to the current scaling
    * factor in the game configuration.
    *
-   * @param {Event} event - The input event containing the new value for the scaling factor.
-   * @return {void}
+   * @param event - The input event containing the new value for the scaling factor.
    */
 
   private updateScalingFactorValue(event: Event): void {
@@ -751,8 +755,7 @@ export class TitleMenuOptions extends HTMLElement {
    * message count if the value is a valid number within the range of 1 to 50. If the value
    * is not valid, resets the input to the current message count in the game configuration.
    *
-   * @param {Event} event - The input event containing the new value for the message count.
-   * @return {void}
+   * @param event - The input event containing the new value for the message count.
    */
 
   private updateMessageCountValue(event: Event): void {
@@ -778,8 +781,7 @@ export class TitleMenuOptions extends HTMLElement {
    * If the value is not valid, resets the input to the current minimum key press delay
    * in the game configuration.
    *
-   * @param {Event} event - The input event containing the new value for the minimum key press delay.
-   * @return {void}
+   * @param event - The input event containing the new value for the minimum key press delay.
    */
   private updateKeypressThrottleValue(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -800,8 +802,7 @@ export class TitleMenuOptions extends HTMLElement {
    * Changes the current seed to a random value.
    *
    * This function will also update the displayed seed in the title menu.
-   *
-   * @return {void}
+   * @return A promise that resolves when the seed has been changed.
    */
   public async changeSeed(): Promise<void> {
     this.gameConfig.seed = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
@@ -815,7 +816,7 @@ export class TitleMenuOptions extends HTMLElement {
    * It then selects the next font in the list, updates the game configuration with this new font, and updates the displayed font in the UI.
    * The updated configuration is saved, and the layout manager is notified to update the font accordingly.
    *
-   * @return {Promise<void>} A promise that resolves when the font has been changed and the configuration is saved.
+   * @return A promise that resolves when the font has been changed and the configuration is saved.
    */
 
   public async changeFont(): Promise<void> {
@@ -837,10 +838,7 @@ export class TitleMenuOptions extends HTMLElement {
   /**
    * Toggles the control scheme setting on or off.
    *
-   * Updates the {@link gameConfig.control_scheme} property, and toggles the
-   * displayed text of the control scheme button.
-   *
-   * @return {void}
+   * Updates the {@link gameConfig.control_scheme} property, and toggles the displayed text of the control scheme button.
    */
   private toggleControlScheme(): void {
     const currentSchemeIndex = this.availableControlSchemes.indexOf(
@@ -862,8 +860,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Updates the {@link gameConfig.show_scanlines} property, and toggles the
    * 'scanlines' class on the main container element. The button text is also
    * updated based on the current state.
-   *
-   * @return {void}
    */
 
   private toggleScanlines(): void {
@@ -887,8 +883,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Updates the {@link gameConfig.scanline_style} property to the next available
    * style in the list of scanline styles. The button text for the scanline style
    * is also updated to reflect the new style.
-   *
-   * @return {void}
    */
 
   private switchScanlineStyle(): void {
@@ -913,8 +907,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Updates the {@link gameConfig.message_display} property, updates the message
    * alignment button, and sets the layout of the main container based on the
    * current message alignment.
-   *
-   * @return {void}
    */
   private toggleMessageAlignment(): void {
     this.gameConfig.message_display =
@@ -932,8 +924,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Updates the {@link gameConfig.show_images} property, updates the show images
    * button, and sets the display of the image container based on the current
    * state. Also updates the disabled status of the image alignment button.
-   *
-   * @return {void}
    */
   private toggleShowImages(): void {
     this.gameConfig.show_images = !this.gameConfig.show_images;
@@ -951,8 +941,6 @@ export class TitleMenuOptions extends HTMLElement {
    * Updates the {@link gameConfig.image_display} property, updates the image
    * alignment button, and sets the layout of the image container based on the
    * current image alignment.
-   *
-   * @return {void}
    */
   private toggleImageAlignment(): void {
     this.gameConfig.image_display =
@@ -963,13 +951,52 @@ export class TitleMenuOptions extends HTMLElement {
   }
 
   /**
-   * Toggles the blood intensity of the game by cycling through the available blood intensities.
+   * Toggles the temperature units between Celsius and Fahrenheit.
    *
-   * The blood intensity is cycled through the following values:
-   * 0 (no blood), 1 (light blood), 2 (medium blood), 3 (heavy blood).
-   *
-   * @return {void}
+   * Updates the {@link gameConfig.temperature_unit} property, and updates the
+   * temperature units button.
    */
+  private toggleTemperatureUnitChange(): void {
+    this.gameConfig.temperature_unit =
+      this.gameConfig.temperature_unit === 'celsius' ? 'fahrenheit' : 'celsius';
+
+    this.buttonManager.updateTemperatureUnitsButton(
+      this.gameConfig.temperature_unit,
+    );
+
+    const customEvent = new CustomEvent('redraw-temperature-info', {
+      bubbles: true,
+    });
+    this.dispatchEvent(customEvent);
+  }
+
+  /**
+   * Toggles the depth units between meters and feet.
+   *
+   * Updates the {@link gameConfig.depth_unit} property, and updates the
+   * depth units button.
+   *
+   * Dispatches a custom 'redraw-temperature-info' event to request the redraw
+   * of the level depth information element.
+   */
+  private toggleDepthUnitChange(): void {
+    this.gameConfig.depth_unit =
+      this.gameConfig.depth_unit === 'meters' ? 'feet' : 'meters';
+
+    this.buttonManager.updateDepthUnitsButton(this.gameConfig.depth_unit);
+
+    const customEvent = new CustomEvent('redraw-depth-info', {
+      bubbles: true,
+    });
+    this.dispatchEvent(customEvent);
+  }
+
+  /**
+   * Cycles through the blood intensity options (0 = no blood, 1 = light blood, 2 = medium blood, 3 = heavy blood).
+   *
+   * Updates the {@link gameConfig.blood_intensity} property and the blood intensity button.
+   */
+
   private toggleBloodIntensity(): void {
     this.gameConfig.blood_intensity = (this.gameConfig.blood_intensity + 1) % 4;
     this.buttonManager.updateBloodIntensityButton(
@@ -983,7 +1010,8 @@ export class TitleMenuOptions extends HTMLElement {
    * This function is called when the user clicks the "start game" button on the player setup
    * screen. It saves the current build parameters to a file and then returns to the previous
    * screen by replacing the content of the title screen with the title menu element.
-   * @return {Promise<void>} A promise for when the file is saved and the screen is updated.
+   *
+   * @return A promise for when the file is saved and the screen is updated.
    */
   private async returnToPreviousScreen(): Promise<void> {
     try {
@@ -1017,8 +1045,7 @@ export class TitleMenuOptions extends HTMLElement {
    * the options menu, and if so, calls the appropriate function to handle the key press.
    * If the pressed key does not match any of the handled keys, the function does nothing.
    *
-   * @param {KeyboardEvent} event - The keyboard event to be handled.
-   * @return {void}
+   * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
     // scroll via keypress when alt or meta key is pressed
@@ -1074,6 +1101,12 @@ export class TitleMenuOptions extends HTMLElement {
       case 'I':
         this.toggleImageAlignment();
         break;
+      case 'p':
+        this.toggleTemperatureUnitChange();
+        break;
+      case 'D':
+        this.toggleDepthUnitChange();
+        break;
       case 'B':
         this.toggleBloodIntensity();
         break;
@@ -1094,8 +1127,6 @@ export class TitleMenuOptions extends HTMLElement {
    *
    * This method is called when the element is removed from the DOM.
    * It removes all event listeners that were added in the connectedCallback method.
-   *
-   * @return {void}
    */
   disconnectedCallback(): void {
     this.eventTracker.removeAll();

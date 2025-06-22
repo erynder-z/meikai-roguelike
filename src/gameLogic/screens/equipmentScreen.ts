@@ -24,8 +24,8 @@ export class EquipmentScreen extends BaseScreen {
 
   /**
    * Converts slot position to corresponding character.
-   * @param {Slot} pos - The slot position.
-   * @returns {string} The character representing the slot.
+   * @param pos - The slot position.
+   * @return The character representing the slot.
    */
   private slotToCharacter(pos: Slot): string {
     return String.fromCharCode(97 + (pos - Slot.MainHand));
@@ -33,8 +33,9 @@ export class EquipmentScreen extends BaseScreen {
 
   /**
    * Converts character to corresponding slot position.
-   * @param {string} char - The character representing the slot.
-   * @returns {Slot} The slot position.
+   *
+   * @param char - The character representing the slot.
+   * @return The slot position.
    */
   private CharacterToSlot(char: string): Slot {
     const i: number = char.charCodeAt(0) - 'a'.charCodeAt(0) + Slot.MainHand;
@@ -62,7 +63,8 @@ export class EquipmentScreen extends BaseScreen {
 
   /**
    * Formats the equipment data for the display component.
-   * @returns {Array<{ char: string; slot: string; description: string }>} Formatted equipment data.
+   *
+   * @return Formatted equipment data.
    */
   private getEquipmentData(): {
     char: string;
@@ -83,7 +85,8 @@ export class EquipmentScreen extends BaseScreen {
 
   /**
    * Fades out the equipment screen.
-   * @returns {Promise<void>}
+   *
+   * @return A promise that resolves when the fade out animation ends.
    */
   private async fadeOutEquipmentScreen(): Promise<void> {
     if (this.display) {
@@ -94,9 +97,9 @@ export class EquipmentScreen extends BaseScreen {
 
   /**
    * Handles the key down event.
-   * @param {KeyboardEvent} event - The keyboard event.
-   * @param {Stack} stack - The stack object.
-   * @returns {boolean} - True if the event was handled successfully, otherwise false.
+   * @param event - The keyboard event.
+   * @param stack - The stack object.
+   * @return True if the event was handled successfully, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
     const slot = this.CharacterToSlot(event.key);
@@ -119,10 +122,9 @@ export class EquipmentScreen extends BaseScreen {
    * removes the current screen from the stack and pushes a new
    * ItemScreen onto the stack with the retrieved item.
    *
-   * @param {Slot} slot - The slot of the item to open the menu for.
-   * @param {Stack} stack - The stack object.
+   * @param slot - The slot of the item to open the menu for.
+   * @param stack - The stack object.
    */
-
   private itemMenu(slot: Slot, stack: Stack): void {
     const item: ItemObject | undefined = this.equipment.getItemInSlot(slot);
 

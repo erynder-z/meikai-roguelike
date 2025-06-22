@@ -23,4 +23,6 @@ export type GameConfigType = {
   };
   blood_intensity: number;
   min_keypress_delay: number;
+  temperature_unit: 'fahrenheit' | 'celsius';
+  depth_unit: 'feet' | 'meters';
 };

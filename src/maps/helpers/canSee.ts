@@ -10,11 +10,12 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
 export class CanSee {
   /**
    * Checks if there is a line of sight between two world points on the map.
-   * @param {WorldPoint} a - The starting point.
-   * @param {WorldPoint} b - The ending point.
-   * @param {GameMapType} map - The map object.
-   * @param {boolean} onlyEnv - Indicates whether to consider only environmental obstacles.
-   * @returns {boolean} - True if there is a line of sight, otherwise false.
+   *
+   * @param a - The starting point.
+   * @param b - The ending point.
+   * @param map - The map object.
+   * @param onlyEnv - Indicates whether to consider only environmental obstacles.
+   * @return True if there is a line of sight, otherwise false.
    */
   public static checkPointLOS_Bresenham(
     a: WorldPoint,
@@ -33,11 +34,12 @@ export class CanSee {
 
   /**
    * Checks if there is a line of sight between two mobs on the map.
-   * @param {Mob} a - The first mob.
-   * @param {Mob} b - The second mob.
-   * @param {GameMapType} map - The map object.
-   * @param {boolean} onlyEnv - Indicates whether to consider only environmental obstacles.
-   * @returns {boolean} - True if there is a line of sight, otherwise false.
+   *
+   * @param a - The first mob.
+   * @param b - The second mob.
+   * @param map - The map object.
+   * @param onlyEnv - Indicates whether to consider only environmental obstacles.
+   * @return True if there is a line of sight, otherwise false.
    */
   public static checkMobLOS_Bresenham(
     a: Mob,
@@ -50,10 +52,11 @@ export class CanSee {
 
   /**
    * Performs raycasting to determine line of sight between two points on the map.
-   * @param {WorldPoint} start - The starting point of the LOS check.
-   * @param {WorldPoint} end - The ending point of the LOS check.
-   * @param {GameMapType} map - The map object.
-   * @returns {boolean} - True if there is line of sight, otherwise false.
+   *
+   * @param start - The starting point of the LOS check.
+   * @param end - The ending point of the LOS check.
+   * @param map - The map object.
+   * @return True if there is line of sight, otherwise false.
    */
   public static checkPointLOS_RayCast(
     start: WorldPoint,
@@ -106,10 +109,11 @@ export class CanSee {
 
   /**
    * Checks if the distance between two points is smaller than a provided threshold.
-   * @param {WorldPoint} a - The first point.
-   * @param {WorldPoint} b - The second point.
-   * @param {number} threshold - The maximum allowed distance.
-   * @returns {boolean} - True if the distance is smaller than the threshold, otherwise false.
+   *
+   * @param a - The first point.
+   * @param b - The second point.
+   * @param threshold - The maximum allowed distance.
+   * @return True if the distance is smaller than the threshold, otherwise false.
    */
   public static isDistanceSmallerThan(
     a: WorldPoint,
@@ -124,10 +128,10 @@ export class CanSee {
    * taking into account the player's current visibility range, light sources in the
    * vicinity, and a maximum visibility limit.
    *
-   * @param {WorldPoint} playerPos - The position of the player on the map.
-   * @param {GameMapType} map - The current game map.
-   * @param {GameState} game - The game state, containing player stats and buffs.
-   * @returns {number} The maximum distance at which entities can be seen by the player.
+   * @param playerPos - The position of the player on the map.
+   * @param map - The current game map.
+   * @param game - The game state, containing player stats and buffs.
+   * @return The maximum distance at which entities can be seen by the player.
    */
 
   public static getFarDist(
@@ -149,10 +153,10 @@ export class CanSee {
   /**
    * Counts the number of light sources in the vicinity of the player position within a specified diameter.
    *
-   * @param {WorldPoint} playerPos - The position of the player on the map.
-   * @param {GameMapType} map - The current map.
-   * @param {number} diameter - The diameter within which to count light sources.
-   * @return {number} The count of light sources in the specified vicinity.
+   * @param playerPos - The position of the player on the map.
+   * @param map - The current map.
+   * @param diameter - The diameter within which to count light sources.
+   * @return The count of light sources in the specified vicinity.
    */
   private static countLightSources(
     playerPos: WorldPoint,
