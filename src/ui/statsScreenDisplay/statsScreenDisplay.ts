@@ -2,10 +2,11 @@ import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffColors } from '../buffs/buffColors';
 import { BuffType } from '../../types/gameLogic/buffs/buffType';
 import { Equipment } from '../../gameLogic/inventory/equipment';
+import { FadeOutElement } from '../other/fadeOutElement';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { Stats } from '../../gameLogic/stats/stats';
 
-export class StatsScreenDisplay extends HTMLElement {
+export class StatsScreenDisplay extends FadeOutElement {
   public colorizer: BuffColors = new BuffColors();
   public stats: Stats | undefined;
   public player: Mob | undefined;
@@ -345,18 +346,5 @@ export class StatsScreenDisplay extends HTMLElement {
       thirstLevels,
       'Thirst',
     );
-  }
-
-  /**
-   * Adds the 'fade-out' class to the element and returns a promise that resolves
-   * when the fade out animation ends.
-   *
-   * @returns A promise that resolves when the fade out animation ends.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

@@ -1,4 +1,6 @@
-export class CommandDirectionScreenDisplay extends HTMLElement {
+import { FadeOutElement } from '../other/fadeOutElement';
+
+export class CommandDirectionScreenDisplay extends FadeOutElement {
   public title: string = '';
   public directions: string[][] = [];
   private menuKey: string = 'Esc';
@@ -107,17 +109,5 @@ export class CommandDirectionScreenDisplay extends HTMLElement {
         });
       });
     }
-  }
-
-  /**
-   * Adds a 'fade-out' class to the element, triggering a fade-out animation, and returns a promise that resolves when the animation ends.
-   *
-   * @return A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

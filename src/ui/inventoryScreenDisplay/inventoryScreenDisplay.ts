@@ -1,7 +1,8 @@
+import { FadeOutElement } from '../other/fadeOutElement';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
 
-export class InventoryScreenDisplay extends HTMLElement {
+export class InventoryScreenDisplay extends FadeOutElement {
   private inventoryItems: ItemObject[] = [];
   private menuKey: string = 'Esc';
 
@@ -151,17 +152,5 @@ export class InventoryScreenDisplay extends HTMLElement {
       itemList.appendChild(fragment);
       inventoryListContainer.appendChild(itemList);
     }
-  }
-
-  /**
-   * Triggers a fade-out animation and resolves when it completes.
-   *
-   * @returns A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

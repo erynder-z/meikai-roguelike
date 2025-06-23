@@ -1,4 +1,6 @@
-export class EquipmentScreenDisplay extends HTMLElement {
+import { FadeOutElement } from '../other/fadeOutElement';
+
+export class EquipmentScreenDisplay extends FadeOutElement {
   private equipmentItems: {
     char: string;
     slot: string;
@@ -146,17 +148,5 @@ export class EquipmentScreenDisplay extends HTMLElement {
       itemList.appendChild(fragment);
       equipmentListContainer.appendChild(itemList);
     }
-  }
-
-  /**
-   * Triggers a fade-out animation and resolves when it completes.
-   *
-   * @returns A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

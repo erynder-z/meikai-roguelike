@@ -1,4 +1,6 @@
-export class ItemScreenDisplay extends HTMLElement {
+import { FadeOutElement } from '../other/fadeOutElement';
+
+export class ItemScreenDisplay extends FadeOutElement {
   public itemDescription: string = '';
   public options: { key: string; description: string }[] = [];
   private menuKey: string = 'Esc';
@@ -102,17 +104,5 @@ export class ItemScreenDisplay extends HTMLElement {
         optionsList.appendChild(li);
       });
     }
-  }
-
-  /**
-   * Triggers a fade-out animation and resolves when it completes.
-   *
-   * @returns A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }
