@@ -96,41 +96,46 @@ export class EquipmentScreen extends BaseScreen {
   }
 
   /**
-   * Handles the key down event.
+   * Handles key down events and fades out the equipment screen if the menu key is pressed.
+   * If a slot key is pressed, opens the item menu for the item in the slot if it exists.
+   *
    * @param event - The keyboard event.
-   * @param stack - The stack object.
-   * @return True if the event was handled successfully, otherwise false.
+   * @param stack - The stack of screens.
+   * @return True if the event is handled, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
-    const slot = this.CharacterToSlot(event.key);
-    if (slot) {
-      this.fadeOutEquipmentScreen();
-      this.itemMenu(slot, stack);
-    }
-    if (event.key === this.activeControlScheme.menu.toString()) {
+    const key = event.key;
+
+    if (key === this.activeControlScheme.menu.toString()) {
       this.fadeOutEquipmentScreen();
       stack.pop();
       return true;
     }
-    return false;
+
+    const slot = this.CharacterToSlot(key);
+    if (!slot) return false;
+
+    // Open item menu if an item exists in the slot
+    return this.itemMenu(slot, stack);
   }
 
   /**
    * Opens the item menu for the specified slot.
    *
-   * Retrieves the item from the given slot and, if the item exists,
-   * removes the current screen from the stack and pushes a new
-   * ItemScreen onto the stack with the retrieved item.
+   * If the slot contains an item, fades out the screen,
+   * pops the current screen, and pushes an ItemScreen.
    *
    * @param slot - The slot of the item to open the menu for.
    * @param stack - The stack object.
+   * @return True if the menu was opened, otherwise false.
    */
-  private itemMenu(slot: Slot, stack: Stack): void {
-    const item: ItemObject | undefined = this.equipment.getItemInSlot(slot);
+  private itemMenu(slot: Slot, stack: Stack): boolean {
+    const item = this.equipment.getItemInSlot(slot);
+    if (!item) return false;
 
-    if (!item) return;
-    const pos = this.CharacterToSlot(slot.toString());
+    this.fadeOutEquipmentScreen();
     stack.pop();
-    stack.push(new ItemScreen(item, pos, this.game, this.make));
+    stack.push(new ItemScreen(item, slot, this.game, this.make));
+    return true;
   }
 }
