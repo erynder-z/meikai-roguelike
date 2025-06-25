@@ -1,29 +1,39 @@
 import { BaseScreen } from './baseScreen';
+import { DetailViewHandler } from '../../ui/detailVIewHandler/detailViewHandler';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { ParsePlayer } from '../events/parsePlayer';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
-import { DetailViewHandler } from '../../ui/detailVIewHandler/detailViewHandler';
 
 /**
  * Represents a game screen that extends the functionality of the base screen.
  */
 export class GameScreen extends BaseScreen {
   public name = 'game-screen';
+  private detailViewHandler = new DetailViewHandler();
   constructor(game: GameState, make: ScreenMaker) {
     super(game, make);
   }
 
   /**
-   * Handle key down event.
+   * Handles key down events. If the entity card is open and the menu key is not being pressed,
+   * the event is ignored. If the entity card is open and the menu key is being pressed, the
+   * entity card is closed and the event is ignored. Otherwise, the event is passed to
+   * {@link playerKeyTurn} to handle the player's turn.
    *
-   * @param event - the keyboard event.
-   * @param stack - the stack.
+   * @param event - The keyboard event to handle.
+   * @param stack - The current stack of screens.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
-    const detailViewHandler = new DetailViewHandler();
-    const isEntityCardOpen = detailViewHandler.isEntityCardOpen();
-    if (isEntityCardOpen) detailViewHandler.closeOpenEntityCard();
+    const isEntityCardOpen = this.detailViewHandler.isEntityCardOpen();
+    const isMenuKey = event?.key === this.activeControlScheme.menu.toString();
+
+    if (isEntityCardOpen && !isMenuKey) return;
+
+    if (isEntityCardOpen && isMenuKey) {
+      this.detailViewHandler.closeOpenEntityCard();
+      return;
+    }
 
     this.playerKeyTurn(
       stack,
@@ -33,11 +43,12 @@ export class GameScreen extends BaseScreen {
   }
 
   /**
-   * A function that handles the player's turn in the game.
+   * Handles the player's key turn. If the player's turn is successfully handled,
+   * it calls {@link npcTurns} to handle the non-player character's turns.
    *
-   * @param stack - the game stack.
-   * @param char - the character input by the player.
-   * @param event - the keyboard event or null.
+   * @param stack - The current stack of screens.
+   * @param char - The character input.
+   * @param event - The keyboard event associated with the key press, or null.
    */
   private playerKeyTurn(
     stack: Stack,

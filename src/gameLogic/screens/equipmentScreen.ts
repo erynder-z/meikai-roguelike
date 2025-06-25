@@ -2,7 +2,6 @@ import { BaseScreen } from './baseScreen';
 import { Equipment } from '../inventory/equipment';
 import { EquipmentScreenDisplay } from '../../ui/equipmentScreenDIsplay/equipmentScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
-import { ItemObject } from '../itemObjects/itemObject';
 import { ItemScreen } from './itemScreen';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Slot } from '../itemObjects/slot';
