@@ -4,7 +4,6 @@ import keysJson from '../../utilities/commonKeyboardChars.json';
 
 export class InventoryScreenDisplay extends FadeOutElement {
   private inventoryItems: ItemObject[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -88,7 +87,7 @@ export class InventoryScreenDisplay extends FadeOutElement {
 
       <div class="inventory-screen-display">
         <div class="inventory-heading">
-          Inventory: (Press ${this.menuKey} to close)
+          Inventory
         </div>
 
         <div class="inventory-list"></div>
@@ -106,21 +105,6 @@ export class InventoryScreenDisplay extends FadeOutElement {
   set items(items: ItemObject[]) {
     this.inventoryItems = items;
     this.renderInventoryList();
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   *
-   * @param key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.inventory-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Inventory: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**

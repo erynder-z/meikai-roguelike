@@ -6,7 +6,6 @@ export class EquipmentScreenDisplay extends FadeOutElement {
     slot: string;
     description: string;
   }[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -89,7 +88,7 @@ export class EquipmentScreenDisplay extends FadeOutElement {
         }
       </style>
       <div class="equipment-screen-display">
-        <div class="equipment-heading">Equipped Items: (Press ${this.menuKey} to close)</div>
+        <div class="equipment-heading">Equipped Items</div>
         <div class="equipment-list"></div>
       </div>
     `;
@@ -105,21 +104,6 @@ export class EquipmentScreenDisplay extends FadeOutElement {
   set items(items: { char: string; slot: string; description: string }[]) {
     this.equipmentItems = items;
     this.renderEquipmentList();
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   *
-   * @param key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.equipment-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Equipped Items: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**

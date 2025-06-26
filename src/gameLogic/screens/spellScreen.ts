@@ -62,7 +62,6 @@ export class SpellScreen extends BaseScreen {
 
       this.display.spells = spells;
       this.display.title = 'Select spell:';
-      this.display.menuKeyText = this.activeControlScheme.menu.toString();
 
       canvas?.insertAdjacentElement('afterend', this.display);
     }

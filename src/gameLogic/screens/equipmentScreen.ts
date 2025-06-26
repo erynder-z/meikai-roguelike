@@ -56,7 +56,6 @@ export class EquipmentScreen extends BaseScreen {
 
       const equipmentData = this.getEquipmentData();
       this.display.items = equipmentData;
-      this.display.menuKeyText = this.activeControlScheme.menu.toString();
     }
   }
 

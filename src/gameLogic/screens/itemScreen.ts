@@ -48,7 +48,6 @@ export class ItemScreen extends BaseScreen {
     ) as ItemScreenDisplay;
     this.display.itemDescription = this.obj.description();
     this.display.options = this.getMenuOptions();
-    this.display.menuKeyText = this.activeControlScheme.menu.toString();
     container?.appendChild(this.display);
   }
 

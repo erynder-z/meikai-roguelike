@@ -3,7 +3,6 @@ import { FadeOutElement } from '../other/fadeOutElement';
 export class SpellScreenDisplay extends FadeOutElement {
   public title: string = '';
   public spells: { key: string; description: string }[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -71,25 +70,11 @@ export class SpellScreenDisplay extends FadeOutElement {
         <div class="spell-screen">
           <div class="spell-title"></div>
           <ul class="spell-options"></ul>
-          <div class="spell-footing">(Press ${this.menuKey} to cancel)</div>
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.renderSpells();
-  }
-
-  /**
-   * Sets the cancel key text displayed in the footer.
-   *
-   * @param key - The cancel key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const footing = this.shadowRoot?.querySelector(
-      '.spell-footing',
-    ) as HTMLElement;
-    if (footing) footing.textContent = `(Press ${this.menuKey} to cancel)`;
   }
 
   /**

@@ -11,7 +11,6 @@ export class StatsScreenDisplay extends FadeOutElement {
   public stats: Stats | undefined;
   public player: Mob | undefined;
   public equipment: Equipment | undefined;
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -107,7 +106,7 @@ export class StatsScreenDisplay extends FadeOutElement {
       </style>
       <div class="stats-screen-display">
         <div class="stats-screen-heading">
-          Stats: (Press ${this.menuKey} to close).
+          Stats
         </div>
         <div class="stats">
           <div class="player-name">Name: ${this.player?.name}</div>
@@ -158,21 +157,6 @@ export class StatsScreenDisplay extends FadeOutElement {
    */
   set currentEquipment(equipment: Equipment) {
     this.equipment = equipment;
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   *
-   * @param key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.stats-screen-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Stats: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**

@@ -33,7 +33,6 @@ export class LogScreen extends BaseScreen {
       canvas?.insertAdjacentElement('afterend', this.display);
     }
     this.display.log = this.messageLog;
-    this.display.menuKeyText = this.activeControlScheme.menu.toString();
   }
 
   /**

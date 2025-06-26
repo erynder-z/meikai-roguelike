@@ -5,7 +5,6 @@ import { LogMessage } from '../../gameLogic/messages/logMessage';
 export class LogScreenDisplay extends FadeOutElement {
   private colorizer = new BuffColors();
   private messageLog: LogMessage[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -85,7 +84,7 @@ export class LogScreenDisplay extends FadeOutElement {
       </style>
       <div class="log-screen-display">
         <div class="log-screen-heading">
-          Log: (Press ${this.menuKey} to close). 
+          Log 
         </div>
         <div class="log-screen-list"></div>
       </div>
@@ -102,20 +101,6 @@ export class LogScreenDisplay extends FadeOutElement {
   set log(messages: LogMessage[]) {
     this.messageLog = messages;
     this.generateMessageList();
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   * @param {string} key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.log-screen-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Log: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**

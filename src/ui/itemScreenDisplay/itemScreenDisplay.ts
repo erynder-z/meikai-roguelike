@@ -3,7 +3,6 @@ import { FadeOutElement } from '../other/fadeOutElement';
 export class ItemScreenDisplay extends FadeOutElement {
   public itemDescription: string = '';
   public options: { key: string; description: string }[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -60,24 +59,11 @@ export class ItemScreenDisplay extends FadeOutElement {
         <div class="item-display-card">
           <div class="item-description"></div>
           <ul class="options"></ul>
-          <div class="inventory-footing">(Press ${this.menuKey} to cancel)</div>
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.generateOptionsList();
-  }
-  /**
-   * Sets the menu key text displayed in the heading.
-   *
-   * @param key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const footing = this.shadowRoot?.querySelector(
-      '.inventory-footing',
-    ) as HTMLElement;
-    if (footing) footing.textContent = `(Press ${this.menuKey} to close)`;
   }
 
   /**

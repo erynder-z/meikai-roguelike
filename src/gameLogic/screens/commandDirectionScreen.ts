@@ -47,7 +47,6 @@ export class CommandDirectionScreen extends BaseScreen {
       const table = this.getDirectionTable();
       this.display.directions = table;
       this.display.title = 'Which direction?';
-      this.display.menuKeyText = this.activeControlScheme.menu.toString();
 
       canvas?.insertAdjacentElement('afterend', this.display);
     }
