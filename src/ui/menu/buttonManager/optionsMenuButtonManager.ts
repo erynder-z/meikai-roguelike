@@ -76,6 +76,20 @@ export class OptionsMenuButtonManager {
   }
 
   /**
+   * Updates the text of the flicker toggle button based on whether flicker is enabled.
+   *
+   * @param isFlickerEnabled - Indicates if flicker is currently enabled.
+   */
+  public updateFlickerToggleButton(isFlickerEnabled: boolean): void {
+    const flickerButton = this.shadowRoot?.getElementById(
+      'toggle-flicker-button',
+    );
+    if (flickerButton) {
+      flickerButton.innerHTML = `<span class="underline">F</span>licker ${isFlickerEnabled ? 'ON' : 'OFF'}`;
+    }
+  }
+
+  /**
    * Updates the text of the message alignment button based on the current
    * message alignment.
    *
