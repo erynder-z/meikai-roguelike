@@ -10,6 +10,7 @@ import { GenerateMainUI } from './ui/uiGenerators/generateMainUI';
 import { GenerateTitleScreen } from './ui/uiGenerators/generateTitleScreen';
 import { GlyphLoader } from './loaders/glyphLoader';
 import { handleGlobalKeydown } from './utilities/handleGlobalKeyDown';
+import { ImageHandler } from './media/imageHandler/imageHandler';
 import { invoke } from '@tauri-apps/api/core';
 import { LayoutManager } from './ui/layoutManager/layoutManager';
 
@@ -41,6 +42,10 @@ const initializeGame = async () => {
 
     // Generate Main UI
     await GenerateMainUI.generate();
+
+    // Draw First Image
+    const imageHandler = ImageHandler.getInstance();
+    imageHandler.drawFirstImage();
 
     // Start the flicker effect
     if (show_flicker) {

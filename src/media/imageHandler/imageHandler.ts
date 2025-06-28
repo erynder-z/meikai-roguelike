@@ -2,6 +2,7 @@ import { EventCategory } from '../../gameLogic/messages/logMessage';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { images } from './imageIndex';
+import { lvlTier00Images } from '../../media/imageHandler/imageImports/levelImages';
 import { MovementDirection } from '../../types/gameLogic/commands/movementDirections';
 
 /**
@@ -328,5 +329,23 @@ export class ImageHandler {
     image.src = rand.getRandomImageFromArray(imgs);
 
     game.log.removeCurrentEvent();
+  }
+
+  /**
+   * Displays a random image from the first level tier upon game start.
+   * Meant to be called once at the start of the game.
+   */
+  public drawFirstImage(): void {
+    const gameConfig = gameConfigManager.getConfig();
+    const shouldShowImages = gameConfig.show_images;
+
+    if (!shouldShowImages) return;
+
+    const randomImage =
+      lvlTier00Images[Math.floor(Math.random() * lvlTier00Images.length)];
+
+    const image = new Image();
+    image.src = randomImage;
+    this.renderImage(image, 'lvlChange');
   }
 }

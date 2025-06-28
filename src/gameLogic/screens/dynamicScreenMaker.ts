@@ -1,11 +1,8 @@
 import { Build } from '../../types/gameBuilder/build';
-import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameOverScreen } from './gameOverScreen';
 import { GameScreen } from './gameScreen';
 import { GenerateTitleScreen } from '../../ui/uiGenerators/generateTitleScreen';
 import { GameState } from '../../types/gameBuilder/gameState';
-import { ImageHandler } from '../../media/imageHandler/imageHandler';
-import { lvlTier00Images } from '../../media/imageHandler/imageImports/levelImages';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { ScreenStack } from '../../terminal/screenStack';
 import { SerializedGameState } from '../../types/utilities/saveStateHandler';
@@ -94,7 +91,6 @@ export class DynamicScreenMaker implements ScreenMaker {
       (sm: ScreenMaker) => sm.newGame(),
       seed,
     );
-    this.drawFirstImage();
     this.runDynamic(dynamicScreenMaker);
   }
 
@@ -118,28 +114,6 @@ export class DynamicScreenMaker implements ScreenMaker {
       (sm: ScreenMaker) => sm.loadGame(saveState),
       seed,
     );
-    this.drawFirstImage();
     this.runDynamic(dynamicScreenMaker);
-  }
-
-  /**
-   * Displays a random level change image when the game is started.
-   *
-   * The image is displayed using the {@link ImageHandler} and the image type is "lvlChange".
-   * If images are disabled in the game config, then this function does nothing.
-   */
-  private static drawFirstImage(): void {
-    const gameConfig = gameConfigManager.getConfig();
-    const shouldShowImages = gameConfig.show_images;
-
-    if (!shouldShowImages) return;
-
-    const randomImage =
-      lvlTier00Images[Math.floor(Math.random() * lvlTier00Images.length)];
-
-    const imageHandler = ImageHandler.getInstance();
-    const image = new Image();
-    image.src = randomImage;
-    imageHandler.renderImage(image, 'lvlChange');
   }
 }
