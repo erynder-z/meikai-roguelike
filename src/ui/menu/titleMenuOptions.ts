@@ -282,6 +282,9 @@ export class TitleMenuOptions extends HTMLElement {
           <button id="toggle-flicker-button">
             <span class="underline">F</span>licker
           </button>
+          <button id="toggle-glyph-shadow-button">
+            Glyph sh<span class="underline">a</span>dow
+          </button>
         </div>
         <span class="info-span">UI</span>
         <div class="info-container">
@@ -343,6 +346,9 @@ export class TitleMenuOptions extends HTMLElement {
       this.gameConfig.scanline_style,
     );
     this.buttonManager.updateFlickerToggleButton(this.gameConfig.show_flicker);
+    this.buttonManager.updateGlyphShadowToggleButton(
+      this.gameConfig.show_glyph_shadow,
+    );
     this.buttonManager.updateMessageAlignButton(
       this.gameConfig.message_display,
     );
@@ -382,6 +388,7 @@ export class TitleMenuOptions extends HTMLElement {
       this.toggleTemperatureUnitChange.bind(this);
     this.toggleDepthUnitChange = this.toggleDepthUnitChange.bind(this);
     this.toggleBloodIntensity = this.toggleBloodIntensity.bind(this);
+    this.toggleGlyphShadow = this.toggleGlyphShadow.bind(this);
     this.returnToPreviousScreen = this.returnToPreviousScreen.bind(this);
 
     const root = this.shadowRoot;
@@ -915,6 +922,19 @@ export class TitleMenuOptions extends HTMLElement {
   }
 
   /**
+   * Toggles the glyph shadow setting on or off.
+   *
+   * Updates the {@link gameConfig.show_glyph_shadow} property, and updates the
+   * button text based on the current state.
+   */
+  private toggleGlyphShadow(): void {
+    this.gameConfig.show_glyph_shadow = !this.gameConfig.show_glyph_shadow;
+    this.buttonManager.updateGlyphShadowToggleButton(
+      this.gameConfig.show_glyph_shadow,
+    );
+  }
+
+  /**
    * Toggles the message alignment between left and right.
    *
    * Updates the {@link gameConfig.message_display} property, updates the message
@@ -1104,6 +1124,9 @@ export class TitleMenuOptions extends HTMLElement {
         break;
       case 'F':
         this.toggleFlicker();
+        break;
+      case 'a':
+        this.toggleGlyphShadow();
         break;
       case 'M':
         this.toggleMessageAlignment();

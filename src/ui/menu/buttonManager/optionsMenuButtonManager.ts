@@ -210,6 +210,21 @@ export class OptionsMenuButtonManager {
   }
 
   /**
+   * Updates the text of the glyph shadow toggle button based on whether
+   * glyph shadow is enabled.
+   *
+   * @param isGlyphShadowEnabled - Indicates if glyph shadow is currently enabled.
+   */
+  public updateGlyphShadowToggleButton(isGlyphShadowEnabled: boolean): void {
+    const glyphShadowButton = this.shadowRoot?.getElementById(
+      'toggle-glyph-shadow-button',
+    );
+    if (glyphShadowButton) {
+      glyphShadowButton.innerHTML = `Glyph sh<span class="underline">a</span>dow ${isGlyphShadowEnabled ? 'ON' : 'OFF'}`;
+    }
+  }
+
+  /**
    * Displays the current seed in the title menu.
    *
    * @param seed - The current seed.

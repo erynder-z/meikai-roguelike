@@ -10,6 +10,7 @@ export type GameConfigType = {
   show_scanlines: boolean;
   scanline_style: ScanlineStyles;
   show_flicker: boolean;
+  show_glyph_shadow: boolean;
   show_images: boolean;
   message_display: 'left' | 'right';
   message_count: number;

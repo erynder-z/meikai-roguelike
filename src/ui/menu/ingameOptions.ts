@@ -223,6 +223,12 @@ export class IngameOptions extends HTMLElement {
            <button id="toggle-flicker-button">
             <span class="underline">F</span>licker
           </button>
+          <div class="info-text">
+            Glyph shadow: ${this.gameConfig.show_glyph_shadow} *
+          </div>
+          <div class="explanation">
+            * Can only be changed from main menu.
+          </div>
         </div>
         <span class="info-span">UI</span>
         <div class="info-container">

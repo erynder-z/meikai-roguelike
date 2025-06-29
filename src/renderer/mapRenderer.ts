@@ -2,6 +2,7 @@ import { Buff } from '../gameLogic/buffs/buffEnum';
 import { CanSee } from '../maps/helpers/canSee';
 import { DrawableTerminal } from '../types/terminal/drawableTerminal';
 import { EnvEffect } from '../types/gameLogic/maps/mapModel/envEffect';
+import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../types/gameBuilder/gameState';
 import { Glyph } from '../gameLogic/glyphs/glyph';
@@ -34,6 +35,7 @@ export class MapRenderer {
    * @param farDist - The maximum distance that a cell can be from the player to be visible.
    * @param blind - Whether the player is blind.
    * @param isRayCast - Whether ray casting is being used to render the map.
+   * @param applyGlyphShadow - Whether to apply a shadow to the glyph.
    */
   private static drawCell(
     term: DrawableTerminal,
@@ -44,6 +46,7 @@ export class MapRenderer {
     farDist: number,
     blind: boolean,
     isRayCast: boolean,
+    applyGlyphShadow: boolean,
   ): void {
     const cell = map.isLegalPoint(wp) ? map.cell(wp) : this.outside;
     const distanceSq = wp.squaredDistanceTo(playerPos);
@@ -83,7 +86,7 @@ export class MapRenderer {
       isDim,
     );
 
-    if (map.isLegalPoint(wp) && map.cell(wp).lit) {
+    if (applyGlyphShadow && map.isLegalPoint(wp) && map.cell(wp).lit) {
       this.applyTextShadow(term);
     } else {
       term.clearShadow();
@@ -247,9 +250,21 @@ export class MapRenderer {
     const buffs = game.player.buffs;
     const blind = buffs && buffs.is(Buff.Blind);
     const farDist = CanSee.getFarDist(playerPos, map, game);
+    const gameConfig = gameConfigManager.getConfig();
+    const shouldApplyGlyphShadow = gameConfig.show_glyph_shadow;
 
     this.forEachCellInView(term, map, vp, (tp, wp, term, map) => {
-      this.drawCell(term, tp, wp, map, playerPos, farDist, blind, false);
+      this.drawCell(
+        term,
+        tp,
+        wp,
+        map,
+        playerPos,
+        farDist,
+        blind,
+        false,
+        shouldApplyGlyphShadow,
+      );
     });
   }
 
@@ -272,9 +287,21 @@ export class MapRenderer {
     const buffs = game.player.buffs;
     const blind = buffs && buffs.is(Buff.Blind);
     const farDist = CanSee.getFarDist(playerPos, map, game);
+    const gameConfig = gameConfigManager.getConfig();
+    const shouldApplyGlyphShadow = gameConfig.show_glyph_shadow;
 
     this.forEachCellInView(term, map, vp, (tp, wp, term, map) => {
-      this.drawCell(term, tp, wp, map, playerPos, farDist, blind, true);
+      this.drawCell(
+        term,
+        tp,
+        wp,
+        map,
+        playerPos,
+        farDist,
+        blind,
+        true,
+        shouldApplyGlyphShadow,
+      );
     });
   }
 
