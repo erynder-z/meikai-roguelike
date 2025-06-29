@@ -8,14 +8,14 @@ export class FlickerManager {
     this.canvas = document.getElementById('canvas1') as HTMLCanvasElement;
   }
 
-/**
- * Gets the single instance of the FlickerManager.
- *
- * Ensures that only one instance of the FlickerManager is created (singleton pattern).
- * If the instance does not exist, it is created. Otherwise, the existing instance is returned.
- *
- * @returns The single instance of the FlickerManager.
- */
+  /**
+   * Gets the single instance of the FlickerManager.
+   *
+   * Ensures that only one instance of the FlickerManager is created (singleton pattern).
+   * If the instance does not exist, it is created. Otherwise, the existing instance is returned.
+   *
+   * @returns The single instance of the FlickerManager.
+   */
 
   public static getInstance(): FlickerManager {
     if (!FlickerManager.instance) {

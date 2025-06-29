@@ -83,7 +83,22 @@ export class MapRenderer {
       isDim,
     );
 
+    if (map.isLegalPoint(wp) && map.cell(wp).lit) {
+      this.applyTextShadow(term);
+    } else {
+      term.clearShadow();
+    }
     term.drawAt(tp.x, tp.y, glyphInfo.char, fg, bg);
+    term.clearShadow();
+  }
+
+  /**
+   * Applies a text shadow to the terminal.
+   *
+   * @param term - The terminal to apply the shadow to.
+   */
+  private static applyTextShadow(term: DrawableTerminal): void {
+    term.setShadow('rgba(0, 0, 0, 0.5)', 2, 1, 1);
   }
 
   /**

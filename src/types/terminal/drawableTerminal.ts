@@ -62,4 +62,13 @@ export type DrawableTerminal = {
     opacityFactor: number,
     thickness: number,
   ): void;
+
+  setShadow(
+    color: string,
+    blur: number,
+    offsetX: number,
+    offsetY: number,
+  ): void;
+
+  clearShadow(): void;
 };
