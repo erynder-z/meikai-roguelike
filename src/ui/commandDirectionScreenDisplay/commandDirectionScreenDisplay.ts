@@ -1,7 +1,8 @@
-export class CommandDirectionScreenDisplay extends HTMLElement {
+import { FadeOutElement } from '../other/fadeOutElement';
+
+export class CommandDirectionScreenDisplay extends FadeOutElement {
   public title: string = '';
   public directions: string[][] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -62,25 +63,11 @@ export class CommandDirectionScreenDisplay extends HTMLElement {
         <div class="command-direction-screen-display">
           <div class="title"></div>
           <div class="directions-table"></div>
-          <div class="spell-footing">(Press ${this.menuKey} to cancel)</div>
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.renderDirections();
-  }
-
-  /**
-   * Sets the cancel key text displayed in the footer.
-   *
-   * @param key - The cancel key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const footing = this.shadowRoot?.querySelector(
-      '.spell-footing',
-    ) as HTMLElement;
-    if (footing) footing.textContent = `(Press ${this.menuKey} to cancel)`;
   }
 
   /**
@@ -107,17 +94,5 @@ export class CommandDirectionScreenDisplay extends HTMLElement {
         });
       });
     }
-  }
-
-  /**
-   * Adds a 'fade-out' class to the element, triggering a fade-out animation, and returns a promise that resolves when the animation ends.
-   *
-   * @return A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

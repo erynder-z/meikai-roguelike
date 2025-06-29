@@ -2,6 +2,7 @@ import controls from '../../controls/control_schemes.json';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { ControlSchemeName } from '../../types/controls/controlSchemeType';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
+import { FlickerManager } from '../../renderer/flickerManager';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { LayoutManager } from '../layoutManager/layoutManager';
@@ -278,6 +279,12 @@ export class TitleMenuOptions extends HTMLElement {
           <button id="switch-scanline-style-button">
             Scanlines s<span class="underline">t</span>yle
           </button>
+          <button id="toggle-flicker-button">
+            <span class="underline">F</span>licker
+          </button>
+          <button id="toggle-glyph-shadow-button">
+            Glyph sh<span class="underline">a</span>dow
+          </button>
         </div>
         <span class="info-span">UI</span>
         <div class="info-container">
@@ -338,6 +345,10 @@ export class TitleMenuOptions extends HTMLElement {
     this.buttonManager.updateScanlineStyleButton(
       this.gameConfig.scanline_style,
     );
+    this.buttonManager.updateFlickerToggleButton(this.gameConfig.show_flicker);
+    this.buttonManager.updateGlyphShadowToggleButton(
+      this.gameConfig.show_glyph_shadow,
+    );
     this.buttonManager.updateMessageAlignButton(
       this.gameConfig.message_display,
     );
@@ -357,22 +368,6 @@ export class TitleMenuOptions extends HTMLElement {
 
   /**
    * Bind events to the elements inside the options menu.
-   *
-   * The function binds the following events:
-   * - Change current seed button click event.
-   * - Change current font button click event.
-   * - Change terminal dimensions button click event.
-   * - Switch control scheme button click event.
-   * - Toggle scanlines button click event.
-   * - Switch scanline style button click event.
-   * - Toggle message alignment button click event.
-   * - Toggle show images button click event.
-   * - Toggle image alignment button click event.
-   * - Focus and select message count input button click event.
-   * - Toggle blood intensity button click event.
-   * - Focus and select keypress throttle input button click event.
-   * - Return to previous screen button click event.
-   * - Keydown event on the document.
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -383,6 +378,7 @@ export class TitleMenuOptions extends HTMLElement {
       this.focusAndSelectKeypressThrottleInput.bind(this);
     this.toggleScanlines = this.toggleScanlines.bind(this);
     this.switchScanlineStyle = this.switchScanlineStyle.bind(this);
+    this.toggleFlicker = this.toggleFlicker.bind(this);
     this.toggleMessageAlignment = this.toggleMessageAlignment.bind(this);
     this.toggleShowImages = this.toggleShowImages.bind(this);
     this.toggleImageAlignment = this.toggleImageAlignment.bind(this);
@@ -392,6 +388,7 @@ export class TitleMenuOptions extends HTMLElement {
       this.toggleTemperatureUnitChange.bind(this);
     this.toggleDepthUnitChange = this.toggleDepthUnitChange.bind(this);
     this.toggleBloodIntensity = this.toggleBloodIntensity.bind(this);
+    this.toggleGlyphShadow = this.toggleGlyphShadow.bind(this);
     this.returnToPreviousScreen = this.returnToPreviousScreen.bind(this);
 
     const root = this.shadowRoot;
@@ -446,6 +443,12 @@ export class TitleMenuOptions extends HTMLElement {
       'switch-scanline-style-button',
       'click',
       this.switchScanlineStyle,
+    );
+    this.eventTracker.addById(
+      root,
+      'toggle-flicker-button',
+      'click',
+      this.toggleFlicker,
     );
     this.eventTracker.addById(
       root,
@@ -902,6 +905,36 @@ export class TitleMenuOptions extends HTMLElement {
   }
 
   /**
+   * Toggles the flicker setting on or off.
+   *
+   * Updates the {@link gameConfig.show_flicker} property, and starts or stops the flicker effect.
+   * The button text is also updated based on the current state.
+   */
+  private toggleFlicker(): void {
+    this.gameConfig.show_flicker = !this.gameConfig.show_flicker;
+    const flickerManager = FlickerManager.getInstance();
+    if (this.gameConfig.show_flicker) {
+      flickerManager.start();
+    } else {
+      flickerManager.stop();
+    }
+    this.buttonManager.updateFlickerToggleButton(this.gameConfig.show_flicker);
+  }
+
+  /**
+   * Toggles the glyph shadow setting on or off.
+   *
+   * Updates the {@link gameConfig.show_glyph_shadow} property, and updates the
+   * button text based on the current state.
+   */
+  private toggleGlyphShadow(): void {
+    this.gameConfig.show_glyph_shadow = !this.gameConfig.show_glyph_shadow;
+    this.buttonManager.updateGlyphShadowToggleButton(
+      this.gameConfig.show_glyph_shadow,
+    );
+  }
+
+  /**
    * Toggles the message alignment between left and right.
    *
    * Updates the {@link gameConfig.message_display} property, updates the message
@@ -1088,6 +1121,12 @@ export class TitleMenuOptions extends HTMLElement {
         break;
       case 't':
         this.switchScanlineStyle();
+        break;
+      case 'F':
+        this.toggleFlicker();
+        break;
+      case 'a':
+        this.toggleGlyphShadow();
         break;
       case 'M':
         this.toggleMessageAlignment();

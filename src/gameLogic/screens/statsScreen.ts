@@ -33,7 +33,6 @@ export class StatsScreen extends BaseScreen {
       this.display.currentPlayer = this.game.player;
       if (this.game.equipment)
         this.display.currentEquipment = this.game.equipment;
-      this.display.menuKeyText = this.activeControlScheme.menu.toString();
 
       canvas?.insertAdjacentElement('afterend', this.display);
 

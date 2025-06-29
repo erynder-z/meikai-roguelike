@@ -17,7 +17,7 @@
     { "action": "spells", "description": "Open spell screen" },
     { "action": "look", "description": "Look" },
     { "action": "dig_modifier", "description": "Dig modifier key" },
-    { "action": "menu", "description": "Open options screen" },
+    { "action": "menu", "description": "Open options screen / Close menus" },
     { "action": "scroll_list", "description": "Scroll up/down" },
     { "action": "stats", "description": "Open stats screen" }
   ]

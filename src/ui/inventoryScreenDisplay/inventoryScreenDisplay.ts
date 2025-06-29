@@ -1,9 +1,9 @@
+import { FadeOutElement } from '../other/fadeOutElement';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
 
-export class InventoryScreenDisplay extends HTMLElement {
+export class InventoryScreenDisplay extends FadeOutElement {
   private inventoryItems: ItemObject[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -87,7 +87,7 @@ export class InventoryScreenDisplay extends HTMLElement {
 
       <div class="inventory-screen-display">
         <div class="inventory-heading">
-          Inventory: (Press ${this.menuKey} to close)
+          Inventory
         </div>
 
         <div class="inventory-list"></div>
@@ -105,21 +105,6 @@ export class InventoryScreenDisplay extends HTMLElement {
   set items(items: ItemObject[]) {
     this.inventoryItems = items;
     this.renderInventoryList();
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   *
-   * @param key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.inventory-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Inventory: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**
@@ -151,17 +136,5 @@ export class InventoryScreenDisplay extends HTMLElement {
       itemList.appendChild(fragment);
       inventoryListContainer.appendChild(itemList);
     }
-  }
-
-  /**
-   * Triggers a fade-out animation and resolves when it completes.
-   *
-   * @returns A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

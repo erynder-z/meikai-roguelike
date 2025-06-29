@@ -1,10 +1,10 @@
 import { BuffColors } from '../buffs/buffColors';
+import { FadeOutElement } from '../other/fadeOutElement';
 import { LogMessage } from '../../gameLogic/messages/logMessage';
 
-export class LogScreenDisplay extends HTMLElement {
+export class LogScreenDisplay extends FadeOutElement {
   private colorizer = new BuffColors();
   private messageLog: LogMessage[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -84,7 +84,7 @@ export class LogScreenDisplay extends HTMLElement {
       </style>
       <div class="log-screen-display">
         <div class="log-screen-heading">
-          Log: (Press ${this.menuKey} to close). 
+          Log 
         </div>
         <div class="log-screen-list"></div>
       </div>
@@ -101,20 +101,6 @@ export class LogScreenDisplay extends HTMLElement {
   set log(messages: LogMessage[]) {
     this.messageLog = messages;
     this.generateMessageList();
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   * @param {string} key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.log-screen-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Log: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**
@@ -140,17 +126,5 @@ export class LogScreenDisplay extends HTMLElement {
       messageList.appendChild(fragment);
       logScreenList.appendChild(messageList);
     }
-  }
-
-  /**
-   * Adds the 'fade-out' class to the element and returns a promise that resolves when the fade out animation ends.
-   *
-   * @returns A promise that resolves when the fade out animation ends.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

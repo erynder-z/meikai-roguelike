@@ -81,6 +81,49 @@ canvas {
   font-family: var(--game-font), monospace;
 }
 
+@keyframes crt-flicker-fast {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.98;
+  }
+}
+
+@keyframes crt-flicker-medium {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.97;
+  }
+}
+
+@keyframes crt-flicker-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.96;
+  }
+}
+
+
+.flicker-fast {
+  animation: crt-flicker-fast 0.05s infinite;
+}
+
+.flicker-medium {
+  animation: crt-flicker-medium 0.9s infinite;
+}
+
+.flicker-slow {
+  animation: crt-flicker-slow 0.15s infinite;
+}
+
 li {
   list-style: none;
 }
@@ -162,7 +205,7 @@ li {
 
 @keyframes fade-out {
   0% {
-    opacity: 1;
+    opacity: 0;
   }
   100% {
     opacity: 0;

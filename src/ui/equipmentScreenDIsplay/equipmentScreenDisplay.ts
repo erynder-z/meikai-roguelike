@@ -1,10 +1,11 @@
-export class EquipmentScreenDisplay extends HTMLElement {
+import { FadeOutElement } from '../other/fadeOutElement';
+
+export class EquipmentScreenDisplay extends FadeOutElement {
   private equipmentItems: {
     char: string;
     slot: string;
     description: string;
   }[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -87,7 +88,7 @@ export class EquipmentScreenDisplay extends HTMLElement {
         }
       </style>
       <div class="equipment-screen-display">
-        <div class="equipment-heading">Equipped Items: (Press ${this.menuKey} to close)</div>
+        <div class="equipment-heading">Equipped Items</div>
         <div class="equipment-list"></div>
       </div>
     `;
@@ -103,21 +104,6 @@ export class EquipmentScreenDisplay extends HTMLElement {
   set items(items: { char: string; slot: string; description: string }[]) {
     this.equipmentItems = items;
     this.renderEquipmentList();
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   *
-   * @param key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.equipment-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Equipped Items: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**
@@ -146,17 +132,5 @@ export class EquipmentScreenDisplay extends HTMLElement {
       itemList.appendChild(fragment);
       equipmentListContainer.appendChild(itemList);
     }
-  }
-
-  /**
-   * Triggers a fade-out animation and resolves when it completes.
-   *
-   * @returns A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

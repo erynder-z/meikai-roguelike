@@ -2,6 +2,7 @@ import controls from '../../controls/control_schemes.json';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { ControlSchemeName } from '../../types/controls/controlSchemeType';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
+import { FlickerManager } from '../../renderer/flickerManager';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { LayoutManager } from '../layoutManager/layoutManager';
 import { OptionsMenuButtonManager } from './buttonManager/optionsMenuButtonManager';
@@ -219,6 +220,15 @@ export class IngameOptions extends HTMLElement {
           <button id="switch-scanline-style-button">
             Scanlines s<span class="underline">t</span>yle
           </button>
+           <button id="toggle-flicker-button">
+            <span class="underline">F</span>licker
+          </button>
+          <div class="info-text">
+            Glyph shadow: ${this.gameConfig.show_glyph_shadow} *
+          </div>
+          <div class="explanation">
+            * Can only be changed from main menu.
+          </div>
         </div>
         <span class="info-span">UI</span>
         <div class="info-container">
@@ -226,7 +236,7 @@ export class IngameOptions extends HTMLElement {
             <span class="underline">M</span>essage display
           </button>
           <button id="show-images-button">
-            Sh<span class="underline">o</span>ow images
+            Sh<span class="underline">o</span>w images
           </button>
           <button id="image-align-button">
             <span class="underline">I</span>mage alignment
@@ -278,6 +288,7 @@ export class IngameOptions extends HTMLElement {
     this.buttonManager.updateScanlineStyleButton(
       this.gameConfig.scanline_style,
     );
+    this.buttonManager.updateFlickerToggleButton(this.gameConfig.show_flicker);
     this.buttonManager.updateMessageAlignButton(
       this.gameConfig.message_display,
     );
@@ -302,6 +313,7 @@ export class IngameOptions extends HTMLElement {
     this.toggleControlScheme = this.toggleControlScheme.bind(this);
     this.toggleScanlines = this.toggleScanlines.bind(this);
     this.switchScanlineStyle = this.switchScanlineStyle.bind(this);
+    this.toggleFlicker = this.toggleFlicker.bind(this);
     this.toggleMessageAlignment = this.toggleMessageAlignment.bind(this);
     this.toggleTemperatureUnitChange =
       this.toggleTemperatureUnitChange.bind(this);
@@ -334,6 +346,13 @@ export class IngameOptions extends HTMLElement {
       'switch-scanline-style-button',
       'click',
       this.switchScanlineStyle,
+    );
+
+    this.eventTracker.addById(
+      root,
+      'toggle-flicker-button',
+      'click',
+      this.toggleFlicker,
     );
 
     this.eventTracker.addById(
@@ -468,6 +487,23 @@ export class IngameOptions extends HTMLElement {
     const mainContainer = document.getElementById('main-container');
     if (mainContainer)
       ScanlinesHandler.applyScanlineStyle(mainContainer, nextStyle);
+  }
+
+  /**
+   * Toggles the flicker setting on or off.
+   *
+   * Updates the {@link gameConfig.show_flicker} property, and starts or stops the flicker effect.
+   * The button text is also updated based on the current state.
+   */
+  private toggleFlicker(): void {
+    this.gameConfig.show_flicker = !this.gameConfig.show_flicker;
+    const flickerManager = FlickerManager.getInstance();
+    if (this.gameConfig.show_flicker) {
+      flickerManager.start();
+    } else {
+      flickerManager.stop();
+    }
+    this.buttonManager.updateFlickerToggleButton(this.gameConfig.show_flicker);
   }
 
   /**
@@ -693,6 +729,9 @@ export class IngameOptions extends HTMLElement {
         break;
       case 't':
         this.switchScanlineStyle();
+        break;
+      case 'F':
+        this.toggleFlicker();
         break;
       case 'M':
         this.toggleMessageAlignment();

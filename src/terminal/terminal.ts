@@ -484,4 +484,34 @@ export class Terminal implements DrawableTerminal {
     }
     this.ctx.restore();
   }
+
+  /**
+   * Sets the shadow properties of the canvas rendering context.
+   *
+   * @param color - The color of the shadow.
+   * @param blur - The blur level of the shadow.
+   * @param offsetX - The horizontal offset of the shadow.
+   * @param offsetY - The vertical offset of the shadow.
+   */
+  public setShadow(
+    color: string,
+    blur: number,
+    offsetX: number,
+    offsetY: number,
+  ): void {
+    this.ctx.shadowColor = color;
+    this.ctx.shadowBlur = blur;
+    this.ctx.shadowOffsetX = offsetX;
+    this.ctx.shadowOffsetY = offsetY;
+  }
+
+  /**
+   * Clears the shadow properties of the canvas rendering context.
+   */
+  public clearShadow(): void {
+    this.ctx.shadowColor = 'transparent';
+    this.ctx.shadowBlur = 0;
+    this.ctx.shadowOffsetX = 0;
+    this.ctx.shadowOffsetY = 0;
+  }
 }

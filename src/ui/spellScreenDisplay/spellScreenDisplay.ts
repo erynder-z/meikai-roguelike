@@ -1,7 +1,8 @@
-export class SpellScreenDisplay extends HTMLElement {
+import { FadeOutElement } from '../other/fadeOutElement';
+
+export class SpellScreenDisplay extends FadeOutElement {
   public title: string = '';
   public spells: { key: string; description: string }[] = [];
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -69,25 +70,11 @@ export class SpellScreenDisplay extends HTMLElement {
         <div class="spell-screen">
           <div class="spell-title"></div>
           <ul class="spell-options"></ul>
-          <div class="spell-footing">(Press ${this.menuKey} to cancel)</div>
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.renderSpells();
-  }
-
-  /**
-   * Sets the cancel key text displayed in the footer.
-   *
-   * @param key - The cancel key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const footing = this.shadowRoot?.querySelector(
-      '.spell-footing',
-    ) as HTMLElement;
-    if (footing) footing.textContent = `(Press ${this.menuKey} to cancel)`;
   }
 
   /**
@@ -111,17 +98,5 @@ export class SpellScreenDisplay extends HTMLElement {
         optionsList.appendChild(li);
       });
     }
-  }
-
-  /**
-   * Triggers a fade-out animation and resolves when it completes.
-   *
-   * @returns A promise that resolves when the fade-out animation completes.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

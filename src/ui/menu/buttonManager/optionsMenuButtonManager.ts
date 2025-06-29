@@ -76,6 +76,20 @@ export class OptionsMenuButtonManager {
   }
 
   /**
+   * Updates the text of the flicker toggle button based on whether flicker is enabled.
+   *
+   * @param isFlickerEnabled - Indicates if flicker is currently enabled.
+   */
+  public updateFlickerToggleButton(isFlickerEnabled: boolean): void {
+    const flickerButton = this.shadowRoot?.getElementById(
+      'toggle-flicker-button',
+    );
+    if (flickerButton) {
+      flickerButton.innerHTML = `<span class="underline">F</span>licker ${isFlickerEnabled ? 'ON' : 'OFF'}`;
+    }
+  }
+
+  /**
    * Updates the text of the message alignment button based on the current
    * message alignment.
    *
@@ -193,6 +207,21 @@ export class OptionsMenuButtonManager {
     const text = bloodLevels[bloodIntensity] ?? 'UNKNOWN';
 
     bloodIntensityBtn.innerHTML = `<span class="underline">B</span>lood intensity: ${text}`;
+  }
+
+  /**
+   * Updates the text of the glyph shadow toggle button based on whether
+   * glyph shadow is enabled.
+   *
+   * @param isGlyphShadowEnabled - Indicates if glyph shadow is currently enabled.
+   */
+  public updateGlyphShadowToggleButton(isGlyphShadowEnabled: boolean): void {
+    const glyphShadowButton = this.shadowRoot?.getElementById(
+      'toggle-glyph-shadow-button',
+    );
+    if (glyphShadowButton) {
+      glyphShadowButton.innerHTML = `Glyph sh<span class="underline">a</span>dow ${isGlyphShadowEnabled ? 'ON' : 'OFF'}`;
+    }
   }
 
   /**

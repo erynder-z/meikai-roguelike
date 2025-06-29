@@ -2,15 +2,15 @@ import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffColors } from '../buffs/buffColors';
 import { BuffType } from '../../types/gameLogic/buffs/buffType';
 import { Equipment } from '../../gameLogic/inventory/equipment';
+import { FadeOutElement } from '../other/fadeOutElement';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { Stats } from '../../gameLogic/stats/stats';
 
-export class StatsScreenDisplay extends HTMLElement {
+export class StatsScreenDisplay extends FadeOutElement {
   public colorizer: BuffColors = new BuffColors();
   public stats: Stats | undefined;
   public player: Mob | undefined;
   public equipment: Equipment | undefined;
-  private menuKey: string = 'Esc';
 
   constructor() {
     super();
@@ -106,7 +106,7 @@ export class StatsScreenDisplay extends HTMLElement {
       </style>
       <div class="stats-screen-display">
         <div class="stats-screen-heading">
-          Stats: (Press ${this.menuKey} to close).
+          Stats
         </div>
         <div class="stats">
           <div class="player-name">Name: ${this.player?.name}</div>
@@ -157,21 +157,6 @@ export class StatsScreenDisplay extends HTMLElement {
    */
   set currentEquipment(equipment: Equipment) {
     this.equipment = equipment;
-  }
-
-  /**
-   * Sets the menu key text displayed in the heading.
-   *
-   * @param key - The menu key.
-   */
-  set menuKeyText(key: string) {
-    this.menuKey = key;
-    const heading = this.shadowRoot?.querySelector(
-      '.stats-screen-heading',
-    ) as HTMLElement;
-    if (heading) {
-      heading.textContent = `Stats: (Press ${this.menuKey} to close)`;
-    }
   }
 
   /**
@@ -345,18 +330,5 @@ export class StatsScreenDisplay extends HTMLElement {
       thirstLevels,
       'Thirst',
     );
-  }
-
-  /**
-   * Adds the 'fade-out' class to the element and returns a promise that resolves
-   * when the fade out animation ends.
-   *
-   * @returns A promise that resolves when the fade out animation ends.
-   */
-  public fadeOut(): Promise<void> {
-    return new Promise(resolve => {
-      this.classList.add('fade-out');
-      this.addEventListener('animationend', () => resolve(), { once: true });
-    });
   }
 }

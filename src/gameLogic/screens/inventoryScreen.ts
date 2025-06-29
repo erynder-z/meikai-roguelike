@@ -33,7 +33,6 @@ export class InventoryScreen extends BaseScreen {
       canvas?.insertAdjacentElement('afterend', this.display);
 
       this.display.items = this.inventory.items;
-      this.display.menuKeyText = this.activeControlScheme.menu.toString();
     }
   }
 
