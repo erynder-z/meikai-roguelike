@@ -4,6 +4,7 @@ import { ControlSchemeName } from '../../types/controls/controlSchemeType';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { FlickerManager } from '../../renderer/flickerManager';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
+import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { LayoutManager } from '../layoutManager/layoutManager';
 import { OptionsMenuButtonManager } from './buttonManager/optionsMenuButtonManager';
 import { ScanlinesHandler } from '../../renderer/scanlinesHandler';
@@ -46,6 +47,19 @@ export class IngameOptions extends HTMLElement {
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
+        ::-webkit-scrollbar {
+          width: 0.25rem;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background-color: var(--scrollbar-foreground);
+          border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background-color: var(--scrollbar-background);
+        }
+        
         .options-menu {
           font-family: 'UA Squared';
           font-size: 2rem;
@@ -53,17 +67,17 @@ export class IngameOptions extends HTMLElement {
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
           height: 100%;
           width: 100%;
           backdrop-filter: brightness(60%) blur(10px);
           color: var(--white);
           z-index: 1;
-          overflow: hidden;
+          overflow-y: auto;
+          overflow-x: hidden;
           animation: unBlur 0.25s;
         }
 
-        .options-menu button {
+        button {
           font-family: 'UA Squared';
           padding: 1rem;
           font-size: 2rem;
@@ -75,7 +89,7 @@ export class IngameOptions extends HTMLElement {
           cursor: pointer;
         }
 
-        .options-menu button:hover {
+        button:hover {
           transform: translateX(8px) scale(1.05);
         }
 
@@ -154,15 +168,17 @@ export class IngameOptions extends HTMLElement {
         }
 
         .title {
+          font-family: 'UA Squared';
           position: fixed;
           bottom: 0;
           left: 0;
           margin: 0 1rem;
           z-index: 1;
           font-size: 5rem;
+          font-weight: bold;
         }
 
-        .options-menu .back-button {
+        .back-button {
           position: fixed;
           bottom: 0;
           right: 0;
@@ -272,11 +288,12 @@ export class IngameOptions extends HTMLElement {
             <span class="underline">B</span>lood intensity
           </button>
         </div>
-        <div class="title">Options</div>
+        
+      </div>
+      <div class="title">Options</div>
         <button id="back-button" class="back-button">
           <span class="underline">R</span>eturn to previous menu
         </button>
-      </div>
     `;
 
     this.shadowRoot?.appendChild(templateElement.content.cloneNode(true));
@@ -702,6 +719,13 @@ export class IngameOptions extends HTMLElement {
   }
 
   /**
+   * Checks if the Alt or Meta key is pressed.
+   */
+  private isAltKeyPressed(event: KeyboardEvent): boolean {
+    return event.altKey || event.metaKey;
+  }
+
+  /**
    * Handles key presses on the options menu.
    *
    * Listens for the following keys and calls the corresponding method to update the game configuration:
@@ -720,6 +744,18 @@ export class IngameOptions extends HTMLElement {
    * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
+    // scroll via keypress when alt or meta key is pressed
+    if (this.isAltKeyPressed(event)) {
+      const ingameOptions = document.querySelector(
+        'ingame-options',
+      ) as HTMLElement;
+      const targetElement = ingameOptions?.shadowRoot?.querySelector(
+        '.options-menu',
+      ) as HTMLElement;
+
+      new KeypressScrollHandler(targetElement).handleVirtualScroll(event);
+    }
+
     switch (event.key) {
       case 'C':
         this.toggleControlScheme();
