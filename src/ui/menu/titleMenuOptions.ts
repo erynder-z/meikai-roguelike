@@ -912,12 +912,9 @@ export class TitleMenuOptions extends HTMLElement {
    */
   private toggleFlicker(): void {
     this.gameConfig.show_flicker = !this.gameConfig.show_flicker;
-    const flickerManager = FlickerManager.getInstance();
-    if (this.gameConfig.show_flicker) {
-      flickerManager.start();
-    } else {
-      flickerManager.stop();
-    }
+    const canvasContainer = document.getElementById('canvas-container');
+    if (canvasContainer) FlickerManager.handleFlicker(canvasContainer);
+
     this.buttonManager.updateFlickerToggleButton(this.gameConfig.show_flicker);
   }
 

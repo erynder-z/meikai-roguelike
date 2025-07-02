@@ -12,7 +12,6 @@ export type ScanlineStyles =
   | 'shadowMask'
   | 'interlaced'
   | 'static'
-  | 'glitch'
   | 'rainbow'
   | 'anaglyph';
 
@@ -32,7 +31,6 @@ export class ScanlinesHandler {
     shadowMask: 'scanlines-shadowMask',
     interlaced: 'scanlines-interlaced',
     static: 'scanlines-static',
-    glitch: 'scanlines-glitch',
     rainbow: 'scanlines-rainbow',
     anaglyph: 'scanlines-anaglyph',
   };

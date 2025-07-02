@@ -1,11 +1,11 @@
 import './styles/cssReset.css';
+import './styles/flicker.css';
 import './styles/style-main.css';
 import './styles/scanlines.css';
 import { Builder } from './gameBuilder/builder';
 import { gameConfigManager } from './gameConfigManager/gameConfigManager';
 import { ColorLoader } from './loaders/colorLoader';
 import { DynamicScreenMaker } from './gameLogic/screens/dynamicScreenMaker';
-import { FlickerManager } from './renderer/flickerManager';
 import { GenerateMainUI } from './ui/uiGenerators/generateMainUI';
 import { GenerateTitleScreen } from './ui/uiGenerators/generateTitleScreen';
 import { GlyphLoader } from './loaders/glyphLoader';
@@ -20,7 +20,7 @@ const initializeGame = async () => {
 
     const gameConfig = gameConfigManager.getConfig();
 
-    const { SHOW_MENU, seed, player, show_flicker } = gameConfig;
+    const { SHOW_MENU, seed, player } = gameConfig;
 
     // Parallel Initialization of Colors and Glyphs
     await Promise.all([
@@ -46,12 +46,6 @@ const initializeGame = async () => {
     // Draw First Image
     const imageHandler = ImageHandler.getInstance();
     imageHandler.drawFirstImage();
-
-    // Start the flicker effect
-    if (show_flicker) {
-      const flickerManager = FlickerManager.getInstance();
-      flickerManager.start();
-    }
   } catch (error) {
     console.error('Error initializing game:', error);
   }
