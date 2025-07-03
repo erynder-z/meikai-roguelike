@@ -19,7 +19,7 @@ class GameConfigManager {
     SHOW_MENU: true,
     show_scanlines: true,
     scanline_style: 'light',
-    show_flicker: true,
+    show_flicker: false,
     show_glyph_shadow: true,
     show_images: true,
     message_display: 'left',
