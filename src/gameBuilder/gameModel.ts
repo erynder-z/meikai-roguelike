@@ -26,6 +26,7 @@ export class Game implements GameState {
   public needs = new NeedsHandler();
   public stats = new Stats();
   public surfaceTemp = 15;
+  public shouldShowStoryScreen = false;
   constructor(
     public rand: RandomGenerator,
     public player: Mob,

@@ -4,6 +4,7 @@ import { GameState } from '../../types/gameBuilder/gameState';
 import { ParsePlayer } from '../events/parsePlayer';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
+import { StoryScreen } from './storyScreen';
 
 /**
  * Represents a game screen that extends the functionality of the base screen.
@@ -13,6 +14,22 @@ export class GameScreen extends BaseScreen {
   private detailViewHandler = new DetailViewHandler();
   constructor(game: GameState, make: ScreenMaker) {
     super(game, make);
+  }
+
+  /**
+   * If the game state should show the story screen, the story screen is pushed
+   * onto the stack. The game state is then updated to reflect that the story
+   * screen is no longer needed.
+   *
+   * @param stack - The current stack of screens.
+   * @return Returns true if the screen should be updated, false otherwise.
+   */
+  public onTime(stack: Stack): boolean {
+    if (this.game.shouldShowStoryScreen) {
+      this.game.shouldShowStoryScreen = false;
+      stack.push(new StoryScreen(this.game, this.make));
+    }
+    return true;
   }
 
   /**

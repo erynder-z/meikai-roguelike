@@ -25,6 +25,7 @@ export type GameState = {
   needs: NeedsHandler | undefined;
   stats: Stats;
   surfaceTemp: number;
+  shouldShowStoryScreen: boolean;
   currentMap(): GameMapType | null;
   message(msg: LogMessage): void;
   flash(msg: LogMessage): void;
