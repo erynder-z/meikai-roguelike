@@ -1,4 +1,6 @@
 import { FadeOutElement } from '../other/fadeOutElement';
+import * as storyData from '../../story/storyScreenData.json';
+import { Story } from '../../types/story/story';
 
 export class StoryScreenDisplay extends FadeOutElement {
   constructor() {
@@ -10,12 +12,6 @@ export class StoryScreenDisplay extends FadeOutElement {
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
-        :host {
-          --outer-margin: 6rem;
-          --minimal-width: 33%;
-          --maximal-width: 100%;
-        }
-
         ::-webkit-scrollbar {
           width: 0.25rem;
         }
@@ -30,19 +26,46 @@ export class StoryScreenDisplay extends FadeOutElement {
         }
 
         .story-screen-display {
-          background: var(--popupBackground);
-          position: absolute;
-          top: 1rem;
-          left: 1rem;
+          backdrop-filter: blur(35px);
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 100%;
+          width: 100%;
+        }
+
+        .story-card {
+          background: var(--storyScreenBackground);
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
           padding: 2rem;
           border-radius: 1rem;
           display: flex;
-          height: calc(var(--maximal-width) - var(--outer-margin));
-          width: calc(var(--minimal-width) - var(--outer-margin));
+          height: 66%;
+          width: 50%;
           flex-direction: column;
           color: var(--white);
+        }
+
+        .story-screen-heading {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin-bottom: 1rem;
+        }
+
+        .story-text {
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
           overflow-y: auto;
           overflow-x: hidden;
+        }
+
+        .story-screen-footer {
+          font-size: 1rem;
+          margin-top: auto;
         }
 
         .fade-out {
@@ -58,17 +81,48 @@ export class StoryScreenDisplay extends FadeOutElement {
           }
         }
       </style>
+
       <div class="story-screen-display">
-       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-      sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-      At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-      no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, 
-      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
-      sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        <div class="story-card">
+          <div class="story-screen-heading"></div>
+          <div class="story-text"></div>
+          <div class="story-screen-footer">Press any key to continue.</div>
+        </div>
       </div>
     `;
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
+  }
+
+  public displayStoryCard(lvl: number): void {
+    const headingElement = this.shadowRoot?.querySelector(
+      '.story-screen-heading',
+    ) as HTMLElement;
+    const textElement = this.shadowRoot?.querySelector(
+      '.story-text',
+    ) as HTMLElement;
+    if (!textElement || !headingElement) {
+      console.warn('Element not found in Shadow DOM');
+      return;
+    }
+
+    const s: Story = storyData.story[lvl];
+
+    const heading = s.heading;
+    headingElement.innerHTML = heading;
+
+    const paragraphContainer = document.createElement('div');
+
+    // Iterate over the paragraph properties in the story data
+    Object.keys(s).forEach(key => {
+      if (key.startsWith('paragraph_')) {
+        const paragraphText = s[key];
+        const paragraphElement = document.createElement('p');
+        paragraphElement.textContent = paragraphText;
+        paragraphContainer.appendChild(paragraphElement);
+      }
+    });
+
+    textElement.appendChild(paragraphContainer);
   }
 }

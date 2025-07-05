@@ -58,6 +58,10 @@ export class ColorLoader {
         '--popupBackgroundBad',
         colors.root['--popupBackgroundBad'],
       );
+      root.style.setProperty(
+        '--storyScreenBackground',
+        colors.root['--storyScreenBackground'],
+      );
 
       resolve();
     });
