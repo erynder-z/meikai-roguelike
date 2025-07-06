@@ -17,6 +17,8 @@ export class GameScreen extends BaseScreen {
   }
 
   /**
+   * Runs periodically.
+   *
    * If the game state should show the story screen, the story screen is pushed
    * onto the stack. The game state is then updated to reflect that the story
    * screen is no longer needed.
@@ -25,10 +27,10 @@ export class GameScreen extends BaseScreen {
    * @return Returns true if the screen should be updated, false otherwise.
    */
   public onTime(stack: Stack): boolean {
-    if (this.game.shouldShowStoryScreen) {
-      this.game.shouldShowStoryScreen = false;
-      stack.push(new StoryScreen(this.game, this.make));
-    }
+    if (!this.game.shouldShowStoryScreen) return false;
+
+    this.game.shouldShowStoryScreen = false;
+    stack.push(new StoryScreen(this.game, this.make));
     return true;
   }
 

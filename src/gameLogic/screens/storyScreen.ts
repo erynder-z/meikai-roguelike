@@ -38,14 +38,19 @@ export class StoryScreen extends BaseScreen {
   }
 
   /**
-   * Handles key down events for the story screen.
-   * If the menu key is pressed, the story screen fades out and is removed from the stack.
+   * Handles key down events.
+   * If the display's animation is running, it is skipped.
+   * Otherwise, the story screen is faded out and popped from the stack.
    * @param event - The keyboard event.
    * @param stack - The stack of screens.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
-    this.fadeOutStoryScreen();
-    stack.pop();
+    if (this.display?.isAnimationRunning()) {
+      this.display.skipAnimation();
+    } else {
+      this.fadeOutStoryScreen();
+      stack.pop();
+    }
   }
 
   /**
