@@ -100,7 +100,10 @@ export class CommandDirectionScreen extends BaseScreen {
    * @return True if the event is handled, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
-    this.closeScreen(stack);
+    if (event.key === this.activeControlScheme.menu.toString()) {
+      this.closeScreen(stack);
+      return true;
+    }
     const direction = new WorldPoint();
 
     const char = this.controlSchemeManager.keyPressToCode(event);
@@ -144,7 +147,11 @@ export class CommandDirectionScreen extends BaseScreen {
       default:
         break;
     }
-    if (!direction.isEmpty()) this.actInDirection(direction);
+    if (!direction.isEmpty()) {
+      this.closeScreen(stack);
+      this.actInDirection(direction);
+    }
+
     return true;
   }
 

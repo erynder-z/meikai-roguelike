@@ -1,3 +1,4 @@
+import { FlickerManager } from '../../renderer/flickerManager';
 import { ScanlinesHandler } from '../../renderer/scanlinesHandler';
 
 export class GenerateMainUI {
@@ -44,6 +45,7 @@ export class GenerateMainUI {
     canvas.id = 'canvas1';
     canvas.classList.add('canvas1');
     canvasContainer.appendChild(canvas);
+    FlickerManager.handleFlicker(canvasContainer);
 
     const flashContainer = document.createElement('div');
     flashContainer.classList.add('flash-container');

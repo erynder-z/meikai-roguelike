@@ -912,12 +912,9 @@ export class TitleMenuOptions extends HTMLElement {
    */
   private toggleFlicker(): void {
     this.gameConfig.show_flicker = !this.gameConfig.show_flicker;
-    const flickerManager = FlickerManager.getInstance();
-    if (this.gameConfig.show_flicker) {
-      flickerManager.start();
-    } else {
-      flickerManager.stop();
-    }
+    const canvasContainer = document.getElementById('canvas-container');
+    if (canvasContainer) FlickerManager.handleFlicker(canvasContainer);
+
     this.buttonManager.updateFlickerToggleButton(this.gameConfig.show_flicker);
   }
 
@@ -1084,7 +1081,10 @@ export class TitleMenuOptions extends HTMLElement {
     // scroll via keypress when alt or meta key is pressed
     if (this.isAltKeyPressed(event)) {
       const titleScreen = document.querySelector('title-screen') as HTMLElement;
-      const menuOptions = titleScreen?.shadowRoot?.querySelector(
+      const content = titleScreen?.shadowRoot?.querySelector(
+        '.content',
+      ) as HTMLElement;
+      const menuOptions = content?.querySelector(
         'title-menu-options',
       ) as HTMLElement;
       const targetElement = menuOptions?.shadowRoot?.querySelector(

@@ -85,9 +85,10 @@ export class MapHandler {
   }
 
   /**
-   * Handles player switching levels within the dungeon.
+   * Switches the player to a new level, adjusting the player's visibility range based
+   * on the level's darkness and logging the level change event.
    *
-   * @param newLevel - The new level to which the player switches.
+   * @param newLevel - The new level number.
    * @param newPosition - The new position of the player on the new level.
    * @param game - The game object.
    */
@@ -102,6 +103,8 @@ export class MapHandler {
     this.level = newLevel;
     this.adjustLevelVisibilityRange(game);
     this.currentMap(game).enterMap(player, newPosition);
+
+    if (game.dungeon.level === 0) game.shouldShowStoryScreen = true;
 
     game.log.addCurrentEvent(EventCategory.lvlChange);
   }

@@ -14,6 +14,7 @@
     "--grayedOut": "rgba(255, 255, 255, 0.3)",
     "--popupBackground": "rgba(8, 45, 60, 0.5)",
     "--popupBackgroundGood": "rgba(1, 158, 127, 0.5)",
-    "--popupBackgroundBad": "rgba(158, 1, 1, 0.5);"
+    "--popupBackgroundBad": "rgba(158, 1, 1, 0.5);",
+    "--storyScreenBackground": "rgba(17, 26, 36, 0.85)"
   }
 }

@@ -153,7 +153,8 @@
   height: 100vh;
   pointer-events: none;
   touch-action: none;
-  background: repeating-linear-gradient(
+  background:
+    repeating-linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.15),
       rgba(0, 0, 0, 0.15) 1px,
@@ -200,7 +201,8 @@
   height: 100vh;
   pointer-events: none;
   touch-action: none;
-  background: repeating-linear-gradient(
+  background:
+    repeating-linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.1),
       rgba(255, 255, 255, 0.1) 1px,
@@ -216,25 +218,6 @@
     );
 }
 
-.scanlines-glitch:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  touch-action: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 0, 255, 0.2),
-    rgba(255, 0, 255, 0.2) 1px,
-    transparent 4px,
-    transparent 8px
-  );
-  animation: glitch 0.2s infinite;
-}
-
 .scanlines-rainbow:after {
   content: '';
   position: absolute;
@@ -244,7 +227,8 @@
   height: 100vh;
   pointer-events: none;
   touch-action: none;
-  background: repeating-linear-gradient(
+  background:
+    repeating-linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.1),
       rgba(255, 255, 255, 0.1) 1px,
