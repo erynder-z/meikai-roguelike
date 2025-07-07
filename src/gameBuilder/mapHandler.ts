@@ -2,6 +2,7 @@ import { EventCategory } from '../gameLogic/messages/logMessage';
 import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../types/gameBuilder/gameState';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
+import storyData from '../story/storyScreenData.json';
 
 /**
  * Holds the maps of the game.
@@ -85,10 +86,14 @@ export class MapHandler {
   }
 
   /**
-   * Switches the player to a new level, adjusting the player's visibility range based
-   * on the level's darkness and logging the level change event.
+   * Changes the current level and position of the player.
    *
-   * @param newLevel - The new level number.
+   * This method also updates the player's visibility range based on whether
+   * the new level is dark or not. Additionally, it checks if the player has
+   * entered a level with a story event and sets a flag to display the story
+   * screen.
+   *
+   * @param newLevel - The level number to switch to.
    * @param newPosition - The new position of the player on the new level.
    * @param game - The game object.
    */
@@ -104,7 +109,8 @@ export class MapHandler {
     this.adjustLevelVisibilityRange(game);
     this.currentMap(game).enterMap(player, newPosition);
 
-    if (game.dungeon.level === 0) game.shouldShowStoryScreen = true;
+    const storyLevels = storyData.story.map(s => parseInt(s.level, 10));
+    if (storyLevels.includes(this.level)) game.shouldShowStoryScreen = true;
 
     game.log.addCurrentEvent(EventCategory.lvlChange);
   }

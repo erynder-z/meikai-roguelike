@@ -23,13 +23,15 @@ export class StoryScreen extends BaseScreen {
    * and displayStoryText() is called to render the story text.
    */
   public drawScreen(): void {
-    const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
+    const mainContainer = document.getElementById(
+      'main-container',
+    ) as HTMLCanvasElement;
     if (!this.display) {
       this.display = document.createElement(
         'story-screen-display',
       ) as StoryScreenDisplay;
 
-      canvas?.insertAdjacentElement('afterend', this.display);
+      mainContainer?.insertAdjacentElement('afterend', this.display);
 
       const currentLevel = this.game.dungeon.level;
 

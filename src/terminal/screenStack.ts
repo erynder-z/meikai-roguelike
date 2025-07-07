@@ -1,4 +1,3 @@
-import { EventManager } from '../gameLogic/events/eventManager';
 import { DrawableTerminal } from '../types/terminal/drawableTerminal';
 import { InteractiveScreen } from '../types/terminal/interactiveScreen';
 import { Stack } from '../types/terminal/stack';
@@ -118,16 +117,5 @@ export class ScreenStack implements Stack, InteractiveScreen {
     const s = this.getCurrentScreen();
     if (s) change = s.onTime(this);
     return change;
-  }
-
-  /**
-   * Runs the StackScreen by pushing it onto the ScreenStack and running it with the EventManager.
-   *
-   * @param sScreen - the StackScreen to be run.
-   */
-  public static run_StackScreen(sScreen: StackScreen): void {
-    const stack = new ScreenStack();
-    stack.push(sScreen);
-    EventManager.runWithInteractiveScreen(stack);
   }
 }

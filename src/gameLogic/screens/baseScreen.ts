@@ -36,6 +36,8 @@ export class BaseScreen implements StackScreen {
    * @param term - The terminal to draw.
    */
   public drawScreen(term: DrawableTerminal): void {
+    if (this.game.shouldShowStoryScreen) return;
+
     DrawUI.addDynamicEnvironmentAreaEffectsToCells(
       <GameMap>this.game.currentMap(),
     );
