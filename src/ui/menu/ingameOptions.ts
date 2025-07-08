@@ -216,6 +216,12 @@ export class IngameOptions extends HTMLElement {
             * Can only be changed from main menu.
           </div>
         </div>
+        <span class="info-span">Gameplay</span>
+        <div class="info-container">
+          <button id="toggle-story-button">
+           Show stor<span class="underline">y</span>
+          </button>
+        </div>
         <span class="info-span">Controls</span>
         <div class="info-container">
           <button id="switch-controls-button">
@@ -316,6 +322,7 @@ export class IngameOptions extends HTMLElement {
     this.buttonManager.updateShowImagesButton(this.gameConfig.show_images);
     this.buttonManager.updateImageAlignButton(this.gameConfig.image_display);
     this.setupMessageCountInput();
+    this.buttonManager.updateStoryToggleButton(this.gameConfig.show_story);
     this.buttonManager.updateBloodIntensityButton(
       this.gameConfig.blood_intensity,
     );
@@ -327,6 +334,7 @@ export class IngameOptions extends HTMLElement {
    */
   private bindEvents(): void {
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.toggleShowStory = this.toggleShowStory.bind(this);
     this.toggleControlScheme = this.toggleControlScheme.bind(this);
     this.toggleScanlines = this.toggleScanlines.bind(this);
     this.switchScanlineStyle = this.switchScanlineStyle.bind(this);
@@ -343,6 +351,13 @@ export class IngameOptions extends HTMLElement {
     this.returnToIngameMenu = this.returnToIngameMenu.bind(this);
 
     const root = this.shadowRoot;
+
+    this.eventTracker.addById(
+      root,
+      'toggle-story-button',
+      'click',
+      this.toggleShowStory,
+    );
 
     this.eventTracker.addById(
       root,
@@ -433,6 +448,16 @@ export class IngameOptions extends HTMLElement {
       'keydown',
       this.handleKeyPress as EventListener,
     );
+  }
+
+  /**
+   * Toggles the story display on or off.
+   *
+   * Updates the {@link gameConfig.show_story} property, and toggles the displayed text of the story toggle button.
+   */
+  private toggleShowStory(): void {
+    this.gameConfig.show_story = !this.gameConfig.show_story;
+    this.buttonManager.updateStoryToggleButton(this.gameConfig.show_story);
   }
 
   /**
@@ -754,6 +779,9 @@ export class IngameOptions extends HTMLElement {
     }
 
     switch (event.key) {
+      case 'y':
+        this.toggleShowStory();
+        break;
       case 'C':
         this.toggleControlScheme();
         break;

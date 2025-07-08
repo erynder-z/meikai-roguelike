@@ -1,4 +1,5 @@
 import { EventCategory } from '../gameLogic/messages/logMessage';
+import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../types/gameBuilder/gameState';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
@@ -10,6 +11,7 @@ import storyData from '../story/storyScreenData.json';
 export class MapHandler {
   public level: number = 0;
   public maps: GameMapType[] = [];
+  public gameConfig = gameConfigManager.getConfig();
 
   /**
    * Retrieves the current map of the dungeon based on the current level.
@@ -109,8 +111,10 @@ export class MapHandler {
     this.adjustLevelVisibilityRange(game);
     this.currentMap(game).enterMap(player, newPosition);
 
-    const storyLevels = storyData.story.map(s => parseInt(s.level, 10));
-    if (storyLevels.includes(this.level)) game.shouldShowStoryScreen = true;
+    if (this.gameConfig.show_story) {
+      const storyLevels = storyData.story.map(s => parseInt(s.level, 10));
+      if (storyLevels.includes(this.level)) game.shouldShowStoryScreen = true;
+    }
 
     game.log.addCurrentEvent(EventCategory.lvlChange);
   }

@@ -247,6 +247,12 @@ export class TitleMenuOptions extends HTMLElement {
             <div class="explanation">(Default: 0.8)</div>
           </button>
         </div>
+        <span class="info-span">Gameplay</span>
+        <div class="info-container">
+          <button id="toggle-story-button">
+           Show stor<span class="underline">y</span>
+          </button>
+        </div>
         <span class="info-span">Controls</span>
         <div class="info-container">
           <button id="switch-controls-button">
@@ -337,6 +343,7 @@ export class TitleMenuOptions extends HTMLElement {
 
     this.shadowRoot?.appendChild(templateElement.content.cloneNode(true));
 
+    this.buttonManager.updateStoryToggleButton(this.gameConfig.show_story);
     this.buttonManager.updateControlSchemeButton(this.currentScheme);
     this.setupKeypressThrottleInput();
     this.buttonManager.updateScanlinesToggleButton(
@@ -373,6 +380,7 @@ export class TitleMenuOptions extends HTMLElement {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.changeFont = this.changeFont.bind(this);
     this.changeSeed = this.changeSeed.bind(this);
+    this.toggleShowStory = this.toggleShowStory.bind(this);
     this.toggleControlScheme = this.toggleControlScheme.bind(this);
     this.focusAndSelectKeypressThrottleInput =
       this.focusAndSelectKeypressThrottleInput.bind(this);
@@ -419,6 +427,12 @@ export class TitleMenuOptions extends HTMLElement {
     );
     this.eventTracker.addById(root, 'scaling-factor-input', 'input', event =>
       this.handleInputChange(event, 'scaling'),
+    );
+    this.eventTracker.addById(
+      root,
+      'toggle-story-button',
+      'click',
+      this.toggleShowStory,
     );
     this.eventTracker.addById(
       root,
@@ -839,6 +853,17 @@ export class TitleMenuOptions extends HTMLElement {
   }
 
   /**
+   * Toggles the story display on or off.
+   *
+   * Updates the {@link gameConfig.show_story} property, and toggles the displayed text of the story toggle button.
+   */
+  private toggleShowStory(): void {
+    this.gameConfig.show_story = !this.gameConfig.show_story;
+
+    this.buttonManager.updateStoryToggleButton(this.gameConfig.show_story);
+  }
+
+  /**
    * Toggles the control scheme setting on or off.
    *
    * Updates the {@link gameConfig.control_scheme} property, and toggles the displayed text of the control scheme button.
@@ -1112,6 +1137,9 @@ export class TitleMenuOptions extends HTMLElement {
       case 'l':
         event.preventDefault();
         this.focusAndSelectScalingFactorInput();
+        break;
+      case 'y':
+        this.toggleShowStory();
         break;
       case 'C':
         this.toggleControlScheme();

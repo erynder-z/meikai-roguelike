@@ -27,4 +27,5 @@ export type GameConfigType = {
   min_keypress_delay: number;
   temperature_unit: 'fahrenheit' | 'celsius';
   depth_unit: 'feet' | 'meters';
+  show_story: boolean;
 };

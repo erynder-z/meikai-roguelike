@@ -15,6 +15,23 @@ export class OptionsMenuButtonManager {
   }
 
   /**
+   * Updates the text of the story toggle button based on whether the story
+   * feature is enabled.
+   *
+   * Displays 'Show story: YES' if the story is enabled, otherwise displays
+   * 'Show story: NO'.
+   *
+   * @param isStoryEnabled - Indicates if the story feature is currently enabled.
+   */
+
+  public updateStoryToggleButton(isStoryEnabled: boolean): void {
+    const storyButton = this.shadowRoot?.getElementById('toggle-story-button');
+    if (storyButton) {
+      storyButton.innerHTML = `Show stor<span class="underline">y</span>: ${isStoryEnabled ? 'YES' : 'NO'}`;
+    }
+  }
+
+  /**
    * Updates the displayed text of the control scheme button to reflect the current active control scheme.
    *
    * @param text - The current active control scheme.
