@@ -42,8 +42,9 @@ export class DynamicScreenMaker implements ScreenMaker {
    * @return A StackScreen representing the loaded game state.
    */
   public loadGame(saveState: SerializedGameState): StackScreen {
-    const loadedGame = this.builder.restoreGame(saveState);
-    return this.gameScreen(<GameState>loadedGame, this);
+    this.game = this.builder.restoreGame(saveState);
+    this.game.shouldShowStoryScreen = false;
+    return this.gameScreen(<GameState>this.game, this);
   }
 
   /**
@@ -69,7 +70,6 @@ export class DynamicScreenMaker implements ScreenMaker {
   public something(game: GameState | null): StackScreen {
     return this.someScreen(<GameState>game, this);
   }
-
 
   /**
    * Runs a dynamic screen maker.
