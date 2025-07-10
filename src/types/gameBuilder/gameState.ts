@@ -26,6 +26,7 @@ export type GameState = {
   stats: Stats;
   surfaceTemp: number;
   shouldShowStoryScreen: boolean;
+  shownStoryLevels: number[];
   currentMap(): GameMapType | null;
   message(msg: LogMessage): void;
   flash(msg: LogMessage): void;

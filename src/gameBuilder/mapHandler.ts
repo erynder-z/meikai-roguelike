@@ -88,15 +88,16 @@ export class MapHandler {
   }
 
   /**
-   * Changes the current level and position of the player.
+   * Handles the player switching levels.
    *
-   * This method also updates the player's visibility range based on whether
-   * the new level is dark or not. Additionally, it checks if the player has
-   * entered a level with a story event and sets a flag to display the story
-   * screen.
+   * Removes the player from the current map, sets the new level, adjusts the
+   * player's visibility range based on the level's lighting, and adds the player
+   * back into the level at the specified position. Also checks if the level has
+   * a story attached and shows the story screen if the level has a story that
+   * hasn't been shown yet.
    *
    * @param newLevel - The level number to switch to.
-   * @param newPosition - The new position of the player on the new level.
+   * @param newPosition - The position on the new level to enter.
    * @param game - The game object.
    */
   public playerSwitchLevel(
@@ -113,7 +114,13 @@ export class MapHandler {
 
     if (this.gameConfig.show_story) {
       const storyLevels = storyData.story.map(s => parseInt(s.level, 10));
-      if (storyLevels.includes(this.level)) game.shouldShowStoryScreen = true;
+      if (
+        storyLevels.includes(this.level) &&
+        !game.shownStoryLevels.includes(this.level)
+      ) {
+        game.shouldShowStoryScreen = true;
+        game.shownStoryLevels.push(this.level);
+      }
     }
 
     game.log.addCurrentEvent(EventCategory.lvlChange);

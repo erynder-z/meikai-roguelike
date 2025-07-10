@@ -27,6 +27,7 @@ export class Game implements GameState {
   public stats = new Stats();
   public surfaceTemp = 15;
   public shouldShowStoryScreen = false;
+  public shownStoryLevels: number[] = [];
   constructor(
     public rand: RandomGenerator,
     public player: Mob,
