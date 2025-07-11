@@ -63,7 +63,6 @@ export class StoryScreen extends BaseScreen {
   private async fadeOutStoryScreen(): Promise<void> {
     if (this.display) {
       await this.display.fadeOut();
-      this.display.remove();
     }
   }
 }

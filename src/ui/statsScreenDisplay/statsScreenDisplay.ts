@@ -18,6 +18,7 @@ export class StatsScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
+    super.connectedCallback();
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
@@ -89,19 +90,6 @@ export class StatsScreenDisplay extends FadeOutElement {
 
         .red-text {
           color: red;
-        }
-
-        .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
         }
       </style>
       <div class="stats-screen-display">

@@ -13,6 +13,7 @@ export class EquipmentScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
+    super.connectedCallback();
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
@@ -72,19 +73,6 @@ export class EquipmentScreenDisplay extends FadeOutElement {
 
         .no-item {
           color: var(--grayedOut);
-        }
-
-        .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
         }
       </style>
       <div class="equipment-screen-display">

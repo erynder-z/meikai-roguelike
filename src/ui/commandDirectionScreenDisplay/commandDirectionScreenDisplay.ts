@@ -10,6 +10,7 @@ export class CommandDirectionScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
+    super.connectedCallback();
     const template = document.createElement('template');
     template.innerHTML = `
         <style>
@@ -47,17 +48,6 @@ export class CommandDirectionScreenDisplay extends FadeOutElement {
             padding: 0.5rem;
             background: var(--cellBackground);
             border-radius: 0.25rem;
-          }
-          .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
           }
         </style>
         <div class="command-direction-screen-display">

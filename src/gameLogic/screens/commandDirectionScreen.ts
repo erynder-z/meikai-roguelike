@@ -182,7 +182,6 @@ export class CommandDirectionScreen extends BaseScreen {
   private async fadeOutDirectionScreen(): Promise<void> {
     if (this.display) {
       await this.display.fadeOut();
-      this.display.remove();
     }
   }
 }

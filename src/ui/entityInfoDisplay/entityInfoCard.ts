@@ -1,16 +1,18 @@
+import { FadeOutElement } from '../other/fadeOutElement';
 import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';
 import { Spell } from '../../gameLogic/spells/spell';
 import { EnvEffect } from '../../types/gameLogic/maps/mapModel/envEffect';
 import { DetailViewEntity } from '../../types/ui/detailViewEntity';
 import { SpellColors } from '../../colors/spellColors';
 
-export class EntityInfoCard extends HTMLElement {
+export class EntityInfoCard extends FadeOutElement {
   constructor() {
     super();
   }
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
+    super.connectedCallback();
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
@@ -212,24 +214,5 @@ export class EntityInfoCard extends HTMLElement {
     } else {
       return `<span>unharmed</span>`;
     }
-  }
-
-  /**
-   * Triggers a fade-out animation on the entity card and removes it from the DOM
-   * once the animation is completed.
-   *
-   * This method adds the 'fade-out' class to the entity card element, initiating
-   * a CSS animation. It listens for the 'animationend' event to remove the
-   * element from the DOM, ensuring the animation completes before removal.
-   */
-  public fadeOutAndRemove(): void {
-    const entityCard = this.shadowRoot?.querySelector('.entity-card');
-    if (!entityCard) return;
-
-    entityCard.classList.add('fade-out');
-
-    entityCard.addEventListener('animationend', () => this.remove(), {
-      once: true,
-    });
   }
 }

@@ -10,6 +10,7 @@ export class ItemScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
+    super.connectedCallback();
     const template = document.createElement('template');
     template.innerHTML = `
         <style>
@@ -43,17 +44,6 @@ export class ItemScreenDisplay extends FadeOutElement {
           }
           .options li {
             margin: 0.5rem 0;
-          }
-          .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
           }
         </style>
         <div class="item-display-card">

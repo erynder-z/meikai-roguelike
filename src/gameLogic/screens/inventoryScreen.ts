@@ -44,7 +44,6 @@ export class InventoryScreen extends BaseScreen {
   private async fadeOutInventoryScreen(): Promise<void> {
     if (this.display) {
       await this.display.fadeOut();
-      this.display.remove();
     }
   }
 

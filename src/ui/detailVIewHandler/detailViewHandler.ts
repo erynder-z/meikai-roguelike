@@ -96,6 +96,6 @@ export class DetailViewHandler {
     const entityCardElement = document.getElementById(
       'entity-info-card',
     ) as EntityInfoCard;
-    if (entityCardElement) entityCardElement.fadeOutAndRemove();
+    if (entityCardElement) entityCardElement.fadeOut();
   }
 }
