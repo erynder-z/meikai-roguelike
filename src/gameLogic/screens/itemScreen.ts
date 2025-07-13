@@ -268,7 +268,6 @@ export class ItemScreen extends BaseScreen {
   private async fadeOutItemScreen(): Promise<void> {
     if (this.display) {
       await this.display.fadeOut();
-      this.display.remove();
     }
   }
 }

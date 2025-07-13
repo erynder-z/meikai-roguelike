@@ -1,4 +1,5 @@
 import { Build } from '../../types/gameBuilder/build';
+import { EventManager } from '../events/eventManager';
 import { GameOverScreen } from './gameOverScreen';
 import { GameScreen } from './gameScreen';
 import { GenerateTitleScreen } from '../../ui/uiGenerators/generateTitleScreen';
@@ -6,8 +7,9 @@ import { GameState } from '../../types/gameBuilder/gameState';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { ScreenStack } from '../../terminal/screenStack';
 import { SerializedGameState } from '../../types/utilities/saveStateHandler';
-import { StackScreen } from '../../types/terminal/stackScreen';
 import { SomeScreen } from './someScreen';
+import { StackScreen } from '../../types/terminal/stackScreen';
+import { StoryScreen } from './storyScreen';
 
 /**
  * Represents a dynamic screen maker that can create screens based on provided game states.
@@ -40,8 +42,9 @@ export class DynamicScreenMaker implements ScreenMaker {
    * @return A StackScreen representing the loaded game state.
    */
   public loadGame(saveState: SerializedGameState): StackScreen {
-    const loadedGame = this.builder.restoreGame(saveState);
-    return this.gameScreen(<GameState>loadedGame, this);
+    this.game = this.builder.restoreGame(saveState);
+    this.game.shouldShowStoryScreen = false;
+    return this.gameScreen(<GameState>this.game, this);
   }
 
   /**
@@ -69,12 +72,25 @@ export class DynamicScreenMaker implements ScreenMaker {
   }
 
   /**
-   * Runs a dynamic screen sequence.
+   * Runs a dynamic screen maker.
+   * The dynamic screen maker is asked to generate its initial screen and then
+   * the game over screen is shown if the game has ended.
+   * The story screen is then shown if requested.
+   * The screens are then run in order by the EventManager.
    *
-   * @param - The dynamic screen maker instance to run.
+   * @param dynamicScreenMaker - The dynamic screen maker to run.
    */
   static runDynamic(dynamicScreenMaker: DynamicScreenMaker) {
-    ScreenStack.run_StackScreen(dynamicScreenMaker.init(dynamicScreenMaker));
+    const initialScreen = dynamicScreenMaker.init(dynamicScreenMaker);
+    const game = dynamicScreenMaker.game;
+    const stack = new ScreenStack();
+    stack.push(initialScreen);
+
+    if (game && game.shouldShowStoryScreen) {
+      stack.push(new StoryScreen(game, dynamicScreenMaker));
+      game.shouldShowStoryScreen = false;
+    }
+    EventManager.runWithInteractiveScreen(stack);
   }
 
   /**

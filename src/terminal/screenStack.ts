@@ -1,4 +1,3 @@
-import { EventManager } from '../gameLogic/events/eventManager';
 import { DrawableTerminal } from '../types/terminal/drawableTerminal';
 import { InteractiveScreen } from '../types/terminal/interactiveScreen';
 import { Stack } from '../types/terminal/stack';
@@ -12,10 +11,11 @@ export class ScreenStack implements Stack, InteractiveScreen {
   public name: string = 'stack';
   public screens: StackScreen[] = [];
   /**
-   * Remove and return the last element from the currentScreen array, as well as remove the screen from the DOM.
+   * Remove and return the last element from the currentScreen array.
    */
   public pop() {
-    this.fadeOutAndRemoveScreen();
+    /* if (this.screens.length > 0) this.fadeOutAndRemoveScreen(); */
+
     return this.screens.pop();
   }
   /**
@@ -66,21 +66,32 @@ export class ScreenStack implements Stack, InteractiveScreen {
     }
   }
 
-  /**
-   * Removes the current screen by fading it out and then removing it from the DOM.
-   * This function is called when popping the current screen from the stack.
-   */
+  // TODO: Get the actual UI elements associated with the current screen and fade them out.
+  //       Below will not work, because it targets the stack screens, not the UI elements.
+  //
   private fadeOutAndRemoveScreen(): void {
-    const currentScreenElement = document.getElementById(
-      this.getCurrentScreen().name,
-    );
+    const screen = this.getCurrentScreen();
+    if (!screen) return;
+
+    const currentScreenElement = document.querySelector(screen.name);
+
     if (currentScreenElement) {
-      currentScreenElement.classList.add('animate__fadeOut');
+      currentScreenElement.classList.add('fade-out');
       currentScreenElement.addEventListener(
         'animationend',
         () => currentScreenElement.remove(),
         { once: true },
       );
+    } else {
+      const displayElement = document.querySelector(`${screen.name}-display`);
+      if (displayElement) {
+        displayElement.classList.add('fade-out');
+        displayElement.addEventListener(
+          'animationend',
+          () => displayElement.remove(),
+          { once: true },
+        );
+      }
     }
   }
 
@@ -106,16 +117,5 @@ export class ScreenStack implements Stack, InteractiveScreen {
     const s = this.getCurrentScreen();
     if (s) change = s.onTime(this);
     return change;
-  }
-
-  /**
-   * Runs the StackScreen by pushing it onto the ScreenStack and running it with the EventManager.
-   *
-   * @param sScreen - the StackScreen to be run.
-   */
-  public static run_StackScreen(sScreen: StackScreen): void {
-    const stack = new ScreenStack();
-    stack.push(sScreen);
-    EventManager.runWithInteractiveScreen(stack);
   }
 }

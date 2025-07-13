@@ -1,7 +1,9 @@
 import { EventCategory } from '../gameLogic/messages/logMessage';
+import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../types/gameBuilder/gameState';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
+import storyData from '../story/storyScreenData.json';
 
 /**
  * Holds the maps of the game.
@@ -9,6 +11,7 @@ import { WorldPoint } from '../maps/mapModel/worldPoint';
 export class MapHandler {
   public level: number = 0;
   public maps: GameMapType[] = [];
+  public gameConfig = gameConfigManager.getConfig();
 
   /**
    * Retrieves the current map of the dungeon based on the current level.
@@ -85,11 +88,16 @@ export class MapHandler {
   }
 
   /**
-   * Switches the player to a new level, adjusting the player's visibility range based
-   * on the level's darkness and logging the level change event.
+   * Handles the player switching levels.
    *
-   * @param newLevel - The new level number.
-   * @param newPosition - The new position of the player on the new level.
+   * Removes the player from the current map, sets the new level, adjusts the
+   * player's visibility range based on the level's lighting, and adds the player
+   * back into the level at the specified position. Also checks if the level has
+   * a story attached and shows the story screen if the level has a story that
+   * hasn't been shown yet.
+   *
+   * @param newLevel - The level number to switch to.
+   * @param newPosition - The position on the new level to enter.
    * @param game - The game object.
    */
   public playerSwitchLevel(
@@ -104,7 +112,16 @@ export class MapHandler {
     this.adjustLevelVisibilityRange(game);
     this.currentMap(game).enterMap(player, newPosition);
 
-    if (game.dungeon.level === 0) game.shouldShowStoryScreen = true;
+    if (this.gameConfig.show_story) {
+      const storyLevels = storyData.story.map(s => parseInt(s.level, 10));
+      if (
+        storyLevels.includes(this.level) &&
+        !game.shownStoryLevels.includes(this.level)
+      ) {
+        game.shouldShowStoryScreen = true;
+        game.shownStoryLevels.push(this.level);
+      }
+    }
 
     game.log.addCurrentEvent(EventCategory.lvlChange);
   }

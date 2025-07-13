@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class SpellScreenDisplay extends FadeOutElement {
+export class SpellScreenDisplay extends FadeInOutElement {
   public title: string = '';
   public spells: { key: string; description: string }[] = [];
 
@@ -10,6 +10,7 @@ export class SpellScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
+    super.connectedCallback();
     const template = document.createElement('template');
     template.innerHTML = `
         <style>
@@ -55,17 +56,6 @@ export class SpellScreenDisplay extends FadeOutElement {
             font-size: 0.9rem;
             color: #ccc;
           }
-          .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
         </style>
         <div class="spell-screen">
           <div class="spell-title"></div>
@@ -75,6 +65,7 @@ export class SpellScreenDisplay extends FadeOutElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.renderSpells();
+    this.fadeIn();
   }
 
   /**

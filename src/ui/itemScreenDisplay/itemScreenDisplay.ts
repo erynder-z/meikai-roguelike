@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class ItemScreenDisplay extends FadeOutElement {
+export class ItemScreenDisplay extends FadeInOutElement {
   public itemDescription: string = '';
   public options: { key: string; description: string }[] = [];
 
@@ -44,17 +44,6 @@ export class ItemScreenDisplay extends FadeOutElement {
           .options li {
             margin: 0.5rem 0;
           }
-          .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
         </style>
         <div class="item-display-card">
           <div class="item-description"></div>
@@ -62,8 +51,9 @@ export class ItemScreenDisplay extends FadeOutElement {
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
-
+    super.connectedCallback();
     this.generateOptionsList();
+    this.fadeIn();
   }
 
   /**

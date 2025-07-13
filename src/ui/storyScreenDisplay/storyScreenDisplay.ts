@@ -1,8 +1,8 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import * as storyData from '../../story/storyScreenData.json';
 import { Story } from '../../types/story/story';
 
-export class StoryScreenDisplay extends FadeOutElement {
+export class StoryScreenDisplay extends FadeInOutElement {
   private isAnimating = false;
   private animationFrameId: number | null = null;
   private currentLevel = 0;
@@ -51,17 +51,18 @@ export class StoryScreenDisplay extends FadeOutElement {
           height: 66%;
           width: 50%;
           flex-direction: column;
+          font-family: 'UA Squared', monospace;
           color: var(--white);
         }
 
         .story-screen-heading {
-          font-size: 1.5rem;
+          font-size: 2rem;
           font-weight: bold;
           margin-bottom: 1rem;
         }
 
         .story-text {
-          font-size: 1.2rem;
+          font-size: 1.5rem;
           margin-bottom: 1rem;
           overflow-y: auto;
           overflow-x: hidden;
@@ -79,20 +80,6 @@ export class StoryScreenDisplay extends FadeOutElement {
         .hidden {
           display: none;
         }
-
-        .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-
       </style>
 
       <div class="story-screen-display">
@@ -105,6 +92,7 @@ export class StoryScreenDisplay extends FadeOutElement {
     `;
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
+    super.connectedCallback();
   }
 
   /**
@@ -198,12 +186,12 @@ export class StoryScreenDisplay extends FadeOutElement {
     type();
   }
 
-/**
- * Immediately stops the ongoing typewriter animation and displays the full story text.
- * Clears the animation timeout and sets the animation state to not running.
- * Updates the heading and text elements with the complete story content for the current level.
- * Finally, it shows the footer indicating that the animation has ended.
- */
+  /**
+   * Immediately stops the ongoing typewriter animation and displays the full story text.
+   * Clears the animation timeout and sets the animation state to not running.
+   * Updates the heading and text elements with the complete story content for the current level.
+   * Finally, it shows the footer indicating that the animation has ended.
+   */
 
   public skipAnimation(): void {
     if (this.animationFrameId) {
@@ -243,12 +231,12 @@ export class StoryScreenDisplay extends FadeOutElement {
     return this.isAnimating;
   }
 
-/**
- * Reveals the footer element on the story screen display.
- * 
- * This method selects the footer element from the shadow DOM
- * and removes the 'hidden' class to make it visible.
- */
+  /**
+   * Reveals the footer element on the story screen display.
+   *
+   * This method selects the footer element from the shadow DOM
+   * and removes the 'hidden' class to make it visible.
+   */
 
   private showFooter(): void {
     const footer = this.shadowRoot?.querySelector(

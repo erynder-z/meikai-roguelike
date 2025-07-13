@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class CommandDirectionScreenDisplay extends FadeOutElement {
+export class CommandDirectionScreenDisplay extends FadeInOutElement {
   public title: string = '';
   public directions: string[][] = [];
 
@@ -48,17 +48,6 @@ export class CommandDirectionScreenDisplay extends FadeOutElement {
             background: var(--cellBackground);
             border-radius: 0.25rem;
           }
-          .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
         </style>
         <div class="command-direction-screen-display">
           <div class="title"></div>
@@ -67,7 +56,9 @@ export class CommandDirectionScreenDisplay extends FadeOutElement {
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
 
+    super.connectedCallback();
     this.renderDirections();
+    this.fadeIn();
   }
 
   /**

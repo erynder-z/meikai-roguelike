@@ -149,30 +149,3 @@ li {
 .equipment-container {
   grid-area: equipment;
 }
-
-/* Needed to fade out the custom web components */
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.fade-in {
-  animation: fade-in 100ms;
-}
-
-.fade-out {
-  animation: fade-out 100ms;
-}

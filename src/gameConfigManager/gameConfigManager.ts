@@ -45,6 +45,7 @@ class GameConfigManager {
       scaling_factor: 0.8,
       font: 'DejaVu Sans Mono',
     },
+    show_story: true,
   };
   private fonts: string[] = [];
 

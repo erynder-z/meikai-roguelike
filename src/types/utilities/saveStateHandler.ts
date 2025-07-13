@@ -49,6 +49,10 @@ export type ReadyToSaveGameState = {
     id: string;
     data: number;
   };
+  serializedShownStoryLevels: {
+    id: string;
+    data: number[];
+  };
   serializedPlayer: {
     id: string;
     data: Mob;
@@ -82,6 +86,7 @@ export type SerializedGameState = {
   serializedNeeds: { id: string; data: SerializedNeedsData };
   serializedStats: { id: string; data: SerializedStatsData };
   serializedSurfaceTemp: { id: string; data: number };
+  serializedShownStoryLevels: { id: string; data: number[] };
   serializedPlayer: { id: string; data: SerializedPlayerData };
   serializedPlayerBuffs: {
     id: string;

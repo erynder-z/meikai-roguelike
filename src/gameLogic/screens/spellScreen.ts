@@ -176,7 +176,6 @@ export class SpellScreen extends BaseScreen {
   private async fadeOutSpellScreen(): Promise<void> {
     if (this.display) {
       await this.display.fadeOut();
-      this.display.remove();
     }
   }
 }

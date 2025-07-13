@@ -76,6 +76,7 @@ export class Builder implements Build {
     saveStateHandler.restorePlayerEquipment(game, saveState);
     saveStateHandler.restoreStats(game, saveState);
     saveStateHandler.restoreLog(game, saveState);
+    saveStateHandler.restoreShownStoryLevels(game, saveState);
 
     this.enterSpecificLevelAtPos(game, dungeonLevel, playerPos);
 

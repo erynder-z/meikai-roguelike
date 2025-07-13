@@ -17,24 +17,6 @@ export class GameScreen extends BaseScreen {
   }
 
   /**
-   * Runs periodically.
-   *
-   * If the game state should show the story screen, the story screen is pushed
-   * onto the stack. The game state is then updated to reflect that the story
-   * screen is no longer needed.
-   *
-   * @param stack - The current stack of screens.
-   * @return Returns true if the screen should be updated, false otherwise.
-   */
-  public onTime(stack: Stack): boolean {
-    if (!this.game.shouldShowStoryScreen) return false;
-
-    this.game.shouldShowStoryScreen = false;
-    stack.push(new StoryScreen(this.game, this.make));
-    return true;
-  }
-
-  /**
    * Handles key down events. If the entity card is open and the menu key is not being pressed,
    * the event is ignored. If the entity card is open and the menu key is being pressed, the
    * entity card is closed and the event is ignored. Otherwise, the event is passed to
@@ -75,7 +57,13 @@ export class GameScreen extends BaseScreen {
     event: KeyboardEvent | null,
   ): void {
     if (this.game.log) this.game.log.clearQueue();
-    if (this.playerTurn(stack, char, event)) this.npcTurns(stack);
+    if (this.playerTurn(stack, char, event)) {
+      this.npcTurns(stack);
+      if (this.game.shouldShowStoryScreen) {
+        stack.push(new StoryScreen(this.game, this.make));
+        this.game.shouldShowStoryScreen = false;
+      }
+    }
   }
 
   /**

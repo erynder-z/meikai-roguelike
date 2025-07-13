@@ -88,8 +88,6 @@ export class LogScreen extends BaseScreen {
     if (this.display) {
       await this.display.fadeOut();
 
-      this.display.remove();
-
       stack.pop();
     }
   }

@@ -56,6 +56,7 @@ export class SaveStateHandler {
       player,
       build,
       surfaceTemp,
+      shownStoryLevels,
     } = gameState;
 
     const serializedAI = this.getAIData(ai);
@@ -67,6 +68,8 @@ export class SaveStateHandler {
     const serializedNeeds = this.getNeedsData(needs);
     const serializedStats = this.getStatsData(stats);
     const serializedSurfaceTemp = this.getSurfaceTempData(surfaceTemp);
+    const serializedShownStoryLevels =
+      this.getShownStoryLevels(shownStoryLevels);
     const serializedPlayer = this.getPlayerData(player);
     const serializedPlayerBuffs = this.getPlayerBuffsData(player);
     const serializedBuild = this.getBuildData(build);
@@ -83,6 +86,7 @@ export class SaveStateHandler {
       serializedNeeds,
       serializedStats,
       serializedSurfaceTemp,
+      serializedShownStoryLevels,
       serializedPlayer,
       serializedPlayerBuffs,
       serializedBuild,
@@ -223,6 +227,21 @@ export class SaveStateHandler {
     return {
       id: 'SURFACETEMP',
       data: surfaceTemp,
+    };
+  }
+
+  /**
+   * Serializes the levels of the story that the player has seen so far.
+   *
+   * @param shownStoryLevels - The levels of the story that the player has seen.
+   * @return Serialized shown story levels data.
+   */
+  private getShownStoryLevels(
+    shownStoryLevels: GameState['shownStoryLevels'],
+  ): ReadyToSaveGameState['serializedShownStoryLevels'] {
+    return {
+      id: 'SHOWNSTORYLEVELS',
+      data: shownStoryLevels,
     };
   }
 
@@ -691,5 +710,19 @@ export class SaveStateHandler {
     restoredStats.mood = serializedStats.mood || 'Normal';
     restoredStats.hunger = serializedStats.hunger || 0;
     restoredStats.thirst = serializedStats.thirst || 0;
+  }
+
+  /**
+   * Restores the levels of the story that the player has seen so far from the given save state.
+   *
+   * @param game - The game instance whose shown story levels are to be restored.
+   * @param saveState - The save state containing the serialized shown story levels data.
+   */
+  public restoreShownStoryLevels(
+    game: Game,
+    saveState: SerializedGameState,
+  ): void {
+    const shownStoryLevels = saveState.serializedShownStoryLevels.data;
+    game.shownStoryLevels = shownStoryLevels;
   }
 }

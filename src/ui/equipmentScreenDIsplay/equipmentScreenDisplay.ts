@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class EquipmentScreenDisplay extends FadeOutElement {
+export class EquipmentScreenDisplay extends FadeInOutElement {
   private equipmentItems: {
     char: string;
     slot: string;
@@ -73,19 +73,6 @@ export class EquipmentScreenDisplay extends FadeOutElement {
         .no-item {
           color: var(--grayedOut);
         }
-
-        .fade-out {
-          animation: fade-out 100ms;
-        }
-
-        @keyframes fade-out {
-          0% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
       </style>
       <div class="equipment-screen-display">
         <div class="equipment-heading">Equipped Items</div>
@@ -94,6 +81,8 @@ export class EquipmentScreenDisplay extends FadeOutElement {
     `;
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
+    super.connectedCallback();
+    this.fadeIn();
   }
 
   /**
