@@ -17,7 +17,6 @@ export class GameOverScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    super.connectedCallback();
     const template = document.createElement('template');
     template.innerHTML = `
       <style>
@@ -96,6 +95,7 @@ export class GameOverScreenDisplay extends FadeOutElement {
       </div>
     `;
     shadowRoot.appendChild(template.content.cloneNode(true));
+    super.connectedCallback();
 
     this.renderContent();
   }

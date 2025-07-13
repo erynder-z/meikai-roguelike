@@ -10,7 +10,6 @@ export class CommandDirectionScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    super.connectedCallback();
     const template = document.createElement('template');
     template.innerHTML = `
         <style>
@@ -57,6 +56,7 @@ export class CommandDirectionScreenDisplay extends FadeOutElement {
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
 
+    super.connectedCallback();
     this.renderDirections();
   }
 

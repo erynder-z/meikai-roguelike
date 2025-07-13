@@ -12,7 +12,6 @@ export class EntityInfoCard extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    super.connectedCallback();
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
@@ -99,24 +98,12 @@ export class EntityInfoCard extends FadeOutElement {
             opacity: 1;
           }
         }
-
-        @keyframes fade-out {
-          from {
-            opacity: 1;
-          }
-          to {
-            opacity: 0;
-          }
-        }
-
-        .fade-out {
-          animation: fade-out 0.1s forwards;
-        }
       </style>
       <div class="entity-card"></div>
     `;
 
     shadowRoot?.appendChild(templateElement.content.cloneNode(true));
+    super.connectedCallback();
   }
 
   /**
