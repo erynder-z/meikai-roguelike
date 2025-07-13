@@ -1,4 +1,4 @@
-export class FadeOutElement extends HTMLElement {
+export class FadeInOutElement extends HTMLElement {
   constructor() {
     super();
   }
@@ -6,6 +6,18 @@ export class FadeOutElement extends HTMLElement {
   connectedCallback(): void {
     const style = document.createElement('style');
     style.textContent = `
+     .fade-in {
+        animation: fade-in 100ms;
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
       .fade-out {
         animation: fade-out 100ms forwards;
       }
@@ -48,5 +60,13 @@ export class FadeOutElement extends HTMLElement {
         resolve();
       }
     });
+  }
+
+  /**
+   * Adds the 'fade-in' class to the element, which triggers the fade in animation.
+   */
+  public fadeIn(): void {
+    const animatedElement = this.shadowRoot?.querySelector('div');
+    if (animatedElement) animatedElement.classList.add('fade-in');
   }
 }

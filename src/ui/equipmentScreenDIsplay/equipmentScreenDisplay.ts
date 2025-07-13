@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class EquipmentScreenDisplay extends FadeOutElement {
+export class EquipmentScreenDisplay extends FadeInOutElement {
   private equipmentItems: {
     char: string;
     slot: string;
@@ -82,6 +82,7 @@ export class EquipmentScreenDisplay extends FadeOutElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
     super.connectedCallback();
+    this.fadeIn();
   }
 
   /**

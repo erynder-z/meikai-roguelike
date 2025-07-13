@@ -1,8 +1,8 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import * as storyData from '../../story/storyScreenData.json';
 import { Story } from '../../types/story/story';
 
-export class StoryScreenDisplay extends FadeOutElement {
+export class StoryScreenDisplay extends FadeInOutElement {
   private isAnimating = false;
   private animationFrameId: number | null = null;
   private currentLevel = 0;
@@ -13,7 +13,6 @@ export class StoryScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    super.connectedCallback();
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
@@ -93,6 +92,7 @@ export class StoryScreenDisplay extends FadeOutElement {
     `;
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
+    super.connectedCallback();
   }
 
   /**

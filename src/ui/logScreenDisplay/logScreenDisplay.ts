@@ -1,8 +1,8 @@
 import { BuffColors } from '../buffs/buffColors';
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import { LogMessage } from '../../gameLogic/messages/logMessage';
 
-export class LogScreenDisplay extends FadeOutElement {
+export class LogScreenDisplay extends FadeInOutElement {
   private colorizer = new BuffColors();
   private messageLog: LogMessage[] = [];
 
@@ -79,6 +79,7 @@ export class LogScreenDisplay extends FadeOutElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
     super.connectedCallback();
+    this.fadeIn();
   }
 
   /**

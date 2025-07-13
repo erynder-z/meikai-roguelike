@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class CommandDirectionScreenDisplay extends FadeOutElement {
+export class CommandDirectionScreenDisplay extends FadeInOutElement {
   public title: string = '';
   public directions: string[][] = [];
 
@@ -58,6 +58,7 @@ export class CommandDirectionScreenDisplay extends FadeOutElement {
 
     super.connectedCallback();
     this.renderDirections();
+    this.fadeIn();
   }
 
   /**

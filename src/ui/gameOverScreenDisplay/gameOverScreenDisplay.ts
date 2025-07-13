@@ -1,10 +1,10 @@
 import { MessageLog } from '../../gameLogic/messages/messageLog';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { handleLastMoments } from '../../utilities/handleLastMoments';
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import { PostMortem } from '../postMortem/postMortem';
 
-export class GameOverScreenDisplay extends FadeOutElement {
+export class GameOverScreenDisplay extends FadeInOutElement {
   public game: GameState | null = null;
   public playerName: string = '';
   public playerColor: string = '';
@@ -96,8 +96,8 @@ export class GameOverScreenDisplay extends FadeOutElement {
     `;
     shadowRoot.appendChild(template.content.cloneNode(true));
     super.connectedCallback();
-
     this.renderContent();
+    this.fadeIn();
   }
 
   /**

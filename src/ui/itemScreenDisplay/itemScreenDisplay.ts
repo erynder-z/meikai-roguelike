@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class ItemScreenDisplay extends FadeOutElement {
+export class ItemScreenDisplay extends FadeInOutElement {
   public itemDescription: string = '';
   public options: { key: string; description: string }[] = [];
 
@@ -52,8 +52,8 @@ export class ItemScreenDisplay extends FadeOutElement {
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
     super.connectedCallback();
-
     this.generateOptionsList();
+    this.fadeIn();
   }
 
   /**

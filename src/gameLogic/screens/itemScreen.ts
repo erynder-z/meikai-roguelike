@@ -240,7 +240,7 @@ export class ItemScreen extends BaseScreen {
       // Otherwise, if the spell is a screen, push the screen onto the stack.
       stack.push(<StackScreen>spell);
     }
-  } 
+  }
 
   /**
    * Unequips an item from the specified slot and updates the game state.

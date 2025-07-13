@@ -1,6 +1,6 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
-export class SpellScreenDisplay extends FadeOutElement {
+export class SpellScreenDisplay extends FadeInOutElement {
   public title: string = '';
   public spells: { key: string; description: string }[] = [];
 
@@ -65,6 +65,7 @@ export class SpellScreenDisplay extends FadeOutElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.renderSpells();
+    this.fadeIn();
   }
 
   /**

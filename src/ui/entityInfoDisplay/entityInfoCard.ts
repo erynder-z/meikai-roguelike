@@ -1,11 +1,11 @@
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';
 import { Spell } from '../../gameLogic/spells/spell';
 import { EnvEffect } from '../../types/gameLogic/maps/mapModel/envEffect';
 import { DetailViewEntity } from '../../types/ui/detailViewEntity';
 import { SpellColors } from '../../colors/spellColors';
 
-export class EntityInfoCard extends FadeOutElement {
+export class EntityInfoCard extends FadeInOutElement {
   constructor() {
     super();
   }
@@ -35,7 +35,6 @@ export class EntityInfoCard extends FadeOutElement {
           height: calc(var(--maximal-width) - var(--outer-margin));
           width: calc(var(--minimal-width) - var(--outer-margin));
           color: var(--white); 
-          animation: fade-in 0.1s;
         }
 
         .mob-title,
@@ -89,21 +88,13 @@ export class EntityInfoCard extends FadeOutElement {
         .yellow-hp {
           color: yellow;
         }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
       </style>
       <div class="entity-card"></div>
     `;
 
     shadowRoot?.appendChild(templateElement.content.cloneNode(true));
     super.connectedCallback();
+    this.fadeIn();
   }
 
   /**

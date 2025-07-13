@@ -2,11 +2,11 @@ import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffColors } from '../buffs/buffColors';
 import { BuffType } from '../../types/gameLogic/buffs/buffType';
 import { Equipment } from '../../gameLogic/inventory/equipment';
-import { FadeOutElement } from '../other/fadeOutElement';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { Stats } from '../../gameLogic/stats/stats';
 
-export class StatsScreenDisplay extends FadeOutElement {
+export class StatsScreenDisplay extends FadeInOutElement {
   public colorizer: BuffColors = new BuffColors();
   public stats: Stats | undefined;
   public player: Mob | undefined;
@@ -18,7 +18,6 @@ export class StatsScreenDisplay extends FadeOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    super.connectedCallback();
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
@@ -117,6 +116,8 @@ export class StatsScreenDisplay extends FadeOutElement {
     `;
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
+    super.connectedCallback();
+    this.fadeIn();
   }
 
   /**
