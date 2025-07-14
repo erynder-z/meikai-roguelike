@@ -1,146 +1,62 @@
-## Overview
+# Meikai
 
-This roadmap outlines the progress and future tasks for the development of this roguelike game. It is divided into several sections to keep track of what has been implemented and what still needs to be done.
+_A Journey to the Center of the Earth_
 
-## Legend
+A classic roguelike game built with TypeScript, Tauri, and a bit of Rust.
 
-- [ ] ==In Progress==
-- [x] Implemented
-- [x] _Needs Improvement (!)_
-- [ ] Planned
+---
 
-## Features
+## About
 
-### Core Mechanics
+Meikai is a personal project to build a roguelike game from the ground up. It's a journey into the genre's classic mechanics, with a focus on creating a solid, extensible foundation. The game is in active development, and much of the content is still in a placeholder state. The current focus is on building out the core systems and mechanics, with the goal of eventually creating a full-fledged game.
 
-- [x] Game Terminal
-- [x] Screen Handler
-- [x] Game Builder
-- [x] Procedural Dungeon Generation
-- [x] Turn-based Movement System
-- [x] Melee Combat System
-- [x] _Healing (!)_
-- [x] _Inventory System (!)_
-- [x] _Equipment System (!)_
-- [x] _Buff/Spell System (!)_
-- [x] _Ranged Combat (!)_
-- [ ] Save and Load Game
-- [x] _Look System (!)_
+## Current State
 
-### Player Character
+The game is playable, but it's still very much a work in progress. Here's what you can expect from the current build:
 
-- [x] Basic Player Stats (HP, attack, defense)
-- [ ] Skills and Abilities
+- **Procedural Map Generation:** The game generates a new dungeon layout for each run, with a mix of different room and corridor styles.
+- **Turn-Based Combat:** The combat system is in place, with melee and ranged attacks, as well as a basic spell system.
+- **Placeholder Content:** The mobs, items, and level progression are all placeholders. They're functional, but not balanced or diverse.
+- **No Story or Goal (Yet):** The only objective right now is to see how far you can get. The narrative and a proper endgame are still on the road map.
 
-### Enemies
+## Tech Stack
 
-- [x] Basic Enemy AI
-- [x] Progressively Stronger Enemies
-- [x] _Enemy Variety (!)_
-- [x] Enemy Abilities and Spells
-- [ ] Boss(es)
+- **Frontend:** The game is built with TypeScript and Vite. The UI is composed of custom Web Components, which keeps things modular and lightweight.
+- **Backend:** The game is wrapped in a Tauri container, using Rust for the backend to handle file system access and window management.
+- **Game Logic:** The core game logic is written in TypeScript and is decoupled from the UI, which makes it easier to test and maintain.
 
-### Items and Loot
+## Getting Started
 
-- [x] Random Item Generation
-- [x] _Consumable Items (!)_
-- [ ] Weapon and Item Variety
-- [x] Item Rarities
-- [ ] Starting Equipment Selection
-- [ ] Containers / Stashes
+To build and run the game, you'll need to have Node.js and Rust installed. Follow the instructions on the [Tauri website](https://tauri.app/v1/guides/getting-started/prerequisites) to set up your environment.
+(Pre-build binaries will be released later down the road)
 
-### Spells and Buffs
+1.  **Clone the repository:**
 
-- [x] Negative Buff Spells
-- [ ] Positive Buff Spells
-- [x] _Spell Costs (!)_
-- [x] Unified Player/Monster Spell System
+    ```bash
+    git clone https://github.com/your-username/meikai-roguelike.git
+    cd meikai-roguelike
+    ```
 
-### User Interface
+2.  **Install dependencies:**
 
-- [x] Stats Display
-- [x] Messages Display
-- [x] Buffs Display
-- [x] Equipment Display
-- [x] Message Log
-- [x] Situation Dependent Images
-- [x] _Main Menu (!)_
-- [ ] Help Screen
+    ```bash
+    npm install
+    ```
 
-### World and Environment
+3.  **Run in development mode:**
 
-- [x] Basic Dungeon Environment
-- [x] (Horizontal) Digging Mechanic
-- [ ] ==Diverse Biomes==
-- [ ] Environmental Hazards (traps, poison)
-- [x] _Generators for Different Map Types (Cave, Labyrinth, City, etc...) (!)_
-- [ ] Static Maps for Story Purposes
+    ```bash
+    npm run tauri dev
+    ```
 
-### Sound and Music
+4.  **Build for production:**
 
-- [ ] Background Music
-- [ ] Ambient Sounds
+    ```bash
+    npm run tauri build
+    ```
 
-### Narrative
-
-- [ ] Main Storyline
-- [ ] Side Quests
-- [ ] In-game Lore (books, inscriptions)
-
-### Advanced Mechanics
-
-- [ ] Thirst-System
-- [ ] Simple Crafting / Item Combination System
-
-### Backend for multi-platform deployment
-
-- [x] Tauri backend
-
-## Milestones
-
-- [ ] A playable and winnable game
-
-## Download
-
-- TBA
-
-## Build the App
-
-1. Install the prerequisites for Tauri according to the [Tauri official website](https://tauri.app/v1/guides/getting-started/prerequisites).
-
-2. Clone the Repository
-
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
-
-3. Install Node.js Dependencies
-
-   ```bash
-   npm install
-   ```
-
-4. Build the Tauri App
-
-   4.1 For development (with hot-reloading):
-
-   ```bash
-   npm run tauri dev
-   ```
-
-   4.2 For production (to create a distributable package):
-
-   ```bash
-   npm run tauri build
-   ```
-
-   If using the dev command, the app will launch automatically. For production, the executable can be found in the src-tauri/target/release/ directory.
+    The production build will be located in the `src-tauri/target/release` directory.
 
 ## Acknowledgements
 
 This project is built upon the fundamental structure outlined in the book [_How to Create Your Own Roguelike with TypeScript_](https://www.google.com/search?client=firefox-b-d&q=how+to+make+your+own+roguelike%2C+gaardsted) by Jakob Gaardsted.
-
-## Additional resources
-
-[Adding new biome](adding_new_biome.md)
