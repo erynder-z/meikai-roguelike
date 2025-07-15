@@ -8,8 +8,9 @@ import { GameState } from '../../types/gameBuilder/gameState';
 import { invoke } from '@tauri-apps/api/core';
 import { PopupHandler } from '../popup/popupHandler';
 import { SaveStateHandler } from '../../savestates/saveStateHandler';
+import { UnBlurElement } from '../other/unBlurElement';
 
-export class IngameMenu extends HTMLElement {
+export class IngameMenu extends UnBlurElement {
   private eventTracker = new EventListenerTracker();
   private game: GameState | null = null;
   private isRendered = false;
@@ -70,7 +71,6 @@ export class IngameMenu extends HTMLElement {
           color: var(--white);
           z-index: 1;
           overflow: hidden;
-          animation: unBlur 0.25s;
         }
 
         .ingame-menu h1 {
@@ -113,15 +113,6 @@ export class IngameMenu extends HTMLElement {
           height: 100%;
           gap: 0.5rem;
         }
-
-        @keyframes unBlur {
-          from {
-            filter: blur(35px);
-          }
-          to {
-            filter: blur(0px);
-          }
-        }
       </style>
 
       <div class="ingame-menu">
@@ -151,7 +142,9 @@ export class IngameMenu extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.bindEvents();
+    this.unBlur();
 
     // use animation frame to ensure rendered is set to true only after the element is fully rendered
     requestAnimationFrame(() => {

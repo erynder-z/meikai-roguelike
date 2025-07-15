@@ -8,8 +8,9 @@ import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { LayoutManager } from '../layoutManager/layoutManager';
 import { OptionsMenuButtonManager } from './buttonManager/optionsMenuButtonManager';
 import { ScanlinesHandler } from '../../renderer/scanlinesHandler';
+import { UnBlurElement } from '../other/unBlurElement';
 
-export class TitleMenuOptions extends HTMLElement {
+export class TitleMenuOptions extends UnBlurElement {
   private eventTracker: EventListenerTracker;
   private layoutManager: LayoutManager;
   private buttonManager: OptionsMenuButtonManager;
@@ -67,7 +68,6 @@ export class TitleMenuOptions extends HTMLElement {
           color: var(--white);
           z-index: 1;
           overflow-x: hidden;
-          animation: unBlur 0.25s;
         }
 
         .options-menu button {
@@ -179,16 +179,6 @@ export class TitleMenuOptions extends HTMLElement {
           margin: 0 1rem;
           z-index: 1;
           font-size: 2.5rem;
-        }
-
-        @keyframes unBlur {
-          from {
-            filter: blur(35px);
-          }
-
-          to {
-            filter: blur(0px);
-          }
         }
       </style>
 
@@ -343,6 +333,7 @@ export class TitleMenuOptions extends HTMLElement {
 
     this.shadowRoot?.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.buttonManager.updateStoryToggleButton(this.gameConfig.show_story);
     this.buttonManager.updateControlSchemeButton(this.currentScheme);
     this.setupKeypressThrottleInput();
@@ -371,6 +362,7 @@ export class TitleMenuOptions extends HTMLElement {
       this.gameConfig.blood_intensity,
     );
     this.bindEvents();
+    this.unBlur();
   }
 
   /**

@@ -8,8 +8,9 @@ import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { LayoutManager } from '../layoutManager/layoutManager';
 import { OptionsMenuButtonManager } from './buttonManager/optionsMenuButtonManager';
 import { ScanlinesHandler } from '../../renderer/scanlinesHandler';
+import { UnBlurElement } from '../other/unBlurElement';
 
-export class IngameOptions extends HTMLElement {
+export class IngameOptions extends UnBlurElement {
   private gameConfig = gameConfigManager.getConfig();
   private eventTracker: EventListenerTracker;
   private layoutManager: LayoutManager;
@@ -74,7 +75,6 @@ export class IngameOptions extends HTMLElement {
           z-index: 1;
           overflow-y: auto;
           overflow-x: hidden;
-          animation: unBlur 0.25s;
         }
 
         button {
@@ -186,15 +186,6 @@ export class IngameOptions extends HTMLElement {
           z-index: 1;
           font-size: 2.5rem;
         }
-
-        @keyframes unBlur {
-          from {
-            filter: blur(35px);
-          }
-          to {
-            filter: blur(0px);
-          }
-        }
       </style>
 
       <div class="options-menu">
@@ -304,6 +295,7 @@ export class IngameOptions extends HTMLElement {
 
     this.shadowRoot?.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.buttonManager.updateControlSchemeButton(this.currentScheme);
     this.buttonManager.updateScanlinesToggleButton(
       this.gameConfig.show_scanlines,
@@ -327,6 +319,7 @@ export class IngameOptions extends HTMLElement {
       this.gameConfig.blood_intensity,
     );
     this.bindEvents();
+    this.unBlur();
   }
 
   /**

@@ -3,8 +3,9 @@ import { BaseDirectory, readFile } from '@tauri-apps/plugin-fs';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { exit } from '@tauri-apps/plugin-process';
 import { invoke } from '@tauri-apps/api/core';
+import { UnBlurElement } from '../other/unBlurElement';
 
-export class TitleMenu extends HTMLElement {
+export class TitleMenu extends UnBlurElement {
   private eventTracker = new EventListenerTracker();
   private shouldEnableLoadGameKeyboardShortcuts: boolean = true;
   constructor() {
@@ -38,7 +39,6 @@ export class TitleMenu extends HTMLElement {
         margin: 8rem 1rem 0 1rem;
         text-align: center;
         z-index: 1;
-        animation: unBlur 0.25s;
       }
 
       .title-screen-container button {
@@ -67,7 +67,6 @@ export class TitleMenu extends HTMLElement {
         justify-content: center;
         gap: 0.5rem;
         height: 100%;
-        animation: unBlur 0.25s;
       }
 
       .bottom-container {
@@ -76,7 +75,6 @@ export class TitleMenu extends HTMLElement {
         align-items: center;
         width: 100%;
         margin-top: auto;
-        animation: unBlur 0.25s;
       }
 
       .version-display {
@@ -87,15 +85,6 @@ export class TitleMenu extends HTMLElement {
       button[disabled] {
         opacity: 0.5;
         cursor: not-allowed;
-      }
-
-      @keyframes unBlur {
-        from {
-          filter: blur(35px);
-        }
-        to {
-          filter: blur(0px);
-        }
       }
     </style>
 
@@ -132,8 +121,10 @@ export class TitleMenu extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.checkForSaveState();
     this.bindEvents();
+    this.unBlur();
   }
 
   /**

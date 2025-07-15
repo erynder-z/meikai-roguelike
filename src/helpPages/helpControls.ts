@@ -6,8 +6,9 @@ import {
 } from '../types/controls/controlSchemeType';
 import { EventListenerTracker } from '../utilities/eventListenerTracker';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
+import { UnBlurElement } from '../ui/other/unBlurElement';
 
-export class HelpControls extends HTMLElement {
+export class HelpControls extends UnBlurElement {
   private eventTracker = new EventListenerTracker();
   private gameConfig = gameConfigManager.getConfig();
   private controlSchemeName: ControlSchemeName = this.gameConfig.control_scheme;
@@ -41,7 +42,6 @@ export class HelpControls extends HTMLElement {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          animation: unBlur 0.25s;
         }
 
         .control-scheme-button-container {
@@ -89,15 +89,6 @@ export class HelpControls extends HTMLElement {
         .underline {
           text-decoration: underline;
         }
-
-        @keyframes unBlur {
-        from {
-          filter: blur(35px);
-        }
-        to {
-          filter: blur(0px);
-        }
-      }
       </style>
 
       <div class="container">
@@ -121,8 +112,10 @@ export class HelpControls extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.bindEvents();
     this.populateControlsTable(this.controlSchemeName);
+    this.unBlur();
   }
 
   /**
