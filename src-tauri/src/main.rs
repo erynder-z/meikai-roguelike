@@ -1,17 +1,9 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::Manager;
-
 mod commands;
 
 fn main() {
     tauri::Builder::default()
-        /* Open devtools on app launch */
-        .setup(|app| {
-            #[cfg(debug_assertions)]
-            app.get_webview_window("main").unwrap().open_devtools();
-            Ok(())
-        })
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_dialog::init())
