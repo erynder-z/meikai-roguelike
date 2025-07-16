@@ -322,58 +322,41 @@ export class Builder implements Build {
     rand: RandomGenerator,
   ): void {
     if (level === 0) {
-      this.addStairs0(map, rand);
-    } else {
-      this.addStairs(map, rand);
-    }
-  }
-
-  /**
-   * Adds stairs for level to the map at a specified position.
-   *
-   * @param map - The map to which stairs are being added.
-   */
-  private addStairs0(map: GameMapType, rand: RandomGenerator): void {
-    const pos = this.centerPos(map.dimensions);
-    const x = 3;
-    const y = 0;
-    const p = new WorldPoint(x, y).addTo(pos);
-
-    if (!map.cell(p).isBlocked) {
-      map.cell(p).env = Glyph.Stairs_Down;
-      map.addStairInfo(Glyph.Stairs_Down, p);
-    } else {
+      // For the first level, only place down stairs.
       this.addStair(map, rand, Glyph.Stairs_Down);
+    } else {
+      // For other levels, place both up and down stairs.
+      this.addStair(map, rand, Glyph.Stairs_Down);
+      this.addStair(map, rand, Glyph.Stairs_Up);
     }
   }
 
   /**
-   * Adds stairs for a level to the map.
+   * Adds a single staircase to the map, ensuring it's placed in a valid, free space.
    *
    * @param map - The map to which stairs are being added.
-   */
-  private addStairs(map: GameMapType, rand: RandomGenerator): void {
-    this.addStair(map, rand, Glyph.Stairs_Down);
-    this.addStair(map, rand, Glyph.Stairs_Up);
-  }
-
-  /**
-   * Adds stairs to the map based on the provided glyph and random generator.
-   *
-   * @param map - The map to which stairs are being added.
-   * @param rand - The random generator used for adding stairs.
-   * @param stair - The glyph representing the stairs.
+   * @param rand - The random generator used for placing stairs.
+   * @param stairGlyph - The glyph representing the stairs (Up or Down).
+   * @returns The position of the placed stairs, or null if no suitable position was found.
    */
   private addStair(
     map: GameMapType,
     rand: RandomGenerator,
-    stair: Glyph.Stairs_Up | Glyph.Stairs_Down,
-  ): boolean {
-    const p = <WorldPoint>FindFreeSpace.findFree(map, rand);
-    map.cell(p).env = stair;
-    map.addStairInfo(stair, p);
-
-    return true;
+    stairGlyph: Glyph.Stairs_Up | Glyph.Stairs_Down,
+  ): WorldPoint | null {
+    const maxAttempts = 100; // Prevent infinite loops on crowded maps.
+    for (let i = 0; i < maxAttempts; i++) {
+      try {
+        const p = FindFreeSpace.findFree(map, rand);
+        map.cell(p).env = stairGlyph;
+        map.addStairInfo(stairGlyph, p);
+        return p;
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+    console.warn(`Could not place ${Glyph[stairGlyph]} on level ${map.level}.`);
+    return null;
   }
 
   /**
