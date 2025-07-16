@@ -119,6 +119,7 @@ export class TitleMenuOptions extends UnBlurElement {
         .explanation {
           font-size: 1rem;
           font-weight: normal;
+          padding-top: 0.5rem;
         }
 
         .terminal-dimensions-input{
@@ -214,7 +215,10 @@ export class TitleMenuOptions extends UnBlurElement {
               value="${this.gameConfig.terminal.dimensions.height}"
             /> *
             <div class="explanation">
-              * Changing these will alter any saved games! Default: 64 x 40
+              * Changing these will alter any saved games! 
+            </div>
+            <div class="explanation">
+              * Recommended: 64 x 40 for 16:10 and 72 x 40 for 16:9 aspect ratio!
             </div>
           </button>
           <button id="scaling-factor-input-button">
