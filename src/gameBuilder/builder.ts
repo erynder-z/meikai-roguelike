@@ -494,7 +494,7 @@ export class Builder implements Build {
    * @param game - The game object.
    */
   private initLevel0(game: Game): void {
-    const L0 = game.dungeon.getLevel(0, game);
+    const L0 = game.dungeon.getMapForLevel(0, game);
     this.addItemToPlayerInventory(<Inventory>game.inventory);
     this.addItemNextToPlayer(game.player, L0);
     this.makeTestMob(L0, game.player);

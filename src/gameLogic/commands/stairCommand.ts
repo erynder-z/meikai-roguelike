@@ -26,7 +26,7 @@ export class StairCommand extends CommandBase {
     const { dungeon } = game;
 
     const newLevel = dungeon.level + levelDir;
-    const newMap = dungeon.getLevel(newLevel, game);
+    const newMap = dungeon.getMapForLevel(newLevel, game);
     const direction = levelDir !== -1 ? 'descends' : 'ascends';
     const newPos = this.getNewPos(direction, newMap, game);
 
