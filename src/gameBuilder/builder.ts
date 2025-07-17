@@ -493,7 +493,7 @@ export class Builder implements Build {
     const a = player.pos;
     let p = new WorldPoint(a.x, a.y + 2);
     map.addObject(
-      new ItemObject(Glyph.Shield, Slot.OffHand, [ObjCategory.Armor]),
+      new ItemObject(Glyph.Lantern, Slot.OffHand, [ObjCategory.Misc]),
       p,
     );
     map.cell(p).env = Glyph.Regular_Floor;
@@ -501,10 +501,10 @@ export class Builder implements Build {
     p = new WorldPoint(a.x, a.y + 1);
     map.addObject(
       new ItemObject(
-        Glyph.Rune,
+        Glyph.Dynamite,
         Slot.NotWorn,
-        [ObjCategory.SpellItem],
-        Spell.Poison,
+        [ObjCategory.Consumable],
+        Spell.Burn,
       ),
       p,
     );
@@ -518,60 +518,60 @@ export class Builder implements Build {
    */
   private addItemToPlayerInventory(inv: Inventory): void {
     inv.add(
-      new ItemObject(Glyph.Dagger, Slot.MainHand, [ObjCategory.MeleeWeapon]),
+      new ItemObject(Glyph.Pickaxe, Slot.MainHand, [ObjCategory.MeleeWeapon]),
     );
 
     inv.add(
       new ItemObject(
-        Glyph.Potion,
+        Glyph.FirstAidKit,
         Slot.NotWorn,
         [ObjCategory.Consumable, ObjCategory.Special],
         Spell.Heal,
       ),
     );
 
-    const rune1 = new ItemObject(
-      Glyph.Rune,
+    const dynamite = new ItemObject(
+      Glyph.Dynamite,
       Slot.NotWorn,
-      [ObjCategory.SpellItem, ObjCategory.Special],
-      Spell.Teleport,
+      [ObjCategory.Consumable, ObjCategory.Special],
+      Spell.Burn,
     );
-    rune1.charges = 2;
-    inv.add(rune1);
+    dynamite.charges = 2;
+    inv.add(dynamite);
 
-    const rune2 = new ItemObject(
-      Glyph.Rune,
+    const flareGun = new ItemObject(
+      Glyph.FlareGun,
       Slot.NotWorn,
-      [ObjCategory.SpellItem, ObjCategory.Special],
-      Spell.Bullet,
+      [ObjCategory.RangedWeapon, ObjCategory.Special],
+      Spell.Burn,
     );
-    rune2.charges = 1;
-    inv.add(rune2);
+    flareGun.charges = 1;
+    inv.add(flareGun);
 
-    const pistol = new ItemObject(
-      Glyph.Pistol,
+    const revolver = new ItemObject(
+      Glyph.Revolver,
       Slot.NotWorn,
       [ObjCategory.RangedWeapon, ObjCategory.Special],
       Spell.Bullet,
     );
-    pistol.charges = 10;
-    inv.add(pistol);
+    revolver.charges = 10;
+    inv.add(revolver);
 
-    const strongDagger = new ItemObject(Glyph.Dagger, Slot.MainHand, [
+    const strongPickaxe = new ItemObject(Glyph.Pickaxe, Slot.MainHand, [
       ObjCategory.MeleeWeapon,
     ]);
-    strongDagger.level = 50;
-    inv.add(strongDagger);
+    strongPickaxe.level = 50;
+    inv.add(strongPickaxe);
 
-    const strongPistol = new ItemObject(
-      Glyph.Pistol,
+    const strongRevolver = new ItemObject(
+      Glyph.Revolver,
       Slot.NotWorn,
       [ObjCategory.RangedWeapon, ObjCategory.Special],
       Spell.Bullet,
     );
-    strongPistol.level = 50;
-    strongPistol.charges = 10;
-    inv.add(strongPistol);
+    strongRevolver.level = 50;
+    strongRevolver.charges = 10;
+    inv.add(strongRevolver);
 
     const ration = new ItemObject(
       Glyph.Ration,
@@ -593,17 +593,17 @@ export class Builder implements Build {
     inv.add(waterBottle);
 
     for (let index = 0; index < 10; index++) {
-      const potion = new ItemObject(
-        Glyph.Potion,
+      const laudanum = new ItemObject(
+        Glyph.Laudanum,
         Slot.NotWorn,
         [ObjCategory.Consumable],
         Spell.Heal,
         1,
-        'some potion',
+        'some laudanum',
         1,
       );
 
-      inv.add(potion);
+      inv.add(laudanum);
     }
   }
 }

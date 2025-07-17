@@ -98,6 +98,26 @@ export enum Glyph {
   Ration,
   Water_Bottle,
 
+  // Items
+  Pickaxe,
+  Revolver,
+  PithHelmet,
+  Goggles,
+  ExpeditionCoat,
+  SturdyBoots,
+  Laudanum,
+  Dynamite,
+  Lantern,
+  PocketWatch,
+  GearRing,
+  CaneSword,
+  SteamDrill,
+  HarpoonGun,
+  FlareGun,
+  MiningHelmet,
+  BoilerSuit,
+  FirstAidKit,
+
   // Misc
   Bad,
   Unknown,

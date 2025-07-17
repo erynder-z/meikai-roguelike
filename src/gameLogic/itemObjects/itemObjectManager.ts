@@ -45,6 +45,96 @@ export class ItemObjectManager {
       slot: Slot.NotWorn,
       category: [ObjCategory.RangedWeapon],
     },
+    {
+      glyph: Glyph.Pickaxe,
+      slot: Slot.MainHand,
+      category: [ObjCategory.MeleeWeapon],
+    },
+    {
+      glyph: Glyph.Revolver,
+      slot: Slot.MainHand,
+      category: [ObjCategory.RangedWeapon],
+    },
+    {
+      glyph: Glyph.PithHelmet,
+      slot: Slot.Head,
+      category: [ObjCategory.Armor],
+    },
+    {
+      glyph: Glyph.Goggles,
+      slot: Slot.Head,
+      category: [ObjCategory.Armor],
+    },
+    {
+      glyph: Glyph.ExpeditionCoat,
+      slot: Slot.Back,
+      category: [ObjCategory.Armor],
+    },
+    {
+      glyph: Glyph.SturdyBoots,
+      slot: Slot.Feet,
+      category: [ObjCategory.Armor],
+    },
+    {
+      glyph: Glyph.Laudanum,
+      slot: Slot.NotWorn,
+      category: [ObjCategory.Consumable],
+    },
+    {
+      glyph: Glyph.Dynamite,
+      slot: Slot.NotWorn,
+      category: [ObjCategory.Consumable],
+    },
+    {
+      glyph: Glyph.Lantern,
+      slot: Slot.NotWorn,
+      category: [ObjCategory.Misc],
+    },
+    {
+      glyph: Glyph.PocketWatch,
+      slot: Slot.NotWorn,
+      category: [ObjCategory.Misc],
+    },
+    {
+      glyph: Glyph.GearRing,
+      slot: Slot.Ring,
+      category: [ObjCategory.Armor],
+    },
+    {
+      glyph: Glyph.CaneSword,
+      slot: Slot.MainHand,
+      category: [ObjCategory.MeleeWeapon],
+    },
+    {
+      glyph: Glyph.SteamDrill,
+      slot: Slot.MainHand,
+      category: [ObjCategory.MeleeWeapon],
+    },
+    {
+      glyph: Glyph.HarpoonGun,
+      slot: Slot.BothHands,
+      category: [ObjCategory.RangedWeapon],
+    },
+    {
+      glyph: Glyph.FlareGun,
+      slot: Slot.MainHand,
+      category: [ObjCategory.RangedWeapon],
+    },
+    {
+      glyph: Glyph.MiningHelmet,
+      slot: Slot.Head,
+      category: [ObjCategory.Armor],
+    },
+    {
+      glyph: Glyph.BoilerSuit,
+      slot: Slot.Back,
+      category: [ObjCategory.Armor],
+    },
+    {
+      glyph: Glyph.FirstAidKit,
+      slot: Slot.NotWorn,
+      category: [ObjCategory.Consumable],
+    },
   ];
 
   private static highestSpellTier: number = Spell.None;
