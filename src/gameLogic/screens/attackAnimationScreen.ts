@@ -1,6 +1,7 @@
+import { AnimationManager } from '../animations/animationManager';
+import { AttackAnimationType } from '../../types/gameLogic/animations/animationTypes';
 import { BaseScreen } from './baseScreen';
 import { DrawableTerminal } from '../../types/terminal/drawableTerminal';
-import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
@@ -32,22 +33,20 @@ export class AttackAnimationScreen extends BaseScreen {
   }
 
   /**
-   * Draws the attack animation on the terminal.
+   * Draws the attack animation screen on the provided terminal.
    *
    * @param term - The terminal to draw on.
    */
   public drawScreen(term: DrawableTerminal): void {
+    let attackType: AttackAnimationType;
+
     if (this.isDig) {
-      this.drawAttackAnimation(term, 'burst');
-      return;
+      attackType = 'burst';
+    } else if (this.isRanged) {
+      attackType = 'ranged';
+    } else {
+      attackType = this.isAttackByPlayer ? 'longerSlash' : 'shorterSlash';
     }
-
-    if (this.isRanged) {
-      this.drawAttackAnimation(term, 'ranged');
-      return;
-    }
-
-    const attackType = this.isAttackByPlayer ? 'longerSlash' : 'shorterSlash';
     this.drawAttackAnimation(term, attackType);
   }
 
@@ -61,6 +60,7 @@ export class AttackAnimationScreen extends BaseScreen {
     stack.removeScreen(this);
     return true;
   }
+
   /**
    * Draws the attack animation of a given type on the given terminal.
    *
@@ -69,28 +69,15 @@ export class AttackAnimationScreen extends BaseScreen {
    */
   private drawAttackAnimation(
     term: DrawableTerminal,
-    type: 'longerSlash' | 'shorterSlash' | 'burst' | 'ranged',
+    type: AttackAnimationType,
   ): void {
-    const { color, opacityFactor, thickness } = this.getAnimationParams(type);
+    const animation = AnimationManager.getAnimation(type);
+    if (!animation) return;
+
+    const { color, opacityFactor, thickness } = animation;
     const targetPos = this.getTargetPosition();
     const drawingMethod = this.getDrawingMethod(term, type);
     drawingMethod(targetPos.x, targetPos.y, color, opacityFactor, thickness);
-  }
-
-  /**
-   * Gets the parameters for the attack animation given the type of attack.
-   *
-   * @param type - The type of attack animation to draw. Must be one of 'longerSlash', 'shorterSlash', 'burst', or 'ranged'.
-   * @return An object with the color, opacity factor, and line thickness for the attack animation.
-   */
-  private getAnimationParams(
-    type: 'longerSlash' | 'shorterSlash' | 'burst' | 'ranged',
-  ): { color: string; opacityFactor: number; thickness: number } {
-    const gameConfig = gameConfigManager.getConfig();
-    const color = type === 'shorterSlash' ? '#a7001b' : gameConfig.player.color;
-    const opacityFactor = 0.9;
-    const thickness = type === 'shorterSlash' ? 2 : 1;
-    return { color, opacityFactor, thickness };
   }
 
   /**
@@ -103,7 +90,7 @@ export class AttackAnimationScreen extends BaseScreen {
    */
   private getDrawingMethod(
     term: DrawableTerminal,
-    type: 'longerSlash' | 'shorterSlash' | 'burst' | 'ranged',
+    type: AttackAnimationType,
   ): (
     x: number,
     y: number,
@@ -119,6 +106,7 @@ export class AttackAnimationScreen extends BaseScreen {
       case 'ranged':
         return term.drawProjectileExplosion.bind(term);
       case 'burst':
+        return term.drawBurstAttackOverlay.bind(term);
       default:
         return term.drawBurstAttackOverlay.bind(term);
     }
