@@ -83,22 +83,6 @@ export enum Glyph {
   Nebulous_Mist,
 
   // Items
-  Dagger,
-  Shield,
-  Cap,
-  Gloves,
-  Cape,
-  Pants,
-  Boots,
-  Bullet,
-  Potion,
-  Pistol,
-  Rune,
-  Scroll,
-  Ration,
-  Water_Bottle,
-
-  // Items
   Pickaxe,
   Revolver,
   PithHelmet,
@@ -117,6 +101,11 @@ export enum Glyph {
   MiningHelmet,
   BoilerSuit,
   FirstAidKit,
+  Water_Bottle,
+  Ration,
+  Rune,
+  Bullet,
+  Scroll,
 
   // Misc
   Bad,

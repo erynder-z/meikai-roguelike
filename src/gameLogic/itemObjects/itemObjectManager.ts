@@ -2,140 +2,30 @@ import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../glyphs/glyph';
 import { ItemObject } from './itemObject';
 import { ObjCategory } from './itemCategories';
-import { ObjectTypes } from '../../types/gameLogic/itemObjects/objTypes';
+import {
+  ItemTemplate,
+  ItemDefinitionJson,
+} from '../../types/gameLogic/itemObjects/items';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { Slot } from './slot';
 import { Spell } from '../spells/spell';
 import spellData from '../../gameLogic/spells/spellData/spells.json';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import * as itemData from '../../gameLogic/itemObjects/itemData/items.json';
 
 /**
  * Represents a collection of objects (items) in the game world.
  */
 export class ItemObjectManager {
-  private static objTypes: ObjectTypes[] = [
-    {
-      glyph: Glyph.Dagger,
-      slot: Slot.MainHand,
-      category: [ObjCategory.MeleeWeapon],
-    },
-    { glyph: Glyph.Shield, slot: Slot.OffHand, category: [ObjCategory.Armor] },
-    { glyph: Glyph.Cap, slot: Slot.Head, category: [ObjCategory.Armor] },
-    { glyph: Glyph.Gloves, slot: Slot.Hands, category: [ObjCategory.Armor] },
-    { glyph: Glyph.Cape, slot: Slot.Back, category: [ObjCategory.Armor] },
-    { glyph: Glyph.Pants, slot: Slot.Legs, category: [ObjCategory.Armor] },
-    { glyph: Glyph.Boots, slot: Slot.Feet, category: [ObjCategory.Armor] },
-    {
-      glyph: Glyph.Potion,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.Consumable],
-    },
-    {
-      glyph: Glyph.Rune,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.SpellItem],
-    },
-    {
-      glyph: Glyph.Scroll,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.SpellItem],
-    },
-    {
-      glyph: Glyph.Pistol,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.RangedWeapon],
-    },
-    {
-      glyph: Glyph.Pickaxe,
-      slot: Slot.MainHand,
-      category: [ObjCategory.MeleeWeapon],
-    },
-    {
-      glyph: Glyph.Revolver,
-      slot: Slot.MainHand,
-      category: [ObjCategory.RangedWeapon],
-    },
-    {
-      glyph: Glyph.PithHelmet,
-      slot: Slot.Head,
-      category: [ObjCategory.Armor],
-    },
-    {
-      glyph: Glyph.Goggles,
-      slot: Slot.Head,
-      category: [ObjCategory.Armor],
-    },
-    {
-      glyph: Glyph.ExpeditionCoat,
-      slot: Slot.Back,
-      category: [ObjCategory.Armor],
-    },
-    {
-      glyph: Glyph.SturdyBoots,
-      slot: Slot.Feet,
-      category: [ObjCategory.Armor],
-    },
-    {
-      glyph: Glyph.Laudanum,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.Consumable],
-    },
-    {
-      glyph: Glyph.Dynamite,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.Consumable],
-    },
-    {
-      glyph: Glyph.Lantern,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.Misc],
-    },
-    {
-      glyph: Glyph.PocketWatch,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.Misc],
-    },
-    {
-      glyph: Glyph.GearRing,
-      slot: Slot.Ring,
-      category: [ObjCategory.Armor],
-    },
-    {
-      glyph: Glyph.CaneSword,
-      slot: Slot.MainHand,
-      category: [ObjCategory.MeleeWeapon],
-    },
-    {
-      glyph: Glyph.SteamDrill,
-      slot: Slot.MainHand,
-      category: [ObjCategory.MeleeWeapon],
-    },
-    {
-      glyph: Glyph.HarpoonGun,
-      slot: Slot.BothHands,
-      category: [ObjCategory.RangedWeapon],
-    },
-    {
-      glyph: Glyph.FlareGun,
-      slot: Slot.MainHand,
-      category: [ObjCategory.RangedWeapon],
-    },
-    {
-      glyph: Glyph.MiningHelmet,
-      slot: Slot.Head,
-      category: [ObjCategory.Armor],
-    },
-    {
-      glyph: Glyph.BoilerSuit,
-      slot: Slot.Back,
-      category: [ObjCategory.Armor],
-    },
-    {
-      glyph: Glyph.FirstAidKit,
-      slot: Slot.NotWorn,
-      category: [ObjCategory.Consumable],
-    },
-  ];
+  private static objTypes: ItemTemplate[] = (
+    itemData.items as ItemDefinitionJson[]
+  ).map(item => ({
+    glyph: Glyph[item.glyph as keyof typeof Glyph],
+    slot: Slot[item.slot as keyof typeof Slot],
+    category: item.category.map(
+      (c: string) => ObjCategory[c as keyof typeof ObjCategory],
+    ),
+  }));
 
   private static highestSpellTier: number = Spell.None;
 
@@ -167,7 +57,7 @@ export class ItemObjectManager {
     level: number,
   ): ItemObject {
     const index = this.indexForGlyph(objType);
-    const template: ObjectTypes = ItemObjectManager.getTemplate(index);
+    const template: ItemTemplate = ItemObjectManager.getTemplate(index);
     const object = this.makeTemplateObject(level, rand, template);
     map.addObject(object, wp);
     return object;
@@ -213,11 +103,11 @@ export class ItemObjectManager {
    * @param rand - The random number generator used to generate a random index.
    * @return The randomly selected object template.
    */
-  private static getRandomTemplate(rand: RandomGenerator): ObjectTypes {
+  private static getRandomTemplate(rand: RandomGenerator): ItemTemplate {
     const index = rand.randomIntegerExclusive(
       ItemObjectManager.objTypes.length,
     );
-    const template: ObjectTypes = ItemObjectManager.getTemplate(index);
+    const template: ItemTemplate = ItemObjectManager.getTemplate(index);
     return template;
   }
 
@@ -259,7 +149,7 @@ export class ItemObjectManager {
   private static makeTemplateObject(
     level: number,
     rand: RandomGenerator,
-    template: ObjectTypes,
+    template: ItemTemplate,
   ): ItemObject {
     const objectLevel = rand.adjustLevel(level);
     const object = new ItemObject(
@@ -270,7 +160,7 @@ export class ItemObjectManager {
     object.level = objectLevel;
 
     switch (object.glyph) {
-      case Glyph.Potion:
+      case Glyph.Laudanum:
         this.setSpecificSpell(object, Spell.Heal);
         break;
       case Glyph.Rune:
@@ -280,7 +170,7 @@ export class ItemObjectManager {
       case Glyph.Scroll:
         this.setItemSpell(object, rand);
         break;
-      case Glyph.Pistol:
+      case Glyph.Revolver:
         this.setSpecificSpell(object, Spell.Bullet);
         object.charges = rand.randomIntegerExclusive(10, level);
         break;
@@ -352,7 +242,7 @@ export class ItemObjectManager {
    * @return The template object type.
    * @throws Throws an error if the index is out of bounds.
    */
-  private static getTemplate(index: number): ObjectTypes {
+  private static getTemplate(index: number): ItemTemplate {
     const length = ItemObjectManager.objTypes.length;
 
     if (index < 0 || index >= length) {

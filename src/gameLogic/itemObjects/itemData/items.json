@@ -2,13 +2,15 @@
   "items": [
     {
       "id": "Pickaxe",
+      "glyph": "Pickaxe",
       "char": "⛏",
       "bgCol": "#4B5A52",
       "fgCol": "#B0A084",
       "hasSolidBg": false,
       "name": "Pickaxe",
       "description": "A sturdy pickaxe, essential for breaking through rock and other obstacles.",
-      "category": "MeleeWeapon",
+      "category": ["MeleeWeapon"],
+      "slot": "MainHand",
       "help": {
         "show": true,
         "about": "A sturdy pickaxe, essential for breaking through rock and other obstacles."
@@ -16,13 +18,15 @@
     },
     {
       "id": "Revolver",
+      "glyph": "Revolver",
       "char": "¬",
       "bgCol": "#4B5A52",
       "fgCol": "#8A8C76",
       "hasSolidBg": false,
       "name": "Revolver",
       "description": "A reliable six-shooter, perfect for fending off subterranean threats.",
-      "category": "RangedWeapon",
+      "category": ["RangedWeapon"],
+      "slot": "MainHand",
       "help": {
         "show": true,
         "about": "A reliable six-shooter, perfect for fending off subterranean threats."
@@ -30,13 +34,15 @@
     },
     {
       "id": "PithHelmet",
+      "glyph": "PithHelmet",
       "char": "^",
       "bgCol": "#4B5A52",
       "fgCol": "#A67F66",
       "hasSolidBg": false,
       "name": "Pith Helmet",
       "description": "A lightweight helmet offering protection from falling debris and the occasional dripping stalactite.",
-      "category": "Armor",
+      "category": ["Armor"],
+      "slot": "Head",
       "help": {
         "show": true,
         "about": "A lightweight helmet offering protection from falling debris and the occasional dripping stalactite."
@@ -44,13 +50,15 @@
     },
     {
       "id": "Goggles",
+      "glyph": "Goggles",
       "char": "∞",
       "bgCol": "#4B5A52",
       "fgCol": "#887F72",
       "hasSolidBg": false,
       "name": "Goggles",
       "description": "Protective eyewear to shield against dust, spores, and unexpected geothermal vents.",
-      "category": "Armor",
+      "category": ["Armor"],
+      "slot": "Head",
       "help": {
         "show": true,
         "about": "Protective eyewear to shield against dust, spores, and unexpected geothermal vents."
@@ -58,13 +66,15 @@
     },
     {
       "id": "ExpeditionCoat",
+      "glyph": "ExpeditionCoat",
       "char": "[",
       "bgCol": "#4B5A52",
       "fgCol": "#947E82",
       "hasSolidBg": false,
       "name": "Expedition Coat",
       "description": "A durable coat with numerous pockets, offering protection from the elements.",
-      "category": "Armor",
+      "category": ["Armor"],
+      "slot": "Body",
       "help": {
         "show": true,
         "about": "A durable coat with numerous pockets, offering protection from the elements."
@@ -72,13 +82,15 @@
     },
     {
       "id": "SturdyBoots",
+      "glyph": "SturdyBoots",
       "char": "]",
       "bgCol": "#4B5A52",
       "fgCol": "#7C8C8A",
       "hasSolidBg": false,
       "name": "Sturdy Boots",
       "description": "Reinforced boots designed for traversing treacherous underground terrain.",
-      "category": "Armor",
+      "category": ["Armor"],
+      "slot": "Feet",
       "help": {
         "show": true,
         "about": "Reinforced boots designed for traversing treacherous underground terrain."
@@ -86,13 +98,14 @@
     },
     {
       "id": "Laudanum",
+      "glyph": "Laudanum",
       "char": "!",
       "bgCol": "#4B5A52",
       "fgCol": "#8B7D7A",
       "hasSolidBg": false,
       "name": "Laudanum",
       "description": "A tincture of opium, useful for dulling pain and steadying nerves.",
-      "category": "Consumable",
+      "category": ["Consumable"],
       "help": {
         "show": true,
         "about": "A tincture of opium, useful for dulling pain and steadying nerves."
@@ -100,13 +113,15 @@
     },
     {
       "id": "Dynamite",
+      "glyph": "Dynamite",
       "char": "¡",
       "bgCol": "#4B5A52",
       "fgCol": "#FF4500",
       "hasSolidBg": false,
       "name": "Dynamite",
       "description": "A stick of dynamite, capable of clearing large obstacles or dealing with groups of creatures.",
-      "category": "Consumable",
+      "category": ["Consumable"],
+      "slot": "NotWorn",
       "help": {
         "show": true,
         "about": "A stick of dynamite, capable of clearing large obstacles or dealing with groups of creatures."
@@ -114,13 +129,15 @@
     },
     {
       "id": "Lantern",
+      "glyph": "Lantern",
       "char": "☼",
       "bgCol": "#4B5A52",
       "fgCol": "#FFFF00",
       "hasSolidBg": false,
       "name": "Lantern",
       "description": "A brass lantern that casts a steady, reliable light, pushing back the oppressive darkness.",
-      "category": "Misc",
+      "category": ["Misc"],
+      "slot": "Offhand",
       "help": {
         "show": true,
         "about": "A brass lantern that casts a steady, reliable light, pushing back the oppressive darkness."
@@ -128,13 +145,15 @@
     },
     {
       "id": "PocketWatch",
+      "glyph": "PocketWatch",
       "char": "Θ",
       "bgCol": "#4B5A52",
       "fgCol": "#FFD700",
       "hasSolidBg": false,
       "name": "Pocket Watch",
       "description": "An intricate pocket watch, its ticking a small comfort in the silent depths.",
-      "category": "Misc",
+      "category": ["Misc"],
+      "slot": "NotWorn",
       "help": {
         "show": true,
         "about": "An intricate pocket watch, its ticking a small comfort in the silent depths."
@@ -142,13 +161,15 @@
     },
     {
       "id": "GearRing",
+      "glyph": "GearRing",
       "char": "=",
       "bgCol": "#4B5A52",
       "fgCol": "#C0C0C0",
       "hasSolidBg": false,
       "name": "Gear Ring",
       "description": "A ring fashioned from interlocking gears, humming with a faint mechanical energy.",
-      "category": "Armor",
+      "category": ["Armor"],
+      "slot": "NotWorn",
       "help": {
         "show": true,
         "about": "A ring fashioned from interlocking gears, humming with a faint mechanical energy."
@@ -156,13 +177,15 @@
     },
     {
       "id": "CaneSword",
+      "glyph": "CaneSword",
       "char": "|",
       "bgCol": "#4B5A52",
       "fgCol": "#B0A084",
       "hasSolidBg": false,
       "name": "Cane Sword",
       "description": "An elegant walking cane concealing a slender, deadly blade.",
-      "category": "MeleeWeapon",
+      "category": ["MeleeWeapon"],
+      "slot": "MainHand",
       "help": {
         "show": true,
         "about": "An elegant walking cane concealing a slender, deadly blade."
@@ -170,13 +193,15 @@
     },
     {
       "id": "SteamDrill",
+      "glyph": "SteamDrill",
       "char": "⌶",
       "bgCol": "#4B5A52",
       "fgCol": "#B0A084",
       "hasSolidBg": false,
       "name": "Steam Drill",
       "description": "A marvel of modern engineering, this steam-powered drill can pulverize rock with astonishing speed.",
-      "category": "MeleeWeapon",
+      "category": ["MeleeWeapon"],
+      "slot": "BothHands",
       "help": {
         "show": true,
         "about": "A marvel of modern engineering, this steam-powered drill can pulverize rock with astonishing speed."
@@ -184,13 +209,15 @@
     },
     {
       "id": "HarpoonGun",
+      "glyph": "HarpoonGun",
       "char": "}",
       "bgCol": "#4B5A52",
       "fgCol": "#8A8C76",
       "hasSolidBg": false,
       "name": "Harpoon Gun",
       "description": "A pneumatic gun that fires a heavy, tethered harpoon.",
-      "category": "RangedWeapon",
+      "category": ["RangedWeapon"],
+      "slot": "NotWorn",
       "help": {
         "show": true,
         "about": "A pneumatic gun that fires a heavy, tethered harpoon."
@@ -198,13 +225,15 @@
     },
     {
       "id": "FlareGun",
+      "glyph": "FlareGun",
       "char": "*",
       "bgCol": "#4B5A52",
       "fgCol": "#FF4500",
       "hasSolidBg": false,
       "name": "Flare Gun",
       "description": "A pistol that fires a bright, burning flare, useful for signaling or temporarily blinding foes.",
-      "category": "RangedWeapon",
+      "category": ["RangedWeapon"],
+      "slot": "NotWorn",
       "help": {
         "show": true,
         "about": "A pistol that fires a bright, burning flare, useful for signaling or temporarily blinding foes."
@@ -212,13 +241,15 @@
     },
     {
       "id": "MiningHelmet",
+      "glyph": "MiningHelmet",
       "char": "∩",
       "bgCol": "#4B5A52",
       "fgCol": "#A67F66",
       "hasSolidBg": false,
       "name": "Mining Helmet",
       "description": "A sturdy helmet with a built-in carbide lamp.",
-      "category": "Armor",
+      "category": ["Armor"],
+      "slot": "Head",
       "help": {
         "show": true,
         "about": "A sturdy helmet with a built-in carbide lamp."
@@ -226,13 +257,15 @@
     },
     {
       "id": "BoilerSuit",
+      "glyph": "BoilerSuit",
       "char": "{",
       "bgCol": "#4B5A52",
       "fgCol": "#947E82",
       "hasSolidBg": false,
       "name": "Boiler Suit",
       "description": "A one-piece garment of tough, heavy-duty cloth, offering full-body protection.",
-      "category": "Armor",
+      "category": ["Armor"],
+      "slot": "Body",
       "help": {
         "show": true,
         "about": "A one-piece garment of tough, heavy-duty cloth, offering full-body protection."
@@ -240,16 +273,76 @@
     },
     {
       "id": "FirstAidKit",
+      "glyph": "FirstAidKit",
       "char": "☤",
       "bgCol": "#4B5A52",
       "fgCol": "#FF0000",
       "hasSolidBg": false,
       "name": "First-Aid Kit",
       "description": "A compact kit containing bandages, antiseptics, and other medical supplies.",
-      "category": "Consumable",
+      "category": ["Consumable"],
+      "slot": "NotWorn",
       "help": {
         "show": true,
         "about": "A compact kit containing bandages, antiseptics, and other medical supplies."
+      }
+    },
+    {
+      "id": "Scroll",
+      "glyph": "Scroll",
+      "char": "§",
+      "bgCol": "#4B5A52",
+      "fgCol": "#8A758E",
+      "hasSolidBg": false,
+      "name": "Scroll",
+      "description": "A scroll that can cast magic.",
+      "category": ["SpellItem"],
+      "slot": "NotWorn",
+      "help": { "show": true, "about": "A scroll that can cast magic." }
+    },
+    {
+      "id": "Rune",
+      "glyph": "Rune",
+      "char": "ᚱ",
+      "bgCol": "#4B5A52",
+      "fgCol": "#7F9278",
+      "hasSolidBg": false,
+      "name": "Rune",
+      "description": "A rune that can cast magic.",
+      "category": ["SpellItem"],
+      "slot": "NotWorn",
+      "help": { "show": true, "about": "A rune that can cast magic." }
+    },
+    {
+      "id": "Water_Bottle",
+      "glyph": "Water_Bottle",
+      "char": "Ւ",
+      "bgCol": "#4B5A52",
+      "fgCol": "#0ab1f5",
+      "hasSolidBg": false,
+      "name": "Water bottle",
+      "description": "Bottled water.",
+      "category": ["Consumable"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "Water in a bottle. Tasteless, but refreshing."
+      }
+    },
+    {
+      "id": "Ration",
+      "glyph": "Ration",
+      "char": "ø",
+      "bgCol": "#4B5A52",
+      "fgCol": "#32d728",
+      "hasSolidBg": false,
+      "name": "Ration",
+      "description": "Prepared food in a can.",
+      "category": ["Consumable"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "Prepared food in a can. Not exactly tasty, but better than going hungry."
       }
     }
   ]
