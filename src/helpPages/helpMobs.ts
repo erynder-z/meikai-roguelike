@@ -1,6 +1,7 @@
 import mobData from '../gameLogic/mobs/mobData/mobs.json';
+import { UnBlurElement } from '../ui/other/unBlurElement';
 
-export class HelpMobs extends HTMLElement {
+export class HelpMobs extends UnBlurElement {
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -18,7 +19,6 @@ export class HelpMobs extends HTMLElement {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          animation: unBlur 0.25s;
         }
 
         table {
@@ -53,15 +53,6 @@ export class HelpMobs extends HTMLElement {
         .about-cell {
           font-style: italic;
         }
-
-        @keyframes unBlur {
-        from {
-          filter: blur(35px);
-        }
-        to {
-          filter: blur(0px);
-        }
-      }
       </style>
 
     <div class="container">
@@ -82,7 +73,9 @@ export class HelpMobs extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.populateMobsList();
+    this.unBlur();
   }
 
   /**

@@ -1,7 +1,8 @@
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import environmentData from '../gameLogic/environment/environmentData/environment.json';
+import { UnBlurElement } from '../ui/other/unBlurElement';
 
-export class HelpEnvironment extends HTMLElement {
+export class HelpEnvironment extends UnBlurElement {
   private gameConfig = gameConfigManager.getConfig();
   constructor() {
     super();
@@ -21,7 +22,6 @@ export class HelpEnvironment extends HTMLElement {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          animation: unBlur 0.25s;
         }
 
         table {
@@ -53,15 +53,6 @@ export class HelpEnvironment extends HTMLElement {
         .about-cell {
           font-style: italic;
         }
-
-        @keyframes unBlur {
-        from {
-          filter: blur(35px);
-        }
-        to {
-          filter: blur(0px);
-        }
-      }
       </style>
 
     <div class="container">
@@ -82,7 +73,9 @@ export class HelpEnvironment extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.populateEnvironmentList();
+    this.unBlur();
   }
 
   /**

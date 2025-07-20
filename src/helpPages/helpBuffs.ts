@@ -1,7 +1,8 @@
 import { BuffColors } from '../ui/buffs/buffColors';
 import buffsData from '../gameLogic/buffs/buffData/buffs.json';
+import { UnBlurElement } from '../ui/other/unBlurElement';
 
-export class HelpBuffs extends HTMLElement {
+export class HelpBuffs extends UnBlurElement {
   private colorizer: BuffColors;
   constructor() {
     super();
@@ -22,7 +23,6 @@ export class HelpBuffs extends HTMLElement {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          animation: unBlur 0.25s;
         }
 
         table {
@@ -53,15 +53,6 @@ export class HelpBuffs extends HTMLElement {
         .effect-cell {
           font-style: italic;
         }
-
-        @keyframes unBlur {
-        from {
-          filter: blur(35px);
-        }
-        to {
-          filter: blur(0px);
-        }
-      }
       </style>
 
     <div class="container">
@@ -81,7 +72,9 @@ export class HelpBuffs extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.populateBuffsList();
+    this.unBlur();
   }
 
   /**

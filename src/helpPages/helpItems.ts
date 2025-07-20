@@ -1,6 +1,7 @@
 import itemData from '../gameLogic/itemObjects/itemData/items.json';
+import { UnBlurElement } from '../ui/other/unBlurElement';
 
-export class HelpItems extends HTMLElement {
+export class HelpItems extends UnBlurElement {
   constructor() {
     super();
 
@@ -18,7 +19,6 @@ export class HelpItems extends HTMLElement {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          animation: unBlur 0.25s;
         }
 
         table {
@@ -53,15 +53,6 @@ export class HelpItems extends HTMLElement {
         .about-cell {
           font-style: italic;
         }
-
-        @keyframes unBlur {
-        from {
-          filter: blur(35px);
-        }
-        to {
-          filter: blur(0px);
-        }
-      }
       </style>
 
     <div class="container">
@@ -82,7 +73,9 @@ export class HelpItems extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.populateItemsList();
+    this.unBlur();
   }
 
   /**

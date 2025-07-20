@@ -20,7 +20,7 @@ export class MapHandler {
    * @returns The current map.
    */
   public currentMap(game: GameState): GameMapType {
-    return this.getLevel(this.level, game);
+    return this.getMapForLevel(this.level, game);
   }
 
   /**
@@ -31,7 +31,7 @@ export class MapHandler {
    * @param game - The game object.
    * @returns The map of the specified level.
    */
-  public getLevel(level: number, game: GameState): GameMapType {
+  public getMapForLevel(level: number, game: GameState): GameMapType {
     if (!this.hasLevel(level)) {
       const map = game.build.makeLevel(game.rand, level, game.surfaceTemp);
       this.add(map, level);

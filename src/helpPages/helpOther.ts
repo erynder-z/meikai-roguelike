@@ -1,6 +1,7 @@
+import { UnBlurElement } from '../ui/other/unBlurElement';
 import otherConceptsData from './otherConcepts.json';
 
-export class HelpOther extends HTMLElement {
+export class HelpOther extends UnBlurElement {
   constructor() {
     super();
 
@@ -22,7 +23,6 @@ export class HelpOther extends HTMLElement {
            text-align: left;
            font-weight: bold;
            border-bottom: 1px solid var(--whiteTransparent);
-           animation: unBlur 0.25s;
         }
 
         .concepts-content {
@@ -30,17 +30,7 @@ export class HelpOther extends HTMLElement {
            padding: 0.75rem;
            text-align: left;
            font-style: italic;
-           animation: unBlur 0.25s;
         }
-
-        @keyframes unBlur {
-        from {
-          filter: blur(35px);
-        }
-        to {
-          filter: blur(0px);
-        }
-      }
       </style>
 
       <div id="concents-list">
@@ -50,7 +40,9 @@ export class HelpOther extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.populateConcepts();
+    this.unBlur();
   }
 
   /**

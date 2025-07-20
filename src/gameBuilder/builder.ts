@@ -322,58 +322,41 @@ export class Builder implements Build {
     rand: RandomGenerator,
   ): void {
     if (level === 0) {
-      this.addStairs0(map, rand);
-    } else {
-      this.addStairs(map, rand);
-    }
-  }
-
-  /**
-   * Adds stairs for level to the map at a specified position.
-   *
-   * @param map - The map to which stairs are being added.
-   */
-  private addStairs0(map: GameMapType, rand: RandomGenerator): void {
-    const pos = this.centerPos(map.dimensions);
-    const x = 3;
-    const y = 0;
-    const p = new WorldPoint(x, y).addTo(pos);
-
-    if (!map.cell(p).isBlocked) {
-      map.cell(p).env = Glyph.Stairs_Down;
-      map.addStairInfo(Glyph.Stairs_Down, p);
-    } else {
+      // For the first level, only place down stairs.
       this.addStair(map, rand, Glyph.Stairs_Down);
+    } else {
+      // For other levels, place both up and down stairs.
+      this.addStair(map, rand, Glyph.Stairs_Down);
+      this.addStair(map, rand, Glyph.Stairs_Up);
     }
   }
 
   /**
-   * Adds stairs for a level to the map.
+   * Adds a single staircase to the map, ensuring it's placed in a valid, free space.
    *
    * @param map - The map to which stairs are being added.
-   */
-  private addStairs(map: GameMapType, rand: RandomGenerator): void {
-    this.addStair(map, rand, Glyph.Stairs_Down);
-    this.addStair(map, rand, Glyph.Stairs_Up);
-  }
-
-  /**
-   * Adds stairs to the map based on the provided glyph and random generator.
-   *
-   * @param map - The map to which stairs are being added.
-   * @param rand - The random generator used for adding stairs.
-   * @param stair - The glyph representing the stairs.
+   * @param rand - The random generator used for placing stairs.
+   * @param stairGlyph - The glyph representing the stairs (Up or Down).
+   * @returns The position of the placed stairs, or null if no suitable position was found.
    */
   private addStair(
     map: GameMapType,
     rand: RandomGenerator,
-    stair: Glyph.Stairs_Up | Glyph.Stairs_Down,
-  ): boolean {
-    const p = <WorldPoint>FindFreeSpace.findFree(map, rand);
-    map.cell(p).env = stair;
-    map.addStairInfo(stair, p);
-
-    return true;
+    stairGlyph: Glyph.Stairs_Up | Glyph.Stairs_Down,
+  ): WorldPoint | null {
+    const maxAttempts = 100; // Prevent infinite loops on crowded maps.
+    for (let i = 0; i < maxAttempts; i++) {
+      try {
+        const p = FindFreeSpace.findFree(map, rand);
+        map.cell(p).env = stairGlyph;
+        map.addStairInfo(stairGlyph, p);
+        return p;
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+    console.warn(`Could not place ${Glyph[stairGlyph]} on level ${map.level}.`);
+    return null;
   }
 
   /**
@@ -494,7 +477,7 @@ export class Builder implements Build {
    * @param game - The game object.
    */
   private initLevel0(game: Game): void {
-    const L0 = game.dungeon.getLevel(0, game);
+    const L0 = game.dungeon.getMapForLevel(0, game);
     this.addItemToPlayerInventory(<Inventory>game.inventory);
     this.addItemNextToPlayer(game.player, L0);
     this.makeTestMob(L0, game.player);
@@ -510,7 +493,7 @@ export class Builder implements Build {
     const a = player.pos;
     let p = new WorldPoint(a.x, a.y + 2);
     map.addObject(
-      new ItemObject(Glyph.Shield, Slot.OffHand, [ObjCategory.Armor]),
+      new ItemObject(Glyph.Lantern, Slot.OffHand, [ObjCategory.Misc]),
       p,
     );
     map.cell(p).env = Glyph.Regular_Floor;
@@ -518,10 +501,10 @@ export class Builder implements Build {
     p = new WorldPoint(a.x, a.y + 1);
     map.addObject(
       new ItemObject(
-        Glyph.Rune,
+        Glyph.Dynamite,
         Slot.NotWorn,
-        [ObjCategory.SpellItem],
-        Spell.Poison,
+        [ObjCategory.Consumable],
+        Spell.Burn,
       ),
       p,
     );
@@ -535,60 +518,60 @@ export class Builder implements Build {
    */
   private addItemToPlayerInventory(inv: Inventory): void {
     inv.add(
-      new ItemObject(Glyph.Dagger, Slot.MainHand, [ObjCategory.MeleeWeapon]),
+      new ItemObject(Glyph.Pickaxe, Slot.MainHand, [ObjCategory.MeleeWeapon]),
     );
 
     inv.add(
       new ItemObject(
-        Glyph.Potion,
+        Glyph.FirstAidKit,
         Slot.NotWorn,
         [ObjCategory.Consumable, ObjCategory.Special],
         Spell.Heal,
       ),
     );
 
-    const rune1 = new ItemObject(
-      Glyph.Rune,
+    const dynamite = new ItemObject(
+      Glyph.Dynamite,
       Slot.NotWorn,
-      [ObjCategory.SpellItem, ObjCategory.Special],
-      Spell.Teleport,
+      [ObjCategory.Consumable, ObjCategory.Special],
+      Spell.Burn,
     );
-    rune1.charges = 2;
-    inv.add(rune1);
+    dynamite.charges = 2;
+    inv.add(dynamite);
 
-    const rune2 = new ItemObject(
-      Glyph.Rune,
+    const flareGun = new ItemObject(
+      Glyph.FlareGun,
       Slot.NotWorn,
-      [ObjCategory.SpellItem, ObjCategory.Special],
-      Spell.Bullet,
+      [ObjCategory.RangedWeapon, ObjCategory.Special],
+      Spell.Burn,
     );
-    rune2.charges = 1;
-    inv.add(rune2);
+    flareGun.charges = 1;
+    inv.add(flareGun);
 
-    const pistol = new ItemObject(
-      Glyph.Pistol,
+    const revolver = new ItemObject(
+      Glyph.Revolver,
       Slot.NotWorn,
       [ObjCategory.RangedWeapon, ObjCategory.Special],
       Spell.Bullet,
     );
-    pistol.charges = 10;
-    inv.add(pistol);
+    revolver.charges = 10;
+    inv.add(revolver);
 
-    const strongDagger = new ItemObject(Glyph.Dagger, Slot.MainHand, [
+    const strongPickaxe = new ItemObject(Glyph.Pickaxe, Slot.MainHand, [
       ObjCategory.MeleeWeapon,
     ]);
-    strongDagger.level = 50;
-    inv.add(strongDagger);
+    strongPickaxe.level = 50;
+    inv.add(strongPickaxe);
 
-    const strongPistol = new ItemObject(
-      Glyph.Pistol,
+    const strongRevolver = new ItemObject(
+      Glyph.Revolver,
       Slot.NotWorn,
       [ObjCategory.RangedWeapon, ObjCategory.Special],
       Spell.Bullet,
     );
-    strongPistol.level = 50;
-    strongPistol.charges = 10;
-    inv.add(strongPistol);
+    strongRevolver.level = 50;
+    strongRevolver.charges = 10;
+    inv.add(strongRevolver);
 
     const ration = new ItemObject(
       Glyph.Ration,
@@ -610,17 +593,17 @@ export class Builder implements Build {
     inv.add(waterBottle);
 
     for (let index = 0; index < 10; index++) {
-      const potion = new ItemObject(
-        Glyph.Potion,
+      const laudanum = new ItemObject(
+        Glyph.Laudanum,
         Slot.NotWorn,
         [ObjCategory.Consumable],
         Spell.Heal,
         1,
-        'some potion',
+        'some laudanum',
         1,
       );
 
-      inv.add(potion);
+      inv.add(laudanum);
     }
   }
 }

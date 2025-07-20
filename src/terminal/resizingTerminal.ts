@@ -52,6 +52,20 @@ export class ResizingTerminal extends Terminal {
     this.canvas.width = this.sideLength * this.dimensions.x;
     this.canvas.height = this.sideLength * this.dimensions.y;
 
+    // Center the canvas within the container
+    const horizontalPadding = (containerWidth - this.canvas.width) * 0.5;
+    const verticalPadding = (containerHeight - this.canvas.height) * 0.5;
+
+    const left = horizontalPadding * 0.5;
+    const right = horizontalPadding * 0.5;
+    const top = verticalPadding * 0.5;
+    const bottom = verticalPadding * 0.5;
+
+    this.canvas.style.paddingLeft = `${left}px`;
+    this.canvas.style.paddingRight = `${right}px`;
+    this.canvas.style.paddingTop = `${top}px`;
+    this.canvas.style.paddingBottom = `${bottom}px`;
+
     this.reinitializeContext();
   }
 

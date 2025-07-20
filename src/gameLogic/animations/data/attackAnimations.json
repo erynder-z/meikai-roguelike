@@ -1,0 +1,28 @@
+{
+  "animations": [
+    {
+      "type": "longerSlash",
+      "color": "#ffffff",
+      "opacityFactor": 0.9,
+      "thickness": 1
+    },
+    {
+      "type": "shorterSlash",
+      "color": "#a7001b",
+      "opacityFactor": 0.9,
+      "thickness": 2
+    },
+    {
+      "type": "burst",
+      "color": "#ffffff",
+      "opacityFactor": 0.9,
+      "thickness": 1
+    },
+    {
+      "type": "ranged",
+      "color": "#ffffff",
+      "opacityFactor": 0.9,
+      "thickness": 1
+    }
+  ]
+}

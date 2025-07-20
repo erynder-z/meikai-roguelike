@@ -8,8 +8,9 @@ import {
   girlishPortrait,
   boyishPortrait,
 } from '../../media/imageHandler/imageImports/portraitImages';
+import { UnBlurElement } from '../other/unBlurElement';
 
-export class PlayerSetup extends HTMLElement {
+export class PlayerSetup extends UnBlurElement {
   private eventTracker = new EventListenerTracker();
   private gameConfig = gameConfigManager.getConfig();
   constructor() {
@@ -44,7 +45,6 @@ export class PlayerSetup extends HTMLElement {
           flex-direction: column;
           align-items: center;
           width: 45ch;
-          animation: unBlur 0.25s;
         }
 
         .container h1 {
@@ -198,16 +198,6 @@ export class PlayerSetup extends HTMLElement {
           text-align: left;
           margin-top: 1rem;
         }
-
-        @keyframes unBlur {
-          from {
-            filter: blur(35px);
-          }
-
-          to {
-            filter: blur(0px);
-          }
-        }
       </style>
 
       <div class="container">
@@ -273,8 +263,10 @@ export class PlayerSetup extends HTMLElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
+    super.connectedCallback();
     this.bindEvents();
     this.displayPlayer(this.gameConfig.player);
+    this.unBlur();
   }
 
   /**

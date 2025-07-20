@@ -1,6 +1,5 @@
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { InteractiveScreen } from '../../types/terminal/interactiveScreen';
-import { KeypressThrottler } from '../../utilities/keypressThrottler';
 import { ResizingTerminal } from '../../terminal/resizingTerminal';
 
 /**
@@ -8,23 +7,15 @@ import { ResizingTerminal } from '../../terminal/resizingTerminal';
  *
  */
 export class EventManager {
-  private keyThrottler: KeypressThrottler;
+  private isThrottled = false;
 
   constructor(
     public term: ResizingTerminal,
     public screen: InteractiveScreen,
   ) {
-    const gameConfig = gameConfigManager.getConfig();
-    const { min_keypress_delay } = gameConfig;
-
-    this.keyThrottler = new KeypressThrottler(
-      this.handleKeyDown.bind(this),
-      min_keypress_delay,
-    );
-
     const bodyElement = document.getElementById('body-main');
     bodyElement?.addEventListener('keydown', event =>
-      this.keyThrottler.run(event),
+      this.throttleKeyboardInput(event),
     );
 
     window.addEventListener('resize', this.handleResize.bind(this));
@@ -57,6 +48,7 @@ export class EventManager {
    * @param event - The keyboard event to be handled.
    */
   private handleKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' || event?.metaKey) event.preventDefault();
     this.screen.handleKeyDownEvent(event);
     this.screen.drawScreen(this.term);
   }
@@ -90,5 +82,26 @@ export class EventManager {
     rawScreen: InteractiveScreen,
   ): EventManager {
     return new EventManager(new ResizingTerminal(), rawScreen);
+  }
+
+  /**
+   * Handles keyboard events with a throttle to prevent rapid successive inputs.
+   *
+   * @param event - The keyboard event to be processed.
+   *
+   * This method limits the rate of processing keyboard events by setting a throttle
+   * that temporarily prevents additional events from being processed. It processes
+   * the event immediately and then waits for a delay, defined by the game configuration,
+   * before allowing the next event to be processed.
+   */
+  private throttleKeyboardInput(event: KeyboardEvent): void {
+    if (this.isThrottled) return;
+
+    this.isThrottled = true;
+    this.handleKeyDown(event);
+
+    setTimeout(() => {
+      this.isThrottled = false;
+    }, gameConfigManager.getConfig().min_keypress_delay);
   }
 }
