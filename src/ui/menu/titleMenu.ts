@@ -71,7 +71,7 @@ export class TitleMenu extends UnBlurElement {
       }
 
       .buttons-container button {
-        text-align: left;
+        text-align: center;
       }
 
       button:nth-child(1) {

@@ -106,6 +106,31 @@ export class IngameOptions extends UnBlurElement {
           min-width: 70ch;
         }
 
+        .info-container button:nth-child(1) {
+          transform: rotate(-0.3deg);
+          margin-left: 0.2rem;
+        }
+        .info-container button:nth-child(2) {
+          transform: rotate(0.6deg);
+          margin-left: -0.2rem;
+        }
+        .info-container button:nth-child(3) {
+          transform: rotate(-0.5deg);
+          margin-left: 0.5rem;
+        }
+        .info-container button:nth-child(4) {
+          transform: rotate(0.5deg);
+          margin-left: -0.5rem;
+        }
+        .info-container button:nth-child(5) {
+          transform: rotate(-0.2deg);
+          margin-left: 0.3rem;
+        }
+        .info-container button:nth-child(6) {
+          transform: rotate(0.6deg);
+          margin-left: -0.3rem;
+        }
+
         .info-span {
           font-size: 2.5rem;
           width: 45%;
@@ -129,6 +154,19 @@ export class IngameOptions extends UnBlurElement {
           font-weight: bold;
           color: var(--grayedOut);
           cursor: not-allowed;
+        }
+
+        .info-container .info-text:nth-child(1) {
+          transform: rotate(-0.8deg);
+        }
+        .info-container .info-text:nth-child(2) {
+          transform: rotate(0.8deg);
+        }
+        .info-container .info-text:nth-child(3) {
+          transform: rotate(-0.4deg);
+        }
+        .info-container .info-text:nth-child(4) {
+          transform: rotate(0.4deg);
         }
 
         .explanation {
@@ -185,6 +223,7 @@ export class IngameOptions extends UnBlurElement {
           margin: 0 1rem;
           z-index: 1;
           font-size: 2.5rem;
+          transform: rotate(1.6deg);
         }
       </style>
 

@@ -73,18 +73,19 @@ export class IngameMenu extends UnBlurElement {
           overflow: hidden;
         }
 
-        .ingame-menu h1 {
+        .ingame-menu-heading {
           position: absolute;
           bottom: 0;
           left: 0;
           margin: 0 1rem;
           z-index: 1;
+          font-size: 5rem;
         }
 
-        .ingame-menu button {
+         button {
           font-family: 'UA Squared';
           padding: 1rem;
-          font-size: 2.5rem;
+          font-size: 3rem;
           font-weight: bold;
           background: none;
           color: var(--white);
@@ -96,6 +97,41 @@ export class IngameMenu extends UnBlurElement {
         .ingame-menu button:hover {
           transform: translateX(8px) scale(1.05);
         }
+
+        button:nth-child(1) {
+         margin-left: 0.4rem;
+         transform: rotate(-1deg);
+      }
+
+        button:nth-child(2) {
+         margin-left: 0.6rem;
+         transform: rotate(-1deg);
+      }
+
+        button:nth-child(3) {
+         margin-left: 0.3rem;
+         transform: rotate(1deg);
+      }
+
+        button:nth-child(4) {
+         margin-left: 0rem;
+         transform: rotate(-1deg);
+      }
+
+        button:nth-child(5) {
+         margin-left: 0.5rem;
+         transform: rotate(-1deg);
+      }
+
+        button:nth-child(6) {
+         margin-left: 0.1rem;
+         transform: rotate(1deg);
+      }
+
+       button:nth-child(7) {
+        margin-left: 0.2rem;
+        transform: rotate(-1deg);
+      } 
 
         .underline {
           text-decoration: underline;
@@ -116,7 +152,7 @@ export class IngameMenu extends UnBlurElement {
       </style>
 
       <div class="ingame-menu">
-        <h1>Menu</h1>
+        <div class="ingame-menu-heading">Menu</div>
         <div class="buttons-container">
           <button id="return-to-game-button">
             <span class="underline">R</span>eturn to game
