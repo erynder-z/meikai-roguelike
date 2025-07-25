@@ -41,7 +41,9 @@ export class Terminal implements DrawableTerminal {
    * @return The initialized and configured rendering context.
    */
   public initializeContext(): CanvasRenderingContext2D {
-    const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
+    const canvas = document.getElementById(
+      'terminal-canvas',
+    ) as HTMLCanvasElement;
     if (!canvas) throw new Error('Canvas with id "canvas1" not found.');
 
     const ctx = canvas.getContext('2d');
@@ -90,9 +92,10 @@ export class Terminal implements DrawableTerminal {
    */
   public static createStockTerminal(): Terminal {
     const defaultCanvas = document.getElementById(
-      'canvas1',
+      'terminal-canvas',
     ) as HTMLCanvasElement;
-    if (!defaultCanvas) throw new Error('Canvas with id "canvas1" not found.');
+    if (!defaultCanvas)
+      throw new Error('Canvas with id "terminal-canvas" not found.');
 
     const defaultCtx = defaultCanvas.getContext('2d');
     if (!defaultCtx) throw new Error('Unable to get 2D context from canvas.');

@@ -23,7 +23,9 @@ export class StatsScreen extends BaseScreen {
    * Renders the stats screen via a custom component.
    */
   public drawScreen(): void {
-    const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
+    const canvas = document.getElementById(
+      'terminal-canvas',
+    ) as HTMLCanvasElement;
     if (!this.display) {
       this.display = document.createElement(
         'stats-screen-display',

@@ -42,8 +42,8 @@ export class GenerateMainUI {
     canvasContainer.id = 'canvas-container';
     canvasContainer.classList.add('canvas-container');
     const canvas = document.createElement('canvas');
-    canvas.id = 'canvas1';
-    canvas.classList.add('canvas1');
+    canvas.id = 'terminal-canvas';
+    canvas.classList.add('terminal-canvas');
     canvasContainer.appendChild(canvas);
     FlickerManager.handleFlicker(canvasContainer);
 

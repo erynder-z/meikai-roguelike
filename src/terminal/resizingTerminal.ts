@@ -9,7 +9,9 @@ export class ResizingTerminal extends Terminal {
   private canvasContainer: HTMLDivElement;
 
   constructor() {
-    const defaultCanvas = <HTMLCanvasElement>document.getElementById('canvas1');
+    const defaultCanvas = <HTMLCanvasElement>(
+      document.getElementById('terminal-canvas')
+    );
     const defaultCtx = <CanvasRenderingContext2D>defaultCanvas.getContext('2d');
     super(TerminalPoint.TerminalDimensions, defaultCtx);
 
