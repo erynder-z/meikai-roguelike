@@ -57,6 +57,24 @@ export class PlayerSetup extends UnBlurElement {
           width: 45ch;
         }
 
+        .player-about > div:nth-child(1) {
+          transform: rotate(-1deg);
+        }
+
+        .player-about > div:nth-child(2) {
+          margin-left: 0.5rem;
+          transform: rotate(1.2deg);
+        }
+
+        .player-about > div:nth-child(3) {
+          margin-left: 0.1rem;
+          transform: rotate(0.3deg);
+        }
+        .player-about > div:nth-child(4) {
+          margin-left: 0.8rem;
+          transform: rotate(0.8deg);
+        }
+
         .container button {
           font-family: 'UA Squared';
           padding: 1rem;
@@ -90,6 +108,10 @@ export class PlayerSetup extends UnBlurElement {
           justify-content: center;
           height: 100%;
           gap: 0.5rem;
+        }
+
+        .buttons-container button {
+          transform: rotate(-1.2deg);
         }
 
         .appearance {

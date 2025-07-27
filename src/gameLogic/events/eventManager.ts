@@ -1,6 +1,6 @@
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { InteractiveScreen } from '../../types/terminal/interactiveScreen';
-import { ResizingTerminal } from '../../terminal/resizingTerminal';
+import { Terminal } from '../../terminal/terminal';
 
 /**
  * Manages events such as keyboard input and window resizing.
@@ -10,7 +10,7 @@ export class EventManager {
   private isThrottled = false;
 
   constructor(
-    public term: ResizingTerminal,
+    public term: Terminal,
     public screen: InteractiveScreen,
   ) {
     const bodyElement = document.getElementById('body-main');
@@ -81,7 +81,7 @@ export class EventManager {
   public static runWithInteractiveScreen(
     rawScreen: InteractiveScreen,
   ): EventManager {
-    return new EventManager(new ResizingTerminal(), rawScreen);
+    return new EventManager(new Terminal(), rawScreen);
   }
 
   /**

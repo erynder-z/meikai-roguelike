@@ -18,19 +18,39 @@ const SHORT_MAX_FACTOR = 1.0;
 const SHORT_FACTOR_RANGE = SHORT_MAX_FACTOR - SHORT_MIN_FACTOR;
 
 /**
- * Represents a terminal for drawing text on a canvas.
+ * Represents a terminal for drawing the game map on a canvas.
  */
 export class Terminal implements DrawableTerminal {
   private gameConfig = gameConfigManager.getConfig();
-  constructor(
-    public dimensions: TerminalPoint,
-    public ctx: CanvasRenderingContext2D,
-    public horizontalSide: number = 1,
-    public verticalSide: number = 1,
-    public sideLength: number = 40,
-  ) {
-    // (Re)initialize the context with the desired settings.
+  public dimensions: TerminalPoint;
+  public ctx: CanvasRenderingContext2D;
+  public horizontalSide: number = 1;
+  public verticalSide: number = 1;
+  public sideLength: number = 40;
+  private canvas: HTMLCanvasElement;
+  private canvasContainer: HTMLDivElement;
+
+  constructor() {
+    this.dimensions = TerminalPoint.TerminalDimensions;
+    this.canvas = document.getElementById(
+      'terminal-canvas',
+    ) as HTMLCanvasElement;
+    this.canvasContainer = document.getElementById(
+      'canvas-container',
+    ) as HTMLDivElement;
+
+    if (!this.canvas)
+      throw new Error('Canvas with id "terminal-canvas" not found.');
+    if (!this.canvasContainer)
+      throw new Error('Canvas container with id "canvas-container" not found.');
+
     this.ctx = this.initializeContext();
+
+    window.addEventListener('resize', () =>
+      requestAnimationFrame(() => this.handleResize()),
+    );
+
+    this.handleResize(); // Initialize the canvas size
   }
 
   /**
@@ -41,15 +61,12 @@ export class Terminal implements DrawableTerminal {
    * @return The initialized and configured rendering context.
    */
   public initializeContext(): CanvasRenderingContext2D {
-    const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
-    if (!canvas) throw new Error('Canvas with id "canvas1" not found.');
-
-    const ctx = canvas.getContext('2d');
+    const ctx = this.canvas.getContext('2d');
     if (!ctx) throw new Error('Unable to get 2D context from canvas.');
 
     // Set canvas dimensions based on the terminal grid and side length.
-    canvas.width = this.dimensions.x * this.sideLength;
-    canvas.height = this.dimensions.y * this.sideLength;
+    this.canvas.width = this.dimensions.x * this.sideLength;
+    this.canvas.height = this.dimensions.y * this.sideLength;
 
     // Update horizontal and vertical cell dimensions.
     this.horizontalSide = this.sideLength;
@@ -67,8 +84,8 @@ export class Terminal implements DrawableTerminal {
     ctx.font = `${squeeze}px "${this.gameConfig.terminal.font}", monospace`;
 
     // Center the drawing context in the canvas.
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
+    ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
 
     return ctx;
   }
@@ -84,20 +101,57 @@ export class Terminal implements DrawableTerminal {
   }
 
   /**
-   * Creates a stock terminal object with the default canvas and context.
-   *
-   * @return The created terminal object.
+   * Reinitializes the canvas context by calling initializeContext() and setting the context to the return value.
    */
-  public static createStockTerminal(): Terminal {
-    const defaultCanvas = document.getElementById(
-      'canvas1',
-    ) as HTMLCanvasElement;
-    if (!defaultCanvas) throw new Error('Canvas with id "canvas1" not found.');
+  public reinitializeContext(): void {
+    this.ctx = this.initializeContext();
+  }
 
-    const defaultCtx = defaultCanvas.getContext('2d');
-    if (!defaultCtx) throw new Error('Unable to get 2D context from canvas.');
+  /**
+   * Calculates the largest possible square cell size that fits within the given container dimensions
+   * and updates the canvas size to match. The context is then reinitialized with the new canvas size.
+   *
+   * @param containerWidth - The width of the container in pixels.
+   * @param containerHeight - The height of the container in pixels.
+   */
+  private resizeCanvasAndTerminal(
+    containerWidth: number,
+    containerHeight: number,
+  ): void {
+    // Determine the largest possible square cell size that fits within the container
+    const maxWidthCells = Math.floor(containerWidth / this.dimensions.x);
+    const maxHeightCells = Math.floor(containerHeight / this.dimensions.y);
+    this.sideLength = Math.min(maxWidthCells, maxHeightCells);
 
-    return new Terminal(TerminalPoint.TerminalDimensions, defaultCtx);
+    // Update canvas size to match the calculated side length
+    this.canvas.width = this.sideLength * this.dimensions.x;
+    this.canvas.height = this.sideLength * this.dimensions.y;
+
+    // Center the canvas within the container
+    const horizontalPadding = (containerWidth - this.canvas.width) * 0.5;
+    const verticalPadding = (containerHeight - this.canvas.height) * 0.5;
+
+    const left = horizontalPadding * 0.5;
+    const right = horizontalPadding * 0.5;
+    const top = verticalPadding * 0.5;
+    const bottom = verticalPadding * 0.5;
+
+    this.canvas.style.paddingLeft = `${left}px`;
+    this.canvas.style.paddingRight = `${right}px`;
+    this.canvas.style.paddingTop = `${top}px`;
+    this.canvas.style.paddingBottom = `${bottom}px`;
+
+    this.reinitializeContext();
+  }
+
+  /**
+   * Handles the resize event by calculating the new canvas dimensions based on the container's current width and height, and adjusts the canvas and terminal size accordingly.
+   */
+
+  public handleResize(): void {
+    const containerWidth = this.canvasContainer.offsetWidth;
+    const containerHeight = this.canvasContainer.offsetHeight;
+    this.resizeCanvasAndTerminal(containerWidth, containerHeight);
   }
 
   /**
@@ -360,7 +414,7 @@ export class Terminal implements DrawableTerminal {
   ): void {
     const { horizontalSide, verticalSide, ctx } = this;
     const fx = x * horizontalSide;
-    const fy = y * verticalSide;
+    const fy = y * this.verticalSide;
     const direction =
       SLASH_DIRECTIONS[(Math.random() * SLASH_DIRECTIONS.length) | 0];
 

@@ -34,8 +34,9 @@ export class TitleMenu extends UnBlurElement {
         background: var(--backgroundDefaultTransparent);
       }
 
-      .title-screen-container h1 {
+      .heading {
         font-size: 4rem;
+        font-weight: bold;
         margin: 8rem 1rem 0 1rem;
         text-align: center;
         z-index: 1;
@@ -44,7 +45,7 @@ export class TitleMenu extends UnBlurElement {
       .title-screen-container button {
         font-family: 'UA Squared';
         padding: 1rem;
-        font-size: 2.5rem;
+        font-size: 3rem;
         font-weight: bold;
         background: none;
         color: var(--white);
@@ -69,6 +70,45 @@ export class TitleMenu extends UnBlurElement {
         height: 100%;
       }
 
+      .buttons-container button {
+        text-align: center;
+      }
+
+      button:nth-child(1) {
+        margin-left: 0.4rem;
+        transform: rotate(-1deg);
+      }
+
+      button:nth-child(2) {
+        margin-left: 0.6rem;
+        transform: rotate(-1deg);
+      }
+
+      button:nth-child(3) {
+        margin-left: 0.3rem;
+        transform: rotate(1deg);
+      }
+
+      button:nth-child(4) {
+        margin-left: 0rem;
+        transform: rotate(-1deg);
+      }
+
+      button:nth-child(5) {
+        margin-left: 0.5rem;
+        transform: rotate(-1deg);
+      }
+
+      button:nth-child(6) {
+        margin-left: 0.1rem;
+        transform: rotate(1deg);
+      }
+
+      button:nth-child(7) {
+        margin-left: 0.2rem;
+        transform: rotate(-1deg);
+      } 
+
       .bottom-container {
         display: flex;
         justify-content: space-between;
@@ -89,7 +129,7 @@ export class TitleMenu extends UnBlurElement {
     </style>
 
     <div class="title-screen-container">
-      <h1>Meikai: Roguelike Journey to the Center of the Earth</h1>
+      <div class="heading"><span">Meikai</span><span>:</span> <span>Roguelike</span> <span> Journey</span> <span >to<span> <span>the</span> <span>Center</span> <span>of</span> <span>the<span> <span>Earth</span></div>
       <div class="buttons-container">
         <button id="new-game-button">
           <span class="underline">N</span>ew game

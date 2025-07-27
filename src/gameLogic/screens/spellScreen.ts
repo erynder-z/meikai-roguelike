@@ -49,7 +49,9 @@ export class SpellScreen extends BaseScreen {
    * the title to 'Select spell:'.
    */
   public drawScreen(): void {
-    const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
+    const canvas = document.getElementById(
+      'terminal-canvas',
+    ) as HTMLCanvasElement;
     if (!this.display) {
       this.display = document.createElement(
         'spell-screen-display',

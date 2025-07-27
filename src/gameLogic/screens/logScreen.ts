@@ -25,7 +25,9 @@ export class LogScreen extends BaseScreen {
    * Renders the log screen via a custom component.
    */
   public drawScreen(): void {
-    const canvas = document.getElementById('canvas1') as HTMLCanvasElement;
+    const canvas = document.getElementById(
+      'terminal-canvas',
+    ) as HTMLCanvasElement;
     if (!this.display) {
       this.display = document.createElement(
         'log-screen-display',
