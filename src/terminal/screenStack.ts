@@ -14,8 +14,6 @@ export class ScreenStack implements Stack, InteractiveScreen {
    * Remove and return the last element from the currentScreen array.
    */
   public pop() {
-    /* if (this.screens.length > 0) this.fadeOutAndRemoveScreen(); */
-
     return this.screens.pop();
   }
   /**
@@ -63,35 +61,6 @@ export class ScreenStack implements Stack, InteractiveScreen {
     const currentScreen = this.getCurrentScreen();
     if (currentScreen) {
       currentScreen.drawScreen(term);
-    }
-  }
-
-  // TODO: Get the actual UI elements associated with the current screen and fade them out.
-  //       Below will not work, because it targets the stack screens, not the UI elements.
-  //
-  private fadeOutAndRemoveScreen(): void {
-    const screen = this.getCurrentScreen();
-    if (!screen) return;
-
-    const currentScreenElement = document.querySelector(screen.name);
-
-    if (currentScreenElement) {
-      currentScreenElement.classList.add('fade-out');
-      currentScreenElement.addEventListener(
-        'animationend',
-        () => currentScreenElement.remove(),
-        { once: true },
-      );
-    } else {
-      const displayElement = document.querySelector(`${screen.name}-display`);
-      if (displayElement) {
-        displayElement.classList.add('fade-out');
-        displayElement.addEventListener(
-          'animationend',
-          () => displayElement.remove(),
-          { once: true },
-        );
-      }
     }
   }
 
