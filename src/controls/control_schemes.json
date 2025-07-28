@@ -14,13 +14,14 @@
     "move_down_right": ["Numpad3"],
     "wait": ["Numpad5"],
     "log": ["q"],
-    "handle_door": ["c"],
+    "handle_door": ["d"],
     "grab_item": ["g"],
     "inventory": ["i"],
     "equipment": ["u"],
     "look": ["l"],
     "spells": ["s"],
     "stats": ["t"],
+    "craft": ["c"],
     "scroll_list": ["Alt", "Meta", "Numpad8", "Numpad2"]
   },
   "wasd_keys": {
@@ -45,6 +46,7 @@
     "look": ["l"],
     "spells": ["m"],
     "stats": ["t"],
+    "craft": ["f"],
     "scroll_list": ["Alt", "Meta", "w", "s"]
   },
   "vi_keys_QWERTY": {
@@ -62,13 +64,14 @@
     "move_down_right": ["n"],
     "wait": [","],
     "log": ["q"],
-    "handle_door": ["c"],
+    "handle_door": ["d"],
     "grab_item": ["g"],
     "inventory": ["i"],
     "equipment": ["e"],
     "look": [";"],
     "spells": ["s"],
     "stats": ["t"],
+    "craft": ["c"],
     "scroll_list": ["Alt", "Meta", "k", "j"]
   },
   "vi_keys_QWERTZ": {
@@ -86,13 +89,14 @@
     "move_down_right": ["n"],
     "wait": [","],
     "log": ["q"],
-    "handle_door": ["c"],
+    "handle_door": ["d"],
     "grab_item": ["g"],
     "inventory": ["i"],
     "equipment": ["e"],
     "look": [";"],
     "spells": ["s"],
     "stats": ["t"],
+    "craft": ["c"],
     "scroll_list": ["Alt", "Meta", "k", "j"]
   }
 }
