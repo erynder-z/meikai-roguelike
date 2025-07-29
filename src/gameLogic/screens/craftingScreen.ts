@@ -1,8 +1,8 @@
 import { BaseScreen } from './baseScreen';
 import { CraftingScreenDisplay } from '../../ui/craftingScreenDisplay/craftingScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
+import { ItemObject } from '../itemObjects/itemObject';
 import { Inventory } from '../inventory/inventory';
-import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
 
@@ -12,6 +12,7 @@ import { Stack } from '../../types/terminal/stack';
 export class CraftingScreen extends BaseScreen {
   public name = 'crafting-screen';
   private display: CraftingScreenDisplay | null = null;
+  private combineItems: ItemObject[] = [];
   constructor(
     public game: GameState,
     public make: ScreenMaker,
@@ -41,7 +42,7 @@ export class CraftingScreen extends BaseScreen {
    *
    * @return A promise that resolves when the fade out animation ends.
    */
-  private async fadeOutInventoryScreen(): Promise<void> {
+  private async fadeOutCraftingScreen(): Promise<void> {
     if (this.display) {
       await this.display.fadeOut();
     }
@@ -55,21 +56,83 @@ export class CraftingScreen extends BaseScreen {
    * @return True if the event was handled, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
-    if (event.key === this.activeControlScheme.menu.toString()) {
-      this.fadeOutInventoryScreen();
+    if (this.handleItemSelection(event.key)) return true;
+    if (this.handleMenuKey(event.key, stack)) return true;
+    if (this.handleScroll(event)) return true;
+
+    return false;
+  }
+
+  /**
+   * Handles item selection in the crafting screen.
+   *
+   * @param key - The key pressed.
+   * @returns True if an item was selected/deselected, otherwise false.
+   */
+  private handleItemSelection(key: string): boolean {
+    const pos = this.characterToPosition(key);
+    if (pos < 0) {
+      return false;
+    }
+
+    const item = this.inventory.items[pos];
+    const index = this.combineItems.indexOf(item);
+
+    if (index !== -1) {
+      this.combineItems.splice(index, 1);
+    } else {
+      this.combineItems.push(item);
+    }
+
+    if (this.display) {
+      this.display.combined = this.combineItems;
+    }
+
+    return true;
+  }
+
+  /**
+   * Handles the menu key press.
+   *
+   * @param key - The key pressed.
+   * @param stack - The stack of screens.
+   * @returns True if the menu key was pressed, otherwise false.
+   */
+  private handleMenuKey(key: string, stack: Stack): boolean {
+    if (key === this.activeControlScheme.menu.toString()) {
+      this.fadeOutCraftingScreen();
       stack.pop();
       return true;
     }
+    return false;
+  }
 
-    // scroll via keypress when alt or meta key is pressed
-    if (this.isAltKeyPressed(event)) {
-      const scrollContainer = this.display?.shadowRoot?.querySelector(
-        '.crafting-screen-display',
-      ) as HTMLElement;
-      new KeypressScrollHandler(scrollContainer).handleVirtualScroll(event);
+  /**
+   * Handles scrolling in the crafting screen.
+   *
+   * @param event - The keyboard event.
+   * @returns True if the screen was scrolled, otherwise false.
+   */
+  private handleScroll(event: KeyboardEvent): boolean {
+    if (this.isAltKeyPressed(event) && this.display) {
+      this.display.handleVirtualScroll(event);
       return true;
     }
     return false;
+  }
+
+  /**
+   * Converts a character to a corresponding position in the inventory.
+   * The character is converted to a number by subtracting the char code of 'a' from the char code of the given character.
+   * If the resulting position is valid (i.e. within the range of the inventory), it is returned.
+   * Otherwise -1 is returned.
+   *
+   * @param c - The character to convert.
+   * @return The position of the character in the inventory, or -1 if not valid.
+   */
+  private characterToPosition(c: string): number {
+    const pos = c.charCodeAt(0) - 'a'.charCodeAt(0);
+    return pos >= 0 && pos < this.inventory.length() ? pos : -1;
   }
 
   /**

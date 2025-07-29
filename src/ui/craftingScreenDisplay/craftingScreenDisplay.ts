@@ -1,9 +1,11 @@
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
+import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 
 export class CraftingScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];
+  private combinedItems: ItemObject[] = [];
 
   constructor() {
     super();
@@ -69,14 +71,35 @@ export class CraftingScreenDisplay extends FadeInOutElement {
         .inventory-list ul li {
           list-style-type: none;
         }
+
+        .selectedItem {
+          color: red;
+        }
+
+        .craft-button {
+          padding: 1rem;
+          margin-top: auto;
+          width: 100%;
+          font-size: 1.25rem;
+          font-weight: bold;
+          background: var(--whiteTransparent);
+          color: var(--white);
+          border: none;
+          transition: all 0.2s ease-in-out;
+          cursor: pointer;
+        }
+
+        .hidden {
+          visibility: hidden;
+        }
       </style>
 
       <div class="crafting-screen-display">
         <div class="crafting-heading">
           Item crafting
         </div>
-
         <div class="inventory-list"></div>
+        <button class="craft-button hidden">Combine selected items (+)</button>
       </div>
     `;
 
@@ -93,18 +116,41 @@ export class CraftingScreenDisplay extends FadeInOutElement {
   set items(items: ItemObject[]) {
     this.inventoryItems = items;
     this.renderInventoryList();
+    this.updateButtonVisibility();
+  }
+
+  /**
+   * Sets the items to be combined.
+   *
+   * @param items - The items to combine.
+   */
+  set combined(items: ItemObject[]) {
+    this.combinedItems = items;
+    this.renderInventoryList();
+    this.updateButtonVisibility();
+  }
+
+  /**
+   * Handles virtual scrolling via keypress.
+   *
+   * @param event - The keyboard event.
+   */
+  public handleVirtualScroll(event: KeyboardEvent): void {
+    const scrollContainer = this.shadowRoot?.querySelector(
+      '.crafting-screen-display',
+    ) as HTMLElement;
+    if (scrollContainer) {
+      new KeypressScrollHandler(scrollContainer).handleVirtualScroll(event);
+    }
   }
 
   /**
    * Renders the inventory list items.
-   *
-   * Clears the inventory list container, then creates a new unordered list
-   * element with list items for each inventory item. The list items are assigned
-   * data-index attributes with the index of the item in the inventoryItems array.
-   * The list items are also assigned text content with a key (a number for the first
-   * 10 items and a question mark for items after that) and the description of the item.
    */
   private renderInventoryList(): void {
+    const isItemSelected = (item: ItemObject) =>
+      this.combinedItems.includes(item);
+
     const inventoryListContainer = this.shadowRoot?.querySelector(
       '.inventory-list',
     ) as HTMLElement;
@@ -118,6 +164,8 @@ export class CraftingScreenDisplay extends FadeInOutElement {
         const listItem = document.createElement('li');
         listItem.textContent = `${key}: ${item.description()}`;
         listItem.dataset.index = index.toString();
+        if (isItemSelected(item)) listItem.classList.add('selectedItem');
+
         fragment.appendChild(listItem);
       });
 
@@ -125,4 +173,18 @@ export class CraftingScreenDisplay extends FadeInOutElement {
       inventoryListContainer.appendChild(itemList);
     }
   }
+
+  /**
+   * Updates the visibility of the 'Craft' button based on the number of items selected.
+   */
+  private updateButtonVisibility(): void {
+    const button = this.shadowRoot?.querySelector('.craft-button');
+    if (this.combinedItems.length >= 2) {
+      button?.classList.remove('hidden');
+    } else {
+      button?.classList.add('hidden');
+    }
+  }
 }
+
+customElements.define('crafting-screen-display', CraftingScreenDisplay);
