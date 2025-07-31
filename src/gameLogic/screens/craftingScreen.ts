@@ -34,6 +34,7 @@ export class CraftingScreen extends BaseScreen {
       ) as CraftingScreenDisplay;
       canvas?.insertAdjacentElement('afterend', this.display);
       this.display.items = this.inventory.items;
+      this.display.maxIngredients = this.game.stats.maxCraftIngredients;
     }
   }
 

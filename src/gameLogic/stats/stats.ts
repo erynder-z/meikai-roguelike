@@ -18,6 +18,7 @@ export class Stats {
   public mood: Mood = 'Normal';
   public hunger = 0.0;
   public thirst = 0.0;
+  public maxCraftIngredients = 2;
 
   /**
    * Adjusts the default visibility range by the specified amount.

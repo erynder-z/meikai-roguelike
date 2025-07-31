@@ -6,6 +6,7 @@ import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 export class CraftingScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];
   private combinedItems: ItemObject[] = [];
+  private maxNoOfIngredients: number = 2;
 
   constructor() {
     super();
@@ -76,6 +77,16 @@ export class CraftingScreenDisplay extends FadeInOutElement {
           color: red;
         }
 
+        .crafting-message {
+          padding: 1rem;
+          margin-top: auto;
+          width: 100%;
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: var(--white);
+          text-align: center;
+        }
+
         .craft-button {
           padding: 1rem;
           margin-top: auto;
@@ -90,7 +101,7 @@ export class CraftingScreenDisplay extends FadeInOutElement {
         }
 
         .hidden {
-          visibility: hidden;
+          display: none;
         }
       </style>
 
@@ -99,6 +110,7 @@ export class CraftingScreenDisplay extends FadeInOutElement {
           Item crafting
         </div>
         <div class="inventory-list"></div>
+        <div class="crafting-message hidden"></div>
         <button class="craft-button hidden">Combine selected items (+)</button>
       </div>
     `;
@@ -116,7 +128,7 @@ export class CraftingScreenDisplay extends FadeInOutElement {
   set items(items: ItemObject[]) {
     this.inventoryItems = items;
     this.renderInventoryList();
-    this.updateButtonVisibility();
+    this.updateCraftingActionDisplay();
   }
 
   /**
@@ -127,7 +139,16 @@ export class CraftingScreenDisplay extends FadeInOutElement {
   set combined(items: ItemObject[]) {
     this.combinedItems = items;
     this.renderInventoryList();
-    this.updateButtonVisibility();
+    this.updateCraftingActionDisplay();
+  }
+
+  /**
+   * Sets the maximum number of items that can be combined at once.
+   *
+   * @param maxIngredients - The new maximum number of items that can be combined.
+   */
+  set maxIngredients(maxIngredients: number) {
+    this.maxNoOfIngredients = maxIngredients;
   }
 
   /**
@@ -175,16 +196,32 @@ export class CraftingScreenDisplay extends FadeInOutElement {
   }
 
   /**
-   * Updates the visibility of the 'Craft' button based on the number of items selected.
+   * Updates the visibility of the 'Craft' button and the crafting message based on the number of items selected.
    */
-  private updateButtonVisibility(): void {
-    const button = this.shadowRoot?.querySelector('.craft-button');
-    if (this.combinedItems.length >= 2) {
-      button?.classList.remove('hidden');
+  private updateCraftingActionDisplay(): void {
+    const craftButton = this.shadowRoot?.querySelector('.craft-button');
+    const craftingMessage = this.shadowRoot?.querySelector(
+      '.crafting-message',
+    ) as HTMLElement;
+
+    if (!craftButton || !craftingMessage) {
+      return;
+    }
+
+    const selectedCount = this.combinedItems.length;
+
+    if (selectedCount > 1 && selectedCount <= this.maxNoOfIngredients) {
+      craftButton.classList.remove('hidden');
+      craftingMessage.classList.add('hidden');
     } else {
-      button?.classList.add('hidden');
+      craftButton.classList.add('hidden');
+      craftingMessage.classList.remove('hidden');
+
+      if (selectedCount <= 1) {
+        craftingMessage.textContent = 'Select at least 2 items to combine.';
+      } else {
+        craftingMessage.textContent = `You can only combine up to ${this.maxNoOfIngredients} items.`;
+      }
     }
   }
 }
-
-customElements.define('crafting-screen-display', CraftingScreenDisplay);
