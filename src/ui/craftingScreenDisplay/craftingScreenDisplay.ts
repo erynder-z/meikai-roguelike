@@ -17,11 +17,11 @@ export class CraftingScreenDisplay extends FadeInOutElement {
     const templateElement = document.createElement('template');
     templateElement.innerHTML = `
       <style>
-       :host {
-           --outer-margin: 6rem;
-           --minimal-width: 33%;
-           --maximal-width: 100%;
-         }
+        :host {
+          --outer-margin: 6rem;
+          --minimal-width: 33%;
+          --maximal-width: 100%;
+        }
 
         ::-webkit-scrollbar {
           width: 0.25rem;
@@ -48,20 +48,54 @@ export class CraftingScreenDisplay extends FadeInOutElement {
           width: calc(var(--minimal-width) - var(--outer-margin));
           flex-direction: column;
           align-items: center;
-          justify-content: start;
           color: var(--white);
           overflow-y: auto;
           overflow-x: hidden;
         }
 
         .crafting-heading {
+          color: var(--heading);
           font-size: 1.5rem;
+          font-weight: bold;
           text-align: center;
-          margin-bottom: 2rem;
+          letter-spacing: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .crafting-message-container {
+          width: 100%;
+          min-height: 7ch;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: var(--white);
+          text-align: center;
+        }
+
+        .crafting-message {
+          padding: 1rem;
+          width: 100%;
+        }
+
+        .craft-button {
+          padding: 1rem;
+          width: 100%;
+          background: none;
+          font: inherit;
+          font-size: 1.5rem;
+          color: var(--textGood);
+          border: none;
+          transition: all 0.2s ease-in-out;
+          cursor: pointer;
         }
 
         .inventory-list {
           width: 100%;
+          display: flex;
+          overflow: auto;
+          margin-bottom: 1rem;
         }
 
         .inventory-list ul {
@@ -74,30 +108,11 @@ export class CraftingScreenDisplay extends FadeInOutElement {
         }
 
         .selectedItem {
-          color: red;
+          color: var(--selected);
         }
 
-        .crafting-message {
-          padding: 1rem;
-          margin-top: auto;
-          width: 100%;
-          font-size: 1.25rem;
-          font-weight: bold;
-          color: var(--white);
-          text-align: center;
-        }
-
-        .craft-button {
-          padding: 1rem;
-          margin-top: auto;
-          width: 100%;
-          font-size: 1.25rem;
-          font-weight: bold;
-          background: var(--whiteTransparent);
-          color: var(--white);
-          border: none;
-          transition: all 0.2s ease-in-out;
-          cursor: pointer;
+        .bad {
+          color: var(--textBad);
         }
 
         .hidden {
@@ -106,12 +121,12 @@ export class CraftingScreenDisplay extends FadeInOutElement {
       </style>
 
       <div class="crafting-screen-display">
-        <div class="crafting-heading">
-          Item crafting
+        <div class="crafting-heading">Item Crafting</div>
+        <div class="crafting-message-container">
+          <div class="crafting-message bad hidden"></div>
+          <button class="craft-button hidden">Combine (+)</button>
         </div>
         <div class="inventory-list"></div>
-        <div class="crafting-message hidden"></div>
-        <button class="craft-button hidden">Combine selected items (+)</button>
       </div>
     `;
 
@@ -158,7 +173,7 @@ export class CraftingScreenDisplay extends FadeInOutElement {
    */
   public handleVirtualScroll(event: KeyboardEvent): void {
     const scrollContainer = this.shadowRoot?.querySelector(
-      '.crafting-screen-display',
+      '.inventory-list',
     ) as HTMLElement;
     if (scrollContainer) {
       new KeypressScrollHandler(scrollContainer).handleVirtualScroll(event);
