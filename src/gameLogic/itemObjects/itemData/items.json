@@ -344,6 +344,134 @@
         "show": true,
         "about": "Prepared food in a can. Not exactly tasty, but better than going hungry."
       }
+    },
+    {
+      "id": "Shiv",
+      "glyph": "Shiv",
+      "char": "†",
+      "bgCol": "#4B5A52",
+      "fgCol": "#A9A9A9",
+      "hasSolidBg": false,
+      "name": "Shiv",
+      "description": "A crude, but effective, makeshift blade.",
+      "category": ["MeleeWeapon"],
+      "slot": "MainHand",
+      "help": {
+        "show": true,
+        "about": "A crude, but effective, makeshift blade."
+      }
+    },
+    {
+      "id": "ScrapMetal",
+      "glyph": "ScrapMetal",
+      "char": "⚙",
+      "bgCol": "#4B5A52",
+      "fgCol": "#8B4513",
+      "hasSolidBg": false,
+      "name": "Scrap Metal",
+      "description": "A piece of scrap metal, useful for crafting.",
+      "category": ["Misc"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "A piece of scrap metal, useful for crafting."
+      }
+    },
+    {
+      "id": "Gunpowder",
+      "glyph": "Gunpowder",
+      "char": "⚱",
+      "bgCol": "#4B5A52",
+      "fgCol": "#36454F",
+      "hasSolidBg": false,
+      "name": "Gunpowder",
+      "description": "A small pouch of black powder.",
+      "category": ["Misc"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "A small pouch of black powder."
+      }
+    },
+    {
+      "id": "BioluminescentFungus",
+      "glyph": "BioluminescentFungus",
+      "char": "҉",
+      "bgCol": "#4B5A52",
+      "fgCol": "#7FFF00",
+      "hasSolidBg": false,
+      "name": "Bioluminescent Fungus",
+      "description": "A glowing mushroom that emits a soft, ethereal light.",
+      "category": ["Misc"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "A glowing mushroom that emits a soft, ethereal light."
+      }
+    },
+    {
+      "id": "ToughLeather",
+      "glyph": "ToughLeather",
+      "char": "⌧",
+      "bgCol": "#4B5A52",
+      "fgCol": "#8B4513",
+      "hasSolidBg": false,
+      "name": "Tough Leather",
+      "description": "A thick, durable piece of leather.",
+      "category": ["Misc"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "A thick, durable piece of leather."
+      }
+    },
+    {
+      "id": "PetrifiedWood",
+      "glyph": "PetrifiedWood",
+      "char": "¶",
+      "bgCol": "#4B5A52",
+      "fgCol": "#8B4513",
+      "hasSolidBg": false,
+      "name": "Petrified Wood",
+      "description": "A piece of wood that has turned to stone over time.",
+      "category": ["Misc"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "A piece of wood that has turned to stone over time."
+      }
+    },
+    {
+      "id": "ResonantCrystal",
+      "glyph": "ResonantCrystal",
+      "char": "♦",
+      "bgCol": "#4B5A52",
+      "fgCol": "#00FFFF",
+      "hasSolidBg": false,
+      "name": "Resonant Crystal",
+      "description": "A crystal that hums with a strange energy.",
+      "category": ["Misc"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "A crystal that hums with a strange energy."
+      }
+    },
+    {
+      "id": "Junk",
+      "glyph": "Junk",
+      "char": "᥆",
+      "bgCol": "#cfdbdb",
+      "fgCol": "#00FFFF",
+      "hasSolidBg": false,
+      "name": "Junk",
+      "description": "Seemingly useless junk.",
+      "category": ["Misc"],
+      "slot": "NotWorn",
+      "help": {
+        "show": true,
+        "about": "You cannot quite make out what this junk could be used for."
+      }
     }
   ]
 }

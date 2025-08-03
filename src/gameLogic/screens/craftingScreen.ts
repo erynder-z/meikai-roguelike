@@ -1,4 +1,5 @@
 import { BaseScreen } from './baseScreen';
+import { CraftingHandler } from '../crafting/craftingHandler';
 import { CraftingScreenDisplay } from '../../ui/craftingScreenDisplay/craftingScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { ItemObject } from '../itemObjects/itemObject';
@@ -93,19 +94,27 @@ export class CraftingScreen extends BaseScreen {
   }
 
   /**
-   * Handles the menu key press.
+   * Handles the menu key being pressed in the crafting screen.
+   *
+   * If the menu key is pressed, the crafting screen is faded out and popped from the stack.
+   * If the combine key is pressed, the items in the combine list are combined.
    *
    * @param key - The key pressed.
    * @param stack - The stack of screens.
-   * @returns True if the menu key was pressed, otherwise false.
+   * @return True if the event was handled, otherwise false.
    */
   private handleMenuKey(key: string, stack: Stack): boolean {
-    if (key === this.activeControlScheme.menu.toString()) {
-      this.fadeOutCraftingScreen();
-      stack.pop();
-      return true;
+    switch (key) {
+      case this.activeControlScheme.menu.toString():
+        this.fadeOutCraftingScreen();
+        stack.pop();
+        return true;
+      case this.activeControlScheme.combine_items.toString():
+        this.handleCombine();
+        return true;
+      default:
+        return false;
     }
-    return false;
   }
 
   /**
@@ -144,5 +153,37 @@ export class CraftingScreen extends BaseScreen {
    */
   private isAltKeyPressed(event: KeyboardEvent): boolean {
     return event.altKey || event.metaKey;
+  }
+
+  /**
+   * Clears the list of items to combine.
+   *
+   * @remarks
+   * This also updates the display to show an empty list of combined items.
+   */
+  private clearCombineItems(): void {
+    this.combineItems = [];
+    if (this.display) {
+      this.display.combined = this.combineItems;
+    }
+  }
+
+  /**
+   * Combines the selected items in the crafting screen.
+   *
+   * This function uses the CraftingHandler to attempt to combine the items
+   * that are currently selected in the crafting interface. If a valid item
+   * is created as a result of the combination, it is added to the inventory.
+   * After attempting the combination, the list of items to combine is cleared.
+   */
+  private handleCombine(): void {
+    const maxIngredients = this.game.stats.maxCraftIngredients;
+    const craftingHandler = new CraftingHandler(this.inventory, maxIngredients);
+
+    const result = craftingHandler.combine(...this.combineItems);
+
+    if (result) this.inventory.add(result);
+
+    this.clearCombineItems();
   }
 }

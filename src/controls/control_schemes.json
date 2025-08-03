@@ -22,6 +22,7 @@
     "spells": ["s"],
     "stats": ["t"],
     "craft": ["c"],
+    "combine_items": ["+"],
     "scroll_list": ["Alt", "Meta", "Numpad8", "Numpad2"]
   },
   "wasd_keys": {
@@ -47,6 +48,7 @@
     "spells": ["m"],
     "stats": ["t"],
     "craft": ["f"],
+    "combine_items": ["+"],
     "scroll_list": ["Alt", "Meta", "w", "s"]
   },
   "vi_keys_QWERTY": {
@@ -72,6 +74,7 @@
     "spells": ["s"],
     "stats": ["t"],
     "craft": ["c"],
+    "combine_items": ["+"],
     "scroll_list": ["Alt", "Meta", "k", "j"]
   },
   "vi_keys_QWERTZ": {
@@ -97,6 +100,7 @@
     "spells": ["s"],
     "stats": ["t"],
     "craft": ["c"],
+    "combine_items": ["+"],
     "scroll_list": ["Alt", "Meta", "k", "j"]
   }
 }

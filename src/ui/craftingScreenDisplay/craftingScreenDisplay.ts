@@ -93,6 +93,7 @@ export class CraftingScreenDisplay extends FadeInOutElement {
 
         .inventory-list {
           width: 100%;
+          width: 100%;
           display: flex;
           overflow: auto;
           margin-bottom: 1rem;

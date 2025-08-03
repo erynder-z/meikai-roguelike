@@ -1,0 +1,51 @@
+{
+  "recipes": [
+    {
+      "ingredients": ["scrapmetal", "gunpowder"],
+      "result": {
+        "glyph": "Dynamite",
+        "slot": "NotWorn",
+        "category": ["Consumable"],
+        "spell": "Burn",
+        "level": 1,
+        "charges": 1,
+        "effectMagnitude": null
+      }
+    },
+    {
+      "ingredients": ["toughleather", "bioluminescentfungus"],
+      "result": {
+        "glyph": "FirstAidKit",
+        "slot": "NotWorn",
+        "category": ["Consumable"],
+        "spell": "Heal",
+        "level": 1,
+        "charges": 1,
+        "effectMagnitude": null
+      }
+    },
+    {
+      "ingredients": ["scrapmetal", "petrifiedwood"],
+      "result": {
+        "glyph": "Shiv",
+        "slot": "MainHand",
+        "category": ["MeleeWeapon"],
+        "level": 1,
+        "charges": 0,
+        "effectMagnitude": null
+      }
+    },
+    {
+      "ingredients": ["resonantcrystal", "petrifiedwood"],
+      "result": {
+        "glyph": "Rune",
+        "slot": "NotWorn",
+        "category": ["SpellItem"],
+        "spell": "Heal",
+        "level": 1,
+        "charges": 1,
+        "effectMagnitude": null
+      }
+    }
+  ]
+}
