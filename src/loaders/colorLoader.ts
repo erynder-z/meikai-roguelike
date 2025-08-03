@@ -62,6 +62,10 @@ export class ColorLoader {
         '--storyScreenBackground',
         colors.root['--storyScreenBackground'],
       );
+      root.style.setProperty('--heading', colors.root['--heading']);
+      root.style.setProperty('--textBad', colors.root['--textBad']);
+      root.style.setProperty('--textGood', colors.root['--textGood']);
+      root.style.setProperty('--selected', colors.root['--selected']);
 
       resolve();
     });

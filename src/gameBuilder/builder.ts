@@ -593,6 +593,34 @@ export class Builder implements Build {
     inv.add(waterBottle);
 
     for (let index = 0; index < 10; index++) {
+      const leather = new ItemObject(
+        Glyph.ToughLeather,
+        Slot.NotWorn,
+        [ObjCategory.Misc],
+        Spell.None,
+        1,
+        'some leather',
+        1,
+      );
+
+      inv.add(leather);
+    }
+
+    for (let index = 0; index < 10; index++) {
+      const fungus = new ItemObject(
+        Glyph.BioluminescentFungus,
+        Slot.NotWorn,
+        [ObjCategory.Misc],
+        Spell.None,
+        1,
+        'some bioluminescent fungus',
+        1,
+      );
+
+      inv.add(fungus);
+    }
+
+    for (let index = 0; index < 10; index++) {
       const laudanum = new ItemObject(
         Glyph.Laudanum,
         Slot.NotWorn,

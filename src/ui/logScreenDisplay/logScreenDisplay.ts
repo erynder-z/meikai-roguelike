@@ -51,9 +51,12 @@ export class LogScreenDisplay extends FadeInOutElement {
         }
 
         .log-screen-heading {
+          color: var(--heading);
           font-size: 1.5rem;
+          font-weight: bold;
           text-align: center;
-          margin-bottom: 2rem;
+          letter-spacing: 0.5rem;
+          margin-bottom: 1rem;
         }
 
         .log-screen-list ul li:nth-child(odd) {

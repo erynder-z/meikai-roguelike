@@ -9,6 +9,10 @@
       "description": "You can dig through rocks by holding the 'dig' modifier key while pressing the directional key where you want to dig."
     },
     {
+      "concept": "Crafting",
+      "description": "You can craft new items by opening the crafting screen and combining items in your inventory."
+    },
+    {
       "concept": "Another concept",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta doloremque labore laudantium a sed cum accusantium, mollitia vel dignissimos cupiditate officia in. Beatae, ex!"
     }

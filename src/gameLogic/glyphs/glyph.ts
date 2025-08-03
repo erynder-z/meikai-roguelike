@@ -106,6 +106,14 @@ export enum Glyph {
   Rune,
   Bullet,
   Scroll,
+  Shiv,
+  ScrapMetal,
+  Gunpowder,
+  BioluminescentFungus,
+  ToughLeather,
+  PetrifiedWood,
+  ResonantCrystal,
+  Junk,
 
   // Misc
   Bad,

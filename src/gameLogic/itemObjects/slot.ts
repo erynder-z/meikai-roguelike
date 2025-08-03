@@ -8,5 +8,7 @@ export enum Slot {
   Back = 6,
   Legs = 7,
   Feet = 8,
-  Last = 9,
+  Neck = 9,
+  Ring = 10,
+  Last = 11,
 }

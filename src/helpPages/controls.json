@@ -19,6 +19,11 @@
     { "action": "dig_modifier", "description": "Dig modifier key" },
     { "action": "menu", "description": "Open options screen / Close menus" },
     { "action": "scroll_list", "description": "Scroll up/down" },
-    { "action": "stats", "description": "Open stats screen" }
+    { "action": "stats", "description": "Open stats screen" },
+    { "action": "craft", "description": "Open crafting screen" },
+    {
+      "action": "combine_items",
+      "description": "Combine items in the crafting screen"
+    }
   ]
 }

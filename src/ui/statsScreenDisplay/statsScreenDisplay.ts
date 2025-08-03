@@ -57,9 +57,12 @@ export class StatsScreenDisplay extends FadeInOutElement {
         }
 
         .stats-screen-heading {
+          color: var(--heading);
           font-size: 1.5rem;
+          font-weight: bold;
           text-align: center;
-          margin-bottom: 2rem;
+          letter-spacing: 0.5rem;
+          margin-bottom: 1rem;
         }
 
         .stats {

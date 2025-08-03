@@ -25,6 +25,7 @@ import { StackScreen } from '../../types/terminal/stackScreen';
 import { StatsScreen } from '../screens/statsScreen';
 import { WaitCommand } from '../commands/waitCommand';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { CraftingScreen } from '../screens/craftingScreen';
 
 /**
  * Class responsible for parsing player input and converting it into game commands.
@@ -138,6 +139,9 @@ export class ParsePlayer {
         break;
       case activeControlScheme.stats.toString():
         stackScreen = new StatsScreen(this.game, this.make);
+        break;
+      case activeControlScheme.craft.toString():
+        stackScreen = new CraftingScreen(this.game, this.make);
         break;
       case activeControlScheme.menu.toString():
         stackScreen = new IngameMenuScreen(this.game, this.make, stack);

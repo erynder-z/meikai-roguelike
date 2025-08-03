@@ -35,10 +35,13 @@ export class SpellScreenDisplay extends FadeInOutElement {
             justify-content: center;
             color: var(--white);
           }
-          .spell-title {
+          .spell-heading {
+            color: var(--heading);
             font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-weight: bold;
             text-align: center;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1rem;
           }
           .spell-options {
             list-style: none;
@@ -58,7 +61,7 @@ export class SpellScreenDisplay extends FadeInOutElement {
           }
         </style>
         <div class="spell-screen">
-          <div class="spell-title"></div>
+          <div class="spell-heading"></div>
           <ul class="spell-options"></ul>
         </div>
       `;
@@ -74,7 +77,7 @@ export class SpellScreenDisplay extends FadeInOutElement {
   private renderSpells(): void {
     if (!this.shadowRoot) return;
 
-    const titleElement = this.shadowRoot.querySelector('.spell-title');
+    const titleElement = this.shadowRoot.querySelector('.spell-heading');
     const optionsList = this.shadowRoot.querySelector('.spell-options');
 
     if (titleElement) {
