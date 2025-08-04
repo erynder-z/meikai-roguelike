@@ -3,6 +3,7 @@ import { Command } from '../../types/gameLogic/commands/command';
 import { CommandBase } from '../commands/commandBase';
 import { Cost } from '../../types/gameLogic/commands/cost';
 import { GameState } from '../../types/gameBuilder/gameState';
+import keys from '../../utilities/commonKeyboardChars.json';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Spell } from '../spells/spell';
 import { SpellFinder } from '../spells/spellFinder';
@@ -29,18 +30,20 @@ export class SpellScreen extends BaseScreen {
    * @return The corresponding character.
    */
   private positionToCharacter(pos: number): string {
-    return String.fromCharCode(97 + pos);
+    return keys.keys[pos];
   }
 
   /**
-   * Converts a character to its corresponding position in the alphabet.
+   * Converts a character to a corresponding position in the spell list.
+   * The character is converted to a number by finding its index in the list of keys.
+   * If the character is not found, -1 is returned.
    *
    * @param c - The character to convert.
-   * @return The position of the character in the alphabet.
+   * @return The position of the character in the list of keys, or -1 if not found.
    */
   private characterToPosition(c: string): number {
-    const pos = c.charCodeAt(0) - 'a'.charCodeAt(0);
-    return pos;
+    const pos = keys.keys.indexOf(c);
+    return pos >= 0 ? pos : -1;
   }
 
   /**

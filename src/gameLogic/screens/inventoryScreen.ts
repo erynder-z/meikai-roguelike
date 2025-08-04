@@ -4,6 +4,7 @@ import { Inventory } from '../inventory/inventory';
 import { InventoryScreenDisplay } from '../../ui/inventoryScreenDisplay/inventoryScreenDisplay';
 import { ItemScreen } from './itemScreen';
 import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
+import keys from '../../utilities/commonKeyboardChars.json';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
 
@@ -91,7 +92,7 @@ export class InventoryScreen extends BaseScreen {
    * @return The position of the character in the inventory, or -1 if not valid.
    */
   private characterToPosition(c: string): number {
-    const pos = c.charCodeAt(0) - 'a'.charCodeAt(0);
+    const pos = keys.keys.indexOf(c);
     return pos >= 0 && pos < this.inventory.length() ? pos : -1;
   }
 

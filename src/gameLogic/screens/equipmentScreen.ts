@@ -3,6 +3,7 @@ import { Equipment } from '../inventory/equipment';
 import { EquipmentScreenDisplay } from '../../ui/equipmentScreenDIsplay/equipmentScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { ItemScreen } from './itemScreen';
+import keys from '../../utilities/commonKeyboardChars.json';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Slot } from '../itemObjects/slot';
 import { Stack } from '../../types/terminal/stack';
@@ -22,23 +23,26 @@ export class EquipmentScreen extends BaseScreen {
   }
 
   /**
-   * Converts slot position to corresponding character.
-   * @param pos - The slot position.
-   * @return The character representing the slot.
+   * Converts a slot position to the corresponding character.
+   * @param pos - The slot position to convert.
+   * @return The character represented by the slot position.
    */
   private slotToCharacter(pos: Slot): string {
-    return String.fromCharCode(97 + (pos - Slot.MainHand));
+    return keys.keys[pos - Slot.MainHand];
   }
 
   /**
-   * Converts character to corresponding slot position.
-   *
-   * @param char - The character representing the slot.
-   * @return The slot position.
+   * Converts a character to the corresponding slot position.
+   * If the character is not found in the keys list, or its index is out of range,
+   * Slot.NotWorn is returned.
+   * @param char - The character to convert.
+   * @return The slot position represented by the character.
    */
   private CharacterToSlot(char: string): Slot {
-    const i: number = char.charCodeAt(0) - 'a'.charCodeAt(0) + Slot.MainHand;
-    return i in Slot ? (i as Slot) : Slot.NotWorn;
+    const index = keys.keys.indexOf(char);
+    return index < 0 || index >= Slot.Last
+      ? Slot.NotWorn
+      : ((index + Slot.MainHand) as Slot);
   }
 
   /**
