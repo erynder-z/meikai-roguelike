@@ -2,6 +2,7 @@ import { BaseScreen } from './baseScreen';
 import { CraftingHandler } from '../crafting/craftingHandler';
 import { CraftingScreenDisplay } from '../../ui/craftingScreenDisplay/craftingScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
+import { groupInventory } from '../../utilities/inventoryUtils';
 import { ItemObject } from '../itemObjects/itemObject';
 import { Inventory } from '../inventory/inventory';
 import keys from '../../utilities/commonKeyboardChars.json';
@@ -134,16 +135,21 @@ export class CraftingScreen extends BaseScreen {
 
   /**
    * Converts a character to a corresponding position in the inventory.
-   * The character is converted to a number by subtracting the char code of 'a' from the char code of the given character.
-   * If the resulting position is valid (i.e. within the range of the inventory), it is returned.
-   * Otherwise -1 is returned.
+   * The character is converted to a number by finding its index in the list of keys.
+   * If the character is not found, or its index is out of range, -1 is returned.
    *
    * @param c - The character to convert.
-   * @return The position of the character in the inventory, or -1 if not valid.
+   * @return The position of the character in the inventory, or -1 if not found.
    */
   private characterToPosition(c: string): number {
     const pos = keys.keys.indexOf(c);
-    return pos >= 0 && pos < this.inventory.length() ? pos : -1;
+    const groupedItems = groupInventory(this.inventory.items);
+
+    if (pos >= 0 && pos < groupedItems.length) {
+      const item = groupedItems[pos].item;
+      return this.inventory.items.indexOf(item);
+    }
+    return -1;
   }
   /**
    * Checks if the Alt or Meta key is pressed.

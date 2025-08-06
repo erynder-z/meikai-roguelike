@@ -2,6 +2,7 @@ import { FadeInOutElement } from '../other/fadeInOutElement';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
 import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
+import { groupInventory } from '../../utilities/inventoryUtils';
 
 export class CraftingScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];
@@ -195,13 +196,19 @@ export class CraftingScreenDisplay extends FadeInOutElement {
       inventoryListContainer.innerHTML = '';
       const itemList = document.createElement('ul');
       const fragment = document.createDocumentFragment();
+      const groupedItems = groupInventory(this.inventoryItems);
 
-      this.inventoryItems.forEach((item, index) => {
+      groupedItems.forEach((groupedItem, index) => {
         const key = index < keysJson.keys.length ? keysJson.keys[index] : '?';
         const listItem = document.createElement('li');
-        listItem.textContent = `${key}: ${item.description()}`;
-        listItem.dataset.index = index.toString();
-        if (isItemSelected(item)) listItem.classList.add('selectedItem');
+        const count = groupedItem.count > 1 ? ` x${groupedItem.count}` : '';
+        listItem.textContent = `${key}: ${groupedItem.item.description()}${count}`;
+        listItem.dataset.index = this.inventoryItems
+          .indexOf(groupedItem.item)
+          .toString();
+        if (isItemSelected(groupedItem.item)) {
+          listItem.classList.add('selectedItem');
+        }
 
         fragment.appendChild(listItem);
       });

@@ -1,6 +1,7 @@
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
+import { groupInventory } from '../../utilities/inventoryUtils';
 
 export class InventoryScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];
@@ -102,10 +103,16 @@ export class InventoryScreenDisplay extends FadeInOutElement {
    * Renders the inventory list items.
    *
    * Clears the inventory list container, then creates a new unordered list
-   * element with list items for each inventory item. The list items are assigned
-   * data-index attributes with the index of the item in the inventoryItems array.
-   * The list items are also assigned text content with a key (a number for the first
-   * 10 items and a question mark for items after that) and the description of the item.
+   * element with list items for each inventory item.
+   *
+   * The key for each item is the first letter of the item's glyph, as long as
+   * the item's index is within the keysJson array.
+   *
+   * The text content of each list item is the item's description, followed by
+   * the count of the item if it is more than one.
+   *
+   * The 'data-index' attribute of each list item is set to the index of the
+   * item in the inventoryItems array.
    */
   private renderInventoryList(): void {
     const inventoryListContainer = this.shadowRoot?.querySelector(
@@ -115,12 +122,16 @@ export class InventoryScreenDisplay extends FadeInOutElement {
       inventoryListContainer.innerHTML = '';
       const itemList = document.createElement('ul');
       const fragment = document.createDocumentFragment();
+      const groupedItems = groupInventory(this.inventoryItems);
 
-      this.inventoryItems.forEach((item, index) => {
+      groupedItems.forEach((groupedItem, index) => {
         const key = index < keysJson.keys.length ? keysJson.keys[index] : '?';
         const listItem = document.createElement('li');
-        listItem.textContent = `${key}: ${item.description()}`;
-        listItem.dataset.index = index.toString();
+        const count = groupedItem.count > 1 ? ` x${groupedItem.count}` : '';
+        listItem.textContent = `${key}: ${groupedItem.item.description()}${count}`;
+        listItem.dataset.index = this.inventoryItems
+          .indexOf(groupedItem.item)
+          .toString();
         fragment.appendChild(listItem);
       });
 

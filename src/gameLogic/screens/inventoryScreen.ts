@@ -1,5 +1,6 @@
 import { BaseScreen } from './baseScreen';
 import { GameState } from '../../types/gameBuilder/gameState';
+import { groupInventory } from '../../utilities/inventoryUtils';
 import { Inventory } from '../inventory/inventory';
 import { InventoryScreenDisplay } from '../../ui/inventoryScreenDisplay/inventoryScreenDisplay';
 import { ItemScreen } from './itemScreen';
@@ -93,7 +94,13 @@ export class InventoryScreen extends BaseScreen {
    */
   private characterToPosition(c: string): number {
     const pos = keys.keys.indexOf(c);
-    return pos >= 0 && pos < this.inventory.length() ? pos : -1;
+    const groupedItems = groupInventory(this.inventory.items);
+
+    if (pos >= 0 && pos < groupedItems.length) {
+      const item = groupedItems[pos].item;
+      return this.inventory.items.indexOf(item);
+    }
+    return -1;
   }
 
   /**
