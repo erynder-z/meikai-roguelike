@@ -1,5 +1,6 @@
 import { BuffsDisplay } from '../ui/buffs/buffsDisplay';
 import { CommandDirectionScreenDisplay } from '../ui/commandDirectionScreenDisplay/commandDirectionScreenDisplay';
+import { CraftedItemDisplay } from '../ui/craftedItemDisplay/craftedItemDisplay';
 import { CraftingScreenDisplay } from '../ui/craftingScreenDisplay/craftingScreenDisplay';
 import { EntityInfoCard } from '../ui/entityInfoDisplay/entityInfoCard';
 import { EquipmentDisplay } from '../ui/equipment/equipmentDisplay';
@@ -55,3 +56,4 @@ customElements.define('level-depth-info', LevelDepthInfo);
 customElements.define('level-temperature-info', LevelTemperatureInfo);
 customElements.define('story-screen-display', StoryScreenDisplay);
 customElements.define('crafting-screen-display', CraftingScreenDisplay);
+customElements.define('crafted-item-display', CraftedItemDisplay);
