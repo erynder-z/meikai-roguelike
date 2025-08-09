@@ -1,7 +1,7 @@
-import { FadeInOutElement } from '../other/fadeInOutElement';
+import { PopInFadeOutElement } from '../other/popInFadeOutElement';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 
-export class CraftedItemDisplay extends FadeInOutElement {
+export class CraftedItemDisplay extends PopInFadeOutElement {
   private item: ItemObject | null = null;
 
   constructor() {
@@ -36,7 +36,7 @@ export class CraftedItemDisplay extends FadeInOutElement {
           background: var(--popupBackground);
           position: absolute;
           top: 1rem;
-          left: var(--minimal-width);
+          left: 1rem;
           padding: 2rem;
           border-radius: 1rem;
           display: flex;
@@ -82,7 +82,7 @@ export class CraftedItemDisplay extends FadeInOutElement {
 
     shadowRoot.appendChild(templateElement.content.cloneNode(true));
     super.connectedCallback();
-    this.fadeIn();
+    this.popIn();
 
     requestAnimationFrame(() => {
       if (this.item) {
@@ -108,17 +108,22 @@ export class CraftedItemDisplay extends FadeInOutElement {
       '.item-details',
     ) as HTMLElement;
 
-    console.log(itemDetailsContainer);
     if (itemDetailsContainer && this.item) {
       itemDetailsContainer.innerHTML = '';
       const itemList = document.createElement('ul');
       const fragment = document.createDocumentFragment();
 
       const nameItem = document.createElement('li');
-      nameItem.textContent = `Name: ${this.item.description()}`;
+      nameItem.textContent = `Name: ${this.item.name()}`;
+
+      const itemDesc = document.createElement('li');
+      itemDesc.textContent = this.item.desc;
+
       fragment.appendChild(nameItem);
+      fragment.appendChild(itemDesc);
 
       itemList.appendChild(fragment);
+
       itemDetailsContainer.appendChild(itemList);
     }
   }
