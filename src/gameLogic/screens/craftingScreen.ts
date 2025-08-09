@@ -1,6 +1,7 @@
 import { BaseScreen } from './baseScreen';
 import { CraftingHandler } from '../crafting/craftingHandler';
 import { CraftingScreenDisplay } from '../../ui/craftingScreenDisplay/craftingScreenDisplay';
+import { CraftedItemDisplay } from '../../ui/craftedItemDisplay/craftedItemDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { groupInventory } from '../../utilities/inventoryUtils';
 import { ItemObject } from '../itemObjects/itemObject';
@@ -15,6 +16,7 @@ import { Stack } from '../../types/terminal/stack';
 export class CraftingScreen extends BaseScreen {
   public name = 'crafting-screen';
   private display: CraftingScreenDisplay | null = null;
+  private craftedItemDisplay: CraftedItemDisplay | null = null;
   private combineItems: ItemObject[] = [];
   constructor(
     public game: GameState,
@@ -50,6 +52,9 @@ export class CraftingScreen extends BaseScreen {
     if (this.display) {
       await this.display.fadeOut();
     }
+    if (this.craftedItemDisplay) {
+      await this.craftedItemDisplay.fadeOut();
+    }
   }
 
   /**
@@ -60,56 +65,58 @@ export class CraftingScreen extends BaseScreen {
    * @return True if the event was handled, otherwise false.
    */
   public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
-    if (this.handleItemSelection(event.key)) return true;
-    if (this.handleMenuKey(event.key, stack)) return true;
-    if (this.handleScroll(event)) return true;
+    if (this.isCraftedItemScreenShown()) return this.handleModalKeyDown(event);
 
+    return this.handleCraftingKeyDown(event, stack);
+  }
+
+  private handleModalKeyDown(event: KeyboardEvent): boolean {
+    if (event.key === this.activeControlScheme.menu.toString()) {
+      this.removeCraftedItemDisplay();
+    }
+    return true; // Always consume input in modal state
+  }
+
+  private handleCraftingKeyDown(event: KeyboardEvent, stack: Stack): boolean {
+    if (this.handleItemSelection(event)) return true;
+    if (this.handleMenuActions(event, stack)) return true;
+    if (this.handleScroll(event)) return true;
     return false;
   }
 
   /**
-   * Handles item selection in the crafting screen.
+   * Handles key down events related to item selection.
    *
-   * @param key - The key pressed.
-   * @returns True if an item was selected/deselected, otherwise false.
+   * If the character pressed does not correspond to a valid inventory item position, the function returns false.
+   * Otherwise, the item is toggled in the list of selected items and the crafting screen display is updated.
+   * @param event - The keyboard event.
+   * @return True if the event was handled, otherwise false.
    */
-  private handleItemSelection(key: string): boolean {
-    const pos = this.characterToPosition(key);
-    if (pos < 0) {
-      return false;
-    }
+  private handleItemSelection(event: KeyboardEvent): boolean {
+    const pos = this.characterToPosition(event.key);
+    if (pos < 0) return false;
 
-    const item = this.inventory.items[pos];
-    const index = this.combineItems.indexOf(item);
+    this.removeCraftedItemDisplay();
+    this.toggleItemForCombination(this.inventory.items[pos]);
 
-    if (index !== -1) {
-      this.combineItems.splice(index, 1);
-    } else {
-      this.combineItems.push(item);
-    }
-
-    if (this.display) {
-      this.display.combined = this.combineItems;
-    }
+    if (this.display) this.display.combined = this.combineItems;
 
     return true;
   }
 
   /**
-   * Handles the menu key being pressed in the crafting screen.
+   * Handles the menu key being pressed.
    *
-   * If the menu key is pressed, the crafting screen is faded out and popped from the stack.
-   * If the combine key is pressed, the items in the combine list are combined.
-   *
-   * @param key - The key pressed.
+   * If the crafted item display is showing, it is removed.
+   * Otherwise, the crafting screen is faded out and removed from the stack.
+   * @param event - The keyboard event.
    * @param stack - The stack of screens.
-   * @return True if the event was handled, otherwise false.
+   * @returns True if the menu key is handled, otherwise false.
    */
-  private handleMenuKey(key: string, stack: Stack): boolean {
-    switch (key) {
+  private handleMenuActions(event: KeyboardEvent, stack: Stack): boolean {
+    switch (event.key) {
       case this.activeControlScheme.menu.toString():
-        this.fadeOutCraftingScreen();
-        stack.pop();
+        this.closeScreen(stack);
         return true;
       case this.activeControlScheme.combine_items.toString():
         this.handleCombine();
@@ -183,13 +190,105 @@ export class CraftingScreen extends BaseScreen {
    * After attempting the combination, the list of items to combine is cleared.
    */
   private handleCombine(): void {
-    const maxIngredients = this.game.stats.maxCraftIngredients;
-    const craftingHandler = new CraftingHandler(this.inventory, maxIngredients);
-
+    const craftingHandler = new CraftingHandler(
+      this.inventory,
+      this.game.stats.maxCraftIngredients,
+    );
     const result = craftingHandler.combine(...this.combineItems);
-
-    if (result) this.inventory.add(result);
-
     this.clearCombineItems();
+
+    if (result) {
+      this.handleSuccessfulCombination(result);
+    } else {
+      this.handleFailedCombination();
+    }
+  }
+
+  /**
+   * Handles the result of a successful item combination.
+   * @param newItem - The new item created as a result of the combination.
+   */
+  private handleSuccessfulCombination(newItem: ItemObject): void {
+    this.inventory.add(newItem);
+    this.showCraftedItem(newItem);
+    if (this.display) this.display.items = this.inventory.items;
+  }
+
+  /**
+   * Handles the result of an unsuccessful item combination.
+   *
+   * Removes any existing display of a crafted item.
+   */
+  private handleFailedCombination(): void {
+    this.removeCraftedItemDisplay();
+  }
+
+  /**
+   * Toggles an item for combination in the crafting interface.
+   *
+   * If the item is already in the list of items to combine, it is removed.
+   * Otherwise, it is added to the list.
+   * @param item - The item to toggle.
+   */
+  private toggleItemForCombination(item: ItemObject): void {
+    const index = this.combineItems.indexOf(item);
+    if (index !== -1) {
+      this.combineItems.splice(index, 1);
+    } else {
+      this.combineItems.push(item);
+    }
+  }
+
+  /**
+   * Closes the crafting screen with a fade-out animation and removes it from the stack.
+   *
+   * @param stack - The stack of screens.
+   */
+  private closeScreen(stack: Stack): void {
+    this.fadeOutCraftingScreen();
+    stack.pop();
+  }
+
+  /**
+   * Returns true if the crafted item display is visible, otherwise false.
+   *
+   * This is used to determine if the crafted item display is a modal that
+   * blocks user input.
+   * @return True if the screen is modal, otherwise false.
+   */
+  private isCraftedItemScreenShown(): boolean {
+    return !!this.craftedItemDisplay;
+  }
+
+  /**
+   * Shows the crafted item in a new display.
+   * @param item The item that was crafted.
+   */
+  private async showCraftedItem(item: ItemObject): Promise<void> {
+    if (this.display) this.display.style.display = 'none';
+    if (this.craftedItemDisplay) this.craftedItemDisplay.remove();
+
+    const canvas = document.getElementById(
+      'terminal-canvas',
+    ) as HTMLCanvasElement;
+    if (canvas) {
+      this.craftedItemDisplay = document.createElement(
+        'crafted-item-display',
+      ) as CraftedItemDisplay;
+      this.craftedItemDisplay.itemToDisplay = item;
+      canvas.insertAdjacentElement('afterend', this.craftedItemDisplay);
+    }
+  }
+
+  /**
+   * Removes the crafted item display.
+   */
+  private async removeCraftedItemDisplay(): Promise<void> {
+    if (this.craftedItemDisplay) {
+      await this.craftedItemDisplay.fadeOut();
+      this.craftedItemDisplay = null;
+    }
+
+    if (this.display) this.display.style.display = 'block';
   }
 }
