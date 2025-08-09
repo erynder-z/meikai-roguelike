@@ -177,9 +177,8 @@ export class CraftingScreenDisplay extends FadeInOutElement {
     const scrollContainer = this.shadowRoot?.querySelector(
       '.inventory-list',
     ) as HTMLElement;
-    if (scrollContainer) {
+    if (scrollContainer)
       new KeypressScrollHandler(scrollContainer).handleVirtualScroll(event);
-    }
   }
 
   /**
@@ -206,9 +205,8 @@ export class CraftingScreenDisplay extends FadeInOutElement {
         listItem.dataset.index = this.inventoryItems
           .indexOf(groupedItem.item)
           .toString();
-        if (isItemSelected(groupedItem.item)) {
+        if (isItemSelected(groupedItem.item))
           listItem.classList.add('selectedItem');
-        }
 
         fragment.appendChild(listItem);
       });
@@ -219,32 +217,59 @@ export class CraftingScreenDisplay extends FadeInOutElement {
   }
 
   /**
-   * Updates the visibility of the 'Craft' button and the crafting message based on the number of items selected.
+   * Updates the visibility of the 'Craft' button and the crafting message.
    */
   private updateCraftingActionDisplay(): void {
-    const craftButton = this.shadowRoot?.querySelector('.craft-button');
+    const craftButton = this.shadowRoot?.querySelector(
+      '.craft-button',
+    ) as HTMLElement;
     const craftingMessage = this.shadowRoot?.querySelector(
       '.crafting-message',
     ) as HTMLElement;
 
-    if (!craftButton || !craftingMessage) {
-      return;
-    }
+    if (!craftButton || !craftingMessage) return;
 
+    const canCraft = this.canCombineItems();
+
+    this.toggleElementsVisibility(craftButton, craftingMessage, canCraft);
+
+    if (!canCraft) this.updateCraftingMessage(craftingMessage);
+  }
+
+  /**
+   * Checks if the currently selected items can be combined.
+   * @returns True if items can be combined, otherwise false.
+   */
+  private canCombineItems(): boolean {
     const selectedCount = this.combinedItems.length;
+    return selectedCount > 1 && selectedCount <= this.maxNoOfIngredients;
+  }
 
-    if (selectedCount > 1 && selectedCount <= this.maxNoOfIngredients) {
-      craftButton.classList.remove('hidden');
-      craftingMessage.classList.add('hidden');
-    } else {
-      craftButton.classList.add('hidden');
-      craftingMessage.classList.remove('hidden');
+  /**
+   * Toggles the visibility of the craft button and message.
+   * @param craftButton - The craft button element.
+   * @param craftingMessage - The crafting message element.
+   * @param canCraft - Whether the items can be crafted.
+   */
+  private toggleElementsVisibility(
+    craftButton: HTMLElement,
+    craftingMessage: HTMLElement,
+    canCraft: boolean,
+  ): void {
+    craftButton.classList.toggle('hidden', !canCraft);
+    craftingMessage.classList.toggle('hidden', canCraft);
+  }
 
-      if (selectedCount <= 1) {
-        craftingMessage.textContent = 'Select at least 2 items to combine.';
-      } else {
-        craftingMessage.textContent = `You can only combine up to ${this.maxNoOfIngredients} items.`;
-      }
-    }
+  /**
+   * Updates the crafting message text.
+   * @param craftingMessage - The crafting message element.
+   */
+  private updateCraftingMessage(craftingMessage: HTMLElement): void {
+    const selectedCount = this.combinedItems.length;
+    const message =
+      selectedCount <= 1
+        ? 'Select at least 2 items to combine.'
+        : `You can only combine up to ${this.maxNoOfIngredients} items.`;
+    craftingMessage.textContent = message;
   }
 }
