@@ -1,5 +1,6 @@
-import { PopInFadeOutElement } from '../other/popInFadeOutElement';
+import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
+import { PopInFadeOutElement } from '../other/popInFadeOutElement';
 
 export class CraftedItemDisplay extends PopInFadeOutElement {
   private item: ItemObject | null = null;
@@ -37,7 +38,7 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
           position: absolute;
           top: 1rem;
           left: 1rem;
-          padding: 2rem;
+          padding: 2rem 4rem;
           border-radius: 1rem;
           display: flex;
           height: calc(var(--maximal-width) - var(--outer-margin));
@@ -60,7 +61,6 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
 
         .item-details {
           width: 100%;
-          padding: 0 2rem;
         }
 
         .item-details ul {
@@ -71,6 +71,15 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
         .item-details ul li {
           list-style-type: none;
           margin-bottom: 0.5rem;
+        }
+
+        .item-details .glyph {
+          font-size: 4rem;
+        }
+
+        .item-details .name {
+          font-size: 1.5rem;
+          font-weight: bold;
         }
       </style>
 
@@ -113,14 +122,31 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
       const itemList = document.createElement('ul');
       const fragment = document.createDocumentFragment();
 
-      const nameItem = document.createElement('li');
-      nameItem.textContent = `Name: ${this.item.name()}`;
+      const glyphInfo = GlyphMap.getGlyphInfo(this.item.glyph);
+      const glyphChar = glyphInfo.char;
+      const glyphColor = glyphInfo.fgCol;
+      const charges = this.item.charges;
 
-      const itemDesc = document.createElement('li');
-      itemDesc.textContent = this.item.desc;
+      const glyphElement = document.createElement('li');
+      glyphElement.classList.add('glyph');
+      glyphElement.style.color = glyphColor;
+      glyphElement.textContent = glyphChar;
+      fragment.appendChild(glyphElement);
 
-      fragment.appendChild(nameItem);
-      fragment.appendChild(itemDesc);
+      const nameElement = document.createElement('li');
+      nameElement.classList.add('name');
+      nameElement.textContent = this.item.name();
+      fragment.appendChild(nameElement);
+
+      const descriptionElement = document.createElement('li');
+      descriptionElement.textContent = this.item.desc;
+      fragment.appendChild(descriptionElement);
+
+      if (charges > 1) {
+        const chargesElement = document.createElement('li');
+        chargesElement.textContent = `Contains ${charges} charges`;
+        fragment.appendChild(chargesElement);
+      }
 
       itemList.appendChild(fragment);
 
