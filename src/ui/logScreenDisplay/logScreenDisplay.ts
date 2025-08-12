@@ -17,7 +17,7 @@ export class LogScreenDisplay extends FadeInOutElement {
       <style>
         :host {
           --outer-margin: 6rem;
-          --minimal-width: 33%;
+          --minimal-width: 70ch;
           --maximal-width: 100%;
         }
         ::-webkit-scrollbar {
@@ -34,12 +34,23 @@ export class LogScreenDisplay extends FadeInOutElement {
         }
 
         .log-screen-display {
-           background: var(--popupBackground);
-           position: absolute;
+          backdrop-filter: brightness(50%);
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 100%;
+          width: 100%;
+        }
+
+        .menu-card {
+           background: var(--logScreenBackground);
+           position: relative;
            top: 1rem;
            left: 1rem;
            padding: 2rem;
            border-radius: 1rem;
+           outline: 0.1rem solid var(--outline);
            display: flex;
            height: calc(var(--maximal-width) - var(--outer-margin));
            width: calc(var(--minimal-width) - var(--outer-margin));
@@ -73,10 +84,12 @@ export class LogScreenDisplay extends FadeInOutElement {
         }
       </style>
       <div class="log-screen-display">
-        <div class="log-screen-heading">
-          Log 
+        <div class="menu-card">
+          <div class="log-screen-heading">
+            Log 
+          </div>
+          <div class="log-screen-list"></div>
         </div>
-        <div class="log-screen-list"></div>
       </div>
     `;
 

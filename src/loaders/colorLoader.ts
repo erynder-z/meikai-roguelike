@@ -66,6 +66,35 @@ export class ColorLoader {
       root.style.setProperty('--textBad', colors.root['--textBad']);
       root.style.setProperty('--textGood', colors.root['--textGood']);
       root.style.setProperty('--selected', colors.root['--selected']);
+      root.style.setProperty('--outline', colors.root['--outline']);
+      root.style.setProperty(
+        '--craftingScreenBackground',
+        colors.root['--craftingScreenBackground'],
+      );
+      root.style.setProperty(
+        '--inventoryScreenBackground',
+        colors.root['--inventoryScreenBackground'],
+      );
+      root.style.setProperty(
+        '--equipmentScreenBackground',
+        colors.root['--equipmentScreenBackground'],
+      );
+      root.style.setProperty(
+        '--spellScreenBackground',
+        colors.root['--spellScreenBackground'],
+      );
+      root.style.setProperty(
+        '--statsScreenBackground',
+        colors.root['--statsScreenBackground'],
+      );
+      root.style.setProperty(
+        '--logScreenBackground',
+        colors.root['--logScreenBackground'],
+      );
+      root.style.setProperty(
+        '--commandDirectionScreenBackground',
+        colors.root['--commandDirectionScreenBackground'],
+      );
 
       resolve();
     });

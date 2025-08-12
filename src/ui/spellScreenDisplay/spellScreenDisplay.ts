@@ -16,25 +16,39 @@ export class SpellScreenDisplay extends FadeInOutElement {
         <style>
           :host {
           --outer-margin: 6rem;
-          --minimal-width: 33%;
+          --minimal-width: 70ch;
           --maximal-width: 100%;
           }
 
           .spell-screen {
-            background: var(--popupBackground);
-            position: absolute;
+            backdrop-filter: brightness(50%);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 100%;
+            width: 100%;
+          }
+
+          .menu-card {
+            background: var(--spellScreenBackground);
+            position: relative;
             top: 1rem;
             left: 1rem;
             padding: 2rem;
             border-radius: 1rem;
+            outline: 0.1rem solid var(--outline);
             display: flex;
             height: calc(var(--maximal-width) - var(--outer-margin));
             width: calc(var(--minimal-width) - var(--outer-margin));
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: start;
             color: var(--white);
+            overflow-y: auto;
+            overflow-x: hidden;
           }
+
           .spell-heading {
             color: var(--heading);
             font-size: 1.5rem;
@@ -61,8 +75,10 @@ export class SpellScreenDisplay extends FadeInOutElement {
           }
         </style>
         <div class="spell-screen">
-          <div class="spell-heading"></div>
-          <ul class="spell-options"></ul>
+          <div class="menu-card">
+            <div class="spell-heading"></div>
+            <ul class="spell-options"></ul>
+          </div>
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
