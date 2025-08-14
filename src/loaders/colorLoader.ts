@@ -95,7 +95,18 @@ export class ColorLoader {
         '--commandDirectionScreenBackground',
         colors.root['--commandDirectionScreenBackground'],
       );
-
+      root.style.setProperty(
+        '--itemScreenBackground',
+        colors.root['--itemScreenBackground'],
+      );
+      root.style.setProperty(
+        '--entityInfoCardBackground',
+        colors.root['--entityInfoCardBackground'],
+      );
+      root.style.setProperty(
+        '--craftedItemBackground',
+        colors.root['--craftedItemBackground'],
+      );
       resolve();
     });
   }

@@ -10,60 +10,86 @@ export class ItemScreenDisplay extends FadeInOutElement {
 
   connectedCallback(): void {
     const shadowRoot = this.attachShadow({ mode: 'open' });
+    super.connectedCallback();
     const template = document.createElement('template');
     template.innerHTML = `
         <style>
           :host {
            --outer-margin: 6rem;
-           --minimal-width: 33%;
+           --minimal-width: 70ch;
            --maximal-width: 100%;
          }
-          .item-display-card {
-            background: var(--popupBackground);
-            position: absolute;
+
+         .item-screen {
+            backdrop-filter: brightness(50%);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 100%;
+            width: 100%;
+          }
+
+          .menu-card {
+            background: var(--itemScreenBackground);
+            position: relative;
             top: 1rem;
             left: 1rem;
             padding: 2rem;
             border-radius: 1rem;
+            outline: 0.1rem solid var(--outline);
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             height: calc(var(--maximal-width) - var(--outer-margin));
             width: calc(var(--minimal-width) - var(--outer-margin));
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
             color: var(--white);
+            overflow-y: auto;
+            overflow-x: hidden;
           }
-          .item-description {
+
+          .item-heading {
+            color: var(--heading);
             font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1rem;
           }
+
           .options {
             list-style: none;
             padding: 0;
+            margin: 0;
+            width: 100%;
           }
+
           .options li {
             margin: 0.5rem 0;
+            font-size: 1rem;
+            text-align: left;
           }
         </style>
-        <div class="item-display-card">
-          <div class="item-description"></div>
-          <ul class="options"></ul>
+        <div class="item-screen">
+            <div class="menu-card">
+                <div class="item-heading"></div>
+                <ul class="options"></ul>
+            </div>
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));
-    super.connectedCallback();
-    this.generateOptionsList();
+    this.renderOptionsList();
     this.fadeIn();
   }
 
   /**
    * Generates and populates the options list in the item screen display.
    */
-  private generateOptionsList(): void {
+  private renderOptionsList(): void {
     if (!this.shadowRoot) return;
 
-    const descriptionElement =
-      this.shadowRoot.querySelector('.item-description');
+    const descriptionElement = this.shadowRoot.querySelector('.item-heading');
     const optionsList = this.shadowRoot.querySelector('.options');
 
     if (descriptionElement) {
