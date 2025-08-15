@@ -16,7 +16,7 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
       <style>
         :host {
           --outer-margin: 6rem;
-          --minimal-width: 33%;
+          --minimal-width: 70ch;
           --maximal-width: 100%;
         }
 
@@ -33,21 +33,32 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
           background-color: var(--scrollbar-background);
         }
 
-        .crafted-item-display {
-          background: var(--popupBackground);
-          position: absolute;
-          top: 1rem;
-          left: 1rem;
-          padding: 2rem 4rem;
-          border-radius: 1rem;
-          display: flex;
-          height: calc(var(--maximal-width) - var(--outer-margin));
-          width: calc(var(--minimal-width) - var(--outer-margin));
-          flex-direction: column;
-          align-items: center;
-          color: var(--white);
-          overflow-y: auto;
-          overflow-x: hidden;
+         .crafted-item-display {
+            backdrop-filter: brightness(50%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+          }
+
+        .crafted-item-card {
+          background: var(--craftedItemBackground);
+         position: relative;
+            top: 1rem;
+            left: 1rem;
+            padding: 2rem;
+            border-radius: 1rem;
+            outline: 0.1rem solid var(--outline);
+            display: flex;
+            height: calc(var(--maximal-width) - var(--outer-margin));
+            width: calc(var(--minimal-width) - var(--outer-margin));
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            color: var(--white);
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .crafting-heading {
@@ -84,8 +95,10 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
       </style>
 
       <div class="crafted-item-display">
+      <div class="crafted-item-card">
         <div class="crafting-heading">New Item Crafted</div>
         <div class="item-details"></div>
+      </div>
       </div>
     `;
 

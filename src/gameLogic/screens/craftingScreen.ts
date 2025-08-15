@@ -268,15 +268,15 @@ export class CraftingScreen extends BaseScreen {
     if (this.display) this.display.style.display = 'none';
     if (this.craftedItemDisplay) this.craftedItemDisplay.remove();
 
-    const canvas = document.getElementById(
-      'terminal-canvas',
+    const container = document.getElementById(
+      'canvas-container',
     ) as HTMLCanvasElement;
-    if (canvas) {
+    if (container) {
       this.craftedItemDisplay = document.createElement(
         'crafted-item-display',
       ) as CraftedItemDisplay;
       this.craftedItemDisplay.itemToDisplay = item;
-      canvas.insertAdjacentElement('afterend', this.craftedItemDisplay);
+      container.appendChild(this.craftedItemDisplay);
     }
   }
 
