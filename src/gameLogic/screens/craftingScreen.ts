@@ -261,11 +261,16 @@ export class CraftingScreen extends BaseScreen {
   }
 
   /**
-   * Shows the crafted item in a new display.
-   * @param item The item that was crafted.
+   * Shows the crafted item on the screen.
+   *
+   * Removes any existing display of the crafted item and creates a new
+   * display element for the given item. The new display element is then
+   * added to the 'canvas-container' element.
+   *
+   * @param item - The item to display.
+   * @return A promise that resolves when the display is added to the DOM.
    */
   private async showCraftedItem(item: ItemObject): Promise<void> {
-    if (this.display) this.display.style.display = 'none';
     if (this.craftedItemDisplay) this.craftedItemDisplay.remove();
 
     const container = document.getElementById(
