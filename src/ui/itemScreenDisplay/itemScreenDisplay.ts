@@ -35,7 +35,7 @@ export class ItemScreenDisplay extends FadeInOutElement {
             position: relative;
             top: 1rem;
             left: 1rem;
-            padding: 2rem;
+            padding: 2rem 4rem;
             border-radius: 1rem;
             outline: 0.1rem solid var(--outline);
             display: flex;

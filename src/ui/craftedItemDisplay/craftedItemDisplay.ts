@@ -39,7 +39,7 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
           left: 0;
           background: var(--craftedItemBackground);
           margin: 1rem;
-          padding: 2rem;
+          padding: 2rem 4rem;
           border-radius: 1rem;
           outline: 0.1rem solid var(--outline);
           display: flex;

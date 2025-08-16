@@ -55,14 +55,13 @@ export class StatsScreenDisplay extends FadeInOutElement {
           position: relative;
           top: 1rem;
           left: 1rem;
-          padding: 2rem;
+          padding: 2rem 4rem;
           border-radius: 1rem;
           outline: 0.1rem solid var(--outline);
           display: flex;
           height: calc(var(--maximal-width) - var(--outer-margin));
           width: calc(var(--minimal-width) - var(--outer-margin));
           flex-direction: column;
-          align-items: center;
           color: var(--white);
           overflow-y: auto;
           overflow-x: hidden;
@@ -78,7 +77,7 @@ export class StatsScreenDisplay extends FadeInOutElement {
         }
 
         .stats {
-          padding: 0 2rem;
+          padding: 0;
         }
 
         .buffs-list-heading {

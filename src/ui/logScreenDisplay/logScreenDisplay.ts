@@ -48,7 +48,7 @@ export class LogScreenDisplay extends FadeInOutElement {
            position: relative;
            top: 1rem;
            left: 1rem;
-           padding: 2rem;
+           padding: 2rem 4rem;
            border-radius: 1rem;
            outline: 0.1rem solid var(--outline);
            display: flex;
@@ -75,7 +75,7 @@ export class LogScreenDisplay extends FadeInOutElement {
         }
 
         .log-screen-list ul {
-          padding: 0 2rem;
+          padding: 0;
           height: 100%;
         }
 
