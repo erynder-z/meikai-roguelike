@@ -13,6 +13,12 @@ export type ItemDefinitionJson = {
   description: string;
   category: string[];
   slot: string;
+  initialization?: {
+    spell?: string;
+    charges?: {
+      base: number;
+    };
+  };
   help: {
     show: boolean;
     about: string;
@@ -23,4 +29,10 @@ export type ItemTemplate = {
   glyph: Glyph;
   slot: Slot;
   category: ObjCategory[];
+  initialization?: {
+    spell?: string;
+    charges?: {
+      base: number;
+    };
+  };
 };

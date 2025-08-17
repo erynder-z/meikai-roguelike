@@ -25,6 +25,7 @@ export class ItemObjectManager {
     category: item.category.map(
       (c: string) => ObjCategory[c as keyof typeof ObjCategory],
     ),
+    initialization: item.initialization,
   }));
 
   private static highestSpellTier: number = Spell.None;
@@ -118,7 +119,10 @@ export class ItemObjectManager {
    * @param level - The level of the item object.
    * @return The generated random item object.
    */
-  private static createRandomItem(rand: RandomGenerator, level: number): ItemObject {
+  private static createRandomItem(
+    rand: RandomGenerator,
+    level: number,
+  ): ItemObject {
     const maxAttempts = 1000;
     let attempts = 0;
 
@@ -159,29 +163,19 @@ export class ItemObjectManager {
     );
     object.level = objectLevel;
 
-    switch (object.glyph) {
-      case Glyph.Laudanum:
-        this.setSpecificSpell(object, Spell.Heal);
-        break;
-      case Glyph.Rune:
-        this.setItemSpell(object, rand);
-        this.setCharges(object, 1, rand, level);
-        break;
-      case Glyph.Scroll:
-        this.setItemSpell(object, rand);
-        break;
-      case Glyph.Revolver:
-        this.setSpecificSpell(object, Spell.Bullet);
-        object.charges = rand.randomIntegerExclusive(10, level);
-        break;
-      case Glyph.Ration:
-        this.setItemSpell(object, rand);
-        this.setCharges(object, 1, rand, level);
-        break;
-      case Glyph.Water_Bottle:
-        this.setItemSpell(object, rand);
-        this.setCharges(object, 1, rand, level);
-        break;
+    if (template.initialization) {
+      const init = template.initialization;
+
+      if (init.spell) {
+        if (init.spell === 'Random') {
+          this.setItemSpell(object, rand);
+        } else {
+          const spell = Spell[init.spell as keyof typeof Spell];
+          if (spell != null) this.setSpecificSpell(object, spell);
+        }
+      }
+
+      if (init.charges) this.setCharges(object, init.charges.base, rand, level);
     }
 
     return object;
