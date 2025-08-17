@@ -94,7 +94,7 @@ export class ItemObjectManager {
     level: number,
     rand: RandomGenerator,
   ): ItemObject {
-    return this.rareRunes(rand, level);
+    return this.createRandomItem(rand, level);
   }
 
   /**
@@ -112,13 +112,13 @@ export class ItemObjectManager {
   }
 
   /**
-   * Generates a rare rune item object with a specified level.
+   * Generates a random item, with special handling for rare runes.
    *
    * @param rand - The random number generator used for randomness.
    * @param level - The level of the item object.
-   * @return The generated rare rune item object.
+   * @return The generated random item object.
    */
-  private static rareRunes(rand: RandomGenerator, level: number): ItemObject {
+  private static createRandomItem(rand: RandomGenerator, level: number): ItemObject {
     const maxAttempts = 1000;
     let attempts = 0;
 
