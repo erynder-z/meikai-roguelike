@@ -127,7 +127,7 @@ export class EntityInfoCard extends FadeInOutElement {
     const glyphInfo = GlyphMap.getGlyphInfo(entity.glyph);
     const glyphChar = glyphInfo.char;
     const glyphColor = glyphInfo.fgCol;
-    const description = entity.description;
+    const description = glyphInfo.description;
     const level = entity.level;
     const hp = entity.hp || 0;
     const maxHp = entity.maxHp || 0;
