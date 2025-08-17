@@ -213,9 +213,9 @@ export class GameMap implements GameMapType {
    * @param p - the world point where the player will enter
    */
   public addObject(o: ItemObject, p: WorldPoint): void {
-    o.desc = GlyphMap.getGlyphDescription(o.glyph);
+    o.spellDesc = GlyphMap.getGlyphDescription(o.glyph);
     if (o.spell != Spell.None)
-      o.desc = ItemObjectManager.getSpellDescription(o.spell);
+      o.spellDesc = ItemObjectManager.getSpellDescription(o.spell);
 
     this.cell(p).obj = o;
   }

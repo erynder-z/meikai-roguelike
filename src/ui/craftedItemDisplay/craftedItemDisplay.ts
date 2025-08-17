@@ -142,7 +142,7 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
       fragment.appendChild(nameElement);
 
       const descriptionElement = document.createElement('li');
-      descriptionElement.textContent = this.item.desc;
+      descriptionElement.textContent = this.item.spellDesc;
       fragment.appendChild(descriptionElement);
 
       if (charges > 1) {
