@@ -54,8 +54,8 @@ export class DetailViewHandler {
         name: entity.name(),
         description: entity.description(),
         level: entity.level,
-        charges: entity.charges,
-        spell: entity.spell,
+        charges: entity.spellCasting.charges,
+        spell: entity.spellCasting.spell,
       };
     } else if (
       'name' in entity &&

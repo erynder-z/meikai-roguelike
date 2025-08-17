@@ -349,9 +349,9 @@
       "category": ["Consumable"],
       "slot": "NotWorn",
       "initialization": {
-        "spell": "Random",
+        "spell": "DecreaseThirst",
         "charges": {
-          "base": 1
+          "base": 3
         }
       },
       "help": {
@@ -370,12 +370,6 @@
       "description": "Prepared food in a can.",
       "category": ["Consumable"],
       "slot": "NotWorn",
-      "initialization": {
-        "spell": "Random",
-        "charges": {
-          "base": 1
-        }
-      },
       "help": {
         "show": true,
         "about": "Prepared food in a can. Not exactly tasty, but better than going hungry."

@@ -29,7 +29,7 @@ export class FindObjectSpell {
    * @return True if the ItemObject is usable, false otherwise.
    */
   private isUsable(obj: ItemObject, game: GameState): boolean {
-    const canUse = obj.spell != Spell.None;
+    const canUse = obj.spellCasting.spell != Spell.None;
 
     if (!canUse) {
       const msg = new LogMessage(
@@ -54,9 +54,9 @@ export class FindObjectSpell {
     if (!this.isUsable(obj, game)) return null;
 
     const finder = new SpellFinder(game, this.stack, this.make);
-    const amount = obj.effectMagnitude || 1;
+    const amount = obj.spellCasting.effectMagnitude || 1;
     const cost = new MultipleUseItemCost(game, obj, this.index);
 
-    return finder.find(obj.spell, amount, cost);
+    return finder.find(obj.spellCasting.spell, amount, cost);
   }
 }

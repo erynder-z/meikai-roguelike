@@ -189,7 +189,7 @@ export class ItemObjectManager {
    */
   private static setItemSpell(object: ItemObject, rand: RandomGenerator): void {
     const l = rand.adjustLevel(object.level);
-    object.spell = this.spellForLevel(l);
+    object.spellCasting.spell = this.spellForLevel(l);
   }
 
   /**
@@ -210,7 +210,7 @@ export class ItemObjectManager {
    * @param spell - The specific spell to set.
    */
   private static setSpecificSpell(object: ItemObject, spell: Spell): void {
-    object.spell = spell;
+    object.spellCasting.spell = spell;
   }
 
   /**
@@ -227,7 +227,7 @@ export class ItemObjectManager {
     rand: RandomGenerator,
     level: number,
   ): void {
-    object.charges = rand.randomIntegerExclusive(charges, level);
+    object.spellCasting.charges = rand.randomIntegerExclusive(charges, level);
   }
   /**
    * Retrieves a template object type based on its index.

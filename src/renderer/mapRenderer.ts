@@ -178,8 +178,8 @@ export class MapRenderer {
       };
     } else {
       let fg = glyphInfo.fgCol;
-      if (!cell.mob && cell.obj && cell.obj.spell !== Spell.None) {
-        fg = SpellColors.c[cell.obj.spell][0];
+      if (!cell.mob && cell.obj && cell.obj.spellCasting.spell !== Spell.None) {
+        fg = SpellColors.c[cell.obj.spellCasting.spell][0];
       }
       resultColors = { fg, bg: envOnlyGlyphInfo.bgCol };
     }
@@ -407,8 +407,8 @@ export class MapRenderer {
         return ManipulateColors.darkenColor(envColor, 0.2);
       }
       // If the cell has an object with a spell, return the spell color
-      /*   if (!cell.mob && cell.obj && cell.obj.spell !== Spell.None)
-        return SpellColors.c[cell.obj.spell][0]; */
+      /*   if (!cell.mob && cell.obj && cell.obj.spellCasting.spell !== Spell.None)
+        return SpellColors.c[cell.obj.spellCasting.spell][0]; */
 
       // If the mob in the cell is bloody, tint the foreground color with a red tone
       if (cell.mob?.bloody.isBloody) {

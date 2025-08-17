@@ -21,15 +21,15 @@ export class MultipleUseItemCost implements Cost {
   public pay(): boolean {
     const { obj } = this;
 
-    if (obj.charges <= 0) {
+    if (obj.spellCasting.charges <= 0) {
       const msg = new LogMessage(
         `${obj.description()} is out of charges!`,
         EventCategory.unable,
       );
       this.game.message(msg);
     } else {
-      --obj.charges;
-      if (obj.charges > 0) return true;
+      --obj.spellCasting.charges;
+      if (obj.spellCasting.charges > 0) return true;
       const msg = new LogMessage(
         `${obj.description()} is out of charges!`,
         EventCategory.use,

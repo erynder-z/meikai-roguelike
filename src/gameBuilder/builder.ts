@@ -499,15 +499,11 @@ export class Builder implements Build {
     map.cell(p).env = Glyph.Regular_Floor;
 
     p = new WorldPoint(a.x, a.y + 1);
-    map.addObject(
-      new ItemObject(
-        Glyph.Dynamite,
-        Slot.NotWorn,
-        [ObjCategory.Consumable],
-        Spell.Burn,
-      ),
-      p,
-    );
+    const dynamite = new ItemObject(Glyph.Dynamite, Slot.NotWorn, [
+      ObjCategory.Consumable,
+    ]);
+    dynamite.spellCasting.spell = Spell.Burn;
+    map.addObject(dynamite, p);
     map.cell(p).env = Glyph.Regular_Floor;
   }
 
@@ -521,40 +517,35 @@ export class Builder implements Build {
       new ItemObject(Glyph.Pickaxe, Slot.MainHand, [ObjCategory.MeleeWeapon]),
     );
 
-    inv.add(
-      new ItemObject(
-        Glyph.FirstAidKit,
-        Slot.NotWorn,
-        [ObjCategory.Consumable, ObjCategory.Special],
-        Spell.Heal,
-      ),
-    );
+    const firstAidKit = new ItemObject(Glyph.FirstAidKit, Slot.NotWorn, [
+      ObjCategory.Consumable,
+      ObjCategory.Special,
+    ]);
+    firstAidKit.spellCasting.spell = Spell.Heal;
+    inv.add(firstAidKit);
 
-    const dynamite = new ItemObject(
-      Glyph.Dynamite,
-      Slot.NotWorn,
-      [ObjCategory.Consumable, ObjCategory.Special],
-      Spell.Burn,
-    );
-    dynamite.charges = 2;
+    const dynamite = new ItemObject(Glyph.Dynamite, Slot.NotWorn, [
+      ObjCategory.Consumable,
+      ObjCategory.Special,
+    ]);
+    dynamite.spellCasting.spell = Spell.Burn;
+    dynamite.spellCasting.charges = 2;
     inv.add(dynamite);
 
-    const flareGun = new ItemObject(
-      Glyph.FlareGun,
-      Slot.NotWorn,
-      [ObjCategory.RangedWeapon, ObjCategory.Special],
-      Spell.Burn,
-    );
-    flareGun.charges = 1;
+    const flareGun = new ItemObject(Glyph.FlareGun, Slot.NotWorn, [
+      ObjCategory.RangedWeapon,
+      ObjCategory.Special,
+    ]);
+    flareGun.spellCasting.spell = Spell.Burn;
+    flareGun.spellCasting.charges = 1;
     inv.add(flareGun);
 
-    const revolver = new ItemObject(
-      Glyph.Revolver,
-      Slot.NotWorn,
-      [ObjCategory.RangedWeapon, ObjCategory.Special],
-      Spell.Bullet,
-    );
-    revolver.charges = 10;
+    const revolver = new ItemObject(Glyph.Revolver, Slot.NotWorn, [
+      ObjCategory.RangedWeapon,
+      ObjCategory.Special,
+    ]);
+    revolver.spellCasting.spell = Spell.Bullet;
+    revolver.spellCasting.charges = 10;
     inv.add(revolver);
 
     const strongPickaxe = new ItemObject(Glyph.Pickaxe, Slot.MainHand, [
@@ -567,29 +558,24 @@ export class Builder implements Build {
       Glyph.Revolver,
       Slot.NotWorn,
       [ObjCategory.RangedWeapon, ObjCategory.Special],
-      Spell.Bullet,
+      50, // level
     );
-    strongRevolver.level = 50;
-    strongRevolver.charges = 10;
+    strongRevolver.spellCasting.spell = Spell.Bullet;
+    strongRevolver.spellCasting.charges = 10;
     inv.add(strongRevolver);
 
-    const ration = new ItemObject(
-      Glyph.Ration,
-      Slot.NotWorn,
-      [ObjCategory.Consumable],
-      Spell.DecreaseHunger,
-    );
-
-    ration.effectMagnitude = 0.25;
+    const ration = new ItemObject(Glyph.Ration, Slot.NotWorn, [
+      ObjCategory.Consumable,
+    ]);
+    ration.spellCasting.spell = Spell.DecreaseHunger;
+    ration.spellCasting.effectMagnitude = 0.25;
     inv.add(ration);
 
-    const waterBottle = new ItemObject(
-      Glyph.Water_Bottle,
-      Slot.NotWorn,
-      [ObjCategory.Consumable],
-      Spell.DecreaseThirst,
-    );
-    waterBottle.effectMagnitude = 0.25;
+    const waterBottle = new ItemObject(Glyph.Water_Bottle, Slot.NotWorn, [
+      ObjCategory.Consumable,
+    ]);
+    waterBottle.spellCasting.spell = Spell.DecreaseThirst;
+    waterBottle.spellCasting.effectMagnitude = 0.25;
     inv.add(waterBottle);
 
     for (let index = 0; index < 10; index++) {
@@ -597,11 +583,9 @@ export class Builder implements Build {
         Glyph.ToughLeather,
         Slot.NotWorn,
         [ObjCategory.Misc],
-        Spell.None,
-        1,
-        'some leather',
         1,
       );
+      leather.spellCasting.description = 'some leather';
 
       inv.add(leather);
     }
@@ -611,11 +595,9 @@ export class Builder implements Build {
         Glyph.BioluminescentFungus,
         Slot.NotWorn,
         [ObjCategory.Misc],
-        Spell.None,
-        1,
-        'some bioluminescent fungus',
         1,
       );
+      fungus.spellCasting.description = 'some bioluminescent fungus';
 
       inv.add(fungus);
     }
@@ -625,11 +607,10 @@ export class Builder implements Build {
         Glyph.Laudanum,
         Slot.NotWorn,
         [ObjCategory.Consumable],
-        Spell.Heal,
-        1,
-        'some laudanum',
         1,
       );
+      laudanum.spellCasting.spell = Spell.Heal;
+      laudanum.spellCasting.description = 'some laudanum';
 
       inv.add(laudanum);
     }

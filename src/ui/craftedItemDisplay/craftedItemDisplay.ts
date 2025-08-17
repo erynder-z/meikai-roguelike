@@ -128,7 +128,7 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
       const glyphInfo = GlyphMap.getGlyphInfo(this.item.glyph);
       const glyphChar = glyphInfo.char;
       const glyphColor = glyphInfo.fgCol;
-      const charges = this.item.charges;
+      const charges = this.item.spellCasting.charges;
 
       const glyphElement = document.createElement('li');
       glyphElement.classList.add('glyph');
@@ -142,7 +142,7 @@ export class CraftedItemDisplay extends PopInFadeOutElement {
       fragment.appendChild(nameElement);
 
       const descriptionElement = document.createElement('li');
-      descriptionElement.textContent = this.item.spellDesc;
+      descriptionElement.textContent = this.item.spellCasting.description;
       fragment.appendChild(descriptionElement);
 
       if (charges > 1) {
