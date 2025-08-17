@@ -23,7 +23,7 @@ export class StatsScreenDisplay extends FadeInOutElement {
       <style>
         :host {
           --outer-margin: 6rem;
-          --minimal-width: 33%;
+          --minimal-width: 70ch;
           --maximal-width: 100%;
         }
 
@@ -41,12 +41,23 @@ export class StatsScreenDisplay extends FadeInOutElement {
         }
 
         .stats-screen-display {
-          background: var(--popupBackground);
-          position: absolute;
+          backdrop-filter: brightness(50%);
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 100%;
+          width: 100%;
+        }
+
+        .menu-card {
+          background: var(--statsScreenBackground);
+          position: relative;
           top: 1rem;
           left: 1rem;
-          padding: 2rem;
+          padding: 2rem 4rem;
           border-radius: 1rem;
+          outline: 0.1rem solid var(--outline);
           display: flex;
           height: calc(var(--maximal-width) - var(--outer-margin));
           width: calc(var(--minimal-width) - var(--outer-margin));
@@ -66,7 +77,7 @@ export class StatsScreenDisplay extends FadeInOutElement {
         }
 
         .stats {
-          padding: 0 2rem;
+          padding: 0;
         }
 
         .buffs-list-heading {
@@ -95,25 +106,27 @@ export class StatsScreenDisplay extends FadeInOutElement {
         }
       </style>
       <div class="stats-screen-display">
-        <div class="stats-screen-heading">
-          Stats
-        </div>
-        <div class="stats">
-          <div class="player-name">Name: ${this.player?.name}</div>
-          <div class="player-hp">HP: ${this.player?.hp}</div>
-          <div class="stats-list">
-            <div class="armor-class">Armor class: ${this.equipment?.armorClass()}</div>
-            <div class="weapon-damage">Weapon damage: ${this.equipment?.weaponDamage()}</div>
-            <div class="attack-modifier">Attack modifier: ${this.stats?.damageDealModifier}</div>
-            <div class="defense-modifier">Defense modifier: ${this.stats?.damageReceiveModifier}</div>
-            <div class="visibility-range">Visibility: ${this.stats?.currentVisibilityRange}</div>
-            <div class="hunger">Hunger: ${this.stats?.hunger}</div>
-            <div class="thirst">Thirst: ${this.stats?.thirst}</div>
-            <div class="mood">Mood: ${this.stats?.mood}</div>
-            <div class="mob-kills">Kills: ${this.stats?.mobKillCounter}</div>
+        <div class="menu-card">
+          <div class="stats-screen-heading">
+            Stats
           </div>
-          <div class="buffs-list-heading">Buffs:</div>
-          <div class="buffs-list"></div>
+          <div class="stats">
+            <div class="player-name">Name: ${this.player?.name}</div>
+            <div class="player-hp">HP: ${this.player?.hp}</div>
+            <div class="stats-list">
+              <div class="armor-class">Armor class: ${this.equipment?.armorClass()}</div>
+              <div class="weapon-damage">Weapon damage: ${this.equipment?.weaponDamage()}</div>
+              <div class="attack-modifier">Attack modifier: ${this.stats?.damageDealModifier}</div>
+              <div class="defense-modifier">Defense modifier: ${this.stats?.damageReceiveModifier}</div>
+              <div class="visibility-range">Visibility: ${this.stats?.currentVisibilityRange}</div>
+              <div class="hunger">Hunger: ${this.stats?.hunger}</div>
+              <div class="thirst">Thirst: ${this.stats?.thirst}</div>
+              <div class="mood">Mood: ${this.stats?.mood}</div>
+              <div class="mob-kills">Kills: ${this.stats?.mobKillCounter}</div>
+            </div>
+            <div class="buffs-list-heading">Buffs:</div>
+            <div class="buffs-list"></div>
+          </div>
         </div>
       </div>
     `;

@@ -1,14 +1,18 @@
 export type Recipe = {
-    ingredients: string[];
-    result: RecipeResult;
+  ingredients: string[];
+  result: RecipeResult;
 };
 
 export type RecipeResult = {
-    glyph: string;
-    slot: string;
-    category: string[];
+  glyph: string;
+  slot: string;
+  category: string[];
+  level: number;
+  initialization?: {
     spell?: string;
-    level: number;
-    charges: number;
-    effectMagnitude: number | null;
+    charges?: {
+      base: number;
+    };
+    effectMagnitude?: number | null;
+  };
 };

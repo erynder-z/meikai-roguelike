@@ -131,15 +131,17 @@ export type SerializedInventoryData = {
 };
 
 export type SerializedItemData = {
-  charges: number;
-  desc: string;
   glyph: number;
   id: string;
   level: number;
   slot: number;
-  spell: number;
   category: number[];
-  effectMagnitude: number | null;
+  spellCasting: {
+    charges: number;
+    description: string;
+    spell: number;
+    effectMagnitude: number | null;
+  };
 };
 
 export type SerializedEquipmentData = [number, SerializedItemData][];

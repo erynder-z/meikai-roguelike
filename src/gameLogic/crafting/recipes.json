@@ -6,10 +6,14 @@
         "glyph": "Dynamite",
         "slot": "NotWorn",
         "category": ["Consumable"],
-        "spell": "Burn",
         "level": 1,
-        "charges": 1,
-        "effectMagnitude": null
+        "initialization": {
+          "spell": "Burn",
+          "charges": {
+            "base": 1
+          },
+          "effectMagnitude": null
+        }
       }
     },
     {
@@ -18,10 +22,14 @@
         "glyph": "FirstAidKit",
         "slot": "NotWorn",
         "category": ["Consumable"],
-        "spell": "Heal",
         "level": 1,
-        "charges": 1,
-        "effectMagnitude": null
+        "initialization": {
+          "spell": "Heal",
+          "charges": {
+            "base": 1
+          },
+          "effectMagnitude": null
+        }
       }
     },
     {
@@ -31,8 +39,12 @@
         "slot": "MainHand",
         "category": ["MeleeWeapon"],
         "level": 1,
-        "charges": 0,
-        "effectMagnitude": null
+        "initialization": {
+          "charges": {
+            "base": 0
+          },
+          "effectMagnitude": null
+        }
       }
     },
     {
@@ -41,10 +53,14 @@
         "glyph": "Rune",
         "slot": "NotWorn",
         "category": ["SpellItem"],
-        "spell": "Heal",
         "level": 1,
-        "charges": 1,
-        "effectMagnitude": null
+        "initialization": {
+          "spell": "Heal",
+          "charges": {
+            "base": 1
+          },
+          "effectMagnitude": null
+        }
       }
     }
   ]

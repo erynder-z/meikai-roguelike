@@ -19,6 +19,17 @@
     "--heading": "#fff9a0",
     "--textBad": "#ff0000",
     "--textGood": "#00ff00",
-    "--selected": "#ff1dce"
+    "--selected": "#ff1dce",
+    "--outline": "rgba(255, 255, 255, 0.1)",
+    "--craftingScreenBackground": "rgba(8, 45, 60, 0.9)",
+    "--inventoryScreenBackground": "rgba(10, 60, 20, 0.9)",
+    "--equipmentScreenBackground": "rgba(45, 10, 60, 0.9)",
+    "--spellScreenBackground": "rgba(60, 10, 45, 0.9)",
+    "--statsScreenBackground": "rgba(60, 20, 10, 0.9)",
+    "--logScreenBackground": "rgba(30, 30, 30, 0.9)",
+    "--commandDirectionScreenBackground": "rgba(60, 50, 10, 0.9)",
+    "--itemScreenBackground": "rgba(65, 25, 15, 0.9)",
+    "--entityInfoCardBackground": "rgba(35, 32, 32, 0.9)",
+    "--craftedItemBackground": "rgba(65, 55, 15, 0.9)"
   }
 }

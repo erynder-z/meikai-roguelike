@@ -17,7 +17,7 @@ export class InventoryScreenDisplay extends FadeInOutElement {
       <style>
        :host {
            --outer-margin: 6rem;
-           --minimal-width: 33%;
+           --minimal-width: 70ch;
            --maximal-width: 100%;
          }
 
@@ -35,12 +35,23 @@ export class InventoryScreenDisplay extends FadeInOutElement {
         }
 
         .inventory-screen-display {
-          background: var(--popupBackground);
-          position: absolute;
+          backdrop-filter: brightness(50%);
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 100%;
+          width: 100%;
+        }
+
+        .menu-card {
+          background: var(--inventoryScreenBackground);
+          position: relative;
           top: 1rem;
           left: 1rem;
-          padding: 2rem;
+          padding: 2rem 4rem;
           border-radius: 1rem;
+          outline: 0.1rem solid var(--outline);
           display: flex;
           height: calc(var(--maximal-width) - var(--outer-margin));
           width: calc(var(--minimal-width) - var(--outer-margin));
@@ -66,7 +77,7 @@ export class InventoryScreenDisplay extends FadeInOutElement {
         }
 
         .inventory-list ul {
-          padding: 0 2rem;
+          padding: 0;
           width: 100%;
         }
 
@@ -76,11 +87,13 @@ export class InventoryScreenDisplay extends FadeInOutElement {
       </style>
 
       <div class="inventory-screen-display">
-        <div class="inventory-heading">
-          Inventory
-        </div>
+        <div class="menu-card">
+          <div class="inventory-heading">
+            Inventory
+          </div>
 
-        <div class="inventory-list"></div>
+          <div class="inventory-list"></div>
+        </div>
       </div>
     `;
 

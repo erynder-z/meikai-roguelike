@@ -15,16 +15,28 @@ export class CommandDirectionScreenDisplay extends FadeInOutElement {
         <style>
           :host {
             --outer-margin: 6rem;
-            --minimal-width: 33%;
+            --minimal-width: 70ch;
             --maximal-width: 100%;
-        }
+          }
+
           .command-direction-screen-display {
-            background: var(--popupBackground);
-            position: absolute;
+            backdrop-filter: brightness(50%);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 100%;
+            width: 100%;
+          }
+
+          .menu-card {
+            background: var(--commandDirectionScreenBackground);
+            position: relative;
             top: 1rem;
             left: 1rem;
-            padding: 2rem;
+            padding: 2rem 4rem;
             border-radius: 1rem;
+            outline: 0.1rem solid var(--outline);
             display: flex;
             height: calc(var(--maximal-width) - var(--outer-margin));
             width: calc(var(--minimal-width) - var(--outer-margin));
@@ -32,7 +44,10 @@ export class CommandDirectionScreenDisplay extends FadeInOutElement {
             align-items: center;
             justify-content: center;
             color: var(--white);
+            overflow-y: auto;
+            overflow-x: hidden;
           }
+
           .title {
             font-size: 1.5rem;
             margin-bottom: 1rem;
@@ -49,9 +64,12 @@ export class CommandDirectionScreenDisplay extends FadeInOutElement {
             border-radius: 0.25rem;
           }
         </style>
+        
         <div class="command-direction-screen-display">
-          <div class="title"></div>
-          <div class="directions-table"></div>
+          <div class="menu-card">
+            <div class="title"></div>
+            <div class="directions-table"></div>
+          </div>
         </div>
       `;
     shadowRoot.appendChild(template.content.cloneNode(true));

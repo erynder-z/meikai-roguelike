@@ -27,6 +27,12 @@
       "description": "A reliable six-shooter, perfect for fending off subterranean threats.",
       "category": ["RangedWeapon"],
       "slot": "MainHand",
+      "initialization": {
+        "spell": "Bullet",
+        "charges": {
+          "base": 10
+        }
+      },
       "help": {
         "show": true,
         "about": "A reliable six-shooter, perfect for fending off subterranean threats."
@@ -106,6 +112,9 @@
       "name": "Laudanum",
       "description": "A tincture of opium, useful for dulling pain and steadying nerves.",
       "category": ["Consumable"],
+      "initialization": {
+        "spell": "Heal"
+      },
       "help": {
         "show": true,
         "about": "A tincture of opium, useful for dulling pain and steadying nerves."
@@ -282,6 +291,12 @@
       "description": "A compact kit containing bandages, antiseptics, and other medical supplies.",
       "category": ["Consumable"],
       "slot": "NotWorn",
+      "initialization": {
+        "spell": "Heal",
+        "charges": {
+          "base": 3
+        }
+      },
       "help": {
         "show": true,
         "about": "A compact kit containing bandages, antiseptics, and other medical supplies."
@@ -298,6 +313,9 @@
       "description": "A scroll that can cast magic.",
       "category": ["SpellItem"],
       "slot": "NotWorn",
+      "initialization": {
+        "spell": "Random"
+      },
       "help": { "show": true, "about": "A scroll that can cast magic." }
     },
     {
@@ -311,6 +329,12 @@
       "description": "A rune that can cast magic.",
       "category": ["SpellItem"],
       "slot": "NotWorn",
+      "initialization": {
+        "spell": "Random",
+        "charges": {
+          "base": 1
+        }
+      },
       "help": { "show": true, "about": "A rune that can cast magic." }
     },
     {
@@ -324,6 +348,12 @@
       "description": "Bottled water.",
       "category": ["Consumable"],
       "slot": "NotWorn",
+      "initialization": {
+        "spell": "DecreaseThirst",
+        "charges": {
+          "base": 3
+        }
+      },
       "help": {
         "show": true,
         "about": "Water in a bottle. Tasteless, but refreshing."

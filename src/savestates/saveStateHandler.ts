@@ -472,14 +472,15 @@ export class SaveStateHandler {
       serializedItem.glyph,
       serializedItem.slot,
       serializedItem.category.map(cat => cat),
-      serializedItem.spell,
       serializedItem.level,
-      serializedItem.desc,
-      serializedItem.charges,
-      serializedItem.effectMagnitude,
     );
 
     item.id = serializedItem.id;
+    item.spellCasting.spell = serializedItem.spellCasting.spell;
+    item.spellCasting.charges = serializedItem.spellCasting.charges;
+    item.spellCasting.description = serializedItem.spellCasting.description;
+    item.spellCasting.effectMagnitude =
+      serializedItem.spellCasting.effectMagnitude;
 
     return item;
   }
@@ -614,18 +615,20 @@ export class SaveStateHandler {
     const inv = <Inventory>game.inventory;
     const items = saveState.serializedInventory.data?.items;
     if (items) {
-      for (const item of items) {
-        inv.add(
-          new ItemObject(
-            item.glyph,
-            item.slot,
-            item.category,
-            item.spell,
-            item.level,
-            item.desc,
-            item.charges,
-          ),
+      for (const serializedItem of items) {
+        const item = new ItemObject(
+          serializedItem.glyph,
+          serializedItem.slot,
+          serializedItem.category,
+          serializedItem.level,
         );
+        item.spellCasting.spell = serializedItem.spellCasting.spell;
+        item.spellCasting.charges = serializedItem.spellCasting.charges;
+        item.spellCasting.description =
+          serializedItem.spellCasting.description;
+        item.spellCasting.effectMagnitude =
+          serializedItem.spellCasting.effectMagnitude;
+        inv.add(item);
       }
     }
     return game;
@@ -646,15 +649,19 @@ export class SaveStateHandler {
 
     if (items) {
       for (const item of items) {
+        const serializedItem = item[1];
         const itm = new ItemObject(
-          item[1].glyph,
-          item[1].slot,
-          item[1].category,
-          item[1].spell,
-          item[1].level,
-          item[1].desc,
-          item[1].charges,
+          serializedItem.glyph,
+          serializedItem.slot,
+          serializedItem.category,
+          serializedItem.level,
         );
+        itm.spellCasting.spell = serializedItem.spellCasting.spell;
+        itm.spellCasting.charges = serializedItem.spellCasting.charges;
+        itm.spellCasting.description =
+          serializedItem.spellCasting.description;
+        itm.spellCasting.effectMagnitude =
+          serializedItem.spellCasting.effectMagnitude;
         new EquipCommand(itm, item[0] as number, game).execute();
       }
     }

@@ -93,21 +93,23 @@ export class CraftingHandler {
   }
 
   /**
-   * Creates a new ItemObject based on the given RecipeResult data.
+   * Handles a recipe match by creating a new ItemObject based on the recipe result.
+   *
    * @param resultData - The recipe result data.
-   * @returns A new ItemObject if the recipe result data is valid, or null if it is invalid.
-   * @throws If the recipe result data is invalid.
+   * @returns The new ItemObject or null if an error occurred during item creation.
    */
   private handleMatchingRecipe(resultData: RecipeResult): ItemObject | null {
     const {
       glyph: glyphName,
       slot: slotName,
       category: categoryNames,
-      spell: spellName,
       level,
-      charges,
-      effectMagnitude,
+      initialization,
     } = resultData;
+
+    const spellName = initialization?.spell;
+    const charges = initialization?.charges?.base;
+    const effectMagnitude = initialization?.effectMagnitude;
 
     const glyph = Glyph[glyphName as keyof typeof Glyph];
     if (glyph === undefined) {
@@ -139,16 +141,15 @@ export class CraftingHandler {
 
     const desc = GlyphMap.getGlyphDescription(glyph);
 
-    return new ItemObject(
-      glyph,
-      slot,
-      categories,
-      spell,
-      level,
-      desc,
-      charges,
-      effectMagnitude,
-    );
+    const item = new ItemObject(glyph, slot, categories, level);
+    item.spellCasting.spell = spell;
+    item.spellCasting.description = desc;
+    if (charges != null) item.spellCasting.charges = charges;
+
+    if (effectMagnitude != null)
+      item.spellCasting.effectMagnitude = effectMagnitude;
+
+    return item;
   }
 
   /**
@@ -159,15 +160,16 @@ export class CraftingHandler {
   private createJunkItem(): ItemObject {
     const desc = GlyphMap.getGlyphDescription(Glyph.Junk);
 
-    return new ItemObject(
+    const item = new ItemObject(
       Glyph.Junk,
       Slot.NotWorn,
       [ObjCategory.Misc],
-      Spell.None,
       0,
-      desc,
-      0,
-      null,
     );
+    item.spellCasting.spell = Spell.None;
+    item.spellCasting.description = desc;
+    item.spellCasting.charges = 0;
+    item.spellCasting.effectMagnitude = null;
+    return item;
   }
 }

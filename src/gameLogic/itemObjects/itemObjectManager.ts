@@ -25,6 +25,7 @@ export class ItemObjectManager {
     category: item.category.map(
       (c: string) => ObjCategory[c as keyof typeof ObjCategory],
     ),
+    initialization: item.initialization,
   }));
 
   private static highestSpellTier: number = Spell.None;
@@ -94,7 +95,7 @@ export class ItemObjectManager {
     level: number,
     rand: RandomGenerator,
   ): ItemObject {
-    return this.rareRunes(rand, level);
+    return this.createRandomItem(rand, level);
   }
 
   /**
@@ -112,13 +113,16 @@ export class ItemObjectManager {
   }
 
   /**
-   * Generates a rare rune item object with a specified level.
+   * Generates a random item, with special handling for rare runes.
    *
    * @param rand - The random number generator used for randomness.
    * @param level - The level of the item object.
-   * @return The generated rare rune item object.
+   * @return The generated random item object.
    */
-  private static rareRunes(rand: RandomGenerator, level: number): ItemObject {
+  private static createRandomItem(
+    rand: RandomGenerator,
+    level: number,
+  ): ItemObject {
     const maxAttempts = 1000;
     let attempts = 0;
 
@@ -159,29 +163,19 @@ export class ItemObjectManager {
     );
     object.level = objectLevel;
 
-    switch (object.glyph) {
-      case Glyph.Laudanum:
-        this.setSpecificSpell(object, Spell.Heal);
-        break;
-      case Glyph.Rune:
-        this.setItemSpell(object, rand);
-        this.setCharges(object, 1, rand, level);
-        break;
-      case Glyph.Scroll:
-        this.setItemSpell(object, rand);
-        break;
-      case Glyph.Revolver:
-        this.setSpecificSpell(object, Spell.Bullet);
-        object.charges = rand.randomIntegerExclusive(10, level);
-        break;
-      case Glyph.Ration:
-        this.setItemSpell(object, rand);
-        this.setCharges(object, 1, rand, level);
-        break;
-      case Glyph.Water_Bottle:
-        this.setItemSpell(object, rand);
-        this.setCharges(object, 1, rand, level);
-        break;
+    if (template.initialization) {
+      const init = template.initialization;
+
+      if (init.spell) {
+        if (init.spell === 'Random') {
+          this.setItemSpell(object, rand);
+        } else {
+          const spell = Spell[init.spell as keyof typeof Spell];
+          if (spell != null) this.setSpecificSpell(object, spell);
+        }
+      }
+
+      if (init.charges) this.setCharges(object, init.charges.base, rand, level);
     }
 
     return object;
@@ -195,7 +189,7 @@ export class ItemObjectManager {
    */
   private static setItemSpell(object: ItemObject, rand: RandomGenerator): void {
     const l = rand.adjustLevel(object.level);
-    object.spell = this.spellForLevel(l);
+    object.spellCasting.spell = this.spellForLevel(l);
   }
 
   /**
@@ -216,7 +210,7 @@ export class ItemObjectManager {
    * @param spell - The specific spell to set.
    */
   private static setSpecificSpell(object: ItemObject, spell: Spell): void {
-    object.spell = spell;
+    object.spellCasting.spell = spell;
   }
 
   /**
@@ -233,7 +227,7 @@ export class ItemObjectManager {
     rand: RandomGenerator,
     level: number,
   ): void {
-    object.charges = rand.randomIntegerExclusive(charges, level);
+    object.spellCasting.charges = rand.randomIntegerExclusive(charges, level);
   }
   /**
    * Retrieves a template object type based on its index.

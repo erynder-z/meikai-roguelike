@@ -17,24 +17,36 @@ export class EntityInfoCard extends FadeInOutElement {
       <style>
         :host {
           --outer-margin: 6rem;
-          --minimal-width: 33%;
+          --minimal-width: 70ch;
           --maximal-width: 100%;
         }
 
         .entity-card {
-          background: var(--popupBackground);
-          position: absolute;
+          background: var(--entityInfoCardBackground);
+          position: fixed;
           top: 1rem;
           left: 1rem;
-          padding: 2rem;
+          padding: 2rem 4rem;
           border-radius: 1rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
           height: calc(var(--maximal-width) - var(--outer-margin));
           width: calc(var(--minimal-width) - var(--outer-margin));
-          color: var(--white); 
+          color: var(--white);
+        }
+
+        .entity-heading {
+          color: var(--heading);
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-align: center;
+          letter-spacing: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .details {
+          min-width: 100%;
         }
 
         .mob-title,
@@ -50,7 +62,7 @@ export class EntityInfoCard extends FadeInOutElement {
         .corpse-glyph,
         .item-glyph,
         .env-glyph {
-          margin: 0.5rem auto 1rem auto;
+          margin: 1rem 0;
           font-size: 2.5rem;
           display: flex;
           justify-content: center;
@@ -84,12 +96,15 @@ export class EntityInfoCard extends FadeInOutElement {
         .orange-hp {
           color: orange;
         }
-        
+
         .yellow-hp {
           color: yellow;
         }
       </style>
-      <div class="entity-card"></div>
+      <div class="entity-card">
+        <div class="entity-heading">Entity Info</div>
+          <div class="details"></div>
+      </div>
     `;
 
     shadowRoot?.appendChild(templateElement.content.cloneNode(true));
@@ -103,7 +118,7 @@ export class EntityInfoCard extends FadeInOutElement {
    * @param entity - The entity to fill the card with.
    */
   public fillCardDetails(entity: DetailViewEntity): void {
-    const entityCard = this.shadowRoot?.querySelector('.entity-card');
+    const entityCard = this.shadowRoot?.querySelector('.details');
     if (!entityCard) return;
 
     entityCard.innerHTML = '';
@@ -112,7 +127,7 @@ export class EntityInfoCard extends FadeInOutElement {
     const glyphInfo = GlyphMap.getGlyphInfo(entity.glyph);
     const glyphChar = glyphInfo.char;
     const glyphColor = glyphInfo.fgCol;
-    const description = entity.description;
+    const description = glyphInfo.description;
     const level = entity.level;
     const hp = entity.hp || 0;
     const maxHp = entity.maxHp || 0;

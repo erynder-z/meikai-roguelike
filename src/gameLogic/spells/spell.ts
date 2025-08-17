@@ -25,11 +25,13 @@ export enum Spell {
   Bleed, // Tier 22
   Levitate, // Tier 23
   Disarm, // Tier 24
-  None, // Tier 25
 
   // Utility spells for hunger and thirst
   DecreaseHunger,
   DecreaseThirst,
+
+  // Other
+  None, // Tier 25
 }
 
 export const PICKABLE_SPELLS: readonly Spell[] = [
