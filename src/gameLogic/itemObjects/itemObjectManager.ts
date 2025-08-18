@@ -25,6 +25,7 @@ export class ItemObjectManager {
     category: item.category.map(
       (c: string) => ObjCategory[c as keyof typeof ObjCategory],
     ),
+    weight: item.weight,
     initialization: item.initialization,
   }));
 
@@ -160,8 +161,9 @@ export class ItemObjectManager {
       template.glyph,
       template.slot,
       template.category,
+      objectLevel,
+      template.weight,
     );
-    object.level = objectLevel;
 
     if (template.initialization) {
       const init = template.initialization;

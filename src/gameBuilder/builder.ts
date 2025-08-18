@@ -522,6 +522,7 @@ export class Builder implements Build {
       ObjCategory.Special,
     ]);
     firstAidKit.spellCasting.spell = Spell.Heal;
+    firstAidKit.weight = 1;
     inv.add(firstAidKit);
 
     const dynamite = new ItemObject(Glyph.Dynamite, Slot.NotWorn, [
@@ -530,6 +531,7 @@ export class Builder implements Build {
     ]);
     dynamite.spellCasting.spell = Spell.Burn;
     dynamite.spellCasting.charges = 2;
+    dynamite.weight = 1;
     inv.add(dynamite);
 
     const flareGun = new ItemObject(Glyph.FlareGun, Slot.NotWorn, [
@@ -538,6 +540,7 @@ export class Builder implements Build {
     ]);
     flareGun.spellCasting.spell = Spell.Burn;
     flareGun.spellCasting.charges = 1;
+    flareGun.weight = 1;
     inv.add(flareGun);
 
     const revolver = new ItemObject(Glyph.Revolver, Slot.NotWorn, [
@@ -546,12 +549,14 @@ export class Builder implements Build {
     ]);
     revolver.spellCasting.spell = Spell.Bullet;
     revolver.spellCasting.charges = 10;
+    revolver.weight = 1;
     inv.add(revolver);
 
     const strongPickaxe = new ItemObject(Glyph.Pickaxe, Slot.MainHand, [
       ObjCategory.MeleeWeapon,
     ]);
     strongPickaxe.level = 50;
+    strongPickaxe.weight = 10;
     inv.add(strongPickaxe);
 
     const strongRevolver = new ItemObject(
@@ -562,6 +567,7 @@ export class Builder implements Build {
     );
     strongRevolver.spellCasting.spell = Spell.Bullet;
     strongRevolver.spellCasting.charges = 10;
+    strongRevolver.weight = 10;
     inv.add(strongRevolver);
 
     const ration = new ItemObject(Glyph.Ration, Slot.NotWorn, [
@@ -569,6 +575,7 @@ export class Builder implements Build {
     ]);
     ration.spellCasting.spell = Spell.DecreaseHunger;
     ration.spellCasting.effectMagnitude = 0.25;
+    ration.weight = 1;
     inv.add(ration);
 
     const waterBottle = new ItemObject(Glyph.Water_Bottle, Slot.NotWorn, [
@@ -576,6 +583,7 @@ export class Builder implements Build {
     ]);
     waterBottle.spellCasting.spell = Spell.DecreaseThirst;
     waterBottle.spellCasting.effectMagnitude = 0.25;
+    waterBottle.weight = 1;
     inv.add(waterBottle);
 
     for (let index = 0; index < 10; index++) {
@@ -586,6 +594,7 @@ export class Builder implements Build {
         1,
       );
       leather.spellCasting.description = 'some leather';
+      leather.weight = 0.1;
 
       inv.add(leather);
     }
@@ -598,6 +607,7 @@ export class Builder implements Build {
         1,
       );
       fungus.spellCasting.description = 'some bioluminescent fungus';
+      fungus.weight = 0.1;
 
       inv.add(fungus);
     }
@@ -611,6 +621,7 @@ export class Builder implements Build {
       );
       laudanum.spellCasting.spell = Spell.Heal;
       laudanum.spellCasting.description = 'some laudanum';
+      laudanum.weight = 0.1;
 
       inv.add(laudanum);
     }
