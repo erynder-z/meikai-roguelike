@@ -73,7 +73,10 @@ export class InventoryScreenDisplay extends FadeInOutElement {
         }
 
         .inventory-list {
+          height: 100%;
           width: 100%;
+          overflow-y: auto;
+          overflow-x: hidden;
         }
 
         .inventory-list ul {
@@ -93,6 +96,7 @@ export class InventoryScreenDisplay extends FadeInOutElement {
           </div>
 
           <div class="inventory-list"></div>
+          <div class="items-total-weight"></div>
         </div>
       </div>
     `;
@@ -110,6 +114,7 @@ export class InventoryScreenDisplay extends FadeInOutElement {
   set items(items: ItemObject[]) {
     this.inventoryItems = items;
     this.renderInventoryList();
+    this.renderItemsTotalWeight();
   }
 
   /**
@@ -150,6 +155,31 @@ export class InventoryScreenDisplay extends FadeInOutElement {
 
       itemList.appendChild(fragment);
       inventoryListContainer.appendChild(itemList);
+    }
+  }
+
+  /**
+   * Renders the total weight of the items in the inventory to the UI.
+   *
+   * Gets the element with the class name 'items-total-weight', clears it,
+   * calculates the total weight of the items in the inventoryItems array,
+   * rounds it to two decimal places, and sets the text content of the element
+   * to a string containing the rounded weight.
+   */
+  private renderItemsTotalWeight(): void {
+    const itemsTotalWeightContainer = this.shadowRoot?.querySelector(
+      '.items-total-weight',
+    ) as HTMLElement;
+    if (itemsTotalWeightContainer) {
+      itemsTotalWeightContainer.innerHTML = '';
+      const initialWeight = 0;
+      const weight = this.inventoryItems.reduce(
+        (totalWeight, item) => totalWeight + item.weight,
+        initialWeight,
+      );
+
+      const roundedWeight = weight.toFixed(2);
+      itemsTotalWeightContainer.textContent = `Total weight: ${roundedWeight}`;
     }
   }
 }

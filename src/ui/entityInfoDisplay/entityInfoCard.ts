@@ -129,6 +129,7 @@ export class EntityInfoCard extends FadeInOutElement {
     const glyphColor = glyphInfo.fgCol;
     const description = glyphInfo.description;
     const level = entity.level;
+    const weight = entity.weight ? entity.weight : null;
     const hp = entity.hp || 0;
     const maxHp = entity.maxHp || 0;
     const mobHealthMessage = this.getMobHealthMessage(hp, maxHp);
@@ -163,6 +164,7 @@ export class EntityInfoCard extends FadeInOutElement {
             <div class="item-title">${name}</div>
             <div class="item-glyph" style="color: ${gCol ? gCol : glyphColor}">${glyphChar}</div>
             <div class="item-level">Item level: ${level}</div>
+            <div class="item-weight">Item weight: ${weight}</div>
             ${spell !== 'None' ? `<div class="item-spell">Item spell: ${spell}</div>` : ''}
             ${spell !== 'None' ? `<div class="item-charges">Charges: ${charges}</div>` : ''}
             <div class="item-description">${description}</div>

@@ -4,6 +4,7 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
   private equipmentItems: {
     char: string;
     slot: string;
+    weight: number;
     description: string;
   }[] = [];
 
@@ -101,6 +102,7 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
         <div class="menu-card">
           <div class="equipment-heading">Equipped Items</div>
           <div class="equipment-list"></div>
+          <div class="equipment-total-weight"></div>
         </div>
       </div>
     `;
@@ -115,9 +117,17 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
    *
    * @param items - An array of equipment items to display.
    */
-  set items(items: { char: string; slot: string; description: string }[]) {
+  set items(
+    items: {
+      char: string;
+      slot: string;
+      weight: number;
+      description: string;
+    }[],
+  ) {
     this.equipmentItems = items;
     this.renderEquipmentList();
+    this.renderEquipmentTotalWeight();
   }
 
   /**
@@ -145,6 +155,23 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
 
       itemList.appendChild(fragment);
       equipmentListContainer.appendChild(itemList);
+    }
+  }
+
+  private renderEquipmentTotalWeight(): void {
+    const equipmentTotalWeightContainer = this.shadowRoot?.querySelector(
+      '.equipment-total-weight',
+    ) as HTMLElement;
+    if (equipmentTotalWeightContainer) {
+      equipmentTotalWeightContainer.innerHTML = '';
+      const initialWeight = 0;
+      const weight = this.equipmentItems.reduce(
+        (totalWeight, item) => totalWeight + item.weight,
+        initialWeight,
+      );
+
+      const roundedWeight = weight.toFixed(2);
+      equipmentTotalWeightContainer.textContent = `Total weight: ${roundedWeight}`;
     }
   }
 }

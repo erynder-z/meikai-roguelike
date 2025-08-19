@@ -73,14 +73,21 @@ export class EquipmentScreen extends BaseScreen {
   private getEquipmentData(): {
     char: string;
     slot: string;
+    weight: number;
     description: string;
   }[] {
-    const data: { char: string; slot: string; description: string }[] = [];
+    const data: {
+      char: string;
+      slot: string;
+      weight: number;
+      description: string;
+    }[] = [];
     for (let slot = Slot.MainHand; slot < Slot.Last; ++slot) {
       const item = this.equipment.getItemInSlot(slot);
       data.push({
         char: this.slotToCharacter(slot),
         slot: Slot[slot],
+        weight: item ? item.weight : 0,
         description: item ? item.description() : 'none',
       });
     }

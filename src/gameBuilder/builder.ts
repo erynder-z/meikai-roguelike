@@ -493,7 +493,7 @@ export class Builder implements Build {
     const a = player.pos;
     let p = new WorldPoint(a.x, a.y + 2);
     map.addObject(
-      new ItemObject(Glyph.Lantern, Slot.OffHand, [ObjCategory.Misc]),
+      new ItemObject(Glyph.Lantern, Slot.OffHand, [ObjCategory.Misc], 1, 2),
       p,
     );
     map.cell(p).env = Glyph.Regular_Floor;
@@ -503,6 +503,7 @@ export class Builder implements Build {
       ObjCategory.Consumable,
     ]);
     dynamite.spellCasting.spell = Spell.Burn;
+    dynamite.weight = 1.2;
     map.addObject(dynamite, p);
     map.cell(p).env = Glyph.Regular_Floor;
   }
@@ -513,9 +514,11 @@ export class Builder implements Build {
    * @param inv - The inventory to add the item to.
    */
   private addItemToPlayerInventory(inv: Inventory): void {
-    inv.add(
-      new ItemObject(Glyph.Pickaxe, Slot.MainHand, [ObjCategory.MeleeWeapon]),
-    );
+    const pickaxe = new ItemObject(Glyph.Pickaxe, Slot.MainHand, [
+      ObjCategory.MeleeWeapon,
+    ]);
+    pickaxe.weight = 1;
+    inv.add(pickaxe);
 
     const firstAidKit = new ItemObject(Glyph.FirstAidKit, Slot.NotWorn, [
       ObjCategory.Consumable,
