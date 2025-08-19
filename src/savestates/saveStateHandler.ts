@@ -473,6 +473,7 @@ export class SaveStateHandler {
       serializedItem.slot,
       serializedItem.category.map(cat => cat),
       serializedItem.level,
+      serializedItem.weight,
     );
 
     item.id = serializedItem.id;
@@ -621,6 +622,7 @@ export class SaveStateHandler {
           serializedItem.slot,
           serializedItem.category,
           serializedItem.level,
+          serializedItem.weight,
         );
         item.spellCasting.spell = serializedItem.spellCasting.spell;
         item.spellCasting.charges = serializedItem.spellCasting.charges;
@@ -655,6 +657,7 @@ export class SaveStateHandler {
           serializedItem.slot,
           serializedItem.category,
           serializedItem.level,
+          serializedItem.weight,
         );
         itm.spellCasting.spell = serializedItem.spellCasting.spell;
         itm.spellCasting.charges = serializedItem.spellCasting.charges;

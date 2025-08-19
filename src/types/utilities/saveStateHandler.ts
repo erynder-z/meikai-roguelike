@@ -142,6 +142,7 @@ export type SerializedItemData = {
     spell: number;
     effectMagnitude: number | null;
   };
+  weight: number;
 };
 
 export type SerializedEquipmentData = [number, SerializedItemData][];
