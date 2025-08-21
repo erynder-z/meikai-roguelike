@@ -170,10 +170,11 @@ export class BaseScreen implements StackScreen {
       return;
     }
 
-    if (this.game.needs) {
-      this.game.needs.processPlayerNeeds(this.game, player);
-    }
+    if (this.game.needs) this.game.needs.processPlayerNeeds(this.game, player);
+
     this.handleAutoHeal(player);
+
+    this.game.stats.setMaxCarryWeight();
     this.game.stats.incrementTurnCounter();
   }
 

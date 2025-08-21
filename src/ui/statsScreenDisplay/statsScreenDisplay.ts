@@ -126,6 +126,7 @@ export class StatsScreenDisplay extends FadeInOutElement {
             </div>
             <div class="buffs-list-heading">Buffs:</div>
             <div class="buffs-list"></div>
+            <div class="max-carry-weight">Max carry weight: ${this.stats?.maxCarryWeight}</div>
           </div>
         </div>
       </div>
