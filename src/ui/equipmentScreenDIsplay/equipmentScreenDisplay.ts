@@ -1,12 +1,12 @@
+import {
+  EquipmentDisplayData,
+  EquipmentItemData,
+} from '../../types/ui/equipmentDisplayData';
 import { FadeInOutElement } from '../other/fadeInOutElement';
 
 export class EquipmentScreenDisplay extends FadeInOutElement {
-  private equipmentItems: {
-    char: string;
-    slot: string;
-    weight: number;
-    description: string;
-  }[] = [];
+  private equipmentItems: EquipmentItemData[] = [];
+  private inventoryWeight = 0;
 
   constructor() {
     super();
@@ -97,12 +97,31 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
         .no-item {
           color: var(--grayedOut);
         }
+
+        .equipment-weight {
+          color: var(--white);
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-align: center;
+          letter-spacing: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .inventory-equipment-container {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
       </style>
       <div class="equipment-screen-display">
         <div class="menu-card">
           <div class="equipment-heading">Equipped Items</div>
           <div class="equipment-list"></div>
-          <div class="equipment-total-weight"></div>
+          <div class="equipment-weight"></div>
+            <div class="inventory-equipment-container">
+             <div class="inventory-weight"></div>
+             <div class="total-weight"></div>
+            </div>
         </div>
       </div>
     `;
@@ -113,21 +132,18 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
   }
 
   /**
-   * Sets the equipment items to display.
+   * Updates the equipment screen display with new data.
    *
-   * @param items - An array of equipment items to display.
+   * @param data - An object containing the new equipment data to display.
    */
-  set items(
-    items: {
-      char: string;
-      slot: string;
-      weight: number;
-      description: string;
-    }[],
-  ) {
-    this.equipmentItems = items;
+  public update(data: EquipmentDisplayData): void {
+    this.equipmentItems = data.items;
+    this.inventoryWeight = data.inventoryWeight;
+
     this.renderEquipmentList();
-    this.renderEquipmentTotalWeight();
+    this.renderTotalWeight();
+    this.renderInventoryWeight();
+    this.renderEquipmentWeight();
   }
 
   /**
@@ -158,20 +174,62 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
     }
   }
 
-  private renderEquipmentTotalWeight(): void {
-    const equipmentTotalWeightContainer = this.shadowRoot?.querySelector(
-      '.equipment-total-weight',
+  /**
+   * Renders the total weight of all items in the inventory and equipped.
+   */
+  private renderTotalWeight(): void {
+    const totalWeightContainer = this.shadowRoot?.querySelector(
+      '.total-weight',
     ) as HTMLElement;
-    if (equipmentTotalWeightContainer) {
-      equipmentTotalWeightContainer.innerHTML = '';
-      const initialWeight = 0;
-      const weight = this.equipmentItems.reduce(
-        (totalWeight, item) => totalWeight + item.weight,
-        initialWeight,
-      );
+    if (totalWeightContainer) {
+      totalWeightContainer.innerHTML = '';
 
-      const roundedWeight = weight.toFixed(2);
-      equipmentTotalWeightContainer.textContent = `Total weight: ${roundedWeight}`;
+      const roundedWeight = (
+        this.getEquipmentWeight() + this.inventoryWeight
+      ).toFixed(2);
+
+      totalWeightContainer.textContent = `Total carry weight: ${roundedWeight}`;
     }
+  }
+
+  /**
+   * Renders the total weight of all items in the inventory.
+   */
+  private renderInventoryWeight(): void {
+    const inventoryWeightContainer = this.shadowRoot?.querySelector(
+      '.inventory-weight',
+    ) as HTMLElement;
+    if (inventoryWeightContainer) {
+      inventoryWeightContainer.innerHTML = '';
+      const roundedWeight = this.inventoryWeight.toFixed(2);
+      inventoryWeightContainer.textContent = `Inventory weight: ${roundedWeight}`;
+    }
+  }
+
+  /**
+   * Renders the total weight of all items equipped.
+   */
+  private renderEquipmentWeight(): void {
+    const equippedWeightContainer = this.shadowRoot?.querySelector(
+      '.equipment-weight',
+    ) as HTMLElement;
+    if (equippedWeightContainer) {
+      equippedWeightContainer.innerHTML = '';
+      const roundedWeight = this.getEquipmentWeight().toFixed(2);
+      equippedWeightContainer.textContent = `Equipment weight: ${roundedWeight}`;
+    }
+  }
+
+  /**
+   * Returns the total weight of all items equipped.
+   *
+   * @returns The total weight of all items equipped.
+   */
+  private getEquipmentWeight(): number {
+    const initialWeight = 0;
+    return this.equipmentItems.reduce(
+      (totalWeight, item) => totalWeight + item.weight,
+      initialWeight,
+    );
   }
 }

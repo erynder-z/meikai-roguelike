@@ -2,6 +2,7 @@ import { BaseScreen } from './baseScreen';
 import { Equipment } from '../inventory/equipment';
 import { EquipmentScreenDisplay } from '../../ui/equipmentScreenDIsplay/equipmentScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
+import { Inventory } from '../inventory/inventory';
 import { ItemScreen } from './itemScreen';
 import keys from '../../utilities/commonKeyboardChars.json';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
@@ -17,6 +18,7 @@ export class EquipmentScreen extends BaseScreen {
   constructor(
     public game: GameState,
     public make: ScreenMaker,
+    private inventory: Inventory = <Inventory>game.inventory,
     private equipment: Equipment = <Equipment>game.equipment,
   ) {
     super(game, make);
@@ -59,9 +61,13 @@ export class EquipmentScreen extends BaseScreen {
       ) as EquipmentScreenDisplay;
 
       canvas?.insertAdjacentElement('afterend', this.display);
+    }
 
-      const equipmentData = this.getEquipmentData();
-      this.display.items = equipmentData;
+    if (this.display) {
+      this.display.update({
+        items: this.getEquipmentData(),
+        inventoryWeight: this.inventory.totalWeight(),
+      });
     }
   }
 

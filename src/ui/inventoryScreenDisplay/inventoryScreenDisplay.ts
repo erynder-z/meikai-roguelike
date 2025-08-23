@@ -1,10 +1,12 @@
 import { FadeInOutElement } from '../other/fadeInOutElement';
+import { groupInventory } from '../../utilities/inventoryUtils';
+import { InventoryDisplayData } from '../../types/ui/inventoryDisplayData';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
-import { groupInventory } from '../../utilities/inventoryUtils';
 
 export class InventoryScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];
+  private equippedItemsWeight: number = 0;
 
   constructor() {
     super();
@@ -87,6 +89,21 @@ export class InventoryScreenDisplay extends FadeInOutElement {
         .inventory-list ul li {
           list-style-type: none;
         }
+
+        .inventory-weight {
+          color: var(--white);
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-align: center;
+          letter-spacing: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .inventory-equipment-container {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
       </style>
 
       <div class="inventory-screen-display">
@@ -96,8 +113,12 @@ export class InventoryScreenDisplay extends FadeInOutElement {
           </div>
 
           <div class="inventory-list"></div>
-          <div class="items-total-weight"></div>
-        </div>
+            <div class="inventory-weight"></div>
+            <div class="inventory-equipment-container">
+             <div class="total-weight"></div>
+             <div class="equipment-weight"></div>
+            </div>
+          </div>
       </div>
     `;
 
@@ -107,14 +128,20 @@ export class InventoryScreenDisplay extends FadeInOutElement {
   }
 
   /**
-   * Sets the inventory items to display.
+   * Updates the inventory screen display with new data.
    *
-   * @param items - The inventory items.
+   * @param data - An object containing the new inventory data to display.
+   * @param data.items - An array of ItemObjects to display in the inventory list.
+   * @param data.wornItemsWeight - The total weight of all equipped items.
    */
-  set items(items: ItemObject[]) {
-    this.inventoryItems = items;
+  public update(data: InventoryDisplayData): void {
+    this.inventoryItems = data.items;
+    this.equippedItemsWeight = data.wornItemsWeight;
+
     this.renderInventoryList();
     this.renderItemsTotalWeight();
+    this.renderInventoryWeight();
+    this.renderEquippedWeight();
   }
 
   /**
@@ -159,27 +186,71 @@ export class InventoryScreenDisplay extends FadeInOutElement {
   }
 
   /**
-   * Renders the total weight of the items in the inventory to the UI.
+   * Renders the total weight of all items in the inventory and equipped.
    *
-   * Gets the element with the class name 'items-total-weight', clears it,
-   * calculates the total weight of the items in the inventoryItems array,
-   * rounds it to two decimal places, and sets the text content of the element
-   * to a string containing the rounded weight.
+   * Clears the total weight container, then sets the text content of the
+   * container to "Total weight: <rounded total weight>".
    */
   private renderItemsTotalWeight(): void {
-    const itemsTotalWeightContainer = this.shadowRoot?.querySelector(
-      '.items-total-weight',
+    const totalWeightContainer = this.shadowRoot?.querySelector(
+      '.total-weight',
     ) as HTMLElement;
-    if (itemsTotalWeightContainer) {
-      itemsTotalWeightContainer.innerHTML = '';
-      const initialWeight = 0;
-      const weight = this.inventoryItems.reduce(
-        (totalWeight, item) => totalWeight + item.weight,
-        initialWeight,
-      );
+    if (totalWeightContainer) {
+      totalWeightContainer.innerHTML = '';
 
-      const roundedWeight = weight.toFixed(2);
-      itemsTotalWeightContainer.textContent = `Total weight: ${roundedWeight}`;
+      const roundedWeight = (
+        this.inventoryTotalWeight() + this.equippedItemsWeight
+      ).toFixed(2);
+
+      totalWeightContainer.textContent = `Total carry weight: ${roundedWeight}`;
     }
+  }
+
+  /**
+   * Renders the total weight of all items in the inventory.
+   *
+   * Clears the inventory weight container, then sets the text content of the
+   * container to "Inventory weight: <rounded total weight>".
+   */
+  private renderInventoryWeight(): void {
+    const inventoryWeightContainer = this.shadowRoot?.querySelector(
+      '.inventory-weight',
+    ) as HTMLElement;
+    if (inventoryWeightContainer) {
+      inventoryWeightContainer.innerHTML = '';
+      const roundedWeight = this.inventoryTotalWeight().toFixed(2);
+      inventoryWeightContainer.textContent = `Inventory weight: ${roundedWeight}`;
+    }
+  }
+
+  /**
+   * Renders the total weight of all items equipped.
+   *
+   * Clears the equipped weight container, then sets the text content of the
+   * container to "Equipped weight: <rounded total weight>".
+   */
+  private renderEquippedWeight(): void {
+    const equippedWeightContainer = this.shadowRoot?.querySelector(
+      '.equipment-weight',
+    ) as HTMLElement;
+    if (equippedWeightContainer) {
+      equippedWeightContainer.innerHTML = '';
+      const roundedWeight = this.equippedItemsWeight.toFixed(2);
+      equippedWeightContainer.textContent = `Equipment weight: ${roundedWeight}`;
+    }
+  }
+
+  /**
+   * Returns the total weight of all items in the inventory.
+   *
+   * @returns The total weight of all items in the inventory.
+   */
+  private inventoryTotalWeight(): number {
+    const initialWeight = 0;
+    const weight = this.inventoryItems.reduce(
+      (totalWeight, item) => totalWeight + item.weight,
+      initialWeight,
+    );
+    return weight;
   }
 }
