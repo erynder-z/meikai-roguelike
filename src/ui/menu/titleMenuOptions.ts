@@ -347,6 +347,9 @@ export class TitleMenuOptions extends UnBlurElement {
           <button id="depth-units-button">
             <span class="underline">D</span>epth units
           </button>
+          <button id="weight-units-button">
+            Wei<span class="underline">g</span>ht units
+          </button>
         </div>
         <span class="info-span">Misc</span>
         <div class="info-container">
@@ -384,6 +387,7 @@ export class TitleMenuOptions extends UnBlurElement {
       this.gameConfig.temperature_unit,
     );
     this.buttonManager.updateDepthUnitsButton(this.gameConfig.depth_unit);
+    this.buttonManager.updateWeightUnitsButton(this.gameConfig.weight_unit);
     this.buttonManager.updateShowImagesButton(this.gameConfig.show_images);
     this.buttonManager.updateImageAlignButton(this.gameConfig.image_display);
     this.setupScalingFactorInput();
@@ -417,6 +421,7 @@ export class TitleMenuOptions extends UnBlurElement {
     this.toggleTemperatureUnitChange =
       this.toggleTemperatureUnitChange.bind(this);
     this.toggleDepthUnitChange = this.toggleDepthUnitChange.bind(this);
+    this.toggleWeightUnitChange = this.toggleWeightUnitChange.bind(this);
     this.toggleBloodIntensity = this.toggleBloodIntensity.bind(this);
     this.toggleGlyphShadow = this.toggleGlyphShadow.bind(this);
     this.returnToPreviousScreen = this.returnToPreviousScreen.bind(this);
@@ -522,6 +527,12 @@ export class TitleMenuOptions extends UnBlurElement {
       'depth-units-button',
       'click',
       this.toggleDepthUnitChange,
+    );
+    this.eventTracker.addById(
+      root,
+      'weight-units-button',
+      'click',
+      this.toggleWeightUnitChange,
     );
     this.eventTracker.addById(
       root,
@@ -1069,6 +1080,19 @@ export class TitleMenuOptions extends UnBlurElement {
   }
 
   /**
+   * Toggles the weight units between kilograms and pounds.
+   *
+   * Updates the {@link gameConfig.weight_unit} property, and updates the
+   * weight units button.
+   */
+  private toggleWeightUnitChange(): void {
+    this.gameConfig.weight_unit =
+      this.gameConfig.weight_unit === 'kilograms' ? 'pounds' : 'kilograms';
+
+    this.buttonManager.updateWeightUnitsButton(this.gameConfig.weight_unit);
+  }
+
+  /**
    * Cycles through the blood intensity options (0 = no blood, 1 = light blood, 2 = medium blood, 3 = heavy blood).
    *
    * Updates the {@link gameConfig.blood_intensity} property and the blood intensity button.
@@ -1195,6 +1219,9 @@ export class TitleMenuOptions extends UnBlurElement {
         break;
       case 'D':
         this.toggleDepthUnitChange();
+        break;
+      case 'g':
+        this.toggleWeightUnitChange();
         break;
       case 'B':
         this.toggleBloodIntensity();

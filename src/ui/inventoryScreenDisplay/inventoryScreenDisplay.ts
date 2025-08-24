@@ -99,7 +99,7 @@ export class InventoryScreenDisplay extends FadeInOutElement {
           font-size: 1.5rem;
           font-weight: bold;
           text-align: center;
-          letter-spacing: 0.5rem;
+          letter-spacing: 0.25rem;
           margin-bottom: 1rem;
         }
 
@@ -216,8 +216,8 @@ export class InventoryScreenDisplay extends FadeInOutElement {
         totalWeight >= this.maxCarryWeight
           ? 'red'
           : totalWeight / this.maxCarryWeight > 0.8
-          ? 'yellow'
-          : 'white';
+            ? 'yellow'
+            : 'white';
 
       totalWeightContainer.classList.remove('yellow', 'red');
       totalWeightContainer.classList.add(color);
