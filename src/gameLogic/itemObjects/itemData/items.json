@@ -11,6 +11,7 @@
       "description": "A sturdy pickaxe, essential for breaking through rock and other obstacles.",
       "category": ["MeleeWeapon"],
       "slot": "MainHand",
+      "weight": 3,
       "help": {
         "show": true,
         "about": "A sturdy pickaxe, essential for breaking through rock and other obstacles."
@@ -27,6 +28,7 @@
       "description": "A reliable six-shooter, perfect for fending off subterranean threats.",
       "category": ["RangedWeapon"],
       "slot": "MainHand",
+      "weight": 2,
       "initialization": {
         "spell": "Bullet",
         "charges": {
@@ -49,6 +51,7 @@
       "description": "A lightweight helmet offering protection from falling debris and the occasional dripping stalactite.",
       "category": ["Armor"],
       "slot": "Head",
+      "weight": 1,
       "help": {
         "show": true,
         "about": "A lightweight helmet offering protection from falling debris and the occasional dripping stalactite."
@@ -65,6 +68,7 @@
       "description": "Protective eyewear to shield against dust, spores, and unexpected geothermal vents.",
       "category": ["Armor"],
       "slot": "Head",
+      "weight": 0.5,
       "help": {
         "show": true,
         "about": "Protective eyewear to shield against dust, spores, and unexpected geothermal vents."
@@ -81,6 +85,7 @@
       "description": "A durable coat with numerous pockets, offering protection from the elements.",
       "category": ["Armor"],
       "slot": "Body",
+      "weight": 2,
       "help": {
         "show": true,
         "about": "A durable coat with numerous pockets, offering protection from the elements."
@@ -97,6 +102,7 @@
       "description": "Reinforced boots designed for traversing treacherous underground terrain.",
       "category": ["Armor"],
       "slot": "Feet",
+      "weight": 1.5,
       "help": {
         "show": true,
         "about": "Reinforced boots designed for traversing treacherous underground terrain."
@@ -112,6 +118,7 @@
       "name": "Laudanum",
       "description": "A tincture of opium, useful for dulling pain and steadying nerves.",
       "category": ["Consumable"],
+      "weight": 0.2,
       "initialization": {
         "spell": "Heal"
       },
@@ -131,6 +138,7 @@
       "description": "A stick of dynamite, capable of clearing large obstacles or dealing with groups of creatures.",
       "category": ["Consumable"],
       "slot": "NotWorn",
+      "weight": 0.5,
       "help": {
         "show": true,
         "about": "A stick of dynamite, capable of clearing large obstacles or dealing with groups of creatures."
@@ -147,6 +155,7 @@
       "description": "A brass lantern that casts a steady, reliable light, pushing back the oppressive darkness.",
       "category": ["Misc"],
       "slot": "Offhand",
+      "weight": 2,
       "help": {
         "show": true,
         "about": "A brass lantern that casts a steady, reliable light, pushing back the oppressive darkness."
@@ -163,6 +172,7 @@
       "description": "An intricate pocket watch, its ticking a small comfort in the silent depths.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 0.5,
       "help": {
         "show": true,
         "about": "An intricate pocket watch, its ticking a small comfort in the silent depths."
@@ -179,6 +189,7 @@
       "description": "A ring fashioned from interlocking gears, humming with a faint mechanical energy.",
       "category": ["Armor"],
       "slot": "NotWorn",
+      "weight": 0.1,
       "help": {
         "show": true,
         "about": "A ring fashioned from interlocking gears, humming with a faint mechanical energy."
@@ -195,6 +206,7 @@
       "description": "An elegant walking cane concealing a slender, deadly blade.",
       "category": ["MeleeWeapon"],
       "slot": "MainHand",
+      "weight": 1,
       "help": {
         "show": true,
         "about": "An elegant walking cane concealing a slender, deadly blade."
@@ -211,6 +223,7 @@
       "description": "A marvel of modern engineering, this steam-powered drill can pulverize rock with astonishing speed.",
       "category": ["MeleeWeapon"],
       "slot": "BothHands",
+      "weight": 5,
       "help": {
         "show": true,
         "about": "A marvel of modern engineering, this steam-powered drill can pulverize rock with astonishing speed."
@@ -227,6 +240,7 @@
       "description": "A pneumatic gun that fires a heavy, tethered harpoon.",
       "category": ["RangedWeapon"],
       "slot": "NotWorn",
+      "weight": 4,
       "help": {
         "show": true,
         "about": "A pneumatic gun that fires a heavy, tethered harpoon."
@@ -243,6 +257,7 @@
       "description": "A pistol that fires a bright, burning flare, useful for signaling or temporarily blinding foes.",
       "category": ["RangedWeapon"],
       "slot": "NotWorn",
+      "weight": 1,
       "help": {
         "show": true,
         "about": "A pistol that fires a bright, burning flare, useful for signaling or temporarily blinding foes."
@@ -259,6 +274,7 @@
       "description": "A sturdy helmet with a built-in carbide lamp.",
       "category": ["Armor"],
       "slot": "Head",
+      "weight": 1.5,
       "help": {
         "show": true,
         "about": "A sturdy helmet with a built-in carbide lamp."
@@ -275,6 +291,7 @@
       "description": "A one-piece garment of tough, heavy-duty cloth, offering full-body protection.",
       "category": ["Armor"],
       "slot": "Body",
+      "weight": 2.5,
       "help": {
         "show": true,
         "about": "A one-piece garment of tough, heavy-duty cloth, offering full-body protection."
@@ -291,6 +308,7 @@
       "description": "A compact kit containing bandages, antiseptics, and other medical supplies.",
       "category": ["Consumable"],
       "slot": "NotWorn",
+      "weight": 1,
       "initialization": {
         "spell": "Heal",
         "charges": {
@@ -313,6 +331,7 @@
       "description": "A scroll that can cast magic.",
       "category": ["SpellItem"],
       "slot": "NotWorn",
+      "weight": 0.1,
       "initialization": {
         "spell": "Random"
       },
@@ -329,6 +348,7 @@
       "description": "A rune that can cast magic.",
       "category": ["SpellItem"],
       "slot": "NotWorn",
+      "weight": 0.1,
       "initialization": {
         "spell": "Random",
         "charges": {
@@ -348,6 +368,7 @@
       "description": "Bottled water.",
       "category": ["Consumable"],
       "slot": "NotWorn",
+      "weight": 1,
       "initialization": {
         "spell": "DecreaseThirst",
         "charges": {
@@ -370,6 +391,7 @@
       "description": "Prepared food in a can.",
       "category": ["Consumable"],
       "slot": "NotWorn",
+      "weight": 0.5,
       "help": {
         "show": true,
         "about": "Prepared food in a can. Not exactly tasty, but better than going hungry."
@@ -386,6 +408,7 @@
       "description": "A crude, but effective, makeshift blade.",
       "category": ["MeleeWeapon"],
       "slot": "MainHand",
+      "weight": 0.5,
       "help": {
         "show": true,
         "about": "A crude, but effective, makeshift blade."
@@ -402,6 +425,7 @@
       "description": "A piece of scrap metal, useful for crafting.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 1,
       "help": {
         "show": true,
         "about": "A piece of scrap metal, useful for crafting."
@@ -418,6 +442,7 @@
       "description": "A small pouch of black powder.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 0.2,
       "help": {
         "show": true,
         "about": "A small pouch of black powder."
@@ -434,6 +459,7 @@
       "description": "A glowing mushroom that emits a soft, ethereal light.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 0.1,
       "help": {
         "show": true,
         "about": "A glowing mushroom that emits a soft, ethereal light."
@@ -450,6 +476,7 @@
       "description": "A thick, durable piece of leather.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 1,
       "help": {
         "show": true,
         "about": "A thick, durable piece of leather."
@@ -466,6 +493,7 @@
       "description": "A piece of wood that has turned to stone over time.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 2,
       "help": {
         "show": true,
         "about": "A piece of wood that has turned to stone over time."
@@ -482,6 +510,7 @@
       "description": "A crystal that hums with a strange energy.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 0.5,
       "help": {
         "show": true,
         "about": "A crystal that hums with a strange energy."
@@ -498,6 +527,7 @@
       "description": "Seemingly useless junk.",
       "category": ["Misc"],
       "slot": "NotWorn",
+      "weight": 1,
       "help": {
         "show": true,
         "about": "You cannot quite make out what this junk could be used for."

@@ -19,6 +19,8 @@ export class Stats {
   public hunger = 0.0;
   public thirst = 0.0;
   public maxCraftIngredients = 2;
+  public maxCarryWeight = this.currentStrength * 25;
+  public maxCarryWeightModifier = 1.0;
 
   /**
    * Adjusts the default visibility range by the specified amount.
@@ -118,6 +120,30 @@ export class Stats {
    */
   public resetDamageReceiveModifier(): void {
     this.damageReceiveModifier = 1.0;
+  }
+
+  /**
+   * Adjusts the max carry weight modifier by the given amount.
+   *
+   * @param amount - The amount to adjust the modifier by.
+   */
+  public adjustMaxCarryWeightModifier(amount: number): void {
+    this.maxCarryWeightModifier += amount;
+  }
+
+  /**
+   * Resets the max carry weight modifier to 1.0.
+   */
+  public resetMaxCarryWeightModifier(): void {
+    this.maxCarryWeightModifier = 1.0;
+  }
+
+  /**
+   * Calculates the maximum carry weight of the entity based on its current strength.
+   */
+  public setMaxCarryWeight(): void {
+    this.maxCarryWeight =
+      this.currentStrength * 25 * this.maxCarryWeightModifier;
   }
 
   /**

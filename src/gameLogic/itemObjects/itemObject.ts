@@ -18,11 +18,12 @@ export class ItemObject {
     public slot: Slot,
     public category: ObjCategory[] = [ObjCategory.Misc],
     public level: number = 1,
+    public weight: number = 0,
   ) {
     this.id = crypto.randomUUID();
     this.spellCasting = new SpellProperties();
   }
-
+  
   /**
    * Generates a description of the item object.
    *

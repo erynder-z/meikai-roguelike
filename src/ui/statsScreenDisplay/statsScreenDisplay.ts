@@ -5,15 +5,18 @@ import { Equipment } from '../../gameLogic/inventory/equipment';
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { Stats } from '../../gameLogic/stats/stats';
+import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class StatsScreenDisplay extends FadeInOutElement {
   public colorizer: BuffColors = new BuffColors();
   public stats: Stats | undefined;
   public player: Mob | undefined;
   public equipment: Equipment | undefined;
+  private unitSettingsManager: UnitSettingsManager;
 
   constructor() {
     super();
+    this.unitSettingsManager = new UnitSettingsManager();
   }
 
   connectedCallback(): void {
@@ -126,6 +129,7 @@ export class StatsScreenDisplay extends FadeInOutElement {
             </div>
             <div class="buffs-list-heading">Buffs:</div>
             <div class="buffs-list"></div>
+            <div class="max-carry-weight"></div>
           </div>
         </div>
       </div>
@@ -239,6 +243,25 @@ export class StatsScreenDisplay extends FadeInOutElement {
       });
     }
   }
+
+  /**
+   * Displays the player's max carry weight in the stats screen display.
+   */
+  public displayMaxCarryWeight(): void {
+    const el = this.shadowRoot?.querySelector(
+      '.max-carry-weight',
+    ) as HTMLElement;
+    if (!el) return;
+    const weight = this.stats?.maxCarryWeight;
+    if (typeof weight === 'number') {
+      el.textContent = `Max carry weight: ${this.unitSettingsManager.displayWeight(
+        weight,
+      )}`;
+    } else {
+      el.textContent = 'Max carry weight: N/A';
+    }
+  }
+
   /**
    * Returns the label and class name corresponding to the given value in the
    * given list of levels. If the given value does not match any of the levels,

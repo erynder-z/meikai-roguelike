@@ -9,6 +9,7 @@ export type DetailViewEntity = {
   description: string;
   sprite?: string;
   level?: number;
+  weight?: number;
   hp?: number;
   maxHp?: number;
   charges?: number;

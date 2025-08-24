@@ -1,14 +1,19 @@
+import {
+  EquipmentDisplayData,
+  EquipmentItemData,
+} from '../../types/ui/equipmentDisplayData';
 import { FadeInOutElement } from '../other/fadeInOutElement';
+import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class EquipmentScreenDisplay extends FadeInOutElement {
-  private equipmentItems: {
-    char: string;
-    slot: string;
-    description: string;
-  }[] = [];
+  private equipmentItems: EquipmentItemData[] = [];
+  private inventoryWeight: number = 0;
+  private maxCarryWeight: number = 0;
+  private unitSettingsManager: UnitSettingsManager;
 
   constructor() {
     super();
+    this.unitSettingsManager = new UnitSettingsManager();
   }
 
   connectedCallback(): void {
@@ -96,11 +101,40 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
         .no-item {
           color: var(--grayedOut);
         }
+
+        .equipment-weight {
+          color: var(--white);
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-align: center;
+          letter-spacing: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .inventory-equipment-container {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
+
+        .yellow {
+          color: yellow;
+        }
+
+        .red {
+          color: red;
+        }
+          
       </style>
       <div class="equipment-screen-display">
         <div class="menu-card">
           <div class="equipment-heading">Equipped Items</div>
           <div class="equipment-list"></div>
+          <div class="equipment-weight"></div>
+            <div class="inventory-equipment-container">
+             <div class="inventory-weight"></div>
+             <div class="total-weight"></div>
+            </div>
         </div>
       </div>
     `;
@@ -111,13 +145,19 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
   }
 
   /**
-   * Sets the equipment items to display.
+   * Updates the equipment screen display with new data.
    *
-   * @param items - An array of equipment items to display.
+   * @param data - An object containing the new equipment data to display.
    */
-  set items(items: { char: string; slot: string; description: string }[]) {
-    this.equipmentItems = items;
+  public update(data: EquipmentDisplayData): void {
+    this.equipmentItems = data.items;
+    this.inventoryWeight = data.inventoryWeight;
+    this.maxCarryWeight = data.maxCarryWeight;
+
     this.renderEquipmentList();
+    this.renderTotalWeight();
+    this.renderInventoryWeight();
+    this.renderEquipmentWeight();
   }
 
   /**
@@ -146,5 +186,81 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
       itemList.appendChild(fragment);
       equipmentListContainer.appendChild(itemList);
     }
+  }
+
+  /**
+   * Renders the total weight of all items in the inventory and equipped.
+   */
+  private renderTotalWeight(): void {
+    const totalWeightContainer = this.shadowRoot?.querySelector(
+      '.total-weight',
+    ) as HTMLElement;
+    if (totalWeightContainer) {
+      totalWeightContainer.innerHTML = '';
+
+      const totalWeight = this.getEquipmentWeight() + this.inventoryWeight;
+      const displayWeight = this.unitSettingsManager.displayWeight(totalWeight);
+
+      const color =
+        totalWeight >= this.maxCarryWeight
+          ? 'red'
+          : totalWeight / this.maxCarryWeight > 0.8
+          ? 'yellow'
+          : 'white';
+
+      totalWeightContainer.classList.remove('yellow', 'red');
+      totalWeightContainer.classList.add(color);
+
+      totalWeightContainer.textContent = `Total carry weight: ${displayWeight}`;
+    }
+  }
+
+  /**
+   * Renders the total weight of all items in the inventory.
+   */
+  private renderInventoryWeight(): void {
+    const inventoryWeightContainer = this.shadowRoot?.querySelector(
+      '.inventory-weight',
+    ) as HTMLElement;
+    if (inventoryWeightContainer) {
+      inventoryWeightContainer.innerHTML = '';
+
+      const displayWeight = this.unitSettingsManager.displayWeight(
+        this.inventoryWeight,
+      );
+
+      inventoryWeightContainer.textContent = `Inventory weight: ${displayWeight}`;
+    }
+  }
+
+  /**
+   * Renders the total weight of all items equipped.
+   */
+  private renderEquipmentWeight(): void {
+    const equippedWeightContainer = this.shadowRoot?.querySelector(
+      '.equipment-weight',
+    ) as HTMLElement;
+    if (equippedWeightContainer) {
+      equippedWeightContainer.innerHTML = '';
+
+      const equipmentWeight = this.getEquipmentWeight();
+      const displayWeight =
+        this.unitSettingsManager.displayWeight(equipmentWeight);
+
+      equippedWeightContainer.textContent = `Equipment weight: ${displayWeight}`;
+    }
+  }
+
+  /**
+   * Returns the total weight of all items equipped.
+   *
+   * @returns The total weight of all items equipped.
+   */
+  private getEquipmentWeight(): number {
+    const initialWeight = 0;
+    return this.equipmentItems.reduce(
+      (totalWeight, item) => totalWeight + item.weight,
+      initialWeight,
+    );
   }
 }

@@ -2,6 +2,7 @@ import { BaseScreen } from './baseScreen';
 import { Equipment } from '../inventory/equipment';
 import { EquipmentScreenDisplay } from '../../ui/equipmentScreenDIsplay/equipmentScreenDisplay';
 import { GameState } from '../../types/gameBuilder/gameState';
+import { Inventory } from '../inventory/inventory';
 import { ItemScreen } from './itemScreen';
 import keys from '../../utilities/commonKeyboardChars.json';
 import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
@@ -17,6 +18,7 @@ export class EquipmentScreen extends BaseScreen {
   constructor(
     public game: GameState,
     public make: ScreenMaker,
+    private inventory: Inventory = <Inventory>game.inventory,
     private equipment: Equipment = <Equipment>game.equipment,
   ) {
     super(game, make);
@@ -59,9 +61,14 @@ export class EquipmentScreen extends BaseScreen {
       ) as EquipmentScreenDisplay;
 
       canvas?.insertAdjacentElement('afterend', this.display);
+    }
 
-      const equipmentData = this.getEquipmentData();
-      this.display.items = equipmentData;
+    if (this.display) {
+      this.display.update({
+        items: this.getEquipmentData(),
+        inventoryWeight: this.inventory.totalWeight(),
+        maxCarryWeight: this.game.stats.maxCarryWeight,
+      });
     }
   }
 
@@ -73,14 +80,21 @@ export class EquipmentScreen extends BaseScreen {
   private getEquipmentData(): {
     char: string;
     slot: string;
+    weight: number;
     description: string;
   }[] {
-    const data: { char: string; slot: string; description: string }[] = [];
+    const data: {
+      char: string;
+      slot: string;
+      weight: number;
+      description: string;
+    }[] = [];
     for (let slot = Slot.MainHand; slot < Slot.Last; ++slot) {
       const item = this.equipment.getItemInSlot(slot);
       data.push({
         char: this.slotToCharacter(slot),
         slot: Slot[slot],
+        weight: item ? item.weight : 0,
         description: item ? item.description() : 'none',
       });
     }

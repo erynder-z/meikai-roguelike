@@ -162,4 +162,17 @@ export class Equipment {
     if (weapon) return weapon.level + 1;
     return minDmg;
   }
+
+  /**
+   * Returns the total weight of all items in the equipment.
+   *
+   * @returns The total weight of all items in the equipment.
+   */
+  public totalWeight(): number {
+    let totalWeight = 0;
+    for (const item of this._objs.values()) {
+      totalWeight += item.weight;
+    }
+    return totalWeight;
+  }
 }

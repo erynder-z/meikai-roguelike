@@ -1,4 +1,5 @@
 import { CommandBase } from './commandBase';
+import { Equipment } from '../inventory/equipment';
 import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../../types/gameBuilder/gameState';
@@ -27,23 +28,60 @@ export class PickupCommand extends CommandBase {
     const item = cell.obj;
 
     if (!item) {
-      const msg = new LogMessage(
-        'There is nothing here to pick up.',
-        EventCategory.unable,
-      );
-      game.flash(msg);
+      this.noItemMessage();
       return false;
     }
+
+    if (this.exceedsMaxCarryWeight()) return false;
 
     cell.obj = undefined;
     inventory.add(item);
 
-    const msg = new LogMessage(
-      `You picked up ${item.description()}.`,
-      EventCategory.pickup,
-    );
-    game.message(msg);
+    this.successMessage();
 
     return true;
+  }
+
+  /**
+   * Displays a message indicating that the item was picked up successfully.
+   */
+  private successMessage(): void {
+    const { game } = this;
+    const msg = new LogMessage('You picked up the item.', EventCategory.pickup);
+    game.message(msg);
+  }
+
+  /**
+   * Displays a flash message indicating that there is no item to pick up.
+   */
+  private noItemMessage(): void {
+    const { game } = this;
+    const msg = new LogMessage(
+      'There is nothing here to pick up.',
+      EventCategory.unable,
+    );
+    game.flash(msg);
+  }
+
+  /**
+   * Checks if the player is carrying more items than their maximum carry weight.
+   *
+   * @returns Returns true if the player is carrying too many items, false otherwise.
+   */
+  private exceedsMaxCarryWeight(): boolean {
+    const { game } = this;
+    const inventory = <Inventory>game.inventory;
+    const equipment = <Equipment>game.equipment;
+    const maxCarryWeight = game.stats.maxCarryWeight;
+
+    if (inventory.totalWeight() + equipment.totalWeight() > maxCarryWeight) {
+      const msg = new LogMessage(
+        'You are carrying too much stuff!',
+        EventCategory.unable,
+      );
+      game.flash(msg);
+      return true;
+    }
+    return false;
   }
 }

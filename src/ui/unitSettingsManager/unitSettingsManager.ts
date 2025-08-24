@@ -15,13 +15,21 @@ export class UnitSettingsManager {
     feet: 'ft',
   };
 
+  private static WEIGHT_UNIT_MAP = {
+    kilograms: 'kg',
+    pounds: 'lb',
+  };
+
   private currentTempUnit: 'celsius' | 'fahrenheit';
   private currentDepthUnit: 'meters' | 'feet';
+
+  private currentWeightUnit: 'kilograms' | 'pounds';
 
   constructor() {
     const gameConfig = gameConfigManager.getConfig();
     this.currentTempUnit = gameConfig.temperature_unit;
     this.currentDepthUnit = gameConfig.depth_unit;
+    this.currentWeightUnit = gameConfig.weight_unit;
   }
 
   /**
@@ -43,6 +51,15 @@ export class UnitSettingsManager {
   }
 
   /**
+   * Sets the current weight unit.
+   *
+   * @param unit The new weight unit ('kilograms' or 'pounds').
+   */
+  public setCurrentWeightUnit(unit: 'kilograms' | 'pounds'): void {
+    this.currentWeightUnit = unit;
+  }
+
+  /**
    * Converts a temperature from Celsius to Fahrenheit.
    *
    * @param celsius The temperature in Celsius.
@@ -60,6 +77,16 @@ export class UnitSettingsManager {
    */
   private convertMetersToFeet(meters: number): number {
     return meters * 3.28084;
+  }
+
+  /**
+   * Converts a weight from kilograms to pounds.
+   *
+   * @param kilograms The weight in kilograms.
+   * @returns The weight in pounds.
+   */
+  private convertKilogramsToPounds(kilograms: number): number {
+    return kilograms * 2.20462;
   }
 
   /**
@@ -84,6 +111,18 @@ export class UnitSettingsManager {
     return this.currentDepthUnit === 'feet'
       ? this.convertMetersToFeet(depth)
       : depth;
+  }
+
+  /**
+   * Converts a weight from kilograms to the currently set unit.
+   *
+   * @param weight The weight in kilograms.
+   * @returns The weight in the current unit.
+   */
+  private convertWeight(weight: number): number {
+    return this.currentWeightUnit === 'pounds'
+      ? this.convertKilogramsToPounds(weight)
+      : weight;
   }
 
   /**
@@ -112,5 +151,18 @@ export class UnitSettingsManager {
     const displayUnit =
       UnitSettingsManager.DEPTH_UNIT_MAP[this.currentDepthUnit] || 'm';
     return `${convertedDepth}${displayUnit}`;
+  }
+
+  /**
+   * Displays a weight with the currently set unit.
+   *
+   * @param weight - The weight in kilograms.
+   * @return The weight in the current unit with the appropriate unit symbol.
+   */
+  public displayWeight(weight: number): string {
+    const convertedWeight = Math.round(this.convertWeight(weight)).toFixed(2);
+    const displayUnit =
+      UnitSettingsManager.WEIGHT_UNIT_MAP[this.currentWeightUnit] || 'kg';
+    return `${convertedWeight} ${displayUnit}`;
   }
 }

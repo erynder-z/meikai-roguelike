@@ -1,13 +1,19 @@
 import { FadeInOutElement } from '../other/fadeInOutElement';
+import { groupInventory } from '../../utilities/inventoryUtils';
+import { InventoryDisplayData } from '../../types/ui/inventoryDisplayData';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
-import { groupInventory } from '../../utilities/inventoryUtils';
+import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class InventoryScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];
+  private equippedItemsWeight: number = 0;
+  private maxCarryWeight: number = 0;
+  private unitSettingsManager: UnitSettingsManager;
 
   constructor() {
     super();
+    this.unitSettingsManager = new UnitSettingsManager();
   }
 
   connectedCallback(): void {
@@ -73,7 +79,10 @@ export class InventoryScreenDisplay extends FadeInOutElement {
         }
 
         .inventory-list {
+          height: 100%;
           width: 100%;
+          overflow-y: auto;
+          overflow-x: hidden;
         }
 
         .inventory-list ul {
@@ -84,6 +93,29 @@ export class InventoryScreenDisplay extends FadeInOutElement {
         .inventory-list ul li {
           list-style-type: none;
         }
+
+        .inventory-weight {
+          color: var(--white);
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-align: center;
+          letter-spacing: 0.25rem;
+          margin-bottom: 1rem;
+        }
+
+        .inventory-equipment-container {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
+
+        .yellow {
+          color: yellow;
+        }
+
+        .red {
+          color: red;
+        }
       </style>
 
       <div class="inventory-screen-display">
@@ -93,7 +125,12 @@ export class InventoryScreenDisplay extends FadeInOutElement {
           </div>
 
           <div class="inventory-list"></div>
-        </div>
+            <div class="inventory-weight"></div>
+            <div class="inventory-equipment-container">
+             <div class="equipment-weight"></div>
+             <div class="total-weight"></div>
+            </div>
+          </div>
       </div>
     `;
 
@@ -103,13 +140,21 @@ export class InventoryScreenDisplay extends FadeInOutElement {
   }
 
   /**
-   * Sets the inventory items to display.
+   * Updates the inventory screen display with new data.
    *
-   * @param items - The inventory items.
+   * @param data - An object containing the new inventory data to display.
+   * @param data.items - An array of ItemObjects to display in the inventory list.
+   * @param data.wornItemsWeight - The total weight of all equipped items.
    */
-  set items(items: ItemObject[]) {
-    this.inventoryItems = items;
+  public update(data: InventoryDisplayData): void {
+    this.inventoryItems = data.items;
+    this.equippedItemsWeight = data.wornItemsWeight;
+    this.maxCarryWeight = data.maxCarryWeight;
+
     this.renderInventoryList();
+    this.renderItemsTotalWeight();
+    this.renderInventoryWeight();
+    this.renderEquippedWeight();
   }
 
   /**
@@ -151,5 +196,83 @@ export class InventoryScreenDisplay extends FadeInOutElement {
       itemList.appendChild(fragment);
       inventoryListContainer.appendChild(itemList);
     }
+  }
+
+  /**
+   * Renders the total weight of all items in the inventory and equipped.
+   */
+  private renderItemsTotalWeight(): void {
+    const totalWeightContainer = this.shadowRoot?.querySelector(
+      '.total-weight',
+    ) as HTMLElement;
+    if (totalWeightContainer) {
+      totalWeightContainer.innerHTML = '';
+
+      const totalWeight =
+        this.inventoryTotalWeight() + this.equippedItemsWeight;
+      const displayWeight = this.unitSettingsManager.displayWeight(totalWeight);
+
+      const color =
+        totalWeight >= this.maxCarryWeight
+          ? 'red'
+          : totalWeight / this.maxCarryWeight > 0.8
+            ? 'yellow'
+            : 'white';
+
+      totalWeightContainer.classList.remove('yellow', 'red');
+      totalWeightContainer.classList.add(color);
+
+      totalWeightContainer.textContent = `Total carry weight: ${displayWeight}`;
+    }
+  }
+
+  /**
+   * Renders the total weight of all items in the inventory.
+   */
+  private renderInventoryWeight(): void {
+    const inventoryWeightContainer = this.shadowRoot?.querySelector(
+      '.inventory-weight',
+    ) as HTMLElement;
+    if (inventoryWeightContainer) {
+      inventoryWeightContainer.innerHTML = '';
+
+      const inventoryWeight = this.inventoryTotalWeight();
+      const displayWeight =
+        this.unitSettingsManager.displayWeight(inventoryWeight);
+
+      inventoryWeightContainer.textContent = `Inventory weight: ${displayWeight}`;
+    }
+  }
+
+  /**
+   * Renders the total weight of all items equipped.
+   */
+  private renderEquippedWeight(): void {
+    const equippedWeightContainer = this.shadowRoot?.querySelector(
+      '.equipment-weight',
+    ) as HTMLElement;
+    if (equippedWeightContainer) {
+      equippedWeightContainer.innerHTML = '';
+
+      const displayWeight = this.unitSettingsManager.displayWeight(
+        this.equippedItemsWeight,
+      );
+
+      equippedWeightContainer.textContent = `Equipment weight: ${displayWeight}`;
+    }
+  }
+
+  /**
+   * Returns the total weight of all items in the inventory.
+   *
+   * @returns The total weight of all items in the inventory.
+   */
+  private inventoryTotalWeight(): number {
+    const initialWeight = 0;
+    const weight = this.inventoryItems.reduce(
+      (totalWeight, item) => totalWeight + item.weight,
+      initialWeight,
+    );
+    return weight;
   }
 }

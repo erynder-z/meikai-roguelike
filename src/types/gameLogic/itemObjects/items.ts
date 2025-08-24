@@ -13,6 +13,7 @@ export type ItemDefinitionJson = {
   description: string;
   category: string[];
   slot: string;
+  weight: number;
   initialization?: {
     spell?: string;
     charges?: {
@@ -29,6 +30,7 @@ export type ItemTemplate = {
   glyph: Glyph;
   slot: Slot;
   category: ObjCategory[];
+  weight: number;
   initialization?: {
     spell?: string;
     charges?: {

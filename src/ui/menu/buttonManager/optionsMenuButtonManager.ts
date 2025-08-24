@@ -207,6 +207,25 @@ export class OptionsMenuButtonManager {
   }
 
   /**
+   * Updates the text of the weight units button based on the current
+   * weight units.
+   *
+   * Sets the button's text to 'Weight units: KILOGRAMS' or 'Weight units: POUNDS',
+   * depending on the current unit.
+   *
+   * @param unit - The current weight unit.
+   */
+  public updateWeightUnitsButton(unit: 'kilograms' | 'pounds'): void {
+    const weightUnitsBtn = this.shadowRoot?.getElementById(
+      'weight-units-button',
+    ) as HTMLButtonElement;
+
+    if (weightUnitsBtn) {
+      weightUnitsBtn.innerHTML = `Wei<span class="underline">g</span>ht units: ${unit.toUpperCase()}`;
+    }
+  }
+
+  /**
    * Updates the text of the blood intensity button based on the current blood intensity.
    *
    * Sets the button's text to 'Blood intensity: OFF', 'Blood intensity: NORMAL', 'Blood intensity: HIGH', or 'Blood intensity: ULTRA', depending on the current blood intensity.

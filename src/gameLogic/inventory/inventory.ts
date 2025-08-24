@@ -32,4 +32,13 @@ export class Inventory {
   public removeIndex(index: number): void {
     this.items.splice(index, 1);
   }
+
+  /**
+   * Returns the total weight of all items in the inventory.
+   *
+   * @returns The total weight of all items in the inventory.
+   */
+  public totalWeight(): number {
+    return this.items.reduce((total, item) => total + item.weight, 0);
+  }
 }

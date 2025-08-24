@@ -54,6 +54,7 @@ export class DetailViewHandler {
         name: entity.name(),
         description: entity.description(),
         level: entity.level,
+        weight: entity.weight,
         charges: entity.spellCasting.charges,
         spell: entity.spellCasting.spell,
       };

@@ -1,4 +1,5 @@
 import { BaseScreen } from './baseScreen';
+import { Equipment } from '../inventory/equipment';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { groupInventory } from '../../utilities/inventoryUtils';
 import { Inventory } from '../inventory/inventory';
@@ -19,6 +20,7 @@ export class InventoryScreen extends BaseScreen {
     public game: GameState,
     public make: ScreenMaker,
     private inventory: Inventory = <Inventory>game.inventory,
+    private equipment: Equipment = <Equipment>game.equipment,
   ) {
     super(game, make);
   }
@@ -35,9 +37,14 @@ export class InventoryScreen extends BaseScreen {
         'inventory-screen-display',
       ) as InventoryScreenDisplay;
       canvas?.insertAdjacentElement('afterend', this.display);
-
-      this.display.items = this.inventory.items;
     }
+
+    if (this.display)
+      this.display.update({
+        items: this.inventory.items,
+        wornItemsWeight: this.equipment.totalWeight(),
+        maxCarryWeight: this.game.stats.maxCarryWeight,
+      });
   }
 
   /**
