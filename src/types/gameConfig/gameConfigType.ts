@@ -27,5 +27,6 @@ export type GameConfigType = {
   min_keypress_delay: number;
   temperature_unit: 'fahrenheit' | 'celsius';
   depth_unit: 'feet' | 'meters';
+  weight_unit: 'pounds' | 'kilograms';
   show_story: boolean;
 };

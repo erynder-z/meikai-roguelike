@@ -3,14 +3,17 @@ import {
   EquipmentItemData,
 } from '../../types/ui/equipmentDisplayData';
 import { FadeInOutElement } from '../other/fadeInOutElement';
+import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class EquipmentScreenDisplay extends FadeInOutElement {
   private equipmentItems: EquipmentItemData[] = [];
   private inventoryWeight: number = 0;
   private maxCarryWeight: number = 0;
+  private unitSettingsManager: UnitSettingsManager;
 
   constructor() {
     super();
+    this.unitSettingsManager = new UnitSettingsManager();
   }
 
   connectedCallback(): void {
@@ -195,17 +198,15 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
     if (totalWeightContainer) {
       totalWeightContainer.innerHTML = '';
 
-      const roundedWeight =
-        Math.round((this.getEquipmentWeight() + this.inventoryWeight) * 100) /
-        100;
-      const displayWeight = roundedWeight.toFixed(2);
+      const totalWeight = this.getEquipmentWeight() + this.inventoryWeight;
+      const displayWeight = this.unitSettingsManager.displayWeight(totalWeight);
 
       const color =
-        roundedWeight >= this.maxCarryWeight
+        totalWeight >= this.maxCarryWeight
           ? 'red'
-          : roundedWeight / this.maxCarryWeight > 0.8
-            ? 'yellow'
-            : 'white';
+          : totalWeight / this.maxCarryWeight > 0.8
+          ? 'yellow'
+          : 'white';
 
       totalWeightContainer.classList.remove('yellow', 'red');
       totalWeightContainer.classList.add(color);
@@ -224,8 +225,9 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
     if (inventoryWeightContainer) {
       inventoryWeightContainer.innerHTML = '';
 
-      const roundedWeight = Math.round(this.inventoryWeight * 100) / 100;
-      const displayWeight = roundedWeight.toFixed(2);
+      const displayWeight = this.unitSettingsManager.displayWeight(
+        this.inventoryWeight,
+      );
 
       inventoryWeightContainer.textContent = `Inventory weight: ${displayWeight}`;
     }
@@ -241,8 +243,9 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
     if (equippedWeightContainer) {
       equippedWeightContainer.innerHTML = '';
 
-      const roundedWeight = Math.round(this.getEquipmentWeight() * 100) / 100;
-      const displayWeight = roundedWeight.toFixed(2);
+      const equipmentWeight = this.getEquipmentWeight();
+      const displayWeight =
+        this.unitSettingsManager.displayWeight(equipmentWeight);
 
       equippedWeightContainer.textContent = `Equipment weight: ${displayWeight}`;
     }
