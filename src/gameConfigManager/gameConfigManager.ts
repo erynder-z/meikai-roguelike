@@ -37,6 +37,7 @@ class GameConfigManager {
     min_keypress_delay: 50,
     temperature_unit: 'celsius',
     depth_unit: 'meters',
+    weight_unit: 'kilograms',
     terminal: {
       dimensions: {
         width: 64,
