@@ -43,6 +43,7 @@ export class InventoryScreen extends BaseScreen {
       this.display.update({
         items: this.inventory.items,
         wornItemsWeight: this.equipment.totalWeight(),
+        maxCarryWeight: this.game.stats.maxCarryWeight,
       });
   }
 

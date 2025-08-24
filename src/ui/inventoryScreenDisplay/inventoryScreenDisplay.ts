@@ -7,6 +7,7 @@ import keysJson from '../../utilities/commonKeyboardChars.json';
 export class InventoryScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];
   private equippedItemsWeight: number = 0;
+  private maxCarryWeight: number = 0;
 
   constructor() {
     super();
@@ -104,6 +105,14 @@ export class InventoryScreenDisplay extends FadeInOutElement {
           justify-content: space-between;
           width: 100%;
         }
+
+        .yellow {
+          color: yellow;
+        }
+
+        .red {
+          color: red;
+        }
       </style>
 
       <div class="inventory-screen-display">
@@ -115,8 +124,8 @@ export class InventoryScreenDisplay extends FadeInOutElement {
           <div class="inventory-list"></div>
             <div class="inventory-weight"></div>
             <div class="inventory-equipment-container">
-             <div class="total-weight"></div>
              <div class="equipment-weight"></div>
+             <div class="total-weight"></div>
             </div>
           </div>
       </div>
@@ -137,6 +146,7 @@ export class InventoryScreenDisplay extends FadeInOutElement {
   public update(data: InventoryDisplayData): void {
     this.inventoryItems = data.items;
     this.equippedItemsWeight = data.wornItemsWeight;
+    this.maxCarryWeight = data.maxCarryWeight;
 
     this.renderInventoryList();
     this.renderItemsTotalWeight();
@@ -187,9 +197,6 @@ export class InventoryScreenDisplay extends FadeInOutElement {
 
   /**
    * Renders the total weight of all items in the inventory and equipped.
-   *
-   * Clears the total weight container, then sets the text content of the
-   * container to "Total weight: <rounded total weight>".
    */
   private renderItemsTotalWeight(): void {
     const totalWeightContainer = this.shadowRoot?.querySelector(
@@ -198,19 +205,28 @@ export class InventoryScreenDisplay extends FadeInOutElement {
     if (totalWeightContainer) {
       totalWeightContainer.innerHTML = '';
 
-      const roundedWeight = (
-        this.inventoryTotalWeight() + this.equippedItemsWeight
-      ).toFixed(2);
+      const roundedWeight =
+        Math.round(
+          (this.inventoryTotalWeight() + this.equippedItemsWeight) * 100,
+        ) / 100;
+      const displayWeight = roundedWeight.toFixed(2);
 
-      totalWeightContainer.textContent = `Total carry weight: ${roundedWeight}`;
+      const color =
+        roundedWeight >= this.maxCarryWeight
+          ? 'red'
+          : roundedWeight / this.maxCarryWeight > 0.8
+            ? 'yellow'
+            : 'white';
+
+      totalWeightContainer.classList.remove('yellow', 'red');
+      totalWeightContainer.classList.add(color);
+
+      totalWeightContainer.textContent = `Total carry weight: ${displayWeight}`;
     }
   }
 
   /**
    * Renders the total weight of all items in the inventory.
-   *
-   * Clears the inventory weight container, then sets the text content of the
-   * container to "Inventory weight: <rounded total weight>".
    */
   private renderInventoryWeight(): void {
     const inventoryWeightContainer = this.shadowRoot?.querySelector(
@@ -218,16 +234,16 @@ export class InventoryScreenDisplay extends FadeInOutElement {
     ) as HTMLElement;
     if (inventoryWeightContainer) {
       inventoryWeightContainer.innerHTML = '';
-      const roundedWeight = this.inventoryTotalWeight().toFixed(2);
-      inventoryWeightContainer.textContent = `Inventory weight: ${roundedWeight}`;
+
+      const roundedWeight = Math.round(this.inventoryTotalWeight() * 100) / 100;
+      const displayWeight = roundedWeight.toFixed(2);
+
+      inventoryWeightContainer.textContent = `Inventory weight: ${displayWeight}`;
     }
   }
 
   /**
    * Renders the total weight of all items equipped.
-   *
-   * Clears the equipped weight container, then sets the text content of the
-   * container to "Equipped weight: <rounded total weight>".
    */
   private renderEquippedWeight(): void {
     const equippedWeightContainer = this.shadowRoot?.querySelector(
@@ -235,8 +251,11 @@ export class InventoryScreenDisplay extends FadeInOutElement {
     ) as HTMLElement;
     if (equippedWeightContainer) {
       equippedWeightContainer.innerHTML = '';
-      const roundedWeight = this.equippedItemsWeight.toFixed(2);
-      equippedWeightContainer.textContent = `Equipment weight: ${roundedWeight}`;
+
+      const roundedWeight = Math.round(this.equippedItemsWeight * 100) / 100;
+      const displayWeight = roundedWeight.toFixed(2);
+
+      equippedWeightContainer.textContent = `Equipment weight: ${displayWeight}`;
     }
   }
 

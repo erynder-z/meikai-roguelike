@@ -6,7 +6,8 @@ import { FadeInOutElement } from '../other/fadeInOutElement';
 
 export class EquipmentScreenDisplay extends FadeInOutElement {
   private equipmentItems: EquipmentItemData[] = [];
-  private inventoryWeight = 0;
+  private inventoryWeight: number = 0;
+  private maxCarryWeight: number = 0;
 
   constructor() {
     super();
@@ -112,6 +113,15 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
           justify-content: space-between;
           width: 100%;
         }
+
+        .yellow {
+          color: yellow;
+        }
+
+        .red {
+          color: red;
+        }
+          
       </style>
       <div class="equipment-screen-display">
         <div class="menu-card">
@@ -139,6 +149,7 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
   public update(data: EquipmentDisplayData): void {
     this.equipmentItems = data.items;
     this.inventoryWeight = data.inventoryWeight;
+    this.maxCarryWeight = data.maxCarryWeight;
 
     this.renderEquipmentList();
     this.renderTotalWeight();
@@ -184,11 +195,22 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
     if (totalWeightContainer) {
       totalWeightContainer.innerHTML = '';
 
-      const roundedWeight = (
-        this.getEquipmentWeight() + this.inventoryWeight
-      ).toFixed(2);
+      const roundedWeight =
+        Math.round((this.getEquipmentWeight() + this.inventoryWeight) * 100) /
+        100;
+      const displayWeight = roundedWeight.toFixed(2);
 
-      totalWeightContainer.textContent = `Total carry weight: ${roundedWeight}`;
+      const color =
+        roundedWeight >= this.maxCarryWeight
+          ? 'red'
+          : roundedWeight / this.maxCarryWeight > 0.8
+            ? 'yellow'
+            : 'white';
+
+      totalWeightContainer.classList.remove('yellow', 'red');
+      totalWeightContainer.classList.add(color);
+
+      totalWeightContainer.textContent = `Total carry weight: ${displayWeight}`;
     }
   }
 
@@ -201,8 +223,11 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
     ) as HTMLElement;
     if (inventoryWeightContainer) {
       inventoryWeightContainer.innerHTML = '';
-      const roundedWeight = this.inventoryWeight.toFixed(2);
-      inventoryWeightContainer.textContent = `Inventory weight: ${roundedWeight}`;
+
+      const roundedWeight = Math.round(this.inventoryWeight * 100) / 100;
+      const displayWeight = roundedWeight.toFixed(2);
+
+      inventoryWeightContainer.textContent = `Inventory weight: ${displayWeight}`;
     }
   }
 
@@ -215,8 +240,11 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
     ) as HTMLElement;
     if (equippedWeightContainer) {
       equippedWeightContainer.innerHTML = '';
-      const roundedWeight = this.getEquipmentWeight().toFixed(2);
-      equippedWeightContainer.textContent = `Equipment weight: ${roundedWeight}`;
+
+      const roundedWeight = Math.round(this.getEquipmentWeight() * 100) / 100;
+      const displayWeight = roundedWeight.toFixed(2);
+
+      equippedWeightContainer.textContent = `Equipment weight: ${displayWeight}`;
     }
   }
 

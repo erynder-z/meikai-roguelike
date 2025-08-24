@@ -8,4 +8,5 @@ export type EquipmentItemData = {
 export type EquipmentDisplayData = {
   items: EquipmentItemData[];
   inventoryWeight: number;
+  maxCarryWeight: number;
 };
