@@ -163,6 +163,6 @@ export class UnitSettingsManager {
     const convertedWeight = Math.round(this.convertWeight(weight)).toFixed(2);
     const displayUnit =
       UnitSettingsManager.WEIGHT_UNIT_MAP[this.currentWeightUnit] || 'kg';
-    return `${convertedWeight}${displayUnit}`;
+    return `${convertedWeight} ${displayUnit}`;
   }
 }

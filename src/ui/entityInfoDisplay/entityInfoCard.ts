@@ -4,10 +4,14 @@ import { Spell } from '../../gameLogic/spells/spell';
 import { EnvEffect } from '../../types/gameLogic/maps/mapModel/envEffect';
 import { DetailViewEntity } from '../../types/ui/detailViewEntity';
 import { SpellColors } from '../../colors/spellColors';
+import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class EntityInfoCard extends FadeInOutElement {
+  private unitSettingsManager: UnitSettingsManager;
+
   constructor() {
     super();
+    this.unitSettingsManager = new UnitSettingsManager();
   }
 
   connectedCallback(): void {
@@ -129,7 +133,7 @@ export class EntityInfoCard extends FadeInOutElement {
     const glyphColor = glyphInfo.fgCol;
     const description = glyphInfo.description;
     const level = entity.level;
-    const weight = entity.weight ? entity.weight : null;
+    const weight = entity.weight;
     const hp = entity.hp || 0;
     const maxHp = entity.maxHp || 0;
     const mobHealthMessage = this.getMobHealthMessage(hp, maxHp);
@@ -164,7 +168,7 @@ export class EntityInfoCard extends FadeInOutElement {
             <div class="item-title">${name}</div>
             <div class="item-glyph" style="color: ${gCol ? gCol : glyphColor}">${glyphChar}</div>
             <div class="item-level">Item level: ${level}</div>
-            <div class="item-weight">Item weight: ${weight}</div>
+            ${weight !== undefined ? `<div class="item-weight">Item weight: ${this.unitSettingsManager.displayWeight(weight)}</div>` : ''}
             ${spell !== 'None' ? `<div class="item-spell">Item spell: ${spell}</div>` : ''}
             ${spell !== 'None' ? `<div class="item-charges">Charges: ${charges}</div>` : ''}
             <div class="item-description">${description}</div>

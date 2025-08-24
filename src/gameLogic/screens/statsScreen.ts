@@ -41,6 +41,7 @@ export class StatsScreen extends BaseScreen {
       this.display.displayHP();
       this.display.displayHunger();
       this.display.displayThirst();
+      this.display.displayMaxCarryWeight();
       this.display.setBuffs(this.game.player.buffs.getBuffsMap());
     }
   }
