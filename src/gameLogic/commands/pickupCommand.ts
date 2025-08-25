@@ -26,13 +26,14 @@ export class PickupCommand extends CommandBase {
     const inventory = <Inventory>game.inventory;
     const cell = map.cell(player.pos);
     const item = cell.obj;
+    const isPlayer = this.me.isPlayer;
 
     if (!item) {
       this.noItemMessage();
       return false;
     }
 
-    if (this.exceedsMaxCarryWeight()) return false;
+    if (isPlayer && this.exceedsMaxCarryWeight()) return false;
 
     cell.obj = undefined;
     inventory.add(item);
@@ -76,7 +77,7 @@ export class PickupCommand extends CommandBase {
 
     if (inventory.totalWeight() + equipment.totalWeight() > maxCarryWeight) {
       const msg = new LogMessage(
-        'You are carrying too much stuff!',
+        'Unable to pickup, because you are carrying too much stuff!',
         EventCategory.unable,
       );
       game.flash(msg);
