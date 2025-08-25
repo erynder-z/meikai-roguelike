@@ -5,6 +5,7 @@ import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { Glyph } from '../glyphs/glyph';
 import { GlyphMap } from '../glyphs/glyphMap';
+import { Inventory } from '../inventory/inventory';
 import { ItemObject } from '../itemObjects/itemObject';
 import { Mob } from '../mobs/mob';
 import { MovementDirection } from '../../types/gameLogic/commands/movementDirections';
@@ -33,20 +34,46 @@ export class MoveCommand extends CommandBase {
     const newPosition = this.dir.plus(currentPosition);
     const map = <GameMapType>this.game.currentMap();
 
-    if (this.isMoveLegal(map, newPosition)) {
-      if (this.me.isPlayer) {
-        const movementDir = this.getMovementDirectionFromPosition(
-          currentPosition,
-          newPosition,
-        );
-        const eventCat =
-          EventCategory[`moving_${movementDir}` as keyof typeof EventCategory];
-        this.game.addCurrentEvent(eventCat);
-      }
-      this.moveAndHandleExtras(map, newPosition);
+    if (!this.isMoveLegal(map, newPosition)) return false;
+
+    if (
+      this.me.isPlayer &&
+      !this.preMovePlayerChecks(currentPosition, newPosition)
+    )
+      return false;
+
+    this.moveAndHandleExtras(map, newPosition);
+
+    return true;
+  }
+
+  /**
+   * Performs pre-move checks for the player.
+   *
+   * @param currentPosition - The current position of the player.
+   * @param newPosition - The new position of the player.
+   * @returns Returns true if the player can move, false otherwise.
+   */
+  private preMovePlayerChecks(
+    currentPosition: WorldPoint,
+    newPosition: WorldPoint,
+  ): boolean {
+    const inv = <Inventory>this.game.inventory;
+    const overburdened = inv.totalWeight() > this.game.stats.maxCarryWeight;
+
+    if (overburdened) {
+      this.handleOverburdened();
+      return false;
     }
 
-    return !map.isBlocked(newPosition);
+    const movementDir = this.getMovementDirectionFromPosition(
+      currentPosition,
+      newPosition,
+    );
+    const eventCat =
+      EventCategory[`moving_${movementDir}` as keyof typeof EventCategory];
+    this.game.addCurrentEvent(eventCat);
+    return true;
   }
 
   /**
@@ -180,5 +207,13 @@ export class MoveCommand extends CommandBase {
       default:
         return '';
     }
+  }
+
+  /**
+   * Flashes a message to the player when they are overburdened, unable to move.
+   */
+  private handleOverburdened(): void {
+    const msg = new LogMessage('You are overburdened!', EventCategory.unable);
+    this.game.flash(msg);
   }
 }
