@@ -100,6 +100,7 @@ export abstract class CommandBase implements Command {
     if (this.paralyzed(mob, game)) return negate;
     if (this.asleep(mob, game)) return negate;
     if (this.slow(mob, game)) return negate;
+    if (this.encumbered(mob, game)) return negate;
     if (this.freeze(mob, game, move)) return negate;
     if (this.dehydrated(game)) return negate;
     if (this.ravenous(game)) return negate;
@@ -245,6 +246,25 @@ export abstract class CommandBase implements Command {
     if (!me.is(Buff.Freeze)) return false;
     if (move && game.rand.isOneIn(2)) return false;
     const msg = new LogMessage('You are frozen!', EventCategory.buff);
+    if (me.isPlayer) game.flash(msg);
+    return true;
+  }
+
+  /**
+   * Checks if the given mob is encumbered and flashes a message if it is the player.
+   * If encumbered, the player's actions have a 10% chance to fail.
+   *
+   * @param me - The mob to check for being encumbered.
+   * @param game - The game object for checking conditions and displaying messages.
+   * @returns True if the mob is encumbered and the action fails, false otherwise.
+   */
+  private encumbered(me: Mob, game: GameState): boolean {
+    if (!me.is(Buff.Encumbered)) return false;
+    if (!game.rand.isOneIn(10)) return false;
+    const msg = new LogMessage(
+      'You stumble due to the weight of your equipment!',
+      EventCategory.buff,
+    );
     if (me.isPlayer) game.flash(msg);
     return true;
   }

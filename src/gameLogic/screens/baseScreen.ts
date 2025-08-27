@@ -1,3 +1,5 @@
+import { Buff } from '../buffs/buffEnum';
+import { BuffCommand } from '../commands/buffCommand';
 import { CellEffects } from '../commands/cellEffects';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { DrawableTerminal } from '../../types/terminal/drawableTerminal';
@@ -12,6 +14,7 @@ import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../types/terminal/stack';
 import { StackScreen } from '../../types/terminal/stackScreen';
 import { TurnQueue } from '../turnQueue/turnQueue';
+import { EventCategory, LogMessage } from '../messages/logMessage';
 
 /**
  * Represents a base screen implementation that implements the StackScreen interface.
@@ -170,11 +173,10 @@ export class BaseScreen implements StackScreen {
       return;
     }
 
-    if (this.game.needs) this.game.needs.processPlayerNeeds(this.game, player);
-
+    this.game.needs?.processPlayerNeeds(this.game, player);
     this.handleAutoHeal(player);
-
     this.game.stats.setMaxCarryWeight();
+    this.handleEncumbrance(player);
     this.game.stats.incrementTurnCounter();
   }
 
@@ -191,6 +193,47 @@ export class BaseScreen implements StackScreen {
       if (tooHungry || tooThirsty) return;
 
       this.game.autoHeal.turn(player, this.game);
+    }
+  }
+
+  /**
+   * Checks if the player is encumbered and applies/removes the
+   * encumbered buff accordingly.
+   *
+   * Encumbrance is determined by the total weight of the player's
+   * equipment exceeding 25% of their max carry weight.
+   *
+   * @param player - the player to check.
+   */
+  private handleEncumbrance(player: Mob): void {
+    const equipmentWeight = this.game.equipment?.totalWeight() || 0;
+    const maxCarryWeight = this.game.stats.maxCarryWeight;
+    const isEncumbered = equipmentWeight > maxCarryWeight * 0.25; // equipment weight exceeds 25% of max carry weight.
+    const hasBuff = player.is(Buff.Encumbered);
+
+    if (isEncumbered && !hasBuff) {
+      const duration = Number.MAX_SAFE_INTEGER;
+      new BuffCommand(
+        Buff.Encumbered,
+        player,
+        this.game,
+        player,
+        duration,
+      ).execute();
+
+      const flash = new LogMessage(
+        'You are encumbered by your equipment!',
+        EventCategory.buff,
+      );
+      if (player.isPlayer) this.game.flash(flash);
+    } else if (!isEncumbered && hasBuff) {
+      player.buffs.cleanse(Buff.Encumbered, this.game, player);
+
+      const flash = new LogMessage(
+        'You are no longer encumbered.',
+        EventCategory.buff,
+      );
+      if (player.isPlayer) this.game.flash(flash);
     }
   }
 

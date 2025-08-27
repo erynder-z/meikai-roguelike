@@ -22,4 +22,5 @@ export enum Buff {
   AttackDown = 20,
   DefenseUp = 21,
   DefenseDown = 22,
+  Encumbered = 23,
 }

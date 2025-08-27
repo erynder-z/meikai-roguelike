@@ -559,7 +559,7 @@ export class Builder implements Build {
       ObjCategory.MeleeWeapon,
     ]);
     strongPickaxe.level = 50;
-    strongPickaxe.weight = 10;
+    strongPickaxe.weight = 30;
     inv.add(strongPickaxe);
 
     const strongRevolver = new ItemObject(

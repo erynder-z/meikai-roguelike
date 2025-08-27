@@ -133,6 +133,13 @@
     {
       "buff": "DefenseDown",
       "help": { "show": true, "about": "Increases damage taken by 1-100%." }
+    },
+    {
+      "buff": "Encumbered",
+      "help": {
+        "show": true,
+        "about": "Equipped items are too heavy, which might cause you to stumble."
+      }
     }
   ]
 }

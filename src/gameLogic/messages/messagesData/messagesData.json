@@ -137,6 +137,12 @@
       "textColor": "#ED5D12",
       "noun": "exposed",
       "adjective": "feeling vulnerable"
+    },
+    {
+      "buff": "Encumbered",
+      "textColor": "#808080",
+      "noun": "encumbrance",
+      "adjective": "encumbered"
     }
   ]
 }
