@@ -27,7 +27,7 @@ export class CellEffects {
   public applyCellEffects(): void {
     if (this.cell.isCausingSlow()) {
       if (this.cell.env !== Glyph.Shallow_Water) {
-        // Shallow water is handled in this.handleWater()
+        // Shallow water is handled in WaterHandler class
         const duration = this.cell.environment.defaultBuffDuration || 5;
         new BuffCommand(
           Buff.Slow,
@@ -166,6 +166,8 @@ export class CellEffects {
     if (this.cell.isWater()) {
       WaterHandler.handleWaterCellEffect(this.me, this.game);
       if (!this.me.isAlive()) return;
+    } else {
+      WaterHandler.handleLeavingWater(this.me, this.game);
     }
     if (this.cell.isChasmEdge()) {
       ChasmHandler.handleChasmEdge(this.me, this.game);

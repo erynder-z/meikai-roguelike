@@ -1,6 +1,7 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffCommand } from '../../gameLogic/commands/buffCommand';
 import { CleanseBuffCommand } from '../../gameLogic/commands/cleanseBuffCommand';
+import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { Mob } from '../../gameLogic/mobs/mob';
 
@@ -12,7 +13,7 @@ export class WaterHandler {
    * Handles the effect of a water cell on the given mob.
    *
    * This effect reduces the mob's bloodiness by 0.5, removes any active Burn or Lava buffs,
-   * and adds a Slow buff for 2 turns.
+   * and adds the SlightlySubmerged buff.
    *
    * @param mob The mob to handle the water cell effect for.
    * @param game The game state.
@@ -26,9 +27,7 @@ export class WaterHandler {
       }
     }
 
-    const duration = 2;
-    new BuffCommand(Buff.Slow, mob, game, mob, duration).execute();
-
+    // remove fire buffs
     const fireBuffs = [Buff.Burn, Buff.Lava];
     const activeBuffs = mob.buffs;
 
@@ -37,5 +36,45 @@ export class WaterHandler {
         new CleanseBuffCommand(buff, mob, game).execute();
       }
     });
+
+    const isSubmerged = mob.is(Buff.SlightlySubmerged);
+
+    if (!isSubmerged) {
+      const duration = Number.MAX_SAFE_INTEGER;
+      new BuffCommand(
+        Buff.SlightlySubmerged,
+        mob,
+        game,
+        mob,
+        duration,
+      ).execute();
+
+      const flash = new LogMessage(
+        'You are wading through shallow water.',
+        EventCategory.buff,
+      );
+      if (mob.isPlayer) game.flash(flash);
+    }
+  }
+
+  /**
+   * Handles the effect of leaving a water cell for a given mob.
+   *
+   * This effect removes the `SlightlySubmerged` buff.
+   *
+   * @param mob The mob to handle the leaving water cell effect for.
+   * @param game The game state.
+   */
+  public static handleLeavingWater(mob: Mob, game: GameState): void {
+    if (mob.is(Buff.SlightlySubmerged)) {
+      mob.buffs.cleanse(Buff.SlightlySubmerged, game, mob);
+      if (mob.isPlayer) {
+        const flash = new LogMessage(
+          'You are no longer in the water.',
+          EventCategory.buff,
+        );
+        game.flash(flash);
+      }
+    }
   }
 }

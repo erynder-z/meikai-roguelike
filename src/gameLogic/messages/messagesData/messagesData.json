@@ -143,6 +143,18 @@
       "textColor": "#808080",
       "noun": "encumbrance",
       "adjective": "encumbered"
+    },
+    {
+      "buff": "Stun",
+      "textColor": "#FF6347",
+      "noun": "stun",
+      "adjective": "stunned"
+    },
+    {
+      "buff": "SlightlySubmerged",
+      "textColor": "#7ed0f5",
+      "noun": "slightly submerged",
+      "adjective": "slightly submerged"
     }
   ]
 }

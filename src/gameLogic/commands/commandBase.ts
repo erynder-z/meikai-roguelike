@@ -104,6 +104,7 @@ export abstract class CommandBase implements Command {
     if (this.freeze(mob, game, move)) return negate;
     if (this.dehydrated(game)) return negate;
     if (this.ravenous(game)) return negate;
+    if (this.slightlySubmerged(mob, game)) return negate;
 
     return able;
   }
@@ -323,6 +324,25 @@ export abstract class CommandBase implements Command {
     );
     if (this.me.isPlayer && ravenous && chance) game.flash(msg);
     return ravenous && chance;
+  }
+
+  /**
+   * Checks if the given mob is slightly submerged and flashes a message if it is the player.
+   * If slightly submerged, half of the player's actions have a 50% chance to fail.
+   *
+   * @param me - The mob to check for being slightly submerged.
+   * @param game - The game object for checking conditions and displaying messages.
+   * @returns True if the mob is slightly submerged and the action fails, false otherwise.
+   */
+  private slightlySubmerged(me: Mob, game: GameState): boolean {
+    if (!me.is(Buff.SlightlySubmerged)) return false;
+    if (game.rand.isOneIn(2)) return false;
+    const msg = new LogMessage(
+      'Wading through water is difficult!',
+      EventCategory.buff,
+    );
+    if (me.isPlayer) game.flash(msg);
+    return true;
   }
 
   /**

@@ -140,6 +140,13 @@
         "show": true,
         "about": "Equipped items are too heavy, which might cause you to stumble."
       }
+    },
+    {
+      "buff": "SlightlySubmerged",
+      "help": {
+        "show": true,
+        "about": "Wading through water is difficult."
+      }
     }
   ]
 }
