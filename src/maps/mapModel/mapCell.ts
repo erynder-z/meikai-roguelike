@@ -324,4 +324,13 @@ export class MapCell {
   public isWater(): boolean {
     return this.env === Glyph.Shallow_Water || this.env === Glyph.Deep_Water;
   }
+
+  /**
+   * Checks if the current cell is a Nebulous Mist.
+   *
+   * @return True if the cell is a Nebulous Mist, false otherwise.
+   */
+  public isNebulousMist(): boolean {
+    return this.env === Glyph.Nebulous_Mist;
+  }
 }

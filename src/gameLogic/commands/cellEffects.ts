@@ -7,6 +7,7 @@ import { Glyph } from '../glyphs/glyph';
 import { HealCommand } from './healCommand';
 import { MapCell } from '../../maps/mapModel/mapCell';
 import { Mob } from '../mobs/mob';
+import { NebulousMistHandler } from '../../maps/helpers/nebulousMistHandler';
 import { StatChangeBuffCommand } from './statChangeBuffCommand';
 import { WaterHandler } from '../../maps/helpers/waterHandler';
 
@@ -84,15 +85,17 @@ export class CellEffects {
     }
 
     if (this.cell.isCausingBlind()) {
-      const duration = this.cell.environment.defaultBuffDuration || 5;
-      new BuffCommand(
-        Buff.Blind,
-        this.me,
-        this.game,
-        this.me,
-        duration,
-      ).execute();
-      if (!this.me.isAlive()) return;
+      if (this.cell.env !== Glyph.Nebulous_Mist) {
+        const duration = this.cell.environment.defaultBuffDuration || 5;
+        new BuffCommand(
+          Buff.Blind,
+          this.me,
+          this.game,
+          this.me,
+          duration,
+        ).execute();
+        if (!this.me.isAlive()) return;
+      }
     }
 
     if (this.cell.isCausingAttackUp()) {
@@ -176,6 +179,12 @@ export class CellEffects {
     if (this.cell.isChasmCenter()) {
       ChasmHandler.handleChasmCenter(this.me, this.game);
       if (!this.me.isAlive()) return;
+    }
+    if (this.cell.isNebulousMist()) {
+      NebulousMistHandler.handleNebulousMistCellEffect(this.me, this.game);
+      if (!this.me.isAlive()) return;
+    } else {
+      NebulousMistHandler.handleLeavingNebulousMist(this.me, this.game);
     }
   }
 }

@@ -248,7 +248,7 @@ export class MapRenderer {
     game: GameState,
   ): void {
     const buffs = game.player.buffs;
-    const blind = buffs && buffs.is(Buff.Blind);
+    const blind = buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
     const farDist = CanSee.getFarDist(playerPos, map, game);
     const gameConfig = gameConfigManager.getConfig();
     const shouldApplyGlyphShadow = gameConfig.show_glyph_shadow;
@@ -285,7 +285,7 @@ export class MapRenderer {
     game: GameState,
   ): void {
     const buffs = game.player.buffs;
-    const blind = buffs && buffs.is(Buff.Blind);
+    const blind = buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
     const farDist = CanSee.getFarDist(playerPos, map, game);
     const gameConfig = gameConfigManager.getConfig();
     const shouldApplyGlyphShadow = gameConfig.show_glyph_shadow;

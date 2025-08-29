@@ -83,7 +83,7 @@ export class LookScreen extends BaseScreen {
     game: GameState,
   ): boolean {
     const { buffs } = game.player;
-    const isBlind = buffs && buffs.is(Buff.Blind);
+    const isBlind = buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
     const farDist = CanSee.getFarDist(playerPos, map, game);
 
     return (

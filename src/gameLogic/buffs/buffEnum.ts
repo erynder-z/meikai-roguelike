@@ -24,4 +24,5 @@ export enum Buff {
   DefenseDown = 22,
   Encumbered = 23,
   SlightlySubmerged = 24,
+  NebulousMist = 25,
 }
