@@ -147,6 +147,13 @@
         "show": true,
         "about": "Wading through water is difficult."
       }
+    },
+    {
+      "buff": "NebulousMist",
+      "help": {
+        "show": true,
+        "about": "You are enveloped in a thick mist and cannot see."
+      }
     }
   ]
 }

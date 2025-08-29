@@ -155,6 +155,12 @@
       "textColor": "#7ed0f5",
       "noun": "slightly submerged",
       "adjective": "slightly submerged"
+    },
+    {
+      "buff": "NebulousMist",
+      "textColor": "#A9A9A9",
+      "noun": "mist",
+      "adjective": "enveloped in mist"
     }
   ]
 }
