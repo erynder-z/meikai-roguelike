@@ -1,6 +1,5 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffCommand } from '../../gameLogic/commands/buffCommand';
-import { CleanseBuffCommand } from '../../gameLogic/commands/cleanseBuffCommand';
 import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { Mob } from '../../gameLogic/mobs/mob';
@@ -33,7 +32,15 @@ export class WaterHandler {
 
     fireBuffs.forEach(buff => {
       if (activeBuffs.is(buff)) {
-        new CleanseBuffCommand(buff, mob, game).execute();
+        mob.buffs.getBuffsMap().delete(buff);
+        if (mob.isPlayer) {
+          game.flash(
+            new LogMessage(
+              `The water extinguishes the flames!`,
+              EventCategory.buff,
+            ),
+          );
+        }
       }
     });
 

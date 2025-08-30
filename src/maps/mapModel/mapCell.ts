@@ -333,4 +333,13 @@ export class MapCell {
   public isNebulousMist(): boolean {
     return this.env === Glyph.Nebulous_Mist;
   }
+
+  /**
+   * Checks if the current cell is lava.
+   *
+   * @return True if the cell is lava, false otherwise.
+   */
+  public isLava(): boolean {
+    return this.env === Glyph.Lava;
+  }
 }

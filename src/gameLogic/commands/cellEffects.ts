@@ -5,6 +5,7 @@ import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../../types/gameBuilder/gameState';
 import { Glyph } from '../glyphs/glyph';
 import { HealCommand } from './healCommand';
+import { LavaHandler } from '../../maps/helpers/lavaHandler';
 import { MapCell } from '../../maps/mapModel/mapCell';
 import { Mob } from '../mobs/mob';
 import { NebulousMistHandler } from '../../maps/helpers/nebulousMistHandler';
@@ -60,7 +61,6 @@ export class CellEffects {
         buff: Buff.Slow,
         specialGlyph: Glyph.Shallow_Water,
       },
-      { condition: cell => cell.isCausingBurn(), buff: Buff.Lava },
       { condition: cell => cell.isCausingBleed(), buff: Buff.Bleed },
       { condition: cell => cell.isCausingPoison(), buff: Buff.Poison },
       { condition: cell => cell.isCausingConfusion(), buff: Buff.Confuse },
@@ -132,11 +132,15 @@ export class CellEffects {
   }
 
   /**
-   * Applies cell effects that handle the mob's environment, such as whether it is in water, mist, or a chasm.
+   * Applies all environment handlers to the mob. These handlers are responsible for cell effects caused by the environment,
+   * such as lava, water, and chasms. The order of application is as follows:
+   *  1. Water
+   *  2. Nebulous Mist
+   *  3. Lava
+   *  4. Chasm Edge
+   *  5. Chasm Center
    *
-   * If the mob is in water, it will be healed. If it is leaving water, any active Burn or Lava buffs will be removed.
-   * If it is in mist, it will be blinded. If it is leaving mist, the blind buff will be removed.
-   * If it is in a chasm, it will be killed.
+   * If the mob dies in the middle of this process, the rest of the handlers will not be applied.
    */
   private applyEnvironmentHandlers(): void {
     if (this.cell.isWater()) {
@@ -150,6 +154,13 @@ export class CellEffects {
       NebulousMistHandler.handleNebulousMistCellEffect(this.me, this.game);
     } else {
       NebulousMistHandler.handleLeavingNebulousMist(this.me, this.game);
+    }
+    if (!this.me.isAlive()) return;
+
+    if (this.cell.isLava()) {
+      LavaHandler.handleLavaCellEffect(this.me, this.game);
+    } else {
+      LavaHandler.handleLeavingLava(this.me, this.game);
     }
     if (!this.me.isAlive()) return;
 
