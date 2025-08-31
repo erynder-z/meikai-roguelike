@@ -1,5 +1,5 @@
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { InteractiveScreen } from '../../types/terminal/interactiveScreen';
+import { InteractiveScreen } from '../../shared-types/terminal/interactiveScreen';
 import { Terminal } from '../../terminal/terminal';
 
 /**

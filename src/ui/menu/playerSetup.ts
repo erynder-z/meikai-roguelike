@@ -1,5 +1,5 @@
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameConfigType } from '../../types/gameConfig/gameConfigType';
+import { GameConfig } from '../../shared-types/gameConfig/gameConfig';
 import { getRandomColor } from '../../randomGenerator/getRandomColor';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { getRandomUnicodeCharacter } from '../../randomGenerator/getRandomAvatar';
@@ -448,7 +448,7 @@ export class PlayerSetup extends UnBlurElement {
    *
    * @param player - The player object containing the appearance, name, and avatar information.
    */
-  private displayPlayer(player: GameConfigType['player']): void {
+  private displayPlayer(player: GameConfig['player']): void {
     const isGirlish = player.appearance === 'girlish';
     this.renderPortraitElement(
       'player-portrait-girlish',

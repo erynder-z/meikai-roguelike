@@ -2,14 +2,14 @@ import { AttackAnimationScreen } from '../screens/attackAnimationScreen';
 import { CommandBase } from './commandBase';
 import { EnvironmentChecker } from '../environment/environmentChecker';
 import { EventCategory } from '../messages/logMessage';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Glyph } from '../glyphs/glyph';
 import { GlyphMap } from '../glyphs/glyphMap';
 import { LogMessage } from '../messages/logMessage';
 import { Mob } from '../mobs/mob';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../types/terminal/stack';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**

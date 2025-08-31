@@ -1,6 +1,6 @@
 import { CommandBase } from './commandBase';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
 
 /**
@@ -17,7 +17,7 @@ export class DrinkCommand extends CommandBase {
 
   /**
    * Executes the drink command. For players, this decreases the thirst level and flashes a message.
-   * 
+   *
    * @returns Always returns true.
    */
   public execute(): boolean {

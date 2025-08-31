@@ -1,5 +1,5 @@
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { EnvironmentChecker } from '../environment/environmentChecker';
 import { FindFreeSpace } from '../../maps/helpers/findFreeSpace';
 import { ItemObjectManager } from './itemObjectManager';

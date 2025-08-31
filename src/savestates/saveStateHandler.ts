@@ -1,4 +1,6 @@
 import { ActiveBuffs } from '../gameLogic/buffs/activeBuffs';
+import { AutoHeal } from '../gameLogic/commands/autoHeal';
+import { Builder } from '../gameBuilder/builder';
 import { Buff } from '../gameLogic/buffs/buffEnum';
 import { BuffCommand } from '../gameLogic/commands/buffCommand';
 import { Corpse } from '../gameLogic/mobs/corpse';
@@ -6,16 +8,19 @@ import { EquipCommand } from '../gameLogic/commands/equipCommand';
 import { Game } from '../gameBuilder/gameModel';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { GameMap } from '../maps/mapModel/gameMap';
-import { GameState } from '../types/gameBuilder/gameState';
+import { GameState } from '../shared-types/gameBuilder/gameState';
 import { Glyph } from '../gameLogic/glyphs/glyph';
 import { ItemObject } from '../gameLogic/itemObjects/itemObject';
 import { Inventory } from '../gameLogic/inventory/inventory';
 import { LayoutManager } from '../ui/layoutManager/layoutManager';
 import { LogMessage } from '../gameLogic/messages/logMessage';
 import { MapCell } from '../maps/mapModel/mapCell';
+import { MapHandler } from '../gameBuilder/mapHandler';
+import { MessageLog } from '../gameLogic/messages/messageLog';
 import { Mob } from '../gameLogic/mobs/mob';
+import { MobAI } from '../shared-types/gameLogic/mobs/mobAI';
+import { NeedsHandler } from '../gameLogic/needs/needsHandler';
 import {
-  ReadyToSaveGameState,
   SerializedCorpseData,
   SerializedDungeonData,
   SerializedGameMap,
@@ -25,11 +30,77 @@ import {
   SerializedMapCellArray,
   SerializedMapQueue,
   SerializedMobData,
-} from '../types/utilities/saveStateHandler';
+} from '../shared-types/utilities/saveStateHandler';
+import { Slot } from '../gameLogic/itemObjects/slot';
+import { StatChangeBuffCommand } from '../gameLogic/commands/statChangeBuffCommand';
+import { Stats } from '../gameLogic/stats/stats';
+import { Tick } from '../shared-types/gameLogic/buffs/buffType';
 import { TurnQueue } from '../gameLogic/turnQueue/turnQueue';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
-import { Tick } from '../types/gameLogic/buffs/buffType';
-import { StatChangeBuffCommand } from '../gameLogic/commands/statChangeBuffCommand';
+
+type ReadyToSaveGameState = {
+  serializedAI: {
+    id: string;
+    data: MobAI | null;
+  };
+  serializedLog: {
+    id: string;
+    data: MessageLog;
+  };
+  serializedDungeon: {
+    id: string;
+    data: MapHandler;
+  };
+  serializedAutoHeal: {
+    id: string;
+    data: AutoHeal | undefined;
+  };
+  serializedInventory: {
+    id: string;
+    data: Inventory | undefined;
+  };
+  serializedEquipment: {
+    id: string;
+    data: [Slot, ItemObject][];
+  };
+  serializedNeeds: {
+    id: string;
+    data: NeedsHandler | undefined;
+  };
+  serializedStats: {
+    id: string;
+    data: Stats;
+  };
+  serializedSurfaceTemp: {
+    id: string;
+    data: number;
+  };
+  serializedShownStoryLevels: {
+    id: string;
+    data: number[];
+  };
+  serializedPlayer: {
+    id: string;
+    data: Mob;
+  };
+  serializedPlayerBuffs: {
+    id: string;
+    data: {
+      buff: Buff;
+      duration: number;
+    }[];
+  };
+  serializedBuild: {
+    id: string;
+    data: Builder;
+  };
+  playerConfig: {
+    name: string;
+    appearance: 'boyish' | 'girlish';
+    color: string;
+    avatar: string;
+  };
+};
 
 /**
  * Handles serializing and deserializing the game state to and from JSON.
@@ -626,8 +697,7 @@ export class SaveStateHandler {
         );
         item.spellCasting.spell = serializedItem.spellCasting.spell;
         item.spellCasting.charges = serializedItem.spellCasting.charges;
-        item.spellCasting.description =
-          serializedItem.spellCasting.description;
+        item.spellCasting.description = serializedItem.spellCasting.description;
         item.spellCasting.effectMagnitude =
           serializedItem.spellCasting.effectMagnitude;
         inv.add(item);
@@ -661,8 +731,7 @@ export class SaveStateHandler {
         );
         itm.spellCasting.spell = serializedItem.spellCasting.spell;
         itm.spellCasting.charges = serializedItem.spellCasting.charges;
-        itm.spellCasting.description =
-          serializedItem.spellCasting.description;
+        itm.spellCasting.description = serializedItem.spellCasting.description;
         itm.spellCasting.effectMagnitude =
           serializedItem.spellCasting.effectMagnitude;
         new EquipCommand(itm, item[0] as number, game).execute();

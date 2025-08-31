@@ -1,5 +1,5 @@
 import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealthAdjust } from '../../gameLogic/commands/healthAdjust';
 import { Mob } from '../../gameLogic/mobs/mob';
 

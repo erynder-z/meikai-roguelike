@@ -1,10 +1,10 @@
-import { Able } from '../../types/gameLogic/commands/able';
+import { Able } from '../../shared-types/gameLogic/commands/able';
 import { Act } from './act';
 import { Buff } from '../buffs/buffEnum';
-import { Command } from '../../types/gameLogic/commands/command';
-import { Cost } from '../../types/gameLogic/commands/cost';
+import { Command } from '../../shared-types/gameLogic/commands/command';
+import { Cost } from '../../shared-types/gameLogic/commands/cost';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
@@ -100,9 +100,11 @@ export abstract class CommandBase implements Command {
     if (this.paralyzed(mob, game)) return negate;
     if (this.asleep(mob, game)) return negate;
     if (this.slow(mob, game)) return negate;
+    if (this.encumbered(mob, game)) return negate;
     if (this.freeze(mob, game, move)) return negate;
     if (this.dehydrated(game)) return negate;
     if (this.ravenous(game)) return negate;
+    if (this.slightlySubmerged(mob, game)) return negate;
 
     return able;
   }
@@ -250,6 +252,25 @@ export abstract class CommandBase implements Command {
   }
 
   /**
+   * Checks if the given mob is encumbered and flashes a message if it is the player.
+   * If encumbered, the player's actions have a 10% chance to fail.
+   *
+   * @param me - The mob to check for being encumbered.
+   * @param game - The game object for checking conditions and displaying messages.
+   * @returns True if the mob is encumbered and the action fails, false otherwise.
+   */
+  private encumbered(me: Mob, game: GameState): boolean {
+    if (!me.is(Buff.Encumbered)) return false;
+    if (!game.rand.isOneIn(10)) return false;
+    const msg = new LogMessage(
+      'You stumble due to the weight of your equipment!',
+      EventCategory.buff,
+    );
+    if (me.isPlayer) game.flash(msg);
+    return true;
+  }
+
+  /**
    * Checks if the mob is confused and updates the direction accordingly.
    *
    * @param game - The game object for handling randomness.
@@ -303,6 +324,25 @@ export abstract class CommandBase implements Command {
     );
     if (this.me.isPlayer && ravenous && chance) game.flash(msg);
     return ravenous && chance;
+  }
+
+  /**
+   * Checks if the given mob is slightly submerged and flashes a message if it is the player.
+   * If slightly submerged, half of the player's actions have a 50% chance to fail.
+   *
+   * @param me - The mob to check for being slightly submerged.
+   * @param game - The game object for checking conditions and displaying messages.
+   * @returns True if the mob is slightly submerged and the action fails, false otherwise.
+   */
+  private slightlySubmerged(me: Mob, game: GameState): boolean {
+    if (!me.is(Buff.SlightlySubmerged)) return false;
+    if (game.rand.isOneIn(2)) return false;
+    const msg = new LogMessage(
+      'Wading through water is difficult!',
+      EventCategory.buff,
+    );
+    if (me.isPlayer) game.flash(msg);
+    return true;
   }
 
   /**

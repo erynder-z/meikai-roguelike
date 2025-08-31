@@ -1,9 +1,9 @@
 import { EventCategory } from '../../gameLogic/messages/logMessage';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { images } from './imageIndex';
 import { lvlTier00Images } from '../../media/imageHandler/imageImports/levelImages';
-import { MovementDirection } from '../../types/gameLogic/commands/movementDirections';
+import { MovementDirection } from '../../shared-types/gameLogic/commands/movementDirections';
 
 /**
  * Singleton throttle-based image display helper

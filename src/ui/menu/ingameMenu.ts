@@ -4,7 +4,7 @@ import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { exit } from '@tauri-apps/plugin-process';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { invoke } from '@tauri-apps/api/core';
 import { PopupHandler } from '../popup/popupHandler';
 import { SaveStateHandler } from '../../savestates/saveStateHandler';

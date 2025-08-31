@@ -1,8 +1,8 @@
 import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from '../commands/buffCommand';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealthAdjust } from '../commands/healthAdjust';
 import { Mob } from '../mobs/mob';
 

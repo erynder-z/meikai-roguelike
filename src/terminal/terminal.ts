@@ -1,5 +1,5 @@
 import * as colorData from '../colors/colors.json';
-import { DrawableTerminal } from '../types/terminal/drawableTerminal';
+import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { ManipulateColors } from '../colors/manipulateColors';
 import { TerminalPoint } from './terminalPoint';

@@ -1,19 +1,19 @@
 import { CanSee } from '../../maps/helpers/canSee';
 import { CommandBase } from '../commands/commandBase';
-import { Cost } from '../../types/gameLogic/commands/cost';
+import { Cost } from '../../shared-types/gameLogic/commands/cost';
 import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from './mob';
-import { MobAI } from '../../types/gameLogic/mobs/mobAI';
+import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
 import { MobAI2_Cat } from './mobAI2_Cat';
 import { MobAI3_Ant } from './mobAI3_Ant';
 import { Mood } from './moodEnum';
 import { NPCSpellFinder } from '../spells/npcSpellFinder';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { SimpleSleepAI } from './simpleSleepAI';
 import { PICKABLE_SPELLS, Spell } from '../spells/spell';
-import { Stack } from '../../types/terminal/stack';
+import { Stack } from '../../shared-types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**

@@ -1,4 +1,4 @@
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';

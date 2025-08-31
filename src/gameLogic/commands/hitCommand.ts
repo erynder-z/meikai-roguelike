@@ -5,12 +5,12 @@ import { Buff } from '../buffs/buffEnum';
 import { CommandBase } from './commandBase';
 import { Equipment } from '../inventory/equipment';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealthAdjust } from './healthAdjust';
 import { Mob } from '../mobs/mob';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { Stack } from '../../types/terminal/stack';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 
 /**
  * Represents a command to hit another mob.

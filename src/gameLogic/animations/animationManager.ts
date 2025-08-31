@@ -1,8 +1,12 @@
-import {
-  AttackAnimation,
-  AttackAnimationType,
-} from '../../types/gameLogic/animations/animationTypes';
+import { AttackAnimationType } from '../../shared-types/gameLogic/animations/animationTypes';
 import * as animationData from './data/attackAnimations.json';
+
+type AttackAnimation = {
+  type: AttackAnimationType;
+  color: string;
+  opacityFactor: number;
+  thickness: number;
+};
 
 /**
  * Manages the available attack animations and provides methods for retrieving specific animations.

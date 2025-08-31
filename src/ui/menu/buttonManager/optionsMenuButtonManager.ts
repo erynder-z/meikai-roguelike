@@ -1,5 +1,5 @@
 import { gameConfigManager } from '../../../gameConfigManager/gameConfigManager';
-import { GameConfigType } from '../../../types/gameConfig/gameConfigType';
+import { GameConfig } from '../../../shared-types/gameConfig/gameConfig';
 import { ScanlineStyles } from '../../../renderer/scanlinesHandler';
 /**
  * Handles changing the displayed content of buttons on the options menu.
@@ -37,7 +37,7 @@ export class OptionsMenuButtonManager {
    * @param text - The current active control scheme.
    */
   public updateControlSchemeButton(
-    text: GameConfigType['control_scheme'],
+    text: GameConfig['control_scheme'],
   ): void {
     const controlSchemeButton = this.shadowRoot?.getElementById(
       'switch-controls-button',
@@ -265,7 +265,7 @@ export class OptionsMenuButtonManager {
    *
    * @param seed - The current seed.
    */
-  public displayCurrentSeed(seed: GameConfigType['seed']): void {
+  public displayCurrentSeed(seed: GameConfig['seed']): void {
     const seedButton = this.shadowRoot?.getElementById(
       'current-seed-button',
     ) as HTMLDivElement;

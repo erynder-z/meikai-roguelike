@@ -1,5 +1,5 @@
 import { MessageLog } from '../../gameLogic/messages/messageLog';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { handleLastMoments } from '../../utilities/handleLastMoments';
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import { PostMortem } from '../postMortem/postMortem';

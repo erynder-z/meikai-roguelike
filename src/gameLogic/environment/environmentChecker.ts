@@ -1,8 +1,5 @@
-import {
-  EnvEffect,
-  randomEnvEffect,
-} from '../../types/gameLogic/maps/mapModel/envEffect';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
+import { EnvEffect } from '../../shared-types/gameLogic/maps/mapModel/envEffect';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../glyphs/glyph';
 import { MapCell } from '../../maps/mapModel/mapCell';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
@@ -133,7 +130,7 @@ export class EnvironmentChecker {
 
   private static addArcaneSigilEffect(cell: MapCell): void {
     if (cell.glyph() === Glyph.Arcane_Sigil) {
-      const effect = randomEnvEffect();
+      const effect = this.randomEnvEffect();
       cell.addEnvEffect(effect);
     }
   }
@@ -194,4 +191,18 @@ export class EnvironmentChecker {
       }
     }
   }
+
+  /**
+   * Returns a random environment effect. This will be one of the values
+   * on the EnvEffect enum, excluding the numeric values.
+   *
+   * @return A random environment effect
+   */
+  private static randomEnvEffect = (): EnvEffect => {
+    const effects = Object.keys(EnvEffect)
+      .filter(key => isNaN(Number(key)))
+      .map(key => EnvEffect[key as keyof typeof EnvEffect]);
+
+    return effects[Math.floor(Math.random() * effects.length)];
+  };
 }

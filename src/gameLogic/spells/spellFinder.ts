@@ -2,23 +2,27 @@ import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from '../commands/buffCommand';
 import { BulletCommand } from '../commands/bulletCommand';
 import { CleanseAllCommand } from '../commands/cleanseAllCommand';
-import { Command } from '../../types/gameLogic/commands/command';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { CommandDirectionScreen } from '../screens/commandDirectionScreen';
-import { CommandOrScreen } from '../../types/gameLogic/screens/CommandOrScreen';
-import { Cost } from '../../types/gameLogic/commands/cost';
+import { Cost } from '../../shared-types/gameLogic/commands/cost';
 import { DrinkCommand } from '../commands/drinkCommand';
 import { EatCommand } from '../commands/eatCommand';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealCommand } from '../commands/healCommand';
 import { Mob } from '../mobs/mob';
 import { MultiplyCommand } from '../commands/multiplyCommand';
 import { PayloadCommand } from '../commands/payloadCommand';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Spell } from './spell';
-import { Stack } from '../../types/terminal/stack';
-import { StackScreen } from '../../types/terminal/stackScreen';
+import { Stack } from '../../shared-types/terminal/stack';
+import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { SummonCommand } from '../commands/summonCommand';
 import { TeleportCommand } from '../commands/teleportCommand';
+
+type CommandOrScreen = {
+  cmd: Command;
+  screen: StackScreen;
+};
 
 /**
  * Helper-class that provides methods for returning a Command or a StackScreen for a spell.

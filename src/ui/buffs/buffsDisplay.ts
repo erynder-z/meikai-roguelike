@@ -1,6 +1,6 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffColors } from './buffColors';
-import { BuffType } from '../../types/gameLogic/buffs/buffType';
+import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
 
 export class BuffsDisplay extends HTMLElement {
   constructor(public colorizer: BuffColors = new BuffColors()) {
@@ -99,12 +99,15 @@ export class BuffsDisplay extends HTMLElement {
   }
 
   /**
-   * Iterates over the given map of buffs and creates a list item for each buff.
-   * The text content of the list item is the name of the buff and the remaining time.
-   * The colorizer is used to color the list item according to the buff type.
+   * Displays a list of buffs in the given fragment.
    *
-   * @param buffMap - The map of buffs to their types.
-   * @param fragment - The fragment to which the list items should be appended.
+   * @param buffMap - A map of buffs to their types.
+   * @param fragment - The fragment to modify.
+   *
+   * This method iterates over the given map of buffs and creates a list item for each buff.
+   * The list item's text content is set to the name of the buff with a colon and the time
+   * left, or '∞' if the time left is greater than 999.
+   * The list item is then colored using the colorizer and appended to the given fragment.
    */
   private displayBuffList(
     buffMap: Map<Buff, BuffType>,
@@ -113,7 +116,8 @@ export class BuffsDisplay extends HTMLElement {
     buffMap.forEach((buff, key) => {
       const listItem = document.createElement('li');
       const remainTime = buff.timeLeft;
-      listItem.textContent = `${Buff[key]}: ${remainTime}`;
+      const displayRemainTime = remainTime > 999 ? '∞' : remainTime; // display '∞' if the remain time is a large number, i.e. the buff iks meant to last until a certain condition is met.
+      listItem.textContent = `${Buff[key]}: ${displayRemainTime}`;
 
       this.colorizer.colorBuffs(listItem);
       fragment.appendChild(listItem);

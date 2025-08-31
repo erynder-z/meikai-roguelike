@@ -1,17 +1,17 @@
-import { Command } from '../../types/gameLogic/commands/command';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { CommandBase } from './commandBase';
 import { DamageStep } from '../stepper/damageStep';
 import { DirectionStep } from '../stepper/directionStep';
 import { EventCategory } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Glyph } from '../glyphs/glyph';
 import { ImageHandler } from '../../media/imageHandler/imageHandler';
 import { Mob } from '../mobs/mob';
 import { RangedWeaponType } from '../stepper/damageStep';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Step } from '../../types/gameLogic/stepper/step';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Step } from '../../shared-types/gameLogic/stepper/step';
 import { StepScreen } from '../screens/stepScreen';
-import { Stack } from '../../types/terminal/stack';
+import { Stack } from '../../shared-types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**

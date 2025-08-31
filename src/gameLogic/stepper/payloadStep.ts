@@ -1,8 +1,8 @@
-import { Command } from '../../types/gameLogic/commands/command';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { Command } from '../../shared-types/gameLogic/commands/command';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
-import { Step } from '../../types/gameLogic/stepper/step';
+import { Step } from '../../shared-types/gameLogic/stepper/step';
 import { TimedStep } from './timedStep';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 

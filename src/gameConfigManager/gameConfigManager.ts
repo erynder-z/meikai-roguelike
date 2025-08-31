@@ -1,6 +1,6 @@
 import { FontHandler } from '../font/fontHandler';
 import { getRandomName } from '../randomGenerator/getRandomName';
-import { GameConfigType } from '../types/gameConfig/gameConfigType';
+import { GameConfig } from '../shared-types/gameConfig/gameConfig';
 import {
   BaseDirectory,
   readTextFile,
@@ -14,8 +14,8 @@ import {
  */
 class GameConfigManager {
   private static instance: GameConfigManager;
-  private config: GameConfigType;
-  private readonly defaultParams: GameConfigType = {
+  private config: GameConfig;
+  private readonly defaultParams: GameConfig = {
     SHOW_MENU: true,
     show_scanlines: true,
     scanline_style: 'light',
@@ -37,6 +37,7 @@ class GameConfigManager {
     min_keypress_delay: 50,
     temperature_unit: 'celsius',
     depth_unit: 'meters',
+    weight_unit: 'kilograms',
     terminal: {
       dimensions: {
         width: 64,
@@ -107,7 +108,7 @@ class GameConfigManager {
    *
    * @returns The current game configuration.
    */
-  public getConfig(): GameConfigType {
+  public getConfig(): GameConfig {
     return this.config;
   }
 

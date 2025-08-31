@@ -1,8 +1,8 @@
 import { BaseScreen } from './baseScreen';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../types/terminal/stack';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
 import { StatsScreenDisplay } from '../../ui/statsScreenDisplay/statsScreenDisplay';
 
 /**

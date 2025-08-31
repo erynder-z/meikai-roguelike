@@ -6,10 +6,25 @@ import { GlyphMap } from '../glyphs/glyphMap';
 import { Slot } from '../itemObjects/slot';
 import { ObjCategory } from '../itemObjects/itemCategories';
 import { Spell } from '../spells/spell';
-import {
-  Recipe,
-  RecipeResult,
-} from '../../types/gameLogic/crafting/recipeType';
+
+type Recipe = {
+  ingredients: string[];
+  result: RecipeResult;
+};
+
+type RecipeResult = {
+  glyph: string;
+  slot: string;
+  category: string[];
+  level: number;
+  initialization?: {
+    spell?: string;
+    charges?: {
+      base: number;
+    };
+    effectMagnitude?: number | null;
+  };
+};
 
 /**
  * Class responsible for handling item crafting logic.

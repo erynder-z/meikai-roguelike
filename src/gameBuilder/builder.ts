@@ -1,10 +1,10 @@
 import { AISwitcher } from '../gameLogic/mobs/aiSwitcher';
-import { Build } from '../types/gameBuilder/build';
-import { GameConfigType } from '../types/gameConfig/gameConfigType';
+import { Build } from '../shared-types/gameBuilder/build';
+import { GameConfig } from '../shared-types/gameConfig/gameConfig';
 import { FindFreeSpace } from '../maps/helpers/findFreeSpace';
 import { Game } from './gameModel';
-import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../shared-types/gameBuilder/gameState';
 import { Glyph } from '../gameLogic/glyphs/glyph';
 import { Inventory } from '../gameLogic/inventory/inventory';
 import { ItemObject } from '../gameLogic/itemObjects/itemObject';
@@ -13,13 +13,13 @@ import { MapGenerator1 } from '../maps/mapGenerator/mapGenerator';
 import { MapGenerator_Cave } from '../maps/mapGenerator/mapGenerator_Cave';
 import { MapGenerator_Maze } from '../maps/mapGenerator/mapGenerator_Maze';
 import { Mob } from '../gameLogic/mobs/mob';
-import { MobAI } from '../types/gameLogic/mobs/mobAI';
+import { MobAI } from '../shared-types/gameLogic/mobs/mobAI';
 import { MoodAI } from '../gameLogic/mobs/moodAI';
 import { ObjCategory } from '../gameLogic/itemObjects/itemCategories';
 import { Overworld } from '../maps/staticMaps/overworld';
 import { RandomGenerator } from '../randomGenerator/randomGenerator';
 import { SaveStateHandler } from '../savestates/saveStateHandler';
-import { SerializedGameState } from '../types/utilities/saveStateHandler';
+import { SerializedGameState } from '../shared-types/utilities/saveStateHandler';
 import { Slot } from '../gameLogic/itemObjects/slot';
 import { Spell } from '../gameLogic/spells/spell';
 import { TerminalPoint } from '../terminal/terminalPoint';
@@ -30,8 +30,8 @@ import { WorldPoint } from '../maps/mapModel/worldPoint';
  */
 export class Builder implements Build {
   constructor(
-    public seed: GameConfigType['seed'],
-    public player: GameConfigType['player'],
+    public seed: GameConfig['seed'],
+    public player: GameConfig['player'],
   ) {}
 
   /**
@@ -559,7 +559,7 @@ export class Builder implements Build {
       ObjCategory.MeleeWeapon,
     ]);
     strongPickaxe.level = 50;
-    strongPickaxe.weight = 10;
+    strongPickaxe.weight = 30;
     inv.add(strongPickaxe);
 
     const strongRevolver = new ItemObject(

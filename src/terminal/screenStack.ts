@@ -1,7 +1,7 @@
-import { DrawableTerminal } from '../types/terminal/drawableTerminal';
-import { InteractiveScreen } from '../types/terminal/interactiveScreen';
-import { Stack } from '../types/terminal/stack';
-import { StackScreen } from '../types/terminal/stackScreen';
+import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
+import { InteractiveScreen } from '../shared-types/terminal/interactiveScreen';
+import { Stack } from '../shared-types/terminal/stack';
+import { StackScreen } from '../shared-types/terminal/stackScreen';
 
 /**
  * Represents a stack of interactive screens in the game.

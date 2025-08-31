@@ -1,4 +1,4 @@
-import { Mood } from '../../types/gameLogic/stats/stats';
+import { Mood } from '../../shared-types/gameLogic/stats/stats';
 
 /**
  * Manage player related stats
@@ -19,7 +19,9 @@ export class Stats {
   public hunger = 0.0;
   public thirst = 0.0;
   public maxCraftIngredients = 2;
-  public maxCarryWeight = this.currentStrength * 25;
+  public strengthToCarryWeightMultiplier = 25;
+  public maxCarryWeight =
+    this.currentStrength * this.strengthToCarryWeightMultiplier;
   public maxCarryWeightModifier = 1.0;
 
   /**
@@ -143,7 +145,9 @@ export class Stats {
    */
   public setMaxCarryWeight(): void {
     this.maxCarryWeight =
-      this.currentStrength * 25 * this.maxCarryWeightModifier;
+      this.currentStrength *
+      this.strengthToCarryWeightMultiplier *
+      this.maxCarryWeightModifier;
   }
 
   /**

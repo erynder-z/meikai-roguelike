@@ -1,5 +1,5 @@
 import { Corpse } from '../../gameLogic/mobs/corpse';
-import { EnvEffect } from '../../types/gameLogic/maps/mapModel/envEffect';
+import { EnvEffect } from '../../shared-types/gameLogic/maps/mapModel/envEffect';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';
@@ -323,5 +323,23 @@ export class MapCell {
    */
   public isWater(): boolean {
     return this.env === Glyph.Shallow_Water || this.env === Glyph.Deep_Water;
+  }
+
+  /**
+   * Checks if the current cell is a Nebulous Mist.
+   *
+   * @return True if the cell is a Nebulous Mist, false otherwise.
+   */
+  public isNebulousMist(): boolean {
+    return this.env === Glyph.Nebulous_Mist;
+  }
+
+  /**
+   * Checks if the current cell is lava.
+   *
+   * @return True if the cell is lava, false otherwise.
+   */
+  public isLava(): boolean {
+    return this.env === Glyph.Lava;
   }
 }
