@@ -1,4 +1,4 @@
-import { AttackAnimationType } from '../../types/gameLogic/animations/animationTypes';
+import { AttackAnimationType } from '../../shared-types/gameLogic/animations/animationTypes';
 import * as animationData from './data/attackAnimations.json';
 
 type AttackAnimation = {

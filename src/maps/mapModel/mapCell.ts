@@ -1,5 +1,5 @@
 import { Corpse } from '../../gameLogic/mobs/corpse';
-import { EnvEffect } from '../../types/gameLogic/maps/mapModel/envEffect';
+import { EnvEffect } from '../../shared-types/gameLogic/maps/mapModel/envEffect';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';

@@ -1,10 +1,10 @@
 import { Buff } from '../gameLogic/buffs/buffEnum';
 import { CanSee } from '../maps/helpers/canSee';
-import { DrawableTerminal } from '../types/terminal/drawableTerminal';
-import { EnvEffect } from '../types/gameLogic/maps/mapModel/envEffect';
+import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
+import { EnvEffect } from '../shared-types/gameLogic/maps/mapModel/envEffect';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../shared-types/gameBuilder/gameState';
 import { Glyph } from '../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
@@ -248,7 +248,8 @@ export class MapRenderer {
     game: GameState,
   ): void {
     const buffs = game.player.buffs;
-    const blind = buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
+    const blind =
+      buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
     const farDist = CanSee.getFarDist(playerPos, map, game);
     const gameConfig = gameConfigManager.getConfig();
     const shouldApplyGlyphShadow = gameConfig.show_glyph_shadow;
@@ -285,7 +286,8 @@ export class MapRenderer {
     game: GameState,
   ): void {
     const buffs = game.player.buffs;
-    const blind = buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
+    const blind =
+      buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
     const farDist = CanSee.getFarDist(playerPos, map, game);
     const gameConfig = gameConfigManager.getConfig();
     const shouldApplyGlyphShadow = gameConfig.show_glyph_shadow;

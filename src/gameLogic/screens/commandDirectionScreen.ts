@@ -1,9 +1,9 @@
 import { BaseScreen } from './baseScreen';
-import { Command } from '../../types/gameLogic/commands/command';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { CommandDirectionScreenDisplay } from '../../ui/commandDirectionScreenDisplay/commandDirectionScreenDisplay';
-import { GameState } from '../../types/gameBuilder/gameState';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../types/terminal/stack';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**

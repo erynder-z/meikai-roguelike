@@ -1,14 +1,14 @@
 import { BleedTick } from '../buffs/bleedTick';
 import { Buff } from '../buffs/buffEnum';
-import { BuffType } from '../../types/gameLogic/buffs/buffType';
+import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
 import { BurnTick } from '../buffs/burnTick';
 import { CommandBase } from './commandBase';
 import { FreezeTick } from '../buffs/freezeTick';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
 import { PetrifyTick } from '../buffs/petrifyTick';
 import { PoisonTick } from '../buffs/poisonTick';
-import { Tick } from '../../types/gameLogic/buffs/buffType';
+import { Tick } from '../../shared-types/gameLogic/buffs/buffType';
 
 const BURN_DMG_MIN = 2;
 const BURN_DMG_MAX = 4;

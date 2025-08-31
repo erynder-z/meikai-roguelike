@@ -1,14 +1,14 @@
 import { BaseScreen } from './baseScreen';
-import { Command } from '../../types/gameLogic/commands/command';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { CommandBase } from '../commands/commandBase';
-import { Cost } from '../../types/gameLogic/commands/cost';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { Cost } from '../../shared-types/gameLogic/commands/cost';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import keys from '../../utilities/commonKeyboardChars.json';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Spell } from '../spells/spell';
 import { SpellFinder } from '../spells/spellFinder';
-import { Stack } from '../../types/terminal/stack';
-import { StackScreen } from '../../types/terminal/stackScreen';
+import { Stack } from '../../shared-types/terminal/stack';
+import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { SpellScreenDisplay } from '../../ui/spellScreenDisplay/spellScreenDisplay';
 
 /**

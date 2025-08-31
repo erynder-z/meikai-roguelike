@@ -1,7 +1,7 @@
 import { Buff } from '../buffs/buffEnum';
 import { CommandBase } from './commandBase';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
 import { MobMessagesHandler } from '../../ui/messages/mobMessagesHandler';
 

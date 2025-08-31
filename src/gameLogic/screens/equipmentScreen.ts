@@ -1,13 +1,13 @@
 import { BaseScreen } from './baseScreen';
 import { Equipment } from '../inventory/equipment';
 import { EquipmentScreenDisplay } from '../../ui/equipmentScreenDIsplay/equipmentScreenDisplay';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Inventory } from '../inventory/inventory';
 import { ItemScreen } from './itemScreen';
 import keys from '../../utilities/commonKeyboardChars.json';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Slot } from '../itemObjects/slot';
-import { Stack } from '../../types/terminal/stack';
+import { Stack } from '../../shared-types/terminal/stack';
 
 /**
  * Represents a equipment screen.

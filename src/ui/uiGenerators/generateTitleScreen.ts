@@ -3,7 +3,7 @@ import { BaseDirectory, readFile } from '@tauri-apps/plugin-fs';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { DynamicScreenMaker } from '../../gameLogic/screens/dynamicScreenMaker';
 import { GlyphLoader } from '../../loaders/glyphLoader';
-import { SerializedGameState } from '../../types/utilities/saveStateHandler';
+import { SerializedGameState } from '../../shared-types/utilities/saveStateHandler';
 import { PopupHandler } from '../popup/popupHandler';
 
 export class GenerateTitleScreen {

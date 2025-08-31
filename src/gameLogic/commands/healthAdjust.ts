@@ -2,8 +2,8 @@ import { AutoHeal } from './autoHeal';
 import { CanSee } from '../../maps/helpers/canSee';
 import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { LootManager } from '../itemObjects/lootManager';
 import { Mob } from '../mobs/mob';
 

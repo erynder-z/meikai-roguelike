@@ -1,9 +1,9 @@
 import { BaseScreen } from './baseScreen';
 import { DetailViewHandler } from '../../ui/detailVIewHandler/detailViewHandler';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ParsePlayer } from '../events/parsePlayer';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../types/terminal/stack';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
 import { StoryScreen } from './storyScreen';
 
 /**

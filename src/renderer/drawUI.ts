@@ -1,12 +1,12 @@
 import { BuffsDisplay } from '../ui/buffs/buffsDisplay';
-import { DrawableTerminal } from '../types/terminal/drawableTerminal';
+import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
 import { EnvironmentChecker } from '../gameLogic/environment/environmentChecker';
 import { EquipmentDisplay } from '../ui/equipment/equipmentDisplay';
 import { EventCategory, LogMessage } from '../gameLogic/messages/logMessage';
 import { FlashDisplay } from '../ui/flashDisplay/flashDisplay';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../shared-types/gameBuilder/gameState';
 import { Glyph } from '../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';

@@ -1,13 +1,13 @@
 import { AwakeAI } from './awakeAI';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from './mob';
-import { MobAI } from '../../types/gameLogic/mobs/mobAI';
+import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
 import { Mood } from './moodEnum';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { ShootAI } from './shootAI';
 import { SimpleSleepAI } from './simpleSleepAI';
 import { SpellAI } from './spellAI';
-import { Stack } from '../../types/terminal/stack';
+import { Stack } from '../../shared-types/terminal/stack';
 import { VisibilityAwareSleepAI } from './visibilityAwareSleepAI';
 
 /**

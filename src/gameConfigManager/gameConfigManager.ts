@@ -1,6 +1,6 @@
 import { FontHandler } from '../font/fontHandler';
 import { getRandomName } from '../randomGenerator/getRandomName';
-import { GameConfig } from '../types/gameConfig/gameConfig';
+import { GameConfig } from '../shared-types/gameConfig/gameConfig';
 import {
   BaseDirectory,
   readTextFile,

@@ -1,10 +1,10 @@
 import { BloodVisualsHandler } from '../../utilities/bloodVisualsHandler';
 import { EventCategory } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealthAdjust } from '../commands/healthAdjust';
 import { LogMessage } from '../messages/logMessage';
 import { Mob } from '../mobs/mob';
-import { Tick } from '../../types/gameLogic/buffs/buffType';
+import { Tick } from '../../shared-types/gameLogic/buffs/buffType';
 
 /**
  * Handles a bleed tick.

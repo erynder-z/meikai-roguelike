@@ -1,12 +1,12 @@
 import { GameMap } from '../mapModel/gameMap';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { MapUtils } from '../helpers/mapUtils';
 import { OVERWORLD_LEVEL_TILES } from '../mapGenerator/generationData/overworldLevelTiles';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { RockGenerator } from '../mapGenerator/rockGenerator';
 import { WorldPoint } from '../mapModel/worldPoint';
-import { WeightedFeatureConfig } from '../../types/gameLogic/maps/helpers/weightedFeatures';
+import { WeightedFeatureConfig } from '../../shared-types/gameLogic/maps/helpers/weightedFeatures';
 
 const overworldFeatures: WeightedFeatureConfig[] = [
   {

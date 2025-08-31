@@ -1,7 +1,7 @@
 import { CommandBase } from './commandBase';
 import { Equipment } from '../inventory/equipment';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ItemObject } from '../itemObjects/itemObject';
 import { Slot } from '../itemObjects/slot';
 

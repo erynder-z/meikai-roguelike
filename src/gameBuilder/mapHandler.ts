@@ -1,7 +1,7 @@
 import { EventCategory } from '../gameLogic/messages/logMessage';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../shared-types/gameBuilder/gameState';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
 import storyData from '../story/storyScreenData.json';
 

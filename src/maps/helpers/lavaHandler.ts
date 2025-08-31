@@ -1,7 +1,7 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffCommand } from '../../gameLogic/commands/buffCommand';
 import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../../gameLogic/mobs/mob';
 
 /**

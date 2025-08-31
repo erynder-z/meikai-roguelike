@@ -1,14 +1,14 @@
 import { Act } from './act';
 import { CommandBase } from './commandBase';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Glyph } from '../glyphs/glyph';
 import { GlyphMap } from '../glyphs/glyphMap';
 import { Inventory } from '../inventory/inventory';
 import { ItemObject } from '../itemObjects/itemObject';
 import { Mob } from '../mobs/mob';
-import { MovementDirection } from '../../types/gameLogic/commands/movementDirections';
+import { MovementDirection } from '../../shared-types/gameLogic/commands/movementDirections';
 import { StairCommand } from './stairCommand';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 

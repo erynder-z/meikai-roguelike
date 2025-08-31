@@ -1,6 +1,6 @@
 import { DEFAULT_LEVEL_TILES } from './generationData/defaultLevelTiles';
 import { GameMap } from '../mapModel/gameMap';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { MapUtils } from '../helpers/mapUtils';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';

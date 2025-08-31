@@ -1,9 +1,9 @@
 import { AttackDamageChangeTick } from '../buffs/attackDamageChangeTick';
 import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from './buffCommand';
-import { BuffType, Tick } from '../../types/gameLogic/buffs/buffType';
+import { BuffType, Tick } from '../../shared-types/gameLogic/buffs/buffType';
 import { DefenseChangeTick } from '../buffs/defenseChangeTick';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
 
 const DEFAULT_BUFF_DURATION = 50;

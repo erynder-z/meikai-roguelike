@@ -1,5 +1,5 @@
 import { gameConfigManager } from '../../../gameConfigManager/gameConfigManager';
-import { GameConfig } from '../../../types/gameConfig/gameConfig';
+import { GameConfig } from '../../../shared-types/gameConfig/gameConfig';
 import { ScanlineStyles } from '../../../renderer/scanlinesHandler';
 /**
  * Handles changing the displayed content of buttons on the options menu.

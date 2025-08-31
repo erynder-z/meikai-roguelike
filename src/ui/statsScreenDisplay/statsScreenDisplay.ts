@@ -1,6 +1,6 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffColors } from '../buffs/buffColors';
-import { BuffType } from '../../types/gameLogic/buffs/buffType';
+import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
 import { Equipment } from '../../gameLogic/inventory/equipment';
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import { Mob } from '../../gameLogic/mobs/mob';

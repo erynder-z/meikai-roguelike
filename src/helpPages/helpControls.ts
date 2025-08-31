@@ -1,6 +1,9 @@
 import controlsData from './controls.json';
 import controlSchemes from '../controls/control_schemes.json';
-import { ControlSchemeName, ControlScheme } from '../types/controls/controlScheme';
+import {
+  ControlScheme,
+  ControlSchemeName,
+} from '../shared-types/controls/controlScheme';
 import { EventListenerTracker } from '../utilities/eventListenerTracker';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { UnBlurElement } from '../ui/other/unBlurElement';
@@ -210,7 +213,7 @@ export class HelpControls extends UnBlurElement {
       const keyCell = document.createElement('td');
       const actionCell = document.createElement('td');
 
-      const keys = (selectedScheme as ControlSchemeType)[action] || [];
+      const keys = (selectedScheme as ControlScheme)[action] || [];
       keyCell.textContent =
         action === 'scroll_list'
           ? this.formatScrollListKeys(keys)

@@ -1,6 +1,6 @@
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from './mob';
-import { MobAI } from '../../types/gameLogic/mobs/mobAI';
+import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
 import { MoveCommand } from '../commands/moveCommand';
 
 /**

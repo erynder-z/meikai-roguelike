@@ -1,12 +1,12 @@
 import { EnvironmentChecker } from '../../gameLogic/environment/environmentChecker';
 import { GameMap } from '../mapModel/gameMap';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { IrregularShapeAreaGenerator } from './irregularShapeAreaGenerator';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { RockGenerator } from '../mapGenerator/rockGenerator';
-import { Tile } from '../../types/gameLogic/maps/mapGenerator/tile';
-import { WeightedFeatureConfig } from '../../types/gameLogic/maps/helpers/weightedFeatures';
+import { Tile } from '../../shared-types/gameLogic/maps/mapGenerator/tile';
+import { WeightedFeatureConfig } from '../../shared-types/gameLogic/maps/helpers/weightedFeatures';
 import { WorldPoint } from '../mapModel/worldPoint';
 
 /**

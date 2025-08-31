@@ -1,10 +1,10 @@
-import { Able } from '../../types/gameLogic/commands/able';
+import { Able } from '../../shared-types/gameLogic/commands/able';
 import { Act } from './act';
 import { Buff } from '../buffs/buffEnum';
-import { Command } from '../../types/gameLogic/commands/command';
-import { Cost } from '../../types/gameLogic/commands/cost';
+import { Command } from '../../shared-types/gameLogic/commands/command';
+import { Cost } from '../../shared-types/gameLogic/commands/cost';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 

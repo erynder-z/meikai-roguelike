@@ -1,18 +1,18 @@
 import { BaseScreen } from './baseScreen';
-import { Command } from '../../types/gameLogic/commands/command';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { CommandBase } from '../commands/commandBase';
 import { EntityInfoCard } from '../../ui/entityInfoDisplay/entityInfoCard';
 import { EquipCommand } from '../commands/equipCommand';
 import { DetailViewHandler } from '../../ui/detailVIewHandler/detailViewHandler';
 import { DropCommand } from '../commands/dropCommand';
 import { FindObjectSpell } from '../spells/findObjectSpells';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ItemObject } from '../itemObjects/itemObject';
 import { ItemScreenDisplay } from '../../ui/itemScreenDisplay/itemScreenDisplay';
 import { ObjCategory } from '../itemObjects/itemCategories';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../types/terminal/stack';
-import { StackScreen } from '../../types/terminal/stackScreen';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { Slot } from '../itemObjects/slot';
 import { UnequipCommand } from '../commands/unequipCommand';
 

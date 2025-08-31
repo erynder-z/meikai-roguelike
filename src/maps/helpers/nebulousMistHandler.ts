@@ -1,7 +1,7 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffCommand } from '../../gameLogic/commands/buffCommand';
 import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../../gameLogic/mobs/mob';
 
 /**
@@ -21,13 +21,7 @@ export class NebulousMistHandler {
 
     if (!isInMist) {
       const duration = Number.MAX_SAFE_INTEGER;
-      new BuffCommand(
-        Buff.NebulousMist,
-        mob,
-        game,
-        mob,
-        duration,
-      ).execute();
+      new BuffCommand(Buff.NebulousMist, mob, game, mob, duration).execute();
 
       const flash = new LogMessage(
         'A thick mist surrounds you, making it hard to see.',

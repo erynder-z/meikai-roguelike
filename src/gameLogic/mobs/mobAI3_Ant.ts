@@ -1,9 +1,9 @@
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from './mob';
-import { MobAI } from '../../types/gameLogic/mobs/mobAI';
+import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
 import { MoveBumpCommand } from '../commands/moveBumpCommand';
-import { Stack } from '../../types/terminal/stack';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 
 /**
  * Represents an implementation of MobAI for a ant-type mob.

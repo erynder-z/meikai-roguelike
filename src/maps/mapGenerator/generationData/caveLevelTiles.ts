@@ -1,5 +1,5 @@
 import { Glyph } from '../../../gameLogic/glyphs/glyph';
-import { Tile } from '../../../types/gameLogic/maps/mapGenerator/tile';
+import { Tile } from '../../../shared-types/gameLogic/maps/mapGenerator/tile';
 
 export const CAVE_LEVEL_TILES: Tile = {
   floor: [

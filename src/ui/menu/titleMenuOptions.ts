@@ -1,6 +1,6 @@
 import controls from '../../controls/control_schemes.json';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
-import { ControlSchemeName } from '../../types/controls/controlScheme';
+import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { FlickerManager } from '../../renderer/flickerManager';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';

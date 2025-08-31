@@ -1,4 +1,4 @@
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 
 /**
  * Represents a point in the world with x and y coordinates.

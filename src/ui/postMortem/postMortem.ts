@@ -1,4 +1,4 @@
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 
 export class PostMortem extends HTMLElement {
   public game: GameState | null = null;

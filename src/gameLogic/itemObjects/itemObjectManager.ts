@@ -1,4 +1,4 @@
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../glyphs/glyph';
 import { ItemObject } from './itemObject';
 import { ObjCategory } from './itemCategories';

@@ -1,8 +1,8 @@
 import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from './buffCommand';
 import { ChasmHandler } from '../../maps/helpers/chasmHandler';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Glyph } from '../glyphs/glyph';
 import { HealCommand } from './healCommand';
 import { LavaHandler } from '../../maps/helpers/lavaHandler';

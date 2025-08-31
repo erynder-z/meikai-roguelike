@@ -1,15 +1,15 @@
-import { Able } from '../../types/gameLogic/commands/able';
+import { Able } from '../../shared-types/gameLogic/commands/able';
 import { Act } from './act';
 import { CommandBase } from './commandBase';
 import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameState } from '../../types/gameBuilder/gameState';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HitCommand } from './hitCommand';
 import { MagnetismHandler } from '../../maps/helpers/magnetismHandler';
 import { MapCell } from '../../maps/mapModel/mapCell';
 import { Mob } from '../mobs/mob';
 import { MoveCommand } from './moveCommand';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../types/terminal/stack';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**

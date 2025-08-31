@@ -1,4 +1,4 @@
-import { Mood } from '../../types/gameLogic/stats/stats';
+import { Mood } from '../../shared-types/gameLogic/stats/stats';
 
 /**
  * Manage player related stats

@@ -2,16 +2,16 @@ import { BaseScreen } from './baseScreen';
 import { Buff } from '../buffs/buffEnum';
 import { CanSee } from '../../maps/helpers/canSee';
 import { DetailViewHandler } from '../../ui/detailVIewHandler/detailViewHandler';
-import { DrawableTerminal } from '../../types/terminal/drawableTerminal';
+import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
 import { DrawUI } from '../../renderer/drawUI';
 import { EntityInfoCard } from '../../ui/entityInfoDisplay/entityInfoCard';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../types/gameBuilder/gameState';
-import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
-import { DetailViewEntity } from '../../types/ui/detailViewEntity';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { DetailViewEntity } from '../../shared-types/ui/detailViewEntity';
 import { MapCell } from '../../maps/mapModel/mapCell';
-import { ScreenMaker } from '../../types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../types/terminal/stack';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**
@@ -83,7 +83,8 @@ export class LookScreen extends BaseScreen {
     game: GameState,
   ): boolean {
     const { buffs } = game.player;
-    const isBlind = buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
+    const isBlind =
+      buffs && (buffs.is(Buff.Blind) || buffs.is(Buff.NebulousMist));
     const farDist = CanSee.getFarDist(playerPos, map, game);
 
     return (
