@@ -5,12 +5,50 @@ import mobsData from '../gameLogic/mobs/mobData/mobs.json';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
-import {
-  CorpseGlyph,
-  EnvironmentGlyph,
-  ItemGlyph,
-  MobGlyph,
-} from '../types/gameLogic/glyphs/glyphTypes';
+
+type BaseGlyph = {
+  id: string;
+  char: string;
+  bgCol: string;
+  fgCol: string;
+  hasSolidBg: boolean;
+  name: string;
+  description: string;
+  help?: {
+    show: boolean;
+    about: string;
+  };
+};
+
+type EnvironmentGlyph = {
+  isOpaque: boolean;
+  isBlockingMovement: boolean;
+  isBlockingProjectiles: boolean;
+  isDiggable: boolean;
+  isCausingSlow: boolean;
+  isCausingBurn: boolean;
+  isMagnetic: boolean;
+  isCausingBleed: boolean;
+  isGlowing: boolean;
+  isCausingPoison: boolean;
+  isCausingConfusion: boolean;
+  isCausingBlind: boolean;
+  defaultBuffDuration?: number;
+} & BaseGlyph;
+
+/**
+ * Represents a mob glyph.
+ */
+type MobGlyph = {
+  // Add any mob-specific properties here if needed
+} & BaseGlyph;
+
+/**
+ * Represents an item glyph.
+ */
+type ItemGlyph = {
+  // Add any item-specific properties here if needed
+} & BaseGlyph;
 
 /**
  * Responsible for loading and initializing glyphs into the GlyphMap.
@@ -135,7 +173,7 @@ export class GlyphLoader {
         });
 
         // Load corpse glyphs
-        corpseData.corpses.forEach((corpse: CorpseGlyph) => {
+        corpseData.corpses.forEach((corpse: BaseGlyph) => {
           const corpseGlyph = new GlyphInfo(
             corpse.id,
             corpse.fgCol,

@@ -1,6 +1,11 @@
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import * as storyData from '../../story/storyScreenData.json';
-import { Story } from '../../types/story/story';
+
+type Story = {
+  level: string;
+  heading: string;
+  [key: string]: string;
+};
 
 export class StoryScreenDisplay extends FadeInOutElement {
   private isAnimating = false;

@@ -1,9 +1,6 @@
 import controlsData from './controls.json';
 import controlSchemes from '../controls/control_schemes.json';
-import {
-  ControlSchemeName,
-  ControlSchemeType,
-} from '../types/controls/controlSchemeType';
+import { ControlSchemeName, ControlScheme } from '../types/controls/controlScheme';
 import { EventListenerTracker } from '../utilities/eventListenerTracker';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { UnBlurElement } from '../ui/other/unBlurElement';

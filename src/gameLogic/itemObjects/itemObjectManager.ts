@@ -2,16 +2,49 @@ import { GameMapType } from '../../types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../glyphs/glyph';
 import { ItemObject } from './itemObject';
 import { ObjCategory } from './itemCategories';
-import {
-  ItemTemplate,
-  ItemDefinitionJson,
-} from '../../types/gameLogic/itemObjects/items';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { Slot } from './slot';
 import { Spell } from '../spells/spell';
 import spellData from '../../gameLogic/spells/spellData/spells.json';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import * as itemData from '../../gameLogic/itemObjects/itemData/items.json';
+
+type ItemDefinitionJson = {
+  id: string;
+  glyph: string;
+  char: string;
+  bgCol: string;
+  fgCol: string;
+  hasSolidBg: boolean;
+  name: string;
+  description: string;
+  category: string[];
+  slot: string;
+  weight: number;
+  initialization?: {
+    spell?: string;
+    charges?: {
+      base: number;
+    };
+  };
+  help: {
+    show: boolean;
+    about: string;
+  };
+};
+
+type ItemTemplate = {
+  glyph: Glyph;
+  slot: Slot;
+  category: ObjCategory[];
+  weight: number;
+  initialization?: {
+    spell?: string;
+    charges?: {
+      base: number;
+    };
+  };
+};
 
 /**
  * Represents a collection of objects (items) in the game world.

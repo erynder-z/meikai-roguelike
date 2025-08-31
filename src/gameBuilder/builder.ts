@@ -1,6 +1,6 @@
 import { AISwitcher } from '../gameLogic/mobs/aiSwitcher';
 import { Build } from '../types/gameBuilder/build';
-import { GameConfigType } from '../types/gameConfig/gameConfigType';
+import { GameConfig } from '../types/gameConfig/gameConfig';
 import { FindFreeSpace } from '../maps/helpers/findFreeSpace';
 import { Game } from './gameModel';
 import { GameMapType } from '../types/gameLogic/maps/mapModel/gameMapType';
@@ -30,8 +30,8 @@ import { WorldPoint } from '../maps/mapModel/worldPoint';
  */
 export class Builder implements Build {
   constructor(
-    public seed: GameConfigType['seed'],
-    public player: GameConfigType['player'],
+    public seed: GameConfig['seed'],
+    public player: GameConfig['player'],
   ) {}
 
   /**

@@ -1,9 +1,14 @@
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import { groupInventory } from '../../utilities/inventoryUtils';
-import { InventoryDisplayData } from '../../types/ui/inventoryDisplayData';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
 import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
+
+type InventoryDisplayData = {
+  items: ItemObject[];
+  wornItemsWeight: number;
+  maxCarryWeight: number;
+};
 
 export class InventoryScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];

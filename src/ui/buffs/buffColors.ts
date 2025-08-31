@@ -1,5 +1,11 @@
 import messagesData from '../../gameLogic/messages/messagesData/messagesData.json';
-import { BuffText } from '../../types/ui/buffText';
+
+type BuffText = {
+  buff: string;
+  textColor: string;
+  noun: string;
+  adjective: string;
+};
 
 /**
  * Represents a helper class that provides methods for coloring buff text.

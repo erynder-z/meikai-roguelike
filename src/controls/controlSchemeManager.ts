@@ -1,5 +1,5 @@
 import controls from './control_schemes.json';
-import { ControlSchemeName } from '../types/controls/controlSchemeType';
+import { ControlSchemeName } from '../types/controls/controlScheme';
 
 /**
  * Provides the current control scheme to be used in the game. Available control schemes are defined in the `control_schemes.json` file.

@@ -1,6 +1,6 @@
 import { ScanlineStyles } from '../../renderer/scanlinesHandler';
 
-export type GameConfigType = {
+export type GameConfig = {
   SHOW_MENU: boolean;
   terminal: {
     dimensions: { width: number; height: number };

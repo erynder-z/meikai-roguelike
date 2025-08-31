@@ -15,7 +15,6 @@ import { LogMessage } from '../gameLogic/messages/logMessage';
 import { MapCell } from '../maps/mapModel/mapCell';
 import { Mob } from '../gameLogic/mobs/mob';
 import {
-  ReadyToSaveGameState,
   SerializedCorpseData,
   SerializedDungeonData,
   SerializedGameMap,
@@ -30,6 +29,78 @@ import { TurnQueue } from '../gameLogic/turnQueue/turnQueue';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
 import { Tick } from '../types/gameLogic/buffs/buffType';
 import { StatChangeBuffCommand } from '../gameLogic/commands/statChangeBuffCommand';
+import { MapHandler } from '../gameBuilder/mapHandler';
+import { MessageLog } from '../gameLogic/messages/messageLog';
+import { AutoHeal } from '../gameLogic/commands/autoHeal';
+import { NeedsHandler } from '../gameLogic/needs/needsHandler';
+import { Stats } from '../gameLogic/stats/stats';
+import { Builder } from '../gameBuilder/builder';
+import { Slot } from '../gameLogic/itemObjects/slot';
+import { MobAI } from '../types/gameLogic/mobs/mobAI';
+
+type ReadyToSaveGameState = {
+  serializedAI: {
+    id: string;
+    data: MobAI | null;
+  };
+  serializedLog: {
+    id: string;
+    data: MessageLog;
+  };
+  serializedDungeon: {
+    id: string;
+    data: MapHandler;
+  };
+  serializedAutoHeal: {
+    id: string;
+    data: AutoHeal | undefined;
+  };
+  serializedInventory: {
+    id: string;
+    data: Inventory | undefined;
+  };
+  serializedEquipment: {
+    id: string;
+    data: [Slot, ItemObject][];
+  };
+  serializedNeeds: {
+    id: string;
+    data: NeedsHandler | undefined;
+  };
+  serializedStats: {
+    id: string;
+    data: Stats;
+  };
+  serializedSurfaceTemp: {
+    id: string;
+    data: number;
+  };
+  serializedShownStoryLevels: {
+    id: string;
+    data: number[];
+  };
+  serializedPlayer: {
+    id: string;
+    data: Mob;
+  };
+  serializedPlayerBuffs: {
+    id: string;
+    data: {
+      buff: Buff;
+      duration: number;
+    }[];
+  };
+  serializedBuild: {
+    id: string;
+    data: Builder;
+  };
+  playerConfig: {
+    name: string;
+    appearance: 'boyish' | 'girlish';
+    color: string;
+    avatar: string;
+  };
+};
 
 /**
  * Handles serializing and deserializing the game state to and from JSON.

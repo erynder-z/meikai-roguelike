@@ -1,9 +1,18 @@
-import {
-  EquipmentDisplayData,
-  EquipmentItemData,
-} from '../../types/ui/equipmentDisplayData';
 import { FadeInOutElement } from '../other/fadeInOutElement';
 import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
+
+type EquipmentItemData = {
+  char: string;
+  slot: string;
+  weight: number;
+  description: string;
+};
+
+type EquipmentDisplayData = {
+  items: EquipmentItemData[];
+  inventoryWeight: number;
+  maxCarryWeight: number;
+};
 
 export class EquipmentScreenDisplay extends FadeInOutElement {
   private equipmentItems: EquipmentItemData[] = [];

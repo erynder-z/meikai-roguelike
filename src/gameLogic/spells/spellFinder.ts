@@ -4,7 +4,6 @@ import { BulletCommand } from '../commands/bulletCommand';
 import { CleanseAllCommand } from '../commands/cleanseAllCommand';
 import { Command } from '../../types/gameLogic/commands/command';
 import { CommandDirectionScreen } from '../screens/commandDirectionScreen';
-import { CommandOrScreen } from '../../types/gameLogic/screens/CommandOrScreen';
 import { Cost } from '../../types/gameLogic/commands/cost';
 import { DrinkCommand } from '../commands/drinkCommand';
 import { EatCommand } from '../commands/eatCommand';
@@ -19,6 +18,11 @@ import { Stack } from '../../types/terminal/stack';
 import { StackScreen } from '../../types/terminal/stackScreen';
 import { SummonCommand } from '../commands/summonCommand';
 import { TeleportCommand } from '../commands/teleportCommand';
+
+type CommandOrScreen = {
+  cmd: Command;
+  screen: StackScreen;
+};
 
 /**
  * Helper-class that provides methods for returning a Command or a StackScreen for a spell.
