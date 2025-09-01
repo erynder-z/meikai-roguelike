@@ -34,6 +34,18 @@ export class ParsePlayer {
   private gameConfig = gameConfigManager.getConfig();
   private currentScheme = this.gameConfig.control_scheme || 'default';
   private controlSchemeManager: ControlSchemeManager;
+  private activeControlScheme;
+
+  private readonly directionMap: Record<string, WorldPoint>;
+  private readonly screenActions: Record<
+    string,
+    (stack: Stack) => StackScreen | undefined
+  >;
+  private readonly commandActions: Record<
+    string,
+    (stack: Stack) => Command | undefined
+  >;
+
   constructor(
     public game: GameState,
     public make: ScreenMaker,
@@ -43,6 +55,45 @@ export class ParsePlayer {
     this.currentScheme =
       gameConfigManager.getConfig().control_scheme || 'default';
     this.controlSchemeManager = new ControlSchemeManager(this.currentScheme);
+    this.activeControlScheme = this.controlSchemeManager.getActiveScheme();
+    const acs = this.activeControlScheme; // shorthand
+
+    this.directionMap = {
+      [acs.move_left.toString()]: new WorldPoint(-1, 0),
+      [acs.move_right.toString()]: new WorldPoint(1, 0),
+      [acs.move_up.toString()]: new WorldPoint(0, -1),
+      [acs.move_down.toString()]: new WorldPoint(0, 1),
+      [acs.move_up_left.toString()]: new WorldPoint(-1, -1),
+      [acs.move_up_right.toString()]: new WorldPoint(1, -1),
+      [acs.move_down_left.toString()]: new WorldPoint(-1, 1),
+      [acs.move_down_right.toString()]: new WorldPoint(1, 1),
+    };
+
+    this.commandActions = {
+      [acs.wait.toString()]: stack => this.waitCmd(stack),
+      [acs.grab_item.toString()]: () =>
+        this.game.inventory ? new PickupCommand(this.game) : undefined,
+    };
+
+    this.screenActions = {
+      [acs.log.toString()]: () => new LogScreen(this.game, this.make),
+      [acs.handle_door.toString()]: () => this.doorCommand(),
+      [acs.inventory.toString()]: () =>
+        this.game.inventory
+          ? new InventoryScreen(this.game, this.make)
+          : undefined,
+      [acs.equipment.toString()]: () =>
+        this.game.equipment
+          ? new EquipmentScreen(this.game, this.make)
+          : undefined,
+      [acs.look.toString()]: () => new LookScreen(this.game, this.make),
+      [acs.spells.toString()]: () => new SpellScreen(this.game, this.make),
+      [acs.stats.toString()]: () => new StatsScreen(this.game, this.make),
+      [acs.craft.toString()]: () => new CraftingScreen(this.game, this.make),
+      [acs.menu.toString()]: stack =>
+        new IngameMenuScreen(this.game, this.make, stack),
+      [acs.debug1.toString()]: () => new DebuggerScreen(this.game, this.make),
+    };
   }
 
   /**
@@ -75,97 +126,42 @@ export class ParsePlayer {
     stack: Stack,
     event: KeyboardEvent | null,
   ): Command | null {
-    const activeControlScheme = this.controlSchemeManager.getActiveScheme();
-
     const alt = event?.altKey || event?.metaKey;
-    let stackScreen: StackScreen | undefined;
-    const dir = new WorldPoint();
-
     if (event && alt) event.preventDefault();
 
-    switch (char) {
-      case activeControlScheme.move_left.toString():
-        dir.x = -1;
-        break;
-      case activeControlScheme.move_right.toString():
-        dir.x = 1;
-        break;
-      case activeControlScheme.move_up.toString():
-        dir.y = -1;
-        break;
-      case activeControlScheme.move_down.toString():
-        dir.y = 1;
-        break;
-      case activeControlScheme.move_up_left.toString():
-        dir.y = -1;
-        dir.x = -1;
-        break;
-      case activeControlScheme.move_up_right.toString():
-        dir.y = -1;
-        dir.x = 1;
-        break;
-      case activeControlScheme.move_down_left.toString():
-        dir.y = 1;
-        dir.x = -1;
-        break;
-      case activeControlScheme.move_down_right.toString():
-        dir.y = 1;
-        dir.x = 1;
-        break;
-      case activeControlScheme.wait.toString():
-        return this.waitCmd(stack);
-      case activeControlScheme.log.toString():
-        stackScreen = new LogScreen(this.game, this.make);
-        break;
-      case activeControlScheme.handle_door.toString():
-        stackScreen = this.doorCommand();
-        break;
-      case activeControlScheme.grab_item.toString():
-        if (this.game.inventory) return new PickupCommand(this.game);
-        break;
-      case activeControlScheme.inventory.toString():
-        if (this.game.inventory)
-          stackScreen = new InventoryScreen(this.game, this.make);
-        break;
-      case activeControlScheme.equipment.toString():
-        if (this.game.equipment)
-          stackScreen = new EquipmentScreen(this.game, this.make);
-        break;
-      case activeControlScheme.look.toString():
-        stackScreen = new LookScreen(this.game, this.make);
-        break;
-      case activeControlScheme.spells.toString():
-        stackScreen = new SpellScreen(this.game, this.make);
-        break;
-      case activeControlScheme.stats.toString():
-        stackScreen = new StatsScreen(this.game, this.make);
-        break;
-      case activeControlScheme.craft.toString():
-        stackScreen = new CraftingScreen(this.game, this.make);
-        break;
-      case activeControlScheme.menu.toString():
-        stackScreen = new IngameMenuScreen(this.game, this.make, stack);
-        break;
-      // Debugging command
-      case activeControlScheme.debug1.toString():
-        stackScreen = new DebuggerScreen(this.game, this.make);
-        console.log('stack: ', stack);
-        console.log('game: ', this.game);
-        break;
-      // Debugging command
-      case activeControlScheme.debug2.toString():
-        break;
+    // Direct commands
+    const commandAction = this.commandActions[char];
+    if (commandAction) {
+      return commandAction(stack) ?? null;
     }
 
-    if (stackScreen) {
-      DrawUI.clearFlash(this.game);
-      stack.push(stackScreen);
+    // Screen-pushing actions
+    const screenAction = this.screenActions[char];
+    if (screenAction) {
+      const stackScreen = screenAction(stack);
+      if (stackScreen) {
+        DrawUI.clearFlash(this.game);
+        stack.push(stackScreen);
+      }
       return null;
     }
-    if (!dir.isEmpty())
+
+    // Movement-based actions
+    const direction = this.directionMap[char];
+    if (direction) {
       return alt
-        ? this.digInDirection(dir, stack)
-        : this.moveBumpCmd(dir, stack);
+        ? this.digInDirection(direction, stack)
+        : this.moveBumpCmd(direction, stack);
+    }
+
+    // Debug keys or other keys
+    if (char === this.activeControlScheme.debug1.toString()) {
+      console.log('stack: ', stack);
+      console.log('game: ', this.game);
+    }
+    if (char === this.activeControlScheme.debug2.toString()) {
+      // Placeholder for debugging
+    }
 
     return null;
   }
