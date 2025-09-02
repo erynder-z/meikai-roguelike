@@ -12,6 +12,16 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
 export class CommandDirectionScreen extends BaseScreen {
   public name = 'command-direction-screen';
   private display: CommandDirectionScreenDisplay | null = null;
+  private directionMap: { [key: string]: { x: number; y: number } } = {
+    [this.activeControlScheme.move_left.toString()]: { x: -1, y: 0 },
+    [this.activeControlScheme.move_right.toString()]: { x: 1, y: 0 },
+    [this.activeControlScheme.move_up.toString()]: { x: 0, y: -1 },
+    [this.activeControlScheme.move_down.toString()]: { x: 0, y: 1 },
+    [this.activeControlScheme.move_up_left.toString()]: { x: -1, y: -1 },
+    [this.activeControlScheme.move_up_right.toString()]: { x: 1, y: -1 },
+    [this.activeControlScheme.move_down_left.toString()]: { x: -1, y: 1 },
+    [this.activeControlScheme.move_down_right.toString()]: { x: 1, y: 1 },
+  };
   constructor(
     public command: Command,
     public game: GameState,
@@ -106,50 +116,14 @@ export class CommandDirectionScreen extends BaseScreen {
       this.closeScreen(stack);
       return true;
     }
-    const direction = new WorldPoint();
 
     const char = this.controlSchemeManager.keyPressToCode(event);
-    switch (char) {
-      case this.activeControlScheme.move_left.toString():
-        direction.x = -1;
-        break;
+    const move = this.directionMap[char];
 
-      case this.activeControlScheme.move_right.toString():
-        direction.x = 1;
-        break;
-
-      case this.activeControlScheme.move_up.toString():
-        direction.y = -1;
-        break;
-
-      case this.activeControlScheme.move_down.toString():
-        direction.y = 1;
-        break;
-
-      case this.activeControlScheme.move_up_left.toString():
-        direction.x = -1;
-        direction.y = -1;
-        break;
-
-      case this.activeControlScheme.move_up_right.toString():
-        direction.x = 1;
-        direction.y = -1;
-        break;
-
-      case this.activeControlScheme.move_down_left.toString():
-        direction.x = -1;
-        direction.y = 1;
-        break;
-
-      case this.activeControlScheme.move_down_right.toString():
-        direction.x = 1;
-        direction.y = 1;
-        break;
-
-      default:
-        break;
-    }
-    if (!direction.isEmpty()) {
+    if (move) {
+      const direction = new WorldPoint();
+      direction.x = move.x;
+      direction.y = move.y;
       this.closeScreen(stack);
       this.actInDirection(direction);
     }
@@ -182,8 +156,6 @@ export class CommandDirectionScreen extends BaseScreen {
    * @returns A promise that resolves when the fade out animation ends.
    */
   private async fadeOutDirectionScreen(): Promise<void> {
-    if (this.display) {
-      await this.display.fadeOut();
-    }
+    if (this.display) await this.display.fadeOut();
   }
 }

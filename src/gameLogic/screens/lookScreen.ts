@@ -30,11 +30,34 @@ export class LookScreen extends BaseScreen {
   );
   private cursorPos: WorldPoint;
   private lookPos: WorldPoint;
+  private readonly keydownActions: Record<string, (stack: Stack) => void>;
 
   constructor(game: GameState, make: ScreenMaker) {
     super(game, make);
     this.cursorPos = this.neutralPos;
     this.lookPos = this.playerPos;
+    this.keydownActions = {
+      [this.activeControlScheme.move_left.toString()]: () =>
+        this.moveCursor(-1, 0),
+      [this.activeControlScheme.move_right.toString()]: () =>
+        this.moveCursor(1, 0),
+      [this.activeControlScheme.move_up.toString()]: () =>
+        this.moveCursor(0, -1),
+      [this.activeControlScheme.move_down.toString()]: () =>
+        this.moveCursor(0, 1),
+      [this.activeControlScheme.move_up_left.toString()]: () =>
+        this.moveCursor(-1, -1),
+      [this.activeControlScheme.move_up_right.toString()]: () =>
+        this.moveCursor(1, -1),
+      [this.activeControlScheme.move_down_left.toString()]: () =>
+        this.moveCursor(-1, 1),
+      [this.activeControlScheme.move_down_right.toString()]: () =>
+        this.moveCursor(1, 1),
+      [this.activeControlScheme.menu.toString()]: (stack: Stack) => {
+        DrawUI.clearFlash(this.game);
+        stack.pop();
+      },
+    };
   }
 
   /**
@@ -65,6 +88,13 @@ export class LookScreen extends BaseScreen {
 
     const s = this.getCellInfo(this.lookPos.x, this.lookPos.y);
     if (s) this.displayInfo(s);
+  }
+
+  private moveCursor(dx: number, dy: number): void {
+    this.cursorPos.x += dx;
+    this.cursorPos.y += dy;
+    this.lookPos.x += dx;
+    this.lookPos.y += dy;
   }
 
   /**
@@ -289,13 +319,6 @@ export class LookScreen extends BaseScreen {
     const isEntityCardOpen = detailViewHandler.isEntityCardOpen();
     if (isEntityCardOpen) detailViewHandler.closeOpenEntityCard();
 
-    const moveCursor = (dx: number, dy: number) => {
-      this.cursorPos.x += dx;
-      this.cursorPos.y += dy;
-      this.lookPos.x += dx;
-      this.lookPos.y += dy;
-    };
-
     const char = this.controlSchemeManager.keyPressToCode(event);
 
     if (this.keyBindings.has(char)) {
@@ -306,35 +329,7 @@ export class LookScreen extends BaseScreen {
 
     this.keyBindings.clear();
 
-    switch (char) {
-      case this.activeControlScheme.move_left.toString():
-        moveCursor(-1, 0);
-        break;
-      case this.activeControlScheme.move_right.toString():
-        moveCursor(1, 0);
-        break;
-      case this.activeControlScheme.move_up.toString():
-        moveCursor(0, -1);
-        break;
-      case this.activeControlScheme.move_down.toString():
-        moveCursor(0, 1);
-        break;
-      case this.activeControlScheme.move_up_left.toString():
-        moveCursor(-1, -1);
-        break;
-      case this.activeControlScheme.move_up_right.toString():
-        moveCursor(1, -1);
-        break;
-      case this.activeControlScheme.move_down_left.toString():
-        moveCursor(-1, 1);
-        break;
-      case this.activeControlScheme.move_down_right.toString():
-        moveCursor(1, 1);
-        break;
-      case this.activeControlScheme.menu.toString():
-        DrawUI.clearFlash(this.game);
-        stack.pop();
-        break;
-    }
+    const action = this.keydownActions[char];
+    if (action) action(stack);
   }
 }

@@ -21,8 +21,8 @@ import { UnequipCommand } from '../commands/unequipCommand';
  */
 export class ItemScreen extends BaseScreen {
   public name = 'item-screen';
-
   private display: ItemScreenDisplay | null = null;
+  private readonly itemActions: Record<string, (stack: Stack) => void>;
 
   constructor(
     private obj: ItemObject,
@@ -33,6 +33,19 @@ export class ItemScreen extends BaseScreen {
   ) {
     super(game, maker);
     this.isSlotOccupied = game.equipment?.hasItemInSlot(this.obj.slot) ?? false;
+    this.itemActions = {
+      d: stack => this.dropItem(stack),
+      w: stack => this.canWear(stack),
+      q: stack => this.canWear(stack),
+      n: stack => this.unequip(this.obj.slot, stack),
+      u: stack => this.useItem(stack),
+      f: stack => this.useItem(stack),
+      c: stack => this.useItem(stack),
+      v: stack => {
+        this.displayItemDetails(this.obj);
+        stack.pop();
+      },
+    };
   }
 
   /**
@@ -140,30 +153,6 @@ export class ItemScreen extends BaseScreen {
     // Get the keys that are currently shown on the item screen
     const optionKeys = display?.options.map(option => option.key);
 
-    // Map the keys to actions
-    const itemActions: Record<string, (stack: Stack) => void> = {
-      // Drop the item
-      d: () => this.dropItem(stack),
-      // Wear the item
-      w: () => this.canWear(stack),
-      // Equip the item
-      q: () => this.canWear(stack),
-      // Unequip the item
-      n: () => this.unequip(this.obj.slot, stack),
-      // Use the item
-      u: () => this.useItem(stack),
-      // Fire the item
-      f: () => this.useItem(stack),
-      // Cast the item
-      c: () => this.useItem(stack),
-      // View the item's details
-      v: () => {
-        this.displayItemDetails(this.obj);
-        stack.pop();
-        this.fadeOutItemScreen();
-      },
-    };
-
     // If the menu key is pressed, pop the stack and fade out the item screen
     if (event.key === activeControlScheme.menu.toString()) {
       stack.pop();
@@ -171,10 +160,11 @@ export class ItemScreen extends BaseScreen {
       return true;
     }
 
+    const action = this.itemActions[event.key];
     // If the key is in the list of keys shown on the item screen and there is an action associated with it,
     // perform the action and fade out the item screen
-    if (optionKeys?.includes(event.key) && itemActions[event.key]) {
-      itemActions[event.key](stack);
+    if (optionKeys?.includes(event.key) && action) {
+      action(stack);
       this.fadeOutItemScreen();
       return true;
     }
