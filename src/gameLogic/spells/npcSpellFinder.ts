@@ -19,12 +19,47 @@ import { TeleportCommand } from '../commands/teleportCommand';
  * Helper-class that provides methods for returning a spells to be used by npc-mobs.
  */
 export class NPCSpellFinder {
+  private readonly commandMap: Map<Spell, (me: Mob) => Command>;
+
   constructor(
     public game: GameState,
     public stack: Stack,
     public make: ScreenMaker,
     public player: Mob = game.player,
-  ) {}
+  ) {
+    const g = this.game;
+    const level = 1;
+
+    this.commandMap = new Map<Spell, (me: Mob) => Command>([
+      [Spell.Heal, (me: Mob) => new HealCommand(level, me, g)],
+      [Spell.Charm, (me: Mob) => this.buff(Buff.Charm, me)],
+      [Spell.Slow, (me: Mob) => this.buff(Buff.Slow, me)],
+      [Spell.Afraid, (me: Mob) => this.buff(Buff.Afraid, me)],
+      [
+        Spell.Bullet,
+        (me: Mob) => this.aim(new BulletCommand(me, g, this.stack, this.make)),
+      ],
+      [Spell.Poison, (me: Mob) => this.buff(Buff.Poison, me)],
+      [Spell.Confuse, (me: Mob) => this.buff(Buff.Confuse, me)],
+      [Spell.Silence, (me: Mob) => this.buff(Buff.Silence, me)],
+      [Spell.Cleanse, (me: Mob) => new CleanseAllCommand(me, g)],
+      [Spell.Stun, (me: Mob) => this.buff(Buff.Stun, me)],
+      [Spell.Burn, (me: Mob) => this.buff(Buff.Burn, me)],
+      [Spell.Blind, (me: Mob) => this.buff(Buff.Blind, me)],
+      [Spell.Multiply, (me: Mob) => new MultiplyCommand(me, g)],
+      [Spell.Freeze, (me: Mob) => this.buff(Buff.Freeze, me)],
+      [Spell.Root, (me: Mob) => this.buff(Buff.Root, me)],
+      [Spell.Shock, (me: Mob) => this.buff(Buff.Shock, me)],
+      [Spell.Teleport, (me: Mob) => new TeleportCommand(6, me, g)],
+      [Spell.Paralyze, (me: Mob) => this.buff(Buff.Paralyze, me)],
+      [Spell.Sleep, (me: Mob) => this.buff(Buff.Sleep, me)],
+      [Spell.Petrify, (me: Mob) => this.buff(Buff.Petrify, me)],
+      [Spell.Summon, (me: Mob) => new SummonCommand(me, g)],
+      [Spell.Bleed, (me: Mob) => this.buff(Buff.Bleed, me)],
+      [Spell.Levitate, (me: Mob) => this.buff(Buff.Levitate, me)],
+      [Spell.Disarm, (me: Mob) => this.buff(Buff.Disarm, me)],
+    ]);
+  }
 
   /**
    * Finds and returns a Command or StackScreen based on the provided spell and optional cost.
@@ -39,88 +74,12 @@ export class NPCSpellFinder {
     spell: Spell,
     cost?: Cost,
   ): Command | StackScreen | null {
-    const g = this.game;
-    const level = 1;
     const screen: StackScreen | null = null;
-    let cmd: Command;
-    const b = this.buff.bind(this);
+    const createCommand = this.commandMap.get(spell);
 
-    switch (spell) {
-      case Spell.Heal:
-        cmd = new HealCommand(level, me, g);
-        break;
-      case Spell.Charm:
-        cmd = b(Buff.Charm, me);
-        break;
-      case Spell.Slow:
-        cmd = b(Buff.Slow, me);
-        break;
-      case Spell.Afraid:
-        cmd = b(Buff.Afraid, me);
-        break;
-      case Spell.Bullet:
-        cmd = this.aim(new BulletCommand(me, g, this.stack, this.make));
-        break;
-      case Spell.Poison:
-        cmd = b(Buff.Poison, me);
-        break;
-      case Spell.Confuse:
-        cmd = b(Buff.Confuse, me);
-        break;
-      case Spell.Silence:
-        cmd = b(Buff.Silence, me);
-        break;
-      case Spell.Cleanse:
-        cmd = new CleanseAllCommand(me, g);
-        break;
-      case Spell.Stun:
-        cmd = b(Buff.Stun, me);
-        break;
-      case Spell.Burn:
-        cmd = b(Buff.Burn, me);
-        break;
-      case Spell.Blind:
-        cmd = b(Buff.Blind, me);
-        break;
-      case Spell.Multiply:
-        cmd = new MultiplyCommand(me, g);
-        break;
-      case Spell.Freeze:
-        cmd = b(Buff.Freeze, me);
-        break;
-      case Spell.Root:
-        cmd = b(Buff.Root, me);
-        break;
-      case Spell.Shock:
-        cmd = b(Buff.Shock, me);
-        break;
-      case Spell.Teleport:
-        cmd = new TeleportCommand(6, me, g);
-        break;
-      case Spell.Paralyze:
-        cmd = b(Buff.Paralyze, me);
-        break;
-      case Spell.Sleep:
-        cmd = b(Buff.Sleep, me);
-        break;
-      case Spell.Petrify:
-        cmd = b(Buff.Petrify, me);
-        break;
-      case Spell.Summon:
-        cmd = new SummonCommand(me, g);
-        break;
-      case Spell.Bleed:
-        cmd = b(Buff.Bleed, me);
-        break;
-      case Spell.Levitate:
-        cmd = b(Buff.Levitate, me);
-        break;
-      case Spell.Disarm:
-        cmd = b(Buff.Disarm, me);
-        break;
-      default:
-        return null;
-    }
+    if (!createCommand) return null;
+
+    const cmd = createCommand(me);
     cmd.setCost(cost);
 
     return screen ? screen : cmd;

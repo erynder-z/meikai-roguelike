@@ -21,23 +21,84 @@ import { TeleportCommand } from '../commands/teleportCommand';
 
 type CommandOrScreen = {
   cmd: Command;
-  screen: StackScreen;
+  screen?: StackScreen;
 };
+
+type SpellFactory = (amount: number, cost?: Cost) => CommandOrScreen;
 
 /**
  * Helper-class that provides methods for returning a Command or a StackScreen for a spell.
  */
 export class SpellFinder {
+  private spellMap: Map<Spell, SpellFactory>;
+
   constructor(
     public game: GameState,
     public stack: Stack,
     public make: ScreenMaker,
-  ) {}
+  ) {
+    const me = this.game.player;
+    const level = this.game.dungeon.level;
+
+    this.spellMap = new Map<Spell, SpellFactory>([
+      [
+        Spell.Heal,
+        (amount, cost) => ({ cmd: new HealCommand(level, me, game) }),
+      ],
+      [Spell.Charm, (amount, cost) => this.buff(Buff.Charm, me)],
+      [Spell.Slow, (amount, cost) => this.buff(Buff.Slow, me)],
+      [Spell.Afraid, (amount, cost) => this.buff(Buff.Afraid, me)],
+      [
+        Spell.Bullet,
+        (amount, cost) => {
+          const cmd = new BulletCommand(me, game, this.stack, this.make);
+          return { cmd, screen: this.dir(cmd) };
+        },
+      ],
+      [Spell.Poison, (amount, cost) => this.buff(Buff.Poison, me)],
+      [Spell.Confuse, (amount, cost) => this.buff(Buff.Confuse, me)],
+      [Spell.Silence, (amount, cost) => this.buff(Buff.Silence, me)],
+      [
+        Spell.Cleanse,
+        (amount, cost) => ({ cmd: new CleanseAllCommand(me, game) }),
+      ],
+      [Spell.Stun, (amount, cost) => this.buff(Buff.Stun, me)],
+      [Spell.Burn, (amount, cost) => this.buff(Buff.Burn, me)],
+      [Spell.Blind, (amount, cost) => this.buff(Buff.Blind, me)],
+      [
+        Spell.Multiply,
+        (amount, cost) => ({ cmd: new MultiplyCommand(me, game) }),
+      ],
+      [Spell.Freeze, (amount, cost) => this.buff(Buff.Freeze, me)],
+      [Spell.Root, (amount, cost) => this.buff(Buff.Root, me)],
+      [Spell.Shock, (amount, cost) => this.buff(Buff.Shock, me)],
+      [
+        Spell.Teleport,
+        (amount, cost) => ({ cmd: new TeleportCommand(6, me, game) }),
+      ],
+      [Spell.Paralyze, (amount, cost) => this.buff(Buff.Paralyze, me)],
+      [Spell.Sleep, (amount, cost) => this.buff(Buff.Sleep, me)],
+      [Spell.Petrify, (amount, cost) => this.buff(Buff.Petrify, me)],
+      [Spell.Summon, (amount, cost) => ({ cmd: new SummonCommand(me, game) })],
+      [Spell.Bleed, (amount, cost) => this.buff(Buff.Bleed, me)],
+      [Spell.Levitate, (amount, cost) => this.buff(Buff.Levitate, me)],
+      [Spell.Disarm, (amount, cost) => this.buff(Buff.Disarm, me)],
+      [
+        Spell.DecreaseHunger,
+        (amount, cost) => ({ cmd: new EatCommand(me, game, amount) }),
+      ],
+      [
+        Spell.DecreaseThirst,
+        (amount, cost) => ({ cmd: new DrinkCommand(me, game, amount) }),
+      ],
+    ]);
+  }
+
   /**
-   * Finds and returns a Command or StackScreen based on the provided spell and optional cost.
+   * Finds and returns a Command or a StackScreen based on the provided spell and optional cost.
    *
    * @param spell - The spell to be executed.
-   * @param amount - The amount of the spell.
+   * @param amount - The amount of the spell to be executed.
    * @param cost - The optional cost of the spell.
    * @return The found Command or StackScreen, or null if the spell is not recognized.
    */
@@ -46,123 +107,32 @@ export class SpellFinder {
     amount: number,
     cost?: Cost,
   ): Command | StackScreen | null {
-    const { game } = this;
+    const getCommandOrScreen = this.spellMap.get(spell);
+    if (!getCommandOrScreen) return null;
 
-    const me = game.player;
-    const level = this.game.dungeon.level;
-
-    let screen: StackScreen | null = null;
-    let cmd: Command;
-
-    const b = this.buff.bind(this);
-    switch (spell) {
-      case Spell.Heal:
-        cmd = new HealCommand(level, me, game);
-        break;
-      case Spell.Charm:
-        ({ screen, cmd } = b(Buff.Charm, me));
-        break;
-      case Spell.Slow:
-        ({ screen, cmd } = b(Buff.Slow, me));
-        break;
-      case Spell.Afraid:
-        ({ screen, cmd } = b(Buff.Afraid, me));
-        break;
-      case Spell.Bullet:
-        screen = this.dir(
-          (cmd = new BulletCommand(game.player, game, this.stack, this.make)), // TODO: add damage amount based on item properties
-        );
-        break;
-      case Spell.Poison:
-        ({ screen, cmd } = b(Buff.Poison, me));
-        break;
-      case Spell.Confuse:
-        ({ screen, cmd } = b(Buff.Confuse, me));
-        break;
-      case Spell.Silence:
-        ({ screen, cmd } = b(Buff.Silence, me));
-        break;
-      case Spell.Cleanse:
-        cmd = new CleanseAllCommand(me, game);
-        break;
-      case Spell.Stun:
-        ({ screen, cmd } = b(Buff.Stun, me));
-        break;
-      case Spell.Burn:
-        ({ screen, cmd } = b(Buff.Burn, me));
-        break;
-      case Spell.Blind:
-        ({ screen, cmd } = b(Buff.Blind, me));
-        break;
-      case Spell.Multiply:
-        cmd = new MultiplyCommand(me, game);
-        break;
-      case Spell.Freeze:
-        ({ screen, cmd } = b(Buff.Freeze, me));
-        break;
-      case Spell.Root:
-        ({ screen, cmd } = b(Buff.Root, me));
-        break;
-      case Spell.Shock:
-        ({ screen, cmd } = b(Buff.Shock, me));
-        break;
-      case Spell.Teleport:
-        cmd = new TeleportCommand(6, me, game);
-        break;
-      case Spell.Paralyze:
-        ({ screen, cmd } = b(Buff.Paralyze, me));
-        break;
-      case Spell.Sleep:
-        ({ screen, cmd } = b(Buff.Sleep, me));
-        break;
-      case Spell.Petrify:
-        ({ screen, cmd } = b(Buff.Petrify, me));
-        break;
-      case Spell.Summon:
-        cmd = new SummonCommand(me, game);
-        break;
-      case Spell.Bleed:
-        ({ screen, cmd } = b(Buff.Bleed, me));
-        break;
-      case Spell.Levitate:
-        ({ screen, cmd } = b(Buff.Levitate, me));
-        break;
-      case Spell.Disarm:
-        ({ screen, cmd } = b(Buff.Disarm, me));
-        break;
-      case Spell.DecreaseHunger:
-        cmd = new EatCommand(me, game, amount);
-        break;
-      case Spell.DecreaseThirst:
-        cmd = new DrinkCommand(me, game, amount);
-        break;
-
-      default:
-        return null;
-    }
+    const { cmd, screen } = getCommandOrScreen(amount, cost);
     cmd.setCost(cost);
-    return screen ? screen : cmd;
+    return screen ?? cmd;
   }
 
   /**
-   * Creates a new buff command and returns a CommandOrScreen object containing the command and screen.
+   * Wraps a BuffCommand with a PayloadCommand.
    *
-   * @param buff - The type of buff to add.
-   * @param me - The mob to add the buff to.
-   * @return An object containing the command and screen.
+   * @param buff - The buff to be added to the mob.
+   * @param me - The mob to receive the buff.
+   * @return A new PayloadCommand with the given buff, mob, game, and mob as the payload.
    */
   private buff(buff: Buff, me: Mob): CommandOrScreen {
     const buffCmd = new BuffCommand(buff, me, this.game, me);
-    const { screen, cmd } = this.payload(buffCmd, me);
-    return { cmd: cmd, screen: screen };
+    return this.payload(buffCmd, me);
   }
 
   /**
-   * Creates a new payload command and returns a CommandOrScreen object containing the command and screen.
+   * Wraps a Command with a PayloadCommand and then wraps that with a direction screen.
    *
-   * @param inner - The inner command to be wrapped by the payload command.
-   * @param me - The mob that will execute the command.
-   * @return An object containing the command and screen.
+   * @param inner - The command to be wrapped.
+   * @param me - The mob to be used as the payload.
+   * @return A new PayloadCommand with the given command, mob, game, stack, screen maker, and mob as the payload, wrapped with a direction screen.
    */
   private payload(inner: Command, me: Mob): CommandOrScreen {
     const cmd: Command = new PayloadCommand(
@@ -173,14 +143,14 @@ export class SpellFinder {
       inner,
     );
     const dirScreen: StackScreen = this.dir(cmd);
-    return { cmd: cmd, screen: dirScreen };
+    return { cmd, screen: dirScreen };
   }
 
   /**
-   * Creates a new CommandDirectionScreen with the given command and returns it as a StackScreen.
+   * Creates a new CommandDirectionScreen with the given command, game, and screen maker.
    *
-   * @param cmd - The command to be executed.
-   * @return The newly created CommandDirectionScreen.
+   * @param cmd - The command to be wrapped with the direction screen.
+   * @return A new CommandDirectionScreen with the given command, game, and screen maker.
    */
   private dir(cmd: Command): StackScreen {
     return new CommandDirectionScreen(cmd, this.game, this.make);
