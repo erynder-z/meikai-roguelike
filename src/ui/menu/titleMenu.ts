@@ -8,6 +8,7 @@ import { UnBlurElement } from '../other/unBlurElement';
 export class TitleMenu extends UnBlurElement {
   private eventTracker = new EventListenerTracker();
   private shouldEnableLoadGameKeyboardShortcuts: boolean = true;
+  private keyPressHandlers!: Map<string, () => void>;
   constructor() {
     super();
   }
@@ -190,6 +191,21 @@ export class TitleMenu extends UnBlurElement {
     this.showAbout = this.showAbout.bind(this);
     this.quitGame = this.quitGame.bind(this);
 
+    this.keyPressHandlers = new Map<string, () => void>([
+      ['N', this.startNewGame],
+      [
+        'L',
+        () => {
+          if (this.shouldEnableLoadGameKeyboardShortcuts) this.loadGame();
+        },
+      ],
+      ['P', this.playerSetup],
+      ['O', this.showOptions],
+      ['H', this.showHelp],
+      ['A', this.showAbout],
+      ['Q', this.quitGame],
+    ]);
+
     const root = this.shadowRoot;
 
     this.eventTracker.addById(
@@ -252,31 +268,8 @@ export class TitleMenu extends UnBlurElement {
    * @param event - The keyboard event to be handled.
    */
   private handleKeyPress(event: KeyboardEvent): void {
-    switch (event.key) {
-      case 'N':
-        this.startNewGame();
-        break;
-      case 'L':
-        if (this.shouldEnableLoadGameKeyboardShortcuts) this.loadGame();
-        break;
-      case 'P':
-        this.playerSetup();
-        break;
-      case 'O':
-        this.showOptions();
-        break;
-      case 'H':
-        this.showHelp();
-        break;
-      case 'A':
-        this.showAbout();
-        break;
-      case 'Q':
-        this.quitGame();
-        break;
-      default:
-        break;
-    }
+    const handler = this.keyPressHandlers.get(event.key);
+    if (handler) handler();
   }
 
   /**

@@ -13,6 +13,7 @@ import { UnBlurElement } from '../other/unBlurElement';
 export class PlayerSetup extends UnBlurElement {
   private eventTracker = new EventListenerTracker();
   private gameConfig = gameConfigManager.getConfig();
+  private keyPressHandlers!: Map<string, (event: KeyboardEvent) => void>;
   constructor() {
     super();
   }
@@ -323,6 +324,34 @@ export class PlayerSetup extends UnBlurElement {
     this.randomize = this.randomize.bind(this);
     this.returnToPreviousScreen = this.returnToPreviousScreen.bind(this);
 
+    this.keyPressHandlers = new Map<string, (event: KeyboardEvent) => void>([
+      ['N', this.enableNameEditing],
+      ['a', () => this.randomize('name')],
+      ['C', this.changeColor],
+      ['o', () => this.randomize('color')],
+      ['A', this.enableAvatarEditing],
+      ['z', () => this.randomize('avatar')],
+      ['R', this.returnToPreviousScreen],
+      [
+        'ArrowLeft',
+        event => {
+          if (event.metaKey) this.toggleAppearance();
+        },
+      ],
+      [
+        'ArrowRight',
+        event => {
+          if (event.metaKey) this.toggleAppearance();
+        },
+      ],
+      [
+        'r',
+        event => {
+          if (event.metaKey) this.randomize('all');
+        },
+      ],
+    ]);
+
     const root = this.shadowRoot;
 
     this.eventTracker.addById(root, 'player-portrait-girlish', 'click', () => {
@@ -407,40 +436,8 @@ export class PlayerSetup extends UnBlurElement {
       event.preventDefault();
     }
 
-    switch (event.key) {
-      case 'N':
-        this.enableNameEditing();
-        break;
-      case 'a':
-        this.randomize('name');
-        break;
-      case 'C':
-        this.changeColor();
-        break;
-      case 'o':
-        this.randomize('color');
-        break;
-      case 'A':
-        this.enableAvatarEditing();
-        break;
-      case 'z':
-        this.randomize('avatar');
-        break;
-      case 'R':
-        this.returnToPreviousScreen();
-        break;
-      case 'ArrowLeft':
-        if (event.metaKey) this.toggleAppearance();
-        break;
-      case 'ArrowRight':
-        if (event.metaKey) this.toggleAppearance();
-        break;
-      case 'r':
-        if (event.metaKey) this.randomize('all');
-        break;
-      default:
-        break;
-    }
+    const handler = this.keyPressHandlers.get(event.key);
+    if (handler) handler(event);
   }
 
   /**

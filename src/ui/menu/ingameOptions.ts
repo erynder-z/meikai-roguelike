@@ -22,6 +22,7 @@ export class IngameOptions extends UnBlurElement {
   ) as ControlSchemeName[];
 
   public activeControlScheme: Record<string, string[]>;
+  private keyPressHandlers!: Map<string, () => void>;
   constructor() {
     super();
 
@@ -386,6 +387,24 @@ export class IngameOptions extends UnBlurElement {
       this.focusAndSelectMessageCountInput.bind(this);
     this.toggleBloodIntensity = this.toggleBloodIntensity.bind(this);
     this.returnToIngameMenu = this.returnToIngameMenu.bind(this);
+
+    this.keyPressHandlers = new Map<string, () => void>([
+      ['y', this.toggleShowStory],
+      ['C', this.toggleControlScheme],
+      ['S', this.toggleScanlines],
+      ['t', this.switchScanlineStyle],
+      ['F', this.toggleFlicker],
+      ['M', this.toggleMessageAlignment],
+      ['e', this.focusAndSelectMessageCountInput],
+      ['p', this.toggleTemperatureUnitChange],
+      ['D', this.toggleDepthUnitChange],
+      ['g', this.toggleWeightUnitChange],
+      ['o', this.toggleShowImages],
+      ['I', this.toggleImageAlignment],
+      ['B', this.toggleBloodIntensity],
+      [this.activeControlScheme.menu.toString(), this.returnToIngameMenu],
+      ['R', this.returnToIngameMenu],
+    ]);
 
     const root = this.shadowRoot;
 
@@ -835,53 +854,8 @@ export class IngameOptions extends UnBlurElement {
       new KeypressScrollHandler(targetElement).handleVirtualScroll(event);
     }
 
-    switch (event.key) {
-      case 'y':
-        this.toggleShowStory();
-        break;
-      case 'C':
-        this.toggleControlScheme();
-        break;
-      case 'S':
-        this.toggleScanlines();
-        break;
-      case 't':
-        this.switchScanlineStyle();
-        break;
-      case 'F':
-        this.toggleFlicker();
-        break;
-      case 'M':
-        this.toggleMessageAlignment();
-        break;
-      case 'e':
-        this.focusAndSelectMessageCountInput();
-        break;
-      case 'p':
-        this.toggleTemperatureUnitChange();
-        break;
-      case 'D':
-        this.toggleDepthUnitChange();
-        break;
-      case 'g':
-        this.toggleWeightUnitChange();
-        break;
-      case 'o':
-        this.toggleShowImages();
-        break;
-      case 'I':
-        this.toggleImageAlignment();
-        break;
-      case 'B':
-        this.toggleBloodIntensity();
-        break;
-      case this.activeControlScheme.menu.toString():
-      case 'R':
-        this.returnToIngameMenu();
-        break;
-      default:
-        break;
-    }
+    const handler = this.keyPressHandlers.get(event.key);
+    handler?.();
   }
 
   /**

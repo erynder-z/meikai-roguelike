@@ -15,6 +15,7 @@ export class IngameMenu extends UnBlurElement {
   private game: GameState | null = null;
   private isRendered = false;
   private shouldDisableSaveKeyboardShortcut = false;
+  private keyPressHandlers!: Map<string, () => void>;
 
   private gameConfig = gameConfigManager.getConfig();
   private currentScheme = this.gameConfig.control_scheme || 'default';
@@ -207,6 +208,21 @@ export class IngameMenu extends UnBlurElement {
     this.returnToTitle = this.returnToTitle.bind(this);
     this.quitApp = this.quitApp.bind(this);
 
+    this.keyPressHandlers = new Map<string, () => void>([
+      [this.activeControlScheme.menu.toString(), this.returnToGame],
+      ['R', this.returnToGame],
+      ['O', this.showOptions],
+      ['H', this.showHelp],
+      [
+        'S',
+        () => {
+          if (!this.shouldDisableSaveKeyboardShortcut) this.saveGame();
+        },
+      ],
+      ['t', this.returnToTitle],
+      ['Q', this.quitApp],
+    ]);
+
     const root = this.shadowRoot;
 
     this.eventTracker.addById(
@@ -252,29 +268,8 @@ export class IngameMenu extends UnBlurElement {
     // Prevent keyboard events before the element is fully rendered. In particular, this prevents the initial {menu} keypress to close the menu the moment it's being rendered.
     if (!this.rendered) return;
 
-    switch (event.key) {
-      case this.activeControlScheme.menu.toString():
-      case 'R':
-        this.returnToGame();
-        break;
-      case 'O':
-        this.showOptions();
-        break;
-      case 'H':
-        this.showHelp();
-        break;
-      case 'S':
-        if (!this.shouldDisableSaveKeyboardShortcut) this.saveGame();
-        break;
-      case 't':
-        this.returnToTitle();
-        break;
-      case 'Q':
-        this.quitApp();
-        break;
-      default:
-        break;
-    }
+    const handler = this.keyPressHandlers.get(event.key);
+    if (handler) handler();
   }
 
   /**

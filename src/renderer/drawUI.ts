@@ -24,7 +24,76 @@ import { WorldPoint } from '../maps/mapModel/worldPoint';
  * Handles drawing/updating the game map and UI elements.
  */
 export class DrawUI {
-  static outside: MapCell = new MapCell(Glyph.Unknown);
+  private static outside: MapCell = new MapCell(Glyph.Unknown);
+  private static readonly actionImageHandlerMap = new Map<
+    EventCategory,
+    (imageHandler: ImageHandler, game: GameState) => void
+  >([
+    [
+      EventCategory.lvlChange,
+      (handler, game) => handler.handleLevelImageDisplay(game),
+    ],
+    [
+      EventCategory.attack,
+      (handler, game) => handler.handleAttackImageDisplay(game),
+    ],
+    [
+      EventCategory.mobDamage,
+      (handler, game) => handler.handleAttackImageDisplay(game),
+    ],
+    [
+      EventCategory.playerDamage,
+      (handler, game) => handler.handleHurtImageDisplay(game),
+    ],
+    [
+      EventCategory.mobDeath,
+      (handler, game) => handler.handleSmileImageDisplay(game),
+    ],
+    [
+      EventCategory.moving_UP,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'UP'),
+    ],
+    [
+      EventCategory.moving_DOWN,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'DOWN'),
+    ],
+    [
+      EventCategory.moving_LEFT,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'LEFT'),
+    ],
+    [
+      EventCategory.moving_RIGHT,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'RIGHT'),
+    ],
+    [
+      EventCategory.moving_UP_LEFT,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'UP_LEFT'),
+    ],
+    [
+      EventCategory.moving_DOWN_LEFT,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'DOWN_LEFT'),
+    ],
+    [
+      EventCategory.moving_UP_RIGHT,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'UP_RIGHT'),
+    ],
+    [
+      EventCategory.moving_DOWN_RIGHT,
+      (handler, game) => handler.handleMovingImageDisplay(game, 'DOWN_RIGHT'),
+    ],
+    [
+      EventCategory.rangedAttack,
+      (handler, game) => handler.handlePistolImageDisplay(game),
+    ],
+    [
+      EventCategory.wait,
+      (handler, game) => handler.handleNeutralImageDisplay(game),
+    ],
+    [
+      EventCategory.playerDeath,
+      (handler, game) => handler.handleDeathImageDisplay(game),
+    ],
+  ]);
   /**
    * Draws a map on a drawable terminal. The whole map is visible.
    *
@@ -204,58 +273,8 @@ export class DrawUI {
 
     const currentEventCategory = game.log.currentEvent;
 
-    switch (currentEventCategory) {
-      case EventCategory.lvlChange:
-        imageHandler.handleLevelImageDisplay(game);
-        break;
-      case EventCategory.attack:
-        imageHandler.handleAttackImageDisplay(game);
-        break;
-      case EventCategory.mobDamage:
-        imageHandler.handleAttackImageDisplay(game);
-        break;
-      case EventCategory.playerDamage:
-        imageHandler.handleHurtImageDisplay(game);
-        break;
-      case EventCategory.mobDeath:
-        imageHandler.handleSmileImageDisplay(game);
-        break;
-      case EventCategory.moving_UP:
-        imageHandler.handleMovingImageDisplay(game, 'UP');
-        break;
-      case EventCategory.moving_DOWN:
-        imageHandler.handleMovingImageDisplay(game, 'DOWN');
-        break;
-      case EventCategory.moving_LEFT:
-        imageHandler.handleMovingImageDisplay(game, 'LEFT');
-        break;
-      case EventCategory.moving_RIGHT:
-        imageHandler.handleMovingImageDisplay(game, 'RIGHT');
-        break;
-      case EventCategory.moving_UP_LEFT:
-        imageHandler.handleMovingImageDisplay(game, 'UP_LEFT');
-        break;
-      case EventCategory.moving_DOWN_LEFT:
-        imageHandler.handleMovingImageDisplay(game, 'DOWN_LEFT');
-        break;
-      case EventCategory.moving_UP_RIGHT:
-        imageHandler.handleMovingImageDisplay(game, 'UP_RIGHT');
-        break;
-      case EventCategory.moving_DOWN_RIGHT:
-        imageHandler.handleMovingImageDisplay(game, 'DOWN_RIGHT');
-        break;
-      case EventCategory.rangedAttack:
-        imageHandler.handlePistolImageDisplay(game);
-        break;
-      case EventCategory.wait:
-        imageHandler.handleNeutralImageDisplay(game);
-        break;
-      case EventCategory.playerDeath:
-        imageHandler.handleDeathImageDisplay(game);
-        break;
-      default:
-        break;
-    }
+    const handler = this.actionImageHandlerMap.get(currentEventCategory);
+    if (handler) handler(imageHandler, game);
   }
 
   /**
