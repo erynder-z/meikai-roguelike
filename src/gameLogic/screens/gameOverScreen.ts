@@ -1,5 +1,6 @@
 import { BaseScreen } from './baseScreen';
 import { DrawUI } from '../../renderer/drawUI';
+import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { GameOverScreenDisplay } from '../../ui/gameOverScreenDisplay/gameOverScreenDisplay';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
@@ -40,7 +41,7 @@ export class GameOverScreen extends BaseScreen {
 
       this.display.game = this.game;
       this.display.playerName = `${this.game.player.name} ✝`;
-      this.display.playerColor = this.gameConfig.player.color;
+      this.display.playerColor = gameConfigManager.getConfig().player.color;
       this.display.log = this.game.log;
 
       const menuKey = `<span class="emphasize">${this.activeControlScheme.menu.toString()}</span>`;

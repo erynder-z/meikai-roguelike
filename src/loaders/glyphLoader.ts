@@ -37,20 +37,6 @@ type EnvironmentGlyph = {
 } & BaseGlyph;
 
 /**
- * Represents a mob glyph.
- */
-type MobGlyph = {
-  // Add any mob-specific properties here if needed
-} & BaseGlyph;
-
-/**
- * Represents an item glyph.
- */
-type ItemGlyph = {
-  // Add any item-specific properties here if needed
-} & BaseGlyph;
-
-/**
  * Responsible for loading and initializing glyphs into the GlyphMap.
  */
 export class GlyphLoader {
@@ -117,7 +103,7 @@ export class GlyphLoader {
         });
 
         // Load mob glyphs
-        mobsData.mobs.forEach((mob: MobGlyph) => {
+        mobsData.mobs.forEach((mob: BaseGlyph) => {
           const mobGlyph = new GlyphInfo(
             mob.id,
             mob.fgCol,
@@ -145,7 +131,7 @@ export class GlyphLoader {
         });
 
         // Load item glyphs
-        itemData.items.forEach((item: ItemGlyph) => {
+        itemData.items.forEach((item: BaseGlyph) => {
           const itemGlyph = new GlyphInfo(
             item.id,
             item.fgCol,

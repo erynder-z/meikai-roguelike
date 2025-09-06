@@ -18,12 +18,13 @@ import { Stack } from '../../shared-types/terminal/stack';
  * A test spellcaster
  */
 export class MobAI5_Druid implements MobAI {
+  private aiTargetedMovement: MobAI = new MobAI2_Cat();
+  private aiRandomMovement: MobAI = new MobAI3_Ant();
+
   constructor(
     public speed: number,
     public spellRate: number,
   ) {}
-  private aiTargetedMovement: MobAI = new MobAI2_Cat();
-  private aiRandomMovement: MobAI = new MobAI3_Ant();
 
   /**
    * Takes a turn for the Mob in an awake state.

@@ -2,6 +2,7 @@ import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from '../commands/buffCommand';
 import { CellEffects } from '../commands/cellEffects';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
+import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
 import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
 import { DrawUI } from '../../renderer/drawUI';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
@@ -21,14 +22,15 @@ import { EventCategory, LogMessage } from '../messages/logMessage';
  */
 export class BaseScreen implements StackScreen {
   public name = 'BaseScreen';
-  public gameConfig = gameConfigManager.getConfig();
-  private currentScheme = this.gameConfig.control_scheme || 'default';
+  protected gameConfig = gameConfigManager.getConfig();
+  private readonly currentScheme: ControlSchemeName;
   public controlSchemeManager: ControlSchemeManager;
   public activeControlScheme: Record<string, string[]>;
   constructor(
     public game: GameState,
     public make: ScreenMaker,
   ) {
+    this.currentScheme = this.gameConfig.control_scheme || 'default';
     this.controlSchemeManager = new ControlSchemeManager(this.currentScheme);
     this.activeControlScheme = this.controlSchemeManager.getActiveScheme();
   }

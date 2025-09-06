@@ -2,6 +2,8 @@ import { BulletCommand } from '../commands/bulletCommand';
 import { Command } from '../../shared-types/gameLogic/commands/command';
 import { CommandDirectionScreen } from '../screens/commandDirectionScreen';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
+import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
+import { CraftingScreen } from '../screens/craftingScreen';
 import { DrawUI } from '../../renderer/drawUI';
 import { DebuggerScreen } from '../screens/debuggerScreen';
 import { DigCommand } from '../commands/digCommand';
@@ -25,16 +27,14 @@ import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { StatsScreen } from '../screens/statsScreen';
 import { WaitCommand } from '../commands/waitCommand';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
-import { CraftingScreen } from '../screens/craftingScreen';
 
 /**
  * Class responsible for parsing player input and converting it into game commands.
  */
 export class ParsePlayer {
-  private gameConfig = gameConfigManager.getConfig();
-  private currentScheme = this.gameConfig.control_scheme || 'default';
-  private controlSchemeManager: ControlSchemeManager;
-  private activeControlScheme;
+  private readonly currentScheme: ControlSchemeName;
+  private readonly controlSchemeManager: ControlSchemeManager;
+  private readonly activeControlScheme: Record<string, string[]>;
 
   private readonly directionMap: Record<string, WorldPoint>;
   private readonly screenActions: Record<

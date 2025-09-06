@@ -20,22 +20,25 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
 export class LookScreen extends BaseScreen {
   public name = 'look-screen';
   public keyBindings: Map<string, DetailViewEntity> = new Map();
-  private readonly neutralPos = new WorldPoint(
-    Math.floor(this.gameConfig.terminal.dimensions.width * 0.5),
-    Math.floor(this.gameConfig.terminal.dimensions.height * 0.5),
-  );
-  private readonly playerPos = new WorldPoint(
-    this.game.player.pos.x,
-    this.game.player.pos.y,
-  );
   private cursorPos: WorldPoint;
   private lookPos: WorldPoint;
   private readonly keydownActions: Record<string, (stack: Stack) => void>;
 
   constructor(game: GameState, make: ScreenMaker) {
     super(game, make);
-    this.cursorPos = this.neutralPos;
-    this.lookPos = this.playerPos;
+
+    const neutralPos = new WorldPoint(
+      Math.floor(this.gameConfig.terminal.dimensions.width * 0.5),
+      Math.floor(this.gameConfig.terminal.dimensions.height * 0.5),
+    );
+    const playerPos = new WorldPoint(
+      this.game.player.pos.x,
+      this.game.player.pos.y,
+    );
+
+    this.cursorPos = neutralPos;
+    this.lookPos = playerPos;
+
     this.keydownActions = {
       [this.activeControlScheme.move_left.toString()]: () =>
         this.moveCursor(-1, 0),

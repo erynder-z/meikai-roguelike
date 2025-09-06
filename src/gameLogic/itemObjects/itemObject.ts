@@ -10,8 +10,8 @@ import { SpellProperties } from './spellProperties';
  * Represents an item object in the game world.
  */
 export class ItemObject {
-  public id: string;
-  public spellCasting: SpellProperties;
+  public readonly id: string = crypto.randomUUID();
+  public spellCasting: SpellProperties = new SpellProperties();
 
   constructor(
     public glyph: Glyph,
@@ -19,11 +19,8 @@ export class ItemObject {
     public category: ObjCategory[] = [ObjCategory.Misc],
     public level: number = 1,
     public weight: number = 0,
-  ) {
-    this.id = crypto.randomUUID();
-    this.spellCasting = new SpellProperties();
-  }
-  
+  ) {}
+
   /**
    * Generates a description of the item object.
    *

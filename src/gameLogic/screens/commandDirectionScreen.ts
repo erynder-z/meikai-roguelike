@@ -12,22 +12,23 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
 export class CommandDirectionScreen extends BaseScreen {
   public name = 'command-direction-screen';
   private display: CommandDirectionScreenDisplay | null = null;
-  private directionMap: { [key: string]: { x: number; y: number } } = {
-    [this.activeControlScheme.move_left.toString()]: { x: -1, y: 0 },
-    [this.activeControlScheme.move_right.toString()]: { x: 1, y: 0 },
-    [this.activeControlScheme.move_up.toString()]: { x: 0, y: -1 },
-    [this.activeControlScheme.move_down.toString()]: { x: 0, y: 1 },
-    [this.activeControlScheme.move_up_left.toString()]: { x: -1, y: -1 },
-    [this.activeControlScheme.move_up_right.toString()]: { x: 1, y: -1 },
-    [this.activeControlScheme.move_down_left.toString()]: { x: -1, y: 1 },
-    [this.activeControlScheme.move_down_right.toString()]: { x: 1, y: 1 },
-  };
+  private readonly directionMap: { [key: string]: { x: number; y: number } };
   constructor(
     public command: Command,
     public game: GameState,
     public make: ScreenMaker,
   ) {
     super(game, make);
+    this.directionMap = {
+      [this.activeControlScheme.move_left.toString()]: { x: -1, y: 0 },
+      [this.activeControlScheme.move_right.toString()]: { x: 1, y: 0 },
+      [this.activeControlScheme.move_up.toString()]: { x: 0, y: -1 },
+      [this.activeControlScheme.move_down.toString()]: { x: 0, y: 1 },
+      [this.activeControlScheme.move_up_left.toString()]: { x: -1, y: -1 },
+      [this.activeControlScheme.move_up_right.toString()]: { x: 1, y: -1 },
+      [this.activeControlScheme.move_down_left.toString()]: { x: -1, y: 1 },
+      [this.activeControlScheme.move_down_right.toString()]: { x: 1, y: 1 },
+    };
   }
 
   /**
