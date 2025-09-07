@@ -20,6 +20,7 @@ import { Stack } from '../../shared-types/terminal/stack';
 export class SpellAI implements MobAI {
   private aiTargetedMovement: MobAI = new MobAI2_Cat();
   private aiRandomMovement: MobAI = new MobAI3_Ant();
+
   constructor(
     public speed: number,
     public spellRate: number,
@@ -80,7 +81,7 @@ export class SpellAI implements MobAI {
    * @param rand- the game random generator.
    * @return The chosen buff for the mob.
    */
-  private pickBuff(me: Mob, rand: RandomGenerator): Buff {
+  private pickBuff(_me: Mob, _rand: RandomGenerator): Buff {
     // TODO: Implement buff choosing
     return Buff.Confuse;
   }

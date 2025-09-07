@@ -70,9 +70,9 @@ export class ItemObjectManager {
    * @param glyph - The glyph of the object type.
    * @return The index of the object type.
    */
-  private static indexForGlyph(glyph: Glyph): number {
+  /*   private static indexForGlyph(glyph: Glyph): number {
     return this.objTypes.findIndex(obj => obj.glyph == glyph);
-  }
+  } */
 
   /**
    * Adds an object of a specified type to the map at a given position.
@@ -84,7 +84,7 @@ export class ItemObjectManager {
    * @param level - The level of the object.
    * @return The added object.
    */
-  private static addObjTypeToMap(
+  /* private static addObjTypeToMap(
     wp: WorldPoint,
     map: GameMapType,
     rand: RandomGenerator,
@@ -96,7 +96,7 @@ export class ItemObjectManager {
     const object = this.makeTemplateObject(level, rand, template);
     map.addObject(object, wp);
     return object;
-  }
+  } */
 
   /**
    * Adds a random object of a specified level to the map at a given position.

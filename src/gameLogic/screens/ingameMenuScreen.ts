@@ -13,11 +13,13 @@ import { Stack } from '../../shared-types/terminal/stack';
  */
 export class IngameMenuScreen extends BaseScreen {
   public name = 'ingame-menu';
-  private stack: Stack;
 
-  constructor(game: GameState, make: ScreenMaker, stack: Stack) {
+  constructor(
+    game: GameState,
+    make: ScreenMaker,
+    private stack: Stack,
+  ) {
     super(game, make);
-    this.stack = stack;
   }
 
   /**

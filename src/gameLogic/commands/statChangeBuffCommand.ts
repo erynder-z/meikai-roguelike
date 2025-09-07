@@ -9,6 +9,41 @@ import { Mob } from '../mobs/mob';
 const DEFAULT_BUFF_DURATION = 50;
 
 export class StatChangeBuffCommand extends BuffCommand {
+  private static readonly statBuffConfigMap: Partial<
+    Record<
+      Buff,
+      {
+        adjust: (game: GameState, amount: number) => void;
+        createTick: (
+          target: Mob,
+          game: GameState,
+          absoluteAmount: number,
+        ) => Tick;
+      }
+    >
+  > = {
+    [Buff.AttackUp]: {
+      adjust: (game, amount) => game.stats.adjustDamageDealModifier(amount),
+      createTick: (target, game, absoluteAmount) =>
+        new AttackDamageChangeTick(target, game, absoluteAmount),
+    },
+    [Buff.AttackDown]: {
+      adjust: (game, amount) => game.stats.adjustDamageDealModifier(-amount),
+      createTick: (target, game, absoluteAmount) =>
+        new AttackDamageChangeTick(target, game, -absoluteAmount),
+    },
+    [Buff.DefenseUp]: {
+      adjust: (game, amount) => game.stats.adjustDamageReceiveModifier(-amount),
+      createTick: (target, game, absoluteAmount) =>
+        new DefenseChangeTick(target, game, -absoluteAmount),
+    },
+    [Buff.DefenseDown]: {
+      adjust: (game, amount) => game.stats.adjustDamageReceiveModifier(amount),
+      createTick: (target, game, absoluteAmount) =>
+        new DefenseChangeTick(target, game, absoluteAmount),
+    },
+  };
+
   constructor(
     public buff: Buff,
     public target: Mob,
@@ -34,30 +69,18 @@ export class StatChangeBuffCommand extends BuffCommand {
    */
 
   public execute(): boolean {
-    const { game, target, amount } = this;
+    const { game, target, amount, buff } = this;
 
     if (this.target.buffs.is(this.buff)) return true; // prevent stacking of the same buff
 
-    const absoluteAmount = Math.abs(amount); // The amount can be negative, if loading a saved game, but needs to be a positive value for the logic to work
-
+    const config = StatChangeBuffCommand.statBuffConfigMap[buff];
     let effect: Tick | undefined = undefined;
-    switch (this.buff) {
-      case Buff.AttackUp:
-        this.game.stats.adjustDamageDealModifier(amount);
-        effect = new AttackDamageChangeTick(target, game, absoluteAmount);
-        break;
-      case Buff.AttackDown:
-        this.game.stats.adjustDamageDealModifier(-amount);
-        effect = new AttackDamageChangeTick(target, game, -absoluteAmount);
-        break;
-      case Buff.DefenseUp:
-        this.game.stats.adjustDamageReceiveModifier(-amount);
-        effect = new DefenseChangeTick(target, game, -absoluteAmount);
-        break;
-      case Buff.DefenseDown:
-        this.game.stats.adjustDamageReceiveModifier(amount);
-        effect = new DefenseChangeTick(target, game, absoluteAmount);
-        break;
+
+    if (config) {
+      config.adjust(game, amount);
+      // The amount can be negative, if loading a saved game, but needs to be a positive value for the logic to work
+      const absoluteAmount = Math.abs(amount);
+      effect = config.createTick(target, game, absoluteAmount);
     }
 
     const active: BuffType = {

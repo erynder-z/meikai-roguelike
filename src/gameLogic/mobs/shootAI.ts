@@ -102,7 +102,7 @@ export class ShootAI implements MobAI {
    * @param rand - The random generator used for picking the spell.
    * @return The spell chosen for the mob.
    */
-  private pickSpell(me: Mob, rand: RandomGenerator): Spell {
+  private pickSpell(me: Mob, _rand: RandomGenerator): Spell {
     const index = me.level % PICKABLE_SPELLS.length;
     const spell = PICKABLE_SPELLS[index];
 
@@ -124,7 +124,7 @@ export class ShootAI implements MobAI {
   private castSpell(
     spell: Spell,
     me: Mob,
-    enemy: Mob,
+    _enemy: Mob,
     game: GameState,
     stack: Stack,
     make: ScreenMaker,

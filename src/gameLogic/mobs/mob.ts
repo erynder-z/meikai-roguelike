@@ -9,16 +9,15 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
  */
 export class Mob {
   public id: string;
-  public pos: WorldPoint = new WorldPoint();
-  public glyph: Glyph = Glyph.Unknown;
-  public name: string = '?';
+  public pos: WorldPoint;
+  public name: string;
   public description: string = '';
   public hp: number = 3;
   public maxhp: number = 3;
   public mood: Mood = Mood.Asleep;
   public level: number = 0;
   public sinceMove: number = 0;
-  public isPlayer: boolean = false;
+  public isPlayer: boolean;
   public buffs: ActiveBuffs = new ActiveBuffs();
   public bloody: { isBloody: boolean; intensity: number } = {
     isBloody: false,
@@ -27,14 +26,15 @@ export class Mob {
   public baseStrength: number = 4;
   public currentStrength: number = 4;
 
-  constructor(glyph: Glyph, x: number, y: number) {
-    this.isPlayer = glyph == Glyph.Player;
-    this.glyph = glyph;
-    this.id = Glyph[glyph];
-    this.name = Glyph[glyph];
-    this.pos.x = x;
-    this.pos.y = y;
+  constructor(
+    public glyph: Glyph,
+    x: number,
+    y: number,
+  ) {
     this.id = crypto.randomUUID();
+    this.pos = new WorldPoint(x, y);
+    this.name = Glyph[glyph];
+    this.isPlayer = glyph == Glyph.Player;
   }
 
   /**

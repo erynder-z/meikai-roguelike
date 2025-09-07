@@ -27,7 +27,7 @@ export class StepScreen extends BaseScreen {
    * @param  stack - The stack.
    * @return True if the event was handled successfully, false otherwise.
    */
-  public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
+  public handleKeyDownEvent(_event: KeyboardEvent, _stack: Stack): boolean {
     return false;
   }
 

@@ -21,7 +21,7 @@ export class CanSee {
     a: WorldPoint,
     b: WorldPoint,
     map: GameMapType,
-    onlyEnv: boolean,
+    _onlyEnv: boolean,
   ): boolean {
     const i: BresenhamIterator = BresenhamIterator.createFromWorldPoint(a, b);
     for (; !i.done(); ) {

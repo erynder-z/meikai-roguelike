@@ -129,7 +129,7 @@ export class HitCommand extends CommandBase {
    *
    * @param game - The game object.
    */
-  private clearCharm(game: GameState) {
+  private clearCharm(_game: GameState) {
     const { him } = this;
 
     if (!him.is(Buff.Charm)) return;

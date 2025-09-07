@@ -7,6 +7,20 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
 export class EnvironmentChecker {
   private static areaOfEffectRadius: number = 1;
 
+  private static readonly glyphToAuraEffectMap: Partial<
+    Record<Glyph, EnvEffect>
+  > = {
+    [Glyph.Poison_Mushroom]: EnvEffect.Poison,
+    [Glyph.Confusion_Mushroom]: EnvEffect.Confusion,
+  };
+
+  private static readonly staticGlyphEffectMap: Partial<
+    Record<Glyph, () => EnvEffect>
+  > = {
+    [Glyph.Arcane_Sigil]: () => this.randomEnvEffect(),
+    [Glyph.Nebulous_Mist]: () => EnvEffect.Blind,
+  };
+
   /**
    * Checks if items can be dropped on the given cell.
    *
@@ -53,8 +67,20 @@ export class EnvironmentChecker {
     wp: WorldPoint,
     map: GameMapType,
   ): void {
-    this.addPoisonEffectToCellNeighbors(cell, wp, map);
-    this.addConfusionEffectToCellNeighbors(cell, wp, map);
+    this.applyAuraEffect(
+      cell,
+      wp,
+      map,
+      Glyph.Poison_Mushroom,
+      EnvEffect.Poison,
+    );
+    this.applyAuraEffect(
+      cell,
+      wp,
+      map,
+      Glyph.Confusion_Mushroom,
+      EnvEffect.Confusion,
+    );
   }
 
   /**
@@ -64,86 +90,40 @@ export class EnvironmentChecker {
    * @param cell - The cell to add effects to.
    */
   public static addStaticCellEffects(cell: MapCell): void {
-    this.addArcaneSigilEffect(cell);
-    this.addNebulousMistEffect(cell);
+    const effectFactory = this.staticGlyphEffectMap[cell.glyph()];
+    if (effectFactory) {
+      cell.addEnvEffect(effectFactory());
+    }
   }
 
   /**
-   * Adds the poison effect to the cells surrounding the given cell, if it contains a Poison Mushroom glyph.
+   * Applies an aura effect to the given cell if it matches the given glyph,
+   * and to all its neighbors within the given radius.
    *
-   * @param cell - The cell to add the poison effect to.
+   * @param cell - The cell to check for aura effect.
    * @param wp - The position of the cell.
    * @param map - The map containing the cells.
+   * @param glyph - The glyph that triggers the aura effect.
+   * @param effect - The aura effect to apply.
    */
-  private static addPoisonEffectToCellNeighbors(
+  private static applyAuraEffect(
     cell: MapCell,
     wp: WorldPoint,
     map: GameMapType,
+    glyph: Glyph,
+    effect: EnvEffect,
   ): void {
-    if (cell.glyph() === Glyph.Poison_Mushroom) {
+    if (cell.glyph() === glyph) {
       const neighbors = wp.getNeighbors(this.areaOfEffectRadius);
 
       for (const neighbor of neighbors) {
-        if (!this.isValidNeighbor(neighbor, map)) {
-          continue;
-        }
+        if (!this.isValidNeighbor(neighbor, map)) continue;
 
         const neighborCell = map.cell(neighbor);
 
-        neighborCell.addEnvEffect(EnvEffect.Poison);
+        neighborCell.addEnvEffect(effect);
       }
     }
-  }
-
-  /**
-   * Adds the confusion effect to the neighboring cells of the given cell if it contains a Confusion Mushroom glyph.
-   *
-   * @param cell - The cell to add the confusion effect to.
-   * @param wp - The position of the cell.
-   * @param map - The map containing the cells.
-   */
-  private static addConfusionEffectToCellNeighbors(
-    cell: MapCell,
-    wp: WorldPoint,
-    map: GameMapType,
-  ): void {
-    if (cell.glyph() === Glyph.Confusion_Mushroom) {
-      const neighbors = wp.getNeighbors(this.areaOfEffectRadius);
-
-      for (const neighbor of neighbors) {
-        if (!this.isValidNeighbor(neighbor, map)) {
-          continue;
-        }
-
-        const neighborCell = map.cell(neighbor);
-
-        neighborCell.addEnvEffect(EnvEffect.Confusion);
-      }
-    }
-  }
-
-  /**
-   * Adds a random arcane sigil effect to the given cell if it contains an Arcane Sigil glyph.
-   *
-   * @param cell - The cell to potentially add an arcane sigil effect to.
-   */
-
-  private static addArcaneSigilEffect(cell: MapCell): void {
-    if (cell.glyph() === Glyph.Arcane_Sigil) {
-      const effect = this.randomEnvEffect();
-      cell.addEnvEffect(effect);
-    }
-  }
-
-  /**
-   * Adds the blindness effect to a cell if it contains a Nebulous Mist glyph.
-   *
-   * @param cell - The cell to potentially add the blindness effect to.
-   */
-
-  private static addNebulousMistEffect(cell: MapCell): void {
-    if (cell.glyph() === Glyph.Nebulous_Mist)
-      cell.addEnvEffect(EnvEffect.Blind);
   }
 
   /**
@@ -153,14 +133,7 @@ export class EnvironmentChecker {
    * @return The environmental effect corresponding to the glyph, or null if not found.
    */
   private static getEffectFromGlyph(glyph: Glyph): EnvEffect | null {
-    switch (glyph) {
-      case Glyph.Poison_Mushroom:
-        return EnvEffect.Poison;
-      case Glyph.Confusion_Mushroom:
-        return EnvEffect.Confusion;
-      default:
-        return null;
-    }
+    return this.glyphToAuraEffectMap[glyph] ?? null;
   }
 
   /**

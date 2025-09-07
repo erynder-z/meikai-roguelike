@@ -39,7 +39,7 @@ export abstract class CommandBase implements Command {
    * @param direction - The direction to set.
    * @returns The command object.
    */
-  public setDirection(direction: WorldPoint): Command {
+  public setDirection(_direction: WorldPoint): Command {
     throw 'no setDirection';
   }
 
@@ -253,7 +253,7 @@ export abstract class CommandBase implements Command {
 
   /**
    * Checks if the given mob is encumbered and flashes a message if it is the player.
-   * If encumbered, the player's actions have a 10% chance to fail.
+   * If encumbered, the player's actions have a 20% chance to fail.
    *
    * @param me - The mob to check for being encumbered.
    * @param game - The game object for checking conditions and displaying messages.
@@ -261,7 +261,7 @@ export abstract class CommandBase implements Command {
    */
   private encumbered(me: Mob, game: GameState): boolean {
     if (!me.is(Buff.Encumbered)) return false;
-    if (!game.rand.isOneIn(10)) return false;
+    if (!game.rand.isOneIn(5)) return false;
     const msg = new LogMessage(
       'You stumble due to the weight of your equipment!',
       EventCategory.buff,

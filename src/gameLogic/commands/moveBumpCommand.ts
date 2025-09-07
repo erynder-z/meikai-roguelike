@@ -34,7 +34,7 @@ export class MoveBumpCommand extends CommandBase {
    * @param act - The action being performed.
    * @returns An object indicating if the mob is able to perform the action and if it uses a turn.
    */
-  public able(mob: Mob, game: GameState, act: Act): Able {
+  public able(_mob: Mob, _game: GameState, _act: Act): Able {
     return { isAble: true, usesTurn: false };
   }
 

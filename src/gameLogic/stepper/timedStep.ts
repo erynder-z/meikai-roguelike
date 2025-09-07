@@ -22,7 +22,7 @@ export class TimedStep implements Step {
    *
    * @param pos - The world point to set the position to.
    */
-  public setPos(pos: WorldPoint): void {
+  public setPos(_pos: WorldPoint): void {
     throw 'no setPos';
   }
 
@@ -31,7 +31,7 @@ export class TimedStep implements Step {
    *
    * @param dir - The world point to set the direction to.
    */
-  public setDirection(dir: WorldPoint): void {
+  public setDirection(_dir: WorldPoint): void {
     throw 'no setDir';
   }
 
@@ -40,7 +40,7 @@ export class TimedStep implements Step {
    *
    * @param tgt - The Mob object to set as the target.
    */
-  public setTarget(tgt: Mob): void {
+  public setTarget(_tgt: Mob): void {
     throw 'no setTarget';
   }
 

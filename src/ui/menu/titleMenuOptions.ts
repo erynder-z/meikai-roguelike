@@ -21,6 +21,7 @@ export class TitleMenuOptions extends UnBlurElement {
     controls,
   ) as ControlSchemeName[];
   private activeControlScheme: Record<string, string[]>;
+  private keyPressHandlers!: Map<string, (event: KeyboardEvent) => void>;
 
   constructor() {
     super();
@@ -425,6 +426,49 @@ export class TitleMenuOptions extends UnBlurElement {
     this.toggleBloodIntensity = this.toggleBloodIntensity.bind(this);
     this.toggleGlyphShadow = this.toggleGlyphShadow.bind(this);
     this.returnToPreviousScreen = this.returnToPreviousScreen.bind(this);
+
+    this.keyPressHandlers = new Map<string, (event: KeyboardEvent) => void>([
+      ['d', this.changeSeed],
+      ['f', this.changeFont],
+      [
+        'w',
+        event => {
+          event.preventDefault();
+          this.focusAndSelectTerminalWidthInput();
+        },
+      ],
+      [
+        'h',
+        event => {
+          event.preventDefault();
+          this.focusAndSelectTerminalHeightInput();
+        },
+      ],
+      [
+        'l',
+        event => {
+          event.preventDefault();
+          this.focusAndSelectScalingFactorInput();
+        },
+      ],
+      ['y', this.toggleShowStory],
+      ['C', this.toggleControlScheme],
+      ['S', this.toggleScanlines],
+      ['t', this.switchScanlineStyle],
+      ['F', this.toggleFlicker],
+      ['a', this.toggleGlyphShadow],
+      ['M', this.toggleMessageAlignment],
+      ['e', this.focusAndSelectMessageCountInput],
+      ['o', this.toggleShowImages],
+      ['I', this.toggleImageAlignment],
+      ['p', this.toggleTemperatureUnitChange],
+      ['D', this.toggleDepthUnitChange],
+      ['g', this.toggleWeightUnitChange],
+      ['B', this.toggleBloodIntensity],
+      ['n', this.focusAndSelectKeypressThrottleInput],
+      [this.activeControlScheme.menu.toString(), this.returnToPreviousScreen],
+      ['R', this.returnToPreviousScreen],
+    ]);
 
     const root = this.shadowRoot;
 
@@ -1165,77 +1209,8 @@ export class TitleMenuOptions extends UnBlurElement {
       new KeypressScrollHandler(targetElement).handleVirtualScroll(event);
     }
 
-    switch (event.key) {
-      case 'd':
-        this.changeSeed();
-        break;
-      case 'f':
-        this.changeFont();
-        break;
-      case 'w':
-        event.preventDefault();
-        this.focusAndSelectTerminalWidthInput();
-        break;
-      case 'h':
-        event.preventDefault();
-        this.focusAndSelectTerminalHeightInput();
-        break;
-      case 'l':
-        event.preventDefault();
-        this.focusAndSelectScalingFactorInput();
-        break;
-      case 'y':
-        this.toggleShowStory();
-        break;
-      case 'C':
-        this.toggleControlScheme();
-        break;
-      case 'S':
-        this.toggleScanlines();
-        break;
-      case 't':
-        this.switchScanlineStyle();
-        break;
-      case 'F':
-        this.toggleFlicker();
-        break;
-      case 'a':
-        this.toggleGlyphShadow();
-        break;
-      case 'M':
-        this.toggleMessageAlignment();
-        break;
-      case 'e':
-        this.focusAndSelectMessageCountInput();
-        break;
-      case 'o':
-        this.toggleShowImages();
-        break;
-      case 'I':
-        this.toggleImageAlignment();
-        break;
-      case 'p':
-        this.toggleTemperatureUnitChange();
-        break;
-      case 'D':
-        this.toggleDepthUnitChange();
-        break;
-      case 'g':
-        this.toggleWeightUnitChange();
-        break;
-      case 'B':
-        this.toggleBloodIntensity();
-        break;
-      case 'n':
-        this.focusAndSelectKeypressThrottleInput();
-        break;
-      case this.activeControlScheme.menu.toString():
-      case 'R':
-        this.returnToPreviousScreen();
-        break;
-      default:
-        break;
-    }
+    const handler = this.keyPressHandlers.get(event.key);
+    if (handler) handler(event);
   }
 
   /**

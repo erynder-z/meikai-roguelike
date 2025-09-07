@@ -22,16 +22,15 @@ const SHORT_FACTOR_RANGE = SHORT_MAX_FACTOR - SHORT_MIN_FACTOR;
  */
 export class Terminal implements DrawableTerminal {
   private gameConfig = gameConfigManager.getConfig();
-  public dimensions: TerminalPoint;
+  public dimensions: TerminalPoint = TerminalPoint.TerminalDimensions;
   public ctx: CanvasRenderingContext2D;
   public horizontalSide: number = 1;
   public verticalSide: number = 1;
   public sideLength: number = 40;
-  private canvas: HTMLCanvasElement;
-  private canvasContainer: HTMLDivElement;
+  private readonly canvas: HTMLCanvasElement;
+  private readonly canvasContainer: HTMLDivElement;
 
   constructor() {
-    this.dimensions = TerminalPoint.TerminalDimensions;
     this.canvas = document.getElementById(
       'terminal-canvas',
     ) as HTMLCanvasElement;

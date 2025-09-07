@@ -66,20 +66,6 @@ export class GlyphMap {
   }
 
   /**
-   * Warns if a glyph is added but the registry size does not match the length of the Glyph enum.
-   *
-   * This can happen when a glyph is added in the code but the enum is not updated.
-   * @param glyph - The glyph to warn about.
-   */
-  private static warn(glyph: Glyph): void {
-    if (GlyphMap.glyphsRegistry.size === Object.keys(Glyph).length) return;
-
-    console.error(
-      `Glyph ${Glyph[glyph]} differs from registry size ${GlyphMap.glyphsRegistry.size}`,
-    );
-  }
-
-  /**
    * Converts an index to a glyph.
    *
    * The index is relative to the order of glyphs in the registry. This order is

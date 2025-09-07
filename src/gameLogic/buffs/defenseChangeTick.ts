@@ -28,7 +28,7 @@ export class DefenseChangeTick implements Tick {
    * @param duration - The duration of the defense modifier.
    * @param timeLeft - The time left in the modifier.
    */
-  public tick(duration: number, timeLeft: number): void {
+  public tick(_duration: number, timeLeft: number): void {
     if (!this.isFinalTick(timeLeft)) return;
 
     this.game.stats.adjustDamageReceiveModifier(-this.amount);

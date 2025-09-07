@@ -2,6 +2,7 @@ import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from '../commands/buffCommand';
 import { CellEffects } from '../commands/cellEffects';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
+import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
 import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
 import { DrawUI } from '../../renderer/drawUI';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
@@ -21,14 +22,15 @@ import { EventCategory, LogMessage } from '../messages/logMessage';
  */
 export class BaseScreen implements StackScreen {
   public name = 'BaseScreen';
-  public gameConfig = gameConfigManager.getConfig();
-  private currentScheme = this.gameConfig.control_scheme || 'default';
+  protected gameConfig = gameConfigManager.getConfig();
+  private readonly currentScheme: ControlSchemeName;
   public controlSchemeManager: ControlSchemeManager;
   public activeControlScheme: Record<string, string[]>;
   constructor(
     public game: GameState,
     public make: ScreenMaker,
   ) {
+    this.currentScheme = this.gameConfig.control_scheme || 'default';
     this.controlSchemeManager = new ControlSchemeManager(this.currentScheme);
     this.activeControlScheme = this.controlSchemeManager.getActiveScheme();
   }
@@ -61,7 +63,13 @@ export class BaseScreen implements StackScreen {
     DrawUI.renderActionImage(this.game);
   }
 
-  public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {}
+  /**
+   * Handles key down events for the screen.
+   *
+   * @param event - The keyboard event.
+   * @param stack - The stack of screens.
+   */
+  public handleKeyDownEvent(_event: KeyboardEvent, _stack: Stack): void {}
 
   /**
    * Determines if the screen should be updated based on time.
@@ -69,7 +77,7 @@ export class BaseScreen implements StackScreen {
    * @param stack - The stack of screens.
    * @return Returns `true` if the screen should be updated, `false` otherwise.
    */
-  public onTime(stack: Stack): boolean {
+  public onTime(_stack: Stack): boolean {
     return false;
   }
 
