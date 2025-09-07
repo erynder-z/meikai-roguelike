@@ -43,53 +43,56 @@ export class SpellFinder {
     this.spellMap = new Map<Spell, SpellFactory>([
       [
         Spell.Heal,
-        (amount, cost) => ({ cmd: new HealCommand(level, me, game) }),
+        (_amount, _cost) => ({ cmd: new HealCommand(level, me, game) }),
       ],
-      [Spell.Charm, (amount, cost) => this.buff(Buff.Charm, me)],
-      [Spell.Slow, (amount, cost) => this.buff(Buff.Slow, me)],
-      [Spell.Afraid, (amount, cost) => this.buff(Buff.Afraid, me)],
+      [Spell.Charm, (_amount, _cost) => this.buff(Buff.Charm, me)],
+      [Spell.Slow, (_amount, _cost) => this.buff(Buff.Slow, me)],
+      [Spell.Afraid, (_amount, _cost) => this.buff(Buff.Afraid, me)],
       [
         Spell.Bullet,
-        (amount, cost) => {
+        (_amount, _cost) => {
           const cmd = new BulletCommand(me, game, this.stack, this.make);
           return { cmd, screen: this.dir(cmd) };
         },
       ],
-      [Spell.Poison, (amount, cost) => this.buff(Buff.Poison, me)],
-      [Spell.Confuse, (amount, cost) => this.buff(Buff.Confuse, me)],
-      [Spell.Silence, (amount, cost) => this.buff(Buff.Silence, me)],
+      [Spell.Poison, (_amount, _cost) => this.buff(Buff.Poison, me)],
+      [Spell.Confuse, (_amount, _cost) => this.buff(Buff.Confuse, me)],
+      [Spell.Silence, (_amount, _cost) => this.buff(Buff.Silence, me)],
       [
         Spell.Cleanse,
-        (amount, cost) => ({ cmd: new CleanseAllCommand(me, game) }),
+        (_amount, _cost) => ({ cmd: new CleanseAllCommand(me, game) }),
       ],
-      [Spell.Stun, (amount, cost) => this.buff(Buff.Stun, me)],
-      [Spell.Burn, (amount, cost) => this.buff(Buff.Burn, me)],
-      [Spell.Blind, (amount, cost) => this.buff(Buff.Blind, me)],
+      [Spell.Stun, (_amount, _cost) => this.buff(Buff.Stun, me)],
+      [Spell.Burn, (_amount, _cost) => this.buff(Buff.Burn, me)],
+      [Spell.Blind, (_amount, _cost) => this.buff(Buff.Blind, me)],
       [
         Spell.Multiply,
-        (amount, cost) => ({ cmd: new MultiplyCommand(me, game) }),
+        (_amount, _cost) => ({ cmd: new MultiplyCommand(me, game) }),
       ],
-      [Spell.Freeze, (amount, cost) => this.buff(Buff.Freeze, me)],
-      [Spell.Root, (amount, cost) => this.buff(Buff.Root, me)],
-      [Spell.Shock, (amount, cost) => this.buff(Buff.Shock, me)],
+      [Spell.Freeze, (_amount, _cost) => this.buff(Buff.Freeze, me)],
+      [Spell.Root, (_amount, _cost) => this.buff(Buff.Root, me)],
+      [Spell.Shock, (_amount, _cost) => this.buff(Buff.Shock, me)],
       [
         Spell.Teleport,
-        (amount, cost) => ({ cmd: new TeleportCommand(6, me, game) }),
+        (_amount, _cost) => ({ cmd: new TeleportCommand(6, me, game) }),
       ],
-      [Spell.Paralyze, (amount, cost) => this.buff(Buff.Paralyze, me)],
-      [Spell.Sleep, (amount, cost) => this.buff(Buff.Sleep, me)],
-      [Spell.Petrify, (amount, cost) => this.buff(Buff.Petrify, me)],
-      [Spell.Summon, (amount, cost) => ({ cmd: new SummonCommand(me, game) })],
-      [Spell.Bleed, (amount, cost) => this.buff(Buff.Bleed, me)],
-      [Spell.Levitate, (amount, cost) => this.buff(Buff.Levitate, me)],
-      [Spell.Disarm, (amount, cost) => this.buff(Buff.Disarm, me)],
+      [Spell.Paralyze, (_amount, _cost) => this.buff(Buff.Paralyze, me)],
+      [Spell.Sleep, (_amount, _cost) => this.buff(Buff.Sleep, me)],
+      [Spell.Petrify, (_amount, _cost) => this.buff(Buff.Petrify, me)],
+      [
+        Spell.Summon,
+        (_amount, _cost) => ({ cmd: new SummonCommand(me, game) }),
+      ],
+      [Spell.Bleed, (_amount, _cost) => this.buff(Buff.Bleed, me)],
+      [Spell.Levitate, (_amount, _cost) => this.buff(Buff.Levitate, me)],
+      [Spell.Disarm, (_amount, _cost) => this.buff(Buff.Disarm, me)],
       [
         Spell.DecreaseHunger,
-        (amount, cost) => ({ cmd: new EatCommand(me, game, amount) }),
+        (amount, _cost) => ({ cmd: new EatCommand(me, game, amount) }),
       ],
       [
         Spell.DecreaseThirst,
-        (amount, cost) => ({ cmd: new DrinkCommand(me, game, amount) }),
+        (amount, _cost) => ({ cmd: new DrinkCommand(me, game, amount) }),
       ],
     ]);
   }

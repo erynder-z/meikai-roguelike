@@ -1,4 +1,3 @@
-import { BulletCommand } from '../commands/bulletCommand';
 import { Command } from '../../shared-types/gameLogic/commands/command';
 import { CommandDirectionScreen } from '../screens/commandDirectionScreen';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
@@ -18,7 +17,6 @@ import { LogScreen } from '../screens/logScreen';
 import { LookScreen } from '../screens/lookScreen';
 import { Mob } from '../mobs/mob';
 import { MoveBumpCommand } from '../commands/moveBumpCommand';
-import { MoveCommand } from '../commands/moveCommand';
 import { PickupCommand } from '../commands/pickupCommand';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { SpellScreen } from '../screens/spellScreen';
@@ -177,16 +175,6 @@ export class ParsePlayer {
   }
 
   /**
-   * Creates a new MoveCommand with the given direction, player, and game.
-   *
-   * @param dir - the direction to move.
-   * @return the newly created MoveCommand.
-   */
-  private moveCmd(dir: WorldPoint): Command {
-    return new MoveCommand(dir, this.player, this.game);
-  }
-
-  /**
    * Creates a new WaitCommand with the given stack, player, and game.
    *
    * @param stack - The stack object used by the WaitCommand.
@@ -225,11 +213,11 @@ export class ParsePlayer {
    * @param stack - The stack object used by the BulletCommand.
    * @return The StackScreen returned by the direction method.
    */
-  private bulletCommand(stack: Stack): StackScreen {
+  /* private bulletCommand(stack: Stack): StackScreen {
     return this.direction(
       new BulletCommand(this.player, this.game, stack, this.make),
     );
-  }
+  } */
 
   /**
    * Creates a new CommandDirectionScreen with the given command and returns it as a StackScreen.
@@ -237,7 +225,7 @@ export class ParsePlayer {
    * @param command - The command to be executed.
    * @return The newly created CommandDirectionScreen.
    */
-  private direction(command: Command): StackScreen {
+  /* private direction(command: Command): StackScreen {
     return new CommandDirectionScreen(command, this.game, this.make);
-  }
+  } */
 }

@@ -39,7 +39,7 @@ export abstract class CommandBase implements Command {
    * @param direction - The direction to set.
    * @returns The command object.
    */
-  public setDirection(direction: WorldPoint): Command {
+  public setDirection(_direction: WorldPoint): Command {
     throw 'no setDirection';
   }
 

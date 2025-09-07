@@ -186,15 +186,6 @@ export class Builder implements Build {
   ): void {
     game.dungeon.playerSwitchLevel(level, pos, game);
   }
-  /**
-   * Calculates the center position of the given WorldPoint dimensions.
-   *
-   * @param dim - the dimensions for which to calculate the center position.
-   * @return the center position of the given dimensions.
-   */
-  private centerPos(dim: WorldPoint): WorldPoint {
-    return new WorldPoint(Math.floor(dim.x / 2), Math.floor(dim.y / 2));
-  }
 
   /**
    * Creates a new player Mob.
@@ -228,7 +219,7 @@ export class Builder implements Build {
   public makeRingOfMobs(
     glyph: Glyph,
     map: GameMapType,
-    rand: RandomGenerator,
+    _rand: RandomGenerator,
   ): void {
     const dim = map.dimensions;
     const c = new WorldPoint(Math.floor(dim.x / 2), Math.floor(dim.y / 2));

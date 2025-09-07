@@ -46,7 +46,7 @@ export class StoryScreen extends BaseScreen {
    * @param event - The keyboard event.
    * @param stack - The stack of screens.
    */
-  public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {
+  public handleKeyDownEvent(_event: KeyboardEvent, stack: Stack): void {
     if (this.display?.isAnimationRunning()) {
       this.display.skipAnimation();
     } else {

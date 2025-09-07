@@ -10,7 +10,7 @@ import { SpellProperties } from './spellProperties';
  * Represents an item object in the game world.
  */
 export class ItemObject {
-  public readonly id: string = crypto.randomUUID();
+  public id: string = crypto.randomUUID();
   public spellCasting: SpellProperties = new SpellProperties();
 
   constructor(

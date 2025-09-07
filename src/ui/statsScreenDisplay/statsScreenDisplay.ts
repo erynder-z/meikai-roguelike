@@ -229,7 +229,7 @@ export class StatsScreenDisplay extends FadeInOutElement {
 
       let first = true;
 
-      buffMap.forEach((buff, key) => {
+      buffMap.forEach((_buff, key) => {
         if (!first) {
           buffsList.appendChild(document.createTextNode(', '));
         }

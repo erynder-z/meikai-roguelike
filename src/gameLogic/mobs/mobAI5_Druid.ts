@@ -80,7 +80,7 @@ export class MobAI5_Druid implements MobAI {
    * @param r - the random number generator.
    * @return The chosen buff for the mob.
    */
-  private pickBuff(me: Mob, r: RandomGenerator): Buff {
+  private pickBuff(_me: Mob, _r: RandomGenerator): Buff {
     // TODO: Implement buff choosing
     return Buff.Bleed;
   }

@@ -13,5 +13,5 @@ export class SomeScreen extends BaseScreen {
     super(game, make);
   }
 
-  public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {}
+  public handleKeyDownEvent(_event: KeyboardEvent, _stack: Stack): void {}
 }

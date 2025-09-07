@@ -63,7 +63,13 @@ export class BaseScreen implements StackScreen {
     DrawUI.renderActionImage(this.game);
   }
 
-  public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): void {}
+  /**
+   * Handles key down events for the screen.
+   *
+   * @param event - The keyboard event.
+   * @param stack - The stack of screens.
+   */
+  public handleKeyDownEvent(_event: KeyboardEvent, _stack: Stack): void {}
 
   /**
    * Determines if the screen should be updated based on time.
@@ -71,7 +77,7 @@ export class BaseScreen implements StackScreen {
    * @param stack - The stack of screens.
    * @return Returns `true` if the screen should be updated, `false` otherwise.
    */
-  public onTime(stack: Stack): boolean {
+  public onTime(_stack: Stack): boolean {
     return false;
   }
 

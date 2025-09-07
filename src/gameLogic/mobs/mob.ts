@@ -8,7 +8,7 @@ import { WorldPoint } from '../../maps/mapModel/worldPoint';
  * Represents a mobile entity within the game world. Mob can be either a player or an NPC.
  */
 export class Mob {
-  public readonly id: string;
+  public id: string;
   public pos: WorldPoint;
   public name: string;
   public description: string = '';

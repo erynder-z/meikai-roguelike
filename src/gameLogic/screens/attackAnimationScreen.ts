@@ -28,7 +28,7 @@ export class AttackAnimationScreen extends BaseScreen {
    * @param stack - The stack of screens.
    * @return True if the event was handled successfully, otherwise false.
    */
-  public handleKeyDownEvent(event: KeyboardEvent, stack: Stack): boolean {
+  public handleKeyDownEvent(_event: KeyboardEvent, _stack: Stack): boolean {
     return false;
   }
 

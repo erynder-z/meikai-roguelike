@@ -12,7 +12,7 @@ import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 export class MobAI3_Ant implements MobAI {
   public turn(
     me: Mob,
-    enemy: Mob,
+    _enemy: Mob,
     game: GameState,
     stack: Stack,
     make: ScreenMaker,
