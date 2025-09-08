@@ -68,28 +68,6 @@ export class BresenhamIterator {
   }
 
   /**
-   * Iterates through all points along the line.
-   */
-  private iterateAllPoints(): void {
-    for (this.i = 0; this.i <= this.longest; this.i++) {
-      this.next();
-    }
-  }
-
-  /**
-   * Iterates through all points along the line.
-   */
-  private iterateAllPoints2(): void {
-    let p: WorldPoint;
-
-    do {
-      p = this.next();
-    } while (!this.done());
-
-    console.log(p); // Logging the last point after iteration completion
-  }
-
-  /**
    * Creates a BresenhamIterator instance with specified start and end points.
    *
    * @param start The starting point.
@@ -198,4 +176,20 @@ export class BresenhamIterator {
     ++this.i;
     return curPoint;
   }
+
+  /*   private iterateAllPoints(): void {
+    for (this.i = 0; this.i <= this.longest; this.i++) {
+      this.next();
+    }
+  }
+
+  private iterateAllPoints2(): void {
+    let p: WorldPoint;
+
+    do {
+      p = this.next();
+    } while (!this.done());
+
+    console.log(p); // Logging the last point after iteration completion
+  } */
 }
