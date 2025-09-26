@@ -33,7 +33,7 @@ To build and run the game, you'll need to have Node.js and Rust installed. Follo
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/meikai-roguelike.git
+    git clone https://github.com/erynder-z/meikai-roguelike.git
     cd meikai-roguelike
     ```
 
