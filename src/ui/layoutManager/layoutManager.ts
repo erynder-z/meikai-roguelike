@@ -1,8 +1,8 @@
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
+import { MessageLog } from '../../gameLogic/messages/messageLog';
 import { ImageHandler } from '../../media/imageHandler/imageHandler';
 import { images } from '../../media/imageHandler/imageIndex';
 import { MessagesDisplay } from '../messages/messagesDisplay';
-import { MessageLog } from '../../gameLogic/messages/messageLog';
 
 /**
  *  This class handles changing and redrawing parts of the UI when needed.

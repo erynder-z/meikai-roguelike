@@ -1,11 +1,11 @@
-import { AutoHeal } from './autoHeal';
 import { CanSee } from '../../maps/helpers/canSee';
-import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { LootManager } from '../itemObjects/lootManager';
+import { EventCategory, LogMessage } from '../messages/logMessage';
 import { Mob } from '../mobs/mob';
+import { AutoHeal } from './autoHeal';
 
 /**
  * A class to handle adjustments to health of a mob.

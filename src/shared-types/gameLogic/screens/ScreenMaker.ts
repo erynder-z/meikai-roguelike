@@ -1,6 +1,6 @@
 import { GameState } from '../../gameBuilder/gameState';
-import { SerializedGameState } from '../../utilities/saveStateHandler';
 import { StackScreen } from '../../terminal/stackScreen';
+import { SerializedGameState } from '../../utilities/saveStateHandler';
 
 export type ScreenMaker = {
   newGame(): StackScreen;

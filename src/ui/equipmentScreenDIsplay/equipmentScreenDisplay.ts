@@ -214,8 +214,8 @@ export class EquipmentScreenDisplay extends FadeInOutElement {
         totalWeight >= this.maxCarryWeight
           ? 'red'
           : totalWeight / this.maxCarryWeight > 0.8
-          ? 'yellow'
-          : 'white';
+            ? 'yellow'
+            : 'white';
 
       totalWeightContainer.classList.remove('yellow', 'red');
       totalWeightContainer.classList.add(color);

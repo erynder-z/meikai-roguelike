@@ -1,8 +1,8 @@
-import { BaseScreen } from './baseScreen';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
 import { StoryScreenDisplay } from '../../ui/storyScreenDisplay/storyScreenDisplay';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents a screen for displaying additional content.

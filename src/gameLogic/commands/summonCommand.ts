@@ -1,9 +1,9 @@
-import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameMap } from '../../maps/mapModel/gameMap';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { EventCategory, LogMessage } from '../messages/logMessage';
 import { Mob } from '../mobs/mob';
 import { MultiplyCommand } from './multiplyCommand';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**
  * Represents a command that spawns a mob.

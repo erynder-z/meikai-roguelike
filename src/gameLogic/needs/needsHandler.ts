@@ -1,9 +1,9 @@
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from '../commands/buffCommand';
-import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealthAdjust } from '../commands/healthAdjust';
+import { EventCategory, LogMessage } from '../messages/logMessage';
 import { Mob } from '../mobs/mob';
 
 type NeedConfig = {

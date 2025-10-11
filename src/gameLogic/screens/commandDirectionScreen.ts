@@ -1,10 +1,10 @@
-import { BaseScreen } from './baseScreen';
-import { Command } from '../../shared-types/gameLogic/commands/command';
-import { CommandDirectionScreenDisplay } from '../../ui/commandDirectionScreenDisplay/commandDirectionScreenDisplay';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { CommandDirectionScreenDisplay } from '../../ui/commandDirectionScreenDisplay/commandDirectionScreenDisplay';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents a screen for selecting a direction for a command.

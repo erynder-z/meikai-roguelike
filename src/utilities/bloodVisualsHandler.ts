@@ -1,10 +1,10 @@
-import { CanSee } from '../maps/helpers/canSee';
-import { EnvironmentChecker } from '../gameLogic/environment/environmentChecker';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../shared-types/gameBuilder/gameState';
+import { EnvironmentChecker } from '../gameLogic/environment/environmentChecker';
 import { Mob } from '../gameLogic/mobs/mob';
+import { CanSee } from '../maps/helpers/canSee';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
+import { GameState } from '../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
 
 export class BloodVisualsHandler {
   private static get bloodIntensity(): number {

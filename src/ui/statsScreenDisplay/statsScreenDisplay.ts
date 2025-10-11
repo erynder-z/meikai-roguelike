@@ -1,10 +1,10 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
-import { BuffColors } from '../buffs/buffColors';
-import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
 import { Equipment } from '../../gameLogic/inventory/equipment';
-import { FadeInOutElement } from '../other/fadeInOutElement';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { Stats } from '../../gameLogic/stats/stats';
+import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
+import { BuffColors } from '../buffs/buffColors';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class StatsScreenDisplay extends FadeInOutElement {

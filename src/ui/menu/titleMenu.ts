@@ -1,8 +1,8 @@
+import { invoke } from '@tauri-apps/api/core';
 import { ask } from '@tauri-apps/plugin-dialog';
 import { BaseDirectory, readFile } from '@tauri-apps/plugin-fs';
-import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { exit } from '@tauri-apps/plugin-process';
-import { invoke } from '@tauri-apps/api/core';
+import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { UnBlurElement } from '../other/unBlurElement';
 
 export class TitleMenu extends UnBlurElement {

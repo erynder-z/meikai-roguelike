@@ -1,18 +1,17 @@
-import { Command } from '../../shared-types/gameLogic/commands/command';
-import { CommandBase } from './commandBase';
-import { DamageStep } from '../stepper/damageStep';
-import { DirectionStep } from '../stepper/directionStep';
-import { EventCategory } from '../messages/logMessage';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Glyph } from '../glyphs/glyph';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { ImageHandler } from '../../media/imageHandler/imageHandler';
-import { Mob } from '../mobs/mob';
-import { RangedWeaponType } from '../stepper/damageStep';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Step } from '../../shared-types/gameLogic/stepper/step';
-import { StepScreen } from '../screens/stepScreen';
 import { Stack } from '../../shared-types/terminal/stack';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { Glyph } from '../glyphs/glyph';
+import { EventCategory } from '../messages/logMessage';
+import { Mob } from '../mobs/mob';
+import { StepScreen } from '../screens/stepScreen';
+import { DamageStep, RangedWeaponType } from '../stepper/damageStep';
+import { DirectionStep } from '../stepper/directionStep';
+import { CommandBase } from './commandBase';
 
 /**
  * Represents a command to fire a ranged weapon.

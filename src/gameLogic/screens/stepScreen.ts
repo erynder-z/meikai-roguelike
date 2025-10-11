@@ -1,11 +1,11 @@
-import { AttackAnimationScreen } from './attackAnimationScreen';
-import { BaseScreen } from './baseScreen';
-import { DamageStep } from '../stepper/damageStep';
-import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../shared-types/terminal/stack';
 import { Step } from '../../shared-types/gameLogic/stepper/step';
+import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
+import { Stack } from '../../shared-types/terminal/stack';
+import { DamageStep } from '../stepper/damageStep';
+import { AttackAnimationScreen } from './attackAnimationScreen';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents a screen that displays a timed step that damages a mob at its current position.

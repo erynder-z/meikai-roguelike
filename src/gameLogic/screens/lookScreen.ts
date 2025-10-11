@@ -1,18 +1,18 @@
-import { BaseScreen } from './baseScreen';
-import { Buff } from '../buffs/buffEnum';
 import { CanSee } from '../../maps/helpers/canSee';
-import { DetailViewHandler } from '../../ui/detailVIewHandler/detailViewHandler';
-import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
+import { MapCell } from '../../maps/mapModel/mapCell';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { DrawUI } from '../../renderer/drawUI';
-import { EntityInfoCard } from '../../ui/entityInfoDisplay/entityInfoCard';
-import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { DetailViewEntity } from '../../shared-types/ui/detailViewEntity';
-import { MapCell } from '../../maps/mapModel/mapCell';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
 import { Stack } from '../../shared-types/terminal/stack';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { DetailViewEntity } from '../../shared-types/ui/detailViewEntity';
+import { DetailViewHandler } from '../../ui/detailVIewHandler/detailViewHandler';
+import { EntityInfoCard } from '../../ui/entityInfoDisplay/entityInfoCard';
+import { Buff } from '../buffs/buffEnum';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents a screen for looking at the player's surroundings.

@@ -1,17 +1,17 @@
 import { AutoHeal } from '../gameLogic/commands/autoHeal';
-import { Builder } from './builder';
 import { Equipment } from '../gameLogic/inventory/equipment';
-import { EventCategory, LogMessage } from '../gameLogic/messages/logMessage';
-import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../shared-types/gameBuilder/gameState';
 import { Inventory } from '../gameLogic/inventory/inventory';
-import { MapHandler } from './mapHandler';
+import { EventCategory, LogMessage } from '../gameLogic/messages/logMessage';
 import { MessageLog } from '../gameLogic/messages/messageLog';
 import { Mob } from '../gameLogic/mobs/mob';
-import { MobAI } from '../shared-types/gameLogic/mobs/mobAI';
 import { NeedsHandler } from '../gameLogic/needs/needsHandler';
-import { RandomGenerator } from '../randomGenerator/randomGenerator';
 import { Stats } from '../gameLogic/stats/stats';
+import { RandomGenerator } from '../randomGenerator/randomGenerator';
+import { GameState } from '../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { MobAI } from '../shared-types/gameLogic/mobs/mobAI';
+import { Builder } from './builder';
+import { MapHandler } from './mapHandler';
 
 /**
  * The game instance that holds the game state.

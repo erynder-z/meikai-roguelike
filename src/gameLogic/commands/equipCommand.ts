@@ -1,9 +1,9 @@
-import { CommandBase } from './commandBase';
-import { Equipment } from '../inventory/equipment';
-import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { Equipment } from '../inventory/equipment';
 import { ItemObject } from '../itemObjects/itemObject';
 import { Slot } from '../itemObjects/slot';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { CommandBase } from './commandBase';
 
 /**
  * Represents a command to equip an item in a game.

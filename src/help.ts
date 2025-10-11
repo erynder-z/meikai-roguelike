@@ -1,10 +1,10 @@
 import './styles/cssReset.css';
 import './styles/style-help.css';
-import { ColorLoader } from './loaders/colorLoader';
+import { invoke } from '@tauri-apps/api/core';
 import { gameConfigManager } from './gameConfigManager/gameConfigManager';
+import { ColorLoader } from './loaders/colorLoader';
 import { GenerateHelpUI } from './ui/uiGenerators/generateHelpUI';
 import { handleGlobalKeydown } from './utilities/handleGlobalKeyDown';
-import { invoke } from '@tauri-apps/api/core';
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {

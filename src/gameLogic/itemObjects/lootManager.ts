@@ -1,10 +1,10 @@
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { EnvironmentChecker } from '../environment/environmentChecker';
 import { FindFreeSpace } from '../../maps/helpers/findFreeSpace';
-import { ItemObjectManager } from './itemObjectManager';
-import { LogMessage, EventCategory } from '../messages/logMessage';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { EnvironmentChecker } from '../environment/environmentChecker';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { ItemObjectManager } from './itemObjectManager';
 
 /**
  * Handles loot management.

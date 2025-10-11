@@ -1,11 +1,11 @@
-import recipesData from './recipes.json';
-import { Inventory } from '../inventory/inventory';
-import { ItemObject } from '../itemObjects/itemObject';
 import { Glyph } from '../glyphs/glyph';
 import { GlyphMap } from '../glyphs/glyphMap';
-import { Slot } from '../itemObjects/slot';
+import { Inventory } from '../inventory/inventory';
 import { ObjCategory } from '../itemObjects/itemCategories';
+import { ItemObject } from '../itemObjects/itemObject';
+import { Slot } from '../itemObjects/slot';
 import { Spell } from '../spells/spell';
+import recipesData from './recipes.json';
 
 type Recipe = {
   ingredients: string[];

@@ -1,17 +1,17 @@
-import { Buff } from '../buffs/buffEnum';
-import { BuffCommand } from '../commands/buffCommand';
 import { CanSee } from '../../maps/helpers/canSee';
 import { GameMap } from '../../maps/mapModel/gameMap';
+import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from './mob';
 import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { Buff } from '../buffs/buffEnum';
+import { BuffCommand } from '../commands/buffCommand';
+import { Mob } from './mob';
 import { MobAI2_Cat } from './mobAI2_Cat';
 import { MobAI3_Ant } from './mobAI3_Ant';
 import { Mood } from './moodEnum';
-import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { SimpleSleepAI } from './simpleSleepAI';
-import { Stack } from '../../shared-types/terminal/stack';
 
 /**
  * An AI implementation for Mobs in an cast spells.

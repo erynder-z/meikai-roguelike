@@ -1,5 +1,5 @@
-import { BuffColors } from '../buffs/buffColors';
 import { LogMessage } from '../../gameLogic/messages/logMessage';
+import { BuffColors } from '../buffs/buffColors';
 
 export class MessagesDisplay extends HTMLElement {
   private colorizer: BuffColors;

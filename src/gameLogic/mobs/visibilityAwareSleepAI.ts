@@ -1,8 +1,8 @@
 import { CanSee } from '../../maps/helpers/canSee';
 import { GameMap } from '../../maps/mapModel/gameMap';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from './mob';
 import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
+import { Mob } from './mob';
 import { Mood } from './moodEnum';
 
 /**

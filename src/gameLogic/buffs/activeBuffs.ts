@@ -1,11 +1,10 @@
-import { Buff } from './buffEnum';
-import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
-import { EventCategory } from '../messages/logMessage';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { GrammarHandler } from '../../utilities/grammarHandler';
-import { LogMessage } from '../messages/logMessage';
-import { Mob } from '../mobs/mob';
+import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
 import { MobMessagesHandler } from '../../ui/messages/mobMessagesHandler';
+import { GrammarHandler } from '../../utilities/grammarHandler';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { Mob } from '../mobs/mob';
+import { Buff } from './buffEnum';
 
 /**
  * Handles managing buffs on a mob.

@@ -1,12 +1,12 @@
-import corpseData from '../../gameLogic/mobs/mobData/corpses.json';
-import envData from '../../gameLogic/environment/environmentData/environment.json';
-import { FlashDecorator } from './flashDecorator';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
+import envData from '../../gameLogic/environment/environmentData/environment.json';
 import itemData from '../../gameLogic/itemObjects/itemData/items.json';
 import { LogMessage } from '../../gameLogic/messages/logMessage';
-import mobData from '../../gameLogic/mobs/mobData/mobs.json';
 import { MessageLog } from '../../gameLogic/messages/messageLog';
+import corpseData from '../../gameLogic/mobs/mobData/corpses.json';
+import mobData from '../../gameLogic/mobs/mobData/mobs.json';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { FlashDecorator } from './flashDecorator';
 
 export class FlashDisplay extends HTMLElement {
   private decorator: FlashDecorator;

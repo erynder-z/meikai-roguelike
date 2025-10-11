@@ -1,6 +1,6 @@
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { Glyph } from '../glyphs/glyph';
 import { GlyphMap } from '../glyphs/glyphMap';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**
  * Represents the corpse of a mob.

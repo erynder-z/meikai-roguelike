@@ -1,9 +1,9 @@
-import { BaseScreen } from './baseScreen';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
 import { StatsScreenDisplay } from '../../ui/statsScreenDisplay/statsScreenDisplay';
+import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents a screen for displaying the player stats

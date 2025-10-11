@@ -1,10 +1,10 @@
-import { GameMap } from '../mapModel/gameMap';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
-import { MapUtils } from '../helpers/mapUtils';
-import { MAZE_LEVEL_TILES } from './generationData/mazeLevelTiles';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { RockGenerator } from './rockGenerator';
+import { MapUtils } from '../helpers/mapUtils';
+import { GameMap } from '../mapModel/gameMap';
 import { WorldPoint } from '../mapModel/worldPoint';
+import { MAZE_LEVEL_TILES } from './generationData/mazeLevelTiles';
+import { RockGenerator } from './rockGenerator';
 
 /**
  * GameMapType generator for maze-like environments.

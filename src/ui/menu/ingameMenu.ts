@@ -1,14 +1,14 @@
+import { invoke } from '@tauri-apps/api/core';
 import { ask } from '@tauri-apps/plugin-dialog';
 import { BaseDirectory, writeFile } from '@tauri-apps/plugin-fs';
-import { ControlSchemeManager } from '../../controls/controlSchemeManager';
-import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { exit } from '@tauri-apps/plugin-process';
+import { ControlSchemeManager } from '../../controls/controlSchemeManager';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { invoke } from '@tauri-apps/api/core';
-import { PopupHandler } from '../popup/popupHandler';
 import { SaveStateHandler } from '../../savestates/saveStateHandler';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { UnBlurElement } from '../other/unBlurElement';
+import { PopupHandler } from '../popup/popupHandler';
 
 export class IngameMenu extends UnBlurElement {
   private eventTracker = new EventListenerTracker();

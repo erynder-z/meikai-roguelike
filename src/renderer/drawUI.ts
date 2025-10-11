@@ -1,24 +1,24 @@
-import { BuffsDisplay } from '../ui/buffs/buffsDisplay';
-import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
-import { EnvironmentChecker } from '../gameLogic/environment/environmentChecker';
-import { EquipmentDisplay } from '../ui/equipment/equipmentDisplay';
-import { EventCategory, LogMessage } from '../gameLogic/messages/logMessage';
-import { FlashDisplay } from '../ui/flashDisplay/flashDisplay';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../shared-types/gameBuilder/gameState';
+import { EnvironmentChecker } from '../gameLogic/environment/environmentChecker';
 import { Glyph } from '../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
+import { EventCategory, LogMessage } from '../gameLogic/messages/logMessage';
+import { MapCell } from '../maps/mapModel/mapCell';
+import { WorldPoint } from '../maps/mapModel/worldPoint';
 import { ImageHandler } from '../media/imageHandler/imageHandler';
+import { GameState } from '../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
+import { TerminalPoint } from '../terminal/terminalPoint';
+import { BuffsDisplay } from '../ui/buffs/buffsDisplay';
+import { EquipmentDisplay } from '../ui/equipment/equipmentDisplay';
+import { FlashDisplay } from '../ui/flashDisplay/flashDisplay';
+import { MessagesDisplay } from '../ui/messages/messagesDisplay';
 import { LevelDepthInfo } from '../ui/miscInfo/levelDepthInfo';
 import { LevelTemperatureInfo } from '../ui/miscInfo/levelTemperatureInfo';
-import { MapCell } from '../maps/mapModel/mapCell';
-import { MapRenderer } from './mapRenderer';
-import { MessagesDisplay } from '../ui/messages/messagesDisplay';
 import { PlayerHealthInfo } from '../ui/miscInfo/playerHealthInfo';
-import { TerminalPoint } from '../terminal/terminalPoint';
-import { WorldPoint } from '../maps/mapModel/worldPoint';
+import { MapRenderer } from './mapRenderer';
 
 /**
  * Handles drawing/updating the game map and UI elements.

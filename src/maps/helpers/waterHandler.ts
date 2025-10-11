@@ -1,8 +1,8 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
 import { BuffCommand } from '../../gameLogic/commands/buffCommand';
 import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../../gameLogic/mobs/mob';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 
 /**
  * Utility class for handling water related operations.

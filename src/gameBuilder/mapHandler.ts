@@ -1,8 +1,8 @@
-import { EventCategory } from '../gameLogic/messages/logMessage';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../shared-types/gameBuilder/gameState';
+import { EventCategory } from '../gameLogic/messages/logMessage';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
+import { GameState } from '../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
 import storyData from '../story/storyScreenData.json';
 
 /**

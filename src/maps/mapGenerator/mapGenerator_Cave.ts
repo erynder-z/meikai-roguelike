@@ -1,12 +1,12 @@
-import { CAVE_LEVEL_TILES } from './generationData/caveLevelTiles';
-import { GameMap } from '../mapModel/gameMap';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
-import { IrregularShapeAreaGenerator } from '../helpers/irregularShapeAreaGenerator';
-import { MapUtils } from '../helpers/mapUtils';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { WeightedFeatureConfig } from '../../shared-types/gameLogic/maps/helpers/weightedFeatures';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { IrregularShapeAreaGenerator } from '../helpers/irregularShapeAreaGenerator';
+import { MapUtils } from '../helpers/mapUtils';
+import { GameMap } from '../mapModel/gameMap';
 import { WorldPoint } from '../mapModel/worldPoint';
+import { CAVE_LEVEL_TILES } from './generationData/caveLevelTiles';
 
 const caveFeatures: WeightedFeatureConfig[] = [
   {

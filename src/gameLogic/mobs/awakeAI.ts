@@ -1,12 +1,12 @@
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from './mob';
 import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { Mob } from './mob';
 import { MobAI2_Cat } from './mobAI2_Cat';
 import { MobAI3_Ant } from './mobAI3_Ant';
 import { Mood } from './moodEnum';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { SimpleSleepAI } from './simpleSleepAI';
-import { Stack } from '../../shared-types/terminal/stack';
 
 /**
  * An AI implementation for Mobs in an awake state.

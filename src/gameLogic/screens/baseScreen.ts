@@ -1,21 +1,21 @@
+import { ControlSchemeManager } from '../../controls/controlSchemeManager';
+import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
+import { GameMap } from '../../maps/mapModel/gameMap';
+import { MapCell } from '../../maps/mapModel/mapCell';
+import { DrawUI } from '../../renderer/drawUI';
+import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
+import { Stack } from '../../shared-types/terminal/stack';
+import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { Buff } from '../buffs/buffEnum';
 import { BuffCommand } from '../commands/buffCommand';
 import { CellEffects } from '../commands/cellEffects';
-import { ControlSchemeManager } from '../../controls/controlSchemeManager';
-import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
-import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
-import { DrawUI } from '../../renderer/drawUI';
-import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealthAdjust } from '../commands/healthAdjust';
-import { MapCell } from '../../maps/mapModel/mapCell';
-import { Mob } from '../mobs/mob';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../shared-types/terminal/stack';
-import { StackScreen } from '../../shared-types/terminal/stackScreen';
-import { TurnQueue } from '../turnQueue/turnQueue';
 import { EventCategory, LogMessage } from '../messages/logMessage';
+import { Mob } from '../mobs/mob';
+import { TurnQueue } from '../turnQueue/turnQueue';
 
 /**
  * Represents a base screen implementation that implements the StackScreen interface.

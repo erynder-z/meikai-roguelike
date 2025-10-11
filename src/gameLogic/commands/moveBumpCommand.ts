@@ -1,16 +1,16 @@
-import { Able } from '../../shared-types/gameLogic/commands/able';
-import { Act } from './act';
-import { CommandBase } from './commandBase';
-import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { HitCommand } from './hitCommand';
 import { MagnetismHandler } from '../../maps/helpers/magnetismHandler';
+import { GameMap } from '../../maps/mapModel/gameMap';
 import { MapCell } from '../../maps/mapModel/mapCell';
-import { Mob } from '../mobs/mob';
-import { MoveCommand } from './moveCommand';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { Able } from '../../shared-types/gameLogic/commands/able';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { Mob } from '../mobs/mob';
+import { Act } from './act';
+import { CommandBase } from './commandBase';
+import { HitCommand } from './hitCommand';
+import { MoveCommand } from './moveCommand';
 
 /**
  * Represents a command to conditionally call a MoveCommand or a HitCommand.

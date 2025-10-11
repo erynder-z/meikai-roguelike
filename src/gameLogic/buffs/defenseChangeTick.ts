@@ -1,6 +1,6 @@
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from '../mobs/mob';
 import { Tick } from '../../shared-types/gameLogic/buffs/buffType';
+import { Mob } from '../mobs/mob';
 
 /**
  * Handles a tick during the attackUp buff.

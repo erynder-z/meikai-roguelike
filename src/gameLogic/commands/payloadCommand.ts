@@ -1,15 +1,15 @@
-import { Command } from '../../shared-types/gameLogic/commands/command';
-import { CommandBase } from './commandBase';
-import { DirectionStep } from '../stepper/directionStep';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Glyph } from '../glyphs/glyph';
-import { Mob } from '../mobs/mob';
-import { PayloadStep } from '../stepper/payloadStep';
+import { Command } from '../../shared-types/gameLogic/commands/command';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Step } from '../../shared-types/gameLogic/stepper/step';
-import { StepScreen } from '../screens/stepScreen';
 import { Stack } from '../../shared-types/terminal/stack';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { Glyph } from '../glyphs/glyph';
+import { Mob } from '../mobs/mob';
+import { StepScreen } from '../screens/stepScreen';
+import { DirectionStep } from '../stepper/directionStep';
+import { PayloadStep } from '../stepper/payloadStep';
+import { CommandBase } from './commandBase';
 
 /**
  * Represents a command fires a given payload in a specified direction.

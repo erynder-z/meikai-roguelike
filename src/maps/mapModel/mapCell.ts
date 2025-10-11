@@ -1,10 +1,10 @@
-import { Corpse } from '../../gameLogic/mobs/corpse';
-import { EnvEffect } from '../../shared-types/gameLogic/maps/mapModel/envEffect';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
+import { Corpse } from '../../gameLogic/mobs/corpse';
 import { Mob } from '../../gameLogic/mobs/mob';
+import { EnvEffect } from '../../shared-types/gameLogic/maps/mapModel/envEffect';
 
 /**
  * Represents a cell on the game map.

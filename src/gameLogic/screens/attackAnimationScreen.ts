@@ -1,11 +1,11 @@
-import { AnimationManager } from '../animations/animationManager';
-import { AttackAnimationType } from '../../shared-types/gameLogic/animations/animationTypes';
-import { BaseScreen } from './baseScreen';
-import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../shared-types/terminal/stack';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { AttackAnimationType } from '../../shared-types/gameLogic/animations/animationTypes';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { DrawableTerminal } from '../../shared-types/terminal/drawableTerminal';
+import { Stack } from '../../shared-types/terminal/stack';
+import { AnimationManager } from '../animations/animationManager';
+import { BaseScreen } from './baseScreen';
 
 export class AttackAnimationScreen extends BaseScreen {
   public name = 'attack-animation-screen';

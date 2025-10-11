@@ -1,7 +1,7 @@
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
-import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { RandomGenerator } from '../../randomGenerator/randomGenerator';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 
 /**
  * Utility class for finding an unoccupied space on a map.

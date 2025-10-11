@@ -1,7 +1,7 @@
-import { FadeInOutElement } from '../other/fadeInOutElement';
-import { groupInventory } from '../../utilities/inventoryUtils';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
+import { groupInventory } from '../../utilities/inventoryUtils';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 type InventoryDisplayData = {

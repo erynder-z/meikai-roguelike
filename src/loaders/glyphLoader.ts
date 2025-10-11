@@ -1,10 +1,10 @@
-import corpseData from '../gameLogic/mobs/mobData/corpses.json';
-import environmentData from '../gameLogic/environment/environmentData/environment.json';
-import itemData from '../gameLogic/itemObjects/itemData/items.json';
-import mobsData from '../gameLogic/mobs/mobData/mobs.json';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
+import environmentData from '../gameLogic/environment/environmentData/environment.json';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
+import itemData from '../gameLogic/itemObjects/itemData/items.json';
+import corpseData from '../gameLogic/mobs/mobData/corpses.json';
+import mobsData from '../gameLogic/mobs/mobData/mobs.json';
 
 type BaseGlyph = {
   id: string;

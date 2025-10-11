@@ -1,6 +1,6 @@
 import { gameConfigManager } from '../../../gameConfigManager/gameConfigManager';
-import { GameConfig } from '../../../shared-types/gameConfig/gameConfig';
 import { ScanlineStyles } from '../../../renderer/scanlinesHandler';
+import { GameConfig } from '../../../shared-types/gameConfig/gameConfig';
 /**
  * Handles changing the displayed content of buttons on the options menu.
  */
@@ -36,9 +36,7 @@ export class OptionsMenuButtonManager {
    *
    * @param text - The current active control scheme.
    */
-  public updateControlSchemeButton(
-    text: GameConfig['control_scheme'],
-  ): void {
+  public updateControlSchemeButton(text: GameConfig['control_scheme']): void {
     const controlSchemeButton = this.shadowRoot?.getElementById(
       'switch-controls-button',
     );

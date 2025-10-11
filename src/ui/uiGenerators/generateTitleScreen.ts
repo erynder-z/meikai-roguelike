@@ -1,5 +1,5 @@
-import { Builder } from '../../gameBuilder/builder';
 import { BaseDirectory, readFile } from '@tauri-apps/plugin-fs';
+import { Builder } from '../../gameBuilder/builder';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { DynamicScreenMaker } from '../../gameLogic/screens/dynamicScreenMaker';
 import { GlyphLoader } from '../../loaders/glyphLoader';

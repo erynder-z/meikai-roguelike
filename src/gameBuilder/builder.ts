@@ -1,29 +1,29 @@
-import { AISwitcher } from '../gameLogic/mobs/aiSwitcher';
-import { Build } from '../shared-types/gameBuilder/build';
-import { GameConfig } from '../shared-types/gameConfig/gameConfig';
-import { FindFreeSpace } from '../maps/helpers/findFreeSpace';
-import { Game } from './gameModel';
-import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../shared-types/gameBuilder/gameState';
 import { Glyph } from '../gameLogic/glyphs/glyph';
 import { Inventory } from '../gameLogic/inventory/inventory';
+import { ObjCategory } from '../gameLogic/itemObjects/itemCategories';
 import { ItemObject } from '../gameLogic/itemObjects/itemObject';
 import { ItemObjectManager } from '../gameLogic/itemObjects/itemObjectManager';
+import { Slot } from '../gameLogic/itemObjects/slot';
+import { AISwitcher } from '../gameLogic/mobs/aiSwitcher';
+import { Mob } from '../gameLogic/mobs/mob';
+import { MoodAI } from '../gameLogic/mobs/moodAI';
+import { Spell } from '../gameLogic/spells/spell';
+import { FindFreeSpace } from '../maps/helpers/findFreeSpace';
 import { MapGenerator1 } from '../maps/mapGenerator/mapGenerator';
 import { MapGenerator_Cave } from '../maps/mapGenerator/mapGenerator_Cave';
 import { MapGenerator_Maze } from '../maps/mapGenerator/mapGenerator_Maze';
-import { Mob } from '../gameLogic/mobs/mob';
-import { MobAI } from '../shared-types/gameLogic/mobs/mobAI';
-import { MoodAI } from '../gameLogic/mobs/moodAI';
-import { ObjCategory } from '../gameLogic/itemObjects/itemCategories';
+import { WorldPoint } from '../maps/mapModel/worldPoint';
 import { Overworld } from '../maps/staticMaps/overworld';
 import { RandomGenerator } from '../randomGenerator/randomGenerator';
 import { SaveStateHandler } from '../savestates/saveStateHandler';
+import { Build } from '../shared-types/gameBuilder/build';
+import { GameState } from '../shared-types/gameBuilder/gameState';
+import { GameConfig } from '../shared-types/gameConfig/gameConfig';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { MobAI } from '../shared-types/gameLogic/mobs/mobAI';
 import { SerializedGameState } from '../shared-types/utilities/saveStateHandler';
-import { Slot } from '../gameLogic/itemObjects/slot';
-import { Spell } from '../gameLogic/spells/spell';
 import { TerminalPoint } from '../terminal/terminalPoint';
-import { WorldPoint } from '../maps/mapModel/worldPoint';
+import { Game } from './gameModel';
 
 /**
  * The builder for creating games, levels and mobs.

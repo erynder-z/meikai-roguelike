@@ -1,7 +1,7 @@
-import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { invoke } from '@tauri-apps/api/core';
-import { readFile } from '@tauri-apps/plugin-fs';
 import { appDataDir } from '@tauri-apps/api/path';
+import { readFile } from '@tauri-apps/plugin-fs';
+import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 
 type FontInfo = {
   name: string;

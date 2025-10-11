@@ -1,6 +1,6 @@
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Cost } from '../../shared-types/gameLogic/commands/cost';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ItemObject } from './itemObject';
 
 /**

@@ -1,9 +1,9 @@
-import { FadeInOutElement } from '../other/fadeInOutElement';
+import { SpellColors } from '../../colors/spellColors';
 import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';
 import { Spell } from '../../gameLogic/spells/spell';
 import { EnvEffect } from '../../shared-types/gameLogic/maps/mapModel/envEffect';
 import { DetailViewEntity } from '../../shared-types/ui/detailViewEntity';
-import { SpellColors } from '../../colors/spellColors';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 import { UnitSettingsManager } from '../unitSettingsManager/unitSettingsManager';
 
 export class EntityInfoCard extends FadeInOutElement {

@@ -1,10 +1,10 @@
-import { CommandBase } from './commandBase';
-import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from '../mobs/mob';
-import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { RandomGenerator } from '../../randomGenerator/randomGenerator';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { Mob } from '../mobs/mob';
+import { CommandBase } from './commandBase';
 
 /**
  * Represents a command that multiplies a mob.

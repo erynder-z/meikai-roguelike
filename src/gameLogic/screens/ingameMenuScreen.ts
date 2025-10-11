@@ -1,12 +1,12 @@
-import { BaseScreen } from './baseScreen';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { LayoutManager } from '../../ui/layoutManager/layoutManager';
 import { IngameMenu } from '../../ui/menu/ingameMenu';
 import { IngameOptions } from '../../ui/menu/ingameOptions';
 import { LevelDepthInfo } from '../../ui/miscInfo/levelDepthInfo';
 import { LevelTemperatureInfo } from '../../ui/miscInfo/levelTemperatureInfo';
-import { LayoutManager } from '../../ui/layoutManager/layoutManager';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
-import { Stack } from '../../shared-types/terminal/stack';
+import { BaseScreen } from './baseScreen';
 
 /**
  *  This class is only responsible for drawing the menu components. All logic for the menus is handled in the web components.
