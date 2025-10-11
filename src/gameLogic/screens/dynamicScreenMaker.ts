@@ -1,14 +1,14 @@
 import { Build } from '../../shared-types/gameBuilder/build';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { StackScreen } from '../../shared-types/terminal/stackScreen';
+import { SerializedGameState } from '../../shared-types/utilities/saveStateHandler';
+import { ScreenStack } from '../../terminal/screenStack';
+import { GenerateTitleScreen } from '../../ui/uiGenerators/generateTitleScreen';
 import { EventManager } from '../events/eventManager';
 import { GameOverScreen } from './gameOverScreen';
 import { GameScreen } from './gameScreen';
-import { GenerateTitleScreen } from '../../ui/uiGenerators/generateTitleScreen';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
-import { ScreenStack } from '../../terminal/screenStack';
-import { SerializedGameState } from '../../shared-types/utilities/saveStateHandler';
 import { SomeScreen } from './someScreen';
-import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { StoryScreen } from './storyScreen';
 
 /**

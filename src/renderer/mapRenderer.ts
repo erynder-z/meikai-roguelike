@@ -1,19 +1,19 @@
-import { Buff } from '../gameLogic/buffs/buffEnum';
-import { CanSee } from '../maps/helpers/canSee';
-import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
-import { EnvEffect } from '../shared-types/gameLogic/maps/mapModel/envEffect';
+import { ManipulateColors } from '../colors/manipulateColors';
+import { SpellColors } from '../colors/spellColors';
 import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../shared-types/gameBuilder/gameState';
+import { Buff } from '../gameLogic/buffs/buffEnum';
 import { Glyph } from '../gameLogic/glyphs/glyph';
 import { GlyphInfo } from '../gameLogic/glyphs/glyphInfo';
 import { GlyphMap } from '../gameLogic/glyphs/glyphMap';
-import { ManipulateColors } from '../colors/manipulateColors';
-import { MapCell } from '../maps/mapModel/mapCell';
 import { Spell } from '../gameLogic/spells/spell';
-import { SpellColors } from '../colors/spellColors';
-import { TerminalPoint } from '../terminal/terminalPoint';
+import { CanSee } from '../maps/helpers/canSee';
+import { MapCell } from '../maps/mapModel/mapCell';
 import { WorldPoint } from '../maps/mapModel/worldPoint';
+import { GameState } from '../shared-types/gameBuilder/gameState';
+import { EnvEffect } from '../shared-types/gameLogic/maps/mapModel/envEffect';
+import { GameMapType } from '../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
+import { TerminalPoint } from '../terminal/terminalPoint';
 
 /**
  * Sets each cell in the terminal to the appropriate glyph, information and colors.

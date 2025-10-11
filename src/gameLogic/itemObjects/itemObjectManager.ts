@@ -1,13 +1,13 @@
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { Glyph } from '../glyphs/glyph';
-import { ItemObject } from './itemObject';
-import { ObjCategory } from './itemCategories';
-import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { Slot } from './slot';
-import { Spell } from '../spells/spell';
+import * as itemData from '../../gameLogic/itemObjects/itemData/items.json';
 import spellData from '../../gameLogic/spells/spellData/spells.json';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
-import * as itemData from '../../gameLogic/itemObjects/itemData/items.json';
+import { RandomGenerator } from '../../randomGenerator/randomGenerator';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { Glyph } from '../glyphs/glyph';
+import { Spell } from '../spells/spell';
+import { ObjCategory } from './itemCategories';
+import { ItemObject } from './itemObject';
+import { Slot } from './slot';
 
 type ItemDefinitionJson = {
   id: string;

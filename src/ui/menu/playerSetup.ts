@@ -1,13 +1,13 @@
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameConfig } from '../../shared-types/gameConfig/gameConfig';
-import { getRandomColor } from '../../randomGenerator/getRandomColor';
-import { EventListenerTracker } from '../../utilities/eventListenerTracker';
-import { getRandomUnicodeCharacter } from '../../randomGenerator/getRandomAvatar';
-import { getRandomName } from '../../randomGenerator/getRandomName';
 import {
-  girlishPortrait,
   boyishPortrait,
+  girlishPortrait,
 } from '../../media/imageHandler/imageImports/portraitImages';
+import { getRandomUnicodeCharacter } from '../../randomGenerator/getRandomAvatar';
+import { getRandomColor } from '../../randomGenerator/getRandomColor';
+import { getRandomName } from '../../randomGenerator/getRandomName';
+import { GameConfig } from '../../shared-types/gameConfig/gameConfig';
+import { EventListenerTracker } from '../../utilities/eventListenerTracker';
 import { UnBlurElement } from '../other/unBlurElement';
 
 export class PlayerSetup extends UnBlurElement {

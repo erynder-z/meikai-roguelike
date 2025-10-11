@@ -76,8 +76,8 @@ export class PopInFadeOutElement extends HTMLElement {
   public popIn(): void {
     const animatedElement = this.shadowRoot?.querySelector('div');
     if (animatedElement) {
-        animatedElement.classList.remove('fade-out');
-        animatedElement.classList.add('pop-in');
+      animatedElement.classList.remove('fade-out');
+      animatedElement.classList.add('pop-in');
     }
   }
 }

@@ -1,8 +1,8 @@
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { HealthAdjust } from '../commands/healthAdjust';
-import { LogMessage, EventCategory } from '../messages/logMessage';
-import { Mob } from '../mobs/mob';
 import { Tick } from '../../shared-types/gameLogic/buffs/buffType';
+import { HealthAdjust } from '../commands/healthAdjust';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { Mob } from '../mobs/mob';
 
 /**
  * Handles a poison tick.

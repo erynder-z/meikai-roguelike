@@ -1,9 +1,9 @@
-import { CommandBase } from './commandBase';
-import { Equipment } from '../inventory/equipment';
-import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { Equipment } from '../inventory/equipment';
 import { Inventory } from '../inventory/inventory';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { CommandBase } from './commandBase';
 
 /**
  * Represents a command to pick up an item from the game map and add it to the player's inventory.

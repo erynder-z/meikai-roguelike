@@ -1,11 +1,11 @@
-import { Buff } from '../buffs/buffEnum';
-import { CommandBase } from './commandBase';
-import { EventCategory } from '../messages/logMessage';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from '../mobs/mob';
-import { MoveBumpCommand } from './moveBumpCommand';
-import { Stack } from '../../shared-types/terminal/stack';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { Buff } from '../buffs/buffEnum';
+import { EventCategory } from '../messages/logMessage';
+import { Mob } from '../mobs/mob';
+import { CommandBase } from './commandBase';
+import { MoveBumpCommand } from './moveBumpCommand';
 
 /**
  * Represents a wait command that ends the turn for the mob.

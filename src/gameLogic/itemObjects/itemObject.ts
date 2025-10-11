@@ -1,9 +1,9 @@
+import { SpellColors } from '../../colors/spellColors';
 import { Glyph } from '../glyphs/glyph';
 import { GlyphMap } from '../glyphs/glyphMap';
+import { Spell } from '../spells/spell';
 import { ObjCategory } from './itemCategories';
 import { Slot } from './slot';
-import { Spell } from '../spells/spell';
-import { SpellColors } from '../../colors/spellColors';
 import { SpellProperties } from './spellProperties';
 
 /**

@@ -1,8 +1,8 @@
+import { MapCell } from '../../maps/mapModel/mapCell';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { EnvEffect } from '../../shared-types/gameLogic/maps/mapModel/envEffect';
 import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../glyphs/glyph';
-import { MapCell } from '../../maps/mapModel/mapCell';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 export class EnvironmentChecker {
   private static areaOfEffectRadius: number = 1;

@@ -1,9 +1,9 @@
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from './mob';
 import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
-import { MoveBumpCommand } from '../commands/moveBumpCommand';
-import { Stack } from '../../shared-types/terminal/stack';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { MoveBumpCommand } from '../commands/moveBumpCommand';
+import { Mob } from './mob';
 
 /**
  * Represents an implementation of MobAI for a cat-type mob.

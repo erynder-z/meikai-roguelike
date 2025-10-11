@@ -1,14 +1,14 @@
-import { BaseScreen } from './baseScreen';
-import { CraftingHandler } from '../crafting/craftingHandler';
-import { CraftingScreenDisplay } from '../../ui/craftingScreenDisplay/craftingScreenDisplay';
-import { CraftedItemDisplay } from '../../ui/craftedItemDisplay/craftedItemDisplay';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { groupInventory } from '../../utilities/inventoryUtils';
-import { ItemObject } from '../itemObjects/itemObject';
-import { Inventory } from '../inventory/inventory';
-import keys from '../../utilities/commonKeyboardChars.json';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
+import { CraftedItemDisplay } from '../../ui/craftedItemDisplay/craftedItemDisplay';
+import { CraftingScreenDisplay } from '../../ui/craftingScreenDisplay/craftingScreenDisplay';
+import keys from '../../utilities/commonKeyboardChars.json';
+import { groupInventory } from '../../utilities/inventoryUtils';
+import { CraftingHandler } from '../crafting/craftingHandler';
+import { Inventory } from '../inventory/inventory';
+import { ItemObject } from '../itemObjects/itemObject';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents the screen for the crafting menu.

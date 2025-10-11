@@ -1,5 +1,5 @@
-import { BuffColors } from '../ui/buffs/buffColors';
 import buffsData from '../gameLogic/buffs/buffData/buffs.json';
+import { BuffColors } from '../ui/buffs/buffColors';
 import { UnBlurElement } from '../ui/other/unBlurElement';
 
 export class HelpBuffs extends UnBlurElement {

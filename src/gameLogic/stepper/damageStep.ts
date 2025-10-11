@@ -1,12 +1,12 @@
-import { BloodVisualsHandler } from '../../utilities/bloodVisualsHandler';
-import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { HealthAdjust } from '../commands/healthAdjust';
-import { Mob } from '../mobs/mob';
-import { Step } from '../../shared-types/gameLogic/stepper/step';
-import { TimedStep } from './timedStep';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { Step } from '../../shared-types/gameLogic/stepper/step';
+import { BloodVisualsHandler } from '../../utilities/bloodVisualsHandler';
+import { HealthAdjust } from '../commands/healthAdjust';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { Mob } from '../mobs/mob';
+import { TimedStep } from './timedStep';
 
 /**
  * Represents a timed step that damages a mob at its current position.

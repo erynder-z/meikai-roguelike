@@ -1,8 +1,8 @@
 import { Glyph } from '../../../../gameLogic/glyphs/glyph';
 import { ItemObject } from '../../../../gameLogic/itemObjects/itemObject';
-import { MapCell } from '../../../../maps/mapModel/mapCell';
 import { Mob } from '../../../../gameLogic/mobs/mob';
 import { TurnQueue } from '../../../../gameLogic/turnQueue/turnQueue';
+import { MapCell } from '../../../../maps/mapModel/mapCell';
 import { WorldPoint } from '../../../../maps/mapModel/worldPoint';
 
 export type GameMapType = {

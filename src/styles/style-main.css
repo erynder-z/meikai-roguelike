@@ -1,31 +1,31 @@
 @font-face {
   font-family: DejaVu Sans Mono;
-  src: url(../assets/fonts/DejaVuSansMono.ttf) format('truetype');
+  src: url(../assets/fonts/DejaVuSansMono.ttf) format("truetype");
 }
 
 @font-face {
   font-family: UA Squared;
-  src: url(../assets/fonts/UASQUARE.ttf) format('truetype');
+  src: url(../assets/fonts/UASQUARE.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 0xProto-Regular;
-  src: url(../assets/fonts/0xProto-Regular.ttf) format('truetype');
+  font-family: 0xproto-regular;
+  src: url(../assets/fonts/0xProto-Regular.ttf) format("truetype");
 }
 
 @font-face {
   font-family: GoodOldDOS;
-  src: url(../assets/fonts/GoodOldDOS.ttf) format('truetype');
+  src: url(../assets/fonts/GoodOldDOS.ttf) format("truetype");
 }
 
 @font-face {
   font-family: SimplyMono-Book;
-  src: url(../assets/fonts/SimplyMono-Book.ttf) format('truetype');
+  src: url(../assets/fonts/SimplyMono-Book.ttf) format("truetype");
 }
 
 @font-face {
   font-family: TerminusTTF;
-  src: url(../assets/fonts/TerminusTTF.ttf) format('truetype');
+  src: url(../assets/fonts/TerminusTTF.ttf) format("truetype");
 }
 
 ::-webkit-scrollbar {
@@ -69,7 +69,7 @@ html {
   background: var(--backgroundDefault);
   color: var(--white);
   overflow: hidden;
-  font-family: 'DejaVu Sans Mono', monospace;
+  font-family: "DejaVu Sans Mono", monospace;
   font-size: small;
 }
 
@@ -92,9 +92,9 @@ li {
   grid-template-rows: 2% 83% 15%;
   grid-template-columns: 15% 85%;
   grid-template-areas:
-    'misc-info misc-info'
-    'messages canvas'
-    'bottom bottom';
+    "misc-info misc-info"
+    "messages canvas"
+    "bottom bottom";
 }
 
 .canvas-container {
@@ -124,7 +124,7 @@ li {
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: 15% 25% 60%;
-  grid-template-areas: 'image buffs equipment';
+  grid-template-areas: "image buffs equipment";
 }
 
 .image-container {

@@ -1,11 +1,11 @@
-import { DEFAULT_LEVEL_TILES } from './generationData/defaultLevelTiles';
-import { GameMap } from '../mapModel/gameMap';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
-import { MapUtils } from '../helpers/mapUtils';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { RockGenerator } from './rockGenerator';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { MapUtils } from '../helpers/mapUtils';
+import { GameMap } from '../mapModel/gameMap';
 import { WorldPoint } from '../mapModel/worldPoint';
+import { DEFAULT_LEVEL_TILES } from './generationData/defaultLevelTiles';
+import { RockGenerator } from './rockGenerator';
 
 /**
  * GameMapType generator for standard levels.

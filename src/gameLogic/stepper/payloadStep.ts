@@ -1,10 +1,10 @@
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Command } from '../../shared-types/gameLogic/commands/command';
 import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from '../mobs/mob';
 import { Step } from '../../shared-types/gameLogic/stepper/step';
+import { Mob } from '../mobs/mob';
 import { TimedStep } from './timedStep';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**
  * Represents a payload step that fires a payload command in a specified direction.

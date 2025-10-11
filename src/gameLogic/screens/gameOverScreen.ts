@@ -1,10 +1,10 @@
-import { BaseScreen } from './baseScreen';
-import { DrawUI } from '../../renderer/drawUI';
 import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameOverScreenDisplay } from '../../ui/gameOverScreenDisplay/gameOverScreenDisplay';
+import { DrawUI } from '../../renderer/drawUI';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
+import { GameOverScreenDisplay } from '../../ui/gameOverScreenDisplay/gameOverScreenDisplay';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents a game over screen implementation that is part of a terminal-based application stack.

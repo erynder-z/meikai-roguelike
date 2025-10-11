@@ -1,12 +1,12 @@
-import controlsData from './controls.json';
 import controlSchemes from '../controls/control_schemes.json';
+import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import {
   ControlScheme,
   ControlSchemeName,
 } from '../shared-types/controls/controlScheme';
-import { EventListenerTracker } from '../utilities/eventListenerTracker';
-import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { UnBlurElement } from '../ui/other/unBlurElement';
+import { EventListenerTracker } from '../utilities/eventListenerTracker';
+import controlsData from './controls.json';
 
 export class HelpControls extends UnBlurElement {
   private eventTracker = new EventListenerTracker();

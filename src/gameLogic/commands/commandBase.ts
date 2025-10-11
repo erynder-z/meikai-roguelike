@@ -1,12 +1,12 @@
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Able } from '../../shared-types/gameLogic/commands/able';
-import { Act } from './act';
-import { Buff } from '../buffs/buffEnum';
 import { Command } from '../../shared-types/gameLogic/commands/command';
 import { Cost } from '../../shared-types/gameLogic/commands/cost';
+import { Buff } from '../buffs/buffEnum';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Mob } from '../mobs/mob';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { Act } from './act';
 
 /**
  * Abstract class representing a base command implementation that implements the Command interface.

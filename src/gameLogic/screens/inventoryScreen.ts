@@ -1,14 +1,14 @@
-import { BaseScreen } from './baseScreen';
-import { Equipment } from '../inventory/equipment';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { groupInventory } from '../../utilities/inventoryUtils';
-import { Inventory } from '../inventory/inventory';
-import { InventoryScreenDisplay } from '../../ui/inventoryScreenDisplay/inventoryScreenDisplay';
-import { ItemScreen } from './itemScreen';
-import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
-import keys from '../../utilities/commonKeyboardChars.json';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
+import { InventoryScreenDisplay } from '../../ui/inventoryScreenDisplay/inventoryScreenDisplay';
+import keys from '../../utilities/commonKeyboardChars.json';
+import { groupInventory } from '../../utilities/inventoryUtils';
+import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
+import { Equipment } from '../inventory/equipment';
+import { Inventory } from '../inventory/inventory';
+import { BaseScreen } from './baseScreen';
+import { ItemScreen } from './itemScreen';
 
 /**
  * Represents an inventory screen.

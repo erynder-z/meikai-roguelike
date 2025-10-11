@@ -1,9 +1,9 @@
-import { CommandBase } from './commandBase';
-import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Inventory } from '../inventory/inventory';
 import { ItemObject } from '../itemObjects/itemObject';
+import { EventCategory, LogMessage } from '../messages/logMessage';
+import { CommandBase } from './commandBase';
 
 /**
  * Represents a command to drop an item from the player's inventory.

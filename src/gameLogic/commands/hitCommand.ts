@@ -1,16 +1,16 @@
-import { Act } from './act';
-import { AttackAnimationScreen } from '../screens/attackAnimationScreen';
+import { RandomGenerator } from '../../randomGenerator/randomGenerator';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
 import { BloodVisualsHandler } from '../../utilities/bloodVisualsHandler';
 import { Buff } from '../buffs/buffEnum';
-import { CommandBase } from './commandBase';
 import { Equipment } from '../inventory/equipment';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { HealthAdjust } from './healthAdjust';
 import { Mob } from '../mobs/mob';
-import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { Stack } from '../../shared-types/terminal/stack';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { AttackAnimationScreen } from '../screens/attackAnimationScreen';
+import { Act } from './act';
+import { CommandBase } from './commandBase';
+import { HealthAdjust } from './healthAdjust';
 
 /**
  * Represents a command to hit another mob.

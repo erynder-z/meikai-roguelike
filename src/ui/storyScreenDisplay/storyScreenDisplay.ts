@@ -1,5 +1,5 @@
-import { FadeInOutElement } from '../other/fadeInOutElement';
 import * as storyData from '../../story/storyScreenData.json';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
 type Story = {
   level: string;

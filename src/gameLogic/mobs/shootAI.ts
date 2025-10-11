@@ -1,20 +1,20 @@
 import { CanSee } from '../../maps/helpers/canSee';
-import { CommandBase } from '../commands/commandBase';
-import { Cost } from '../../shared-types/gameLogic/commands/cost';
 import { GameMap } from '../../maps/mapModel/gameMap';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { RandomGenerator } from '../../randomGenerator/randomGenerator';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from './mob';
+import { Cost } from '../../shared-types/gameLogic/commands/cost';
 import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { CommandBase } from '../commands/commandBase';
+import { NPCSpellFinder } from '../spells/npcSpellFinder';
+import { PICKABLE_SPELLS, Spell } from '../spells/spell';
+import { Mob } from './mob';
 import { MobAI2_Cat } from './mobAI2_Cat';
 import { MobAI3_Ant } from './mobAI3_Ant';
 import { Mood } from './moodEnum';
-import { NPCSpellFinder } from '../spells/npcSpellFinder';
-import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { SimpleSleepAI } from './simpleSleepAI';
-import { PICKABLE_SPELLS, Spell } from '../spells/spell';
-import { Stack } from '../../shared-types/terminal/stack';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**
  * An AI implementation for Mobs that shoot spells. Spells are being shot in diagonal or orthogonal lines.

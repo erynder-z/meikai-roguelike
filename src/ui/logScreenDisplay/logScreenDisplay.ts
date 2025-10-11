@@ -1,6 +1,6 @@
+import { LogMessage } from '../../gameLogic/messages/logMessage';
 import { BuffColors } from '../buffs/buffColors';
 import { FadeInOutElement } from '../other/fadeInOutElement';
-import { LogMessage } from '../../gameLogic/messages/logMessage';
 
 export class LogScreenDisplay extends FadeInOutElement {
   private colorizer = new BuffColors();

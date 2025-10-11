@@ -1,10 +1,10 @@
-import { BaseScreen } from './baseScreen';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
-import { LogMessage } from '../messages/logMessage';
-import { LogScreenDisplay } from '../../ui/logScreenDisplay/logScreenDisplay';
 import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { Stack } from '../../shared-types/terminal/stack';
+import { LogScreenDisplay } from '../../ui/logScreenDisplay/logScreenDisplay';
+import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
+import { LogMessage } from '../messages/logMessage';
+import { BaseScreen } from './baseScreen';
 
 /**
  * Represents a screen for displaying the log messages.

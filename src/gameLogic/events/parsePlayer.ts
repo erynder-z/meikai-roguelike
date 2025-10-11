@@ -1,30 +1,30 @@
-import { Command } from '../../shared-types/gameLogic/commands/command';
-import { CommandDirectionScreen } from '../screens/commandDirectionScreen';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
-import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
-import { CraftingScreen } from '../screens/craftingScreen';
+import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { DrawUI } from '../../renderer/drawUI';
-import { DebuggerScreen } from '../screens/debuggerScreen';
+import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { Command } from '../../shared-types/gameLogic/commands/command';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
+import { Stack } from '../../shared-types/terminal/stack';
+import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { DigCommand } from '../commands/digCommand';
 import { DoorCommand } from '../commands/doorCommand';
+import { MoveBumpCommand } from '../commands/moveBumpCommand';
+import { PickupCommand } from '../commands/pickupCommand';
+import { WaitCommand } from '../commands/waitCommand';
+import { Mob } from '../mobs/mob';
+import { CommandDirectionScreen } from '../screens/commandDirectionScreen';
+import { CraftingScreen } from '../screens/craftingScreen';
+import { DebuggerScreen } from '../screens/debuggerScreen';
 import { EquipmentScreen } from '../screens/equipmentScreen';
-import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { IngameMenuScreen } from '../screens/ingameMenuScreen';
 import { InventoryScreen } from '../screens/inventoryScreen';
 import { LogScreen } from '../screens/logScreen';
 import { LookScreen } from '../screens/lookScreen';
-import { Mob } from '../mobs/mob';
-import { MoveBumpCommand } from '../commands/moveBumpCommand';
-import { PickupCommand } from '../commands/pickupCommand';
-import { ScreenMaker } from '../../shared-types/gameLogic/screens/ScreenMaker';
 import { SpellScreen } from '../screens/spellScreen';
-import { Stack } from '../../shared-types/terminal/stack';
-import { StackScreen } from '../../shared-types/terminal/stackScreen';
 import { StatsScreen } from '../screens/statsScreen';
-import { WaitCommand } from '../commands/waitCommand';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**
  * Class responsible for parsing player input and converting it into game commands.

@@ -1,7 +1,7 @@
-import { GameState } from '../../gameBuilder/gameState';
 import { Mob } from '../../../gameLogic/mobs/mob';
-import { ScreenMaker } from '../screens/ScreenMaker';
+import { GameState } from '../../gameBuilder/gameState';
 import { Stack } from '../../terminal/stack';
+import { ScreenMaker } from '../screens/ScreenMaker';
 
 export type MobAI = {
   turn(

@@ -1,6 +1,6 @@
 import { Buff } from '../../gameLogic/buffs/buffEnum';
-import { BuffColors } from './buffColors';
 import { BuffType } from '../../shared-types/gameLogic/buffs/buffType';
+import { BuffColors } from './buffColors';
 
 export class BuffsDisplay extends HTMLElement {
   constructor(public colorizer: BuffColors = new BuffColors()) {

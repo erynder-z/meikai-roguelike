@@ -1,5 +1,5 @@
 .scanlines-subtle:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -17,7 +17,7 @@
 }
 
 .scanlines-light:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -35,7 +35,7 @@
 }
 
 .scanlines-medium:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -53,7 +53,7 @@
 }
 
 .scanlines-dark:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -71,7 +71,7 @@
 }
 
 .scanlines-green:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -89,7 +89,7 @@
 }
 
 .scanlines-diagonal:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -107,7 +107,7 @@
 }
 
 .scanlines-vertical:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -125,7 +125,7 @@
 }
 
 .scanlines-lcd:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -145,7 +145,7 @@
 }
 
 .scanlines-shadowMask:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -174,7 +174,7 @@
 }
 
 .scanlines-interlaced:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -193,7 +193,7 @@
 }
 
 .scanlines-static:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -219,7 +219,7 @@
 }
 
 .scanlines-rainbow:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -234,12 +234,11 @@
       rgba(255, 255, 255, 0.1) 1px,
       transparent 2px,
       transparent 4px
-    ),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
+    ), linear-gradient(90deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
 }
 
 .scanlines-anaglyph:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;

@@ -1,13 +1,13 @@
+import {
+  BaseDirectory,
+  mkdir,
+  open,
+  readTextFile,
+  writeTextFile,
+} from '@tauri-apps/plugin-fs';
 import { FontHandler } from '../font/fontHandler';
 import { getRandomName } from '../randomGenerator/getRandomName';
 import { GameConfig } from '../shared-types/gameConfig/gameConfig';
-import {
-  BaseDirectory,
-  readTextFile,
-  writeTextFile,
-  mkdir,
-  open,
-} from '@tauri-apps/plugin-fs';
 
 /**
  * Handles initializing and updating the game configuration that is used to create UI and build the game.

@@ -2,17 +2,17 @@ import './styles/cssReset.css';
 import './styles/flicker.css';
 import './styles/style-main.css';
 import './styles/scanlines.css';
+import { invoke } from '@tauri-apps/api/core';
 import { Builder } from './gameBuilder/builder';
 import { gameConfigManager } from './gameConfigManager/gameConfigManager';
-import { ColorLoader } from './loaders/colorLoader';
 import { DynamicScreenMaker } from './gameLogic/screens/dynamicScreenMaker';
+import { ColorLoader } from './loaders/colorLoader';
+import { GlyphLoader } from './loaders/glyphLoader';
+import { ImageHandler } from './media/imageHandler/imageHandler';
+import { LayoutManager } from './ui/layoutManager/layoutManager';
 import { GenerateMainUI } from './ui/uiGenerators/generateMainUI';
 import { GenerateTitleScreen } from './ui/uiGenerators/generateTitleScreen';
-import { GlyphLoader } from './loaders/glyphLoader';
 import { handleGlobalKeydown } from './utilities/handleGlobalKeyDown';
-import { ImageHandler } from './media/imageHandler/imageHandler';
-import { invoke } from '@tauri-apps/api/core';
-import { LayoutManager } from './ui/layoutManager/layoutManager';
 
 const initializeGame = async () => {
   try {

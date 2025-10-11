@@ -1,7 +1,7 @@
 import * as colorData from '../colors/colors.json';
-import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
-import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
 import { ManipulateColors } from '../colors/manipulateColors';
+import { gameConfigManager } from '../gameConfigManager/gameConfigManager';
+import { DrawableTerminal } from '../shared-types/terminal/drawableTerminal';
 import { TerminalPoint } from './terminalPoint';
 
 const SLASH_DIRECTIONS = [

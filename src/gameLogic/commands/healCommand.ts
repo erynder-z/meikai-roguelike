@@ -1,8 +1,8 @@
-import { CommandBase } from './commandBase';
-import { EventCategory, LogMessage } from '../messages/logMessage';
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { HealthAdjust } from './healthAdjust';
+import { EventCategory, LogMessage } from '../messages/logMessage';
 import { Mob } from '../mobs/mob';
+import { CommandBase } from './commandBase';
+import { HealthAdjust } from './healthAdjust';
 
 /**
  * Represents a command to heal a mob.

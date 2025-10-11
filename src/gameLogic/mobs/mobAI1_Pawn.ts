@@ -1,7 +1,7 @@
 import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Mob } from './mob';
 import { MobAI } from '../../shared-types/gameLogic/mobs/mobAI';
 import { MoveCommand } from '../commands/moveCommand';
+import { Mob } from './mob';
 
 /**
  * Represents an implementation of MobAI for a pawn-type mob.

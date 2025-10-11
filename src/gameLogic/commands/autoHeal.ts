@@ -1,8 +1,8 @@
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { Buff } from '../buffs/buffEnum';
 import { EventCategory, LogMessage } from '../messages/logMessage';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { HealthAdjust } from './healthAdjust';
 import { Mob } from '../mobs/mob';
+import { HealthAdjust } from './healthAdjust';
 
 /**
  * Manages auto healing for a mob.

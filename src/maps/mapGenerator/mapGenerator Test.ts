@@ -1,7 +1,7 @@
-import { GameMap } from '../mapModel/gameMap';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { GameMap } from '../mapModel/gameMap';
 import { WorldPoint } from '../mapModel/worldPoint';
 
 /**

@@ -1,1 +1,31 @@
-{"migrated":{"identifier":"migrated","description":"permissions that were migrated from v1","local":true,"windows":["main","help"],"permissions":["core:default","core:window:allow-create","core:window:allow-show","core:window:allow-close","core:webview:allow-create-webview-window","dialog:allow-confirm","process:allow-exit","dialog:default","process:default",{"identifier":"fs:allow-appdata-read","allow":[{"path":"$APPDATA"}]},{"identifier":"fs:allow-appdata-write","allow":[{"path":"$APPDATA"}]},{"identifier":"fs:scope","allow":[{"path":"$APPDATA/fonts/*.ttf"}]}]}}
+{
+  "migrated": {
+    "identifier": "migrated",
+    "description": "permissions that were migrated from v1",
+    "local": true,
+    "windows": ["main", "help"],
+    "permissions": [
+      "core:default",
+      "core:window:allow-create",
+      "core:window:allow-show",
+      "core:window:allow-close",
+      "core:webview:allow-create-webview-window",
+      "dialog:allow-confirm",
+      "process:allow-exit",
+      "dialog:default",
+      "process:default",
+      {
+        "identifier": "fs:allow-appdata-read",
+        "allow": [{ "path": "$APPDATA" }]
+      },
+      {
+        "identifier": "fs:allow-appdata-write",
+        "allow": [{ "path": "$APPDATA" }]
+      },
+      {
+        "identifier": "fs:scope",
+        "allow": [{ "path": "$APPDATA/fonts/*.ttf" }]
+      }
+    ]
+  }
+}

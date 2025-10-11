@@ -1,7 +1,7 @@
-import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
 import { HealthAdjust } from '../../gameLogic/commands/healthAdjust';
+import { EventCategory, LogMessage } from '../../gameLogic/messages/logMessage';
 import { Mob } from '../../gameLogic/mobs/mob';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
 
 /**
  * Utility class for handling chams.

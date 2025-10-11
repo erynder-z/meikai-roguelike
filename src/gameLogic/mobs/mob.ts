@@ -1,8 +1,8 @@
+import { WorldPoint } from '../../maps/mapModel/worldPoint';
 import { ActiveBuffs } from '../buffs/activeBuffs';
 import { Buff } from '../buffs/buffEnum';
 import { Glyph } from '../glyphs/glyph';
 import { Mood } from './moodEnum';
-import { WorldPoint } from '../../maps/mapModel/worldPoint';
 
 /**
  * Represents a mobile entity within the game world. Mob can be either a player or an NPC.

@@ -1,8 +1,8 @@
-import { FadeInOutElement } from '../other/fadeInOutElement';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import keysJson from '../../utilities/commonKeyboardChars.json';
-import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { groupInventory } from '../../utilities/inventoryUtils';
+import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
+import { FadeInOutElement } from '../other/fadeInOutElement';
 
 export class CraftingScreenDisplay extends FadeInOutElement {
   private inventoryItems: ItemObject[] = [];

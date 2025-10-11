@@ -1,14 +1,14 @@
 import controls from '../../controls/control_schemes.json';
 import { ControlSchemeManager } from '../../controls/controlSchemeManager';
+import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
+import { FlickerManager } from '../../renderer/flickerManager';
+import { ScanlinesHandler } from '../../renderer/scanlinesHandler';
 import { ControlSchemeName } from '../../shared-types/controls/controlScheme';
 import { EventListenerTracker } from '../../utilities/eventListenerTracker';
-import { FlickerManager } from '../../renderer/flickerManager';
-import { gameConfigManager } from '../../gameConfigManager/gameConfigManager';
 import { KeypressScrollHandler } from '../../utilities/KeypressScrollHandler';
 import { LayoutManager } from '../layoutManager/layoutManager';
-import { OptionsMenuButtonManager } from './buttonManager/optionsMenuButtonManager';
-import { ScanlinesHandler } from '../../renderer/scanlinesHandler';
 import { UnBlurElement } from '../other/unBlurElement';
+import { OptionsMenuButtonManager } from './buttonManager/optionsMenuButtonManager';
 
 export class TitleMenuOptions extends UnBlurElement {
   private eventTracker: EventListenerTracker;

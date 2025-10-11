@@ -1,11 +1,11 @@
-import { GameMap } from '../../maps/mapModel/gameMap';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
-import { GameState } from '../../shared-types/gameBuilder/gameState';
-import { Glyph } from '../glyphs/glyph';
 import { MagnetismHandler } from '../../maps/helpers/magnetismHandler';
-import { Step } from '../../shared-types/gameLogic/stepper/step';
-import { TimedStep } from './timedStep';
+import { GameMap } from '../../maps/mapModel/gameMap';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { GameState } from '../../shared-types/gameBuilder/gameState';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { Step } from '../../shared-types/gameLogic/stepper/step';
+import { Glyph } from '../glyphs/glyph';
+import { TimedStep } from './timedStep';
 
 /**
  * Represents a timed step that moves an object in a specified direction.

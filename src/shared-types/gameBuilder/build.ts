@@ -1,11 +1,11 @@
-import { GameMapType } from '../gameLogic/maps/mapModel/gameMapType';
-import { GameState } from './gameState';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { Mob } from '../../gameLogic/mobs/mob';
-import { MobAI } from '../gameLogic/mobs/mobAI';
-import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { SerializedGameState } from '../utilities/saveStateHandler';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { RandomGenerator } from '../../randomGenerator/randomGenerator';
+import { GameMapType } from '../gameLogic/maps/mapModel/gameMapType';
+import { MobAI } from '../gameLogic/mobs/mobAI';
+import { SerializedGameState } from '../utilities/saveStateHandler';
+import { GameState } from './gameState';
 
 export type Build = {
   makeGame(): GameState;

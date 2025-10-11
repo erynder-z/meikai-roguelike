@@ -6,13 +6,13 @@ import { movingImages as movingImages_boyish } from './imageImports/boyish/movin
 import { neutralImages as neutralImages_boyish } from './imageImports/boyish/neutralImages';
 import { pistolImages as pistolImages_boyish } from './imageImports/boyish/pistolImages';
 import { smileImages as smileImages_boyish } from './imageImports/boyish/smileImages';
+import deathImages from './imageImports/deathImages';
 import { attackImages as attackImages_girlish } from './imageImports/girlish/attackImages';
 import { hurtImages as hurtImages_girlish } from './imageImports/girlish/hurtImages';
 import { movingImages as movingImages_girlish } from './imageImports/girlish/movingImages';
 import { neutralImages as neutralImages_girlish } from './imageImports/girlish/neutralImages';
 import { pistolImages as pistolImages_girlish } from './imageImports/girlish/pistolImages';
 import { smileImages as smileImages_girlish } from './imageImports/girlish/smileImages';
-import deathImages from './imageImports/deathImages';
 import {
   lvlTier00Images,
   lvlTier01Images,

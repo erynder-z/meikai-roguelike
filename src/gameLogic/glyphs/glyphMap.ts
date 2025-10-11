@@ -1,5 +1,5 @@
-import { GlyphInfo } from './glyphInfo';
 import { Glyph } from './glyph';
+import { GlyphInfo } from './glyphInfo';
 
 /**
  * Represents a map of glyphs and their corresponding information.

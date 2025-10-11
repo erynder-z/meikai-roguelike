@@ -1,6 +1,6 @@
-import { Mob } from '../mobs/mob';
-import { Step } from '../../shared-types/gameLogic/stepper/step';
 import { WorldPoint } from '../../maps/mapModel/worldPoint';
+import { Step } from '../../shared-types/gameLogic/stepper/step';
+import { Mob } from '../mobs/mob';
 
 /**
  * Represents a timed step that draws a step screen for a given amount of time. Most methods are placeholders to be implemented in subclasses.

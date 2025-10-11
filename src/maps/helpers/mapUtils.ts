@@ -1,13 +1,13 @@
 import { EnvironmentChecker } from '../../gameLogic/environment/environmentChecker';
-import { GameMap } from '../mapModel/gameMap';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
-import { IrregularShapeAreaGenerator } from './irregularShapeAreaGenerator';
 import { RandomGenerator } from '../../randomGenerator/randomGenerator';
-import { RockGenerator } from '../mapGenerator/rockGenerator';
-import { Tile } from '../../shared-types/gameLogic/maps/mapGenerator/tile';
 import { WeightedFeatureConfig } from '../../shared-types/gameLogic/maps/helpers/weightedFeatures';
+import { Tile } from '../../shared-types/gameLogic/maps/mapGenerator/tile';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { RockGenerator } from '../mapGenerator/rockGenerator';
+import { GameMap } from '../mapModel/gameMap';
 import { WorldPoint } from '../mapModel/worldPoint';
+import { IrregularShapeAreaGenerator } from './irregularShapeAreaGenerator';
 
 /**
  * Utility class for map-related operations.

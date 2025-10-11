@@ -1,15 +1,15 @@
-import { Corpse } from '../../gameLogic/mobs/corpse';
 import { EnvironmentChecker } from '../../gameLogic/environment/environmentChecker';
-import { FindFreeSpace } from '../helpers/findFreeSpace';
-import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
 import { Glyph } from '../../gameLogic/glyphs/glyph';
 import { GlyphMap } from '../../gameLogic/glyphs/glyphMap';
 import { ItemObject } from '../../gameLogic/itemObjects/itemObject';
 import { ItemObjectManager } from '../../gameLogic/itemObjects/itemObjectManager';
-import { MapCell } from './mapCell';
+import { Corpse } from '../../gameLogic/mobs/corpse';
 import { Mob } from '../../gameLogic/mobs/mob';
 import { Spell } from '../../gameLogic/spells/spell';
 import { TurnQueue } from '../../gameLogic/turnQueue/turnQueue';
+import { GameMapType } from '../../shared-types/gameLogic/maps/mapModel/gameMapType';
+import { FindFreeSpace } from '../helpers/findFreeSpace';
+import { MapCell } from './mapCell';
 import { WorldPoint } from './worldPoint';
 
 /**
