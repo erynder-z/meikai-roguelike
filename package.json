@@ -13,15 +13,15 @@
     "tauri": "tauri"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.5",
-    "@tauri-apps/api": "^2.8.0",
-    "@tauri-apps/cli": "^2.8.4",
+    "@biomejs/biome": "2.3.0",
+    "@tauri-apps/api": "^2.9.0",
+    "@tauri-apps/cli": "^2.9.1",
     "@tauri-apps/plugin-dialog": "^2.4.0",
     "@tauri-apps/plugin-fs": "^2.4.2",
     "@tauri-apps/plugin-process": "^2.3.0",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.9.1",
     "typescript": "^5.9.3",
-    "vite": "^7.1.9"
+    "vite": "^7.1.12"
   },
   "dependencies": {
     "@tauri-apps/plugin-dialog": "^2.4.0",
